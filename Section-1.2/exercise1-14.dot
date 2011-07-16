@@ -1,0 +1,111 @@
+digraph G {
+node0[label = "cc 11 5"]
+node1[label = "cc 11 4"]
+node2[label = "cc 11 3"]
+node3[label = "cc 11 2"]
+node4[label = "cc 11 1"]
+node5[label = "cc 11 0"]
+node6[label = "cc 10 1"]
+node7[label = "cc 10 0"]
+node8[label = "cc 9 1"]
+node9[label = "cc 9 0"]
+node10[label = "cc 8 1"]
+node11[label = "cc 8 0"]
+node12[label = "cc 7 1"]
+node13[label = "cc 7 0"]
+node14[label = "cc 6 1"]
+node15[label = "cc 6 0"]
+node16[label = "cc 5 1"]
+node17[label = "cc 5 0"]
+node18[label = "cc 4 1"]
+node19[label = "cc 4 0"]
+node20[label = "cc 3 1"]
+node21[label = "cc 3 0"]
+node22[label = "cc 2 1"]
+node23[label = "cc 2 0"]
+node24[label = "cc 1 1"]
+node25[label = "cc 1 0"]
+node26[label = "cc 0 1"]
+node27[label = "cc 6 2"]
+node28[label = "cc 6 1"]
+node29[label = "cc 6 0"]
+node30[label = "cc 5 1"]
+node31[label = "cc 5 0"]
+node32[label = "cc 4 1"]
+node33[label = "cc 4 0"]
+node34[label = "cc 3 1"]
+node35[label = "cc 3 0"]
+node36[label = "cc 2 1"]
+node37[label = "cc 2 0"]
+node38[label = "cc 1 1"]
+node39[label = "cc 1 0"]
+node40[label = "cc 0 1"]
+node41[label = "cc 1 2"]
+node42[label = "cc 1 1"]
+node43[label = "cc 1 0"]
+node44[label = "cc 0 1"]
+node45[label = "cc -4 2"]
+node46[label = "cc 1 3"]
+node47[label = "cc 1 2"]
+node48[label = "cc 1 1"]
+node49[label = "cc 1 0"]
+node50[label = "cc 0 1"]
+node51[label = "cc -4 2"]
+node52[label = "cc -9 3"]
+node53[label = "cc -14 4"]
+node54[label = "cc -39 5"]
+node0 -> node1
+node1 -> node2
+node2 -> node3
+node3 -> node4
+node4 -> node5
+node4 -> node6
+node6 -> node7
+node6 -> node8
+node8 -> node9
+node8 -> node10
+node10 -> node11
+node10 -> node12
+node12 -> node13
+node12 -> node14
+node14 -> node15
+node14 -> node16
+node16 -> node17
+node16 -> node18
+node18 -> node19
+node18 -> node20
+node20 -> node21
+node20 -> node22
+node22 -> node23
+node22 -> node24
+node24 -> node25
+node24 -> node26
+node3 -> node27
+node27 -> node28
+node28 -> node29
+node28 -> node30
+node30 -> node31
+node30 -> node32
+node32 -> node33
+node32 -> node34
+node34 -> node35
+node34 -> node36
+node36 -> node37
+node36 -> node38
+node38 -> node39
+node38 -> node40
+node27 -> node41
+node41 -> node42
+node42 -> node43
+node42 -> node44
+node41 -> node45
+node2 -> node46
+node46 -> node47
+node47 -> node48
+node48 -> node49
+node48 -> node50
+node47 -> node51
+node46 -> node52
+node1 -> node53
+node0 -> node54
+}

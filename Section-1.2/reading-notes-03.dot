@@ -1,0 +1,51 @@
+digraph G {
+node0[label = "fib 6"]
+node1[label = "fib 5"]
+node2[label = "fib 4"]
+node3[label = "fib 3"]
+node4[label = "fib 2"]
+node5[label = "fib 1"]
+node6[label = "fib 0"]
+node7[label = "fib 1"]
+node8[label = "fib 2"]
+node9[label = "fib 1"]
+node10[label = "fib 0"]
+node11[label = "fib 3"]
+node12[label = "fib 2"]
+node13[label = "fib 1"]
+node14[label = "fib 0"]
+node15[label = "fib 1"]
+node16[label = "fib 4"]
+node17[label = "fib 3"]
+node18[label = "fib 2"]
+node19[label = "fib 1"]
+node20[label = "fib 0"]
+node21[label = "fib 1"]
+node22[label = "fib 2"]
+node23[label = "fib 1"]
+node24[label = "fib 0"]
+node0 -> node1
+node1 -> node2
+node2 -> node3
+node3 -> node4
+node4 -> node5
+node4 -> node6
+node3 -> node7
+node2 -> node8
+node8 -> node9
+node8 -> node10
+node1 -> node11
+node11 -> node12
+node12 -> node13
+node12 -> node14
+node11 -> node15
+node0 -> node16
+node16 -> node17
+node17 -> node18
+node18 -> node19
+node18 -> node20
+node17 -> node21
+node16 -> node22
+node22 -> node23
+node22 -> node24
+}
