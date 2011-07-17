@@ -199,9 +199,7 @@ Although we are not specifically required to do so, I can scarcely resist an opp
 189 191 193 195 197 199 201)
 </pre>
 
-For k=1, our model predicts that the number of invocations to `cc` will scale linearly as 2n+1, which, indeed, is precisely the behavior we observe. In this case, regression analysis will be of little quantitative value, although we can still carry the calculation out just for the fun of it, if for no other reason.
-
-Details on how to carry out the regression analysis are given in the corresponding Wiki entry. In this case, the regression yields values of `x = [1 2]`, that is to say, the best-fit curve looks like `y = 2x + 1`, which is precisely what we anticipated.
+For k=1, our model predicts that the number of invocations to `cc` will scale linearly as 2n+1, which, indeed, is precisely the behavior we observe. In this case, regression analysis will be of little quantitative value, although we can still carry the calculation out just for the fun of it, if for no other reason. Details on how to carry out the regression analysis are given in the corresponding Wiki entry. In this case, the regression yields values of `x = [1 2]`, that is to say, the best-fit curve looks like `y = 2x + 1`, which is precisely what we anticipated.
 
 The corresponding plot in Octave looks something like the following:
 
