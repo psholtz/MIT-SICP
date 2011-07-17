@@ -215,7 +215,8 @@ For the remaining values of k, the results are as follows:
 1531 1565 1603 1639 1675 1711 1747 1787 1825 1863 1901 1939 1981 2021 2061 2101 2141)
 </pre>
 
-Regression analysis yields values of `x = [2.671 1.39866 0.2]`, that is, the best fit curve is `y = 2.671 x^2 + 1.39866 x + 0.2`. 
+Regression analysis for k=2 yields values of `x = [2.671 1.39866 0.2]`, that is, the best fit curve is `y = 2.671 x^2 + 1.39866 x + 0.2`:
+
 [![](http://farm7.static.flickr.com/6021/5947047422_10805b113d.jpg)](http://farm7.static.flickr.com/6021/5947047422_10805b113d.jpg)
 
 
