@@ -98,6 +98,8 @@ def output_results(k,stats):
 def write_results(k,stats):
   out_A = []
   out_b = []
+  out_example = []
+  out_t = []
    
   c = 1
   for x in range(len(stats)):
@@ -112,6 +114,8 @@ def write_results(k,stats):
     elif k == 5:
       out_A.append(" 1 " + str(c) + " " + str(c*c) + " " + str(c*c*c) + " " + str(c*c*c*c) + " " + str(c*c*c*c*c) + ";")
     out_b.append(str(stats[x]) + ";")
+    out_example.append(" " + str(c) + " " + str(stats[x]) + ";")
+    out_t.append(str(c)+";")
     c += 1
 
   f = open("matrix0"+str(k)+".m",'w')
@@ -132,8 +136,36 @@ def write_results(k,stats):
   # calc w
   f.write("w = A'*b;\r\n")
 
+  # render the plotting matrices
+  f.write("example = [\r\n")
+  f.write("\r\n".join(out_example))
+  f.write("];\r\n")
+
+  f.write("hold on;\r\n")
+  f.write("plot(example(:,1),example(:,2),'k@');")
+
   # calc x and finish calculation
-  f.write("x = inv(Q)*w")
+  f.write("x = inv(Q)*w;")
+
+  f.write("t = [\r\n")
+  f.write("\r\n".join(out_t))
+  f.write("];\r\n")
+  if k == 1:
+    f.write("p = [x(2,1) x(1,1)];")
+  elif k == 2:
+    f.write("p = [x(3,1) x(2,1) x(1,1)];")
+  elif k == 3:
+    f.write("p = [x(4,1) x(3,1) x(2,1) x(1,1)];")
+  elif k == 4:
+    f.write("p = [x(5,1) x(4,1) x(3,1) x(2,1) x(1,1)];")
+  elif k == 5:
+    f.write("p = [x(6,1) x(5,1) x(4,1) x(3,1) x(2,1) x(1,1)];")
+
+  f.write("plot(t,polyval(p,t));")
+  f.write("hold off;\r\n")
+
+  # print out the answer
+  f.write("x")
 
   f.close()
 
