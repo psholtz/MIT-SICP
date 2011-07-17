@@ -260,6 +260,10 @@ It's worth noting that this matrix is very poorly conditioned, with the ratio be
 14995 15499)
 </pre>
 
-Regression analysis for k=5 yields ``, that is, the best fit curve is (roughly) ``:
+Regression analysis for k=5 yields `x = [18.033 -1.7199 4.1779e-01 -1.9385e-03 1.4051e-04 -5.8625e-08]`.
 
-[![](http://farm7.static.flickr.com/6020/5947047566_aa7b6c50f0.jpg)](http://farm7.static.flickr.com/6020/5947047566_aa7b6c50f0.jpg)
+The best fit curve is (roughly) `y = 18.033 x^5 - 1.7199 x^4`.
+
+It's worth noting that this matrix is very poorly conditioned, with the ratio between largest and smallest eigenvalues being roughly 4.26e+20.
+
+[![](http://farm7.static.flickr.com/6020/5947047566_aa7b6c50f0.jpg)](http://farm7.static.flickr.com/6020/5947047566_aa7b6c50f0.jpg)?
