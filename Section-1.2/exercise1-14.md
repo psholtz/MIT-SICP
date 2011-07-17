@@ -228,7 +228,9 @@ Regression analysis for k=2 yields values of `x = [2.671 1.39866 0.2]`, that is,
 4169 4313 4457 4601 4783 4945 5107 5269 5431 5629 5809 5989 6169 6349 6571 6771 6971 7171 7371 7611 7831 8051 8271 8491)
 </pre>
 
-Regression analysis for k=3 yields `x = [5.168 1.1252 0.174 0.0066]`, that is, the best fit curve is (roughly) `y = 5.168 x^3 + 1.1252 + x^2 + 0.174x`:
+Regression analysis for k=3 yields `x = [5.168 1.1252 0.174 0.0066].
+
+The best fit curve is (roughly) `y = 5.168 x^3 + 1.1252 + x^2 + 0.174x`:
 
 [![](http://farm7.static.flickr.com/6145/5946494323_16a9aeeba2.jpg)](http://farm7.static.flickr.com/6145/5946494323_16a9aeeba2.jpg)
 
