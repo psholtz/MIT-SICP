@@ -201,6 +201,8 @@ Although we are not specifically required to do so, I can scarcely resist an opp
 
 For k=1, our model predicts that the number of invocations to `cc` will scale linearly as 2n+1, which, indeed, is precisely the behavior we observe. In this case, regression analysis will be of little quantitative value, although we can still carry the calculation out just for the fun of it, if for no other reason.
 
+[![](http://farm7.static.flickr.com/6148/5947047384_9d762b1a1a.jpg)](http://farm7.static.flickr.com/6148/5947047384_9d762b1a1a.jpg)
+
 For the remaining values of k, the results are as follows:
 
 <pre>(invocation-count (cc n 2) 100) ==> (list 5 7 9 11 13 19 23 27 31 35 43 49 55 61 67 77 85 93 101 109 121 131 141 151 161 
