@@ -205,7 +205,7 @@ The corresponding plot in Octave looks something like the following:
 
 [![](http://farm7.static.flickr.com/6148/5947047384_9d762b1a1a.jpg)](http://farm7.static.flickr.com/6148/5947047384_9d762b1a1a.jpg)
 
-The "+" characters indicate the scatterplot of the collected statistics, and the blue line indicates the best-fit regression line passing through these points. The regression curve is the best fit polynomial of degree m = k. In this case, since k = 1, the regression curve is linear (or rather, strictly speaking, affine).
+The "+" characters indicate the scatterplot of the collected statistics, and the blue line indicates the best-fit regression line passing through these points. The regression curve is the best fit polynomial of degree m = k. In this case, since k = 1, the regression curve is linear (or rather, strictly speaking, affine). Regression curves for subsequent examples will be polynomials of increasing degree.
 
 For the remaining values of k, the results are as follows:
 
