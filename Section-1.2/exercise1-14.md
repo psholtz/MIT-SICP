@@ -234,6 +234,7 @@ For the remaining values of k, the results are as follows:
 13501 13927)
 </pre>
 
+[![](http://farm7.static.flickr.com/6005/5946494371_a35673c5e9.jpg)](http://farm7.static.flickr.com/6005/5946494371_a35673c5e9.jpg)
 
 <pre>(invocation-count (cc n 5) 100) ==> (list 11 13 15 17 19 25 29 33 37 41 55 63 71 79 87 103 115 127 139 151 177 195 213 231 
 249 287 313 339 365 391 439 475 511 547 583 645 693 741 789 837 915 977 1039 1101 1163 1259 1337 1415 1493 1571 1705 1805 
@@ -242,3 +243,4 @@ For the remaining values of k, the results are as follows:
 14995 15499)
 </pre>
 
+[![](http://farm7.static.flickr.com/6020/5947047566_aa7b6c50f0.jpg)](http://farm7.static.flickr.com/6020/5947047566_aa7b6c50f0.jpg)
