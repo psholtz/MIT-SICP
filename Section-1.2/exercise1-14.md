@@ -228,8 +228,11 @@ Regression analysis for k=2 yields values of `x = [2.671 1.39866 0.2]`, that is,
 4169 4313 4457 4601 4783 4945 5107 5269 5431 5629 5809 5989 6169 6349 6571 6771 6971 7171 7371 7611 7831 8051 8271 8491)
 </pre>
 
+Regression analysis for k=3 yields ...
 
 [![](http://farm7.static.flickr.com/6145/5946494323_16a9aeeba2.jpg)](http://farm7.static.flickr.com/6145/5946494323_16a9aeeba2.jpg)
+
+----
 
 <pre>(invocation-count (cc n 4) 100) ==> (list 9 11 13 15 17 23 27 31 35 39 53 61 69 77 85 101 113 125 137 149 175 193 211 229 
 247 285 311 337 363 389 437 473 509 545 581 643 691 739 787 835 913 975 1037 1099 1161 1257 1335 1413 1491 1569 1693 1791 
@@ -238,7 +241,11 @@ Regression analysis for k=2 yields values of `x = [2.671 1.39866 0.2]`, that is,
 13501 13927)
 </pre>
 
+Regression analysis for k=4 yields ...
+
 [![](http://farm7.static.flickr.com/6005/5946494371_a35673c5e9.jpg)](http://farm7.static.flickr.com/6005/5946494371_a35673c5e9.jpg)
+
+----
 
 <pre>(invocation-count (cc n 5) 100) ==> (list 11 13 15 17 19 25 29 33 37 41 55 63 71 79 87 103 115 127 139 151 177 195 213 231 
 249 287 313 339 365 391 439 475 511 547 583 645 693 741 789 837 915 977 1039 1101 1163 1259 1337 1415 1493 1571 1705 1805 
@@ -246,5 +253,7 @@ Regression analysis for k=2 yields values of `x = [2.671 1.39866 0.2]`, that is,
 6275 6543 6811 7079 7453 7771 8089 8407 8725 9161 9535 9909 10283 10657 11161 11597 12033 12469 12905 13483 13987 14491 
 14995 15499)
 </pre>
+
+Regression analysis for k=5 yields ...
 
 [![](http://farm7.static.flickr.com/6020/5947047566_aa7b6c50f0.jpg)](http://farm7.static.flickr.com/6020/5947047566_aa7b6c50f0.jpg)
