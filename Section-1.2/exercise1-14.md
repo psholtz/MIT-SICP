@@ -243,7 +243,11 @@ The best fit curve is (roughly) `y = 5.168 x^3 + 1.1252 + x^2 + 0.174x`:
 13501 13927)
 </pre>
 
-Regression analysis for k=4 yields ``, that is, the best fit curve is (roughly) ``:
+Regression analysis for k=4 yields `x = [3.9818 2.073 1.2845e-01 6.0712e-03 6.4004e-05]`.
+
+The best fit curve is (roughly) `y = 3.9818 x^4 + 2.073 x^3`. 
+
+It's worth noting that this matrix is very poorly conditioned, with the ratio between largest and smallest eigenvalues being roughly 3.33e+16.
 
 [![](http://farm7.static.flickr.com/6005/5946494371_a35673c5e9.jpg)](http://farm7.static.flickr.com/6005/5946494371_a35673c5e9.jpg)
 
