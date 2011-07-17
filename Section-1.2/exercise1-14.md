@@ -219,6 +219,7 @@ Regression analysis for k=2 yields values of `x = [2.671 1.39866 0.2]`, that is,
 
 [![](http://farm7.static.flickr.com/6021/5947047422_10805b113d.jpg)](http://farm7.static.flickr.com/6021/5947047422_10805b113d.jpg)
 
+----
 
 <pre>(invocation-count (cc n 3) 100) ==> (list 7 9 11 13 15 21 25 29 33 37 51 59 67 75 83 99 111 123 135 147 173 191 209 227 
 245 275 299 323 347 371 413 445 477 509 541 589 629 669 709 749 811 861 911 961 1011 1081 1141 1201 1261 1321 1407 1479 
