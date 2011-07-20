@@ -11,7 +11,7 @@ Some useful links:
 
 * [The "Don't Panic" Guide to 6.001 Scheme](http://sicp.ai.mit.edu/Spring-2005/manuals/dontpanicnew.html)
 
-Don't forget to check out the [Wiki](/psholtz/MIT-SICP/wiki) for answers to some of the more mathematically oriented questions (requiring LaTeX).
+Don't forget to check out the [Wiki](/psholtz/MIT-SICP/wiki) for answers to some of the more mathematically oriented questions.
 
 Finally, A Word From Our Sponsor...
 ----------------------------------- 
