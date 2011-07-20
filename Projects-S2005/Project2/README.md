@@ -1,7 +1,7 @@
 Project 2 - Prisoner's Dilemma
 ============================== 
 
-"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+A prisoner's dilemma always involves two "game players", and each has a choice between "cooperating" and "defecting". If the two players cooperate, they each do moderately well; if they both defect, they each do moderately poorly. If one player cooperates and the other defects, then the defector does extremely well and the cooperator does extremely poorly. Before formalizing the prisoner's dilemma situation, we need to introduce some basic game theory notation.
 
 [![](http://farm7.static.flickr.com/6147/5958316504_84bd9a0355.jpg)](http://farm7.static.flickr.com/6147/5958316504_84bd9a0355.jpg)
 
