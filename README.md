@@ -1,4 +1,4 @@
-Structure and Interpretation of Computer Programs 
+Structure and Interpretation of Computer Programs
 =================================================
 
 [![](http://farm6.static.flickr.com/5221/5599784182_5403472c2a.jpg)](http://farm6.static.flickr.com/5221/5599784182_5403472c2a.jpg)
