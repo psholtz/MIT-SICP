@@ -118,51 +118,51 @@ def write_results(k,stats):
     out_t.append(str(c)+";")
     c += 1
 
-  f = open("matrix0"+str(k)+".m",'w')
+  f = open("m-files/matrix0"+str(k)+".m",'w')
 
   # write the A matrix
   f.write("A = [\r\n")
-  f.write("\r\n".join(out_A))
-  f.write("];\r\n")
+  f.write("".join(out_A))
+  f.write("];\r\n\r\n")
 
   # write the b matrix
   f.write("b = [\r\n")
-  f.write("\r\n".join(out_b))
-  f.write("];\r\n")
+  f.write(" ".join(out_b))
+  f.write("];\r\n\r\n")
 
   # calc Q
-  f.write("Q = A'*A;\r\n")
+  f.write("Q = A'*A;\r\n\r\n")
 
   # calc w
-  f.write("w = A'*b;\r\n")
+  f.write("w = A'*b;\r\n\r\n")
 
   # render the plotting matrices
   f.write("example = [\r\n")
-  f.write("\r\n".join(out_example))
-  f.write("];\r\n")
+  f.write("".join(out_example))
+  f.write("];\r\n\r\n")
 
-  f.write("hold on;\r\n")
-  f.write("plot(example(:,1),example(:,2),'k@');")
+  f.write("hold on;\r\n\r\n")
+  f.write("plot(example(:,1),example(:,2),'k@');\r\n\r\n")
 
   # calc x and finish calculation
-  f.write("x = inv(Q)*w;")
+  f.write("x = inv(Q)*w;\r\n\r\n")
 
   f.write("t = [\r\n")
-  f.write("\r\n".join(out_t))
-  f.write("];\r\n")
+  f.write(" ".join(out_t))
+  f.write("];\r\n\r\n")
   if k == 1:
-    f.write("p = [x(2,1) x(1,1)];")
+    f.write("p = [x(2,1) x(1,1)];\r\n\r\n")
   elif k == 2:
-    f.write("p = [x(3,1) x(2,1) x(1,1)];")
+    f.write("p = [x(3,1) x(2,1) x(1,1)];\r\n\r\n")
   elif k == 3:
-    f.write("p = [x(4,1) x(3,1) x(2,1) x(1,1)];")
+    f.write("p = [x(4,1) x(3,1) x(2,1) x(1,1)];\r\n\r\n")
   elif k == 4:
-    f.write("p = [x(5,1) x(4,1) x(3,1) x(2,1) x(1,1)];")
+    f.write("p = [x(5,1) x(4,1) x(3,1) x(2,1) x(1,1)];\r\n\r\n")
   elif k == 5:
-    f.write("p = [x(6,1) x(5,1) x(4,1) x(3,1) x(2,1) x(1,1)];")
+    f.write("p = [x(6,1) x(5,1) x(4,1) x(3,1) x(2,1) x(1,1)];\r\n\r\n")
 
-  f.write("plot(t,polyval(p,t));")
-  f.write("hold off;\r\n")
+  f.write("plot(t,polyval(p,t));\r\n\r\n")
+  f.write("hold off;\r\n\r\n")
 
   # print out the answer
   f.write("x")
