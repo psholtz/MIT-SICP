@@ -5,6 +5,7 @@
 ;; process for multiplying two integers in terms of adding, doubling, and halving and uses a 
 ;; logarithmic number of steps.
 ;;
+
 (define (double x) (+ x x))
 (define (halve x) (/ x 2))
 (define (even? n) (= (remainder n 2) 0))
