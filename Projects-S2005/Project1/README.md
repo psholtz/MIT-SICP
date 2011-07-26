@@ -15,7 +15,7 @@ We are going to begin by modeling how far a baseball can travel -- the same phys
 
 [![](http://farm7.static.flickr.com/6008/5979646984_b53b5c859c.jpg)](http://farm7.static.flickr.com/6008/5979646984_b53b5c859c.jpg)
 
-Figure 1: Motion of a basebal in a generic direction.
+<strong>Figure 1: Motion of a basebal in a generic direction.</strong>
 
 Write a procedure that takes as input values for a, v, u and t, and returns as output the position of the baseball at time t:
 
