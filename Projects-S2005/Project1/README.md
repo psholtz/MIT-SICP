@@ -6,7 +6,7 @@ Scenario
 
 As you may have noticed this past fall, a remarkable event took place -- the Boston Red Sox won the World Series for the first time in 86 years! You may also have noticed long time Boston residents (such as MIT professors) walking around in a state of bliss. Because many of these folks don't want to have to wait another 86 years for this to happen again, "Red Sox Nation" has hired us to provide some help. In particular, we are to investigate the possibility of perfecting a baseball robot ("basebot") that can accurately throw and can hit with power.
 
-[![](http://farm7.static.flickr.com/6017/5979059285_d5c095a417.jpg)](http://farm7.static.flickr.com/6017/5979059285_d5c095a417.jpg)
+[![](http://farm7.static.flickr.com/6017/5979059285_d5c095a417_m.jpg)](http://farm7.static.flickr.com/6017/5979059285_d5c095a417_m.jpg)
 
 Problem 1: Some Simple Physics
 ------------------------------ 
