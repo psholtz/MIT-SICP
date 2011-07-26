@@ -72,3 +72,8 @@ In some cases, we may want to know how long it takes for the ball to drop to a p
   (lambda (vertical-velocity elevation target-elevation)
     YOUR-CODE-HERE))
 </pre>
+
+Problem 9: Do it on a bounce -- again
+------------------------------------- 
+
+In Problem 8, we just assumed that the velocity would drop by one half on each bounce. But in fact if we are integrating trajectories in order to account for drag, we can actually compute the velocity of the ball when it bounces (since we know the x and y components of velocity when the ball hits the ground). Use this knowledge to refine your code from Problem 8, and rerun your test cases.
