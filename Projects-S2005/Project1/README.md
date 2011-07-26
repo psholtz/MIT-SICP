@@ -73,6 +73,13 @@ In some cases, we may want to know how long it takes for the ball to drop to a p
     YOUR-CODE-HERE))
 </pre>
 
+Problem 8: Do it on a bounce
+---------------------------- 
+
+You should have notice in the last problem that a weaker outfielder cannot in fact get the ball 90m in the air. So he may have to bounce it there. Let's model this effect.
+
+Specifically, assume that when a ball bounces, it leaves the ground at the same angle as it was initially thrown (untrue but a reasonable approximation) but with half the velocity. Write a procedure that will determine the distance traveled, accounting for drag, given an initial velocity, an angle of throw, an initial height, and the number of bounces it will take. Remember that only on the initial stage is the ball released from a given height, for each subsequent bounce it is released from height 0. Remember as well that on each subsequent bounce, the velocity of the ball is dropping by one half. Use this to see how far a fielder can throw a ball on one bounce, on two bounces, on an arbitrary number of bounces until it stops moving. Do this for different initial velocities, and for different initial angles.
+
 Problem 9: Do it on a bounce -- again
 ------------------------------------- 
 
