@@ -74,3 +74,35 @@
   (let ((q (current-time)))
     (+ (car (cdr q))
        (/ (car (cdr (cdr q))) 1000000.0))))
+
+;;
+;; Next, define the procedures for running timed tests.
+;;
+;; We'll change this somewhat from the procedures presented in the text,
+;; in that our procedure will only print a number (and corresponding time)
+;; if it's a prime.
+;;
+(defun timed-prime-test (n)
+  (start-prime-test n (real-time-clock)))
+
+;;
+;; Use this definition of start-prime-test, which returns "true" or "false"
+;; depending on whether the test candidate is prime, so that we can more 
+;; easily support the "search-for-n-primes" procedure defined below.
+;;
+(defun start-prime-test (n start-time)
+  (cond ((prime? n)
+	 (report-prime n (- (real-time-clock) start-time))
+	 t)
+	(t nil)))
+
+;;
+;; Modify procedure slightly, from what is defined in the text, so that 
+;; we only print the prime numbers (i.e., non-primes are suppressed).
+;;
+(defun report-prime (n elapsed-time)
+ (newline)
+ (print n)
+ (print " (")
+ (print elapsed-time)
+ (print ")"))
