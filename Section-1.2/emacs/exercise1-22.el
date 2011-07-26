@@ -102,7 +102,9 @@
 ;;
 (defun report-prime (n elapsed-time)
  (newline)
- (print n)
- (print " (")
- (print elapsed-time)
- (print ")"))
+ (princ n)
+ (princ " (")
+ (princ elapsed-time)
+ (print ")")
+ (newline)
+ nil)
