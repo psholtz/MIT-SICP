@@ -105,6 +105,6 @@
  (princ n)
  (princ " (")
  (princ elapsed-time)
- (print ")")
+ (princ ")")
  (newline)
  nil)
