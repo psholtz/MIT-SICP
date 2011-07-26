@@ -73,6 +73,19 @@ In some cases, we may want to know how long it takes for the ball to drop to a p
     YOUR-CODE-HERE))
 </pre>
 
+Problem 5: What's the best angle to hit?
+---------------------------------------- 
+
+Before we figure out why professional players don't normally hit 700 foot hom runs, let's first see if we can find out the optimal angle at which to launch a baseball, in order to have it travel the furthest. Write a procedure `find-best-angle` that takes as arugments an initial elevation and an initial velocity, and which finds the best angle at which to hit the baseball to optimize distance traveled. You will probably want to write a recursive procedure that tries different angles between 0 and pi/2 radians, sampled every 0.01 radian (say) or between 0 and 90 degrees, sampled every 1 degree (depending on whether your code works in radians or degrees -- either way be sure that you provide the right kind of unit to your trigonometric functions).
+
+<pre>
+(define find-best-angle 
+  (lambda (velocity elevation)
+    YOUR-CODE-HERE))
+</pre>
+
+Use this for some sample values of elevation and velocity. What conclusion can you reach about the optimal angle of hitting?
+
 Problem 8: Do it on a bounce
 ---------------------------- 
 
