@@ -18,7 +18,7 @@
       (gcd b (remainder a b))))
 
 ;; 
-;; For simplicity, define "typedef" the remainder procedure:
+;; For simplicity, "typedef" the remainder procedure:
 ;;
 (define r remainder)
 
