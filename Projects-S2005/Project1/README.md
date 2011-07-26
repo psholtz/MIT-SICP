@@ -53,3 +53,22 @@ One of our goals is to determine how far a baseball will travel in the air, if i
 </pre>
 
 You may notice that, depending on how you wrote your procedures, for some test cases you get an error. For example, try `(root1 5 3 6)`. What happens? If you get an error, which is likely if you wrote your code the straightforward way, figure out how to change it so that your procedure returns a false value in those cases where there is not a valid solution.
+
+Problem 3: Flight Time
+---------------------- 
+
+Given an initial upward velocity (in meters per second, or m/s) and initial elevation or height (in meters, or m), write a procedure that computes how long the baseball will be in flight. Remember that gravity is a downward acceleration of 9.8 m/s^2. Note that to solve this you will need a root of a quadratic equation. Try using `root1`, and using `root2`. Only one of these solutions makes sense. Which one? And why? Use this to create a correct version of the procedure below.
+
+<pre>
+(define time-to-impact
+  (lambda (vertical-velocity elevation)
+    YOUR-CODE-HERE))
+</pre>
+
+In some cases, we may want to know how long it takes for the ball to drop to a particular height, other than 0. Using your previous procedure as a template, write a procedure that computes the time for the ball to reach a given target elevation.
+
+<pre>
+(define time-to-height
+  (lambda (vertical-velocity elevation target-elevation)
+    YOUR-CODE-HERE))
+</pre>
