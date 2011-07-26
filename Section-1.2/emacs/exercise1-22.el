@@ -65,7 +65,7 @@
 ;;
 ;; However, it does have "current-time", which returns a list of three
 ;; elements: (high low microseconds). "High" and "low" combine to give
-;; the number of seconds since Jan 1, 1970, which microseconds is the 
+;; the number of seconds since Jan 1, 1970, while microseconds is the 
 ;; time since the current second. We will form our procedure to return 
 ;; low + microseconds/10^6, to get (theoretically) microsecond accuracy
 ;; for our time measurements.
