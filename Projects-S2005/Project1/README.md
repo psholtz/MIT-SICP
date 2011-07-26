@@ -1,6 +1,8 @@
 Project 1 - Basebot
 =================== 
 
+[![](http://farm7.static.flickr.com/6017/5979059285_d5c095a417.jpg)](http://farm7.static.flickr.com/6017/5979059285_d5c095a417.jpg)
+
 Scenario
 --------
 
