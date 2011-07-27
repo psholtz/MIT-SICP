@@ -117,6 +117,24 @@ Before we figure out why professional players don't normally hit 700 foot home r
 
 Use this for some sample values of elevation and velocity. What conclusion can you reach about the optimal angle of hitting?
 
+Problem 6: So why aren't baseball outfields 600 feet deep?
+---------------------------------------------------------- 
+
+Let's go back to our distances. Why are these numbers for distances hit so unrealistic? -- because we haven't accounted for air friction or drag. (Of course there are some other effects, like spin, but we'll just stick with drag). Let's think about this. Newton's equation basically says that the movement of the ball will be governed by:
+
+<strong>drag + gravity = mass * acceleration</strong>
+
+We can get the mass of the baseball (0.15 kg). We know that force due to gravity - mass * 9.8 m/s^2. The force due to drag is given by:
+
+[xxx]
+
+where C is the drag coefficient (about 0.5 for baseball-sized objects); rho is the density of air (about 1.25 kg/m^3 at sea level for moderate humidity -- not a bad approximation for Boston, but about 1.06 for Denver); A is the cross-sectional area of the baseball (which is pi D^2/4, where D is the diameter of a baseball -- about 0.074 m). Let's denote 1/2 C rho A by the constant beta. Then we see that the drag on a baseball is basically proportional to the square of the velocity of the ball. So there is more drag when the ball is moving faster.
+
+How can we compute the distance traveled by a baseball, but taking into account this drag effect? Basically we have four coupled linear differential equations: 
+
+Let's let x and y denote the two components of position of the baseball, adn let's let u denote the velocity in the horizontal direction, and v denote the velocity in the vertical direction. We will let V denote the magnitude of the velocity. Then the equations of motion are:
+
+
 Problem 7: Throwing instead of hitting
 -------------------------------------- 
 
