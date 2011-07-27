@@ -43,11 +43,12 @@
 ;;
 ;; The "sum" procedure given in the text is defined as follows:
 ;;
-(define (sum term a next b)
-  (if (> a b)
-      0
-      (+ (term a)
-	 (sum term (next a) next b))))
+;; (define (sum term a next b)
+;;   (if (> a b)
+;;       0
+;;       (+ (term a)
+;; 	 (sum term (next a) next b))))
+;;
 
 ;;
 ;; We can redefine "sum" in terms of "accumulate" as follows:
@@ -58,11 +59,12 @@
 ;;
 ;; Similarly, the "product" procedure was defined in 1.31 as:
 ;;
-(define (product term a next b)
-  (if (> a b)
-      1
-      (* (term a)
-	 (product term  (next a) next b))))
+;; (define (product term a next b)
+;;  (if (> a b)
+;;      1
+;;      (* (term a)
+;;	 (product term  (next a) next b))))
+;;
 
 ;;
 ;; We can redefine this procedure in terms of accumulate as follows:
