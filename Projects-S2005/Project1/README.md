@@ -134,15 +134,15 @@ How can we compute the distance traveled by a baseball, but taking into account 
 
 Let's let x and y denote the two components of position of the baseball, adn let's let u denote the velocity in the horizontal direction, and v denote the velocity in the vertical direction. We will let V denote the magnitude of the velocity. Then the equations of motion are:
 
-[xxx]
+[![](http://farm7.static.flickr.com/6001/5981800670_2e2693be8a.jpg)](http://farm7.static.flickr.com/6001/5981800670_2e2693be8a.jpg)
 
 We can rewrite these as:
 
-[xxx]
+[![](http://farm7.static.flickr.com/6121/5981240589_332bf521f2.jpg)](http://farm7.static.flickr.com/6121/5981240589_332bf521f2.jpg)
 
 We also have some initial conditions on these parameters:
 
-[xx]
+[![](http://farm7.static.flickr.com/6002/5981800710_b4fffcaf43_m.jpg)](http://farm7.static.flickr.com/6002/5981800710_b4fffcaf43_m.jpg)
 
 where alpha is the angle of the initial hit with respect to the ground, V is the initial velocity and h is the initial height of the ball.
 
