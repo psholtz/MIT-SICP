@@ -73,6 +73,15 @@ In some cases, we may want to know how long it takes for the ball to drop to a p
     YOUR-CODE-HERE))
 </pre>
 
+Problem 4: Flight Distance
+-------------------------- 
+
+Suppose the baseball is hit with some velocity v, at a starting angle `alpha` relative to the horizontal (in degrees), and from an initial elevation (in meters). We wish to compute the distance in the horizontal direction the baseball will travel by the time it lands. Remember that some of the velocity vector goes into the x-direction, and some into the y, as pictured in Figure 2 below.
+
+[xxx]
+
+<strong>Figure 2: Motion of a baseball in two dimensions, acting under gravitational acceleration g.</strong>
+
 Problem 5: What's the best angle to hit?
 ---------------------------------------- 
 
