@@ -93,6 +93,16 @@ Now let's turn this around. Instead of worrying about how far the ball will carr
 
 You need to write a procedure (or set of procedures) that use the same integration idea to accomplish the following. Given an input velocity and desired distance (plus the other parameters such as mass of the ball, the beta coefficient, gravity, and the height at which the throw was made), we want to try different initial angles (ranging from -90 to 90 degrees) at which to throw. If throwing at a particular angle will result in the ball traveling roughly the desired distance (up to some error) then we want to find the time it takes for the ball to reach the target using this trajectory (Hint: a variation on your integrate code will do this part). Finally, we want to find the trajectory that results in the shortest time, given a fixed initial velocity magnitude).
 
+Write a set of procedures to do this. We suggest that if there is no angle in this range for which at the given velocity the player can throw the required distance, you return the answer 0 for the time so you can tell this case apart from the others.
+
+You can use this to get a sense of times involved in baseball. For example, the distance from home plate to second base is roughly 36m. If your catcher has a gun for an arm, and can throw at 100 mph (or 45 m/s), how long does it take for the throw to reach second base? How long if he throws at 35 m/s? or at 55 m/s?
+
+Note that a really good base runner should be able to get from first to second base in roughly 3 seconds. If the pitcher is throwing at 90 mph how long does it take to reach home? If the catcher throws at 90 mph, how much time does he have to catch and release the ball if he is going to put out a runner trying to steal second?
+
+Now use your procedures to get some data on outfielders. Suppose an outfielder has a strong arm and can throw at 45 m/s. How quickly can he throw the ball to a target at a distance of 30m? 60m? 80m? What if he can throw 55 m/s?
+
+What about the same distances but with a weaker outfielder, who can only throw at 35 m/s?
+
 Problem 8: Do it on a bounce
 ---------------------------- 
 
