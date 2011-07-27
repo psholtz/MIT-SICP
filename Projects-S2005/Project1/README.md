@@ -82,6 +82,14 @@ Suppose the baseball is hit with some velocity v, at a starting angle `alpha` re
 
 <strong>Figure 2: Motion of a baseball in two dimensions, acting under gravitational acceleration g.</strong>
 
+Checking the Scheme manual, you will find procedures `sin` and `cos`. To use these (which require angles in radians rather than degrees), you may also find the procedure `degree2radian` useful. It is given below:
+
+<pre>
+(define degree2radian
+  (lambda (deg)
+    (/ (* deg pi) 180.)))
+</pre>
+
 Try this out for some values. Note that we are doing everything in metric units (distances in meters, weight in kilograms). You may be more accustomed to thinking about baseball in English units (e.g., feet). So we have created some simple procedures to convert feet to meters and <i>vice versa</i> (see the code file for details).
 
 Using your code, determine the time to impact of a ball hit at a height of 1 meter (right down the middle of the plate) with an initial velocity of 45 m/s (about 100 mph -- about what a really good professional player can do -- without steroids), at angles of 0, 45 and 90 degrees (be sure to use radian units or degree units depending on how you provide input to `sin` and `cos`, but remember that those procedures expect arguments in units of radians).
