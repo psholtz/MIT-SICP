@@ -1,4 +1,4 @@
-Project 1 - Basebot
+/Project 1 - Basebot
 =================== 
 
 Scenario
@@ -126,7 +126,7 @@ Let's go back to our distances. Why are these numbers for distances hit so unrea
 
 We can get the mass of the baseball (0.15 kg). We know that force due to gravity - mass * 9.8 m/s^2. The force due to drag is given by:
 
-[xxx]
+[![](http://farm7.static.flickr.com/6004/5981800642_485a7e94ea_m.jpg)](http://farm7.static.flickr.com/6004/5981800642_485a7e94ea_m.jpg)
 
 where C is the drag coefficient (about 0.5 for baseball-sized objects); rho is the density of air (about 1.25 kg/m^3 at sea level for moderate humidity -- not a bad approximation for Boston, but about 1.06 for Denver); A is the cross-sectional area of the baseball (which is pi D^2/4, where D is the diameter of a baseball -- about 0.074 m). Let's denote 1/2 C rho A by the constant beta. Then we see that the drag on a baseball is basically proportional to the square of the velocity of the ball. So there is more drag when the ball is moving faster.
 
