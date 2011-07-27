@@ -6,7 +6,7 @@
 ;; the product of the values of a function at points over a given range. Show how to define factorial
 ;; in terms of "product". Also use "product" to compute approximations to pi using the formula:
 ;;
-;; pi/4 = ( 2 * 4 * 4 * 6 * 6 * 8 * 8 ) / ( 3 * 3 * 5 * 5 * 7 *7 )
+;; pi/4 = ( 2 * 4 * 4 * 6 * 6 * 8 * 8 * ... ) / ( 3 * 3 * 5 * 5 * 7 * 7 * ...)
 ;;
 
 ;;
