@@ -46,40 +46,77 @@
 ;; --> 120
 
 ;;
-;; Use the "product" procedure to compute approximations to pi:
+;; Define some supporting procedures for calculating factorials:
 ;;
 (define (square x) (* x x))
+(define (even? n) (= (remainder n 2) 0))
+(define (odd? n) (not (even? n)))
 
-(define (pi n)
-  (define (next-pi x) (+ x 2))
-  (/ (* 8. (product square 4. next-pi (+ 4. (* 2. (- n 1.)))) (+ 4. (* 2. n)))
-     (product square 3. next-pi (+ 3. (* 2. n)))))
+;;
+;; Count factorials, but go by twos, e.g.,:
+;;
+;; 4!! = 4 * 2 = 8
+;; 5!! = 5 * 3 = 15
+;; 6!! = 6 * 4 * 2 = 48
+;; 7!! = 7 * 5 * 3 = 105
+;;
+(define (factorial-by-two n)
+  (cond ((= n 0) 1)
+	((= n 1) 1)
+	(else
+	 (* n (factorial-by-two (- n 2))))))
 
-;; WORK IN PROGRESS
+;; 
+;; Run some unit tests, to make sure we're OK
+;;
+(= (factorial-by-two 4) 8)
+(= (factorial-by-two 5) 15)
+(= (factorial-by-two 6) 48)
+(= (factorial-by-two 7) 105)
+
+;;
+;; Use the "product" procedure to compute approximations to pi:
+;; ATTEMPT ... might not work so well?
+;;
 (define (pi n)
-  (define (numer a)
-    (cond ((= a 1) 2)
-	  (else
-	   3)))
-  (define (denom a)
-    (let ((t (+ (* 2 (/ (- a 1) 2)) 3)))
-      (if (even? t)
-	  (- t 1)
-	  t)))
-  (define (term a)
-    (/ (numer a) (denom a)))
-  (define (next a)
-    (+ a 1))
+
+  ;; 
+  ;; Define the numerator in the expression for pi.
+  ;;
+  ;; Make sure the argument supplied is even.
+  ;; Signal error condition by 0.0
+  ;;
+  (define (numerator k)
+    (if (even? k)
+	(/ (square (factorial-by-two k)) 2.0)
+	0.0))
+
+  ;; 
+  ;; Define the denominator in the expression for pi.
+  ;;
+  ;; Make sure the argument supplied is odd.
+  ;; Signal error condition by 0.0
+  ;;
+  (define (denominator k)
+    (if (odd? k)
+	(square (factorial-by-two k))
+	0.0))
+
+  ;;
+  ;; Calculate the partial produts of pi, up to n
+  ;;
   (define (pi-partial)
-    (product term 1 next n))
-  (* 4 (pi-partial)))
+    (let ((d1 (* 2 n))
+	  (d2 (+ (* 2 n) 1)))
+      (/ (numerator d1) (denominator d2))))
 
+  ;;
+  ;; (pi-partial) will calculate an approximation for pi/2.
+  ;;
+  ;; We have to multiply it by 2 to get an approximation for pi.
+  ;;
+  (* 2. (pi-partial)))
 
-;;
-;; Run some unit tests
-;;
-
-;; -->??
 
 ;;
 ;; (b) If your "product" procedure generates a recursive process, write one that generates an interative
