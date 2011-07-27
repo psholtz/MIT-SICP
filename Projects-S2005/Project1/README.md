@@ -1,4 +1,4 @@
-/Project 1 - Basebot
+Project 1 - Basebot
 =================== 
 
 Scenario
