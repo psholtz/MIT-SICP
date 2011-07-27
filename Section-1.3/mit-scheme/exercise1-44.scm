@@ -5,3 +5,6 @@
     (/ (+ a b c) 3.0))
   (lambda (x)
     (average (f (- x dx)) (f x) (f (+ x dx)))))
+
+(define (smooth-n-times f n)
+  ((repeated smooth n) f))
