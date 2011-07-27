@@ -60,7 +60,7 @@
 ;; 
 ;; The definition given above generates a recursive process.
 ;;
-;; An example of a version that generates an iterative process is given below:
+;; An example of an "accumulate" procedure that generates an iterative process is given below:
 ;;
 (define (accumulate combiner null-value term a next b)
   (define (accumulate-iter a result)
