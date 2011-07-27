@@ -108,3 +108,39 @@
  (princ ")")
  (newline)
  nil)
+
+;;
+;; Finally, let's define the "search-for-primes" procedure.
+;;
+;; The procedure will take two integers, a and b, and for each prime
+;; inbetween the two integers (inclusive) it will print the prime out
+;; and display the time required to calculate that it was a prime.
+;;
+(defun search-for-primes (a b)
+  (defun search (n)
+    (cond ((<= n b) (timed-prime-test n)))
+    (cond ((< n b) (search (+ n 2)))))
+  (if (even? a)
+      (search (+ a 1))
+    (search a)))
+
+;;
+;; DO SOME SEARCHES HERE
+;;
+
+;;
+;; Now define one additional procedure, which starts at a number a
+;; and finds the next n prime numbers (this is, technically, what 
+;; Exercise 1.22 asks us to do).
+;;
+(defun search-for-n-primes (a n)
+  (defun search (j c)
+    (let ((next-j (+ j 2)))
+      (cond ((< c n)
+	     (if (timed-prime-test j)
+		 (search next-j (+ c 1))
+	       (search next-j c))))))
+  (if (even? a)
+      (search (+ a 1) 0)
+    (search a 0)))
+
