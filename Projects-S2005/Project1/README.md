@@ -134,6 +134,27 @@ How can we compute the distance traveled by a baseball, but taking into account 
 
 Let's let x and y denote the two components of position of the baseball, adn let's let u denote the velocity in the horizontal direction, and v denote the velocity in the vertical direction. We will let V denote the magnitude of the velocity. Then the equations of motion are:
 
+[xxx]
+
+We can rewrite these as:
+
+[xxx]
+
+We also have some initial conditions on these parameters:
+
+[xx]
+
+where alpha is the angle of the initial hit with respect to the ground, V is the initial velocity and h is the initial height of the ball.
+
+To find the distance traveled, we need to integreate these equations. That is, starting with the initial values, we want to move forward a small step in time (say 0.01 seconds), and compute the change in x and y, given the current estimates for velocity. This will give us the new values of x and y. Similarly, we want to compute the change in u and v, and thus, the new values for u and v. We can keep recursively estimating these values until the value for y drops below 0, in which case the value for x tells us the distance traveled.
+
+Based on this idea, write a procedure called `integrate`, which performs this computation. Using this write a procedure called `travel-distance` which, given an initial elevation, an initial magnitude for the velocity, and an initial angle of launch, computes the distance traveled while accounting for drag.
+
+Use this to determine how far a baseball will travel with an angle of 45 degrees, using initial velocities of 45 m/s, 40 m/s and 35 m/s.
+
+How quickly does the distance drop when the angle changes, i.e., how easily does a home run turn into a fly out? Run some examples and report on this. For instance, suppose that the outfield fence is 300 feet from home plate, and that the batter has very quick bat speed, swing at about 100 mph (or 45 m/s). For what range of angles will the ball land over the fence? 
+
+How much does this change if we were in Denver rather than Boston? Report on some examples.
 
 Problem 7: Throwing instead of hitting
 -------------------------------------- 
