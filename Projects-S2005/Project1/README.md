@@ -86,6 +86,13 @@ Before we figure out why professional players don't normally hit 700 foot home r
 
 Use this for some sample values of elevation and velocity. What conclusion can you reach about the optimal angle of hitting?
 
+Problem 7: Throwing instead of hitting
+-------------------------------------- 
+
+Now let's turn this around. Instead of worrying about how far the ball will carry when hit, suppose we want a robotic fielder that can throw the ball accurately and efficiently. For this, we want to determine the best angle to throw the ball at a given velocity in order to reach a target a given distance away in the shortest amount of time. We will assume the target is at height 0 (i.e., on the ground) -- we could do this for a given height of the target but we'll assume that our fielders are good at catching things at ground level!
+
+You need to write a procedure (or set of procedures) that use the same integration idea to accomplish the following. Given an input velocity and desired distance (plus the other parameters such as mass of the ball, the beta coefficient, gravity, and the height at which the throw was made), we want to try different initial angles (ranging from -90 to 90 degrees) at which to throw. If throwing at a particular angle will result in the ball traveling roughly the desired distance (up to some error) then we want to find the time it takes for the ball to reach the target using this trajectory (Hint: a variation on your integrate code will do this part). Finally, we want to find the trajectory that results in the shortest time, given a fixed initial velocity magnitude).
+
 Problem 8: Do it on a bounce
 ---------------------------- 
 
