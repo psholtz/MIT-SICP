@@ -152,6 +152,3 @@
 ;;
 ;; Using applicative-order evaluation, the "remainder" procedure is invoked 4 times.
 ;;
-
-
-
