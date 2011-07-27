@@ -53,6 +53,16 @@
   (accumulate * 1 term a next b))
 
 ;;
+;; With these procedures, we can redefine procedures above in terms of the new "sum" and "product":
+;;
+(define (sum-integers a b)
+  (sum identity a inc b))
+(define (sum-cubes a b)
+  (sum cube a inc b))
+(define (factorial n)
+  (product identity 1 inc n))
+
+;;
 ;; (b) If your accumulate procedure generates a recursive process, write one that generates an iterative
 ;;     process. If it generates an iterative process, write one that generates a recursive process.
 ;;
