@@ -40,7 +40,6 @@
       (* (/ h 3) (sum term a next b 0 n))
       '()))
 	   
-
 ;;
 ;; Now carry out the numerical integration on "cube" between 0 and 1 with n=100, n=1000
 ;; 
