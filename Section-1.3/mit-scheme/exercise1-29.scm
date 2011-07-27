@@ -40,3 +40,27 @@
       (* (/ h 3) (sum term a next b 0 n))
       '()))
 	   
+
+;;
+;; Now carry out the numerical integration on "cube" between 0 and 1 with n=100, n=1000
+;; 
+(define (cube x) (* x x x))
+
+(simpson cube 0 1 100)
+;; --> 1/4
+
+(simpson cube 0 1 1000)
+;; --> 1/4 
+
+;;
+;; This is the answer we were expecting.
+;;
+
+;;
+;; We can perform the integration using real numbers:
+;;
+(simpson cube 0. 1. 100.)
+;; --> 0.246666666666
+
+(simpson cube 0. 1. 1000.)
+;; --> 0.249666666666
