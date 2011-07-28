@@ -22,7 +22,7 @@
       (combiner (if (predicate (term a))
 		    (term a)
 		    null-value)
-		(accumulate combiner null-value term (next a) next b predicate))))
+		(filtered-accumulate combiner null-value term (next a) next b predicate))))
 
 ;;
 ;; Define the prime predicate (take it from Exercise 1.28, which is the fastest prime testing procedure we developed):
