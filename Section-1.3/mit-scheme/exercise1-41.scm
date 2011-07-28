@@ -21,7 +21,6 @@
 ;;
 ;; Let's first use the substitution model to simply the expression for ((double (double double)) inc):
 ;;
-
 ((double (double double)) inc)
 ((double (lambda (x) (double (double x)))) inc) 
 ((lambda (y) ((lambda (x) (double (double x))) ((lambda (x) (double (double x))) y))) inc) 
@@ -38,7 +37,6 @@
 ;;
 ;; Let's investigate this by simplifying the expression further:
 ;;
-
 (double (double (double (double inc))))
 
 (double (double (double (lambda (x) (inc (inc x))))))
@@ -125,46 +123,63 @@
 	      ((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y))) z)))
  (inc (inc 11)))
 
+((lambda (z) ((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y)))
+	      ((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y))) z)))
+ (inc 12))
 
+((lambda (z) ((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y)))
+	      ((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y))) z))) 13)
 
+((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y)))
+ ((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y))) 13))
 
-(((double (double double)) inc) 5)
-(((double (lambda (x) (double (double x)))) inc) 5)
-(((lambda (y) (lambda (x) (double (double x))) (lambda (x) (double (double x))) y)
-(double inc)
-(lambda (x) (inc (inc x)))
+((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y)))
+ ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) 13)))
+
+((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y)))
+ ((lambda (x) (inc (inc x))) (inc (inc 13))))
+
+((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y)))
+ ((lambda (x) (inc (inc x))) (inc 14)))
+
+((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y)))
+ ((lambda (x) (inc (inc x))) 15))
+
+((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y)))
+ (inc (inc 15)))
+
+((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y)))
+ (inc 16))
+
+((lambda (y) ((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) y))) 17)
+
+((lambda (x) (inc (inc x))) ((lambda (x) (inc (inc x))) 17))
+
+((lambda (x) (inc (inc x))) (inc (inc 17)))
+
+((lambda (x) (inc (inc x))) (inc 18))
+
+((lambda (x) (inc (inc x))) 19)
+
+(inc (inc 19))
+
+(inc 20)
+
+21
 
 ;;
-;; So (double inc) produces a one-argument procedure that applies inc twice. 
-;;
-;; We can write:
+;; Hence, we see that our suspicion was correct, and invoking (double (double (double (double inc))))
+;; is like adding 16 to the original number. 
+;; 
+;; We could as well define the following functions:
 ;;
 (define add-two (double inc))
+(define add-four (double (double inc)))
+(define add-sixteen ((double (double double)) inc))
 
 ;;
-;; Now let's see what (double double) evaluates to:
+;; Note that these last two procedures could be rewritten as:
 ;;
-(double double)
-(lambda (x) (double (double x)))
-
-
-;; (double g) will apply the procedure "g" twice. 
-;;
-;; So evaluation of (double inc) will produce a procedure that applies "inc" once (adding one), and 
-;; then applies "inc" again, adding a total of two. 
-;;
-;; We can write:
-;;
-(define add-two (double inc))
-
-
-;; (double double) will apply the argument procedure twice times two (or four times total). 
-;; That is, if "inc" is a procedure that increments by 1, ((double double) inc) will produce 
-;; a procedure that increments by 4.
-;;
-;; Similarly, (double (double double)) will apply the argument procedure twice times two times two, 
-;; or eight times total. ((double (double double)) inc) will produce a procedure that increments 
-;; by 8.
-;;
-(((double (double double)) inc) 5)
+(define add-four ((double double) inc))
+(define add-sixteen (double (double (double (double inc)))))
 
