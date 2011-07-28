@@ -19,7 +19,7 @@
 ;; Evaluation of (((double (double double)) inc) 5)
 ;; ------------------------------------------------ 
 ;;
-;; Let's first use the substitution model to simply the expression for ((double (double double)) inc):
+;; Let's first use the substitution model to simplify the expression for ((double (double double)) inc):
 ;;
 ((double (double double)) inc)
 ((double (lambda (x) (double (double x)))) inc) 
@@ -29,13 +29,13 @@
 (double (double (double (double inc)))) 
 
 ;;
-;; So we're obtained a simplified expression for ((double (double double)) inc). 
+;; So we've obtained a simplified expression for ((double (double double)) inc). 
 ;;
 ;; Semantically, it would appear that we're "doubling" application of the expression four 
 ;; times. If "inc" simply adds 1 to its argument expression, we might expect that 
-;; (double (double (double (double inc)))) would behave something like 2^4 (that is, 4 doubles).
+;; (double (double (double (double inc)))) would behave something like adding 2^4 (that is, 4 doubles).
 ;;
-;; Let's investigate this by simplifying the expression further:
+;; Let's investigate this possibility by simplifying the expression further:
 ;;
 (double (double (double (double inc))))
 
@@ -171,15 +171,15 @@
 ;; Hence, we see that our suspicion was correct, and invoking (double (double (double (double inc))))
 ;; is like adding 16 to the original number. 
 ;; 
-;; We could as well define the following functions:
+;; We could as well define the following procedures:
 ;;
 (define add-two (double inc))
-(define add-four (double (double inc)))
+(define add-four ((double double) inc))
 (define add-sixteen ((double (double double)) inc))
 
 ;;
 ;; Note that these last two procedures could be rewritten as:
 ;;
-(define add-four ((double double) inc))
+(define add-four (double (double inc)))
 (define add-sixteen (double (double (double (double inc)))))
 
