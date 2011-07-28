@@ -165,6 +165,3 @@
 ;; 10 is relatively prime to 3, 7 and 9
 (= (* 3 7 9) (prime-product 10))
 ;; --> #t
-
-
-
