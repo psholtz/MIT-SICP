@@ -67,9 +67,24 @@
 ;; RUN SOME TESTS OF SUM OF SQUARES OF PRIMES
 ;;
 
-;; 
-;; ==>
-;; 
+(sum-of-prime-squares 1 1)
+;; --> 0
+
+(sum-of-prime-squares 1 2)
+;; --> 4 
+
+(sum-of-prime-squares 1 3)
+;; --> 13
+
+(sum-of-prime-squares 1 4)
+;; --> 13
+
+(sum-of-prime-squares 1 5)
+;; --> 38
+
+(define test-value 1000999)
+(= (square test-value) (sum-of-prime-squares test-value (+ test-value 1)))
+;; --> #t
 
 ;; define the "gcd" test
 (define (gcd a b)
