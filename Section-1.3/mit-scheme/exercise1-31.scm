@@ -46,77 +46,87 @@
 ;; --> 120
 
 ;;
-;; Define some supporting procedures for calculating factorials:
+;; Use the "product" procedure to compute approximations to pi: 
 ;;
-(define (square x) (* x x))
-(define (even? n) (= (remainder n 2) 0))
-(define (odd? n) (not (even? n)))
+(define (pi-partial n)
+  ;;
+  ;; The mapping from n to "numerator" that we desire is as follows:
+  ;;
+  ;; 1 --> 2
+  ;; 2 --> 4
+  ;; 3 --> 4
+  ;; 4 --> 6
+  ;; 5 --> 6
+  ;; ...
+  ;;
+  (define (numerator n)
+    (cond ((even? n) (+ n 2.0))
+	  (else
+	   (+ n 1.0))))
+
+  ;;
+  ;; The mapping from n to "denominator" that we desire is as follows:
+  ;;
+  ;; 1 --> 3
+  ;; 2 --> 3
+  ;; 3 --> 5
+  ;; 4 --> 5
+  ;; 5 --> 7
+  ;; ...
+  ;;
+  (define (denominator n)
+    (cond ((even? n) (+ n 1.0))
+	  (else
+	   (+ n 2.0))))
+
+  ;;
+  ;; The "term" will be the fraction:
+  ;;
+  (define (term n)
+    (/ (numerator n) (denominator n)))
+
+  ;;
+  ;; Write it all in terms of "product"
+  ;;
+  (product term 1.0 inc n))
 
 ;;
-;; Count factorials, but go by twos, e.g.,:
+;; The partial approximations only tend to pi/4.
 ;;
-;; 4!! = 4 * 2 = 8
-;; 5!! = 5 * 3 = 15
-;; 6!! = 6 * 4 * 2 = 48
-;; 7!! = 7 * 5 * 3 = 105
-;;
-(define (factorial-by-two n)
-  (cond ((= n 0) 1)
-	((= n 1) 1)
-	(else
-	 (* n (factorial-by-two (- n 2))))))
-
-;; 
-;; Run some unit tests, to make sure we're OK
-;;
-(= (factorial-by-two 4) 8)
-(= (factorial-by-two 5) 15)
-(= (factorial-by-two 6) 48)
-(= (factorial-by-two 7) 105)
-
-;;
-;; Use the "product" procedure to compute approximations to pi:
-;; ATTEMPT ... might not work so well?
+;; Have to multiply by 4 to get back to pi.
 ;;
 (define (pi n)
+  (* 4 (pi-partial n)))
 
-  ;; 
-  ;; Define the numerator in the expression for pi.
-  ;;
-  ;; Make sure the argument supplied is even.
-  ;; Signal error condition by 0.0
-  ;;
-  (define (numerator k)
-    (if (even? k)
-	(/ (square (factorial-by-two k)) 2.0)
-	0.0))
+(pi 1)
+;; --> 2.666666
 
-  ;; 
-  ;; Define the denominator in the expression for pi.
-  ;;
-  ;; Make sure the argument supplied is odd.
-  ;; Signal error condition by 0.0
-  ;;
-  (define (denominator k)
-    (if (odd? k)
-	(square (factorial-by-two k))
-	0.0))
+(pi 5)
+;; --> 2.92571428
 
-  ;;
-  ;; Calculate the partial produts of pi, up to n
-  ;;
-  (define (pi-partial)
-    (let ((d1 (* 2 n))
-	  (d2 (+ (* 2 n) 1)))
-      (/ (numerator d1) (denominator d2))))
+(pi 10)
+;; --> 3.27510104
 
-  ;;
-  ;; (pi-partial) will calculate an approximation for pi/2.
-  ;;
-  ;; We have to multiply it by 2 to get an approximation for pi.
-  ;;
-  (* 2. (pi-partial)))
+(pi 20)
+;; --> 3.21378494
 
+(pi 50)
+;; --> 3.1719440917
+
+(pi 100)
+;; --> 3.1570301
+
+(pi 500)
+;; --> 3.1447232866
+
+(pi 1000)
+;; --> 3.1431607
+
+(pi 5000)
+;; --> 3.1419067
+
+(pi 10000)
+;; --> 3.1417497
 
 ;;
 ;; (b) If your "product" procedure generates a recursive process, write one that generates an interative
