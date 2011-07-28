@@ -182,3 +182,19 @@
 ;;
 (define add-four (double (double inc)))
 (define add-sixteen (double (double (double (double inc)))))
+
+;;
+;; So far, we have deduced that:
+;;
+;; (double inc) ==> adds 2
+;; ((double double) inc) ==> adds 4 = (2^2)
+;; ((double (double double)) inc) ==> adds 16 = ((2^2)^2)
+;;
+;; From this, we might surmise that:
+;; ((double (double (double double))) inc) ==> adds 256 = (((2^2)^2)^2)
+;;
+;; Typing this into the interpreter, we obtain the expected expression:
+;;
+(((double (double (double double))) inc) 5)
+;; --> 261
+
