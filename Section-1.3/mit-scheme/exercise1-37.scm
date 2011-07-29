@@ -35,6 +35,10 @@
 (= (/ 55.0 89.0) (cont-frac n d 10))
 
 ;;
+;; Note the Fibonacci sequence generated in the numerator-to-denominator ratios.
+;;
+
+;;
 ;; Iterative:
 ;;
 (define (cont-frac n d k)
