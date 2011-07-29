@@ -16,7 +16,64 @@
   (lambda (x) (g (g x))))
 
 ;;
-;; Evaluation of (((double (double double)) inc) 5)
+;; Evaluation of (((double (double double)) inc) 5):
+;;
+----------
+(((double (double double)) inc) 5)
+----------
+(((double (lambda (x) (double (double x)))) inc) 5)
+---------- 
+(((lambda (y) 
+    ((lambda (x) (double (double x)))
+     ((lambda (x) (double (double x))) y))) inc) 5)
+----------
+(((lambda (x) (double (double x)))
+  ((lambda (x) (double (double x))) inc)) 5)
+---------- 
+(((lambda (x) (double (double x)))
+  (double (double inc))) 5)
+---------- 
+(((lambda (x) (double (double x)))
+  (double (lambda (y) (inc (inc y))))) 5)
+---------- 
+(((lambda (x) (double (double x)))
+  (lambda (z)
+    ((lambda (y) (inc (inc y))) 
+     ((lambda (y) (inc (inc y))) z)))) 5)
+---------- 
+((double 
+  (double 
+   (lambda (z)
+     ((lambda (y) (inc (inc y)))
+      ((lambda (y) (inc (inc y))) z))))) 5)
+---------- 
+((double
+  (lambda (u)
+    ((lambda (z)
+      ((lambda (y) (inc (inc y)))
+       ((lambda (y) (inc (inc y))) z)))
+     ((lambda (z)
+	((lambda (y) (inc (inc y)))
+	 ((lambda (y) (inc (inc y))) z))) u)))) 5)
+----------
+;;; HAVE A BUG IN THE FOLLOWING CODE
+((lambda (v)
+   ((lambda (u)
+      ((lambda (z)
+	 ((lambda (y) (inc (inc y)))
+	  ((lambda (y) (inc (inc y))) z)))
+       ((lambda (z)
+	  ((lambda (y) (inc (inc y)))
+	   ((lambda (y) (inc (inc y))) z))) u)))
+    ((lambda (u)
+       ((lambda (z)
+	  ((lambda (y) (inc (inc y)))
+	   ((lambda (y) (inc (inc y))) z)))
+	((lambda (z)
+	   ((lambda (y) (inc (inc y)))
+	    ((lambda (y) (inc (inc y))) z))) u)))))) 5)
+----------
+    
 ;; ------------------------------------------------ 
 ;;
 ;; Let's first use the substitution model to simplify the expression for ((double (double double)) inc):
