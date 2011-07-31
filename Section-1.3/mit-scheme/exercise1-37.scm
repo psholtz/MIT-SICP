@@ -79,21 +79,21 @@
   (define (test-iter k)
     (let ((value (cont-frac n d k)))
       (if (< (abs (- value target)) tolerance)
-	  n
+	  k
 	  (test-iter (+ k 1)))))
   (test-iter 1))
 
 (test)
-;; --> 13
+;; --> 10
 
 ;;
-;; Hence, we have to expand the continued fraction 13 times to get accuracy to within 4 decimal places:
+;; Hence, we have to expand the continued fraction 10 times to get accuracy to within 4 decimal places:
 ;;
 (/ 1.0 phi)
 ;; --> 0.6180339882723972
 
-(cont-frac n d 13)
-;; --> 0.6180371352785146
+(cont-frac n d 10)
+;; --> 0.6179775280898876
 
 ;;
 ;; Iterative:
@@ -153,13 +153,13 @@
 ;; get an approximation to 1/phi that is accurate to 4 decimal places:
 ;;
 (test)
-;; --> 13
+;; --> 10
 
 ;;
-;; Again, as before, the answer we get is 13.
+;; Again, as before, the answer we get is 10.
 ;;
 (/ 1.0 phi)
 ;; --> 0.6180339882723972
 
-(cont-frac n d 13)
-;; --> 0.6180371352785146
+(cont-frac n d 10)
+;; --> 0.6179775280898876
