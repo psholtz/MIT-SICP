@@ -37,7 +37,6 @@
 ;; Next define the procedures we need to support Newton's Method:
 ;;
 (define (average x y) (/ (+ x y) 2.0))
-
 (define (average-damp f) (lambda (x) (average x (f x))))
 
 (define (deriv g)
@@ -49,11 +48,33 @@
 (define (newton-transform g)
   (lambda (x)
     (- x (/ (g x) ((deriv g) x)))))
-
 (define (newtons-method g guess)
   (fixed-point (newton-transform g) guess))
 
 ;;
 ;; Finally let's define the cubic procedure:
 ;;
-(define cubic (lambda (x) (+ (cube x) (* a (square x)) (* b x) c)))
+(define (cubic a b c) (lambda (x) (+ (cube x) (* a (square x)) (* b x) c)))
+
+;;
+;; Let's run some simple tests.
+;; 
+;; The root of x^3 is zero. Let's see if our procedure works for this use case:
+;;
+(newtons-method (cubic 0 0 0) 1.0)
+;; ==> 2.653e-5
+
+;;
+;; The root of x^3 + x^2 + x + 1 is -1:
+;;
+(newtons-method (cubic 1 1 1) 1.0)
+;; ==> -0.9999999999 
+
+;;
+;; Some other random use cases:
+;;
+(define x (newtons-method (cubic 1 2 10) 1.0))
+;; ==> -2.182709907
+
+((cubic 1 2 10) x)
+;; ==> 2.759037e-11
