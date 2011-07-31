@@ -113,7 +113,7 @@
 ;; Let's define the following test:
 ;;
 (define (test)
-  (define tolerance 0.0001)  ;; 4 digits of tolerance
+  (define tolerance 0.0001)  ;; 4 digits of accuracy
   (define phi 1.61803399)
   (define target (/ 1.0 phi))
   (define (test-iter k)
