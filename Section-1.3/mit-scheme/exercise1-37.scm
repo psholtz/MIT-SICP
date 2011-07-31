@@ -17,13 +17,13 @@
 ;; is to truncate the expansion after a given number of terms. Such a truncation -- 
 ;; a so-called "k-term finite continued fraction" -- has the form:
 ;;
-;;                  N1
-;; --------------------------------
-;;  D1      +         N2
-;;             ----------------
-;;               ...   + NK
-;;                       -- 
-;;                       DK
+;;                       N1
+;;      --------------------------------
+;;       D1      +         N2
+;;                  ----------------
+;;                    ...   + NK
+;;                            -- 
+;;                            DK
 ;; 
 ;; Suppose that n and d are procedures of one argument (the term index i) that return
 ;; the N(i) and D(i) of the terms of the continued fraction. Define a procedure cont-frac
