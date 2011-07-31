@@ -44,6 +44,22 @@
 ;; Now let's try to "smooth" the impulse:
 ;;
 ((smooth impulse) 0)
+;; ==> 1.0
+
+;;
+;; This is what we expect, since (/ (+ 0.0 3.0 0.0) 3.0) evaluates to 1.0
+;;
+
+((smooth (smooth impulse)) 0)
+;; ==> 1.0
+
+((smooth (smooth (smooth impulse))) 0)
+;; ==> 
+
+((smooth (smooth (smooth (smooth impulse)))) 0)
+;; ==>
+
+(= (/ (+ 0 1 0) 3.0) ((smooth impulse) 0))
 
 
 ;;
@@ -58,6 +74,9 @@
 	  (else
 	   (repeated-iter (compose g f) (+ c 1)))))
   (repeated-iter f 1))
+
+;;
+;; Let's run some unit tests to see if "repeated" works the way we
 
 ;;
 ;; Definition of "smooth-n-times":
