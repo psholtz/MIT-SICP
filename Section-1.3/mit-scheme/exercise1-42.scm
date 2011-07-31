@@ -17,5 +17,7 @@
 ;;
 ;; Run the sample given in text:
 ;;
-((compose square inc) )
+(define (inc n) (+ n 1))
+
+((compose square inc) 6)
 ;; --> 49
