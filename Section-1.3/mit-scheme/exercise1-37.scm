@@ -35,8 +35,37 @@
 (= (/ 55.0 89.0) (cont-frac n d 10))
 
 ;;
+;; Now let's update the denominator procedure:
+;;
+(define d (lambda (x) 2.0))
+
+;;
+;; The following unit tests all assert to true:
+;;
+(= (/ 1.0 2.0) (cont-frac n d 1))
+(= (/ 2.0 5.0) (cont-frac n d 2))
+(= (/ 5.0 12.0) (cont-frac n d 3))
+(= (/ 12.0 29.0) (cont-frac n d 4))
+(= (/ 29.0 70.0) (cont-frac n d 5))
+
+;;
 ;; Note the Fibonacci sequence generated in the numerator-to-denominator ratios.
 ;;
+
+;;
+;; Now let's update the denominator to always be 1, and the numerator to always be 2:
+;;
+(define n (lambda (x) 2.0))
+(define d (lambda (x) 1.0))
+
+;;
+;; The following unit tests all assert to true:
+;;
+(= 2.0 (cont-frac n d 1))
+(= (/ 2.0 3.0) (cont-frac n d 2))
+(= (/ 6.0 5.0) (cont-frac n d 3))
+(= (/ 10.0 11.0) (cont-frac n d 4))
+(= (/ 22.0 21.0) (cont-frac n d 5))
 
 ;;
 ;; Iterative:
