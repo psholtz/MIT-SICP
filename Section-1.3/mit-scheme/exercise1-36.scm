@@ -15,14 +15,17 @@
   (define tolerance 0.00001)
   (define (close-enough? v1 v2)
     (< (abs (- v1 v2)) tolerance))
-  (define (try guess)
+  (define (try guess number)
     (let ((next (f guess)))
       (newline)
+      (display "Guess number ")
+      (display number)
+      (display ": ")
       (display guess)
       (if (close-enough? guess next)
 	  next
-	  (try next))))
-  (try first-guess))
+	  (try next (+ number 1)))))
+  (try first-guess 1))
 
 ;;
 ;; Use it to calculate phi:
