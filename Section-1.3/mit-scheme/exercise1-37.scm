@@ -68,6 +68,34 @@
 (= (/ 22.0 21.0) (cont-frac n d 5))
 
 ;;
+;; To 9 digits of accuracy, the golden ratio phi is 1.61803399.
+;; 
+;; Let's define the following test:
+;;
+(define (test)
+  (define tolerance 0.0001)  ;; 4 digits of tolerance
+  (define phi 1.61803399)
+  (define target (/ 1.0 phi))
+  (define (test-iter k)
+    (let ((value (cont-frac n d k)))
+      (if (< (abs (- value target)) tolerance)
+	  n
+	  (test-iter (+ k 1)))))
+  (test-iter 1))
+
+(test)
+;; --> 13
+
+;;
+;; Hence, we have to expand the continued fraction 13 times to get accuracy to within 4 decimal places:
+;;
+(/ 1.0 phi)
+;; --> 0.6180339882723972
+
+(cont-frac n d 13)
+;; --> 0.6180371352785146
+
+;;
 ;; Iterative:
 ;;
 (define (cont-frac n d k)
@@ -79,4 +107,59 @@
 	   (cont-frac-iter (- i 1) (term i t)))))
   (cont-frac-iter k 0))
 
-    
+;;
+;; Let's try out the unit tests for the Fibonacci sequence again:
+;;
+(define n (lambda (x) 1.0))
+(define d (lambda (x) 1.0))
+
+(= (/ 1.0 1.0) (cont-frac n d 1))
+(= (/ 1.0 2.0) (cont-frac n d 2))
+(= (/ 2.0 3.0) (cont-frac n d 3))
+(= (/ 3.0 5.0) (cont-frac n d 4))
+(= (/ 5.0 8.0) (cont-frac n d 5))
+(= (/ 8.0 13.0) (cont-frac n d 6))
+(= (/ 13.0 21.0) (cont-frac n d 7))
+(= (/ 21.0 34.0) (cont-frac n d 8))
+(= (/ 34.0 55.0) (cont-frac n d 9))
+(= (/ 55.0 89.0) (cont-frac n d 10))
+
+;;
+;; Let's run the other set of unit tests:
+;;
+(define d (lambda (x) 2.0))
+
+(= (/ 1.0 2.0) (cont-frac n d 1))
+(= (/ 2.0 5.0) (cont-frac n d 2))
+(= (/ 5.0 12.0) (cont-frac n d 3))
+(= (/ 12.0 29.0) (cont-frac n d 4))
+(= (/ 29.0 70.0) (cont-frac n d 5))
+
+;;
+;; and also these unit tests:
+;;
+(define n (lambda (x) 2.0))
+(define d (lambda (x) 1.0))
+
+(= 2.0 (cont-frac n d 1))
+(= (/ 2.0 3.0) (cont-frac n d 2))
+(= (/ 6.0 5.0) (cont-frac n d 3))
+(= (/ 10.0 11.0) (cont-frac n d 4))
+(= (/ 22.0 21.0) (cont-frac n d 5))
+
+;;
+;; Let's run our same "test" procedure on the iterative "cont-frac" procedure,
+;; to determine how many times we have to expand the continued fraction to 
+;; get an approximation to 1/phi that is accurate to 4 decimal places:
+;;
+(test)
+;; --> 13
+
+;;
+;; Again, as before, the answer we get is 13.
+;;
+(/ 1.0 phi)
+;; --> 0.6180339882723972
+
+(cont-frac n d 13)
+;; --> 0.6180371352785146
