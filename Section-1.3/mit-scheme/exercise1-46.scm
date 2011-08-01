@@ -38,4 +38,38 @@
     (average guess (/ x guess)))
   ((iterative-improvement good-enough? improve) 1.0))
 
+;;
+;; Run some unit tests:
+;;
+(sqrt 2.0)
+(sqrt 3.0)
+(sqrt 5.0)
+(sqrt 10.0)
+
+;;
+;; Define the "fixed-point" procedure in terms of "iterative-improvement":
+;;
+(define (fixed-point f x)
+  (define tolerance 0.00001)
+  (define (close-enough? guess)
+    (< (abs (- guess (f guess))) tolerance))
+  (define (next x) (f x))
+  ((iterative-improvement close-enough? next) 1.0))
+
+;;
+;; Run some unit tests:
+;;
+(fixed-point cos 1.0)
+(fixed-point (lambda (y) (+ (sin y) (cos y))) 1.0)
+
+(define (average x y) (/ (+ x y) 2.0))
+(define (average-damp f)
+  (lambda (x) (average x (f x))))
+
+
+(define (sqrt x)
+  (fixed-point (average-damp (lambda (y) (/ x y))) 1.0))
+(define (cube-root x)
+  (fixed-point (average-damp (lambda (y) (/ x (square y)))) 1.0))
+
 
