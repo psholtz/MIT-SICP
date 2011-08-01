@@ -88,10 +88,28 @@
 ;; These procedures require three calls to "average-damp":
 ;;
 (define (eighth-root x)
-  (fixed-point (average-damp (average-damp (lambda (y) (/ x (n-th-power y 7)))))
+  (fixed-point (average-damp 
+		(average-damp 
+		 (average-damp (lambda (y) (/ x (n-th-power y 7))))))
 	       1.0))
 
+;;
+;; ...
+;;
 
+(define (fifteenth-root x)
+  (fixed-point (average-damp
+		(average-damp
+		 (average-damp (lambda (y) (/ x (n-th-power y 14))))))
+	       1.0))
 
-
-
+;; 
+;; The following procedure requires four calls to "average-damp":
+;;
+(define (sixteenth-root x)
+  (fixed-point (average-damp
+		(average-damp
+		 (average-damp
+		  (average-damp 
+		   (lambda (y) (/ x (n-th-power y 15)))))))
+	       1.0))
