@@ -159,3 +159,21 @@
     (fixed-point ((repeated average-damp k)
 		  (lambda (y) (/ x (n-th-power y (- n 1)))))
 		 1.0)))
+
+;;
+;; Let's run some unit tests:
+;;
+(n-th-root 2 2)
+;; ==> 1.4142135623746899
+
+(n-th-root 3 2)
+;; ==> 1.7320508075688772
+
+(n-th-root 81 2)
+;; ==> 9.0
+
+(n-th-root 3 5)
+;; ==> 1.2457295735853005
+
+(n-th-root 2 107)
+;; ==> 1.006496234705355
