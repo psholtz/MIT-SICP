@@ -115,8 +115,27 @@
 	       1.0))
 
 ;;
-;; A pattern suggests itself: [xxx]
+;; A pattern suggests itself:
+;; 
+;; n = 2 or n = 3 ==> apply "average-damp" 1x
+;; n = 4 or n = 5 or n = 6 or n = 7 ==> apply "average-damp" 2x
+;; n = 8 or n = 9 or n = 10 or n = 11 
+;; or n = 12 or n = 13 or n = 14 or n = 15 ==> apply "average-damp" 3x
+;; n = 16 ... ==> apply "average-damp" 4x
 ;;
+;; The function of n we are looking for, to give the number of times 
+;; we should apply "average-damp", is given by:
+;;
+;; (floor (/ (log n) (log 2)))
+;;
+(= 1 (floor (/ (log 2) (log 2))))
+(= 1 (floor (/ (log 3) (log 2))))
+(= 2 (floor (/ (log 4) (log 2))))
+(= 2 (floor (/ (log 5) (log 2))))
+(= 2 (floor (/ (log 6) (log 2))))
+(= 2 (floor (/ (log 7) (log 2))))
+(= 3 (floor (/ (log 8) (log 2))))
+(= 4 (floor (/ (log 16) (log 2))))
 
 ;;
 ;; Let's define the "repeated" procedure from the previous exercises, 
