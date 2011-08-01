@@ -42,9 +42,16 @@
 ;; Run some unit tests:
 ;;
 (sqrt 2.0)
+;; ==> 1.4142156862745097
+
 (sqrt 3.0)
+;; ==> 1.7320508100147274
+
 (sqrt 5.0)
+;; ==> 2.2360688956433634
+
 (sqrt 10.0)
+;; ==> 3.162277665175675
 
 ;;
 ;; Define the "fixed-point" procedure in terms of "iterative-improvement":
@@ -60,16 +67,32 @@
 ;; Run some unit tests:
 ;;
 (fixed-point cos 1.0)
+;; ==> 0.7390893414033928
+
 (fixed-point (lambda (y) (+ (sin y) (cos y))) 1.0)
+;; ==> 1.2587228743052672
 
 (define (average x y) (/ (+ x y) 2.0))
 (define (average-damp f)
   (lambda (x) (average x (f x))))
 
-
+;; 
+;; Define "sqrt" and "cube-root" procedures in terms of fixed-point:
+;;
 (define (sqrt x)
   (fixed-point (average-damp (lambda (y) (/ x y))) 1.0))
+
+(sqrt 2.0)
+;; ==> 1.4142156862745097
+
+(sqrt 3.0)
+;; ==> 1.7320508100147274
+
 (define (cube-root x)
   (fixed-point (average-damp (lambda (y) (/ x (square y)))) 1.0))
 
+(cube-root 2.0)
+;; ==> 1.2599166768842038
 
+(cube-root 3.0)
+;; ==> 1.4422451140553103
