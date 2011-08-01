@@ -94,3 +94,25 @@
 ;;
 (define (smooth-n-times f n)
   ((repeated smooth n) f))
+
+
+;;
+;; +++++ 
+;; HERE IS THE CODE
+;;
+((smooth (smooth impulse)) 0)
+
+((smooth
+  (lambda (x)
+    (average
+     (impulse (- x dx))
+     (impulse x)
+     (impulse (+ x dx))))) 0)
+
+((lambda (y)
+   ((average
+     (lambda (x)
+       (average 
+	(impulse (- x dx))
+	(impulse x)
+	(impulse (+ x dx)))
