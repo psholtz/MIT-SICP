@@ -113,3 +113,30 @@
 		  (average-damp 
 		   (lambda (y) (/ x (n-th-power y 15)))))))
 	       1.0))
+
+;;
+;; A pattern suggests itself: [xxx]
+;;
+
+;;
+;; Let's define the "repeated" procedure from the previous exercises, 
+;; so we can use that in our procedure definition:
+;;
+(define (compose f g)
+  (lambda (x) (f (g x))))
+
+(define (repeated f n)
+  (define (repeated-iter g c)
+    (cond ((>= c n) g)
+	  (else
+	   (repeated-iter (compose g f) (+ c 1)))))
+  (repeated-iter f 1))
+
+;;
+;; Finally define the n-th-root procedure that we are seeking:
+;;
+(define (n-th-root x n)
+  (let ((k (floor (/ (log n) (log 2)))))
+    (fixed-point ((repeated average-damp k)
+		  (lambda (y) (/ x (n-th-power y (- n 1)))))
+		 1.0)))
