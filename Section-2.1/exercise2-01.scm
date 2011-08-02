@@ -16,3 +16,18 @@
 	((and (negative? n) (positive? d)) (cons n d))
 	(else
 	 (cons n d))))
+
+;;
+;; Let's define the "print-rat" procedure so we can run some unit tests.
+;;
+(define (print-rat x)
+  (newline)
+  (display (numer x))
+  (display "/")
+  (display (denom x)))
+
+;;
+;; Need selectors for numerator and denominator as well:
+;;
+(define (numer x) (car x))
+(define (denom x) (cdr x))
