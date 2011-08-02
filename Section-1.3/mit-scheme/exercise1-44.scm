@@ -251,4 +251,3 @@
 (= ((smooth-n-times impulse 3) 0) ((smooth (smooth (smooth impulse))) 0))
 (= ((smooth-n-times impulse 4) 0) ((smooth (smooth (smooth (smooth impulse)))) 0))
 (= ((smooth-n-times impulse 5) 0) ((smooth (smooth (smooth (smooth (smooth impulse))))) 0))
-
