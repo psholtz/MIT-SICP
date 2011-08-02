@@ -13,4 +13,6 @@
   (cond ((and (positive? n) (positive? d)) (cons n d))
 	((and (negative? n) (negative? d)) (cons n d))
 	((and (positive? n) (negative? d)) (cons (* -1 n) (* -1 d)))
-	((and (negative? n) (positive? d)) (cons n d))))
+	((and (negative? n) (positive? d)) (cons n d))
+	(else
+	 (cons n d))))
