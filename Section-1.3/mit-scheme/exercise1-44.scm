@@ -146,7 +146,66 @@
   0)
  ((lambda (x)
     (average
-     (impulse (- x
+     (impulse (- x dx))
+     (impulse x)
+     (impulse (+ x dx))))
+  (+ 0 dx)))
+----------------------------------- 
+(average
+ (average 
+  (impulse (- (- 0 dx) dx))
+  (impulse (- 0 dx))
+  (impulse (+ (- 0 dx) dx)))
+ (average
+  (impulse (- 0 dx))
+  (impulse 0)
+  (impluse (+ 0 dx)))
+ (average
+  (impulse (- (+ 0 dx) dx))
+  (impulse (+ 0 dx))
+  (impulse (+ (+ 0 dx) dx))))
+------------------------------------ 
+(average
+ (average
+  (impulse (- -0.00001 dx))
+  (impulse -0.00001)
+  (impulse (+ -0.00001 dx)))
+ (average 
+  (impulse -0.00001)
+  (impulse 0)
+  (impulse +0.00001))
+ (average
+  (impulse (- +0.00001 dx))
+  (impulse +0.00001)
+  (impulse (+ +0.00001 dx))))
+------------------------------------- 
+(average
+ (average
+  (impulse -0.00002)
+  (impulse -0.00001)
+  (impulse 0))
+ (average
+  (impulse -0.00001)
+  (impulse 0)
+  (impulse +0.00001))
+ (average
+  (impulse 0)
+  (impulse +0.00001)
+  (impulse +0.00002)))
+-------------------------------------- 
+(average
+ (average 0 0 3)
+ (average 0 3 0)
+ (average 3 0 0))
+--------------------------------------
+(average 1.0 1.0 1.0)
+-------------------------------------- 
+1.0
+-------------------------------------- 
+
+;;
+;; So indeed, ((smooth (smooth impulse)) 0) works out to 1.0 as well.
+;;
 
 ;;
 ;; Let's look at a couple more n-fold recursive calls of "smooth":
@@ -183,3 +242,13 @@
 ;;
 (define (smooth-n-times f n)
   ((repeated smooth n) f))
+
+;;
+;; Let's run some unit tests, to see if we get the answers we expect:
+;;
+(= ((smooth-n-times impulse 1) 0) ((smooth impulse) 0))
+(= ((smooth-n-times impulse 2) 0) ((smooth (smooth impulse)) 0))
+(= ((smooth-n-times impulse 3) 0) ((smooth (smooth (smooth impulse))) 0))
+(= ((smooth-n-times impulse 4) 0) ((smooth (smooth (smooth (smooth impulse)))) 0))
+(= ((smooth-n-times impulse 5) 0) ((smooth (smooth (smooth (smooth (smooth impulse))))) 0))
+
