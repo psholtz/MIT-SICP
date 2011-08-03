@@ -8,16 +8,21 @@
 ;;
 
 ;;
-;; Modified version of the "make-rat" constructor:
+;; Modified version of the "make-rat" constructor, incorporating the "gcd" test as in text:
 ;;
 (define (make-rat n d) 
+  (define (gcd a b)
+    (if (= b 0)
+	a
+	(gcd b (remainder a b))))
   (define (positive? x)
     (> x 0))
   (define (negative? x)
     (< x 0))
-  (if (negative? d)
-      (cons (* -1 n) (* -1 d))
-      (cons n d)))
+  (let ((g (gcd (abs n) (abs d))))
+    (if (negative? d)
+	(cons (/ (* -1 n) g) (/ (* -1 d) g))
+	(cons (/ n g) (/ d g)))))
 
 ;;
 ;; Let's define the "print-rat" procedure so we can run some unit tests.
