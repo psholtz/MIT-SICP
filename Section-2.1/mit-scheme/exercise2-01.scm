@@ -58,3 +58,24 @@
 ;;
 ;; Note that we're not testing for 0 in the denominator yet.
 ;;
+
+;;
+;; Let's make sure the "gcd" procedure is working correctly:
+;;
+(print-rat (make-rat 2 4))
+;; ==> 1/2
+
+(print-rat (make-rat -2 4))
+;; ==> -1/2
+
+(print-rat (make-rat -2 -4))
+;; ==> 1/2
+
+(print-rat (make-rat 2 -4))
+;; ==> -1/2
+
+(print-rat (make-rat 3 9))
+;; ==> 1/3
+
+(print-rat (make-rat 15 -9))
+;; ==> -5/3
