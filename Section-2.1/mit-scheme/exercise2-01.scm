@@ -15,8 +15,6 @@
     (if (= b 0)
 	a
 	(gcd b (remainder a b))))
-  (define (positive? x)
-    (> x 0))
   (define (negative? x)
     (< x 0))
   (let ((g (gcd (abs n) (abs d))))
