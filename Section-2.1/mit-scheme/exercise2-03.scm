@@ -35,8 +35,8 @@
 ;;
 ;; For our first representation of a rectangle, let's define it using 
 ;; two points: (a) the upper-left hand corner, and (b) the lower right-hand
-;; corner. This information should encode everything we need to be able 
-;; to draw and represent the rectangle.
+;; corner. From this we should be able to extract the width and height of the 
+;; rectangle, and hence its area and perimeter.
 ;;
 (define (make-rect p1 p2)
   (cons p1 p2))
