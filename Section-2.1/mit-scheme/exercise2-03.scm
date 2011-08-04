@@ -33,6 +33,12 @@
   (distance-points (start-segment s) (end-segment s)))
 
 ;;
+;; Let's run some unit tests, to make sure our distance and length procedures 
+;; work as advertised:
+;;
+
+
+;;
 ;; For our first representation of a rectangle, let's define it using 
 ;; two points: (a) the upper-left hand corner, and (b) the lower right-hand
 ;; corner. From this we should be able to extract the width and height of the 
