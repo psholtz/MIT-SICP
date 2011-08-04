@@ -3,13 +3,18 @@
 ;;
 
 ;;
-;; Let's bring in the procedures from Exercise 2.2 that we'll be using here:
+;; Let's bring in the procedures from Exercise 2.2 that we'll be using here.
+;;
+;; The point procedures:
 ;;
 (define (make-point x y)
   (cons x y))
 (define (x-point p) (car p))
 (define (y-point p) (cdr p))
 
+;;
+;; And the segment procedures:
+;;
 (define (make-segment start-point end-point)
   (cons start-point end-point))
 (define (start-segment s)
