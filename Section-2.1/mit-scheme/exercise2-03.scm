@@ -34,8 +34,7 @@
   (distance-points (start-segment s) (end-segment s)))
 
 ;;
-;; Let's run some unit tests, to make sure our distance and length procedures 
-;; work as advertised:
+;; Let's run some unit tests, to make sure our distance and length metrics work as advertised:
 ;;
 (define origin (make-point 0 0))
 (define x1 (make-point 1 0))
