@@ -28,7 +28,8 @@
 ;; the distance between two points:
 ;;
 (define (distance-points p1 p2)
-  (sqrt (+ (square (- (x-point p1) (x-point p2))) (square (- (y-point p1) (y-point p2))))))
+  (sqrt (+ (square (- (x-point p1) (x-point p2))) 
+	   (square (- (y-point p1) (y-point p2))))))
 (define (length-segment s)
   (distance-points (start-segment s) (end-segment s)))
 
@@ -36,7 +37,58 @@
 ;; Let's run some unit tests, to make sure our distance and length procedures 
 ;; work as advertised:
 ;;
+(define origin (make-point 0 0))
+(define x1 (make-point 1 0))
+(define x2 (make-point -1 0))
+(define y1 (make-point 0 1))
+(define y2 (make-point 0 -1))
 
+(distance-points origin x1)
+;; ==> 1
+
+(distance-points origin x2)
+;; ==> 1
+
+(distance-points origin y1)
+;; ==> 1
+
+(distance-points origin y2)
+;; ==> 1
+
+(= (distance-points origin x1) (distance-points x1 origin))
+;; ==> #t
+
+(= (distance-points origin x2) (distance-points x2 origin))
+;; ==> #t 
+
+(= (distance-points origin y1) (distance-points y1 origin))
+;; ==> #t
+
+(= (distance-points origin y2) (distance-points y2 origin))
+;; ==> #t
+
+(distance-points x1 x2)
+;; ==> 2
+
+(distance-points y1 y2)
+;; ==> 2
+
+(distance-points x1 y1)
+;; ==> 1.4142136
+
+(distance-points x2 y2)
+;; ==> 1.4142136
+
+;;
+;; Try out the canonical Pythagorean triangle:
+;;
+(define p1 (make-point 3 0))
+(define p2 (make-point 0 4))
+(distance-points p1 p2)
+;; ==> 5
+
+(= (distance-points p1 p2) (distance-points p2 p1))
+;; ==> #t
 
 ;;
 ;; For our first representation of a rectangle, let's define it using 
