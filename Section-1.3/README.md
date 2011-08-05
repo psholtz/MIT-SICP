@@ -312,7 +312,7 @@ Let's eliminate this inefficiency by using the keyword `let`:
   (sqrt-iter 1.0))
 </pre>
 
-** Fixed-Point Functions **
+**Fixed-Point Functions**
 
 dd
 
