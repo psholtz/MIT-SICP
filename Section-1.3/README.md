@@ -166,6 +166,9 @@ In addition to passing procedures as arguments to other procedures, we can also 
 
 To understand the power of this idea, let's return briefly to the `sqrt` procedure designed in Section 1.1:
 
+<pre>
+ddfdf
+</pre>
 
 This is illustrated nicely by the following series of examples.
 
