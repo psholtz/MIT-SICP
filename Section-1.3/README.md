@@ -164,7 +164,7 @@ Procedures as Returned Values
 
 In addition to passing procedures as arguments to other procedures, we can also return procedures as returned values.
 
-To understand the power of this idea, let's return briefly to the `sqrt` procedure designed in Section 1.1:
+In order to understand the power of this idea, let's return briefly to the `sqrt` procedure designed in Section 1.1:
 
 <pre>
 (define (sqrt x)
@@ -181,8 +181,9 @@ To understand the power of this idea, let's return briefly to the `sqrt` procedu
 
 Suppose we are seeking the square root of x, that is, we are seeking a number y such that y^2=x.
 
-This means we are seeking a number y such that y = x/y (or, expressed in Lisp, given a "x", we are seeking "y" such that (= y (/ x y))).
+This means that we are seeking a number y such that y = x/y (or, expressed in Lisp, given a "x", we are seeking "y" such that (= y (/ x y))).
 
+---
 
 This is illustrated nicely by the following series of examples.
 
