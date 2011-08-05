@@ -250,7 +250,7 @@ So far so good: the procedure generates the same answers as our earlier version,
 
 Let's investigate next point (2) above, the idea of checking to see whether the guess we make is "good enough".
 
-**Fixed-Point Functions**
+**Increasing Abstraction**
 
 As it is presently written, the `good-enough?` procedure checks to see whether the square of our guess falls within a certain, pre-defined tolerance of the number whose square root we are seeking:
 
@@ -293,6 +293,25 @@ Our complete `sqrt` procedure now looks like:
         (sqrt-iter (improve guess))))
   (sqrt-iter 1.0))
 </pre>
+
+Again, this procedure generates the same answers as the initial one, but at the added cost of invoking `improve` twice. Let's eliminate this inefficiency by using the keyword `let`:
+
+<pre>
+(define (sqrt x)
+  (define (close-enough? v1 v2)
+    (&lt; (abs (- v1 v2)) 0.00001))
+  (define (improve guess)
+    ((average-damp (lambda (y) (/ x y))) guess))
+  (define (sqrt-iter guess)
+    (let ((next-guess (improve guess)))
+      (if (close-enough? guess next-guess)
+          guess
+          (sqrt-iter next-guess))))
+  (sqrt-iter 1.0))
+</pre>
+
+Is there a way we can improve the design of the procedure, to eliminate this inefficiency?
+
 
 [xxx]
 
