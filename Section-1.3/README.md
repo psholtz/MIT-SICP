@@ -179,9 +179,9 @@ To understand the power of this idea, let's return briefly to the `sqrt` procedu
   (sqrt-iter 1.0))
 </pre>
 
-Suppose we are seeking the square root of x, that is, we are seeking the number y such that y^2=x.
+Suppose we are seeking the square root of x, that is, we are seeking a number y such that y^2=x.
 
-This means we are seeking the number y such that y = x/y (or, expressed in Lisp, given a "x", we are seeking "y" such that (= y (/ x y))).
+This means we are seeking a number y such that y = x/y (or, expressed in Lisp, given a "x", we are seeking "y" such that (= y (/ x y))).
 
 
 This is illustrated nicely by the following series of examples.
