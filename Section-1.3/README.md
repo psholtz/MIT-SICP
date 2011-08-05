@@ -164,6 +164,21 @@ Procedures as Returned Values
 
 In addition to passing procedures as arguments to other procedures, we can also return procedures as returned values.
 
+To understand the power of this idea, let's return briefly to the `sqrt` procedure designed in Section 1.1:
+
+<pre>
+(define (sqrt x)
+  (define (good-enough? guess)
+    (< (abs (- (square guess) x)) 0.001))
+  (define (improve guess)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+        guess
+        (sqrt-iter (improve guess))))
+  (sqrt-iter 1.0))
+</pre>
+
 This is illustrated nicely by the following series of examples.
 
 Suppose that at some point we wish to calculate the average of that point with the value of some function `f` defined at that point. That is, we seek to evaluate the expression `(average x (f x))` where, as usual:
@@ -180,4 +195,4 @@ We can succinctly express this idea by defining the following procedure:
   (lambda (x) (average x (f x))))
 </pre>
 
-That is, we pass `f` as an argument to `average-damp`, and we receive as the returned value a procedure in one argument which will calculate the average of that value and f evaluated at that argument.
+That is, we can pass `f` as an argument to `average-damp`, and we will receive as the returned value a procedure in one argument which will calculate the average of that argument and f evaluated at that argument.
