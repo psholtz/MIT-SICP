@@ -246,7 +246,18 @@ Our `sqrt` procedure now looks like:
   (sqrt-iter 1.0))
 </pre>
 
-So far so good: the procedure generates the same answers as our earlier version, although it's not entirely clear whether this version is any simpler. Indeed, it looks ostensibly as if this version is more complicated than the first one.
+So far so good: the procedure generates the same answers as our earlier version, although it's not entirely clear whether this version is any simpler. Indeed, it ostensibly looks even more complicated than the first version, but perhaps with a bit more abstraction we'll arrive at something more intuitive.
+
+Let's investigate next point (2) above, the idea of checking to see whether the guess we make is "good enough".
+
+*Fixed-Point Procedures*
+
+[xxx]
+
+let's keep charging ahead with our abstractions to see if we can't arrive at something which, in the end, is simpler.
+
+
+ as if this version is more complicated than the first one.
 
 ---
 
