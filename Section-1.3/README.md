@@ -187,8 +187,7 @@ The `sqrt` procedure encapsulates within itself three concrete ideas:
 
 Let's take a closer look at (3) above, the idea of improving the guess if it isn't good enough, and let's see if there are ways we can represent this idea in more "abstract" or general terms.
 
-Average Damping
----
+*Average Damping*
 
 Suppose we are seeking the square root of x, that is, we are seeking a number y such that y^2=x.
 
