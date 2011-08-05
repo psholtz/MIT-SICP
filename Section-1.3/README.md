@@ -181,7 +181,7 @@ In order to better understand the power of this idea, let's return briefly to th
 
 Suppose we are seeking the square root of x, that is, we are seeking a number y such that y^2=x.
 
-This means that we are seeking a number y such that y = x/y (or, expressed in Lisp, given a "x", we are seeking "y" such that (= y (/ x y))).
+This means that we are seeking a number y such that y = x/y (or, expressed in Lisp, given an "x", we are seeking "y" such that (= y (/ x y))).
 
 ---
 
