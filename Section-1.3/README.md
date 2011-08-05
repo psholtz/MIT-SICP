@@ -246,6 +246,8 @@ Our `sqrt` procedure now looks like:
   (sqrt-iter 1.0))
 </pre>
 
+So far so good: the procedure generates the same answers as our earlier version, although it's not entirely clear whether this version is any simpler. Indeed, it looks ostensibly as if this version is more complicated than the first one.
+
 ---
 
 This is illustrated nicely by the following series of examples.
