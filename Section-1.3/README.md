@@ -261,7 +261,38 @@ As it is presently written, the `good-enough?` procedure checks to see whether t
 
 Suppose that `y` is our guess as to the square root of `x`, and that `(improve y)` is the next iterative improvement towards refining that guess. One way to check whether `y` is "good enough" is to calculate `(square y)` and see whether the answer comes within a certain pre-defined tolerance, exactly as is done in the `good-enough?` procedure above.
 
-Another key insight is to realize that for computing square roots, we don't need to check whether the square of our guess comes "close enough" to the number whose square root we are seeking, but rather we simply need to check whether two successive guesses are nearly identical, since for a square root, we will have y * y = x ... that is,  
+Another key insight towards generalizing our definition of `sqrt` is to realize that for computing square roots, we don't need to check whether the square of our guess comes "close enough" to the number whose square root we are seeking, but rather we simply need to check whether two successive guesses are nearly identical, since for a square root, we will have y * y = x. That is to say, let y(n) be the n-th guess we make, and let y(n+1) be the (n+1)-th guess. We should expect, then, that not only is y(n) * y(n+1) roughly equal to x, but that y(n) is roughly equal to y(n+1). 
+
+We could, then, replace the `good-enough?` procedure with a new procedure in two arguments, which checksto see whether the two arguments are "close enough" to one another to be considered good enough to be an answer for our problem. In doing so, let's tighten up the tolerance a bit, to get a more accurate answer:
+
+<pre>
+(define (close-enough? v1 v2)
+  (< (abs (- v1 v2)) 0.00001))
+</pre>
+
+Clearly we're going to have to modify our `sqrt-iter` procedure as well. Instead of just passing one arugment into `good-enough?` to check to see if a guess is "good enough", we'll have to pass two arguments in to the `close-enough?` procedure: `guess` and `(improve guess)`, and see whether the two values are close qualify as the square root of the number we are seeking:
+
+<pre>
+(define (sqrt-iter guess)
+  (if (close-enough? guess (improve guess))
+      guess
+      (sqrt-iter (improve guess))))
+</pre>
+
+Our complete `sqrt` procedure now looks like:
+
+<pre>
+(define (sqrt x)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) 0.00001))
+  (define (improve guess)
+    ((average-damp (lambda (y) (/ x y))) guess))
+  (define (sqrt-iter guess)
+    (if (close-enough? guess (improve guess))
+        guess
+        (sqrt-iter (improve guess))))
+  (sqrt-iter 1.0))
+</pre>
 
 [xxx]
 
