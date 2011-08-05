@@ -166,18 +166,6 @@ In addition to passing procedures as arguments to other procedures, we can also 
 
 To understand the power of this idea, let's return briefly to the `sqrt` procedure designed in Section 1.1:
 
-<pre>
-(define (sqrt x)
-  (define (good-enough? guess)
-    (< (abs (- (square guess) x)) 0.001))
-  (define (improve guess)
-    (average guess (/ x guess)))
-  (define (sqrt-iter guess)
-    (if (good-enough? guess)
-        guess
-        (sqrt-iter (improve guess))))
-  (sqrt-iter 1.0))
-</pre>
 
 This is illustrated nicely by the following series of examples.
 
