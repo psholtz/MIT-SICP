@@ -203,7 +203,7 @@ That is, we can re-write `improve` as follows:
   (average guess ((lambda (y) (/ x y)) guess)))
 </pre>
 
-This in turn suggests another abstraction, i.e., the notion of "average damping", where for a given function `f`, we would like to create a new procedure in one argument that averages the argument with the value of `f` evaluated at that argument:
+This in turn suggests another abstraction, i.e., the notion of "average damping", where for a given function `f`, we would like to create a new procedure in one argument that averages that argument with the value of `f` evaluated at the argument:
 
 <pre>
 (define (average-damp f)
