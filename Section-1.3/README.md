@@ -183,7 +183,54 @@ Suppose we are seeking the square root of x, that is, we are seeking a number y 
 
 This means that we are seeking a number y such that y = x/y (or, expressed in Lisp, given an "x", we are seeking "y" such that (= y (/ x y))).
 
-If our initial guess for `y` is not good enough, it stands to reason that we might arrive at a better approximation to the square root by average our guess `y` with `x/y`, where `x` is the number whose square root we are seeking.
+If our initial guess for `y` is not good enough, it stands to reason that we might arrive at a better approximation to the square root by average our guess `y` with `x/y`, where `x` is the number whose square root we are seeking. Indeed, this is exactly how the `improve` procedure is defined:
+
+<pre>
+(define (improve guess)
+  (average guess (/ x guess)))
+</pre>
+
+But the expression `(/ x guess)` itself can be expresses as an "anonymous" lambda function in one variable:
+
+<pre>
+(lambda (y) (/ x y))
+</pre>
+
+That is, we can re-write `imrprove` as follows:
+
+<pre>
+(define (improve guess)
+  (average guess ((lambda (y) (/ x y)) guess)))
+</pre>
+
+This in turn suggests another abstraction, called "average damping", where for a given function `f`, we take the average of `x` and `(f x)`:
+
+<pre>
+(define (average-damp f)
+  (average x (f x)))
+</pre>
+
+With this abstraction, we can re-write `improve` as follows:
+
+<pre>
+(define (improve guess)
+  ((average-damp (lambda (y) (/ x y))) guess))
+</pre>
+
+Our `sqrt` procedure now looks like:
+
+<pre>
+(define (sqrt x)
+  (define (good-enough? guess)
+    (&lt; (abs (- (square guess) x)) 0.001))
+  (define (improve guess)
+    ((average-damp (lambda (y) (/ x y))) guess))
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+        guess
+        (sqrt-iter (improve guess))))
+  (sqrt-iter 1.0))
+</pre>
 
 ---
 
