@@ -162,7 +162,7 @@ Expanding the call graph for `(sum-cubes 1 5)` as before, we obtain:
 Procedures as Returned Values
 ----------------------------- 
 
-In addition to passing procedures as arguments to other procedures, we can also return procedures as return values.
+In addition to passing procedures as arguments to other procedures, we can also return procedures as returned values.
 
 This is illustrated nicely by the following series of examples.
 
