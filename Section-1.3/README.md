@@ -250,7 +250,7 @@ So far so good: the procedure generates the same answers as our earlier version,
 
 Let's investigate next point (2) above, the idea of checking to see whether the guess we make is "good enough".
 
-*Fixed-Point Procedures*
+**Fixed-Point Procedures**
 
 [xxx]
 
