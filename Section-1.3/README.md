@@ -312,6 +312,8 @@ Let's eliminate this inefficiency by using the keyword `let`:
   (sqrt-iter 1.0))
 </pre>
 
+Are there additional abstractions we can make, to improve the design of `sqrt` even further? It turns out there are.
+
 **Fixed-Point Functions**
 
 dd
