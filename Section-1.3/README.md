@@ -250,7 +250,18 @@ So far so good: the procedure generates the same answers as our earlier version,
 
 Let's investigate next point (2) above, the idea of checking to see whether the guess we make is "good enough".
 
-**Fixed-Point Procedures**
+**Fixed-Point Functions**
+
+As it is presently writtne, the `good-enough?` procedure checks to see whether the square of our guess falls within a certain, pre-defined tolerance of the number whose square root we are seeking:
+
+<pre>
+(define (good-enough? guess)
+  (&lt; (abs (- (square guess) x)) 0.001))
+</pre>
+
+Suppose that `y` is our guess as to the square root of `x`, and that `(improve y)` is the next iterative improvement towards refining that guess. One way to check 
+
+Another key insight is to realize that for computing square roots, we don't need to check whether the square of our guess comes "close enough" to the number whose square root we are seeking, but rather we simply need to check whether two successive guesses are nearly identical, since for a square root, we will have y * y = x ... that is,  
 
 [xxx]
 
