@@ -190,7 +190,7 @@ If our initial guess for `y` is not good enough, it stands to reason that we mig
   (average guess (/ x guess)))
 </pre>
 
-The key insight here is to realize that the expression `(/ x guess)` itself can be expresses as an instance of an  "anonymous" lambda function in one variable:
+The key insight here is to realize that the expression `(/ x guess)` itself can be expressed as an instance of an  "anonymous" lambda function in one variable:
 
 <pre>
 (lambda (y) (/ x y))
