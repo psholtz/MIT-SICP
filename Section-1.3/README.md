@@ -179,6 +179,12 @@ In order to better understand the power of this idea, let's return briefly to th
   (sqrt-iter 1.0))
 </pre>
 
+The `sqrt` procedure encapsulates within itself three concrete ideas:
+
+(1) The idea of making a guess as to what the square root might be;
+(2) The idea of checking to see how accurate this guess is;
+(3) The idea of improving the guess, if it fails to pass (2) above;
+
 Suppose we are seeking the square root of x, that is, we are seeking a number y such that y^2=x.
 
 This means that we are seeking a number y such that y = x/y (or, expressed in Lisp, given an "x", we are seeking "y" such that (= y (/ x y))).
