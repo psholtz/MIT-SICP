@@ -284,7 +284,7 @@ Our complete `sqrt` procedure now looks like:
 <pre>
 (define (sqrt x)
   (define (close-enough? v1 v2)
-    (< (abs (- v1 v2)) 0.00001))
+    (&lt; (abs (- v1 v2)) 0.00001))
   (define (improve guess)
     ((average-damp (lambda (y) (/ x y))) guess))
   (define (sqrt-iter guess)
