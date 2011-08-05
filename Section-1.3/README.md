@@ -159,6 +159,8 @@ Expanding the call graph for `(sum-cubes 1 5)` as before, we obtain:
 225
 </pre>
 
+The call graph is not necessarily any simpler, but in terms of expressional simplicity, this second definition of `sum-cubes` is far more elegant.
+
 Procedures as Returned Values
 ----------------------------- 
 
