@@ -115,6 +115,8 @@ Each of these procedures can be readily simplified by defining it in terms of th
 	       (sum term (next a) next b))))
 </pre>
 
+Notice that this abstraction requires that the procedures `term` and `next` be passed to `sum` as arguments.
+
 We will carry through an example computation using this abstraction with the `sum-cubes` procedure.
 
 First we (re-)define `sum-cubes` in terms of the new `sum` abstraction:
