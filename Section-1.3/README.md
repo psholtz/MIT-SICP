@@ -196,7 +196,7 @@ The key insight here is to realize that the expression `(/ x guess)` itself can 
 (lambda (y) (/ x y))
 </pre>
 
-That is, we can re-write `imrprove` as follows:
+That is, we can re-write `improve` as follows:
 
 <pre>
 (define (improve guess)
