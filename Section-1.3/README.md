@@ -183,7 +183,7 @@ Suppose we are seeking the square root of x, that is, we are seeking a number y 
 
 This means that we are seeking a number y such that y = x/y (or, expressed in Lisp, given an "x", we are seeking "y" such that (= y (/ x y))).
 
-If our initial guess for `y` is not good enough, it stands to reason that we might arrive at a better approximation for the square root by average our guess `y` with `x/y`, where `x` is the number whose square root we are seeking. Indeed, this is exactly how the `improve` procedure is defined:
+If our initial guess for `y` is not good enough, it stands to reason that we might arrive at a better approximation for the square root by averaging our guess `y` with `x/y`, where `x` is the number whose square root we are seeking. Indeed, this is exactly how the `improve` procedure is defined:
 
 <pre>
 (define (improve guess)
