@@ -166,10 +166,18 @@ In addition to passing procedures as arguments to other procedures, we can also 
 
 This is illustrated nicely by the following series of examples.
 
-Suppose that at some point we wish to calculate the average of that point with the value of some function `f` defined at that point. 
-That is, we seek to evaluate the expression `(average x (f x))` where, as usual:
+Suppose that at some point we wish to calculate the average of that point with the value of some function `f` defined at that point. That is, we seek to evaluate the expression `(average x (f x))` where, as usual:
 
 <pre>
 (define (average x y)
   (/ (+ x y) 2.0))
 </pre>
+
+We can succinctly express this idea by defining the following procedure:
+
+<pre>
+(define (average-damp f)
+  (lambda (x) (average x (f x))))
+</pre>
+
+That is, we pass `f` as an argument to `average-damp`, and we receive as the returned value a procedure in one argument which will calculate the average of that value and f evaluated at that argument.
