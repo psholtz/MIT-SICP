@@ -246,7 +246,7 @@ Our `sqrt` procedure now looks like:
   (sqrt-iter 1.0))
 </pre>
 
-So far so good: the procedure generates the same answers as our earlier version, although it's not entirely clear whether this version is any simpler. Indeed, it ostensibly looks even more complicated than the first version, but perhaps with a bit more abstraction we'll arrive at something more intuitive.
+So far so good: the procedure generates the same answers as our earlier version, although it's not entirely clear whether this version is any simpler than the first one. Indeed, this version ostensibly looks even more complicated than the first, but perhaps with a bit more abstraction we'll be able to arrive at something more intuitive.
 
 Let's investigate next point (2) above, the idea of checking to see whether the guess we make is "good enough".
 
