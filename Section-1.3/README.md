@@ -181,9 +181,13 @@ In order to better understand the power of this idea, let's return briefly to th
 
 The `sqrt` procedure encapsulates within itself three concrete ideas:
 
-1. The idea of making a guess as to what the square root might be;
-2. The idea of checking to see how accurate this guess is;
-3. The idea of improving the guess, if it fails to pass (2) above;
+1. The idea of making a guess as to what the square root might be.
+2. The idea of checking to see how accurate this guess is.
+3. The idea of improving the guess, if by (2) we determine that it is not a very good guess.
+
+Let's take a closer look at (3) above, the idea of improving the guess if it isn't good enough, and let's see if there are ways we can represent this idea in more "abstract" or general terms.
+
+---
 
 Suppose we are seeking the square root of x, that is, we are seeking a number y such that y^2=x.
 
