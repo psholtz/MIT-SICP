@@ -267,7 +267,7 @@ We could, then, replace the `good-enough?` procedure with a new procedure in two
 
 <pre>
 (define (close-enough? v1 v2)
-  (< (abs (- v1 v2)) 0.00001))
+  (&lt; (abs (- v1 v2)) 0.00001))
 </pre>
 
 Clearly we're going to have to modify our `sqrt-iter` procedure as well. Instead of just passing one arugment into `good-enough?` to check to see if a guess is "good enough", we'll have to pass two arguments in to the `close-enough?` procedure: `guess` and `(improve guess)`, and see whether the two values are close qualify as the square root of the number we are seeking:
