@@ -210,7 +210,7 @@ This in turn suggests another abstraction, i.e., the notion of "average damping"
   (lambda (x) (average x (f x))))
 </pre>
 
-Notice that here, `average-damp` returns not a numerical value or an "object" per se, but rather another (lambda) procedure.
+Notice that here, `average-damp` returns not a numerical value nor an "object" per se, but rather another (lambda) procedure.
 
 This is the essence of procedures returning procedures.
 
