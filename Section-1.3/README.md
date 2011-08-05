@@ -294,7 +294,9 @@ Our complete `sqrt` procedure now looks like:
   (sqrt-iter 1.0))
 </pre>
 
-Again, this procedure generates the same answers as the initial one, but at the added cost of invoking `improve` twice. Let's eliminate this inefficiency by using the keyword `let`:
+Again, this procedure generates the same answers as the initial one, but at the added cost of invoking `improve` twice. 
+
+Let's eliminate this inefficiency by using the keyword `let`:
 
 <pre>
 (define (sqrt x)
@@ -310,8 +312,9 @@ Again, this procedure generates the same answers as the initial one, but at the 
   (sqrt-iter 1.0))
 </pre>
 
-Is there a way we can improve the design of the procedure, to eliminate this inefficiency?
+** Fixed-Point Functions **
 
+dd
 
 [xxx]
 
