@@ -159,3 +159,17 @@ Expanding the call graph for `(sum-cubes 1 5)` as before, we obtain:
 225
 </pre>
 
+Procedures as Returned Values
+----------------------------- 
+
+In addition to passing procedures as arguments to other procedures, we can also return procedures as return values.
+
+This is illustrated nicely by the following series of examples.
+
+Suppose that at some point we wish to calculate the average of that point with the value of some function `f` defined at that point. 
+That is, we seek to evaluate the expression `(average x (f x))` where, as usual:
+
+<pre>
+(define (average x y)
+  (/ (+ x y) 2.0))
+</pre>
