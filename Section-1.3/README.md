@@ -318,7 +318,7 @@ Are there additional abstractions we can make, to improve the design of `sqrt` e
 
 **Fixed-Point Functions**
 
-When we first undertook to "abstract" as much of the `sqrt` procedure as possible into the most general terms, we mentioned that contained therein where at least three distinct ideas or notions:
+When we first undertook to "abstract" as much of the `sqrt` procedure as possible, we mentioned that contained therein were at least three distinct ideas or notions:
 
 1. ddd
 2. dd
