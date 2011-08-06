@@ -318,6 +318,22 @@ Are there additional abstractions we can make, to improve the design of `sqrt` e
 
 **Fixed-Point Functions**
 
+When we first started exploring the `sqrt` procedure in greater depth, we mentioned that the `sqrt` procedure encapsulated three distinct ideas or notions:
+
+1. ddd
+2. dd
+3. dd
+
+We've already done some work to "abstract" points 3 and 2 above, now let's see if we can "abstract" 1 into a more general form.
+
+To do so, let's take a closer look at the `sqrt-iter` procedure, to see just how it works:
+
+<pre>
+sss
+</pre>
+
+In the list we produced above at the outset of this section, this correspondings to point 1, which is to say, the process of making a guess 
+
 dd
 
 [xxx]
