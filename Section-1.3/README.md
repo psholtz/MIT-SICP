@@ -320,9 +320,9 @@ Are there additional abstractions we can make, to improve the design of `sqrt` e
 
 When we first undertook to "abstract" as much of the `sqrt` procedure as possible, we mentioned that contained therein were at least three distinct ideas or notions:
 
-1. ddd
-2. dd
-3. dd
+1. The idea of making a guess as to what the square root might be.
+2. The idea of checking to see how accurate this guess is.
+3. The idea of improving the guess, if by (2) we determine that it is not a very good guess.
 
 We've already done some work to "abstract" points 3 and 2 above, now let's see if we can "abstract" 1 into a more general form.
 
