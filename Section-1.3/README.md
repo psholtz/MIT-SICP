@@ -323,13 +323,16 @@ When we first undertook to "abstract" as much of the `sqrt` procedure as possibl
 1. The idea of making a guess as to what the square root might be.
 2. The idea of checking to see how accurate this guess is.
 3. The idea of improving the guess, if by (2) we determine that it is not a very good guess.
-
 We've already done some work to "abstract" points 3 and 2 above, now let's see if we can "abstract" 1 into a more general form.
 
 To do so, let's take a closer look at the `sqrt-iter` procedure, to see just how it works:
 
 <pre>
-sss
+(define (sqrt-iter guess)
+  (let ((next-guess (improve guess)))
+    (if (close-enough? guess next-guess)
+        guess
+        (sqrt-iter next-guess))))
 </pre>
 
 In the list we produced above at the outset of this section, this correspondings to point 1, which is to say, the process of making a guess 
