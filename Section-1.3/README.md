@@ -340,6 +340,9 @@ The `sqrt-iter` procedure works by repeatedly applying the `improve` procedure t
 
 This brings to mind the idea of the fixed points of a function: a number `x` is called a fixed point of `f` if `x` satisfies the equation `f(x)=x`.
 
+For some functions, we can find fixed points by starting with an initial guess, and applying the function repeatedly until the resulting values do not change by very much. The procedure `improve` designed above is one such function, and we shall make use of this fact in our continuing abstraction process.
+
+
 as follows:
 
 1. We compare the n-th guess with the (n+1)-th guess.
