@@ -365,4 +365,4 @@ We can now define the `sqrt` very simply, in terms of the `fixed-point` procedur
                1.0))
 </pre>
 
-The derivation given here, of the "fixed-point" abstracted version of `sqrt`, is somewhat "backwards" from the derivation given in the text, but hopefully it illustrates this process if in a slightly different light.
+The derivation given here of this "fixed-point" abstracted version of `sqrt` is somewhat "backwards" from the derivation given in the text, but hopefully it will serve to illustrate the computational processes involved from a slightly different angle.
