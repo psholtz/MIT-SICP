@@ -342,6 +342,21 @@ This brings to mind the idea of the fixed points of a function: a number `x` is 
 
 For some functions, we can find fixed points by starting with an initial guess, and applying the function repeatedly until the resulting values do not change by very much. The procedure `improve` designed above is one such function, and we shall make use of this fact in our continuing abstraction process.
 
+Let's start by defining a `fixed-point` procedure, and abstracting our `close-enough?` procedure into it:
+
+<pre>
+(define (fixed-point f first-guess)
+  (define tolerance 0.00001)
+  (define (close-enough? v1 v2)
+    (< (abs (- v1 v2)) tolerance))
+  (define (try guess)
+    (let ((next-guess (f guess)))
+      (if (close-enough? guess next-guess)
+          next-guess
+          (try next-guess))))
+  (try first-guess))
+</pre>
+
 
 as follows:
 
