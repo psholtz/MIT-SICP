@@ -165,6 +165,7 @@ Procedures as Returned Values
 ----------------------------- 
 
 [![](http://farm7.static.flickr.com/6066/6030248343_9455b915bb.jpg)](http://farm7.static.flickr.com/6066/6030248343_9455b915bb.jpg)
+**The Y-Combinator Tattoo**: See the wiki article for more information on Y Combinators.
 
 In addition to passing procedures as arguments to other procedures, we can also return procedures as returned values from function calls.
 
