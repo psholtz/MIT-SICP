@@ -364,3 +364,5 @@ We can now define the `sqrt` very simply, in terms of the `fixed-point` procedur
   (fixed-point (average-damp (lambda (y) (/ x y))) 
                1.0))
 </pre>
+
+The derivation given here, of the "fixed-point" abstracted version of `sqrt`, is somewhat "backwards" from the derivation given in the text, but hopefully it illustrates this process if in a slightly different light.
