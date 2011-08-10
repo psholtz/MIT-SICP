@@ -338,6 +338,7 @@ To do so, let's take a closer look at the `sqrt-iter` procedure, to see just how
 
 The `sqrt-iter` procedure works by repeatedly applying the `improve` procedure to each guess, until we arrive at two successive guesses that are "close enough" to one another that we can feel safe about terminating the procedure and returning our guess.
 
+This brings to mind the concept of a fixed point `x` of a function `f` - a number `x` is called a fixed point of `f` if `x` satisfies the equation `f(x)=x`.
 
 as follows:
 
