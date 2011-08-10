@@ -336,6 +336,15 @@ To do so, let's take a closer look at the `sqrt-iter` procedure, to see just how
         (sqrt-iter next-guess))))
 </pre>
 
+The procedure works by repeatedly apply the "improve" procedure to each guess, until we arrive at two successive guesses that are "close enough" to one another that we can feel safe about terminating the procedure and returning our guess.
+
+
+as follows:
+
+1. We compare the n-th guess with the (n+1)-th guess.
+2. If these two values are "close enough" to one another, we terminate the procedure and return our guess.
+3. If these two values are not "close enough" to one another, we improve the guess by applying 
+
 In the list we produced above at the outset of this section, this correspondings to point 1, which is to say, the process of making a guess 
 
 dd
