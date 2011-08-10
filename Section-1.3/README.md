@@ -348,7 +348,7 @@ Let's start by defining a `fixed-point` procedure, and abstracting our `close-en
 (define (fixed-point f first-guess)
   (define tolerance 0.00001)
   (define (close-enough? v1 v2)
-    (< (abs (- v1 v2)) tolerance))
+    (&lt; (abs (- v1 v2)) tolerance))
   (define (try guess)
     (let ((next-guess (f guess)))
       (if (close-enough? guess next-guess)
