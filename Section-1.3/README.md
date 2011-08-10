@@ -357,40 +357,10 @@ Let's start by defining a `fixed-point` procedure, and abstracting our `close-en
   (try first-guess))
 </pre>
 
-
-as follows:
-
-1. We compare the n-th guess with the (n+1)-th guess.
-2. If these two values are "close enough" to one another, we terminate the procedure and return our guess.
-3. If these two values are not "close enough" to one another, we improve the guess by applying 
-
-In the list we produced above at the outset of this section, this correspondings to point 1, which is to say, the process of making a guess 
-
-dd
-
-[xxx]
-
-let's keep charging ahead with our abstractions to see if we can't arrive at something which, in the end, is simpler.
-
-
- as if this version is more complicated than the first one.
-
----
-
-This is illustrated nicely by the following series of examples.
-
-Suppose that at some point we wish to calculate the average of that point with the value of some function `f` defined at that point. That is, we seek to evaluate the expression `(average x (f x))` where, as usual:
+We can now define the `sqrt` very simply, in terms of the `fixed-point` procedure:
 
 <pre>
-(define (average x y)
-  (/ (+ x y) 2.0))
+(define (sqrt x)
+  (fixed-point (average-damp (lambda (y) (/ x y))) 
+               1.0))
 </pre>
-
-We can succinctly express this idea by defining the following procedure:
-
-<pre>
-(define (average-damp f)
-  (lambda (x) (average x (f x))))
-</pre>
-
-That is, we can pass `f` as an argument to `average-damp`, and we will receive as the returned value a procedure in one argument which will calculate the average of that argument and f evaluated at that argument.
