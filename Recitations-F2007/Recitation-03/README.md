@@ -33,7 +33,7 @@ Exercises
 
 What will `(count1 4)` and `(count2 4)` display?
 
-2. Write a procedure `fact` that computes the factorial of a number n.
+2 - Write a procedure `fact` that computes the factorial of a number n.
 
 3. Write a procedure that computes `e`.
 
