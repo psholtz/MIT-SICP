@@ -1,6 +1,8 @@
 Recitation 3 - Sept 12, 2007
 ============================ 
 
+[Link](http://people.csail.mit.edu/jastr/6001/fall07/r03.pdf)
+
 Recursion
 --------- 
 
