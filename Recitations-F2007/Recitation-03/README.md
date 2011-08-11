@@ -42,5 +42,3 @@ What will `(count1 4)` and `(count2 4)` display?
 5. Write a procedure `fib` that computes the n-th Fibonacci number.
 
 6. Write a procedure that computes the golden ratio, phi.
-
-[Recitation 3 PDF](http://people.csail.mit.edu/jastr/6001/fall07/r03.pdf)
