@@ -1,5 +1,5 @@
-Recitation 3 - Sept 12, 2007 ([PDF](http://www.yahoo.com))
-================================== 
+Recitation 3 - Sept 12, 2007 ([PDF](http://people.csail.mit.edu/jastr/6001/fall07/r03.pdf))
+===========================================================================================
 
 Recursion
 --------- 
