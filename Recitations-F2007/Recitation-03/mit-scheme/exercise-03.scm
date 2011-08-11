@@ -25,10 +25,30 @@
 ;; This procedure generates a recursive computational process.
 ;;
 (define (e)
-  (define tolerance 0.00001)
-  (define (good-enough? v1 v2)
-    (< (abs (- v1 v2)) tolerance))
+  
+  ;;
+  ;; Return the n-th term in the summation for e:
+  ;;
   (define (term n)
     (/ 1.0 (fact n)))
 
-  '())
+  ;; 
+  ;; Compute the summation of e up to the n-th term:
+  ;;
+  (define (e-sum n)
+    (define (e-sum-iter c)
+      (if (= c n)
+	  (term n)
+	  (+ (term c) (e-sum-iter (+ c 1)))))
+    (e-sum-iter 0))
+
+  ;;
+  ;; Calculate e up to the 10th term:
+  ;;
+  (e-sum 10))
+
+;;
+;; Run the unit test:
+;;
+(e)
+;; ==> 2.7182818011463845
