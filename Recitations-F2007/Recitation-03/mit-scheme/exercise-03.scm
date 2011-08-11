@@ -25,16 +25,12 @@
 ;; This procedure generates a recursive computational process.
 ;;
 (define (e)
-  
-  ;;
-  ;; Return the n-th term in the summation for e:
-  ;;
+
+  ;; n-th term of the summation
   (define (term n)
     (/ 1.0 (fact n)))
 
-  ;; 
-  ;; Compute the summation of e up to the n-th term:
-  ;;
+  ;; compute the total summation, up to n-terms
   (define (e-sum n)
     (define (e-sum-iter c)
       (if (= c n)
@@ -42,9 +38,7 @@
 	  (+ (term c) (e-sum-iter (+ c 1)))))
     (e-sum-iter 0))
 
-  ;;
-  ;; Calculate e up to the 10th term:
-  ;;
+  ;; approximate e by counting up to 10 terms
   (e-sum 10))
 
 ;;
