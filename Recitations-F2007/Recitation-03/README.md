@@ -13,7 +13,7 @@ Recursion
 Exercises
 --------- 
 
-1 - Consider the following definitions:
+(1) Consider the following definitions:
 
 <pre>
 (define (our-display x)
@@ -37,8 +37,8 @@ What will `(count1 4)` and `(count2 4)` display?
 
 (3) Write a procedure that computes `e`.
 
-4 - Write an iterative procedure that computes `e`.
+(4) Write an iterative procedure that computes `e`.
 
-5 - Write a procedure `fib` that computes the n-th Fibonacci number.
+(5) Write a procedure `fib` that computes the n-th Fibonacci number.
 
-6 - Write a procedure that computes the golden ratio, phi.
+(6) Write a procedure that computes the golden ratio, phi.
