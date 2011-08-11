@@ -1,4 +1,4 @@
-Recitation 3 - Sept 12, 2007 [[PDF](http://www.yahoo.com)]
+Recitation 3 - Sept 12, 2007 ([PDF](http://www.yahoo.com))
 ================================== 
 
 Recursion
