@@ -1,4 +1,4 @@
-Recitation 4 - Sept 14, 2007 (PDF)
+Recitation 4 - Sept 14, 2007 ([PDF](http://people.csail.mit.edu/jastr/6001/fall07/r04.pdf))
 ================================== 
 
 Orders of Growth
