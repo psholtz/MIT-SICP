@@ -1,5 +1,5 @@
-Recitation 3 - Sept 12, 2007
-============================ 
+Recitation 3 - Sept 12, 2007 [[PDF](http://www.yahoo.com)]
+================================== 
 
 Recursion
 --------- 
