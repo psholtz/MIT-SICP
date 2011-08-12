@@ -22,6 +22,17 @@
 	  ;; use 1.0 multiplier to make it into decimal
 	  (* 1.0 (/ dy dx))))))
 
+;;
+;; get "b"
+;;
+(define (y-intercept line-segment)
+  (let ((p (line-segment-start line-segment))
+	(m (slope line-segment)))
+    (cond ((not (null? m))
+	   (let ((x (point-x p))
+		 (y (point-y p)))
+	     (- y (* m x)))))))
+
 ;; 
 ;; check if the lines are parallel
 (define (parallel? line-segment-1 line-segment-2)
