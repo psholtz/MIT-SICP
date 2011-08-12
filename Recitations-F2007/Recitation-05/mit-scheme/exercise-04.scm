@@ -14,10 +14,10 @@
 ;;
 ;; Define the selectors:
 ;;
-(define (line-segment-start line)
-  (car line))
+(define (line-segment-start line-segment)
+  (car line-segment))
 
-(define (line-segment-end line)
-  (cdr line))
+(define (line-segment-end line-segment)
+  (cdr line-segment))
 
 
