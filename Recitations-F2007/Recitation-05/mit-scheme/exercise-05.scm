@@ -2,6 +2,58 @@
 ;; Exercise 5
 ;;
 
+;;
+;; First let's define some helper methods.
+;;
+;; It will be useful to know which point is the "left-most" (and "right-most") 
+;; of a line segment (this is not always going to be the "start" or "end", respectively).
+;;
+
+;;
+;; use this:
+;;
+(define (slope line-segment)
+  (let ((start (line-segment-start line-segment))
+	(end (line-segment-end line-segment)))
+    (let ((dx (- (point-x start) (point-x end)))
+	  (dy (- (point-y start) (point-y end))))
+      (if (= dx 0)
+	  '()
+	  ;; use 1.0 multiplier to make it into decimal
+	  (* 1.0 (/ dy dx))))))
+
+;; 
+;; check if the lines are parallel
+(define (parallel? line1 line2)
+  (if (= (slope line1) (slope line2))
+      #t
+      #f))
+
+
+
+
+
+
+
+(define (slope line-segment)
+  (let ((start (line-segment-start line-segment))
+	(end (line-segment-end line-segment)))
+    (let ((dx (- (point-x start) (point-x end)))
+	  (dy (- (point-y start) (point-y end)))))
+    (if (= dx 0)
+	'()
+	(/ dy dx))))
+
+
+(define (slope line)
+  (let ((start (line-segment-start line))
+	(end (line-segment-end line)))
+    (let ((dx (- (point-x start) (point-x end)))
+	  (dy (- (point-y start) (point-y end)))))
+    (if (= dx 0)
+	'()
+	(/ dy dx))))
+
 (define (intersection line1 line2)
   (define (between x a b)
     (and (>= x a)
