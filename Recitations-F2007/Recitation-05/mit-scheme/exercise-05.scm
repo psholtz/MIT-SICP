@@ -24,8 +24,8 @@
 
 ;; 
 ;; check if the lines are parallel
-(define (parallel? line1 line2)
-  (if (= (slope line1) (slope line2))
+(define (parallel? line-segment-1 line-segment-2)
+  (if (= (slope line-segment-1) (slope line-segment-2))
       #t
       #f))
 
