@@ -44,8 +44,24 @@
 	     #t
 	     #f))))
 
-
-
+;;
+;; define the intersect method
+;; (this will determine where the lines determined by the line segments 
+;; will intersect);
+;;
+(define (intersect line-segment-1 line-segment-2)
+  (if (parallel? line-segment-1 line-segment-2)
+      (display "Lines are parallel!")
+      (let ((m1 (slope line-segment-1))
+	    (m2 (slope line-segment-2))
+	    (b1 (y-intercept line-segment-1))
+	    (b2 (y-intercept line-segment-2)))
+	(let ((x (/ (- b2 b1) (- m1 m2))))
+	  (make-point x
+		      (+ (* m1 x) b1))))))
+	      
+;;
+;; Now it still remains to determine whether the 
 
 
 
