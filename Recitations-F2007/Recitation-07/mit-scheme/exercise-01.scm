@@ -32,3 +32,18 @@
 
 (occurrences 4 (list 1 2 1 1 3))
 ;; ==> 0
+
+;;
+;; Now write the definition using the "filter" procedure:
+;;
+(define (occurrences num a)
+  (define (predicate x)
+    (if (= x num)
+	#t
+	#f))
+  (length (filter predicate a)))
+
+;;
+;; Running the unit tests defined above gives the same results.
+;;
+
