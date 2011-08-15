@@ -44,3 +44,13 @@
 
 (apply-procs ls 3)
 ;; ==> (9 6 4) 
+
+;;
+;; Now let's define "apply-procs" using the "map" procedure:
+;;
+(define (apply-procs a v)
+  (map (lambda (x) (x v)) a))
+
+;;
+;; Running the unit test as above, we get the same results.
+;;
