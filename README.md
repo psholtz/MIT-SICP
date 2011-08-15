@@ -5,6 +5,10 @@ Structure and Interpretation of Computer Programs
 
 Problems and projects from the legendary MIT 6.001 Purple Book.
 
+**Chapter 1** - [xxx]
+
+**Chapter 2** - [xx]
+
 Some useful links:
 
 * [The SICP Web Site (includes full text)](http://mitpress.mit.edu/sicp/) 
