@@ -5,7 +5,7 @@ Structure and Interpretation of Computer Programs
 
 Problems and projects from the legendary MIT 6.001 Purple Book.
 
-**Chapter 1** - [xxx]
+**Chapter 1** - Expressions, Naming and Environment, Evaluating Combinations, Compound Procedures, Substitution Model, Applicative Order Evaluation, Normal Order Evaluation, Conditional Expressions and Predicates, Numerical Analysis, Square Roots, Cube Roots, Black-Box Abstractions
 
 **Chapter 2** - [xx]
 
