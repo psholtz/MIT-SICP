@@ -11,6 +11,8 @@ Some useful links:
 
 * [The "Don't Panic" Guide to 6.001 Scheme](http://sicp.ai.mit.edu/Spring-2005/manuals/dontpanicnew.html)
 
+* [xx](http://matt.might.net/articles/implementation-of-recursive-fixed-point-y-combinator-in-javascript-for-memoization/)
+
 Don't forget to check out the [Wiki](/psholtz/MIT-SICP/wiki) for answers to some of the more mathematically oriented questions.
 
 Finally, A Word From Our Sponsor...
