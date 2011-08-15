@@ -29,7 +29,35 @@
 (map (lambda (x) (list x x)) x)
 
 ;;
-;; However, these solutions do not utilize map, filter and/or fold-right.
+;; (d) ((2) ((4) ((6) ())))
 ;;
+
+;; 
+;; First let's break down what this expression actually "is":
+;;
+(list (list 2) (list (list 4) (list (list 6) '())))
+;; ==> ((2) ((4) ((6) ())))
+
+;;
+;; Seeing what the pattern is, we can construct a function f that generates the structure we desire:
+;;
+(define (f x)
+  (let ((a (filter even? x)))
+    (define (f-iter b)
+      (if (null? b)
+	  '()
+	  (list (list (car b)) (f-iter (cdr b)))))
+    (f-iter a)))
+
+;;
+;; Running the procedure:
+;;
+(f x)
+;; ==> ((2) ((4) ((6) ())))
+
+;;
+;; Which is what we were looking for.
+;;
+
 
 
