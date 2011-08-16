@@ -17,7 +17,6 @@
 ;; from standard high school algebra, and use this to solve the problem.
 ;;
 
-
 ;;
 ;; A procedure to find the slope of the line segment.
 ;;
