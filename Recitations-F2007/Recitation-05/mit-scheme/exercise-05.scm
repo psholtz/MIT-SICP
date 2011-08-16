@@ -119,7 +119,8 @@
 ;; ==> 0.333333333333
 
 ;;
-;; get "b"
+;; Next we want to determine the y-intercept of the line segment, 
+;; which would give us the "b" in the y=mx+b formulation.
 ;;
 (define (y-intercept line-segment)
   (let ((p (line-segment-start line-segment))
@@ -129,8 +130,32 @@
 		 (y (point-y p)))
 	     (- y (* m x)))))))
 
+;;
+;; Run some unit tests:
+;;
+(y-intercept d1)
+;; ==> unspecified return value
+
+(y-intercept d2)
+;; ==> -1 
+
+(y-intercept d3)
+;; ==> unspecified return value
+
+(y-intercept d4)
+;; ==> 1
+
+(y-intercept d5)
+;; ==> 0
+
+(y-intercept d6)
+;; ==> 0
+
 ;; 
-;; check if the lines are parallel
+;; If the lines are parallel, they won't intersect! 
+;;
+;; It will be useful to check for this, so let's define it:
+;;
 (define (parallel? line-segment-1 line-segment-2)
   (cond ((and (null? (slope line-segment-1)) (null? (slope line-segment-2))) #t)
 	((and (null? (slope line-segment-1)) (not (null? (slope line-segment-2)))) #f)
@@ -139,6 +164,25 @@
 	 (if (= (slope line-segment-1) (slope line-segment-2))
 	     #t
 	     #f))))
+
+;;
+;; Run the unit tests:
+;;
+(parallel? d1 d2)
+(parallel? d1 d3)
+(parallel? d1 d4)
+(parallel? d1 d5)
+(parallel? d1 d6)
+(parallel? d2 d3)
+(parallel? d2 d4)
+(parallel? d2 d5)
+(parallel? d2 d6)
+(parallel? d3 d4)
+(parallel? d3 d5)
+(parallel? d3 d6)
+(parallel? d4 d5)
+(parallel? d4 d6)
+(parallel? d5 d6)
 
 ;;
 ;; define the intersect method
