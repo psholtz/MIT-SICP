@@ -58,15 +58,65 @@
 ;; Test the slopes of these line segments:
 ;;
 (slope d1)
+;; ==> '()
+
 (slope d2)
+;; ==> 0
+
 (slope d3)
+;; ==> '()
+
 (slope d4)
+;; ==> 0
+
 (slope d5)
+;; ==> 1.0
+
 (slope d6)
+;; ==> -1.0
 
 ;;
-;; As additional test, test "reverse" going line segments.
+;; So far, so good.
 ;;
+;; Let's make sure that the slope of the line segment is the same, 
+;; no matter which 'direction' we define the line segment as going in:
+;;
+(= (slope (make-line-segment p1 p3)) (slope (make-line-segment p3 p1)))
+;; ==> #t
+
+(= (slope (make-line-segment p2 p4)) (slope (make-line-segment p4 p2)))
+;; ==> #t
+
+(= (slope (make-line-segment p2 p3)) (slope (make-line-segment p3 p2)))
+;; ==> #t
+
+;;
+;; The test has to be defined slightly differently for "vertical" (i.e., 
+;; infinite slope) line segments.
+;;
+(and (null? (slope (make-line-segment p1 p2)))
+     (null? (slope (make-line-segment p2 p1))))
+
+;;
+;; Finally, let's test some lines that have differing slopes
+;;
+(define origin (make-point 0 0))
+(define q1 (make-point 1 2))
+(define q2 (make-point 1 3))
+(define q3 (make-point 2 1))
+(define q4 (make-point 3 1))
+
+(slope (make-line-segment origin q1))
+;; ==> 2
+
+(slope (make-line-segment origin q2))
+;; ==> 3
+
+(slope (make-line-segment origin q3))
+;; ==> 0.5
+
+(slope (make-line-segment origin q4))
+;; ==> 0.333333333333
 
 ;;
 ;; get "b"
