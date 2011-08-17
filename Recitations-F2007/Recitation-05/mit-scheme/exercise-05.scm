@@ -373,6 +373,47 @@
 	end)))
 
 ;;
+;; Run some unit tests:
+;;
+(define line-test-1 (make-line-segment
+		     (make-point 0 1)
+		     (make-point 2 5)))
+
+(define line-test-2 (make-line-segment
+		     (make-point 2 5)
+		     (mame-point 0 1)))
+
+(slope line-test-1)
+;; ==> 2.0
+
+(slope line-test-2)
+;; ==> 2.0
+
+(left-most-point line-test-1)
+;; ==> (0 . 1)
+
+(left-most-point line-test-2)
+;; ==> (0 . 1)
+
+(right-most-point line-test-1)
+;; ==> (2 . 5)
+
+(right-most-point line-test-2)
+;; ==> (2 . 5)
+
+(bottom-most-point line-test-1)
+;; ==> (0 . 1)
+
+(bottom-most-point line-test-2)
+;; ==> (0 . 1)
+
+(top-most-point line-test-1)
+;; ==> (2 . 5)
+
+(top-most-point line-test-2)
+;; ==> (2 . 5)
+
+;;
 ;; Let's also define a procedure that let's use determine 
 ;; whether one number is "between" two other numbers: 
 ;;
@@ -388,6 +429,21 @@
       (if (and (<= x b) (>= x a))
 	  #t
 	  #f)))
+
+(between? 1 0 2)
+;; ==> #t
+
+(between? 1 1 2)
+;; ==> #t
+
+(between? 2 1 2)
+;; ==> #t
+
+(between? -1 0 2)
+;; ==> #f
+
+(between? 3 0 2)
+;; ==> #f
 
 ;;
 ;; Now it still remains to determine whether the 
