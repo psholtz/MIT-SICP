@@ -425,7 +425,7 @@
 ;;
 (define (between? x a b)
   (if (> a b)
-      #f
+      (between? x b a)
       (if (and (<= x b) (>= x a))
 	  #t
 	  #f)))
@@ -454,34 +454,28 @@
 (define (intersection line-segment-1 line-segment-2)
   (if (parallel? line-segment-1 line-segment-2)
       #f
-      (let ((p (intersect line-segment-1 line-segment-2))
-	    (left-1 (left-most-point line-segment-1))
-	    (left-2 (left-most-point line-segment-2))
-	    (right-1 (right-most-point line-segment-1))
-	    (right-2 (right-most-point line-segment-2))
-	    (bottom-1 (bottom-most-point line-segment-1))
-	    (bottom-2 (bottom-most-point line-segment-2))
-	    (top-1 (top-most-point line-segment-1))
-	    (top-2 (top-most-point line-segment-2)))
-	(let ((x (point-x p))
-	      (y (point-y p)))
-	  (if (and
-	       (between? x (point-x left-1) (point-x right-1))
-	       (between? x (point-x left-2) (point-x right-2))
-	       (between? y (point-y bottom-1) (point-y top-1))
-	       (between? y (point-y bottom-2) (point-y top-2)))
-	      #t
-	      #f)))))
+      (let ((p (intersect line-segment-1 line-segment-2)))
+	(let ((left-1 (left-most-point line-segment-1))
+	      (left-2 (left-most-point line-segment-2))
+	      (right-1 (right-most-point line-segment-1))
+	      (right-2 (right-most-point line-segment-2))
+	      (bottom-1 (bottom-most-point line-segment-1))
+	      (bottom-2 (bottom-most-point line-segment-2))
+	      (top-1 (top-most-point line-segment-1))
+	      (top-2 (top-most-point line-segment-2)))
+	  (let ((x (point-x p))
+		(y (point-y p)))
+	    (if 
+	     (and
+	      (between? x (point-x left-1) (point-x right-1))
+	      (between? x (point-x left-2) (point-x right-2))
+	      (between? y (point-y bottom-1) (point-y top-1))
+	      (between? y (point-y bottom-2) (point-y top-2)))
+	     p
+	     #f))))))
 
+;;
+;; Run some unit tests:
+;;
 
-  
-
-(define (intersection line1 line2)
-  (define (between x a b)
-    (and (>= x a)
-	 (<= x b)))
-  (let ((a (line-segment-start line1))
-	(b (line-segment-end line1))
-	(c (line-segment-start line2))
-	(d (line-segment-end line2)))
   
