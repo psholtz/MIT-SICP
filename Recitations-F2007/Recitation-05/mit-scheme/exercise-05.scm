@@ -248,10 +248,10 @@
 	    (b2 (y-intercept line-segment-2)))
 	(cond ((null? m1) 
 	       (let ((x (point-x (line-segment-start line-segment-1))))
-		 (make-point x (+ (* m1 x) b1))))
+		 (make-point x (+ (* m2 x) b2))))
 	      ((null? m2)
 	       (let ((x (point-x (line-segment-start line-segment-2))))
-		 (make-point x (+ (* m2 x) b2))))
+		 (make-point x (+ (* m1 x) b1))))
 	      (else
 	       (let ((x (/ (- b2 b1) (- m1 m2))))
 		 (make-point x
