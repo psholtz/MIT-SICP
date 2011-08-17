@@ -169,20 +169,68 @@
 ;; Run the unit tests:
 ;;
 (parallel? d1 d2)
+;; ==> #f
+
 (parallel? d1 d3)
+;; ==> #t
+
 (parallel? d1 d4)
+;; ==> #f
+
 (parallel? d1 d5)
+;; ==> #f
+
 (parallel? d1 d6)
+;; ==> #f
+
 (parallel? d2 d3)
+;; ==> #f
+
 (parallel? d2 d4)
+;; ==> #t
+
 (parallel? d2 d5)
+;; ==> #f
+
 (parallel? d2 d6)
+;; ==> #f
+
 (parallel? d3 d4)
+;; ==> #f
+
 (parallel? d3 d5)
+;; ==> #f
+
 (parallel? d3 d6)
+;; ==> #f
+
 (parallel? d4 d5)
+;; ==> #f
+
 (parallel? d4 d6)
+;; ==> #f
+
 (parallel? d5 d6)
+;; ==> #f
+
+(parallel? d1 d1)
+;; ==> #t
+
+(parallel? d2 d2)
+;; ==> #t
+
+(parallel? d3 d3)
+;; ==> #t
+
+(parallel? d4 d4)
+;; ==> #t
+
+(parallel? d5 d5)
+;; ==> #t
+
+(parallel? d6 d6)
+;; ==> #t
+
 
 ;;
 ;; define the intersect method
