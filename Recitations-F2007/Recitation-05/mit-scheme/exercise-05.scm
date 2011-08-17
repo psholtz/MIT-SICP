@@ -269,15 +269,93 @@
 ;; Continuing:
 ;;
 (intersect d1 d2)
+;; ==> (1 . -1)
 
 (intersect d1 d3)
+;; ==> The lines are parallel!
+
 (intersect d1 d4)
+;; ==> (1 . 1)
+
 (intersect d1 d5)
+;; ==> (1 . 1.)
+
 (intersect d1 d6)
+;; ==> (1 . -1)
+
+(intersect d2 d3)
+;; ==> (-1 . -1)
+
+(intersect d2 d4)
+;; ==> The lines are parallel!
+
+(intersect d2 d5)
+;; ==> (-1. . -1)
+
+(intersect d2 d6)
+;; ==> (1. . -1)
+
+(intersect d3 d4)
+;; ==> (-1 . 1)
+
+(intersect d3 d5)
+;; ==> (-1 . -1.)
+
+(intersect d3 d6)
+;; ==> (-1 . 1.)
+
+(intersect d4 d5)
+;; ==> (1. . 1)
+ 
+(intersect d4 d6)
+;; ==> (-1. . 1)
+
+(intersect d5 d6)
+;; ==> (0. . 0.)
+
+;;
+;; We can determine whether the lines defined by the line segments
+;; intersect. But we still don't know whether the line segments themselves
+;; actually intersect. To accomplish this, we need to define a few more 
+;; helper methods.
+;;
+;; We need to be able to determine whether the x-coordinate for our 
+;; point of intersection lies between the "left most" and "right most" 
+;; points of the line segments, and whether the y-coordinate for our
+;; point of intersection lies betweeen the "bottom most" and "top most"
+;; points of the line segmenets. 
+;;
+;; For instance, a line segment might not necessarily "start" at the 
+;; "left" and "end" at the "right" (even though this is the intuitive
+;; way to define the line segments.
+;;
+;; We define the following helper methods:
+;;
+
+;;
+;; Extract the "left-most" point of the line-segment:
+;;
+(define (left-most-point line-segment)
+  (let ((start (line-segment-start line-segment))
+	(end (line-segment-end line-segment)))
+    (if (<= (point-x start) (point-x end))
+	start
+	end)))
+
+;;
+;; Extract the "right-most" point of the line-segment:
+;;
+(define (right-most-point line-segment)
+  (let ((start (line-segment-start line-segment))
+	(end (line-segment-end line-segment)))
+    (if (>= (point-x start) (point-x end))
+	start
+	end)))
 
 
+  
 
-	      
+
 ;;
 ;; Now it still remains to determine whether the 
 
