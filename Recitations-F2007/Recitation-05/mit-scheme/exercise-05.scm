@@ -231,22 +231,52 @@
 (parallel? d6 d6)
 ;; ==> #t
 
-
-;;
-;; define the intersect method
-;; (this will determine where the lines determined by the line segments 
-;; will intersect);
+;; 
+;; We're getting close to the final solution.
+;; 
+;; Next let's define a procedure called "intersect" - it will take two 
+;; line segments as arguments, and determine the point at which the 
+;; corresponding lines intersect (if they do intersect), or else indicate 
+;; to the user that the lines are parallel (and hence do not intersect).
 ;;
 (define (intersect line-segment-1 line-segment-2)
   (if (parallel? line-segment-1 line-segment-2)
-      (display "Lines are parallel!")
+      (display "The lines are parallel!")
       (let ((m1 (slope line-segment-1))
 	    (m2 (slope line-segment-2))
 	    (b1 (y-intercept line-segment-1))
 	    (b2 (y-intercept line-segment-2)))
-	(let ((x (/ (- b2 b1) (- m1 m2))))
-	  (make-point x
-		      (+ (* m1 x) b1))))))
+	(cond ((null? m1) 
+	       (let ((x (point-x (line-segment-start line-segment-1))))
+		 (make-point x (+ (* m1 x) b1))))
+	      ((null? m2)
+	       (let ((x (point-x (line-segment-start line-segment-2))))
+		 (make-point x (+ (* m2 x) b2))))
+	      (else
+	       (let ((x (/ (- b2 b1) (- m1 m2))))
+		 (make-point x
+			     (+ (* m1 x) b1))))))))
+
+;;
+;; Run the unit tests:
+;;
+(intersect d1 d1)
+;; ==> The lines are parallel!
+
+;;
+;; Makes sense, we expected that.
+;;
+;; Continuing:
+;;
+(intersect d1 d2)
+
+(intersect d1 d3)
+(intersect d1 d4)
+(intersect d1 d5)
+(intersect d1 d6)
+
+
+
 	      
 ;;
 ;; Now it still remains to determine whether the 
