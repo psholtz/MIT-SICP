@@ -352,9 +352,42 @@
 	start
 	end)))
 
+;;
+;; Extract the "top-most" point of the line-segment:
+;;
+(define (top-most-point line-segment)
+  (let ((start (line-segment-start line-segment))
+	(end (line-segment-end line-segment)))
+    (if (>= (point-y start) (point-y end))
+	start
+	end)))
 
-  
+;; 
+;; Extact the "bottom-most" point of the line-segment:
+;;
+(define (bottom-most-point line-segment)
+  (let ((start (line-segment-start line-segment))
+	(end (line-segment-end line-segment)))
+    (if (<= (point-y start) (point-y end))
+	start
+	end)))
 
+;;
+;; Let's also define a procedure that let's use determine 
+;; whether one number is "between" two other numbers: 
+;;
+;; a -> lower bound
+;; b -> upper bound
+;; x -> number to test
+;;
+;; Enforce requirement that b must be greater than or equal to a.
+;;
+(define (between? x a b)
+  (if (> a b)
+      #f
+      (if (and (<= x b) (>= x a))
+	  #t
+	  #f)))
 
 ;;
 ;; Now it still remains to determine whether the 
