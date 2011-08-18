@@ -6,7 +6,7 @@ Data Structures and Abstractions
 
 **New Procedures**
 
-1. (cons a b) - makes a cons-cell (pair) from a and b.
+(a) `(cons a b)` - makes a cons-cell (pair) from a and b.
 
 Exercises
 ---------
