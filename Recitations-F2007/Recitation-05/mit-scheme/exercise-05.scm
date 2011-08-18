@@ -480,24 +480,52 @@
 ;; First let's go around the square:
 ;;
 (intersection d1 d2)
+;; ==> (1 . -1)
+
 (intersection d2 d3)
+;; ==> (-1 . -1)
+
 (intersection d3 d4)
+;; ==> (-1 . 1)
+
 (intersection d4 d1)
+;; ==> (1 . 1)
 
 ;; 
 ;; Now let's check some other intersections:
 ;;
 (intersection d1 d3)
+;; ==> #f
+
 (intersection d1 d5)
+;; ==> (1 . 1.)
+
 (intersection d1 d6)
+;; ==> (1 . -1.)
+
 (intersection d2 d4)
+;; ==> #f
+
 (intersection d2 d5)
+;; ==> (-1. . -1)
+
 (intersection d2 d6)
+;; ==> (1. . -1)
+
 (intersection d3 d5)
+;; ==> (-1 . -1.)
+
 (intersection d3 d6)
+;; ==> (-1 . 1.)
+
 (intersection d4 d5)
+;; ==> (1. . 1)
+
 (intersection d4 d6)
+;; ==> (1. . 1)
+
 (intersection d5 d6)
+;; ==> (0. . 0.)
 
 ;;
 ;; Let's do a little more unit testing:
@@ -522,11 +550,11 @@
 ;; even though they are normal to one another.
 ;;
 (intersection segment-1 segment-2)
-;; ==>
+;; ==> #f
 
 ;;
 ;; On the other hand, segment-3, which is parallel to segment-1,
 ;; will intersect segment-2 since it is long enough:
 ;;
 (intersection segment-2 segment-3)
-;; ==>
+;; ==> (0.5 . -0.5)
