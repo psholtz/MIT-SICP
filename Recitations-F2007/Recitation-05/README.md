@@ -10,3 +10,5 @@ Data Structures and Abstractions
 
 Exercises
 ---------
+
+(1) Draw box-and-pointer diagrams for the values of the following expressions. Also give the printed representation.
