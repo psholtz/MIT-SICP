@@ -46,6 +46,42 @@
 ;; Use the "product" procedure to compute approximations to pi:
 ;;
 (defun square (x) (* x x))
+(defun even? (n)
+  (= (% n 2) 0))
+
+(defun pi-partial (n)
+  ;; 
+  ;; The mapping from n to "numerator" that we desire is as follows:
+  ;;
+  ;; 1 --> 2
+  ;; 2 --> 4
+  ;; 3 --> 4
+  ;; 4 --> 6
+  ;; 5 --> 6 
+  ;; ...
+  ;; 
+  (defun numerator (n)
+    (cond ((even? n) (+ n 2.0))
+	  (t
+	   (+ n 1.0))))
+
+  ;;
+  ;; The mapping from n to "denominator" that we desire is as follows:
+  ;;
+  ;; 1 --> 3
+  ;; 2 --> 3
+  ;; 3 --> 5
+  ;; 4 --> 5
+  ;; 5 --> 7
+  ;; ...
+  ;;
+  (defun denominator (n)
+    (cond ((even? n) (+ n 1.0))
+	  (t
+	   (+ n 2.0))))
+
+
+
 
 (defun pi (n)
   (let ((next-pi (lambda (x) (+ x 2))))
