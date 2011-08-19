@@ -101,7 +101,40 @@
 
 (pi 1)
 
+(pi 5)
 
+(pi 10)
+
+(pi 20)
+
+(pi 50)
+
+(pi 100)
+
+(pi 500)
+
+(pi 1000)
+
+(pi 5000)
+
+(pi 10000)
+
+;;
+;; iterative
+;;
+(defun product (term a next b)
+  (defun iter (a result)
+    (if (> a b)
+	result
+      (iter (next a) (* result (term a)))))
+  (iter a 1))
+
+(factorial 0)
+(factorial 1)
+(factorial 2)
+(factorial 3)
+(factorial 4)
+(factorial 5)
 
 
 (defun pi (n)
