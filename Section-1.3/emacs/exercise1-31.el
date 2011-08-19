@@ -89,7 +89,7 @@
   ;;
   ;; Write it all in terms of "product"
   ;;
-  (product term 1.0 inc n))
+  (product #'term 1 #'inc n))
 
 ;;
 ;; The partial approximations only tend to pi/4
