@@ -80,6 +80,27 @@
 	  (t
 	   (+ n 2.0))))
 
+  ;;
+  ;; The "term" will be the fraction:
+  ;;
+  (defun term (n)
+    (/ (numerator n) (denominator n)))
+
+  ;;
+  ;; Write it all in terms of "product"
+  ;;
+  (product term 1.0 inc n))
+
+;;
+;; The partial approximations only tend to pi/4
+;;
+;; We have to multiply by 4 to get back to pi.
+;;
+(defun (pi n)
+  (* 4 (pi-partial n)))
+
+(pi 1)
+
 
 
 
