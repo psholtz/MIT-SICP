@@ -99,6 +99,8 @@
 (defun pi (n)
   (* 4 (pi-partial n)))
 
+(setq max-lisp-eval-depth 1000)  ;; try to get a bit more performance out of the interpreter..
+
 (pi 1)
 
 (pi 5)
