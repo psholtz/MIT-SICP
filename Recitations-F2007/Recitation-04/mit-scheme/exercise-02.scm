@@ -55,12 +55,12 @@
 
 ;;
 ;; It takes 15 steps (in time) to compute the answer, for n = 7
-;; It takes 10 slots (in space) to compute the answer, for n = 7
+;; It takes 8 slots (in space) to compute the answer, for n = 7
 ;;
 
 ;;
-;; We can extrapolate from this that the running scales as 2*n + 1, 
-;; and that the space required scales as 2*n - 4. 
+;; We can extrapolate from this that the running scales as 2*n + 1,
+;; and that the space required scales as n + 1
 ;;
 ;; In other words, both running time and space scale linearly in n.
 ;;
