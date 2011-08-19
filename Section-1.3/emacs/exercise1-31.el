@@ -126,7 +126,7 @@
   (defun iter (a result)
     (if (> a b)
 	result
-      (iter (next a) (* result (term a)))))
+      (iter (funcall next a) (* result (funcall term a)))))
   (iter a 1))
 
 (factorial 0)
@@ -134,7 +134,7 @@
 (factorial 2)
 (factorial 3)
 (factorial 4)
-(factorial 5)
+(factorial 5)x
 
 
 (defun pi (n)
