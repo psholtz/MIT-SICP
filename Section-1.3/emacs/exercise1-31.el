@@ -96,7 +96,7 @@
 ;;
 ;; We have to multiply by 4 to get back to pi.
 ;;
-(defun (pi n)
+(defun pi (n)
   (* 4 (pi-partial n)))
 
 (pi 1)
