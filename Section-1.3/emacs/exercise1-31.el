@@ -102,24 +102,26 @@
 (setq max-lisp-eval-depth 1000)  ;; try to get a bit more performance out of the interpreter..
 
 (pi 1)
+;; ==> 2.666666666666
 
 (pi 5)
+;; ==> 2.925714285
 
 (pi 10)
+;; ==> 3.275101041334
 
 (pi 20)
+;; ==> 3.213784940293
 
 (pi 50)
+;; ==> 3.1719440917427 
 
 (pi 100)
+;; ==> 3.157030176455
 
-(pi 500)
-
-(pi 1000)
-
-(pi 5000)
-
-(pi 10000)
+;;
+;; For higher values of n, the emacs interpreter chokes.
+;;
 
 ;;
 ;; (b) If your "product" procedure generates a recursive process, write one that generates an iterative
