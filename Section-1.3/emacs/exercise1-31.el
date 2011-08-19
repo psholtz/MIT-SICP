@@ -120,7 +120,14 @@
 (pi 10000)
 
 ;;
-;; iterative
+;; (b) If your "product" procedure generates a recursive process, write one that generates an iterative
+;; process. If it generates an iterative process, write one that generates a recursive process.
+;;
+
+;;
+;; The code we wrote above generates a recursive process.
+;;
+;; Below we will implement an iterative process:
 ;;
 (defun product (term a next b)
   (defun iter (a result)
@@ -130,41 +137,18 @@
   (iter a 1))
 
 (factorial 0)
+;; ==> 1
+
 (factorial 1)
+;; ==> 1
 (factorial 2)
+;; ==> 2
+
 (factorial 3)
+;; ==> 6
+
 (factorial 4)
-(factorial 5)x
+;; ==> 24 
 
-
-(defun pi (n)
-  (let ((next-pi (lambda (x) (+ x 2))))
-    (/ (* 8.0 (product #'square 4.0 #'next-pi (+ 4.0 (* 2.0 (- n 1.0)))) (+ 4.0 (* 2.0 n)))
-       (product #'square 3.0 #'next-pi (+ 3.0 (* 2.0 n))))))
-
-;; increase the max recursion depth
-(setq max-lisp-eval-depth 1000)
-
-(pi 1)
-;; --> 3.413333333333
-
-(pi 2)
-;; --> 3.3437634693877552
-
-(pi 3)
-;;
-
-(pi 4)
-;;
-
-(pi 5)
-;;
-
-(pi 10)
-;;
-
-(pi 15)
-;;
-
-(pi 20)
-;;
+(factorial 5)
+;; ==> 120
