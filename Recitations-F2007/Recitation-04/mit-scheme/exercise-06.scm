@@ -67,3 +67,29 @@
 ;; Time: O(n)
 ;; Space: O(n)
 ;;
+
+;;
+;; Now look at the recursive version of "find-e" from last time:
+;;
+(define (find-e n)
+  (if (= n 0)
+      1.0
+      (+ (/ (fact n)) (find-e (- n 1)))))
+
+;;
+;; What is the resulting order of growth of "find-e"?
+;;
+
+;;
+;; Let's look at the expansion of "(find-e n)" for various n.
+;;
+;; Let's first try n = 5:
+;;
+(find-e 5)
+(+ (/ (fact 5)) (find-e 4))
+(+ (/ (fact 5)) (+ (/ (fact 4)) (find-e 3)))
+(+ (/ (fact 5)) (+ (/ (fact 4)) (+ (/ (fact 3)) (find-e 2))))
+(+ (/ (fact 5)) (+ (/ (fact 4)) (+ (/ (fact 3)) (+ (/ (fact 2)) (find-e 1)))))
+(+ (/ (fact 5)) (+ (/ (fact 4)) (+ (/ (fact 3)) (+ (/ (fact 2)) (+ (/ (fact 1)) (find-e 0))))))
+(+ (/ (fact 5)) (+ (/ (fact 4)) (+ (/ (fact 3)) (+ (/ (fact 2)) (+ (/ (fact 1)) 1.0)))))
+(+ (/ (fact 5)) (+ (/ (fact 4)) (+ (/ (fact 3)) (+ (/ (fact 2)) (+ (/ 1 1.0))))))
