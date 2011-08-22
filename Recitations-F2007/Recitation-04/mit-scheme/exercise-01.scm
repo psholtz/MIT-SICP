@@ -22,6 +22,10 @@ O(n)
 ;;
 ;; (c) 3^n * n^2
 ;;
+
+;;
+;; As described above, for a product, multiply the two terms:
+;;
 O(3^n * n^2)
 
 ;;
