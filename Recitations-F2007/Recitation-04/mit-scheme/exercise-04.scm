@@ -34,3 +34,35 @@
 (* 3 (square 9))
 (* 3 81)
 243
+
+;;
+;; The procedure takes 10 operations in time, and consumes 5 slots in memory.
+;;
+
+;;
+;; Now let's see how the procedure performs for n = 10:
+;;
+(expt 3 10)
+(square (expt 3 5))
+
+.. ==> 10 additional operations in time, and 5 additional slots in memory.
+
+(square 243)
+59049
+
+;;
+;; We made some pretty good savings in terms of time!
+;;
+;; If we double n, we only add 1 additional slot in memory, and 4 opertions in time.
+;;
+
+;;
+;; Similarly, for n = 20:
+;;
+(expt 3 20)
+(square (expt 3 10))
+
+.. ==> 14 additional operations in time, and 6 additional slots in memory
+
+(square 59049)
+3486784401
