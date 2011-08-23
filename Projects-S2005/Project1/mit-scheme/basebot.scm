@@ -127,9 +127,24 @@
 ;;
 ;; The harder the ball is shot upwards, the longer it takes to hit the ground.
 ;;
-
+;; Suppose now we are standing 10m above the ground, and again we shoot the ball straight 
+;; upwards. How long will it take to hit the ground this time? It will take longer than before, 
+;; since it must first follow the same arc (i.e., same flight time) as when launched from the 
+;; ground, but this time it must fall an additional distance before it hits the ground.
+;;
+;; Let's see if our intuition is born out in the code:
+;;
 (time-to-impact 10 10)
+;; ==> 2.77598
+
 (time-to-impact 10 20)
+;; ==> 3.28378
+
+;;
+;; Launching the ball upwards from an initial elevation > 0 causes the overall flight time to 
+;; lengthen, which is what we expect. Also, the higher our initial elevation, the longer the overall
+;; flight time, which is again what we expect.
+;;
 
 (define (time-to-height vertical_velocity elevation target-elevation)
   (root2 (* -0.5 gravity) vertical-velocity (- elevation target-elevation)))
