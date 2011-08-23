@@ -106,7 +106,8 @@
 ;;
 ;; For this reason, we will define our procedure using the "root2" procedure.
 ;;
-;; We define the polynomial whose roots we are seeking as follows:
+;; We define the polynomial whose roots we are seeking as the equation of motion given 
+;; above:
 ;;
 (define (time-to-impact vertical-velocity elevation)
   (root2 (* -0.5 gravity) vertical-velocity elevation))
