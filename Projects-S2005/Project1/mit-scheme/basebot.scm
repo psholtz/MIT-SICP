@@ -83,7 +83,7 @@
 ;; ++++++++++++++++++++++++++++++++++ 
 
 ;;
-;; The polynomial we are attempting to solve is:
+;; The polynomial whose roots we are attempting to calculate is:
 ;;
 ;; (0.5)*a*t^2 + v*t + x0 = 0
 ;;
@@ -106,8 +106,7 @@
 ;;
 ;; For this reason, we will define our procedure using the "root2" procedure.
 ;;
-;; We define the polynomial whose roots we are seeking as the equation of motion given 
-;; above:
+;; We define the polynomial whose roots we are seeking as the equation of motion above:
 ;;
 (define (time-to-impact vertical-velocity elevation)
   (root2 (* -0.5 gravity) vertical-velocity elevation))
