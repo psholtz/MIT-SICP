@@ -87,13 +87,11 @@
 ;;
 ;; (0.5)*a*t^2 + v*t + x0 = 0
 ;;
-;; which is the equation of motion for a particle moving
-;; under constant acceleration a, constant velocity v, 
-;; and initial position x0.
+;; which is the equation of motion for a particle moving under constant acceleration a, 
+;; constant velocity v and initial position x0.
 ;;
-;; In our case, the accelertion is due to gravity (9.8)
-;; and is directed downwards (i.e., negative). The initial
-;; velocity and position (i.e., elevation) are passed in as
+;; In our case, the accelertion is due to gravity (9.8) and is directed downwards (i.e.,
+;; negative). The initial velocity and position (i.e., elevation) are passed in as
 ;; parameters to the procedure. 
 ;;
 
