@@ -112,8 +112,8 @@
   (root2 (* -0.5 gravity) vertical-velocity elevation))
 
 ;;
-;; The following unit tests model shooting the ball straight upwards at various
-;; velocities (i.e., 10, 20 and 50 m/s) from the ground (i.e., elevation = 0).
+;; The following unit tests model shooting the ball straight upwards from the ground
+;; at various velocities (i.e., elevation = 0 and vertical velocity = 10, 20 and 50 m/s).
 ;;
 (time-to-impact 10 0)
 (time-to-impact 20 0)
