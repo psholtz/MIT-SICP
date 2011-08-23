@@ -77,7 +77,7 @@
 ;;
 
 ;; ++++++++++++++++++++++++++++++++++ 
-;; Problem 3
+;; PROBLEM 3
 ;;
 ;; Calculating the flight time.
 ;; ++++++++++++++++++++++++++++++++++ 
@@ -158,6 +158,18 @@
 ;;
 (define (time-to-height vertical_velocity elevation target-elevation)
   (root2 (* -0.5 gravity) vertical-velocity (- elevation target-elevation)))
+
+
+;; 
+;; Again, run some unit tests:
+;;
+(= (time-to-impact 10 0) (time-to-height 10 0 0))
+;; ==> #t
+(= (time-to-impact 20 0) (time-to-height 20 0 0))
+
+(= (time-to-impact 10 10) (time-to-height 10 10 0))
+(= (time-to-impact 10 20) (time-to-height 10 20 0))
+
 
 ;; +++++++++++++++++++ 
 ;; Problem 4
