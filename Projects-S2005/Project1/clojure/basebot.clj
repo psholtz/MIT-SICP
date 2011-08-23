@@ -35,8 +35,22 @@
 ;;
 ;; Implement quadratic formula.
 ;; +++++++++++++++++++++++++++++
+(defn discriminant [a b c]
+  (- (square b) (* 4 a c)))
+
 (defn root1 [a b c]
-  (let ((d (discriminant a b c)))
+  (let [d (discriminant a b c)]
     (if (< d 0)
       '()
-      (/ (+ (* -1 b) (sqrt d)) (* 2 a)))))
+      (/ (+ (* -1 b) (Math/sqrt d)) (* 2 a)))))
+
+(defn root2 [a b c]
+  (let [d (discriminant a b c)]
+    (if (< d 0)
+      '()
+      (/ (- (* -1 b) (Math/sqrt d)) (* 2 a)))))
+
+;;
+;; Run some unit tests
+;;
+(= (discriminant 0 5 0) 25)
