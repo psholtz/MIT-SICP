@@ -116,8 +116,17 @@
 ;; at various velocities (i.e., elevation = 0 and vertical velocity = 10, 20 and 50 m/s):
 ;;
 (time-to-impact 10 0)
+;; ==> 2.04082
+
 (time-to-impact 20 0)
+;; ==> 4.08163
+
 (time-to-impact 50 0)
+;; ==> 10.20408
+
+;;
+;; The harder the ball is shot upwards, the longer it takes to hit the ground.
+;;
 
 (time-to-impact 10 10)
 (time-to-impact 10 20)
