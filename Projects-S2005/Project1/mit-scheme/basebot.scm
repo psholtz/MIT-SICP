@@ -79,7 +79,7 @@
 ;; ++++++++++++++++++++++++++++++++++ 
 ;; Problem 3
 ;;
-;; Calculate distances (and times).
+;; Calculate flight time.
 ;; ++++++++++++++++++++++++++++++++++ 
 
 ;;
