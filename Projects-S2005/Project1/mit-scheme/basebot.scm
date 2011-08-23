@@ -145,14 +145,10 @@
 ;; lengthen, which is what we expect. Also, the higher our initial elevation, the longer the overall
 ;; flight time, which is again what we expect.
 ;;
-
-;;
 ;; Suppose now that we wish to calculate the flight time, not for when the ball impacts the 
 ;; ground, but rather for when the ball will reach a certain target elevation. Again, we will 
 ;; choose "root2" since we want to know when the ball reaches the target elevation on the "way 
 ;; down" rather than on the "way up". 
-;;
-
 ;;
 ;; Calculating the time to reach the target elevation is the same as calculating the time to 
 ;; impact, provided that we "start" at an initial elevation which is reduced by an amount equal
