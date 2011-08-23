@@ -56,7 +56,7 @@ So the first step in our evaluation model yields the following result:
 <pre>
 (f 5)
 
-(sum-of-squares (+ 5 1) (* 5 10))
+(sum-of-squares (+ 5 1) (* 5 2))
 </pre>
 
 At which point, the **recursive** nature of expression evaluation becomes evident: the problem of evaluating the expression `(f 5)` reduces to the problem of evaluating the expression `(sum-of-squares (+ 5 1) (* 5 10))`; that is to say, we must again evaluate the operands of the expression (in this case, `(+ 5 1)` and `(* 5 10)`), and then we must apply these operands to the operator `sum-of-squares`.
