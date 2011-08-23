@@ -159,16 +159,25 @@
 (define (time-to-height vertical_velocity elevation target-elevation)
   (root2 (* -0.5 gravity) vertical-velocity (- elevation target-elevation)))
 
-
 ;; 
-;; Again, run some unit tests:
+;; We expect the "time to impact" and the "time to height 0" procedures to return the same number:
 ;;
 (= (time-to-impact 10 0) (time-to-height 10 0 0))
 ;; ==> #t
-(= (time-to-impact 20 0) (time-to-height 20 0 0))
 
+(= (time-to-impact 20 0) (time-to-height 20 0 0))
+;; ==> #t
+
+;;
+;; Similarly, when the ball is shot from varying elevations it should still reach the ground at 
+;; the same time that time that it would reach "height 0":
+;;
 (= (time-to-impact 10 10) (time-to-height 10 10 0))
+;; ==> #t
+
 (= (time-to-impact 10 20) (time-to-height 10 20 0))
+;; ==> #t
+
 
 
 ;; +++++++++++++++++++ 
