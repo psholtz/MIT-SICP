@@ -70,12 +70,33 @@
 ;; Try (root1 5 3 6):
 ;;
 (root1 5 3 6)
+;; ==> '()
+
+;;
+;; Returns nil, since the roots to this polynomial are complex.
+;;
 
 ;; ++++++++++++++++++++++++++++++++++ 
 ;; Problem 3
 ;;
 ;; Calculate distances (and times).
 ;; ++++++++++++++++++++++++++++++++++ 
+
+;;
+;; The polynomial we are attempting to solve is:
+;;
+;; (0.5)*a*t^2 + v*t + x0 = 0
+;;
+;; which is the equation of motion for a particle moving
+;; under constant acceleration a, constant velocity v, 
+;; and initial position x0.
+;;
+;; In our case, the accelertion is due to gravity (9.8)
+;; and is directed downwards (i.e., negative). The initial
+;; velocity and position (i.e., elevation) are passed in as
+;; parameters to the procedure. 
+;;
+
 (define (time-to-impact vertical-velocity elevation)
   (root2 (* -0.5 gravity) vertical-velocity elevation))
 
