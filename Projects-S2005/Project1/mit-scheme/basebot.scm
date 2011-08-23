@@ -20,6 +20,16 @@
      (* v t)
      u)))
 
+;;
+;; Run some unit tests:
+;;
+(= (position 0 0 0 0) 0)
+(= (position 0 0 20 0) 20)
+(= (position 0 5 10 10) 60)
+(= (position 2 2 2 2) 10)
+(= (position 5 5 5 5) 92.5)
+(= (position 0 -10 0 1) -10)
+
 ;; ++++++++++++++++++++++++++++++ 
 ;; PROBLEM 2
 ;;
@@ -43,19 +53,23 @@
   (lambda (a b c)
     (- (square b) (* 4 a c))))
 
-(define (sqrt x)
-  (define tolerance 0.001)
-  (define (good-enough? guess)
-    (< (abs (- (/ (square guess) x) 1.0)) tolerance))
-  (define (improve guess)
-    (average guess (/ x guess)))
-  (define (average a b)
-    (/ (+ a b) 2))
-  (define (sqrt-iter guess)
-    (if (good-enough? guess)
-	guess
-	(sqrt-iter (improve guess))))
-  (sqrt-iter 1.0))
+;;
+;; Run some unit tests:
+;;
+(= (discriminant 0 5 0) 25)
+(= (discriminant 5 0 0) 0)
+(= (discriminant 0 0 5) 0)
+(= (discriminant 3 6 3) 0)
+
+(= (root1 1 2 1) -1)
+(= (root2 1 2 1) -1)
+(= (root1 1 -2 1) 1)
+(= (root2 1 -2 1) 1)
+
+;;
+;; Try (root1 5 3 6):
+;;
+(root1 5 3 6)
 
 ;; ++++++++++++++++++++++++++++++++++ 
 ;; Problem 3
