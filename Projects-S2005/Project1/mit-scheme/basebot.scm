@@ -235,6 +235,14 @@
 (define (seconds-to-hours s)
   (/ s 3600))
   
+;;
+;; We measure angle in radians, so we have to convert to degrees.
+;;
+;; We measure evelation and velocity in meters.
+;;
+;; Then calculate how long the ball will stay in the air, and how are it can 
+;; travel horizontally during that time, before it hits the ground.
+;;
 (define travel-distance-simple 
   (lambda (elevation velocity angle)
     (let ((rangle (degree2radian angle)))
