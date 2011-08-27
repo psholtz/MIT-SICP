@@ -285,8 +285,15 @@
 ;;
 ;; Best angle to hit.
 ;; ++++++++++++++++++++ 
+
+;;
+;; We will increment 1 degree at a time:
+;;
 (define angle-increment 1.0)
 
+;;
+;; Define a helper procedure to convert our answers back to angles
+;;
 (define (radian2degree rad) (/ (* rad 180.) pi))
 
 (define (find-best-angle velocity elevation)
@@ -300,6 +307,54 @@
 	(if (> test-distance best-distance)
 	    (find-best-angle-iter velocity elevation test-distance test-angle next-angle)
 	    (find-best-angle-iter velocity elevation best-distance best-angle next-angle)))))
+
+;;
+;; Let's step through some sample velocities at the elevation of 1 meter:
+;;
+(find-best-angle 10 1)
+;; ==> 42.0 
+
+(find-best-angle 20 1)
+;; ==> 44.0 
+
+(find-best-angle 30 1)
+;; ==> 45.0 
+
+(find-best-angle 40 1)
+;; ==> 45.0
+ 
+(find-best-angle 45 1)
+;; ==> 45.0
+
+(find-best-angle 50 1)
+;; ==> 45.0
+
+;;
+;; Now let's step through these same angles, but at an elevation of 10 meters:
+
+(find-best-angle 10 10)
+;; ==> 30.0
+
+(find-best-angle 20 10)
+;; ==> 39.0
+
+(find-best-angle 30 10)
+;; ==> 42.0
+
+(find-best-angle 40 10)
+;; ==> 43.0
+
+(find-best-angle 45 10)
+;; ==> 44.0
+
+(find-best-angle 50 10)
+;; ==> 44.0
+
+;;
+;; In both cases, the best angle seems to asymptotically approach 45 degrees, 
+;; although it approaches this limit more slowly when the initial elevation is higher.
+;;
+
 
 ;; +++++++++++++++++++ 
 ;; Problem 6 
