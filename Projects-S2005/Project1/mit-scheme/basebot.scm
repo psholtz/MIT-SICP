@@ -296,6 +296,9 @@
 ;;
 (define (radian2degree rad) (/ (* rad 180.) pi))
 
+;;
+;; Define the actual procedure itself:
+;;
 (define (find-best-angle velocity elevation)
   (find-best-angle-iter velocity elevation 0.0 0.0 0.0))
 
@@ -331,7 +334,7 @@
 
 ;;
 ;; Now let's step through these same angles, but at an elevation of 10 meters:
-
+;;
 (find-best-angle 10 10)
 ;; ==> 30.0
 
