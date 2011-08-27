@@ -431,6 +431,20 @@
   (extremum-in-list-iter list-a limit))
 
 ;;
+;; Run some unit tests to see how well the procedure works.
+;;
+;; Find the max element:
+;;
+(extremum-in-list (list 1 2 4 50 2 5) > -1)
+;; ==> 50
+
+;;
+;; Find the min element:
+;;
+(extremum-in-list (list 1 2 4 50 2 5) < 51)
+;; ==> 1
+
+;;
 ;; Find the range of angles for which a ball launched at a given elevation 
 ;; and a given velocity will travel to or beyond the target distance. 
 ;;
@@ -456,9 +470,33 @@
   ;; the target distance:
   ;;
   (let ((range (range-of-angles-iter '() 0)))
-    (cons 
-     (min range < -1)
-     (max range > 91))))
+    (list
+     (extremum-in-list range < 91)
+     (extremum-in-list range > -1))))
+
+;;
+;; Now answer the question:
+;;
+;; Suppose the outfield fence is 300 ft from home plate, and the ball is hit at 45 m/s.
+;; For what range of angles will the ball land over the fense?
+;;
+(range-of-angles 1 45 (feet-to-meters 300))
+;; ==> (28. 48.)
+
+;;
+;; Hence, the answer is, for angles between 28 degrees and 48 degrees, the ball
+;; will land over the fence. We can verify:
+(meters-to-feet (travel-distance 1 45 27))
+;; ==> 297.52022305
+
+(meters-to-feet (travel-distance 1 45 28))
+;; ==> 300.59637477
+
+(meters-to-feet (travel-distance 1 45 48))
+;; ==> 301.416919
+
+(meters-to-feet (travel-distance 1 45 49))
+;; ==> 296.48594399
 
 ;; +++++++++++++++++++++++++ 
 ;; Problem 7
