@@ -107,7 +107,7 @@
 ;; For this reason, we will define our procedure using the "root2" procedure.
 ;;
 ;; We define the polynomial whose roots we are seeking as the equation of motion above:
-;;
+;;v
 (define (time-to-impact vertical-velocity elevation)
   (root2 (* -0.5 gravity) vertical-velocity elevation))
 
@@ -156,7 +156,7 @@
 ;; identical terms as before, provided we make this adjustment to the starting elevation from 
 ;; which the ball is launched:
 ;;
-(define (time-to-height vertical_velocity elevation target-elevation)
+(define (time-to-height vertical-velocity elevation target-elevation)
   (root2 (* -0.5 gravity) vertical-velocity (- elevation target-elevation)))
 
 ;; 
@@ -178,6 +178,37 @@
 (= (time-to-impact 10 20) (time-to-height 10 20 0))
 ;; ==> #t
 
+;;
+;; The higher we aim the ball, the "shorter" the time should be, since the ball does not 
+;; need to "fall" as far as it would if it were falling all the way to the ground.
+;;
+(time-to-height 10 20 0)
+;; ==> 3.28378
+
+(time-to-height 10 20 10)
+;; ==> 2.77598
+
+(time-to-height 10 20 20)
+;; ==> 2.040816
+
+(time-to-height 10 20 25)
+;; ==> 1.164716
+
+;;
+;; Is there a height that we can't reach with a given velocity?
+;;
+;; Yes, there is (which is good):
+;;
+(time-to-height 10 20 50)
+;; ==> '()
+
+;;
+;; How about if we increase the velocity? Are we then able to reach the target height?
+;;
+;; Yes, there is (which is good):
+;;
+(time-to-height 10 50 50)
+;; ==> 2.040816 
 
 
 ;; +++++++++++++++++++ 
