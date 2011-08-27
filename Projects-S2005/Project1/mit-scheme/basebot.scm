@@ -252,6 +252,34 @@
 	  (let ((x0 (position 0 vx 0 t0)))
 	    x0))))))
 
+;;
+;; Let's calculate the distances in meters:
+;;
+(travel-distance-simple 1 45 0)
+;; ==> 20.328928
+
+(travel-distance-simple 1 45 45)
+;; ==> 207.6278611
+
+(travel-distance-simple 1 45 90)
+;; ==> 5.496e-4 
+
+;;
+;; This last distance, hit straight up, is essentially zero, which we would expect.
+;;
+
+;;
+;; Now let's translate these distances into feet:
+;;
+(meters-to-feet (travel-distance 1 45 0))
+;; ==> 67.08546179
+
+(meters-to-feet (travel-distance 1 45 45))
+;; ==> 685.1719418
+ 
+(meters-to-feet (travel-distance 1 45 90))
+;; ==> 1.8138183e-3
+
 ;; ++++++++++++++++++++ 
 ;; Problem 5
 ;;
