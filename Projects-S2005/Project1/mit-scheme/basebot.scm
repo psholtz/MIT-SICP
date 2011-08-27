@@ -506,11 +506,14 @@
 (define density 1.06)
 (define beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
 
-(travel-distance 1 45 45)
+(meters-to-feet (travel-distance 1 45 45))
+;; ==> 332.960731
 
-(travel-distance 1 45 40)
+(meters-to-feet (travel-distance 1 45 40))
+;; ==> 339.02937317
 
-(travel-distance 1 45 35)
+(meters-to-feet (travel-distance 1 45 35))
+;; ==> 334.67101927
 
 (range-of-angles 1 45 (feet-to-meters 300))
 ;; ==> (24.0 55.0)
@@ -524,12 +527,16 @@
 ;; Let's check the boundaries:
 ;;
 (meters-to-feet (travel-distance 1 45 23))
+;; ==> 297.60255197
 
 (meters-to-feet (travel-distance 1 45 24))
+;; ==> 308.40236158
 
 (meters-to-feet (travel-distance 1 45 55))
+;; ==> 300.43074011
 
 (meters-to-feet (travel-distance 1 45 56))
+;; ==> 296.81344117
 
 ;;
 ;; Let's go "back to Boston" for the rest of this exercise:
