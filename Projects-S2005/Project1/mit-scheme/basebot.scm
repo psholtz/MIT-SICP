@@ -271,13 +271,13 @@
 ;;
 ;; Now let's translate these distances into feet:
 ;;
-(meters-to-feet (travel-distance 1 45 0))
+(meters-to-feet (travel-distance-simple 1 45 0))
 ;; ==> 67.08546179
 
-(meters-to-feet (travel-distance 1 45 45))
+(meters-to-feet (travel-distance-simple 1 45 45))
 ;; ==> 685.1719418
  
-(meters-to-feet (travel-distance 1 45 90))
+(meters-to-feet (travel-distance-simple 1 45 90))
 ;; ==> 1.8138183e-3
 
 ;; ++++++++++++++++++++ 
