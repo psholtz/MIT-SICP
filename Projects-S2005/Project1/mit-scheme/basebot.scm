@@ -216,16 +216,12 @@
 ;;
 ;; Flight distance.
 ;; +++++++++++++++++++ 
+
+;;
+;; First define the helper procedures:
+;;
 (define (degree2radian deg)
   (/ (* deg pi) 180.))
-
-(define (travel-distance-simple elevation velocity angle)
-  (let ((rangle (degree2radian angle)))
-    (let ((vy (* velocity (sin rangle)))
-	  (vx (* velocity (cos rangle))))
-      (let ((t0 (time-to-impact vy elevation)))
-	(let ((x0 (position 0 vx 0 t0)))
-	  x0)))))
 
 (define (meters-to-feet m)
   (/ (* m 39.6) 12))
@@ -238,6 +234,15 @@
 
 (define (seconds-to-hours s)
   (/ s 3600))
+  
+(define travel-distance-simple 
+  (lambda (elevation velocity angle)
+    (let ((rangle (degree2radian angle)))
+      (let ((vy (* velocity (sin rangle)))
+	    (vx (* velocity (cos rangle))))
+	(let ((t0 (time-to-impact vy elevation)))
+	  (let ((x0 (position 0 vx 0 t0)))
+	    x0))))))
 
 ;; ++++++++++++++++++++ 
 ;; Problem 5
