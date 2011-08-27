@@ -358,18 +358,24 @@
 ;; although it approaches this limit more slowly when the initial elevation is higher.
 ;;
 
-
 ;; +++++++++++++++++++ 
 ;; Problem 6 
 ;; 
 ;; Incorporate drag.
 ;; +++++++++++++++++++ 
+
+;; 
+;; Define some constants:
+;;
 (define drag-coeff 0.5)
 (define density 1.25)
 (define mass 0.145)
 (define diameter 0.074)
 (define beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
 
+;;
+;; Define the integrate procedure:
+;;
 (define (integrate x0 y0 u0 v0 g m beta)
   (if (< y0 0)
       x0
@@ -385,12 +391,74 @@
 		       (+ u0 du)
 		       (+ v0 dv)
 		       g m beta))))))
-	    
+	
+;; 
+;; Use the "integrate" procedure to calculate the travel-distance, incorporating drag:
+;;    
 (define (travel-distance elevation velocity angle)
   (let ((rangle (degree2radian angle)))
     (let ((vy (* velocity (sin rangle)))
 	  (vx (* velocity (cos rangle))))
       (integrate 0 elevation vx vy gravity mass beta))))
+
+;;
+;; Run the proposed unit tests, answers are given in meters:
+;;
+(travel-distance 1 45 45)
+;; ==> 92.50807
+
+(travel-distance 1 45 40)
+;; ==> 95.336655
+
+(travel-distance 1 45 35)
+;; ==> 94.206332
+
+;;
+;; Let's build a procedure to answer the question, "for what range of angles will 
+;; the ball land over the fence, if the fence is 300 feet from home plate and the 
+;; ball is hit at 45 m/s?". First we build a procedure to find the "extremum" in a 
+;; list. To find "maximum" we invoke the procedure with the comparator ">", and to
+;; find the "minimum" we invoke the procedure with the comparator "<":
+;;
+(define (extremum-in-list list-a comparator limit)
+  (define (extremum-in-list-iter list-b extreme-element)
+    (if (null? list-b)
+	extreme-element
+	(let ((test (car list-b)))
+	  (if (comparator test extreme-element)
+	      (extremum-in-list-iter (cdr list-b) test)
+	      (extremum-in-list-iter (cdr list-b) extreme-element)))))
+  (extremum-in-list-iter list-a limit))
+
+;;
+;; Find the range of angles for which a ball launched at a given elevation 
+;; and a given velocity will travel to or beyond the target distance. 
+;;
+(define (range-of-angles elevation velocity target-distance)
+
+  ;;
+  ;; This procedure will produce a list of *all* angles which 
+  ;; will travel to or beyond the target distance.
+  ;;
+  (define (range-of-angles-iter angles angle)
+    (if (> angle 90)
+	angles
+	(let ((next-angle (+ angle angle-increment)))
+	  (if (> (travel-distance elevation velocity angle) target-distance)
+	      (range-of-angles-iter (cons angle angles) next-angle)
+	      (range-of-angles-iter angles next-angle)))))
+
+  ;;
+  ;; Take the list of *all* angles, and return an ordered pair of the 
+  ;; max and min elements from that list. We will return this pair, which 
+  ;; will represent the min and max angles at which the ball can be hit 
+  ;; at the given elevation at the given velocity, and travel to or beyond
+  ;; the target distance:
+  ;;
+  (let ((range (range-of-angles-iter '() 0)))
+    (cons 
+     (min range < -1)
+     (max range > 91))))
 
 ;; +++++++++++++++++++++++++ 
 ;; Problem 7
