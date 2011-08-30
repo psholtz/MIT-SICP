@@ -1,4 +1,4 @@
-Basebot implemented in Clojure.
+**Basebot implemented in Clojure.**
 
 To run this script from the command line, write:
 
