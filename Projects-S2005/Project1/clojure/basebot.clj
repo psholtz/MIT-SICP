@@ -6,7 +6,7 @@
 (defn square [x] (* x x))
 
 (def gravity 9.8)  ;; in m/s
-(def pi 3.14159)
+(def pi (Math/PI))
 
 ;; ++++++++++++++++++++++++++++ 
 ;; PROBLEM 1
