@@ -6,4 +6,4 @@ To run this script from the command line, write:
 
 To run the file into the REPL interpreter, write:
 
->> (load-file "basebot.clj")
+> (load-file "basebot.clj")
