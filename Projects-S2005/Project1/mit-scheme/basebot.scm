@@ -549,9 +549,12 @@
 ;;
 ;; Aim and throw the ball.
 ;; +++++++++++++++++++++++++ 
+
+;;
+;; Define the integration procedure iteratively:
+;;
 (define (throw-ball elevation velocity distance)
   (throw-ball-iter elevation velocity distance 0 -90))
-
 
 (define (throw-ball-iter elevation velocity distance shortest-time test-angle)
   (if (> test-angle 90)
@@ -570,7 +573,7 @@
 	    (throw-ball-iter elevation velocity distance shortest-time next-angle)))))
 
 ;;
-;; convert from miles-per-hour to meters-per-second
+;; Convert from miles-per-hour to meters-per-second:
 ;;
 (define (mph-to-ms mph)
   (feet-to-meters (* (seconds-to-hours mph) 5280)))
