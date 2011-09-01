@@ -582,22 +582,43 @@
 
 ;;
 ;; Answer the questions:
-;;
-
 ;; 
 ;; Throwing the ball at 45 m/s:
 ;;
 (throw-ball 1 45 36)
+;; ==> 0.639588
 
 ;;
 ;; Throwing the ball at 35 m/s:
 ;;
 (throw-ball 1 35 36)
+;; ==> 0.959358
 
 ;;
 ;; Throwing the ball at 55 m/s:
 ;;
 (throw-ball 1 55 36)
+;; ==> 0.560197
+
+;;
+;; These numbers make sense: the slower the ball is thrown the longer it takes to get to second base.
+;;
+
+;;
+;; If the pitcher throws at 90 mph, how long does it take to reach home? 
+;;
+;; If the distance between home plate and second base is 36m, we will take the 
+;; distance between home and the pitcher's mound to be half that, or 18m.
+
+
+;;
+;; [xx]
+;;
+
+;;
+;; If the catcher can throw at 90 mph, how long does it take for his throw to reach second base? (36m away)?
+;;
+;; [xx]
 
 ;; +++++++++++++++++++ 
 ;; Problem 8
