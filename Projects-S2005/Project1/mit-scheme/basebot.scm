@@ -549,9 +549,11 @@
 ;;
 ;; Aim and throw the ball.
 ;; +++++++++++++++++++++++++ 
-
 ;;
-;; Define the integration procedure iteratively:
+;; Define the integration procedure iteratively.
+;;
+;; Procedure will return the time needed to throw the ball the given distance, at 
+;; the given velocity, from the given elevation.
 ;;
 (define (throw-ball elevation velocity distance)
   (throw-ball-iter elevation velocity distance 0 -90))
@@ -577,6 +579,25 @@
 ;;
 (define (mph-to-ms mph)
   (feet-to-meters (* (seconds-to-hours mph) 5280)))
+
+;;
+;; Answer the questions:
+;;
+
+;; 
+;; Throwing the ball at 45 m/s:
+;;
+(throw-ball 1 45 36)
+
+;;
+;; Throwing the ball at 35 m/s:
+;;
+(throw-ball 1 35 36)
+
+;;
+;; Throwing the ball at 55 m/s:
+;;
+(throw-ball 1 55 36)
 
 ;; +++++++++++++++++++ 
 ;; Problem 8
