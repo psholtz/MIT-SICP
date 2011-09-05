@@ -61,11 +61,47 @@
 (= (root1 1 -2 1) 1)
 (= (root2 1 -2 1) 1)
 
+;;
+;; Try (root1 5 3 6):
+;;
+(root1 5 3 6)
+;; ==> nil
+
+;;
+;; Returns nil, since the roots of this polynomial are complex.
+;;
+
 ;; +++++++++++++++++++++
 ;; Problem 3
 ;;
 ;; Calculate distances.
 ;; +++++++++++++++++++++
+;;
+;; The polynomial whose roots we are attempting to calculate is:
+;;
+;; (0.5)*a*t^2 + v*t + x0 = 0
+;;
+;; which is the equation of motion for a particle moving under constant acceleration a, 
+;; constant velocity v and initial position x0.
+;;
+;; In our case, the acceleration is due to gravity (9.8) and is directed downwards
+;; (i.e., negative). The initial velocity and position (i.e., elevation) are passed
+;; in as parameters to the procedure.
+;;
+;; If we plot the elevation of the ball versus time, where the time coordinate is
+;; used as the abscissa, and the elevation of the ball is used as the ordinate, the
+;; "root1" procedure we defined above will give the "left-most" point at which the 
+;; graph intersects the abscissa (i.e., t-axis), while the "root2" procedure will 
+;; give the "right-most" point.
+;;
+;; We are seeking the "right-most" root of this polynomial, since we are seeking the 
+;; point "forward" in time from where the ball was released, at which the ball strikes
+;; the ground (i.e., has elevation 0).
+;;
+;; For this reason, we will define our procedure using the "root2" procedure.
+;;
+;; We define the polynomial whose roots we are seeking as the equation of motion above:
+;;
 (defun time-to-impact (vertical-velocity elevation)
   (root2 (* -0.5 gravity) vertical-velocity elevation))
 
