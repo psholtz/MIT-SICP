@@ -697,7 +697,7 @@
 ;;
 
 ;;
-;; The question asks us to also model how far the ball gets on an arbitrary
+;; The question also asks us to model how far the ball gets on an arbitrary
 ;; number of bounces, until it stops moving. In order to do this, we will 
 ;; compare the distance traveled on two successive bounces. If the resulting
 ;; change in distance is less than some pre-defined tolerance, we suppose 
@@ -892,6 +892,32 @@
 ;; that converges. In this case, we are not able to guarantee such convergence, 
 ;; so we will leave the "infinite" test cases out of our calculations:
 ;;
+
+;;
+;; As before, we expect the answer we get for zero bounces to be the same 
+;; whether we are using the "travel-distance-with-bounce" procedure, or the 
+;; "travel-distance-withbounce-integrated" procedure.
+;;
+(= (travel-distance-with-bounce 1 45 45 0) (travel-distance-with-bounce-integrated 1 45 45 0))
+;; ==> #t
+(= (travel-distance-with-bounce 1 45 30 0) (travel-distance-with-bounce-integrated 1 45 30 0))
+;; ==> #t
+(= (travel-distance-with-bounce 1 45 60 0) (travel-distance-with-bounce-integrated 1 45 60 0))
+;; ==> #t
+
+(= (travel-distance-with-bounce 1 55 45 0) (travel-distance-with-bounce-integrated 1 55 45 0))
+;; ==> #t
+(= (travel-distance-with-bounce 1 55 30 0) (travel-distance-with-bounce-integrated 1 55 30 0))
+;; ==> #t
+(= (travel-distance-with-bounce 1 55 60 0) (travel-distance-with-bounce-integrated 1 55 60 0))
+;; ==> #t
+
+(= (travel-distance-with-bounce 1 35 45 0) (travel-distance-with-bounce-integrated 1 35 45 0))
+;; ==> #t
+(= (travel-distance-with-bounce 1 35 30 0) (travel-distance-with-bounce-integrated 1 35 30 0))
+;; ==> #t
+(= (travel-distance-with-bounce 1 35 60 0) (travel-distance-with-bounce-integrated 1 35 60 0))
+;; ==> #t
 
 ;;
 ;; Throwing the ball at 45 m/s:
