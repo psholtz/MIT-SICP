@@ -51,7 +51,7 @@
   (average guess (/ x guess)))
 
 (defun average (x y)
-  (/ (+ x y) 2))
+  (/ (+ x y) 2.0))
 
 (defun sqrt (x)
   (sqrt-iter 1.0 x))
