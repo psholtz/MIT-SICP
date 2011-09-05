@@ -3,6 +3,6 @@ Section 1.1
 
 Contains worked solutions expressed in the Emacs Lisp dialect.
 
-To load files into a running Emacs interpreter, you may have to update the load-path in your Emacs settings to include the current working directory:
+To load files into a running Emacs interpreter, you may have to update the load-path variable in your Emacs settings to include the current working directory:
 
 > (setq load-path (append (list nil ".") load-path))
