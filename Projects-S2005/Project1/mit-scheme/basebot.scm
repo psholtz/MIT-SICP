@@ -117,10 +117,8 @@
 ;;
 (time-to-impact 10 0)
 ;; ==> 2.04082
-
 (time-to-impact 20 0)
 ;; ==> 4.08163
-
 (time-to-impact 50 0)
 ;; ==> 10.20408
 
@@ -136,7 +134,6 @@
 ;;
 (time-to-impact 10 10)
 ;; ==> 2.77598
-
 (time-to-impact 10 20)
 ;; ==> 3.28378
 
@@ -164,7 +161,6 @@
 ;;
 (= (time-to-impact 10 0) (time-to-height 10 0 0))
 ;; ==> #t
-
 (= (time-to-impact 20 0) (time-to-height 20 0 0))
 ;; ==> #t
 
@@ -174,7 +170,6 @@
 ;;
 (= (time-to-impact 10 10) (time-to-height 10 10 0))
 ;; ==> #t
-
 (= (time-to-impact 10 20) (time-to-height 10 20 0))
 ;; ==> #t
 
@@ -184,13 +179,10 @@
 ;;
 (time-to-height 10 20 0)
 ;; ==> 3.28378
-
 (time-to-height 10 20 10)
 ;; ==> 2.77598
-
 (time-to-height 10 20 20)
 ;; ==> 2.040816
-
 (time-to-height 10 20 25)
 ;; ==> 1.164716
 
@@ -257,10 +249,8 @@
 ;;
 (travel-distance-simple 1 45 0)
 ;; ==> 20.328928
-
 (travel-distance-simple 1 45 45)
 ;; ==> 207.6278611
-
 (travel-distance-simple 1 45 90)
 ;; ==> 5.496e-4 
 
@@ -273,10 +263,8 @@
 ;;
 (meters-to-feet (travel-distance-simple 1 45 0))
 ;; ==> 67.08546179
-
 (meters-to-feet (travel-distance-simple 1 45 45))
 ;; ==> 685.1719418
- 
 (meters-to-feet (travel-distance-simple 1 45 90))
 ;; ==> 1.8138183e-3
 
@@ -316,19 +304,14 @@
 ;;
 (find-best-angle 10 1)
 ;; ==> 42.0 
-
 (find-best-angle 20 1)
 ;; ==> 44.0 
-
 (find-best-angle 30 1)
 ;; ==> 45.0 
-
 (find-best-angle 40 1)
 ;; ==> 45.0
- 
 (find-best-angle 45 1)
 ;; ==> 45.0
-
 (find-best-angle 50 1)
 ;; ==> 45.0
 
@@ -337,19 +320,14 @@
 ;;
 (find-best-angle 10 10)
 ;; ==> 30.0
-
 (find-best-angle 20 10)
 ;; ==> 39.0
-
 (find-best-angle 30 10)
 ;; ==> 42.0
-
 (find-best-angle 40 10)
 ;; ==> 43.0
-
 (find-best-angle 45 10)
 ;; ==> 44.0
-
 (find-best-angle 50 10)
 ;; ==> 44.0
 
@@ -406,10 +384,8 @@
 ;;
 (travel-distance 1 45 45)
 ;; ==> 92.50807
-
 (travel-distance 1 45 40)
 ;; ==> 95.336655
-
 (travel-distance 1 45 35)
 ;; ==> 94.206332
 
@@ -488,13 +464,10 @@
 ;; will land over the fence. We can verify:
 (meters-to-feet (travel-distance 1 45 27))
 ;; ==> 297.52022305
-
 (meters-to-feet (travel-distance 1 45 28))
 ;; ==> 300.59637477
-
 (meters-to-feet (travel-distance 1 45 48))
 ;; ==> 301.416919
-
 (meters-to-feet (travel-distance 1 45 49))
 ;; ==> 296.48594399
 
@@ -508,13 +481,10 @@
 
 (meters-to-feet (travel-distance 1 45 45))
 ;; ==> 332.960731
-
 (meters-to-feet (travel-distance 1 45 40))
-;; ==> 339.02937317
-
+;; ==> 339.0293731
 (meters-to-feet (travel-distance 1 45 35))
 ;; ==> 334.67101927
-
 (range-of-angles 1 45 (feet-to-meters 300))
 ;; ==> (24.0 55.0)
 
@@ -528,13 +498,10 @@
 ;;
 (meters-to-feet (travel-distance 1 45 23))
 ;; ==> 297.60255197
-
 (meters-to-feet (travel-distance 1 45 24))
 ;; ==> 308.40236158
-
 (meters-to-feet (travel-distance 1 45 55))
 ;; ==> 300.43074011
-
 (meters-to-feet (travel-distance 1 45 56))
 ;; ==> 296.81344117
 
@@ -646,10 +613,8 @@
 ;;
 (throw-ball 1 45 30)
 ;; ==> 0.538945
-
 (throw-ball 1 45 60)
 ;; ==> 1.566888
-
 (throw-ball 1 45 90)
 ;; ==> 3.644343
 
@@ -658,10 +623,8 @@
 ;;
 (throw-ball 1 55 30)
 ;; ==> 0.451753
-
 (throw-ball 1 55 60)
 ;; ==> 1.327062
-
 (throw-ball 1 55 90)
 ;; ==> 2.788631
 
@@ -670,10 +633,8 @@
 ;;
 (throw-ball 1 35 30)
 ;; ==> 0.675809
-
 (throw-ball 1 35 60)
 ;; ==> 2.296143
-
 (throw-ball 1 35 90)
 ;; ==> 0
 
@@ -960,35 +921,35 @@
 ;; Throwing the ball at 55 m/s:
 ;;
 (travel-distance-with-bounce-integrated 1 55 45 0)
-;; ==>
+;; ==> 111.706762
 (travel-distance-with-bounce-integrated 1 55 45 1)
-;; ==>
+;; ==> 127.606943
 (travel-distance-with-bounce-integrated 1 55 45 2)
-;; ==>
+;; ==> 131.841170
 
 (travel-distance-with-bounce-integrated 1 55 30 0)
-;; ==>
+;; ==> 112.974847
 (travel-distance-with-bounce-integrated 1 55 30 1)
-;; ==>
+;; ==> 126.718664
 (travel-distance-with-bounce-integrated 1 55 30 2)
-;; ==>
+;; ==> 130.763557
 
 (travel-distance-with-bounce-integrated 1 55 60 0)
-;; ==>
+;; ==> 91.192095
 (travel-distance-with-bounce-integrated 1 55 60 1)
-;; ==>
+;; ==> 106.642614
 (travel-distance-with-bounce-integrated 1 55 60 2)
-;; ==>
+;; ==> 110.992368
 
 ;;
 ;; Throwing the ball at 35 m/s:
 ;;
 (travel-distance-with-bounce-integrated 1 35 45 0)
-;; ==>
+;; ==> 71.584865
 (travel-distance-with-bounce-integrated 1 35 45 1)
-;; ==>
+;; ==> 84.182644
 (travel-distance-with-bounce-integrated 1 35 45 2)
-;; ==>
+;; ==> 87.664462
 
 (travel-distance-with-bounce-integrated 1 35 30 0)
 ;; ==> 69.756268
