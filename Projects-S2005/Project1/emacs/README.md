@@ -1,4 +1,4 @@
-Basebot implementation in Emacs Lisp.
+**Basebot implementation in Emacs Lisp.**
 
 To load the file into a running Emacs interpreter:
 
