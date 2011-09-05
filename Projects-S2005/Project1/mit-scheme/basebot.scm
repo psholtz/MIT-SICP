@@ -230,7 +230,7 @@
 ;;
 ;; We measure evelation and velocity in meters.
 ;;
-;; Then calculate how long the ball will stay in the air, and how are it can 
+;; Then calculate how long the ball will stay in the air, and how far it can 
 ;; travel horizontally during that time, before it hits the ground.
 ;;
 (define travel-distance-simple 

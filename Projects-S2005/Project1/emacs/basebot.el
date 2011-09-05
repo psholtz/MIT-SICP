@@ -200,16 +200,11 @@
 ;;
 ;; Flight distance.
 ;; +++++++++++++++++ 
+;;
+;; First define the helper procedures:
+;;
 (defun degree2radian (deg)
   (/ (* deg pi) 180.0))
-
-(defun travel-distance-simple (elevation velocity angle)
-  (let ((rangle (degree2radian angle)))
-    (let ((vy (* velocity (sin rangle)))
-	  (vx (* velocity (cos rangle))))
-      (let ((t0 (time-to-impact vy elevation)))
-	(let ((x0 (position 0 vx 0 t0)))
-	  x0)))))
 
 (defun meters-to-feet (m)
   (/ (* m 39.6) 12.0))
@@ -222,6 +217,22 @@
 
 (defun seconds-to-hours (s)
   (/ s 3600.0))
+
+;;
+;; We measure angle in radians, so we have to convert to degrees.
+;;
+;; We measure elevation and velocity in meters.
+;;
+;; Then calculate how long the ball will stay in the air, and how far it can 
+;; travel horizontally during that time, before it hits the ground.
+;;
+(defun travel-distance-simple (elevation velocity angle)
+  (let ((rangle (degree2radian angle)))
+    (let ((vy (* velocity (sin rangle)))
+	  (vx (* velocity (cos rangle))))
+      (let ((t0 (time-to-impact vy elevation)))
+	(let ((x0 (position 0 vx 0 t0)))
+	  x0)))))
 
 ;; +++++++++++++++++++
 ;; Problem 5
