@@ -583,19 +583,19 @@
 ;;
 ;; Answer the questions:
 ;; 
-;; Throwing the ball at 45 m/s:
+;; How long does it take for a ball thrown from home plate at 45 m/s to reach second base?
 ;;
 (throw-ball 1 45 36)
 ;; ==> 0.639588
 
 ;;
-;; Throwing the ball at 35 m/s:
+;; How long does it take for a ball thrown from home plate at 35 m/s to reach second base?
 ;;
 (throw-ball 1 35 36)
 ;; ==> 0.959358
 
 ;;
-;; Throwing the ball at 55 m/s:
+;; How long does it take for a ball thrown from home plate at 55 m/s to reach second base?
 ;;
 (throw-ball 1 55 36)
 ;; ==> 0.560197
@@ -609,16 +609,77 @@
 ;;
 ;; If the distance between home plate and second base is 36m, we will take the 
 ;; distance between home and the pitcher's mound to be half that, or 18m.
-
-
 ;;
-;; [xx]
-;;
+(throw-ball 1 (mph-to-ms 90) 18)
+;; ==> 0.286097
 
 ;;
-;; If the catcher can throw at 90 mph, how long does it take for his throw to reach second base? (36m away)?
+;; How long does it take a ball thrown by the catcher at 90 mph to reach second base?
 ;;
-;; [xx]
+(throw-ball 1 (mph-to-ms 90) 36)
+;; ==> 0.8187117
+
+;;
+;; Note that a really good base runner should be able to get from first to second base in roughly 3 seconds.
+;; If the pitcher is throwing at 90 mph how long does it take to each home? If the catcher throws at 90 mph, 
+;; how much time does he have to catch and release the ball if he is going to put out a runner trying to steal
+;; second?
+;;
+
+;;
+;; Given the parameters of the problem, the total time the catcher has is given by the following expression:
+;;
+(- 3 
+   (+ (throw-ball 1 (mph-to-ms 90) 18)
+      (throw-ball 1 (mph-to-ms 90) 36)))
+
+;; ==> 1.895191
+
+;;
+;; Now use your procedures to get some data on outfielders. Suppose an outfielder has a strong arm and can 
+;; throw at 45 m/s. How quickly can he throw the ball to a target at a distance of 30m? 60m? 90m? What if 
+;; he can thow at 55 m/s?
+;;
+
+;;
+;; Throws at 45 m/s:
+;;
+(throw-ball 1 45 30)
+;; ==> 0.538945
+
+(throw-ball 1 45 60)
+;; ==> 1.566888
+
+(throw-ball 1 45 90)
+;; ==> 3.644343
+
+;;
+;; Throws at 55 m/s:
+;;
+(throw-ball 1 55 30)
+;; ==> 0.451753
+
+(throw-ball 1 55 60)
+;; ==> 1.327062
+
+(throw-ball 1 55 90)
+;; ==> 2.788631
+
+;;
+;; Throws at 35 m/s:
+;;
+(throw-ball 1 35 30)
+;; ==> 0.675809
+
+(throw-ball 1 35 60)
+;; ==> 2.296143
+
+(throw-ball 1 35 90)
+;; ==> 0
+
+;;
+;; Note that the weaker outfielder is not able to throw the ball 90 m in the air.
+;;
 
 ;; +++++++++++++++++++ 
 ;; Problem 8
@@ -639,6 +700,89 @@
 					    maximum
 					    (+ count 1)
 					    new-total-distance)))))
+
+;;
+;; In the first place, we would expect the travel distance with 0 bounces 
+;; to be the same as the distance given by the "travel-distance" procedure
+;; derived above.
+;;
+;; Let's test this for a range of angles and velocities:
+;;
+(= (travel-distance 1 45 45) (travel-distance-with-bounce 1 45 45 0))
+;; ==> #t 
+
+(= (travel-distance 1 45 30) (travel-distance-with-bounce 1 45 30 0))
+;; ==> #t 
+
+(= (travel-distance 1 45 60) (travel-distance-with-bounce 1 45 60 0))
+;; ==> #t
+
+
+(= (travel-distance 1 35 45) (travel-distance-with-bounce 1 35 45 0))
+;; ==> #t 
+
+(= (travel-distance 1 35 30) (travel-distance-with-bounce 1 35 30 0))
+;; ==> #t 
+
+(= (travel-distance 1 35 60) (travel-distance-with-bounce 1 35 60 0))
+;; ==> #t 
+
+
+(= (travel-distance 1 55 45) (travel-distance-with-bounce 1 55 45 0))
+;; ==> #t 
+
+(= (travel-distance 1 55 30) (travel-distance-with-bounce 1 55 30 0))
+;; ==> #t 
+
+(= (travel-distance 1 55 60) (travel-distance-with-bounce 1 55 60 0))
+;; ==> #t
+
+;;
+;; This is good, it's what we expect.
+;;
+;; Now let's run through the same set of velocities and angles, and see
+;; how far the ball gets on 0, 1 and 2 bounces.
+;;
+;; Velocity 45 m/s, Angle 45 degrees:
+;;
+(travel-distance-with-bounce 1 45 45 0)
+;; ==> 92.508067
+
+(travel-distance-with-bounce 1 45 45 1)
+;; ==> 132.128978
+
+(travel-distance-with-bounce 1 45 45 2)
+;; ==> 144.792027
+
+;;
+;; Velocity 45 m/s, Angle 30 degrees:
+;;
+(travel-distance-with-bounce 1 45 30 0)
+;; ==>
+
+(travel-distance-with-bounce 1 45 30 1)
+;; ==>
+
+(travel-distance-with-bounce 1 45 30 2)
+;; ==>
+
+;;
+;; Velocity 45 m/s, Angle 60 degrees:
+;;
+(travel-distance-with-bounce 1 45 60 0)
+;; ==>
+
+(travel-distance-with-bounce 1 45 60 1)
+;; ==>
+
+(travel-distance-with-bounce 1 45 60 2)
+;; ==>
+
+
+
+;;
+;; Let's run the unit tests for the same 9 use cases we modeled above. 
+
 
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; Problem 9
@@ -664,13 +808,18 @@
 						       maximum
 						       (+ count 1)
 						       new-distance)))))
-
+;;
+;; Supporting procedure
+;;
 (define (travel-distance-list elevation velocity angle)
   (let ((rangle (degree2radian angle)))
     (let ((vy (* velocity (sin rangle)))
 	  (vx (* velocity (cos rangle))))
       (integrate-list 0 elevation vx vy gravity mass beta))))
 
+;;
+;; Supporting procedure
+;;
 (define (integrate-list x0 y0 u0 v0 g m beta)
   (if (< y0 0)
       (list x0 y0 u0 v0)

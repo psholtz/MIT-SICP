@@ -169,7 +169,7 @@ You can use this to get a sense of times involved in baseball. For example, the 
 
 Note that a really good base runner should be able to get from first to second base in roughly 3 seconds. If the pitcher is throwing at 90 mph how long does it take to reach home? If the catcher throws at 90 mph, how much time does he have to catch and release the ball if he is going to put out a runner trying to steal second?
 
-Now use your procedures to get some data on outfielders. Suppose an outfielder has a strong arm and can throw at 45 m/s. How quickly can he throw the ball to a target at a distance of 30m? 60m? 80m? What if he can throw 55 m/s?
+Now use your procedures to get some data on outfielders. Suppose an outfielder has a strong arm and can throw at 45 m/s. How quickly can he throw the ball to a target at a distance of 30m? 60m? 90m? What if he can throw 55 m/s?
 
 What about the same distances but with a weaker outfielder, who can only throw at 35 m/s?
 
