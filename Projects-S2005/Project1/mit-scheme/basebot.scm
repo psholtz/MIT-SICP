@@ -710,30 +710,24 @@
 ;;
 (= (travel-distance 1 45 45) (travel-distance-with-bounce 1 45 45 0))
 ;; ==> #t 
-
 (= (travel-distance 1 45 30) (travel-distance-with-bounce 1 45 30 0))
 ;; ==> #t 
-
 (= (travel-distance 1 45 60) (travel-distance-with-bounce 1 45 60 0))
 ;; ==> #t
 
 
 (= (travel-distance 1 35 45) (travel-distance-with-bounce 1 35 45 0))
 ;; ==> #t 
-
 (= (travel-distance 1 35 30) (travel-distance-with-bounce 1 35 30 0))
 ;; ==> #t 
-
 (= (travel-distance 1 35 60) (travel-distance-with-bounce 1 35 60 0))
 ;; ==> #t 
 
 
 (= (travel-distance 1 55 45) (travel-distance-with-bounce 1 55 45 0))
 ;; ==> #t 
-
 (= (travel-distance 1 55 30) (travel-distance-with-bounce 1 55 30 0))
 ;; ==> #t 
-
 (= (travel-distance 1 55 60) (travel-distance-with-bounce 1 55 60 0))
 ;; ==> #t
 
@@ -768,13 +762,10 @@
 ;;
 (travel-distance-with-bounce 1 45 45 0)
 ;; ==> 92.508067
-
 (travel-distance-with-bounce 1 45 45 1)
 ;; ==> 132.128978
-
 (travel-distance-with-bounce 1 45 45 2)
 ;; ==> 144.792027
-
 (travel-distance-with-infinite-bounces 1 45 45)
 ;; ==> 150.524625
 
@@ -783,13 +774,10 @@
 ;;
 (travel-distance-with-bounce 1 45 30 0)
 ;; ==> 92.731685
-
 (travel-distance-with-bounce 1 45 30 1)
 ;; ==> 130.038819
-
 (travel-distance-with-bounce 1 45 30 2)
 ;; ==> 142.021944
-
 (travel-distance-with-infinite-bounces 1 45 30)
 ;; ==> 146.961414
 
@@ -798,13 +786,10 @@
 ;;
 (travel-distance-with-bounce 1 45 60 0)
 ;; ==> 76.314195
-
 (travel-distance-with-bounce 1 45 60 1)
 ;; ==> 109.497667
-
 (travel-distance-with-bounce 1 45 60 2)
 ;; ==> 120.505795
-
 (travel-distance-with-infinite-bounces 1 45 60)
 ;; ==> 124.838158
 
@@ -813,13 +798,10 @@
 ;;
 (travel-distance-with-bounce 1 55 45 0)
 ;; ==> 111.707762
-
 (travel-distance-with-bounce 1 55 45 1)
 ;; ==> 163.837675
-
 (travel-distance-with-bounce 1 55 45 2)
 ;; ==> 182.350977
-
 (travel-distance-with-infinite-bounces 1 55 45)
 ;; ==> 189.797510
 
@@ -828,13 +810,10 @@
 ;;
 (travel-distance-with-bounce 1 55 30 0)
 ;; ==> 112.974847
-
 (travel-distance-with-bounce 1 55 30 1)
 ;; ==> 163.000981
-
 (travel-distance-with-bounce 1 55 30 2)
 ;; ==> 179.529616
-
 (travel-distance-with-infinite-bounces 1 55 30)
 ;; ==> 186.419296
 
@@ -844,13 +823,10 @@
 ;;
 (travel-distance-with-bounce 1 55 60 0)
 ;; ==> 91.192095
-
 (travel-distance-with-bounce 1 55 60 1)
 ;; ==> 135.480887
-
 (travel-distance-with-bounce 1 55 60 2)
 ;; ==> 151.016779
-
 (travel-distance-with-infinite-bounces 1 55 60)
 ;; ==> 157.373157
 
@@ -860,13 +836,10 @@
 ;;
 (travel-distance-with-bounce 1 35 45 0)
 ;; ==> 69.756268
-
 (travel-distance-with-bounce 1 35 45 1)
 ;; ==> 95.231904
-
 (travel-distance-with-bounce 1 35 45 2)
 ;; ==> 102.564170
-
 (travel-distance-with-infinite-bounces 1 35 45)
 ;; ==> 106.044391
 
@@ -875,13 +848,10 @@
 ;;
 (travel-distance-with-bounce 1 35 30 0)
 ;; ==> 69.756268
-
 (travel-distance-with-bounce 1 35 30 1)
 ;; ==> 95.231904
-
 (travel-distance-with-bounce 1 35 30 2)
 ;; ==> 102.564170
-
 (travel-distance-with-infinite-bounces 1 35 30)
 ;; ==> 106.044391
 
@@ -890,13 +860,10 @@
 ;;
 (travel-distance-with-bounce 1 35 60 0)
 ;; ==> 59.037524
-
 (travel-distance-with-bounce 1 35 60 1)
 ;; ==> 81.633444
-
 (travel-distance-with-bounce 1 35 60 2)
 ;; ==> 88.744549
-
 (travel-distance-with-infinite-bounces 1 35 60)
 ;; ==> 91.507920
 
@@ -956,3 +923,83 @@
 			    (+ u0 du)
 			    (+ v0 dv)
 			    g m beta))))))
+
+;;
+;; In this case, the distance traveled does not "converge" as nicely 
+;; when the number of bounces increases without limit. Before, we modeled
+;; the velocity as dropping by 50% with each bounce, which produces a series 
+;; that converges. In this case, we are not able to guarantee such convergence, 
+;; so we will leave the "infinite" test cases out of our calculations:
+;;
+
+;;
+;; Throwing the ball at 45 m/s:
+;;
+(travel-distance-with-bounce-integrated 1 45 45 0)
+;; ==> 92.508067
+(travel-distance-with-bounce-integrated 1 45 45 1)
+;; ==> 106.751411
+(travel-distance-with-bounce-integrated 1 45 45 2)
+;; ==> 110.799851
+
+(travel-distance-with-bounce-integrated 1 45 30 0)
+;; ==> 92.731685
+(travel-distance-with-bounce-integrated 1 45 30 1)
+;; ==> 105.005394
+(travel-distance-with-bounce-integrated 1 45 30 2)
+;; ==> 108.365638
+
+(travel-distance-with-bounce-integrated 1 45 60 0)
+;; ==> 76.314195
+(travel-distance-with-bounce-integrated 1 45 60 1)
+;; ==> 89.839477
+(travel-distance-with-bounce-integrated 1 45 60 2)
+;; ==> 93.842967
+
+;;
+;; Throwing the ball at 55 m/s:
+;;
+(travel-distance-with-bounce-integrated 1 55 45 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 45 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 45 2)
+;; ==>
+
+(travel-distance-with-bounce-integrated 1 55 30 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 30 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 30 2)
+;; ==>
+
+(travel-distance-with-bounce-integrated 1 55 60 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 60 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 60 2)
+;; ==>
+
+;;
+;; Throwing the ball at 35 m/s:
+;;
+(travel-distance-with-bounce-integrated 1 35 45 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 35 45 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 35 45 2)
+;; ==>
+
+(travel-distance-with-bounce-integrated 1 35 30 0)
+;; ==> 69.756268
+(travel-distance-with-bounce-integrated 1 35 30 1)
+;; ==> 80.376847
+(travel-distance-with-bounce-integrated 1 35 30 2)
+;; ==> 83.523412
+
+(travel-distance-with-bounce-integrated 1 35 60 0)
+;; ==> 59.037524
+(travel-distance-with-bounce-integrated 1 35 60 1)
+;; ==> 70.986384
+(travel-distance-with-bounce-integrated 1 35 60 2)
+;; ==> 74.614290
