@@ -271,7 +271,6 @@
 ;;
 ;; Best angle to hit.
 ;; ++++++++++++++++++++ 
-
 ;;
 ;; We will increment 1 degree at a time:
 ;;
@@ -339,7 +338,6 @@
 ;; 
 ;; Incorporate drag.
 ;; +++++++++++++++++++ 
-
 ;; 
 ;; Define some constants:
 ;;

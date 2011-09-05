@@ -234,16 +234,51 @@
 	(let ((x0 (position 0 vx 0 t0)))
 	  x0)))))
 
+;;
+;; Let's calculate the distances in meters:
+;;
+(travel-distance-simple 1 45 0)
+;; ==> 20.328928
+(travel-distance-simple 1 45 45)
+;; ==> 207.627859
+(travel-distance-simple 1 45 90)
+;; ==> 2.536629e-14
+
+;;
+;; This last distance, hit straight up, is essentially zero, which we would expect.
+;;
+
+;;
+;; Now let's translate these distances info feet:
+;;
+(meters-to-feet (travel-distance-simple 1 45 0))
+;; ==> 67.08546179
+(meters-to-feet (travel-distance-simple 1 45 45))
+;; ==> 685.171937
+(meters-to-feet (travel-distance-simple 1 45 90))
+;; ==> 8.37087458e-14
+
 ;; +++++++++++++++++++
 ;; Problem 5
 ;;
 ;; Best angle to hit.
 ;; +++++++++++++++++++ 
+
+;;
+;; We will increment 1 degree at a time:
+;;
 (setq angle-increment 1.0) ;; use degrees
+
 (setq max-lisp-eval-depth 1000) ;; NOTE: we must reset the max recursion depth, otherwise find-best-angle will fail on 1.0 increment
 
+;;
+;; Define a helper procedure to convert our answers back to angles:
+;;
 (defun radian2degree (rad) (/ (* rad 180.) pi))
 
+;;
+;; Define the actual procedure itself:
+;;
 (defun find-best-angle (velocity elevation)
   (find-best-angle-iter velocity elevation 0.0 0.0 0.0))
 
@@ -256,12 +291,47 @@
 	  (find-best-angle-iter velocity elevation test-distance test-angle next-angle)
 	(find-best-angle-iter velocity elevation best-distance best-angle next-angle)))))
 
+;;
+;; Let's step through some sample velocities at the elevation of 1 meter:
+;;
+(find-best-angle 10 1)
+;; ==> 42.0
+(find-best-angle 20 1)
+;; ==> 44.0
+(find-best-angle 30 1)
+;; ==> 45.0
+(find-best-angle 40 1)
+;; ==> 45.0
+(find-best-angle 45 1)
+;; ==> 45.0
+
+;;
+;; Now let's step through these same angles, but at an elevation of 10 meters:
+;;
+(find-best-angle 10 10)
+;; ==> 30.0
+(find-best-angle 20 10)
+;; ==> 39.0
+(find-best-angle 30 10)
+;; ==> 42.0
+(find-best-angle 40 10)
+;; ==> 43.0
+(find-best-angle 45 10)
+;; ==> 44.0
+
+;;
+;; In both cases, the best angle seems to asymptotically approach 45 degrees, 
+;; although it approaches this limit more slowly when the initial elevation is higher.
+;;
 
 ;; +++++++++++++++++++ 
 ;; Problem 6
 ;;
 ;; Incorporate drag.
 ;; +++++++++++++++++++
+;;
+;; Define some constants:
+;;
 (setq drag-coeff 0.5)
 (setq density 1.25)
 (setq mass 0.145)
