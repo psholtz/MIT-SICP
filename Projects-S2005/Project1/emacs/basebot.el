@@ -6,7 +6,6 @@
 (defun square (x) (* x x))
 
 (setq gravity 9.8) ;; in m/s
-(setq pi 3.14159) 
 
 ;; ++++++++++++++++++++++++++++ 
 ;; Problem 1
