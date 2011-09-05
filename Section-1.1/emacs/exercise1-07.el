@@ -67,7 +67,7 @@
   (average guess (/ x guess)))
 
 (defun average (x y)
-  (/ (+ x y) 2))
+  (/ (+ x y) 2.0))
 
 ;; 
 ;; Modified version of good-enough?, based on fractional
