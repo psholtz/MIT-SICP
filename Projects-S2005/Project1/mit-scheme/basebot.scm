@@ -782,37 +782,128 @@
 ;; Velocity 45 m/s, Angle 30 degrees:
 ;;
 (travel-distance-with-bounce 1 45 30 0)
-;; ==>
+;; ==> 92.731685
 
 (travel-distance-with-bounce 1 45 30 1)
-;; ==>
+;; ==> 130.038819
 
 (travel-distance-with-bounce 1 45 30 2)
-;; ==>
+;; ==> 142.021944
 
 (travel-distance-with-infinite-bounces 1 45 30)
-;; ==>
+;; ==> 146.961414
 
 ;;
 ;; Velocity 45 m/s, Angle 60 degrees:
 ;;
 (travel-distance-with-bounce 1 45 60 0)
-;; ==>
+;; ==> 76.314195
 
 (travel-distance-with-bounce 1 45 60 1)
-;; ==>
+;; ==> 109.497667
 
 (travel-distance-with-bounce 1 45 60 2)
-;; ==>
+;; ==> 120.505795
 
 (travel-distance-with-infinite-bounces 1 45 60)
-;; ==>
+;; ==> 124.838158
 
+;;
+;; Velocity 55 m/s, Angle 45 degrees:
+;;
+(travel-distance-with-bounce 1 55 45 0)
+;; ==> 111.707762
+
+(travel-distance-with-bounce 1 55 45 1)
+;; ==> 163.837675
+
+(travel-distance-with-bounce 1 55 45 2)
+;; ==> 182.350977
+
+(travel-distance-with-infinite-bounces 1 55 45)
+;; ==> 189.797510
+
+;;
+;; Velocity 55 m/s, Angle 30 degrees:
+;;
+(travel-distance-with-bounce 1 55 30 0)
+;; ==> 112.974847
+
+(travel-distance-with-bounce 1 55 30 1)
+;; ==> 163.000981
+
+(travel-distance-with-bounce 1 55 30 2)
+;; ==> 179.529616
+
+(travel-distance-with-infinite-bounces 1 55 30)
+;; ==> 186.419296
 
 
 ;;
-;; Let's run the unit tests for the same 9 use cases we modeled above. 
+;; Velocity 55 m/s, Angle 60 degrees:
+;;
+(travel-distance-with-bounce 1 55 60 0)
+;; ==> 91.192095
 
+(travel-distance-with-bounce 1 55 60 1)
+;; ==> 135.480887
+
+(travel-distance-with-bounce 1 55 60 2)
+;; ==> 151.016779
+
+(travel-distance-with-infinite-bounces 1 55 60)
+;; ==> 157.373157
+
+ 
+;;
+;; Velocity 35 m/s, Angle 45 degrees:
+;;
+(travel-distance-with-bounce 1 35 45 0)
+;; ==> 69.756268
+
+(travel-distance-with-bounce 1 35 45 1)
+;; ==> 95.231904
+
+(travel-distance-with-bounce 1 35 45 2)
+;; ==> 102.564170
+
+(travel-distance-with-infinite-bounces 1 35 45)
+;; ==> 106.044391
+
+;; 
+;; Velocity 35 m/s, Angle 30 degrees:
+;;
+(travel-distance-with-bounce 1 35 30 0)
+;; ==> 69.756268
+
+(travel-distance-with-bounce 1 35 30 1)
+;; ==> 95.231904
+
+(travel-distance-with-bounce 1 35 30 2)
+;; ==> 102.564170
+
+(travel-distance-with-infinite-bounces 1 35 30)
+;; ==> 106.044391
+
+;;
+;; Velocity 35 m/s, Angle 60 degrees:
+;;
+(travel-distance-with-bounce 1 35 60 0)
+;; ==> 59.037524
+
+(travel-distance-with-bounce 1 35 60 1)
+;; ==> 81.633444
+
+(travel-distance-with-bounce 1 35 60 2)
+;; ==> 88.744549
+
+(travel-distance-with-infinite-bounces 1 35 60)
+;; ==> 91.507920
+
+;;
+;; Note that in this model, the weak outfielder is able to throw the ball
+;; a total distance of 90m (allowing for bounces).
+;;
 
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; Problem 9
