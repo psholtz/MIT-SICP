@@ -81,7 +81,6 @@
 ;;
 ;; Calculating the flight time.
 ;; ++++++++++++++++++++++++++++++++++ 
-
 ;;
 ;; The polynomial whose roots we are attempting to calculate is:
 ;;
@@ -204,11 +203,10 @@
 
 
 ;; +++++++++++++++++++ 
-;; Problem 4
+;; PROBLEM 4
 ;;
 ;; Flight distance.
 ;; +++++++++++++++++++ 
-
 ;;
 ;; First define the helper procedures:
 ;;
@@ -269,7 +267,7 @@
 ;; ==> 1.8138183e-3
 
 ;; ++++++++++++++++++++ 
-;; Problem 5
+;; PROBLEM 5
 ;;
 ;; Best angle to hit.
 ;; ++++++++++++++++++++ 
@@ -337,7 +335,7 @@
 ;;
 
 ;; +++++++++++++++++++ 
-;; Problem 6 
+;; PROBLEM 6 
 ;; 
 ;; Incorporate drag.
 ;; +++++++++++++++++++ 
@@ -512,7 +510,7 @@
 (define beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
 
 ;; +++++++++++++++++++++++++ 
-;; Problem 7
+;; PROBLEM 7
 ;;
 ;; Aim and throw the ball.
 ;; +++++++++++++++++++++++++ 
@@ -643,7 +641,7 @@
 ;;
 
 ;; +++++++++++++++++++ 
-;; Problem 8
+;; PROBLEM 8
 ;;
 ;; Add some bounces.
 ;; +++++++++++++++++++ 
@@ -834,7 +832,7 @@
 ;;
 
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-;; Problem 9
+;; PROBLEM 9
 ;;
 ;; Add some better bounces.
 ;; (Not sure that we're supposed to be using lists, car and 
@@ -1013,7 +1011,6 @@
 ;; ==> #t
 (< (travel-distance-with-bounce-integrated 1 45 60 2) (travel-distance-with-bounce 1 45 60 2))
 ;; ==> #t
-
 
 ;;
 ;; Velocity: 55 m/s 
