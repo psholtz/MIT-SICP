@@ -105,8 +105,95 @@
 (defun time-to-impact (vertical-velocity elevation)
   (root2 (* -0.5 gravity) vertical-velocity elevation))
 
+;;
+;; The following unit tests model shooting the ball straight upwards from the ground
+;; at various velocities (i.e., elevation = 0 and vertical velocity = 10, 20 and 50 m/s):
+;; 
+(time-to-impact 10 0)
+;; ==> 2.040816
+(time-to-impact 20 0)
+;; ==> 4.08163
+(time-to-impact 50 0)
+;; ==>  10.20408
+
+;;
+;; The harder the ball is shot upwards, the longer it takes to hit the ground. 
+;;
+;; Suppose now we are standing 10 m above the ground, and again we shoot the ball straight
+;; upwards. How long will it take to hit the ground this time? It will take longer than before, 
+;; since it must first follow the same arc (i.e., same flight time) as when launched from the
+;; ground, but this time it must fall an additional distance before it hits the ground.
+;;
+;; Let's see if our intuition is born out in the code:
+;;
+(time-to-impact 10 10)
+;; ==> 2.7759847
+(time-to-impact 10 20)
+;; ==> 3.28378296
+
+;;
+;; Launching the ball upwards from an initial elevation > 0 causes the overall flight time to 
+;; lengthen, which is what we expect. Also, the higher our initial elevation, the longer the overall
+;; flight time, which is again what we expect.
+;;
+;; Suppose now that we wish to calculate the flight time, not for when the ball impacts the 
+;; ground, but rather for when the ball will reach a certain target elevation. Again, we will
+;; choose "root2" since we want to know when the ball reaches the target elevation on the "way 
+;; down" rather than on the "way up".
+;;
+;; Calculating the time to reach the target elevation is the same as calculating the time to 
+;; impact, provided that we "start" at an initial elevation which is reduced by an amount equal
+;; to the target elevation we are aiming for. We can, therefore, define our procedure in nearly
+;; identical terms as before, provided we make this adjustment to the starting elevation from
+;; which the ball is launched:
+;;
 (defun time-to-height (vertical-velocity elevation target-elevation)
   (root2 (* -0.5 gravity) vertical-velocity (- elevation target-elevation)))
+
+;;
+;; We expect the "time to impact" and the "time to height 0" procedures to return the same number:
+;;
+(= (time-to-impact 10 0) (time-to-height 10 0 0))
+;; ==> t
+(= (time-to-impact 20 0) (time-to-height 20 0 0))
+;; ==> t
+
+;;
+;; Similarly, when the ball is shot from varying elevations it should still reach the ground at 
+;; the same time that it would reach "height 0":
+;;
+(= (time-to-impact 10 10) (time-to-height 10 10 0))
+;; ==> t
+(= (time-to-impact 10 20) (time-to-height 10 20 0))
+;; ==> t
+
+;;
+;; The higher we aim the ball, the "shorter" the time should be, since the ball does not 
+;; need to "fall" as far as it would if it were falling all the way to the ground.
+;;
+(time-to-height 10 20 0)
+;; ==> 3.28378296
+(time-to-height 10 20 10)
+;; ==> 2.77598475
+(time-to-height 10 20 20)
+;; ==> 2.0408163
+(time-to-height 10 20 25)
+;; ==> 1.16471567
+
+;;
+;; Is there a height that we can't reach with a given velocity? 
+;;
+;; Yes, there is (which is good):
+;;
+(time-to-height 10 20 50)
+;; ==> nil
+
+;;
+;; How about if we increase the velocity? Are we then able to reach the target height?
+;;
+(time-to-height 10 50 50)
+;; ==> 2.0408163
+
 
 ;; +++++++++++++++++ 
 ;; Problem 4
