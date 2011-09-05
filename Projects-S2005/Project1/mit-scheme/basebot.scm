@@ -740,8 +740,29 @@
 ;;
 ;; This is good, it's what we expect.
 ;;
+
+;;
+;; The question asks us to also model how far the ball gets on an arbitrary
+;; number of bounces, until it stops moving. In order to do this, we will 
+;; compare the distance traveled on two successive bounces. If the resulting
+;; change in distance is less than some pre-defined tolerance, we suppose 
+;; that we have found the distance traveled on an "arbitrary" number of bounces:
+;;
+(define travel-distance-with-infinite-bounces  
+  (lambda (elevation velocity angle)
+    (define tolerance 0.001)
+    (define travel-distance-with-infinite-bounces-iter
+      (lambda (number-of-bounces)
+	(let ((distance1 (travel-distance-with-bounce elevation velocity angle number-of-bounces))
+	      (distance2 (travel-distance-with-bounce elevation velocity angle (+ number-of-bounces 1))))
+	  (if (< (abs (- distance1 distance2)) tolerance)
+	      distance2
+	      (travel-distance-with-infinite-bounces-iter (+ number-of-bounces 1))))))
+    (travel-distance-with-infinite-bounces-iter 0)))
+
+;;
 ;; Now let's run through the same set of velocities and angles, and see
-;; how far the ball gets on 0, 1 and 2 bounces.
+;; how far the ball gets on 0, 1, 2 and "infinite" bounces.
 ;;
 ;; Velocity 45 m/s, Angle 45 degrees:
 ;;
@@ -753,6 +774,9 @@
 
 (travel-distance-with-bounce 1 45 45 2)
 ;; ==> 144.792027
+
+(travel-distance-with-infinite-bounces 1 45 45)
+;; ==> 150.524625
 
 ;;
 ;; Velocity 45 m/s, Angle 30 degrees:
@@ -766,6 +790,9 @@
 (travel-distance-with-bounce 1 45 30 2)
 ;; ==>
 
+(travel-distance-with-infinite-bounces 1 45 30)
+;; ==>
+
 ;;
 ;; Velocity 45 m/s, Angle 60 degrees:
 ;;
@@ -776,6 +803,9 @@
 ;; ==>
 
 (travel-distance-with-bounce 1 45 60 2)
+;; ==>
+
+(travel-distance-with-infinite-bounces 1 45 60)
 ;; ==>
 
 
