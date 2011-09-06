@@ -269,6 +269,7 @@
 (setq angle-increment 1.0) ;; use degrees
 
 (setq max-lisp-eval-depth 1000) ;; NOTE: we must reset the max recursion depth, otherwise find-best-angle will fail on 1.0 increment
+(setq max-specpdl-size 1800)    ;; NOTE: reset this as well
 
 ;;
 ;; Define a helper procedure to convert our answers back to angles:
@@ -417,6 +418,11 @@
 ;; and a given velocity will travel to or beyond the target distance.
 ;;
 (defun range-of-angles (elevation velocity target-distance)
+
+  ;; 
+  ;; This procedure will produce a list of *all* angles which 
+  ;; will travel to or beyond the target distance.
+  ;;
   (defun range-of-angles-iter (angles angle)
     (if (> angle 90)
 	angles
@@ -425,10 +431,29 @@
 	    (range-of-angles-iter (cons angle angles) next-angle)
 	  (range-of-angles-iter angles next-angle)))))
 
+  ;;
+  ;; Take the list of *all* angles, and return an ordered pairs of the 
+  ;; max and min elements from that list. We will return this pair, which 
+  ;; will represent the min and max angles at which the ball can be hit
+  ;; at the given elevation at the given velocity, and travel to or beyond
+  ;; the target distance.
+  ;;
   (let ((range (range-of-angles-iter '() 0)))
     (list 
      (extremum-in-list range #'< 91)
      (extremum-in-list range #'> -1))))
+
+;;
+;; Now answer the question:
+;;
+;; Suppose the outfield fence is 300 ft from home plate, and the ball is hit at 45 m/s.
+;; For what range of angles will the ball land over the fence?
+;;
+(range-of-angles 1 45 (feet-to-meters 300))
+;; ==> (28.0 48.0)
+
+;;
+;; Hence, the answer is, for angles 
 
 ;; +++++++++++++++++++++++++ 
 ;; Problem 7 
