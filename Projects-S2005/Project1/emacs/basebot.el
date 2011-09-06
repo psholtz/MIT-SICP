@@ -453,7 +453,56 @@
 ;; ==> (28.0 48.0)
 
 ;;
-;; Hence, the answer is, for angles 
+;; Hence, the answer is, for angles between 28 degrees and 28 degrees, the ball
+;; will land over the fence. We can verify:
+(meters-to-feet (travel-distance 1 45 27))
+;; ==> 297.520088
+(meters-to-feet (travel-distance 1 45 28))
+;; ==> 300.596233
+(meters-to-feet (travel-distance 1 45 48))
+;; ==> 301.416618
+(meters-to-feet (travel-distance 1 45 49))
+;; ==> 296.485635
+
+;;
+;; Let's run through these same examples, as though in Denver, rather than in Boston.
+;;
+;; We adjust the density of air down from 1.25 to 1.06:
+;;
+(setq density 1.06)
+(setq beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
+
+(meters-to-feet (travel-distance 1 45 45))
+;; ==> 332.960441
+(meters-to-feet (travel-distance 1 45 40))
+;; ==> 339.029130
+(meters-to-feet (travel-distance 1 45 35))
+;; ==> 334.670822
+(range-of-angles 1 45 (feet-to-meters 300))
+;; ==> (24.0 55.0)
+
+;;
+;; So this time, the range of angles for which the ball can travel 300 ft is substantially
+;; larger than in Boston. This makes sense, it's what we would expect.
+;;
+
+;;
+;; Let's check the boundaries:
+;;
+(meters-to-feet (travel-distance 1 45 23))
+;; ==> 297.602442
+(meters-to-feet (travel-distance 1 45 24))
+;; ==> 308.402242
+(meters-to-feet (travel-distance 1 45 55))
+;; ==> 300.430342
+(meters-to-feet (travel-distance 1 45 56))
+;; ==> 296.813029
+
+;;
+;; Let's go "back to Boston" for the rest of this exercise:
+;;
+(setq density 1.25)
+(setq beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
 
 ;; +++++++++++++++++++++++++ 
 ;; Problem 7 
@@ -505,6 +554,95 @@
 					  maximum
 					  (+ count 1)
 					  new-total-distance)))))
+
+;;
+;; In the first place, we would expect the travel distance with 0 bounces
+;; to be the same as the distance given by the "travel-distance" procedure
+;; derived above.
+;;
+;; Let's test this for a range of angles and velocities:
+;;
+(= (travel-distance 1 45 45) (travel-distance-with-bounce 1 45 45 0))
+;; ==> t
+(= (travel-distance 1 45 30) (travel-distance-with-bounce 1 45 30 0))
+;; ==> t
+(= (travel-distance 1 45 60) (travel-distance-with-bounce 1 45 60 0))
+;; ==> t
+
+(= (travel-distance 1 35 45) (travel-distance-with-bounce 1 35 45 0))
+;; ==> t
+(= (travel-distance 1 35 30) (travel-distance-with-bounce 1 35 30 0))
+;; ==> t
+(= (travel-distance 1 35 60) (travel-distance-with-bounce 1 35 60 0))
+;; ==> t
+
+(= (travel-distance 1 55 45) (travel-distance-with-bounce 1 55 45 0))
+;; ==> t
+(= (travel-distance 1 55 30) (travel-distance-with-bounce 1 55 30 0))
+;; ==> t
+(= (travel-distance 1 55 60) (travel-distance-with-bounce 1 55 60 0))
+;; ==> t
+
+;;
+;; This is good, it's what we expect.
+;; 
+
+;;
+;; The question also asks us to model how far the ball gets on an arbitrary
+;; number of bounces, until it stops moving. In order to do this, we will
+;; compare the distance traveled on two successive bounces. If the resulting
+;; change in distance is less than some pre-defined tolerance, we suppose
+;; that we have found the distance traveled on an "arbitrary" number of bounces:
+;;
+(defun travel-distance-with-infinite-bounces (elevation velocity angle)
+  (setq tolerance 0.001)
+  (defun travel-distance-with-infinite-bounces-iter (number-of-bounces)
+    (let ((distance1 (travel-distance-with-bounce elevation velocity angle number-of-bounces))
+	  (distance2 (travel-distance-with-bounce elevation velocity angle (+ number-of-bounces 1))))
+      (if (< (abs (- distance1 distance2)) tolerance)
+	  distance2
+	(travel-distance-with-infinite-bounces-iter (+ number-of-bounces 1)))))
+  (travel-distance-with-infinite-bounces-iter 0))
+
+;;
+;; Now let's run through the same set of velocities and angles, and see
+;; how far the ball gets on 0, 1, 2 and "infinite" bounces.
+;;
+;; Velocity 45 m/s, Angle 45 degrees:
+;;
+(travel-distance-with-bounce 1 45 45 0)
+;; ==>
+(travel-distance-with-bounce 1 45 45 1)
+;; ==>
+(travel-distance-with-bounce 1 45 45 2)
+;; ==>
+(travel-distance-with-infinite-bounces 1 45 45)
+;; ==>
+
+;;
+;; Velocity 45 m/s, Angle 30 degrees:
+;;
+(travel-distance-with-bounce 1 45 30 0)
+;; ==>
+(travel-distance-with-bounce 1 45 30 1)
+;; ==>
+(travel-distance-with-bounce 1 45 30 2)
+;; ==>
+(travel-distance-with-infinite-bounces 1 30 45)
+;; ==>
+
+;;
+;; Velocity 45 m/s, Angle 60 degrees:
+;;
+(travel-distance-with-bounce 1 45 60 0)
+;; ==>
+(travel-distance-with-bounce 1 45 60 1)
+;; ==>
+(travel-distance-with-bounce 1 45 60 2)
+;; ==>
+(travel-distance-with-infinite-bounces 1 60 45)
+;; ==>
+
 
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; Problem 9
