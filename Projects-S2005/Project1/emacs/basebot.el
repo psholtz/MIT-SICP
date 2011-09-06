@@ -611,38 +611,113 @@
 ;; Velocity 45 m/s, Angle 45 degrees:
 ;;
 (travel-distance-with-bounce 1 45 45 0)
-;; ==>
+;; ==> 92.507985
 (travel-distance-with-bounce 1 45 45 1)
-;; ==>
+;; ==> 130.390257
 (travel-distance-with-bounce 1 45 45 2)
-;; ==>
+;; ==> 142.789006
 (travel-distance-with-infinite-bounces 1 45 45)
-;; ==>
+;; ==> 146.698686
 
 ;;
 ;; Velocity 45 m/s, Angle 30 degrees:
 ;;
 (travel-distance-with-bounce 1 45 30 0)
-;; ==>
+;; ==> 92.731638
 (travel-distance-with-bounce 1 45 30 1)
-;; ==>
+;; ==> 128.001398
 (travel-distance-with-bounce 1 45 30 2)
-;; ==>
-(travel-distance-with-infinite-bounces 1 30 45)
-;; ==>
+;; ==> 138.876803
+(travel-distance-with-infinite-bounces 1 45 30)
+;; ==> 142.819831
 
 ;;
 ;; Velocity 45 m/s, Angle 60 degrees:
 ;;
 (travel-distance-with-bounce 1 45 60 0)
-;; ==>
+;; ==> 76.314066
 (travel-distance-with-bounce 1 45 60 1)
-;; ==>
+;; ==> 108.899624
 (travel-distance-with-bounce 1 45 60 2)
-;; ==>
-(travel-distance-with-infinite-bounces 1 60 45)
-;; ==>
+;; ==> 119.199699
+(travel-distance-with-infinite-bounces 1 45 60)
+;; ==> 122.310981
 
+;;
+;; Velocity 55 m/s, Angle 45 degrees:
+;;
+(travel-distance-with-bounce 1 55 45 0)
+;; ==> 111.706658
+(travel-distance-with-bounce 1 55 45 1)
+;; ==> 163.112408
+(travel-distance-with-bounce 1 55 45 2)
+;; ==> 179.938511
+(travel-distance-with-infinite-bounces 1 55 45)
+;; ==> 185.571955
+
+;;
+;; Velocity 55 m/s, Angle 30 degrees:
+;;
+(travel-distance-with-bounce 1 55 30 0)
+;; ==> 112.974785
+(travel-distance-with-bounce 1 55 30 1)
+;; ==> 160.834620
+(travel-distance-with-bounce 1 55 30 2)
+;; ==> 175.551357
+(travel-distance-with-infinite-bounces 1 55 30)
+;; ==> 181.186643
+
+;;
+;; Velocity 55 m/s, Angle 60 degrees:
+;;
+(travel-distance-with-bounce 1 55 60 0)
+;; ==> 91.191937
+(travel-distance-with-bounce 1 55 60 1)
+;; ==> 134.142011
+(travel-distance-with-bounce 1 55 60 2)
+;; ==> 148.368389
+(travel-distance-with-infinite-bounces 1 55 60)
+;; ==> 153.08444623
+
+;;
+;; Velocity 35 m/s, Angle 45 degrees:
+;;
+(travel-distance-with-bounce 1 35 45 0)
+;; ==> 71.584805
+(travel-distance-with-bounce 1 35 45 1)
+;; ==> 97.6966609
+(travel-distance-with-bounce 1 35 45 2)
+;; ==> 104.790591
+(travel-distance-with-infinite-bounces 1 35 45)
+;; ==> 107.528372
+
+;;
+;; Velocity 35 m/s, Angle 30 degrees:
+;;
+(travel-distance-with-bounce 1 35 30 0)
+;; ==> 69.756236
+(travel-distance-with-bounce 1 35 30 1)
+;; ==> 93.420429
+(travel-distance-with-bounce 1 35 30 2)
+;; ==> 100.142559
+(travel-distance-with-infinite-bounces 1 35 30)
+;; ==> 103.153756
+
+;;
+;; Velocity 35 m/s, Angle 60 degrees:
+;;
+(travel-distance-with-bounce 1 35 60 0)
+;; ==> 59.037427
+(travel-distance-with-bounce 1 35 60 1)
+;; ==> 81.071928
+(travel-distance-with-bounce 1 35 60 2)
+;; ==> 86.858661
+(travel-distance-with-infinite-bounces 1 35 60)
+;; ==> 89.287766
+
+;;
+;; Note that in this model, the weak outfielder is able to throw the ball
+;; a total distance of 90m (allowing for bounces).
 
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; Problem 9
@@ -670,12 +745,18 @@
 						     (+ count 1)
 						     new-distance)))))
 
+;;
+;; Supporting procedure
+;;
 (defun travel-distance-list (elevation velocity angle)
   (let ((rangle (degree2radian angle)))
     (let ((vy (* velocity (sin rangle)))
 	  (vx (* velocity (cos rangle))))
       (integrate-list 0 elevation vx vy gravity mass beta))))
 
+;;
+;; Supporting procedure
+;;
 (defun integrate-list (x0 y0 u0 v0 g m beta)
   (if (< y0 0)
       (list x0 y0 u0 v0)
@@ -691,3 +772,18 @@
 			  (+ u0 du)
 			  (+ v0 dv)
 			  g m beta))))))
+
+;;
+;; In this case, the distance traveled does not "converge" as nicely
+;; when the number of bounces increases without limit. Before, we modeled
+;; the velocity as dropping by 50% with each bounce, which produces a series
+;; that converges. In this case, we are not able to guarantee such convergence, 
+;; so we will leave the "infinite" test cases out of our calculations:
+;;
+
+;;
+;; As before, we expect the answer we get with zero bounces to be the same
+;; whether we are using the "travel-distance-with-bounce" procedure or the 
+;; "travel-distance-with-bounce-integrated" procedure.
+;;
+(= (travel-distance-with-bounce 1 45 45 0) (travel-distance-with-bounce-integrated 1 45 45 0))
