@@ -266,4 +266,85 @@
 ;; PROBLEM 5
 ;;
 ;; Best angle to hit.
-;; +++++++++++++++++++ 
+;; +++++++++++++++++++
+;;
+;; We will increment 1 degre at a time:
+;;
+(def angle-increment 1.0)
+
+;;
+;; Define a helper procedure to convert our answers back to angles
+;;
+(defn radian2angle [rad]
+  (/ (* rad 180.0) pi))
+
+;;
+;; Define the actual procedure itself:
+;;
+(defn find-best-angle [velocity elevation]
+  (defn find-best-angle-iter [best-distance best-angle test-angle]
+    (if (> test-angle 90)
+      best-angle
+      (let [test-distance (travel-distance-simple elevation velocity test-angle)
+            next-angle (+ test-angle angle-increment)]
+        (if (> test-distance best-distance)
+          (find-best-angle-iter test-distance test-angle next-angle)
+          (find-best-angle-iter best-distance best-angle next-angle)))))
+  (find-best-angle-iter 0.0 0.0 0.0))
+
+;;
+;; Let's step through some sample velocities at the elevation of 1 meter:
+;;
+(find-best-angle 10 1)
+;; ==> 42.0
+(find-best-angle 20 1)
+;; ==> 44.0
+(find-best-angle 30 1)
+;; ==> 45.0 
+(find-best-angle 40 1)
+;; ==> 45.0
+(find-best-angle 45 1)
+;; ==> 45.0
+(find-best-angle 50 1)
+;; ==> 45.0
+
+;;
+;; Now let's step through these same angles, but at an elevation of 10 meters:
+;;
+(find-best-angle 10 10)
+;; ==> 30.0
+(find-best-angle 20 10)
+;; ==> 39.0
+(find-best-angle 30 10)
+;; ==> 42.0
+(find-best-angle 40 10)
+;; ==> 43.0 
+(find-best-angle 45 10)
+;; ==> 44.0
+(find-best-angle 50 10)
+;; ==> 44.0
+
+;;
+;; In both cases, the best angle seems to asymptotically approach 45 degrees,
+;; although it approaches this limit more slowly when the initial elevation is higher.
+;;
+
+;; +++++++++++++++++
+;; PROBLEM 6
+;;
+;; Incorporate drag.
+;; +++++++++++++++++
+;;
+;; Define some constants
+;;
+(def drag-coeff 0.5)
+(def density 1.25)
+(def mass 0.145)
+(def diameter 0.074)
+(def beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
+
+;;
+;; Define the integrate procedure:
+;;
+(defn integrate [x0 y0 u0 v0 g m beta]
+  '())
