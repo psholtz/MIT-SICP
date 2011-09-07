@@ -813,74 +813,74 @@
 ;; Throwing the ball at 45 m/s:
 ;;
 (travel-distance-with-bounce-integrated 1 45 45 0)
-;; ==>
+;; ==> 92.508
 (travel-distance-with-bounce-integrated 1 45 45 1)
-;; ==>
+;; ==> 106.751
 (travel-distance-with-bounce-integrated 1 45 45 2)
-;; ==>
+;; ==> 110.800
 
 (travel-distance-with-bounce-integrated 1 45 30 0)
-;; ==>
+;; ==> 92.732
 (travel-distance-with-bounce-integrated 1 45 30 1)
-;; ==>
+;; ==> 105.005
 (travel-distance-with-bounce-integrated 1 45 30 2)
-;; ==>
+;; ==> 108.366
 
 (travel-distance-with-bounce-integrated 1 45 60 0)
-;; ==>
+;; ==> 76.314
 (travel-distance-with-bounce-integrated 1 45 60 1)
-;; ==>
+;; ==> 89.839
 (travel-distance-with-bounce-integrated 1 45 60 2)
-;; ==>
+;; ==> 93.843
 
 ;;
 ;; Throwing the ball at 55 m/s:
 ;;
 (travel-distance-with-bounce-integrated 1 55 45 0)
-;; ==>
+;; ==> 111.707
 (travel-distance-with-bounce-integrated 1 55 45 1)
-;; ==>
+;; ==> 127.607
 (travel-distance-with-bounce-integrated 1 55 45 2)
-;; ==>
+;; ==> 131.841
 
 (travel-distance-with-bounce-integrated 1 55 30 0)
-;; ==>
+;; ==> 112.975
 (travel-distance-with-bounce-integrated 1 55 30 1)
-;; ==>
+;; ==> 126.719
 (travel-distance-with-bounce-integrated 1 55 30 2)
-;; ==>
+;; ==> 130.763
 
 (travel-distance-with-bounce-integrated 1 55 60 0)
-;; ==>
+;; ==> 91.192
 (travel-distance-with-bounce-integrated 1 55 60 1)
-;; ==>
+;; ==> 106.642
 (travel-distance-with-bounce-integrated 1 55 60 2)
-;; ==>
+;; ==> 110.992
 
 
 ;;
 ;; Throwing the ball at 35 m/s:
 ;;
 (travel-distance-with-bounce-integrated 1 35 45 0)
-;; ==>
+;; ==> 71.585
 (travel-distance-with-bounce-integrated 1 35 45 1)
-;; ==>
+;; ==> 84.183
 (travel-distance-with-bounce-integrated 1 35 45 2)
-;; ==>
+;; ==> 87.664
 
 (travel-distance-with-bounce-integrated 1 35 30 0)
-;; ==>
+;; ==> 69.756
 (travel-distance-with-bounce-integrated 1 35 30 1)
-;; ==>
+;; ==> 80.377
 (travel-distance-with-bounce-integrated 1 35 30 2)
-;; ==>
+;; ==> 83.523
 
 (travel-distance-with-bounce-integrated 1 35 60 0)
-;; ==>
+;; ==> 59.037
 (travel-distance-with-bounce-integrated 1 35 60 1)
-;; ==>
+;; ==> 70.986
 (travel-distance-with-bounce-integrated 1 35 60 2)
-;; ==>
+;; ==> 74.614
 
 ;;
 ;; It is worth noting that for 1 or 2 bounces, the distances traveled are
