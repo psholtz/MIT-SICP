@@ -203,3 +203,67 @@
 ;;
 ;; Flight distance.
 ;; +++++++++++++++++
+;;
+;; First define the helper procedures:
+;;
+(defn degree2radian [deg]
+  (/ (* deg pi) 180.0))
+
+(defn meters-to-feet [m]
+  (/ (* m 39.6) 12))
+
+(defn feet-to-meters [f]
+  (/ (* f 12) 30.6))
+
+(defn hours-to-seconds [h]
+  (* h 3600.0))
+
+(defn seconds-to-hours [s]
+  (/ s 3600.0))
+
+;;
+;; We measure angle in radians, so we have to convert to degrees.
+;;
+;; We measure evelation and velocity in meters.
+;;
+;; Then calculate how long the ball will stay in the air, and how far it can
+;; travel horizontally during that time, before it hits the ground.
+;;
+(def travel-distance-simple
+  (fn [elevation velocity angle]
+    (let [rangle (degree2radian angle)]
+      (let [vy (* velocity (Math/sin rangle))
+            vx (* velocity (Math/cos rangle))]
+        (let [t0 (time-to-impact vy elevation)]
+          (let [x0 (position 0 vx 0 t0)]
+            x0))))))
+
+;;
+;; Let's calculate the distances in meters:
+;;
+(travel-distance-simple 1 45 0)
+;; ==> 20.329
+(travel-distance-simple 1 45 45)
+;; ==> 207.628
+(travel-distance-simple 1 45 90)
+;; ==> 2.537e-14
+
+;;
+;; This last distance, hit straight up, is essentially zero, which we would expect.
+;;
+
+;;
+;; Now let's translate these distances into feet:
+;;
+(meters-to-feet (travel-distance-simple 1 45 0))
+;; ==> 67.085
+(meters-to-feet (travel-distance-simple 1 45 45))
+;; ==> 685.172
+(meters-to-feet (travel-distance-simple 1 45 90))
+;; ==> 8.371e-14
+
+;; +++++++++++++++++++ 
+;; PROBLEM 5
+;;
+;; Best angle to hit.
+;; +++++++++++++++++++ 
