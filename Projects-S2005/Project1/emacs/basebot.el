@@ -787,3 +787,153 @@
 ;; "travel-distance-with-bounce-integrated" procedure.
 ;;
 (= (travel-distance-with-bounce 1 45 45 0) (travel-distance-with-bounce-integrated 1 45 45 0))
+;; ==> t
+(= (travel-distance-with-bounce 1 45 30 0) (travel-distance-with-bounce-integrated 1 45 30 0))
+;; ==> t
+(= (travel-distance-with-bounce 1 45 60 0) (travel-distance-with-bounce-integrated 1 45 60 0))
+;; ==> t
+
+
+(= (travel-distance-with-bounce 1 55 45 0) (travel-distance-with-bounce-integrated 1 55 45 0))
+;; ==> t
+(= (travel-distance-with-bounce 1 55 30 0) (travel-distance-with-bounce-integrated 1 55 30 0))
+;; ==> t
+(= (travel-distance-with-bounce 1 55 60 0) (travel-distance-with-bounce-integrated 1 55 60 0))
+;; ==> t
+
+(= (travel-distance-with-bounce 1 35 45 0) (travel-distance-with-bounce-integrated 1 35 45 0))
+;; ==> t
+(= (travel-distance-with-bounce 1 35 30 0) (travel-distance-with-bounce-integrated 1 35 30 0))
+;; ==> t
+(= (travel-distance-with-bounce 1 35 60 0) (travel-distance-with-bounce-integrated 1 35 60 0))
+;; ==> t
+
+;;
+;; Throwing the ball at 45 m/s:
+;;
+(travel-distance-with-bounce-integrated 1 45 45 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 45 45 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 45 45 2)
+;; ==>
+
+(travel-distance-with-bounce-integrated 1 45 30 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 45 30 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 45 30 2)
+;; ==>
+
+(travel-distance-with-bounce-integrated 1 45 60 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 45 60 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 45 60 2)
+;; ==>
+
+;;
+;; Throwing the ball at 55 m/s:
+;;
+(travel-distance-with-bounce-integrated 1 55 45 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 45 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 45 2)
+;; ==>
+
+(travel-distance-with-bounce-integrated 1 55 30 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 30 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 30 2)
+;; ==>
+
+(travel-distance-with-bounce-integrated 1 55 60 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 60 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 55 60 2)
+;; ==>
+
+
+;;
+;; Throwing the ball at 35 m/s:
+;;
+(travel-distance-with-bounce-integrated 1 35 45 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 35 45 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 35 45 2)
+;; ==>
+
+(travel-distance-with-bounce-integrated 1 35 30 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 35 30 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 35 30 2)
+;; ==>
+
+(travel-distance-with-bounce-integrated 1 35 60 0)
+;; ==>
+(travel-distance-with-bounce-integrated 1 35 60 1)
+;; ==>
+(travel-distance-with-bounce-integrated 1 35 60 2)
+;; ==>
+
+;;
+;; It is worth noting that for 1 or 2 bounces, the distances traveled are
+;; always shorter when integrating the velocities, than when using the 
+;; "naive" 50% model:
+;;
+
+;;
+;; Velocity: 45 m/s
+;;
+(< (travel-distance-with-bounce-integrated 1 45 45 1) (travel-distance-with-bounce 1 45 45 1))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 45 30 1) (travel-distance-with-bounce 1 45 30 1))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 45 60 1) (travel-distance-with-bounce 1 45 60 1))
+;; ==> t
+
+(< (travel-distance-with-bounce-integrated 1 45 45 2) (travel-distance-with-bounce 1 45 45 2))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 45 30 2) (travel-distance-with-bounce 1 45 30 2))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 45 60 2) (travel-distance-with-bounce 1 45 60 2))
+;; ==> t
+
+;;
+;; Velocity: 55 m/s
+;;
+(< (travel-distance-with-bounce-integrated 1 55 45 1) (travel-distance-with-bounce 1 55 45 1))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 55 30 1) (travel-distance-with-bounce 1 55 30 1))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 55 60 1) (travel-distance-with-bounce 1 55 60 1))
+;; ==> t
+
+(< (travel-distance-with-bounce-integrated 1 55 45 2) (travel-distance-with-bounce 1 55 45 2))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 55 30 2) (travel-distance-with-bounce 1 55 30 2))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 55 60 2) (travel-distance-with-bounce 1 55 60 2))
+;; ==> t
+
+;;
+;; Velocity: 35 m/s
+;;
+(< (travel-distance-with-bounce-integrated 1 35 45 1) (travel-distance-with-bounce 1 35 45 1))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 35 30 1) (travel-distance-with-bounce 1 35 30 1))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 35 60 1) (travel-distance-with-bounce 1 35 60 1))
+;; ==> t
+
+(< (travel-distance-with-bounce-integrated 1 35 45 2) (travel-distance-with-bounce 1 35 45 2))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 35 30 2) (travel-distance-with-bounce 1 35 30 2))
+;; ==> t
+(< (travel-distance-with-bounce-integrated 1 35 60 2) (travel-distance-with-bounce 1 35 60 2))
+;; ==> t
