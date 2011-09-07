@@ -718,6 +718,7 @@
 ;;
 ;; Note that in this model, the weak outfielder is able to throw the ball
 ;; a total distance of 90m (allowing for bounces).
+;;
 
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ;; Problem 9
