@@ -363,7 +363,7 @@
                      g m beta))))))
 
 ;;
-;; Use the "integreate" procedure to calculate the travel-distqance, incorporating drag:
+;; Use the "integreate" procedure to calculate the travel-distance, incorporating drag:
 ;;
 (defn travel-distance [elevation velocity angle]
   (let [rangle (degree2radian angle)]
