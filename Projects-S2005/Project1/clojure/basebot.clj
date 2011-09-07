@@ -213,7 +213,7 @@
   (/ (* m 39.6) 12))
 
 (defn feet-to-meters [f]
-  (/ (* f 12) 30.6))
+  (/ (* f 12.0) 39.6))
 
 (defn hours-to-seconds [h]
   (* h 3600.0))
@@ -347,4 +347,97 @@
 ;; Define the integrate procedure:
 ;;
 (defn integrate [x0 y0 u0 v0 g m beta]
-  '())
+  (if (< y0 0)
+    x0
+    (let [dt 0.1
+          speed (Math/sqrt (+ (square u0) (square v0)))]
+      (let [drag (* beta (square speed))]
+        (let [dx (* u0 dt)
+              dy (* v0 dt)
+              du (* (/ -1.0 m) speed beta u0 dt)
+              dv (* -1.0 (+ (* (/ 1.0 m) speed beta v0) g) dt)]
+          (integrate (+ x0 dx)
+                     (+ y0 dy)
+                     (+ u0 du)
+                     (+ v0 dv)
+                     g m beta))))))
+
+;;
+;; Use the "integreate" procedure to calculate the travel-distqance, incorporating drag:
+;;
+(defn travel-distance [elevation velocity angle]
+  (let [rangle (degree2radian angle)]
+    (let [vy (* velocity (Math/sin rangle))
+          vx (* velocity (Math/cos rangle))]
+      (integrate 0 elevation vx vy gravity mass beta))))
+
+;;
+;; Run the proposed unit tests, answers are given in meters:
+;;
+(travel-distance 1 45 45)
+;; ==> 92.508
+(travel-distance 1 45 40)
+;; ==> 95.337
+(travel-distance 1 45 35)
+;; ==> 94.206
+
+;;
+;; Let's build a procedure to answer the question, "for what range of angles will
+;; the ball land over the fence, if the fence is 300 feet from home plate and the
+;; ball is hit at 45 m/s?". First we build a procedure to find the "extremum" in a
+;; list. To find "maximum" we invoke the procedure with the comparator ">", and to
+;; find the "minimum" we invoke the procedure with the comparator "<":
+;;
+(defn extremum-in-list [list-a comparator limit]
+  (defn extremum-in-list-iter [list-b extreme-element]
+    (if (= (count list-b) 0)
+      extreme-element
+      (let [test (first list-b)]
+        (if (comparator test extreme-element)
+          (extremum-in-list-iter (rest list-b) test)
+          (extremum-in-list-iter (rest list-b) extreme-element)))))
+  (extremum-in-list-iter list-a limit))
+
+;;
+;; Run some unit tests to see how well the procedure works.
+;;
+;; Find the max element:
+;;
+(extremum-in-list (list 1 2 4 50 2 5) > -1)
+;; ==> 50
+
+;;
+;; Find the min element:
+;;
+(extremum-in-list (list 1 2 4 50 2 5) < 51)
+;; ==> 1
+
+;;
+;; Find the range of angles for which a ball launched at a given elevation
+;; and a given velocity will travel to or beyond the target distance.
+;;
+(defn range-of-angles [elevation velocity target-distance]
+
+  ;;
+  ;; This procedure will produce a list of *all* angles which
+  ;; will travel to or beyond the target distance.
+  ;;
+  (defn range-of-angles-iter [angles angle]
+    (if (> angle 90)
+      angles
+      (let [next-angle (+ angle angle-increment)]
+        (if (> (travel-distance elevation velocity angle) target-distance)
+          (range-of-angles-iter (cons angle angles) next-angle)
+          (range-of-angles-iter angles next-angle)))))
+  
+  ;;
+  ;; Take the list of *all* angles, and return an ordered pair of the
+  ;; max and min elements from that list. We will return this pair, which
+  ;; will represent the min and max angles at which the ball can be hit
+  ;; at the given elevation at the given velocity, and travel to or beyond
+  ;; the target distance:
+  ;;
+  (let [range (range-of-angles-iter () 0)]
+    (list
+     (extremum-in-list range < 91)
+     (extremum-in-list range > -1))))
