@@ -63,13 +63,60 @@
 (= (root1 1 -2 1) 1)
 (= (root2 1 -2 1) 1)
 
-;; +++++++++++++++++++++ 
+;;
+;; Try (root1 5 3 6):
+;;
+(root1 5 3 6)
+;; ==> ()
+
+;;
+;; Returns nil, since the roots to this polynomial are complex.
+;;
+
+;; +++++++++++++++++++++++
 ;; PROBLEM 3
 ;;
-;; Calculate distances.
-;; +++++++++++++++++++++
+;; Calculate flight times.
+;; +++++++++++++++++++++++
+;;
+;; The polynomial whose roots we are attempting to calculate is:
+;;
+;; (0.5)*a*t^2 + v*t + x0 = 0
+;;
+;; which is the equation of motion for a particle moving under constant acceleration a,
+;; constant velocity v and initial position x0.
+;;
+;; In our case, the acceleration is due to gravity (9.8) and is directed downwards
+;; (i.e., negative). The initial velocity and position (i.e., elevation) are passed
+;; in as parameters to the procedure.
+;;
+;; If we plot the elevation of the ball versus time, where the time coordinate is
+;; used as the abscissa, and the elevation of the ball is used as the ordinate, the
+;; "root1" procedure we defined above will give the "left-most" point at which the
+;; graph intersects the abscissa (i.e., t-axis), while the "root2" procedure will
+;; give the "right-most" point.
+;;
+;; We are seeking the "right-most" root of this polynomial, since we are seeking the
+;; point "forward" in time from where the ball was released, at which the ball strikes
+;; the ground (i.e., has elevation 0).
+;;
+;; For this reason, we will define our procedure using the "root2" procedure.
+;;
+;; We define the polynomial whose roots we are seeking as the equation of motion above:
+;;
 (defn time-to-impact [vertical-velocity elevation]
   (root2 (* -0.5 gravity) vertical-velocity elevation))
+
+;;
+;; The following unit tests model shooting the ball straight upwards from the ground
+;; at various velocities (i.e., elevation = 0 and vertical velocity = 10, 20 and 50 m/s):
+;;
+(time-to-impact 10 0)
+;; ==> 2.041
+(time-to-impact 20 0)
+;; ==> 4.082
+(time-to-impact 50 0)
+;; ==> 10.204
 
 (defn time-to-height [vertical-velocity elevation target-elevation]
   (root2 (* -0.5 gravity) vertical-velocity (- elevation target-elevation)))
@@ -79,77 +126,4 @@
 ;;
 ;; Flight distance.
 ;; +++++++++++++++++
-(defn degree2radian [deg]
-  (/ (* deg pi) 180.0))
-
-(defn travel-distance-simple [elevation velocity angle]
-  (let [rangle (degree2radian angle)]
-    (let [vy (* velocity (Math/sin rangle))
-          vx (* velocity (Math/cos rangle))]
-      (let [t0 (time-to-impact vy elevation)]
-        (let [x0 (position 0 vx 0 t0)]
-          x0)))))
-
-(defn meters-to-feet [m]
-  (/ (* m 39.6) 12.0))
-
-(defn feet-to-meters [f]
-  (/ (* f 12.0) 39.6))
-
-(defn hours-to-seconds [h]
-  (* h 3600.0))
-
-(defn seconds-to-hours [s]
-  (/ s 3600.0))
-
-;; +++++++++++++++++++ 
-;; PROBLEM 5
-;;
-;; Best angle to hit.
-;; +++++++++++++++++++
-(def angle-increment 1.0) ;; use degrees
-
-(defn radian2degree [rad] (/ (* rad 180.0) pi))
-
-(defn find-best-angle-iter [velocity elevation best-distance best-angle test-angle]
-  (if (> test-angle 90)
-    best-angle
-    (let [test-distance (travel-distance-simple elevation velocity test-angle)
-          next-angle (+ test-angle angle-increment)]
-      (if (> test-distance best-distance)
-        (find-best-angle-iter velocity elevation test-distance test-angle next-angle)
-        (find-best-angle-iter velocity elevation best-distance best-angle next-angle)))))
-
-;; +++++++++++++++++ 
-;; PROBLEM 6
-;;
-;; Incorporate drag
-;; +++++++++++++++++
-(def drag-coeff 0.5)
-(def density 1.25)
-(def mass 0.145)
-(def diameter 0.074)
-(def beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
-
-(defn integrate (x0 y0 u0 v0 g m beta)
-  (if (< y0 0)
-    x0
-    (let [dt 0.1
-          speed (Math/sqrt (+ (square u0) (square v0)))]
-      (let [drag (* beta (square speed))]
-        (let [dx (* u0 dt)
-              dy (* v0 dt)
-              du (* (/ -1.0 m) speed beta u0 dt)
-              dv (* -1.0 (+ (* (/ 1.0 m) speed beta v0) g) dt)]
-          (integrate (+ x0 dx)
-                     (+ y0 dy)
-                     (+ u0 du)
-                     (+ v0 dv)
-                     g m beta))))))
-
-(defn travel-distance [elevation velocity angle]
-  (let [rangle (degree2radian angle)]
-    (let [vy (* velocity (Math/sin rangle))
-          vx (* velocity (Math/cos rangle))]
-      (integrate 0 elevation vx vy gravity mass beta))))
 
