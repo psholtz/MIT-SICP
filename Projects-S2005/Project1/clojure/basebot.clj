@@ -719,3 +719,14 @@
 ;; ==> 144.792
 (travel-distance-with-infinite-bounces 1 45 45)
 ;; ==> 150.524
+
+;;
+;; Note that in this model, the weak outfielder is able to throw the ball
+;; a total distance of 90m (allowing for bounces).
+;;
+
+;; +++++++++++++++++++++++++
+;; PROBLEM 9
+;;
+;; Add some better bounces.
+;; +++++++++++++++++++++++++ 
