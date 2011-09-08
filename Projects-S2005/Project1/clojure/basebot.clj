@@ -723,10 +723,98 @@
 ;;
 ;; Velocity 45 m/s, Angle 30 degrees:
 ;;
+(travel-distance-with-bounce 1 45 30 0)
+;; ==> 92.732
+(travel-distance-with-bounce 1 45 30 1)
+;; ==> 130.039
+(travel-distance-with-bounce 1 45 30 2)
+;; ==> 142.022
+(travel-distance-with-infinite-bounces 1 45 30)
+;; ==> 146.961
 
 ;;
 ;; Velocity 45 m/s, Angle 60 degrees:
 ;;
+(travel-distance-with-bounce 1 45 60 0)
+;; ==> 76.314
+(travel-distance-with-bounce 1 45 60 1)
+;; ==> 109.497
+(travel-distance-with-bounce 1 45 60 2)
+;; ==> 120.506
+(travel-distance-with-infinite-bounces 1 45 60)
+;; ==> 124.838
+
+;;
+;; Velocity 55 m/s, Angle 45 degrees:
+;;
+(travel-distance-with-bounce 1 55 45 0)
+;; ==>
+(travel-distance-with-bounce 1 55 45 1)
+;; ==>
+(travel-distance-with-bounce 1 55 45 2)
+;; ==>
+(travel-distance-with-infinite-bounces 1 55 45)
+;; ==> 189.797
+
+;;
+;; Velocity 55 m/s, Angle 30 degrees:
+;;
+(travel-distance-with-bounce 1 55 30 0)
+;; ==>
+(travel-distance-with-bounce 1 55 30 1)
+;; ==>
+(travel-distance-with-bounce 1 55 30 2)
+;; ==>
+(travel-distance-with-infinite-bounces 1 55 30)
+;; ==>
+
+;;
+;; Velocity 55 m/s, Angle 60 degrees:
+;;
+(travel-distance-with-bounce 1 55 60 0)
+;; ==>
+(travel-distance-with-bounce 1 55 60 1)
+;; ==>
+(travel-distance-with-bounce 1 55 60 2)
+;; ==>
+(travel-distance-with-infinite-bounces 1 55 60)
+;; ==>
+
+;;
+;; Velocity 35 m/s, Angle 45 degrees:
+;;
+(travel-distance-with-bounce 1 35 45 0)
+;; ==>
+(travel-distance-with-bounce 1 35 45 1)
+;; ==>
+(travel-distance-with-bounce 1 35 45 2)
+;; ==>
+(travel-distance-with-infinite-bounces 1 35 45)
+;; ==>
+
+;;
+;; Velocity 35 m/s, Angle 30 degrees:
+;;
+(travel-distance-with-bounce 1 35 30 0)
+;; ==>
+(travel-distance-with-bounce 1 35 30 1)
+;; ==>
+(travel-distance-with-bounce 1 35 30 2)
+;; ==>
+(travel-distance-with-infinite-bounces 1 35 30)
+;; ==>
+
+;;
+;; Velocity 35 m/s, Angle 60 degrees:
+;;
+(travel-distance-with-bounce 1 35 60 0)
+;; ==>
+(travel-distance-with-bounce 1 35 60 1)
+;; ==>
+(travel-distance-with-bounce 1 35 60 2)
+;; ==>
+(travel-distance-with-infinite-bounces 1 35 60)
+;; ==>
 
 ;;
 ;; Note that in this model, the weak outfielder is able to throw the ball
