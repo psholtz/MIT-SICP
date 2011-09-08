@@ -721,6 +721,14 @@
 ;; ==> 150.524
 
 ;;
+;; Velocity 45 m/s, Angle 30 degrees:
+;;
+
+;;
+;; Velocity 45 m/s, Angle 60 degrees:
+;;
+
+;;
 ;; Note that in this model, the weak outfielder is able to throw the ball
 ;; a total distance of 90m (allowing for bounces).
 ;;
