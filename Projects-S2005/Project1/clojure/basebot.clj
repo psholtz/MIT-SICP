@@ -748,11 +748,11 @@
 ;; Velocity 55 m/s, Angle 45 degrees:
 ;;
 (travel-distance-with-bounce 1 55 45 0)
-;; ==>
+;; ==> 111.707
 (travel-distance-with-bounce 1 55 45 1)
-;; ==>
+;; ==> 163.838
 (travel-distance-with-bounce 1 55 45 2)
-;; ==>
+;; ==> 182.351
 (travel-distance-with-infinite-bounces 1 55 45)
 ;; ==> 189.797
 
@@ -760,61 +760,61 @@
 ;; Velocity 55 m/s, Angle 30 degrees:
 ;;
 (travel-distance-with-bounce 1 55 30 0)
-;; ==>
+;; ==> 112.975
 (travel-distance-with-bounce 1 55 30 1)
-;; ==>
+;; ==> 163.001
 (travel-distance-with-bounce 1 55 30 2)
-;; ==>
+;; ==> 179.530
 (travel-distance-with-infinite-bounces 1 55 30)
-;; ==>
+;; ==> 186.419
 
 ;;
 ;; Velocity 55 m/s, Angle 60 degrees:
 ;;
 (travel-distance-with-bounce 1 55 60 0)
-;; ==>
+;; ==> 91.192
 (travel-distance-with-bounce 1 55 60 1)
-;; ==>
+;; ==> 135.481
 (travel-distance-with-bounce 1 55 60 2)
-;; ==>
+;; ==> 151.017
 (travel-distance-with-infinite-bounces 1 55 60)
-;; ==>
+;; ==> 157.373
 
 ;;
 ;; Velocity 35 m/s, Angle 45 degrees:
 ;;
 (travel-distance-with-bounce 1 35 45 0)
-;; ==>
+;; ==> 71.585
 (travel-distance-with-bounce 1 35 45 1)
-;; ==>
+;; ==> 98.366
 (travel-distance-with-bounce 1 35 45 2)
-;; ==>
+;; ==> 106.668
 (travel-distance-with-infinite-bounces 1 35 45)
-;; ==>
+;; ==> 110.271
 
 ;;
 ;; Velocity 35 m/s, Angle 30 degrees:
 ;;
 (travel-distance-with-bounce 1 35 30 0)
-;; ==>
+;; ==> 69.756
 (travel-distance-with-bounce 1 35 30 1)
-;; ==>
+;; ==> 95.232
 (travel-distance-with-bounce 1 35 30 2)
-;; ==>
+;; ==> 102.564
 (travel-distance-with-infinite-bounces 1 35 30)
-;; ==>
+;; ==> 106.044
 
 ;;
 ;; Velocity 35 m/s, Angle 60 degrees:
 ;;
 (travel-distance-with-bounce 1 35 60 0)
-;; ==>
+;; ==>  59.037
 (travel-distance-with-bounce 1 35 60 1)
-;; ==>
+;; ==> 81.633
 (travel-distance-with-bounce 1 35 60 2)
-;; ==>
+;; ==> 88.744
 (travel-distance-with-infinite-bounces 1 35 60)
-;; ==>
+;; ==> 91.508
 
 ;;
 ;; Note that in this model, the weak outfielder is able to throw the ball
@@ -825,4 +825,57 @@
 ;; PROBLEM 9
 ;;
 ;; Add some better bounces.
-;; +++++++++++++++++++++++++ 
+;; +++++++++++++++++++++++++
+(defn integrate-list [x0 y0 u0 v0 g m beta]
+  (if (< y0 0)
+    (list x0 y0 u0 v0)
+    (let [dt 0.1
+          speed (Math/sqrt (+ (square u0) (square v0)))]
+      (let [dx (* u0 dt)
+            dy (* v0 dt)
+            du (* (/ -1.0 m) speed beta u0 dt)
+            dv (* -1 (+ (* (/ 1.0 m) speed beta v0) g) dt)]
+        (integrate-list
+         (+ x0 dx)
+         (+ y0 dy)
+         (+ u0 du)
+         (+ v0 dv)
+         g m beta)))))
+
+(defn travel-distance-list [elevation velocity angle]
+  (let [rangle (degree2radian angle)]
+    (let [vy (* velocity (Math/sin rangle))
+          vx (* velocity (Math/cos rangle))]
+      (integrate-list 0 elevation vx vy gravity mass beta))))
+
+(defn travel-distance-with-bounce-integrated [elevation velocity angle bounces]
+  (defn travel-distance-with-bounce-integrated-iter [elevation velocity angle maximum count total-distance]
+    (let [bounce-list (travel-distance-list elevation velocity angle)]
+      (let [new-velocity (Math/sqrt (+ (square (first (rest (rest bounce-list))))
+                                       (square (first (rest (rest (rest bounce-list)))))))
+            new-distance (+ (first bounce-list) total-distance)]
+        (if (= count maximum)
+          new-distance
+          (travel-distance-with-bounce-integrated-iter
+            0
+            (/ new-velocity 2)
+            angle
+            maximum
+            (+ count 1)
+            new-distance)))))
+  (travel-distance-with-bounce-integrated-iter elevation velocity angle bounces 0 0))
+
+;;
+;; In this case, the distance traveled does not "converge" as nicely
+;; when the number of bounces increases without limit. Before, we modeled
+;; the velocity as dropping by 50% with each bounce, which produces a series
+;; that converges. In this case, we are not able to guarantee such convergence,
+;; so we will leave the "infinite" test cases out of our calculations:
+;;
+
+;;
+;; As before, we expect the answer we get for zero bounces to be the same
+;; whether we are using the "travel-distance-with-bounce" procedure, or the
+;; "travel-distance-withbounce-integrated" procedure.
+;;
+
