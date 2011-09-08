@@ -21,6 +21,12 @@
 ;;
 
 ;;
+;; Increase the buffers, so we can compute large primes:
+;;
+(setq max-lisp-eval-depth 1000)
+(setq max-specpdl-size 1800)
+
+;;
 ;; First let's define the code that allows us to check for primes:
 ;;
 (defun smallest-divisor (n)
@@ -125,8 +131,36 @@
     (search a)))
 
 ;;
-;; DO SOME SEARCHES HERE
+;; Run use cases...
 ;;
+(search-for-primes 1000 1050)
+
+;; ==> 1009 (5.90e-5)
+;; ==> 1013 (4.10e-5)
+;; ==> 1019 (3.80e-5)
+;; ==> 1021 (3.70e-5)
+;; ==> 1031 (3.70e-5)
+;; ==> 1033 (3.90e-5)
+;; ==> 1039 (3.80e-5)
+;; ==> 1049 (4.10e-5)
+
+(search-for-primes 10000 10050)
+
+;; ==> 10007 (0.000156)
+;; ==> 10009 (0.000137)
+;; ==> 10037 (0.000148)
+;; ==> 10039 (0.000121)
+
+(search-for-primes 100000 100050)
+
+;; ==> 100003 (0.000580)
+;; ==> 100019 (0.000431)
+;; ==> 100043 (0.000475)
+;; ==> 100049 (0.000378)
+
+(search-for-primes 1000000 1000050)
+
+;; ==> emacs is not able to recurse this deeply
 
 ;;
 ;; Now define one additional procedure, which starts at a number a
@@ -144,3 +178,27 @@
       (search (+ a 1) 0)
     (search a 0)))
 
+;;
+;; Run the same use cases
+;;
+(search-for-n-primes 1000 3)
+
+;; ==> 1009 (3.81e-5)
+;; ==> 1013 (3.70e-5)
+;; ==> 1019 (3.70e-5)
+
+(search-for-n-primes 10000 3)
+
+;; ==> 10007 (0.000119) 
+;; ==> 10009 (0.000114)
+;; ==> 10037 (0.000118)
+
+(search-for-n-primes 100000 3)
+
+;; ==> 100003 (0.000612)
+;; ==> 100019 (0.000496)
+;; ==> 100043 (0.000435)
+
+(search-for-n-primes 1000000 3)
+
+;; emacs is not able to recurse this deeply
