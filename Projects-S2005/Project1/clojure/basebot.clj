@@ -639,4 +639,83 @@
 ;; PROBLEM 8
 ;;
 ;; Add some bounces.
-;; ++++++++++++++++++ 
+;; ++++++++++++++++++
+(defn travel-distance-with-bounce [elevation velocity angle bounces]
+  (defn travel-distance-with-bounce-iter [elevation velocity angle maximum count total-distance]
+    (let [bounce-distance (travel-distance elevation velocity angle)]
+      (let [new-total-distance (+ total-distance bounce-distance)]
+        (if (= count maximum)
+          new-total-distance
+          (travel-distance-with-bounce-iter
+            0
+            (/ velocity 2.0)
+            angle
+            maximum
+            (+ count 1)
+            new-total-distance)))))
+  (travel-distance-with-bounce-iter elevation velocity angle bounces 0 0))
+
+;;
+;; In the first place, we would expect the travel distance with 0 bounces
+;; to be the same as the distance given by the "travel-distance" procedure
+;; derived above.
+;;
+;; Let's test this for a range of angles and velocities:
+;;
+(= (travel-distance 1 45 45) (travel-distance-with-bounce 1 45 45 0))
+;; ==> true
+(= (travel-distance 1 45 30) (travel-distance-with-bounce 1 45 30 0))
+;; ==> true
+(= (travel-distance 1 45 60) (travel-distance-with-bounce 1 45 60 0))
+;; ==> true
+
+(= (travel-distance 1 35 45) (travel-distance-with-bounce 1 35 45 0))
+;; ==> true
+(= (travel-distance 1 35 30) (travel-distance-with-bounce 1 35 30 0))
+;; ==> true
+(= (travel-distance 1 35 60) (travel-distance-with-bounce 1 35 60 0))
+;; ==> true
+
+
+(= (travel-distance 1 55 45) (travel-distance-with-bounce 1 55 45 0))
+;; ==> true
+(= (travel-distance 1 55 30) (travel-distance-with-bounce 1 55 30 0))
+;; ==> true
+(= (travel-distance 1 55 60) (travel-distance-with-bounce 1 55 60 0))
+;; ==> true
+
+;;
+;; This is good, it's what we expect.
+;;
+
+;;
+;; The question also asks us to model how far the ball gets on an arbitrary
+;; number of bounces, until it stops moving. In order to do this, we will
+;; compare the distance traveled on two successive bounces. If the resulting
+;; change in distance is less than some pre-defined tolerance, we suppose
+;; that we have found the distance traveled on an "arbitrary" number of bounces:
+;;
+(defn travel-distance-with-infinite-bounces [elevation velocity angle]
+  (def tolerance 0.001)
+  (defn travel-distance-with-infinite-bounces-iter [number-of-bounces]
+    (let [distance1 (travel-distance-with-bounce elevation velocity angle number-of-bounces)
+          distance2 (travel-distance-with-bounce elevation velocity angle (+ number-of-bounces 1))]
+      (if (< (Math/abs (- distance1 distance2)) tolerance)
+        distance2
+        (travel-distance-with-infinite-bounces-iter (+ number-of-bounces 1)))))
+  (travel-distance-with-infinite-bounces-iter 0))
+
+;;
+;; Now let's run through the same set of velocities and angles, and see
+;; how far the ball gets on 0, 1, 2 and "infinite" bounces.
+;;
+;; Velocity 45 m/s, Angle 45 degrees:
+;;
+(travel-distance-with-bounce 1 45 45 0)
+;; ==> 92.508
+(travel-distance-with-bounce 1 45 45 1)
+;; ==> 132.129
+(travel-distance-with-bounce 1 45 45 2)
+;; ==> 144.792
+(travel-distance-with-infinite-bounces 1 45 45)
+;; ==> 150.524
