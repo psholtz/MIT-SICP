@@ -539,3 +539,104 @@
 ;;
 (defn mph-to-ms [mph]
   (feet-to-meters (* (seconds-to-hours mph) 5280)))
+
+;;
+;; Answer the questions:
+;;
+;; How long does it take for a ball thrown from home plate at 45 m/s to reach second base?
+;;
+(throw-ball 1 45 36)
+;; ==> 0.640
+
+;;
+;; How long does it take for a ball thrown from home plate at 35 m/s to reach second base?
+;;
+(throw-ball 1 35 36)
+;; ==> 0.959
+
+;;
+;; How long does it take for a ball thrown from home plate at 55 m/s to reach second base?
+;;
+(throw-ball 1 55 36)
+;; ==> 0.560
+
+;;
+;; These numbers make sense: the slower the ball is thrown the longer it takes to get to second base.
+;;
+
+;;
+;; If the pitcher throws at 90 mph, how long does it take to reach home?
+;;
+;; If the distance between home plate and second base is 36m, we will take the
+;; distance between home and the pitcher's mound to be half that, or 18m.
+;;
+(throw-ball 1 (mph-to-ms 90) 18)
+;; ==> 0.286
+
+;;
+;; How long does it take a ball thrown by the catcher at 90 mph to reach second base?
+;;
+(throw-ball 1 (mph-to-ms 90) 36)
+;; ==> 0.819
+
+;;
+;; Note that a really good base runner should be able to get from first to second base in roughly 3 seconds.
+;; If the pitcher is throwing at 90 mph how long does it take to each home? If the catcher throws at 90 mph,
+;; how much time does he have to catch and release the ball if he is going to put out a runner trying to steal
+;; second?
+;;
+
+;;
+;; Given the parameters of the problem, the total time the catcher has is given by the following expression:
+;;
+(- 3
+   (+ (throw-ball 1 (mph-to-ms 90) 18)
+      (throw-ball 1 (mph-to-ms 90) 36)))
+
+;; ==> 1.895
+
+;;
+;; Now use your procedures to get some data on outfielders. Suppose an outfielder has a strong arm and can
+;; throw at 45 m/s. How quickly can he throw the ball to a target at a distance of 30m? 60m? 90m? What if
+;; he can thow at 55 m/s?
+;;
+
+;;
+;; Throws at 45 m/s:
+;;
+(throw-ball 1 45 30)
+;; ==> 0.539
+(throw-ball 1 45 60)
+;; ==> 1.567
+(throw-ball 1 45 90)
+;; ==> 3.644
+
+;;
+;; Throws at 55 m/s:
+;;
+(throw-ball 1 55 30)
+;; ==> 0.452
+(throw-ball 1 55 60)
+;; ==> 1.327
+(throw-ball 1 55 90)
+;; ==> 2.789
+
+;;
+;; Throws at 35 m/s:
+;;
+(throw-ball 1 35 30)
+;; ==> 0.676
+(throw-ball 1 35 60)
+;; ==> 2.296
+(throw-ball 1 35 90)
+;;==> 0
+
+;;
+;; Note that the weaker outfielder is not able to throw the ball 90 m in the air.
+;;
+
+;; ++++++++++++++++++ 
+;; PROBLEM 8
+;;
+;; Add some bounces.
+;; ++++++++++++++++++ 
