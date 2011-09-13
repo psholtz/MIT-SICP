@@ -147,4 +147,21 @@
 
 ;; ==> 1009
 ;; ==> 1013
+
+;; ADD MORE HERE
+
 ;;
+;; Now define one additional procedure, which starts at a number a
+;; and finds the next n prime numbers (this is, technically, what 
+;; Exercise 1.22 asks us to do).
+;;
+(defun search-for-n-primes (a n)
+  (defun search (j c)
+    (let ((next-j (+ j 2)))
+      (cond ((< c n)
+	          (if (timed-prime-test j)
+		       (search next-j (+ c 1))
+		           (search next-j c))))))
+  (if (even? a)
+      (search (+ a 1) 0)
+    (search a 0)))
