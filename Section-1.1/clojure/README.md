@@ -1,4 +1,4 @@
 Section 1.1
 =========== 
 
-Contains solutions expressed in Clojure dialect of Lisp.
+Contains solutions expressed in the Clojure dialect of Lisp.
