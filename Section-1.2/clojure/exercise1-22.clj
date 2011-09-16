@@ -21,6 +21,10 @@
 ;;
 
 ;;
+;; [WORKING]
+;;
+
+;;
 ;; First let's define the code that allows us to check for primes:
 ;;
 (defn square [n] (* n n))
