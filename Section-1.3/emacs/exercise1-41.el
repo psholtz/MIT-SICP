@@ -42,10 +42,31 @@
 (setq add-sixteen (funcall (double (double #'double)) #'inc))
 
 ;;
+;; Run some unit tests:
+;;
+(funcall add-two 3)
+;; ==> 5
+
+(funcall add-four 3)
+;; ==> 7
+
+(funcall add-sixteen 3)
+;; ==> 19
+
+;;
 ;; Note that these last two procedures could be rewritten as:
 ;;
 (setq add-four (double (double #'inc)))
 (setq add-sixteen (double (double (double (double #'inc)))))
+
+;;
+;; Run some unit tests:
+;;
+(funcall add-four 3)
+;; ==> 7
+
+(funcall add-sixteen 3)
+;; ==> 19
 
 ;;
 ;; So far, we have deduced that (expressed in scheme)
