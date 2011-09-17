@@ -20,7 +20,7 @@
 ;; Require lexical scoping and increase buffer sizes
 ;;
 (require 'cl)
-(setq max-lisp-eval-depth 100)
+(setq max-lisp-eval-depth 1000)
 (setq max-specpdl-size 1800)
 
 ;;
@@ -94,8 +94,119 @@
 ;;
 (defun fourth-root (x)
   (lexical-let ((x1 x))
-	       (lexical-let ((v1 (average-damp (lambda (y) (/ x1 (n-th-power y 3))))))
-			    v1)))
+	       (fixed-point (average-damp (average-damp (lambda (y) (/ x1 (n-th-power y 3))))) 1.0)))
 
-;; [[ WORKING ]]
+(defun fifth-root (x)
+  (lexical-let ((x1 x))
+	       (fixed-point (average-damp (average-damp (lambda (y) (/ x1 (n-th-power y 4))))) 1.0)))
 
+(defun sixth-root (x)
+  (lexical-let ((x1 x))
+	       (fixed-point (average-damp (average-damp (lambda (y) (/ x1 (n-th-power y 5))))) 1.0)))
+
+(defun seventh-root (x)
+  (lexical-let ((x1 x))
+	       (fixed-point (average-damp (average-damp (lambda (y) (/ x1 (n-th-power y 6))))) 1.0)))
+
+;;
+;; These procedures require three calls to "average-damp":
+;;
+(defun eighth-root (x)
+  (lexical-let ((x1 x))
+	       (fixed-point
+		(average-damp 
+		 (average-damp
+		  (average-damp (lambda (y) (/ x1 (n-th-power y 7)))))) 1.0)))
+
+;;
+;; ...
+;;
+
+(defun fifteenth-root (x)
+  (lexical-let ((x1 x))
+	       (fixed-point
+		(average-damp 
+		 (average-damp
+		  (average-damp (lambda (y) (/ x1 (n-th-power y 14)))))) 1.0)))
+
+;; 
+;; The following procedure requires four calls to "average-damp":
+;;
+(defun sixteenth-root (x)
+  (lexical-let ((x1 x))
+	       (fixed-point 
+		(average-damp
+		 (average-damp
+		  (average-damp
+		   (average-damp (lambda (y) (/ x1 (n-th-power y 15))))))) 1.0)))
+
+;;
+;; A pattern suggests itself:
+;; 
+;; n = 2 or n = 3 ==> apply "average-damp" 1x
+;; n = 4 or n = 5 or n = 6 or n = 7 ==> apply "average-damp" 2x
+;; n = 8 or n = 9 or n = 10 or n = 11 
+;; or n = 12 or n = 13 or n = 14 or n = 15 ==> apply "average-damp" 3x
+;; n = 16 ... ==> apply "average-damp" 4x
+;;
+;; The function of n we are looking for, to give the number of times 
+;; we should apply "average-damp", is given by:
+;;
+;; (floor (/ (log n) (log 2)))
+;;
+(= 1 (floor (/ (log 2) (log 2))))
+(= 1 (floor (/ (log 3) (log 2))))
+(= 2 (floor (/ (log 4) (log 2))))
+(= 2 (floor (/ (log 5) (log 2))))
+(= 2 (floor (/ (log 6) (log 2))))
+(= 2 (floor (/ (log 7) (log 2))))
+(= 3 (floor (/ (log 8) (log 2))))
+(= 4 (floor (/ (log 16) (log 2))))
+
+;;
+;; Let's define the "repeated" procedure from the previous exercises, 
+;; so we can use that in our procedure definition:
+;;
+(defun compose (f g)
+  (lexical-let ((foo f)
+		(goo f))
+	       (lambda (x)
+		 (funcall foo (funcall goo x)))))
+
+(defun repeated (f n)
+  (lexical-let ((foo f))
+	       (defun repeated-iter (g c)
+		 (lexical-let ((goo g))
+			      (cond ((>= c n) goo)
+				    (t
+				     (repeated-iter (compose goo foo) (+ c 1))))))
+	       (repeated-iter foo 1)))
+
+;;
+;; Finally define the n-th-root procedure that we are seeking:
+;;
+(defun n-th-root (x n)
+  (lexical-let ((k (floor (/ (log n) (log 2))))
+		(x1 x)
+		(n1 n))
+    (fixed-point (funcall (repeated #'average-damp k)
+		  (lambda (y) (/ x1 (n-th-power y (- n1 1)))))
+		 1.0)))
+
+;;
+;; Let's run some unit tests:
+;;
+(n-th-root 2 2)
+;; ==> 1.4142135623746899
+
+(n-th-root 3 2)
+;; ==> 1.7320508075688772
+
+(n-th-root 81 2)
+;; ==> 9.0
+
+(n-th-root 3 5)
+;; ==> 1.2457295735853005
+
+(n-th-root 2 10)
+;; ==> 1.071770200377089
