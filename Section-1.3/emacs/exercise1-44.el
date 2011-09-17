@@ -122,3 +122,7 @@
 ;; Let's run some unit tests, to see if we get the answers we expect:
 ;;
 (= (funcall (smooth-n-times impulse 1) 0) (funcall (smooth impulse) 0))
+(= (funcall (smooth-n-times impulse 2) 0) (funcall (smooth (smooth impulse)) 0))
+(= (funcall (smooth-n-times impulse 3) 0) (funcall (smooth (smooth (smooth impulse))) 0))
+(= (funcall (smooth-n-times impulse 4) 0) (funcall (smooth (smooth (smooth (smooth impulse)))) 0))
+(= (funcall (smooth-n-times impulse 5) 0) (funcall (smooth (smooth (smooth (smooth (smooth impulse))))) 0))
