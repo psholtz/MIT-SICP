@@ -12,7 +12,7 @@
 ;; First let's define some supporting polynomial procedures:
 ;;
 (define (cube n) (* n n n))
-(define (square n) (n n))
+(define (square n) (* n n))
 
 ;;
 ;; Now define the fixed-point procedure:
