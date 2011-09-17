@@ -177,3 +177,57 @@
 ;;
 ;; Vide 3, 5 and 7 as examples.
 ;;
+
+;; 
+;; One thing we would expect is for (prime-product p) to be equal to (factorial (- p 1)), 
+;; since p will be relatively prime to all positive integers less than p. 
+;; 
+;; Let's define a factorial procedure to test this for some primes.
+;;
+(defun factorial (n)
+  (cond ((= n 0) 1)
+	((= n 1) 1)
+	(t
+	 (* n (factorial (- n 1))))))
+
+(= 1 (prime-product 2))
+;; ==> t
+
+(= 2 (prime-product 3))
+;; ==> t
+
+(= (factorial 4) (prime-product 5))
+;; ==> t
+
+(= (factorial 6) (prime-product 7))
+;; ==> t
+
+(= (factorial 10) (prime-product 11))
+;; ==> t
+
+(= (factorial 12) (prime-product 13))
+;; ==> t
+
+;;
+;; Let's test some smaller composite numbers.
+;;
+
+;; 4 is relatively prime to 3
+(= 3 (prime-product 4))
+;; --> t
+
+;; 6 is relatively prime to 5
+(= 5 (prime-product 6))
+;; --> t
+
+;; 8 is relatively prime to 3, 5 and 7
+(= (* 3 5 7) (prime-product 8))
+;; --> t
+
+;; 9 is relatively prime to 2, 4, 5, 7 and 8
+(= (* 2 4 5 7 8) (prime-product 9))
+;; --> t
+
+;; 10 is relatively prime to 3, 7 and 9
+(= (* 3 7 9) (prime-product 10))
+;; --> t
