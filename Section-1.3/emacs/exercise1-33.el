@@ -87,4 +87,93 @@
 (= (square test-value) (sum-of-prime-squares test-value (+ test-value 1)))
 ;; ==> t
 
-;; [WORKING]
+;; define the "gcd" test
+(defun gcd (a b)
+  (if (= b 0)
+      a
+    (gcd b (% a b))))
+
+(defun relatively-prime? (a b)
+  (= (gcd a b) 1))
+
+(defun identity (x) x)
+
+(defun prime-product (n)
+  (defun relatively-prime-to-n? (a)
+    (relatively-prime? a n))
+  (filtered-accumulate #'* 1 #'identity 1 #'inc n #'relatively-prime-to-n?))
+
+;;
+;; Let's run through some unit tests:
+;;
+(prime-product 3)
+;; ==> 2
+
+;;
+;; All integers greater than 1 are relatively prime to 1.
+;; 3 is r.p. to 2 as well.
+;;
+;; Hence, (= (prime-product 3) 2) as expected.
+;;
+
+(prime-product 4)
+;; ==> 3 
+
+;;
+;; 4 is r.p. to 1 and 3.
+;; (= (prime-product 4) (* 1 3))
+;;
+
+(prime-product 5)
+;; ==> 24
+
+;;
+;; 5 is r.p. to 1, 2, 3 and 4.
+;; (= (prime-product 5) (* 1 2 3 4))
+;;
+
+(prime-product 6)
+;; ==> 5 
+
+;;
+;; 6 is r.p. is 1 and 5.
+;; (= (prime-product 6) (* 1 5))
+;;
+
+(prime-product 7)
+;; ==> 720
+
+;;
+;; 7 is r.p. to 1, 2, 3, 4, 5, 6
+;; (= (prime-product 7) (* 1 2 3 4 5 6))
+;;
+
+(prime-product 8)
+;; ==> 105
+
+;;
+;; 8 is r.p. to 1, 3, 5, 7
+;; (= (prime-product 8) (* 1 3 5 7))
+;; 
+
+(prime-product 9)
+;; ==> 2240
+
+;;
+;; 9 is r.p. is 2, 4, 5, 7, 8 
+;; (= (prime-product 9) (* 1 2 4 5 7 8))
+;;
+
+(prime-product 10)
+;; ==> 189
+
+;;
+;; 10 is r.p. to 3, 7, 9
+;; (= (prime-product 10) (* 1 3 7 9)
+;;
+
+;;
+;; It's interesting to note that if n is prime, our prime product routine returns (n-1)! 
+;;
+;; Vide 3, 5 and 7 as examples.
+;;
