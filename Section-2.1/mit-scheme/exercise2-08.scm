@@ -45,19 +45,23 @@
 ;; first element of the combination, to arrive at the difference between the two elements.
 ;;
 (define (negative interval)
-  (make-interval (* -1 (upper interval))
-		 (* -1 (lower interval))))
+  (make-interval (* -1 (upper-bound interval))
+		 (* -1 (lower-bound interval))))
 
 ;;
 ;; Do a few use cases, to verify that we are getting the negative:
 ;;
 (negative (make-interval 3 5))
+;; ==> (-5 . -3)
 
 (negative (make-interval 0 3))
+;; ==> (-3 . 0)
 
 (negative (make-interval -5 -3))
+;; ==> (3 . 5)
 
 (negative (make-interval -3 0))
+;; ==> (0 . 3)
  
 ;;
 ;; Now define the subtraction procedure:
