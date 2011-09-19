@@ -21,10 +21,17 @@
 ;; in forming the result for "div-interval", and since we cannot divide by zero,
 ;; we will signal an error if either (lower-bound y) or (upper-bound y) is zero.
 ;;
+;; More generally, we can model any interval that "spans" 0 as somehow being a 
+;; representation "of" 0, and hence exclude such candidate intervals from division.
+;; Note that the previous checks we describe are a special case of this more 
+;; general check.
+;;
 (define (div-interval x y)
   (let ((p1 (lower-bound y))
 	(p2 (upper-bound y)))
-    (cond ((or (= p1 0) (= p2 0))
+    (define (spans-zero?)
+      (and (< p1 0) (> p2 0)))
+    (cond ((or (= p1 0) (= p2 0) (spans-zero?))
 	   (display "*** Cannot divide by zero!"))
 	  (else
 	   (mul-interval x
