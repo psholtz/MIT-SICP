@@ -56,7 +56,9 @@
 ;; This is the answer we were expecting.
 ;;
 
-
+;;
+;; We can perform the integration using real numbers:
+;;
 (simpson cube 0.0 1.0 100)
 ;; --> 0.246666666666
 
