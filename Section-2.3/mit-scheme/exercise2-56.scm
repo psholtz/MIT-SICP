@@ -138,7 +138,7 @@
 ;; ==> (* x y)
 
 ;;
-;; To support exponentiation, we also need to define procedures for 
+;; To support differentiation of exponentiation, we also need to define procedures for 
 ;; manipuating differences:
 ;;
 (define (difference? x)
@@ -176,7 +176,27 @@
 
 ;;
 ;; Now let's address the problem statement, and define the supporting procedures
-;; needed to support exponentation in the symbolic differentiation procedure:
+;; needed to support exponentation in the symbolic differentiation procedure.
+;;
+;; Technically there are three ways we can differentiate an exponentiation:
+;;
+;; (1) x^n
+;; (2) n^x
+;; (3) x^x
+;;
+;; If we wanted to restrict differentiation only to (1), we should place a 
+;; check for exponentiation something like:
+;;
+;; (define (exponentiation? x)
+;;   (and (pair? x) (eq? (car x) '**) (variable? (cadr x))))
+;;
+;; or possibly, even more safely:
+;;
+;; (define (exponentiation? x)
+;;   (and (pair? x) (eq? (car x) '**) (variable? (cadr x)) (number? (caddr x))))
+;;
+;; However, we will try to define a more general model for differentiation of 
+;; exponentiation, one that supports all three forms of exponentiation.
 ;;
 (define (exponentiation? x)
   (and (pair? x) (eq? (car x) '**)))
@@ -195,43 +215,72 @@
 	 (list '** base exp-value))))
 
 (make-exponentiation 3 0)
-;; ==>
+;; ==> 1
 (make-exponentiation 3 1)
-;; ==>
+;; ==> 3
 (make-exponentiation 3 2)
-;; ==>
+;; ==> 9
 (make-exponentiation 'x 0)
-;; ==>
+;; ==> 1
 (make-exponentiation 'x 1)
-;; ==>
+;; ==> x
 (make-exponentiation 'x 2)
-;; ==>
+;; ==> (** x 2)
 (make-exponentiation 3 'x)
-;; ==>
-;; ^^ CAN YOU EXPONENTIATE THIS???
+;; ==> (** 3 x)
+(make-exponentiation 'x 'x)
+;; ==> (** x x)
 
 ;;
 ;; Finally, define the "deriv" procedure:
 ;;
 (define (deriv expression var)
+
+  ;;
+  ;; Derivative of a constant is 0
+  ;;
   (cond ((number? expression) 0)
+
+	;;
+	;; Derivative of a linear variable is 1, otherwise 0 if differentiating against a different variable
+	;;
 	((variable? expression)
 	 (if (same-variable? expression var) 1 0))
+
+	;;
+	;; Differentiate sum
+	;;
 	((sum? expression)
 	 (make-sum (deriv (addend expression) var)
 		    (deriv (augend expression) var)))
+
+	;;
+	;; Differentiate product
+	;;
 	((product? expression)
 	 (make-sum
 	  (make-product (multiplier expression)
 			(deriv (multiplicand expression) var))
 	  (make-product (deriv (multiplier expression) var)
 			(multiplicand expression))))
+
+	;;
+	;; Differentiate an exponentiation
+	;;
 	((exponentiation? expression)
-	 (make-product
-	  (base expression)
-	  (make-exponentiation (base expression)
-			       (make-difference
-				(exponent expression)
-				1))))
+
+	 ;;
+	 ;; This is the simple case, where we have x^n, where x is a variable and n a constant
+	 ;;
+	 (cond ((and (variable? (base expression)) (number? (exponent expression)))
+		(make-product
+		 (base expression)
+		 (make-exponentiation (base expression)
+				      (make-difference
+				       (exponent expression)
+				       1))))))
+	;;
+	;; Signal an error condition
+	;;
 	(else
 	 (error "Unknown expression type -- DERIV" expression))))
