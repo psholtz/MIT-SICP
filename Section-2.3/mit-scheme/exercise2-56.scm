@@ -184,22 +184,14 @@
 ;; (2) n^x
 ;; (3) x^x
 ;;
-;; If we wanted to restrict differentiation only to (1), we should place a 
-;; check for exponentiation something like:
+;; For the sake of simplicity, we will implement only case (1). 
 ;;
-;; (define (exponentiation? x)
-;;   (and (pair? x) (eq? (car x) '**) (variable? (cadr x))))
-;;
-;; or possibly, even more safely:
-;;
-;; (define (exponentiation? x)
-;;   (and (pair? x) (eq? (car x) '**) (variable? (cadr x)) (number? (caddr x))))
-;;
-;; However, we will try to define a more general model for differentiation of 
-;; exponentiation, one that supports all three forms of exponentiation.
+;; For this reason, in the "exponentiation?" test we should check to make sure that 
+;; the base is of type variable. We will support both numbers and variables in the 
+;; exponent.
 ;;
 (define (exponentiation? x)
-  (and (pair? x) (eq? (car x) '**)))
+  (and (pair? x) (eq? (car x) '**) (variable? (cadr x))))
 
 (define (base p)
   (cadr p))
@@ -265,20 +257,16 @@
 			(multiplicand expression))))
 
 	;;
-	;; Differentiate an exponentiation
+	;; Differentiate an exponentiation. 
+	;; Again, only support the case where the base is a variable.
 	;;
 	((exponentiation? expression)
+	 (make-product
+	  (exponent expression)
+	  (make-exponentiation
+	   (base expression)
+	   (make-difference (exponent expression 1)))))
 
-	 ;;
-	 ;; This is the simple case, where we have x^n, where x is a variable and n a constant
-	 ;;
-	 (cond ((and (variable? (base expression)) (number? (exponent expression)))
-		(make-product
-		 (base expression)
-		 (make-exponentiation (base expression)
-				      (make-difference
-				       (exponent expression)
-				       1))))))
 	;;
 	;; Signal an error condition
 	;;
