@@ -54,6 +54,17 @@
   (distance-points (start-segment s) (end-segment s)))
 
 ;;
+;; Support for printing Points:
+;;
+(define (print-point p)
+  (newline)
+  (display "(")
+  (display (x-point p))
+  (display ",")
+  (display (y-point p))
+  (display ")"))
+
+;;
 ;; Lets start by implementing Model (1).
 ;;
 ;; We will construct the rectangle by specifying:
@@ -105,7 +116,12 @@
 ;; Note that we can change the representational model for the rectangles, so long as 
 ;; we do not alter how the "width" and "height" procedures behave.
 ;;
-;; Now let's implement representational model (2).
+
+;;
+;; [[ PUT USE CASES HERE ]]
+;;
+
+;; Now let's implement representational Model (2).
 ;;
 ;; As before, we still require 4 parameters to specify the rectangle, but this time
 ;; we will use:
