@@ -1,47 +1,237 @@
 ;;
 ;; Exercise 2.56
 ;;
+;; Show how to extend the basic differentiator to handle more kinds of expressions.
+;; For instance, implement the differentiation rule:
+;;
+;; d/dx(u^n) = n*u^(n-1) * du/dx
+;;
+;; by adding a new clause to the "deriv" program and defining appropriate procedures
+;; "exponentiation?", "base", "exponent" and "make-exponentiatoin". You may use the 
+;; symbol ** to denote exponentiation). Build in the rules that anything raised to the 
+;; power 0 is 1 and anything raised to the power 1 is itself.
+;;
 
 ;;
-;; Load the library with the necessary procedures.
+;; First let's import the symbolic differentiation package as expressed in the text.
 ;;
-(load "differentiation.scm")
+;; We start with the selectors needed to support the "deriv" procedure.
+;;
+;; First the procedures that support basic symbol manipulation:
+;;
+(define (variable? x) (symbol? x))
 
-;; 
-;; Redefine the "deriv" procedure to handle exponentiation.
+(variable? 'x)
+;; ==> #t
+(variable? 31)
+;; ==> #f
+
+(define (same-variable? v1 v2)
+  (and (variable? v1) (variable? v2) (eq? v1 v2)))
+
+(same-variable? 10 30)
+;; ==> #f
+(same-variable? 10 'x)
+;; ==> #f
+(same-variable? 'x 10)
+;; ==> #f
+(same-variable? 'x 'y)
+;; ==> #f
+(same-variable? 'x 'x)
+;; ==> #t
+
+(define (=number? exp num)
+  (and (number? exp) (= exp num)))
+
+(define test-value-01 0)
+(define test-value-02 10)
+(=number? 'x 0)
+;; ==> #f
+(=number? 0 0)
+;; ==> #t
+(=number? test-value-01 0)
+;; ==> #t
+(=number? test-value-01 10)
+;; ==> #f
+(=number? test-value-02 0)
+;; ==> #f
+(=number? test-value-02 10)
+;; ==> #t
+
 ;;
-(define (deriv exp var)
-  (cond ((number? exp) 0)
-	((variable? exp)
-	 (if (same-variable? exp var) 1 0))
-	((sum? exp)
-	 (make-sum (deriv (addend exp) var)
-		   (deriv (augend exp) var)))
-	((product? exp)
-	 (make-sum
-	  (make-product (multiplier exp)
-			(deriv (multiplicand exp) var))
-	  (make-product (deriv (multiplier exp) var)
-			(multiplicand exp))))
-	((exponentiation? exp)
-	 (make-product
-	  (exponent exp)
-	  (make-exponentiation (base exp) (- (exponent exp) 1))))
+;; Procedures for manipulating sums:
+;;
+(define (sum? x)
+  (and (pair? x) (eq? (car x) '+)))
+
+(define (addend s) (cadr s))
+
+(define (augend s) (caddr s))
+
+(define (make-sum a1 a2)
+  (cond ((=number? a1 0) a2)
+	((=number? a2 0) a1)
+	((and (number? a1) (number? a2)) (+ a1 a2))
 	(else
-	 (error "unknown expression type -- DERIV" exp))))
+	 (list '+ a1 a2))))
+
+(make-sum 0 10)
+;; ==> 10
+(make-sum 0 'x)
+;; ==> x
+(make-sum 10 0)
+;; ==> 10
+(make-sum 'x 0)
+;; ==> x
+(make-sum 10 20)
+;; ==> 30
+(make-sum 'x 'y)
+;; ==> (+ x y)
+(make-sum 10 'x)
+;; ==> (+ 10 x)
+(make-sum 'x 10)
+;; ==> (+ x 10)
 
 ;;
-;; Add support for exponentiation.
+;; Procedures for manipulating products:
+;;
+(define (product? x)
+  (and (pair? x) (eq? (car x) '*)))
+
+(define (multiplier p) (cadr p))
+
+(define (multiplicand p) (caddr p))
+
+(define (make-product m1 m2)
+  (cond ((or (=number? m1 0) (=number? m2 0)) 0)
+	((=number? m1 1) m2)
+	((=number? m2 1) m1)
+	((and (number? m1) (number?  m2)) (* m1 m2))
+	(else 
+	 (list '* m1 m2))))
+
+(make-product 0 10)
+;; ==> 0
+(make-product 1 10)
+;; ==> 10
+(make-product 2 10)
+;; ==> 20
+(make-product 10 0)
+;; ==> 0
+(make-product 10 1)
+;; ==> 10
+(make-product 10 2)
+;; ==> 20
+(make-product 0 'x)
+;; ==> 0
+(make-product 1 'x)
+;; ==> x 
+(make-product 2 'x)
+;; ==> (* 2 x)
+(make-product 'x 0)
+;; ==> 0 
+(make-product 'x 1)
+;; ==> x
+(make-product 'x 2)
+;; ==> (* x 2)
+(make-product 'x 'y)
+;; ==> (* x y)
+
+;;
+;; To support exponentiation, we also need to define procedures for 
+;; manipuating differences:
+;;
+(define (difference? x)
+  (and (pair? x) (eq? (car x) '-)))
+
+(define (minuend p) (cadr p))
+
+(define (subtrahend p) (caddr p))
+
+(define (make-difference s1 s2)
+  (cond ((=number? s2 0) s1)
+	((=number? s1 0) (make-product -1 s2))
+	((and (number? s1) (number? s2)) (- s1 s2))
+	(else
+	 (list '- s1 s2))))
+	 
+(make-difference 3 0)
+;; ==> 3
+(make-difference 0 3)
+;; ==> -3
+(make-difference 4 2)
+;; ==> 2
+(make-difference 2 4)
+;; ==> -2
+(make-difference 'x 0)
+;; ==> x
+(make-difference 0 'x)
+;; ==> (* -1 x)
+(make-difference 'x 1)
+;; ==> (- x 1)
+(make-differnece 1 'x)
+;; ==> (- 1 x)
+(make-difference 'x 'y)
+;; ==> (- x y)
+
+;;
+;; Now let's address the problem statement, and define the supporting procedures
+;; needed to support exponentation in the symbolic differentiation procedure:
 ;;
 (define (exponentiation? x)
   (and (pair? x) (eq? (car x) '**)))
 
-(define (base n) (cadr n))
+(define (base p)
+  (cadr p))
 
-(define (exponent n) (caddr n))
+(define (exponent p)
+  (caddr p))
 
-(define (make-exponentiation b n)
-  (cond ((= n 0) 1)
-	((= n 1) b)
+(define (make-exponentiation base exp-value)
+  (cond ((and (number? base) (number? exp-value)) (expt base exp-value))
+	((=number? exp-value 0) 1)
+	((=number? exp-value 1) base)
 	(else
-	 (list '** b n))))
+	 (list '** base exp-value))))
+
+(make-exponentiation 3 0)
+;; ==>
+(make-exponentiation 3 1)
+;; ==>
+(make-exponentiation 3 2)
+;; ==>
+(make-exponentiation 'x 0)
+;; ==>
+(make-exponentiation 'x 1)
+;; ==>
+(make-exponentiation 'x 2)
+;; ==>
+(make-exponentiation 3 'x)
+;; ==>
+;; ^^ CAN YOU EXPONENTIATE THIS???
+
+;;
+;; Finally, define the "deriv" procedure:
+;;
+(define (deriv expression var)
+  (cond ((number? expression) 0)
+	((variable? expression)
+	 (if (same-variable? expression var) 1 0))
+	((sum? expression)
+	 (make-sum (deriv (addend expression) var)
+		    (deriv (augend expression) var)))
+	((product? expression)
+	 (make-sum
+	  (make-product (multiplier expression)
+			(deriv (multiplicand expression) var))
+	  (make-product (deriv (multiplier expression) var)
+			(multiplicand expression))))
+	((exponentiation? expression)
+	 (make-product
+	  (base expression)
+	  (make-exponentiation (base expression)
+			       (make-difference
+				(exponent expression)
+				1))))
+	(else
+	 (error "Unknown expression type -- DERIV" expression))))
