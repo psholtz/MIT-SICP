@@ -247,6 +247,13 @@
 		    (deriv (augend expression) var)))
 
 	;;
+	;; For completeness, let's add differentiation of differences
+	;;
+	((difference? expression)
+	 (make-difference (deriv (minuend expression) var)
+			  (deriv (subtrahend expression) var)))
+
+	;;
 	;; Differentiate product
 	;;
 	((product? expression)
@@ -265,10 +272,52 @@
 	  (exponent expression)
 	  (make-exponentiation
 	   (base expression)
-	   (make-difference (exponent expression 1)))))
+	   (make-difference (exponent expression) 1))))))
 
 	;;
 	;; Signal an error condition
 	;;
 	(else
 	 (error "Unknown expression type -- DERIV" expression))))
+
+;;
+;; Let's walk through each condition, testing if deriv gives expected answers:
+;;
+(deriv 3 'x)
+;; ==> 0
+(deriv 'x 'x)
+;; ==> 1
+(deriv 'x 'y)
+;; ==> 0
+(deriv '(+ x y) 'x)
+;; ==> 1
+(deriv '(+ x y) 'y)
+;; ==> 1
+(deriv '(+ (* 2 x) y) 'x)
+;; ==> 2
+(deriv '(+ (* x y) y) 'x)
+;; ==> y
+(deriv '(+ (* 2 x) y) 'y)
+;; ==> 1
+(deriv '(- x 1) 'x)
+;; ==> 1
+(deriv '(- y x) 'x)
+;; ==> -1
+(deriv '(* x y) 'x)
+;; ==> y
+(deriv '(** x 3) 'x)
+;; ==> (* 3 (** x 2))
+(deriv '(** x y) 'x)
+;; ==> (* y (** x (- y 1)))
+
+;;
+;; Looks like the basics work.
+;;
+;; Let's step through some of the examples given in the text:
+;;
+(deriv '(+ x 3) 'x)
+;; ==> 1
+(deriv '(* x y) 'x)
+;; ==> y
+(deriv '(* (* x y) (+ x 3)) 'x)
+;; ==> (+ (* x y) (* y (+ x 3)))
