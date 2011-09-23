@@ -6,20 +6,6 @@
 ;; definitions of the procedures cons, car and cdr.
 ;;
 
-;;
-;; We need to re-introduce the expt procedure
-;; from Chapter 1, as an auxilliary procedure
-;; for calculating exponentials.
-;;
-(define (expt b n)
-  (cond ((= n 0) 1)
-	((even? n) (square (expt b (/ n 2))))
-	(else (* b (expt b (- n 1))))))
-
-(define (even? n) (= (remainder n 2) 0))
-
-(define (square n) (* n n))
-
 ;; 
 ;; Definition for the cons procedure:
 ;;
