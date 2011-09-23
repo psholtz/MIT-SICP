@@ -76,8 +76,13 @@
 ;;
 ;; We create a data structure to hold these two points (upper-left, and lower-right)
 ;;
+;; We want our constructor to signal an error if the user supplies rectangle dimensions
+;; which are invalid:
+;;
 (define (make-rectangle upper-left-x upper-left-y lower-right-x lower-right-y)
-  (cons (make-point upper-left-x upper-left-y) (make-point lower-right-x lower-right y)))
+  (cond ((and (> lower-right-x upper-left-x) (> upper-left-y lower-right-y))
+	 (cons (make-point upper-left-x upper-left-y)
+	       (make-point lower-right-x lower-right-y)))))
 
 ;;
 ;; Selectors:
@@ -118,8 +123,57 @@
 ;;
 
 ;;
-;; [[ PUT USE CASES HERE ]]
+;; Let's run some use cases. 
 ;;
+;; The following cases should all fail, owing to bad dimensions.
+;;
+(define r1 (make-rectangle 0 0 0 0))
+;; ==> Invalid
+(define r1 (make-rectangle 0 1 0 0))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 1 0))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 -1 0))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 0 -1))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 -1 -1))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 1 1))
+;; ==> Invalid
+
+;;
+;; Now let's start working with "real" rectangles, and run them through our selectors:
+;;
+(define r1 (make-rectangle 0 1 1 0))
+;; ==> r1
+(print-point (upper-left r1))
+;; ==> (0,1)
+(print-point (lower-right r1))
+;; ==> (1,0)
+(width r1)
+;; ==> 1
+(height r1)
+;; ==> 1
+(perimeter r1)
+;; ==> 4
+(area r1)
+;; ==> 1
+
+(define r2 (make-rectangle 0 1 2 0))
+;; ==> r2
+(print-point (upper-left r2))
+;; ==> (0,1)
+(print-point (lower-right r2))
+;; ==> (2,0)
+(width r2)
+;; ==> 2
+(height r2)
+;; ==> 1
+(perimeter r2)
+;; ==> 6
+(area r2)
+;; ==> 2
 
 ;; Now let's implement representational Model (2).
 ;;
@@ -131,18 +185,26 @@
 ;; (c) width 
 ;; (d) height 
 ;;
+;; Again, do some error checking to make sure the rectangle is valid.
+;;
 (define (make-rectangle upper-left-x upper-left-y width height)
-  (let ((p1 (make-point upper-left-x upper-left-y)))
-    (let ((p2 (make-point
-	       (+ (x-point p1) width)
-	       (+ (y-point p1) height))))
-    (cons p1 p2))))
+  (cond ((and (> width 0) (> height 0))
+	 (let ((p1 (make-point upper-left-x upper-left-y)))
+	   (let ((p2 (make-point
+		      (+ (x-point p1) width)
+		      (+ (y-point p1) height))))
+	     (cons p1 p2))))
+	(else
+	 (display "Error - recn
 
 ;;
 ;; Note that if we construct the rectangle in this manner, we do not need
 ;; to alter any of the remaining selectors, nor do we need to change the 
 ;; "perimeter" or "area" procedures.
 ;;
+
+;;
+;; Let's run some 
 
 ;;
 ;; [[WORKING -- ADD USE CASES]]
