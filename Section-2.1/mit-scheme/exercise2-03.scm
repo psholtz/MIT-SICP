@@ -82,7 +82,9 @@
 (define (make-rectangle upper-left-x upper-left-y lower-right-x lower-right-y)
   (cond ((and (> lower-right-x upper-left-x) (> upper-left-y lower-right-y))
 	 (cons (make-point upper-left-x upper-left-y)
-	       (make-point lower-right-x lower-right-y)))))
+	       (make-point lower-right-x lower-right-y)))
+	(else
+	 (display "Error: rectangle dimensions are invalid!"))))
 
 ;;
 ;; Selectors:
@@ -192,10 +194,10 @@
 	 (let ((p1 (make-point upper-left-x upper-left-y)))
 	   (let ((p2 (make-point
 		      (+ (x-point p1) width)
-		      (+ (y-point p1) height))))
+		      (- (y-point p1) height))))
 	     (cons p1 p2))))
 	(else
-	 (display "Error - recn
+	 (display "Error: rectangle dimensions are invalid!"))))
 
 ;;
 ;; Note that if we construct the rectangle in this manner, we do not need
@@ -204,8 +206,53 @@
 ;;
 
 ;;
-;; Let's run some 
+;; Again, let's check to make sure it rejects bad rectangles:
+;;
+(define r1 (make-rectangle 0 0 0 0))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 -1 0))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 0 -1))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 -1 -1))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 1 0))
+;; ==> Invalid
+(define r1 (make-rectangle 0 0 0 1))
+;; ==> Invalid
 
 ;;
-;; [[WORKING -- ADD USE CASES]]
+;; Let's re-run our test cases from before (without changing of any of the other selectors), 
+;; and see if we still get the same answers. The "semantics" of the constructor have changed, 
+;; and we must pass in different arguments to generate the "same" rectangle, but otherwise 
+;; the selectors need not be updated.
 ;;
+(define r1 (make-rectangle 0 1 1 1))
+;; ==> r1
+(upper-left r1)
+;; ==> (0,1)
+(lower-right r1)
+;; ==> (1,0)
+(width r1)
+;; ==> 1
+(height r1) 
+;; ==> 1
+(perimeter r1)
+;; ==> 4
+(area r1)
+;; ==> 1
+
+(define r2 (make-rectangle 0 1 2 1))
+;; ==> r2
+(upper-left r2)
+;; ==> (0,1)
+(lower-right r2)
+;; ==> (2,0)
+(width r2)
+;; ==> 2
+(height r2)
+;; ==> 1 
+(perimeter r2)
+;; ==> 6
+(area r2)
+;; ==> 2
