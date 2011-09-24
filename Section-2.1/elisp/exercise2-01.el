@@ -29,30 +29,41 @@
   (newline)
   (princ (numer x))
   (princ "/")
-  (princ (denom x)))
+  (princ (denom x))
+  (newline))
 
 ;;
 ;; Need selectors for numerator and denominator as well:
 ;;
-(defun (numer x) (car x))
-(defun (denom x) (cdr x))
+(defun numer (x) (car x))
+(defun denom (x) (cdr x))
 
 ;;
 ;; Run the unit tests:
 ;;
 (print-rat (make-rat 1 2))
+;; ==> 1/2
 (print-rat (make-rat -1 2))
+;; ==> -1/2
 (print-rat (make-rat 1 -2))
+;; ==> -1/2
 (print-rat (make-rat -1 -2))
-
+;; ==> 1/2
 (print-rat (make-rat 0 2))
+;; ==> 0/1
 
 ;;
 ;; Note that we're not testing for 0 in the denominator yet.
 ;;
 (print-rat (make-rat 2 4))
+;; ==> 1/2
 (print-rat (make-rat -2 4))
+;; ==> -1/2
 (print-rat (make-rat -2 -4))
+;; ==> 1/2
 (print-rat (make-rat 2 -4))
+;; ==> -1/2
 (print-rat (make-rat 3 9))
+;; ==> 1/3
 (print-rat (make-rat 15 -9))
+;; ==> -5/3
