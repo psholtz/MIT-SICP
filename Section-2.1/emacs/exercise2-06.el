@@ -31,7 +31,7 @@
 	       (lambda (f)
 		 (lexical-let ((foo f))
 			      (lambda (x)
-				(funcall foo (funcall (funcall noo #'foo) x)))))))
+				(funcall foo (funcall (funcall noo foo) x)))))))
 
 ;;
 ;; To get a sense for what's happening here, let's experiment a bit with these procedures and 
