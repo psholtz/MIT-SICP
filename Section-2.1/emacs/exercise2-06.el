@@ -118,3 +118,61 @@
 ;; ==> 25
 (funcall (funcall (add-1 #'zero) #'square) 10)
 ;; ==> 100
+
+;;
+;; If we apply "add-1" twice, it is reasonbly to presume that the resulting compound 
+;; procedure will apply its argument procedure twice:
+;;
+(funcall (funcall (add-1 (add-1 #'zero)) #'inc) 1)
+;; ==> 3
+(funcall (funcall (add-1 (add-1 #'zero)) #'inc) 5)
+;; ==> 7
+(funcall (funcall (add-1 (add-1 #'zero)) #'inc) 10)
+;; ==> 12
+(funcall (funcall (add-1 (add-1 #'zero)) #'inc) 100)
+;; ==> 102
+
+;;
+;; The same results are obtained when applying the compound-procedure to "square", although 
+;; here the result is not the natural "succession of numerals" that we obtain when using 
+;; the "increment" procedure:
+;;
+(funcall (funcall (add-1 (add-1 #'zero)) #'square) 2)
+;; ==> 16
+(funcall (funcall (add-1 (add-1 #'zero)) #'square) 3)
+;; ==> 81
+
+;;
+;; If we were lazy, we can do what the book instructs us NOT to do, and that is define procedures
+;; "one" and "two" in terms of "add-1" and "zero":
+;;
+(setq one (add-1 #'zero))
+(setq two (add-1 (add-1 #'zero)))
+
+(funcall (funcall one #'inc) 0)
+;; ==> 1
+(funcall (funcall two #'inc) 0)
+;; ==> 2
+
+;;
+;; I'm not going to expand the call graph the way I did in the scheme example. That would
+;; prove a bit too laborious given the constraints we have to work under in emacs. 
+;; However, we already know what the answer is supposed to be:
+;;
+;; "one" will be one application of the argument procedure.
+;; "two" will be two applications of the argument procedure, and so on.
+;;
+(defun one (f)
+  (lexical-let ((foo f))
+	       (lambda (x)
+		 (funcall foo x))))
+
+(defun two (f)
+  (lexical-let ((foo f))
+	       (lambda (x)
+		 (funcall foo (funcall foo x)))))
+
+(funcall (one #'inc) 0)
+;; ==> 1
+(funcall (two #'inc) 0)
+;; ==> 2
