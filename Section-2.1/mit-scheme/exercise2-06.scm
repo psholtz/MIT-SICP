@@ -78,7 +78,7 @@
 
 ;;
 ;; Judging from the source code for "add-1", the procedure returned consumes a procedure in 
-;; one argument, and itself returns a third procedure in one argument. Let's try to apply 
+;; one argument, which itself returns a third procedure in one argument. Let's try to apply 
 ;; (add-1 zero) to one-argument procedures like "inc" and "square", and see what happens:
 ;;
 ((add-1 zero) inc)
