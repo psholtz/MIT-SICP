@@ -3,7 +3,15 @@ Section 1.3
 
 Contains worked solutions expressed in the Emacs Lisp dialect.
 
--- Explain Lexical Scoping v. Dynamic Scoping --
+To load a sample file into a running Emacs interpreter:
 
-44 is not done.
-45 is not done.
+> (load-file "filename.el")
+
+To load the files into a runnign Emacs interpreter, you may have to update the load-path variable in your Emacs settings to include the current working directory:
+
+> (setq load-path (append (list ".") load-path))
+
+Lexical Scoping versus Dynamic Scoping
+-------------------------------------- 
+
+[explain this for the various problems]
