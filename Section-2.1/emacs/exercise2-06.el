@@ -110,3 +110,11 @@
 ;;
 ;; Let's see what happens if we apply the generated compound procedure to "square":
 ;;
+(funcall (funcall (add-1 #'zero) #'square) 1)
+;; ==> 1
+(funcall (funcall (add-1 #'zero) #'square) 3)
+;; ==> 9
+(funcall (funcall (add-1 #'zero) #'square) 5)
+;; ==> 25
+(funcall (funcall (add-1 #'zero) #'square) 10)
+;; ==> 100
