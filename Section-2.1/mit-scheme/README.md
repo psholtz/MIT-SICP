@@ -7,6 +7,6 @@ To load a sample file from an already running interpreter:
 
 > (load "sample.scm")
 
-To load a simple file into the interpreter from the command line:
+To load a sample file into the interpreter from the command line:
 
 > scheme --load "sample.scm"
