@@ -2,3 +2,11 @@ Section 1.2
 =========== 
 
 Contains worked solutions expressed in the MIT Scheme dialect.
+
+To a sample file from an already running interpreter:
+
+> (load "sample.scm")
+
+To load a sample file into the interpreter from the command line:
+
+> scheme --load "sample.scm"
