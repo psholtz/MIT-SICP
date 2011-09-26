@@ -54,3 +54,26 @@ w(i1-i2) = (b-c) - (a-d) = (b-a) + (d-c) = w(i1) + w(i2)
 </pre>
 
 And so the width of the sum is still the sum of the widths, as we expect.
+
+However, this is not the case for multiplication. 
+
+Consider again, our two intervals:
+
+<pre>
+i1 = (a,b)
+i2 = (c,d)
+</pre>
+
+We are only looking for a (general) counter-example, so let's simplify our analysis by presuming that 0 < a < b and 0 < c < d and a < b < c < d. We then have:
+
+<pre>
+i1 * i2 = (ac, bd)
+</pre>
+
+but in this case, we clearly have:
+
+<pre>
+w(i1 * i2) = bd - ac
+</pre>
+
+which is not a function of either (b-a) or (d-c). QED.
