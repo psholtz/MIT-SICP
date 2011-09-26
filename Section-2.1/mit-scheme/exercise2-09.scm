@@ -1,7 +1,7 @@
 ;;
 ;; Exercise 2.9
 ;;
-;; The "width" of an intervla is half of the difference between its upper and lower bounds.
+;; The "width" of an interval is half of the difference between its upper and lower bounds.
 ;; The width is a measure of the uncertainty of the number specified by the interval. For 
 ;; some arithmetic operations the width of the result of combining two interval is a
 ;; function only of the widths of the argument intervals, whereas for others the width 
