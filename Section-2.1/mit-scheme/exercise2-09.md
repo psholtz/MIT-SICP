@@ -24,6 +24,33 @@ i1 + i2 = (a+c,b+d)
 For the widths of the intervals we have:
 
 <pre>
-w1 = (b-a)
-w2 = (d-c)
+w(i1) = (b-a)
+w(i2) = (d-c)
 </pre>
+
+and the width of the summed interval is similarly:
+
+<pre>
+w(i1+i2) = (d+b)-(a+c) = (d-c) + (b-a) = w(i1) + w(i2)
+</pre>
+
+In other words, the width of the sum is the sum of the widths.
+
+The difference is simply a special for of the sum, namely, adding the negative of one of the arguments, so we would expect the same arguments to carry over identicallly. 
+
+If we wish to work out the difference by hand, we would have:
+
+<pre>
+i1 = (a,b)
+i2 = (c,d)
+-i2 = (-d,-c)
+i1 - i2 = (a-d,b-c)
+</pre>
+
+so that:
+
+<pre>
+w(i1-i2) = (b-c) - (a-d) = (b-a) + (d-c) = w(i1) + w(i2)
+</pre>
+
+And so the width of the sum is still the sum of the widths, as we expect.
