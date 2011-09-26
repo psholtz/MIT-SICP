@@ -170,15 +170,16 @@
 	   (total-weight structure)))))
 
 (total-weight m1)
-;; ==>
+;; ==> 2
 (total-weight m2)
-;; ==>
+;; ==> 5
 (total-weight m3)
-;; ==>
+;; ==> 8
 (total-weight m4)
-;; ==>
+;; ==> 7
 (total-weight m5)
-;; ==>
+;; ==> 12
+
 
 ;;
 ;; (c) A mobile is said to be "balanced" if the torque applied by its top-left branch is equal to that 
@@ -194,6 +195,16 @@
 (define (torque branch)
   (* (branch-length branch) (branch-weight branch)))
 
+(torque (left-branch m1))
+;; ==> 1
+(torque (right-branch m1))
+;; ==> 1
+(torque (left-branch m2))
+;; ==>
+(torque (right-branch m2))
+;; ==>
+
+
 ;;
 ;; Let's also define a selector "balanced-branch?" which determines whether the mobile attached
 ;; to the branch is balanced. If the attached structure is simply a weight, then we presume yes, 
@@ -202,7 +213,7 @@
 ;;
 (define (balanced-branch? branch)
   (let ((structure (branch-structure branch)))
-    (cond ((number? structure) #f)
+    (cond ((number? structure) #t)
 	  (else
 	   (balanced-mobile? structure)))))
 
