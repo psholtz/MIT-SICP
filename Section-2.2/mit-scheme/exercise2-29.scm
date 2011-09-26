@@ -32,6 +32,126 @@
   (cadr branch))
 
 ;;
+;; Let's define some sample mobiles:
+;;
+(define m1 (make-mobile 
+	    (make-branch 1 1)
+	    (make-branch 1 1)))
+
+(define m2 (make-mobile
+	    (make-branch 2 3)
+	    (make-branch 3 2)))
+
+(define m3 (make-mobile 
+	    (make-branch 1 3)
+	    (make-branch 3 5)))
+
+(define m4 (make-mobile
+	    (make-branch 3 m1)
+	    (make-branch 3 m2)))
+
+(define m5 (make-mobile 
+	    (make-branch 3 5)
+	    (make-branch 5 m4)))
+
+;;
+;; Unit test of "m1"
+;;
+(left-branch m1)
+;; ==> (1 1)
+(right-branch m1)
+;; ==> (1 1)
+(branch-length (left-branch m1))
+;; ==> 1
+(branch-length (right-branch m1))
+;; ==> 1
+(branch-structure (left-branch m1))
+;; ==> 1
+(branch-structure (right-branch m1))
+;; ==> 1
+
+
+;; 
+;; Unit test of "m2"
+;;
+(left-branch m2)
+;; ==> (2 3)
+(right-branch m2)
+;; ==> (3 2)
+(branch-length (left-branch m2))
+;; ==> 2
+(branch-length (right-branch m2))
+;; ==> 3
+(branch-structure (left-branch m2))
+;; ==> 3
+(branch-structure (right-branch m2))
+;; ==> 2
+
+
+;;
+;; Unit test of "m3"
+;;
+(left-branch m3)
+;; ==> (1 3)
+(right-branch m3)
+;; ==> (3 5)
+(branch-length (left-branch m3))
+;; ==> 1
+(branch-length (right-branch m3))
+;; ==> 3
+(branch-structure (left-branch m3))
+;; ==> 3
+(branch-structure (right-branch m3))
+;; ==> 5
+
+
+;;
+;; Unit test of "m4"
+;;
+(left-branch m4)
+;; ==> (3 ((1 1) (1 1)))
+(right-branch m4)
+;; ==> (3 ((2 3) (3 2)))
+(branch-length (left-branch m4))
+;; ==> 3
+(branch-length (right-branch m4))
+;; ==> 3
+(branch-structure (left-branch m4))
+;; ==> ((1 1) (1 1))
+(branch-structure (right-branch m4))
+;; ==> ((2 3) (3 2))
+(left-branch (branch-structure (left-branch m4)))
+;; ==> (1 1)
+(right-branch (branch-structure (left-branch m4)))
+;; ==> (1 1)
+(left-branch (branch-structure (right-branch m4)))
+;; ==> (2 3)
+(right-branch (branch-structure (right-branch m4)))
+;; ==> (3 2)
+
+
+;;
+;; Unit test of "m5"
+;;
+(left-branch m5)
+;; ==> (3 5)
+(right-branch m5)
+;; ==> (5 ((3 ((1 1) (1 1))) (3 ((2 3) (3 2)))))
+(branch-length (left-branch m5))
+;; ==> 3
+(branch-length (right-bracnh m5))
+;; ==> 5
+(branch-structure (left-branch m5))
+;; ==> 5
+(branch-structure (right-branch m5))
+;; ==> ((3 ((1 1) (1 1))) (3 ((2 3) (3 2))))
+(left-branch (branch-structure (right-branch m5)))
+;; ==> (3 ((1 1) (1 1)))
+(right-branch (branch-structure (right-branch m5)))
+;; ==> (3 ((2 3) (3 2)))
+
+
+;;
 ;; (b) Using your selectors, define a procedure "total-weight" that returns the total weight of a mobile.
 ;;
 
@@ -48,6 +168,17 @@
     (cond ((number? structure) structure)
 	  (else
 	   (total-weight structure)))))
+
+(total-weight m1)
+;; ==>
+(total-weight m2)
+;; ==>
+(total-weight m3)
+;; ==>
+(total-weight m4)
+;; ==>
+(total-weight m5)
+;; ==>
 
 ;;
 ;; (c) A mobile is said to be "balanced" if the torque applied by its top-left branch is equal to that 
