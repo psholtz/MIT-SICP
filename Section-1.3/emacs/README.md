@@ -16,4 +16,4 @@ Lexical Scoping versus Dynamic Scoping
 
 [explain this for the various problems]
 
-[The Art of the Interpreter|http://www.yahoo.com]
+[The Art of the Interpreter](http://www.yahoo.com)
