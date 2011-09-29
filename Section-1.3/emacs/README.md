@@ -16,4 +16,6 @@ Lexical Scoping versus Dynamic Scoping
 
 [explain this for the various problems]
 
-[The Art of the Interpreter](http://www.yahoo.com)
+[The Art of the Interpreter](ftp://publications.ai.mit.edu/ai-publications/pdf/AIM-453.pdf)
+
+[The Original Lambda Papers](http://library.readscheme.org/page1.html)
