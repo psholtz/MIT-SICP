@@ -260,7 +260,7 @@
 (prime? (+ point1 9))
 ;; --> t
 
-(prime? (+ point 21))
+(prime? (+ point1 21))
 ;; --> t
 
 ;;
