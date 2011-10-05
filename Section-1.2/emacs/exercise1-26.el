@@ -19,3 +19,56 @@
 ;; "I don't see what difference that could make," says Louis. "I do." says Eva. "By writing the 
 ;; "procedure like that you have transformed the O(log n) process into a O(n) process." Explain.
 ;;
+
+;;
+;; For the sake of entertainment, let's set ourselves up to run the prime number tests using the 
+;; version of "expmod" given above:
+;;
+(defun even? (n) (= (% n 2) 0))
+(defun square (n) (* n n))
+
+(defun expmod (base exp m)
+  (cond ((= exp 0) 1)
+	((even? exp)
+	 (% (* (expmod base (/ exp 2) m)
+	       (expmod base (/ exp 2) m))
+	    m))
+	(t
+	 (% (* base (expmod base (- exp 1) m)) m))))
+
+(defun fermat-test (n)
+  (defun try-it (a)
+    (= (expmod a n n) a))
+  (try-it (+ 1 (random (- n 1)))))
+
+(defun fast-prime? (n times)
+  (cond ((= times 0) t)
+	((fermat-test n) (fast-prime? n (- times 1)))
+	(t '())))
+
+;;
+;; Let's run some unit tests, to make sure it works:
+;;
+(setq n 100)
+
+(fast-prime? 3 n)
+;; ==> t
+(fast-prime? 4 n)
+;; ==> nil
+(fast-prime? 5 n)
+;; ==> t
+(fast-prime? 6 n)
+;; ==> nil
+(fast-prime? 7 n)
+;; ==> t
+
+;;
+;; Next, define the procedures for running timed tests.
+;;
+;; We'll change this somewhat from the procedures presented in the text
+;; in that our procedure will only print a number (and corresponding time)
+;; if it's prime.
+;;
+;; On MIT Scheme, the (runtime) procedure is given by (real-time-clock), and
+;; this is the procedure we will use in our code.
+;;
