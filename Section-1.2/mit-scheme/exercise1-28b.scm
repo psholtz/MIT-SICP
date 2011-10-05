@@ -50,7 +50,7 @@
     (define (std-iter b t)
       (if (> (length b) 0)
 	  (std-iter (cdr b) (+ (square (- (car b) a)) t))
-	  (sqrt (/ (- (length d) 1)))))
+	  (sqrt (/ v (- (length d) 1)))))
     (if (= (length d) 1)
 	0.0
 	(std-iter d 0.0))))
