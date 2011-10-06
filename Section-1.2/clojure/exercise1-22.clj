@@ -107,7 +107,29 @@
   (if (even? a)
     (search (+ a 1))
     (search a)))
-  
+
+(search-for-primes 1000 1050)
+;; ==> 1009 (0)
+;; ==> 1013 (0)
+;; ==> 1019 (0)
+;; ==> 1021 (0)
+;; ==> 1031 (0)
+;; ==> 1033 (0)
+;; ==> 1039 (0)
+;; ==> 1049 (0)
+
+(search-for-primes 100000 100050)
+;; ==> 10007 (0)
+;; ==> 10009 (0)
+;; ==> 10037 (0)
+;; ==> 10039 (0)
+
+(search-for-primes 1000000 1000050)
+;; ==> 1000003 (3)
+;; ==> 1000033 (2)
+;; ==> 1000037 (2)
+;; ==> 1000039 (3)
+
 ;;
 ;; Now define one additional procedure, which starts at a number a
 ;; and finds the next n prime numbers (this is, technically, what
@@ -123,3 +145,18 @@
   (if (even? a)
     (search (+ a 1) 0)
     (search a 0)))
+
+(search-for-n-primes 10000 3)
+;; ==> 10007 (0)
+;; ==> 10009 (0)
+;; ==> 10037 (0)
+
+(search-for-n-primes 100000 3)
+;; ==> 100003 (0)
+;; ==> 100019 (0)
+;; ==> 100043 (0)
+
+(search-for-n-primes 1000000 3)
+;; ==> 1000003 (0)
+;; ==> 1000033 (0)
+;; ==> 1000037 (0)
