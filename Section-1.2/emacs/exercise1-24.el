@@ -8,10 +8,6 @@
 ;;
 
 ;;
-;; [WORKING]
-;;
-
-;;
 ;; Increase the buffers, so we can compute large primes:
 ;;
 (setq max-lisp-eval-depth 1000)
