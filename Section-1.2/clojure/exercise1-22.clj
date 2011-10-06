@@ -42,3 +42,84 @@
 
 (defn prime? [n]
   (= n (smallest-divisor n)))
+
+;;
+;; Let's run some unit tests, to make sure it works:
+;;
+(prime? 3)
+;; ==> true
+(prime? 4)
+;; ==> false
+(prime? 5)
+;; ==> true
+(prime? 6)
+;; ==> false
+(prime? 7)
+;; ==> true
+
+;;
+;; Next, define the procedures for running timed tests.
+;;
+;; We'll change this somewhat from the procedures presented in the text,
+;; in that our procedure will only print a number (and corresponding time)
+;; if it's prime.
+
+;;
+;; Modify procedure slightly, from what is defined in the text, so that
+;; we only print the prime numbers (i.e., non-primes are suppressed).
+;;
+(defn report-prime [n elapsed-time]
+  (println)
+  (print n)
+  (print " (")
+  (print elapsed-time)
+  (print ")"))
+
+;;
+;; Use this definition of start-prime-test, which returns "true" or "false"
+;; depending on whether the test candidate is prime, so that we can more easily
+;; support the "search-for-n-primes" procedure defined below.
+;;
+(defn start-prime-test [n start-time]
+  (cond (prime? n)
+        (do
+         (report-prime n (- (System/currentTimeMillis) start-time))
+         true)
+        :else false))
+
+;;
+;; In Clojure, we can make use of the Java libraries for system time.
+;;
+(defn timed-prime-test [n]
+  (start-prime-test n (System/currentTimeMillis)))
+
+;;
+;; Finally, let's define the "search-for-primes" procedure.
+;;
+;; The procedure will take two integers, a and b, and for each prime
+;; inbetween the two integers (inclusive) it will print the prime out
+;; and display the time required to calculate that it was a prime.
+;;
+(defn search-for-primes [a b]
+  (defn search [n]
+    (cond (<= n b) (timed-prime-test n))
+    (cond (< n b) (search (+ n 2))))
+  (if (even? a)
+    (search (+ a 1))
+    (search a)))
+  
+;;
+;; Now define one additional procedure, which starts at a number a
+;; and finds the next n prime numbers (this is, technically, what
+;; Exercise 1.22 asks us to do).
+;;
+(defn search-for-n-primes [a n]
+  (defn search [j c]
+    (let [next-j (+ j 2)]
+      (cond (< c n)
+            (if (timed-prime-test j)
+              (search next-j (+ c 1))
+              (search next-j c)))))
+  (if (even? a)
+    (search (+ a 1) 0)
+    (search a 0)))
