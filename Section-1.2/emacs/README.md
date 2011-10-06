@@ -12,4 +12,4 @@ To load files into a running Emacs interpreter, you may have to update the load-
 > (setq load-path (append (list ".") load-path))
 
 ---
-Remaining to do: 24, 26
+Remaining to do: 24
