@@ -54,3 +54,19 @@
 (def mills-2 (list 0 2 3 30))
 (prime? (mills-iter mills-2 0))
 ;; ==> true
+
+(def mills-3 (list 0 2 3 30 6))
+(prime? (mills-iter mills-3 0))
+;; ==> true
+
+(def mills-4 (list 0 2 3 30 6 80))
+(prime? (mills-iter mills-4 0))
+;; ==> true
+
+(def mills-5 (list 0 2 3 30 6 80 12))
+(prime? (mills-iter mills-5 0))
+;; ==> true
+
+(def mills-6 (list 0 2 3 30 6 80 12 450))
+(prime? (mills-iter mills-6 0))
+;; ==> true
