@@ -16,7 +16,7 @@ Lexical Scoping versus Dynamic Scoping
 
 [explain this for the various problems]
 
-*References*
+**References**
 
 [1] [The Art of the Interpreter](http://dspace.mit.edu/bitstream/handle/1721.1/6094/AIM-453.pdf)
 
