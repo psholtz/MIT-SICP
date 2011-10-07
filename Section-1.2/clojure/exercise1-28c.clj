@@ -34,6 +34,17 @@
 ;;
 
 ;;
+;; It's interesting to note that this is the same answer given by the following Haskell code:
+;;
+;; millsIter x t | length x > 0 = millsIter (tail x) ( (cube t) + (head x) )
+;;               | otherwise = t
+;;
+;; millsIter a 0
+;;
+;; where a is set to the list as in the Lisp code.
+;;
+
+;;
 ;; It is also worth noting that many of the steps in the iteration generate prime numbers:
 ;;
 (def mills-1 (list 0 2 3))
