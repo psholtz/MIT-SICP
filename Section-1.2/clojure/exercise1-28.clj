@@ -172,8 +172,9 @@
   (Math/floor (rand n)))
 
 (defn prime? [n]
+  ;; need to cast to int, b/c clojure will natively translate to "scientific" mode
   (defn get-random-a []
-    (+ 2 (random (- n 4))))
+    (long (+ 2 (random (- n 4)))))
 
   (defn test-value [a]
     (= (expmod a (- n 1) n) 1))
@@ -237,12 +238,155 @@
 (prime? 31)
 ;; --> true
 
+;;
+;; So far, so good..
+;;
+;; Now let's test the primes we discovered in Exercise 1.22, as well as numbers in that range that
+;; we know to be composite:
+;;
+(def point1 1000000000)
+(def point2 (* 10 point1))
+(def point3 (* 10 point2))
+
+;;
+;; The following three candidates should be prime:
+;;
+(prime? (+ point1 7))
+;; ==> true
+(prime? (+ point1 9))
+;; ==> true
+(prime? (+ point1 21))
+;; ==> true
+
+;;
+;; The following numbers should be composite:
+;;
+(prime? (+ point1 5))
+;; ==> false
+(prime? (+ point1 11))
+;; ==> false
+(prime? (+ point1 13))
+;; ==> false
+(prime? (+ point1 19))
+;; ==> false
+(prime? (+ point1 23))
+;; ==> false
+
+;;
+;; Now let's test candidate primes around 10 billion:
+;;
+(prime? (+ point2 19))
+;; ==> true
+(prime? (+ point2 33))
+;; ==> true
+(prime? (+ point2 61))
+;; ==> true
+
+;;
+;; and let's test some composites around 10 billion:
+;;
+(prime? (+ point2 17))
+;; ==> false
+(prime? (+ point2 21))
+;; ==> false
+(prime? (+ point2 31))
+;; ==> false
+(prime? (+ point2 35))
+;; ==> false
+(prime? (+ point2 59))
+;; ==> false
+(prime? (+ point2 61))
+;; ==> false
+
+;;
+;; Finally, let's test the candidate primes around 100 billion:
+;;
+(prime? (+ point3 3))
+;; ==> true
+(prime? (+ point3 19))
+;; ==> true
+(prime? (+ point3 57))
+;; ==> true
+
+(prime? (+ point3 1))
+;; ==> false
+(prime? (+ point3 5))
+;; ==> false
+(prime? (+ point3 17))
+;; ==> false
+(prime? (+ point3 21))
+;; ==> false
+(prime? (+ point3 55))
+;; ==> false
+(prime? (+ point3 59))
+;; ==> false
+
 (defn fast-expt [b n]
   (cond (= n 0) 1
         (even? n) (square (fast-expt b (/ n 2)))
         :else (* b (fast-expt b (- n 1)))))
 
+(def google (fast-expt 10 100))
+(def google-squared (square google))
+
+(def p1 (+ google 267))
+(def p2 (+ google 949))
+(def p3 (+ google 1243))
+
+(def q1 (+ google-squared 357))
+(def q2 (+ google-squared 627))
+(def q3 (+ google-squared 799))
+
+(prime? p1)
+;; ==> true 
+(prime? p2)
+;; ==> true
+(prime? p3)
+;; ==> true
+
+(prime? q1)
+;; ==> true
+(prime? q2)
+;; ==> true
+(prime? q3)
+;; ==> true
+
 ;;
-;; The clojure implementation cannot handle primes much larger than about a billion.
-;; It generates false negatives.
+;; Looking good. Now let's finally test some composite numbers in the same number range:
+;;
+(prime? (- p1 2))
+;; ==> false
+(prime? (+ p1 2))
+;; ==> false
+(prime? (- p2 2))
+;; ==> false
+(prime? (+ p2 2))
+;; ==> false
+(prime? (- p3 2))
+;; ==> false
+(prime? (+ p3 2))
+;; ==> false
+
+(prime? (- q1 2))
+;; ==> false
+(prime? (+ q1 2))
+;; ==> false
+(prime? (- q2 2))
+;; ==> false
+(prime? (+ q2 2))
+;; ==> false
+(prime? (- q3 2))
+;; ==> false
+(prime? (+ q3 2))
+;; ==> false
+
+;;
+;; It looks good.
+;;
+;; In part (b) of this answer, we will collect performance statistics, and see how this procedure
+;; compares with the other primality testing procedures we've developed in this section.
+;;
+;; In part (c) of this answer, we will explore some interesting recurive properties
+;; of the 20,562-digit Mill's prime (the largest prime that had been proved with Elliptic
+;; Curve Primality Proving (ECPP) by 2006).
 ;;
