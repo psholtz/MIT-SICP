@@ -10,7 +10,7 @@
 ;; The nine cases can be categorized as follows:
 ;;
 ;; CASE I:    (and (> (lower-bound x) 0) (> (lower-bound y) 0))
-;; CASE II:   (and (< (upper-bound y) 0) (< (upper-bound y) 0))
+;; CASE II:   (and (< (upper-bound x) 0) (< (upper-bound y) 0))
 ;; CASE III:  (and (> (lower-bound x) 0) (< (upper-bound y) 0))
 ;; CASE IV:   (and (< (upper-bound x) 0) (> (lower-bound y) 0))
 ;; CASE V:    (and (< (lower-bound x) 0) (> (upper-bound x) 0) (> (lower-bound y) 0))
@@ -38,11 +38,15 @@
 (define (mul-interval x y)
   ;; CASE I
   (cond ((and (> (lower-bound x) 0) (> (lower-bound y) 0))
-	 (make-interval (* (lower-bound x) (lower-bound y)) (* (upper-bound x) (upper-bound y))))
+	 (make-interval 
+	  (* (lower-bound x) (lower-bound y)) 
+	  (* (upper-bound x) (upper-bound y))))
 
 	;; CASE II
-	((and (< (lower-bound y) 0) (< (upper-bound y) 0))
-	 (make-interval (* (upper-bound x) (upper-bound y)) (* (lower-bound x) (lower-bound y))))
+	((and (< (upper-bound x) 0) (< (upper-bound y) 0))
+	 (make-interval 
+	  (* (upper-bound x) (upper-bound y)) 
+	  (* (lower-bound x) (lower-bound y))))
 
 	;; CASE III
 	((and (> (lower-bound x) 0) (< (upper-bound y) 0))
@@ -96,3 +100,18 @@
 
 (define (lower-bound x) (car x))
 (define (upper-bound x) (cdr x))
+
+;; 
+;; Case I Tests:
+;;
+(define p1 (make-interval 3 4))
+(define p2 (make-interval 5 6))
+
+(mul-interval p1 p2)
+;; ==> (15 . 24)
+(equal? (mul-interval p1 p2) (mul-interval-old p1 p2))
+;; ==> #t
+
+;; 
+;; Case II Tests:
+;;
