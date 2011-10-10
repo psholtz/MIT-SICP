@@ -35,16 +35,18 @@
 ;; The last case is the one where we need to carry out all four multiplications, and can be implemented 
 ;; as the "old" mul-interval procedure was defined.
 ;;
-;; Indicated as well is a graphical mnemotic, with "0" being the vertical bar and a horizontal bar dividing
-;; the two interval "x" and "y".. "x" is rendered above the horizontal bar, and "y" is rendered below.
+;; Indicated as well is a graphical mnemetic, showing "0" as well as the relative positions of the interval
+;; "x" and "y".. "x" is rendered above the horizontal bar, and "y" is rendered below.
 ;;
 (define (mul-interval x y)
   ;;
   ;; CASE I:
   ;;
-  ;;     |  x x
-  ;; ------------- 
-  ;;     |  y y 
+  ;;   | 
+  ;;   0  x x
+  ;; --+-------- 
+  ;;   0  y y 
+  ;;   |
   ;;
   (cond ((and (> (lower-bound x) 0) (> (lower-bound y) 0))
 	 (make-interval 
