@@ -75,7 +75,13 @@
 	  (* (upper-bound x) (lower-bound y)) 
 	  (* (lower-bound x) (upper-bound y))))
        
+	;;
 	;; CASE IV
+	;;
+	;;   x x  0 
+	;; -------+-------
+	;;           y y
+	;;
 	((and (< (upper-bound x) 0) (> (lower-bound y) 0))
 	 (make-interval (* (upper-bound y) (lower-bound x)) (* (lower-bound y) (upper-bound x))))
 
@@ -170,4 +176,25 @@
 (equal? (mul-interval p2 q1) (mul-interval-old p2 q1))
 ;; ==> #t
 (equal? (mul-interval p2 q2) (mul-interval-old p2 q2))
+;; ==> #t
+
+;;
+;; Case IV Tests:
+;;
+(mul-interval q1 p1)
+;; ==> (-40 . 24 )
+(mul-interval q1 p2)
+;; ==> (-60 . -40)
+(mul-interval q2 p1)
+;; ==> (-16 . -9)
+(mul-interval q2 p2)
+;; ==> (-24 . -15)
+
+(equal? (mul-interval q1 p1) (mul-interval-old q1 p1))
+;; ==> #t
+(equal? (mul-interval q1 p2) (mul-interval-old q1 p2))
+;; ==> #t
+(equal? (mul-interval q2 p1) (mul-interval-old q2 p1))
+;; ==> #t
+(equal? (mul-interval q2 p2) (mul-interval-old q2 p2))
 ;; ==> #t
