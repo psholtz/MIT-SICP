@@ -28,8 +28,8 @@
 ;; CASE III:  (make-interval (* (upper-bound x) (lower-bound y)) (* (lower-bound x) (upper-bound y)))
 ;; CASE IV:   (make-interval (* (upper-bound y) (lower-bound x)) (* (lower-bound y) (upper-bound x)))
 ;; CASE V:    (make-interval (* (lower-bound x) (upper-bound y)) (* (upper-bound x) (upper-bound y)))
-;; CASE VI:   
-;; CASE VII:
+;; CASE VI:   (make-interval (* (upper-bound x) (lower-bound y)) (* (lower-bound x) (lower-bound y)))
+;; CASE VII:  
 ;; CASE VIII:
 ;;
 ;; The last case is the one where we need to carry out all four multiplications, and can be implemented 
@@ -58,15 +58,15 @@
 
 	;; CASE VI
 	((and (< (lower-bound x) 0) (> (upper-bound x) 0) (> (lower-bound y) 0))
-	 '())
+	 (make-interval (* (upper-bound x) (lower-bound y)) (* (lower-bound x) (lower-bound y))))
 
 	;; CASE VII
 	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (> (lower-bound x) 0))
-	 '())
+	 (make-interval (* (upper-bound y) (lower-bound x)) (* (upper-bound y) (upper-bound x))))
 
 	;; CASE VIII
 	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (< (upper-bound x) 0))
-	 '())
+	 (make-interval (* (lower-bound x) (upper-bound y)) (* (lower-bound y) (upper-bound x))))
 
 	;; CASE IX
 	(else
