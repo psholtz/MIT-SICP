@@ -64,7 +64,7 @@
 	  (* (lower-bound x) (lower-bound y))))
 
 	;;
-	;; CASE III
+	;; CASE III:
 	;;    
 	;;        0  x x
 	;; -------+------- 
@@ -76,7 +76,7 @@
 	  (* (lower-bound x) (upper-bound y))))
        
 	;;
-	;; CASE IV
+	;; CASE IV:
 	;;
 	;;   x x  0 
 	;; -------+-------
@@ -85,9 +85,17 @@
 	((and (< (upper-bound x) 0) (> (lower-bound y) 0))
 	 (make-interval (* (upper-bound y) (lower-bound x)) (* (lower-bound y) (upper-bound x))))
 
-	;; CASE V
+	;;
+	;; CASE V:
+	;;
+	;;   x  0    x
+	;; -----+-------
+	;;      0  y y
+	;;
 	((and (< (lower-bound x) 0) (> (upper-bound x) 0) (> (lower-bound y) 0))
-	 (make-interval (* (lower-bound x) (upper-bound y)) (* (upper-bound x) (upper-bound y))))
+	 (make-interval 
+	  (* (lower-bound x) (upper-bound y)) 
+	  (* (upper-bound x) (upper-bound y))))
 
 	;; CASE VI
 	((and (< (lower-bound x) 0) (> (upper-bound x) 0) (> (lower-bound y) 0))
