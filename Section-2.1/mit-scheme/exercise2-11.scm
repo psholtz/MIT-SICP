@@ -80,7 +80,7 @@
 	;;
 	;;   x x  0 
 	;; -------+-------
-	;;           y y
+	;;        0  y y
 	;;
 	((and (< (upper-bound x) 0) (> (lower-bound y) 0))
 	 (make-interval (* (upper-bound y) (lower-bound x)) (* (lower-bound y) (upper-bound x))))
