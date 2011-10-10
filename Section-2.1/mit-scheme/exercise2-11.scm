@@ -51,15 +51,29 @@
 	  (* (lower-bound x) (lower-bound y)) 
 	  (* (upper-bound x) (upper-bound y))))
 
-	;; CASE II
+	;;
+	;; CASE II:
+	;; 
+	;;   x x  0
+	;; -------+--
+	;;   y y  0 
+	;;
 	((and (< (upper-bound x) 0) (< (upper-bound y) 0))
 	 (make-interval 
 	  (* (upper-bound x) (upper-bound y)) 
 	  (* (lower-bound x) (lower-bound y))))
 
+	;;
 	;; CASE III
+	;;    
+	;;        0  x x
+	;; -------+------- 
+	;;   y y  0
+	;;
 	((and (> (lower-bound x) 0) (< (upper-bound y) 0))
-	 (make-interval (* (upper-bound x) (lower-bound y)) (* (lower-bound x) (upper-bound y))))
+	 (make-interval 
+	  (* (upper-bound x) (lower-bound y)) 
+	  (* (lower-bound x) (upper-bound y))))
        
 	;; CASE IV
 	((and (< (upper-bound x) 0) (> (lower-bound y) 0))
@@ -103,9 +117,15 @@
 		   (max p1 p2 p3 p4))))
 
 ;;
-;; Define also the constructors and selectors, so we can work with intervals:
+;; Define also the constructors and selectors, so we can work with intervals.
 ;;
-(define (make-interval a b) (cons a b))
+;; Add (simple) type-checking to constructor, to make sure we are working with
+;; a valid range:
+;;
+(define (make-interval a b) 
+  (cond ((< a b) (cons a b))
+	(else
+	 (display "error constructing interval!"))))
 (define (lower-bound x) (car x))
 (define (upper-bound x) (cdr x))
 
@@ -123,3 +143,31 @@
 ;; 
 ;; Case II Tests:
 ;;
+(define q1 (make-interval -10 -8))
+(define q2 (make-interval -4 -3))
+
+(mul-interval q1 q2)
+;; ==> (24 . 40)
+(equal? (mul-interval q1 q2) (mul-interval-old q1 q2))
+;; ==> #t
+
+;;
+;; Case III Tests:
+;;
+(mul-interval p1 q1)
+;; ==> (-40 . -24 )
+(mul-interval p1 q2)
+;; ==> (-16 . -9)
+(mul-interval p2 q1)
+;; ==> (-60 . -40)
+(mul-interval p2 q2)
+;; ==> (-24 . -15)
+
+(equal? (mul-interval p1 q1) (mul-interval-old p1 q1))
+;; ==> #t
+(equal? (mul-interval p1 q2) (mul-interval-old p1 q2))
+;; ==> #t
+(equal? (mul-interval p2 q1) (mul-interval-old p2 q1))
+;; ==> #t
+(equal? (mul-interval p2 q2) (mul-interval-old p2 q2))
+;; ==> #t
