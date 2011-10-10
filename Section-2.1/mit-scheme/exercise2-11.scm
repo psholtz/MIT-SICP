@@ -35,8 +35,17 @@
 ;; The last case is the one where we need to carry out all four multiplications, and can be implemented 
 ;; as the "old" mul-interval procedure was defined.
 ;;
+;; Indicated as well is a graphical mnemotic, with "0" being the vertical bar and a horizontal bar dividing
+;; the two interval "x" and "y".. "x" is rendered above the horizontal bar, and "y" is rendered below.
+;;
 (define (mul-interval x y)
-  ;; CASE I
+  ;;
+  ;; CASE I:
+  ;;
+  ;;     |  x x
+  ;; ------------- 
+  ;;     |  y y 
+  ;;
   (cond ((and (> (lower-bound x) 0) (> (lower-bound y) 0))
 	 (make-interval 
 	  (* (lower-bound x) (lower-bound y)) 
@@ -97,7 +106,6 @@
 ;; Define also the constructors and selectors, so we can work with intervals:
 ;;
 (define (make-interval a b) (cons a b))
-
 (define (lower-bound x) (car x))
 (define (upper-bound x) (cdr x))
 
