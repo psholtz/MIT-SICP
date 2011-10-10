@@ -43,7 +43,7 @@
   ;; CASE I:
   ;;
   ;;   0  x x
-  ;; --+-------- 
+  ;; --+-------
   ;;   0  y y 
   ;;
   (cond ((and (> (lower-bound x) 0) (> (lower-bound y) 0))
