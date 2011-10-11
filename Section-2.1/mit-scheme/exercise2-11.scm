@@ -332,11 +332,27 @@
 ;; ==> (0 . 16)
 (mul-interval s1 p2)
 ;; ==> (0 . 24)
+(mul-interval s1 q1)
+;; ==> (-40 . 0)
+(mul-interval s1 q2)
+;; ==> (-16 . 0)
+(mul-interval s1 r1)
+;; ==> (-8 . 20)
+(mul-interval s1 r2)
+;; ==> (-12 . 12)
 
 (equal? (mul-interval s1 p1) (mul-interval-old s1 p1))
 ;; ==> #t
 (equal? (mul-interval s1 p2) (mul-interval-old s1 p2))
 ;; ==> #t 
+(equal? (mul-interval s1 q1) (mul-interval-old s1 q1))
+;; ==> #t
+(equal? (mul-interval s1 q2) (mul-interval-old s1 q2))
+;; ==> #t
+(equal? (mul-interval s1 r1) (mul-interval-old s1 r1))
+;; ==> #t
+(equal? (mul-interval s1 r2) (mul-interval-old s1 r2))
+;; ==> #t
 
 ;;
 ;; Case (c) --> (= (upper-bound x) 0)
