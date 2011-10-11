@@ -386,3 +386,28 @@
 ;;
 ;; Case (d) --> (= (lower-bound y) 0)
 ;;
+(mul-interval p1 s1)
+;; ==> (0 . 16)
+(mul-interval p2 s1)
+;; ==> (0 . 24)
+(mul-interval q1 s1)
+;; ==> (-40 . 0)
+(mul-interval q2 s1)
+;; ==> (-16 . 0)
+(mul-interval r1 s1)
+;; ==> (-8 . 20)
+(mul-interval r2 s1)
+;; ==> (-12 . 12)
+
+(equal? (mul-interval p1 s1) (mul-interval-old p1 s1))
+;; ==> #t
+(equal? (mul-interval p2 s1) (mul-interval-old p2 s1))
+;; ==> #t
+(equal? (mul-interval q1 s1) (mul-interval-old q1 s1))
+;; ==> #t
+(equal? (mul-interval q2 s1) (mul-interval-old q2 s1))
+;; ==> #t
+(equal? (mul-interval r1 s1) (mul-interval-old r1 s1))
+;; ==> #t
+(equal? (mul-interval r2 s1) (mul-interval-old r2 s1))
+;; ==> #t
