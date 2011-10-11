@@ -133,7 +133,11 @@
 	  (* (upper-bound y) (lower-bound x))
 	  (* (lower-bound x) (lower-bound y))))
 
-	;; CASE IX
+	;;
+	;; CASE IX:
+	;;
+	;; Everything else!
+	;;
 	(else
 	 (let ((p1 (* (lower-bound x) (lower-bound y)))
 	       (p2 (* (lower-bound x) (upper-bound y)))
@@ -283,3 +287,49 @@
 ;; ==> #t
 (equal? (mul-interval q2 r1) (mul-interval-old q2 r1))
 ;; ==> #t
+
+;;
+;; Case IX Tests:
+;;
+;; To test Case 9 accurately, we need to test the following cases:
+;;  
+;; (a) Multiply two intervals that both span 0
+;; (b) (= (lower-bound x) 0)
+;; (c) (= (upper-bound x) 0)
+;; (d) (= (lower-bound y) 0)
+;; (e) (= (upper-bound y) 0)
+;;
+(define r2 (make-interval -3 3))
+
+;;
+;; Case (a) --> where both argument intervals span 0
+;;
+(mul-interval r1 r1)
+;; ==> (-10 . 25)
+(mul-interval r2 r2)
+;; ==> (-9 . 9)
+(mul-interval r1 r2)
+;; ==> (-15 . 15)
+(mul-interval r2 r1)
+;; ==> (-15 . 15)
+
+(equal? (mul-interval r1 r1) (mul-interval-old r1 r1))
+;; ==> #t
+(equal? (mul-interval r2 r2) (mul-interval-old r2 r2))
+;; ==> #t
+(equal? (mul-interval r1 r2) (mul-interval-old r1 r2))
+;; ==> #t
+(equal? (mul-interval r2 r1) (mul-interval-old r2 r1))
+;; ==> #t
+
+(define s1 (make-interval 0 4))
+(define s2 (make-interval -2 0))
+
+;;
+;; Case (b) --> (= (lower-bound x) 0)
+;;
+
+(equal? (mul-interval s1 p1) (mul-interval-old s1 p1))
+;; ==> #t
+(equal? (mul-interval s1 p2) (mul-interval-old s1 p2))
+;; ==> #t 
