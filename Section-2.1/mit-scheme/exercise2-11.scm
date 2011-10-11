@@ -30,7 +30,7 @@
 ;; CASE V:    (make-interval (* (lower-bound x) (upper-bound y)) (* (upper-bound x) (upper-bound y)))
 ;; CASE VI:   (make-interval (* (upper-bound x) (lower-bound y)) (* (lower-bound x) (lower-bound y)))
 ;; CASE VII:  (make-interval (* (lower-bound y) (upper-bound x)) (* (upper-bound x) (upper-bound y)))
-;; CASE VIII:
+;; CASE VIII: (make-interval (* (upper-bound y) (lower-bound x)) (* (lower-bound x) (lower-bound y)))
 ;;
 ;; The last case is the one where we need to carry out all four multiplications, and can be implemented 
 ;; as the "old" mul-interval procedure was defined.
@@ -130,8 +130,8 @@
 	;; 
 	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (< (upper-bound x) 0))
 	 (make-interval 
-	  (* (lower-bound x) (upper-bound y)) 
-	  (* (lower-bound y) (upper-bound x))))
+	  (* (upper-bound y) (lower-bound x))
+	  (* (lower-bound x) (lower-bound y))))
 
 	;; CASE IX
 	(else
@@ -269,4 +269,17 @@
 (equal? (mul-interval p1 r1) (mul-interval-old p1 r1))
 ;; ==> #t
 (equal? (mul-interval p2 r1) (mul-interval-old p2 r1))
+;; ==> #t
+
+;;
+;; Case VIII Tests:
+;;
+(mul-interval q1 r1)
+;; ==> (-50 . 20)
+(mul-interval q2 r1)
+;; ==> (-20 . 8)
+
+(equal? (mul-interval q1 r1) (mul-interval-old q1 r1))
+;; ==> #t
+(equal? (mul-interval q2 r1) (mul-interval-old q2 r1))
 ;; ==> #t
