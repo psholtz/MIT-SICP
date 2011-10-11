@@ -328,8 +328,16 @@
 ;;
 ;; Case (b) --> (= (lower-bound x) 0)
 ;;
+(mul-interval s1 p1)
+;; ==> (0 . 16)
+(mul-interval s1 p2)
+;; ==> (0 . 24)
 
 (equal? (mul-interval s1 p1) (mul-interval-old s1 p1))
 ;; ==> #t
 (equal? (mul-interval s1 p2) (mul-interval-old s1 p2))
 ;; ==> #t 
+
+;;
+;; Case (c) --> (= (upper-bound x) 0)
+;;
