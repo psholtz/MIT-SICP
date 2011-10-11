@@ -357,3 +357,32 @@
 ;;
 ;; Case (c) --> (= (upper-bound x) 0)
 ;;
+(mul-interval s2 p1)
+;; ==> (-8 . 0)
+(mul-interval s2 p2)
+;; ==> (-12 . 0)
+(mul-interval s2 q1)
+;; ==> (0 . 20)
+(mul-interval s2 q2)
+;; ==> (0 . 8)
+(mul-interval s2 r1)
+;; ==> (-10 . 4)
+(mul-interval s2 r2)
+;; ==> (-6 . 6)
+
+(equal? (mul-interval s2 p1) (mul-interval-old s2 p1))
+;; ==> #t
+(equal? (mul-interval s2 p2) (mul-interval-old s2 p2))
+;; ==> #t
+(equal? (mul-interval s2 q1) (mul-interval-old s2 q1))
+;; ==> #t
+(equal? (mul-interval s2 q2) (mul-interval-old s2 q2))
+;; ==> #t
+(equal? (mul-interval s2 r1) (mul-interval-old s2 r1))
+;; ==> #t
+(equal? (mul-interval s2 r2) (mul-interval-old s2 r2))
+;; ==> #t
+
+;;
+;; Case (d) --> (= (lower-bound y) 0)
+;;
