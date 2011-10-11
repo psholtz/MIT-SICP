@@ -411,3 +411,32 @@
 ;; ==> #t
 (equal? (mul-interval r2 s1) (mul-interval-old r2 s1))
 ;; ==> #t
+
+;;
+;; Case (e) --> (= (upper-bound y) 0)
+;;
+(mul-interval p1 s2)
+;; ==> (-8 . 0)
+(mul-interval p2 s2)
+;; ==> (-12 . 0)
+(mul-interval q1 s2)
+;; ==> (0 . 20)
+(mul-interval q2 s2)
+;; ==> (0 . 8)
+(mul-interval r1 s2)
+;; ==> (-10 . 4)
+(mul-interval r2 s2)
+;; ==> (-6 . 6)
+
+(equal? (mul-interval p1 s2) (mul-interval-old p1 s2))
+;; ==> #t
+(equal? (mul-interval p2 s2) (mul-interval-old p2 s2))
+;; ==> #t
+(equal? (mul-interval q1 s2) (mul-interval-old q1 s2))
+;; ==> #t
+(equal? (mul-interval q2 s2) (mul-interval-old q2 s2))
+;; ==> #t
+(equal? (mul-interval r1 s2) (mul-interval-old r1 s2))
+;; ==> #t
+(equal? (mul-interval r2 s2) (mul-interval-old r2 s2))
+;; ==> #t
