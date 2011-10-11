@@ -29,7 +29,7 @@
 ;; CASE IV:   (make-interval (* (upper-bound y) (lower-bound x)) (* (lower-bound y) (upper-bound x)))
 ;; CASE V:    (make-interval (* (lower-bound x) (upper-bound y)) (* (upper-bound x) (upper-bound y)))
 ;; CASE VI:   (make-interval (* (upper-bound x) (lower-bound y)) (* (lower-bound x) (lower-bound y)))
-;; CASE VII:  
+;; CASE VII:  (make-interval (* (lower-bound y) (upper-bound x)) (* (upper-bound x) (upper-bound y)))
 ;; CASE VIII:
 ;;
 ;; The last case is the one where we need to carry out all four multiplications, and can be implemented 
@@ -118,12 +118,20 @@
 	;;
 	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (> (lower-bound x) 0))
 	 (make-interval 
-	  (* (upper-bound y) (lower-bound x)) 
-	  (* (upper-bound y) (upper-bound x))))
+	  (* (lower-bound y) (upper-bound x))
+	  (* (upper-bound x) (upper-bound y))))
 
-	;; CASE VIII
+	;;
+	;; CASE VIII:
+	;;
+	;;   x x  0
+	;; -------+-----
+	;;  y     0  y
+	;; 
 	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (< (upper-bound x) 0))
-	 (make-interval (* (lower-bound x) (upper-bound y)) (* (lower-bound y) (upper-bound x))))
+	 (make-interval 
+	  (* (lower-bound x) (upper-bound y)) 
+	  (* (lower-bound y) (upper-bound x))))
 
 	;; CASE IX
 	(else
@@ -248,4 +256,17 @@
 (equal? (mul-interval r1 q1) (mul-interval-old r1 q1))
 ;; ==> #t
 (equal? (mul-interval r1 q2) (mul-interval-old r1 q2))
+;; ==> #t
+
+;;
+;; Case VII Tests:
+;;
+(mul-interval p1 r1)
+;; ==> (-8 . 20)
+(mul-interval p2 r1)
+;; ==> (-12 . 30)
+
+(equal? (mul-interval p1 r1) (mul-interval-old p1 r1))
+;; ==> #t
+(equal? (mul-interval p2 r1) (mul-interval-old p2 r1))
 ;; ==> #t
