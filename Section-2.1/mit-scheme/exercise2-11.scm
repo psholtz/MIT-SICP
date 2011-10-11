@@ -97,9 +97,17 @@
 	  (* (lower-bound x) (upper-bound y)) 
 	  (* (upper-bound x) (upper-bound y))))
 
-	;; CASE VI
+	;;
+	;; CASE VI:
+	;; 
+	;;   x   0     x
+	;; ------+--------
+	;;  y y  0
+	;;
 	((and (< (lower-bound x) 0) (> (upper-bound x) 0) (> (lower-bound y) 0))
-	 (make-interval (* (upper-bound x) (lower-bound y)) (* (lower-bound x) (lower-bound y))))
+	 (make-interval 
+	  (* (upper-bound x) (lower-bound y)) 
+	  (* (lower-bound x) (lower-bound y))))
 
 	;; CASE VII
 	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (> (lower-bound x) 0))
@@ -205,4 +213,18 @@
 (equal? (mul-interval q2 p1) (mul-interval-old q2 p1))
 ;; ==> #t
 (equal? (mul-interval q2 p2) (mul-interval-old q2 p2))
+;; ==> #t
+
+;;
+;; Case V Tests:
+;;
+(def r1 (make-interval -2 5))
+(mul-interval r1 p1)
+;; ==> (-8 . 20)
+(mul-interval r1 p2)
+;; ==> (-12 . 30)
+
+(equal? (mul-interval r1 p1) (mul-interval-old r1 p1))
+;; ==> #t
+(equal? (mul-interval r1 p2) (mul-interval-old r1 p2))
 ;; ==> #t
