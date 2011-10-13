@@ -43,10 +43,15 @@
 ;; ==> 3.65
 
 ;;
+;; It looks good.
+;;
+
+;;
 ;; Finally answer the question:
 ;;
 (define (make-center-percent c p)
-  '())
+  (let ((w (* c p)))
+    (make-center-width c w)))
 
 ;;
 ;; The "center" selector is already given in the text.
@@ -54,4 +59,4 @@
 ;; We define the "percent" selector:
 ;;
 (define (percent i)
-  '())
+  (/ (width i) (center i)))
