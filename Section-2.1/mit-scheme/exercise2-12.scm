@@ -34,13 +34,13 @@
 ;;
 (define x (make-center-width 3.5 0.15))
 (center x)
-;; ==>
+;; ==> 3.5
 (width x)
-;; ==>
+;; ==> 0.15
 (lower-bound x)
-;; ==>
+;; ==> 3.35
 (upper-bound x)
-;; ==>
+;; ==> 3.65
 
 ;;
 ;; Finally answer the question:
