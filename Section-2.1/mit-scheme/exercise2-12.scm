@@ -60,3 +60,20 @@
 ;;
 (define (percent i)
   (/ (width i) (center i)))
+
+;;
+;; Run a use case:
+;;
+(define y (make-center-percent 3 0.1))
+;; ==> (2.7 . 3.3)
+
+(center y)
+;; ==> 3.0
+(percent y)
+;; ==> 0.1
+(width y)
+;; ==> 0.3
+(lower-bound y)
+;; ==> 2.7
+(upper-bound y)
+;; ==> 3.3
