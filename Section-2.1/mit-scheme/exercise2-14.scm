@@ -121,3 +121,85 @@
 ;;
 (define x (make-center-percent 40000 0.005))
 (define y (make-center-percent 65000 0.0125))
+
+(par1 x y)
+;; ==> (24097.75 . 25442.12)
+(par2 x y)
+;; ==> (24567.02 . 24956.14)
+
+;;
+;; Clearly the intervals are "off", but not by so large a margin as before.
+;;
+;; Let's compare the center points and percentage width:
+;;
+(center (par1 x y))
+;; ==> 24769.9
+(center (par2 x y))
+;; ==> 24761.6
+
+;;
+;; Indeed, the center points are quite close!
+;;
+(percent (par1 x y))
+;; ==> 0.0271
+(percent (par2 x y))
+;; ==> 7.86e-3
+
+;;
+;; The percentage width is about 3 times wider using the "par1" procedure than 
+;; when using the "par2" procedure, but both percentage widths are quite "tight".
+;;
+
+;;
+;; The problem statement indicates that "you will get the most insight by using
+;; intervals whose width is a small percentage of the center value." I'm not sure
+;; that I'm able to reproduce this finding. When the interval width is a small 
+;; percentage of the center value, as in the above example, the two procedures seem 
+;; to agree quite closely. The large "errors" seem to arise - on the contrary - only
+;; when the percentage width is quite large compared to the center value.
+;;
+
+;;
+;; As a final example, let's use an example where the percentage width is
+;; egregiously large compared to the center value:
+;;
+(define x (make-center-percent 10 0.3))
+;; ==> (7 . 13)
+(define y (make-center-percent 10 0.4))
+;; ==> (6 . 14)
+
+;;
+;; Both intervals (clearly) have the same center:
+;;
+(center x)
+;; ==> 10. 
+(center y)
+;; ==> 10.
+
+;;
+;; However, running these intervals through the two parallel resistor calculations
+;; gives wildly divergent answers:
+;;
+(par1 x y)
+;; ==> (1.5555 . 14.)
+(par2 x y)
+;; ==> (3.23077 . 6.74074)
+
+;;
+;; The "center" of par1 does not even lie within the bounds of par2!
+;;
+(center (par1 x y))
+;; ==> 7.777777
+(center (par2 x y))
+;; ==> 4.98575
+(> (center (par1 x y)) (upper-bound (par2 x y)))
+;; ==> #t
+
+;;
+;; So it's true, the "same" algebraic expression can give rise to "different" answers
+;; using the interval arithemetic, however I am not able to reproduce the "hint" given 
+;; in the text, wherein the most widely divergent answers are obtained by using "small" 
+;; percentage widths relative to the center value. Rather, I seem to obtain the most 
+;; widely divergent answers when using percentage widths that are very large in comparison
+;; to the center value.
+;;
