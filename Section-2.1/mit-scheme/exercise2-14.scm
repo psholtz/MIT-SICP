@@ -1,7 +1,12 @@
 ;;
 ;; Exercise 2.14
 ;;
-
+;; Demonstrate that Lem is right. Investigate the behavior of the system on a variety
+;; of arithmetic expressions. Make some intervals A and B, and use them in computing
+;; the expressions A/A and A/B. You will get the most insight by using intervals whose width
+;; is a small percentage of the center v alue. Examine the results of the computation in 
+;; center-percent form (see Exercise 2.12).
+;;
 
 ;;
 ;; Constructors and Selectors:
@@ -149,6 +154,20 @@
 ;; The percentage width is about 3 times wider using the "par1" procedure than 
 ;; when using the "par2" procedure, but both percentage widths are quite "tight".
 ;;
+
+;;
+;; If we attempt to calculate A/A for either of these intervals, we find results
+;; that are tightly constrained around 1 (as would be expected):
+;;
+(center (div-interval x x))
+;; ==>
+(center (div-interval y y))
+;; ==>
+
+(percent (div-interval x x))
+;; ==>
+(percent (div-interval y y))
+;; ==>
 
 ;;
 ;; The problem statement indicates that "you will get the most insight by using
