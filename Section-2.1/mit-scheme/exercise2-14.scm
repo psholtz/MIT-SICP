@@ -273,6 +273,7 @@
 ;;
 ;; Clearly, in all these cases, the values we obtain are (quite) far from what we 
 ;; would expect, were the interval arithmetic library functioning properly.
+;;
 
 ;;
 ;; The problem statement indicates that "you will get the most insight by using intervals
