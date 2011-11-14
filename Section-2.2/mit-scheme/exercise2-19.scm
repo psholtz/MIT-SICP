@@ -59,3 +59,15 @@
 
 (define (no-more? coin-values)
   (null? coin-values))
+
+;;
+;; Let's run these results and see what we obtain:
+;;
+(cc 100 us-coins)
+;; ==> 292
+(cc 11 us-coins)
+;; ==> 4
+
+;;
+;; These are the numbers we would expect.
+;;
