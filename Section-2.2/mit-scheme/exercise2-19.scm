@@ -122,3 +122,99 @@
 ;;
 (count-change-uk 11)
 ;; ==> 62
+
+;;
+;; Reversing the order of the coins in the list does not affect the value obtained:
+;;
+(define us-coins-reverse (reverse us-coins))
+(define uk-coins-reverse (reverse uk-coins))
+
+(cc 11 us-coins-reverse)
+;; ==> 4
+(cc 100 us-coins-reverse)
+;; ==> 292
+(cc 11 uk-coins-reverse)
+;; ==> 62
+
+(equal? (cc 11 us-coins) (cc 11 us-coins-reverse))
+;; ==> #t
+(equal? (cc 100 us-coins) (cc 100 us-coins-reverse))
+;; ==> #t
+(equal? (cc 11 uk-coins) (cc 11 uk-coins-reverse))
+;; ==> #t
+
+;;
+;; To understand why, let's walk through the respective call graphs for (cc 6 us-coins) and 
+;; (cc 6 us-coins-reverse). Let's also "typedef" some of the procedure calls for the sake of clarity:
+;;
+(define n no-more?)
+(define f first-denomination)
+(define r except-first-denomination)
+
+;;
+;; First call graph:
+;;
+(cc 6 us-coins)
+(cc 6 '(50 25 10 5 1))
+(+ (cc 6 (r '(50 25 10 5 1))) (cc (- 6 (f '(50 25 10 5 1))) '(50 25 10 5 1)))
+(+ (cc 6 '(25 10 5 1)) (cc (- 6 50) '(50 25 10 5 1)))
+(+ (cc 6 '(25 10 5 1)) (cc -44 '(50 25 10 5 1)))
+(+ (cc 6 '(25 10 5 1)) 0)
+(cc 6 '(25 10 5 1))  ;; <== indicates that we can throw out half-dollars, and get the same answer, which is true
+(+ (cc 6 (r '(25 10 5 1))) (cc (- 6 (f '(25 10 5 1))) '(25 10 5 1)))
+(+ (cc 6 '(10 5 1)) (cc (- 6 25) '(25 10 5 1)))
+(+ (cc 6 '(10 5 1)) (cc -19 '(25 10 5 1)))
+(+ (cc 6 '(10 5 1)) 0)
+(cc 6 '(10 5 1))     ;; <== indicates that we can throw out half-dollars, and quarters, and get the same answer, which is true.
+(+ (cc 6 (r '(10 5 1))) (cc (- 6 (f '(10 5 1))) '(10 5 1)))
+(+ (cc 6 '(5 1)) (cc (- 6 10) '(10 5 1)))
+(+ (cc 6 '(5 1)) (cc -4 '(10 5 1)))
+(+ (cc 6 '(5 1)) 0)
+(cc 6 '(5 1))        ;; <== indicates that we can throw out half-dollars, and quarters, and dimes, and get the same answers, which is true.
+(+ (cc 6 (r '(5 1))) (cc (- 6 (f '(5 1))) '(5 1)))
+(+ (cc 6 '(1)) (cc 1 '(5 1))) ;; <== indicates that we can use either (a) all pennies, or (b) pennies and nickels
+;;;;;;;;;;;;;;;;
+(+ (+ (cc 6 (r '(1))) (cc (- 6 (f '(1))) '(1)))
+   (+ (cc 1 (r '(5 1))) (cc (- 1 (f '(5 1))) '(5 1))))
+;;;;;;;;;;;;;;;; 
+(+ (+ (cc 6 '()) (cc (- 6 1) '(1)))
+   (+ (cc 1 '(1)) (cc (- 1 5) '(5 1))))
+;;;;;;;;;;;;;;;; 
+(+ (+ 0 (cc 5 '(1)))
+   (+ (cc 1 '(1)) (cc -4 '(5 1))))
+;;;;;;;;;;;;;;;; 
+(+ (cc 5 '(1)) (+ (cc 1 '(1)) 0))
+(+ (cc 5 '(1)) (cc 1 '(1))) ;; <== indicates that the answer is the sum of (a) how many ways can you change 5 cents, using just pennies, and (b) how many ways can you change a penny, using just pennies. The answer to both questions is 1. Hence the answer we seek is 2.
+(+ (cc 5 '(1)) (+ (cc 1 '()) (cc (- 1 (f '(1))) '(1))))
+(+ (cc 5 '(1)) (+ 0 (cc (- 1 1) '(1))))
+(+ (cc 5 '(1)) (cc 0 '(1)))
+(+ (cc 5 '(1)) 1)
+(+ (+ (cc 5 (r '(1))) (cc (- 5 (f '(1))) '(1))) 1)
+(+ (+ (cc 5 '()) (cc (- 5 1) '(1))) 1)
+(+ (+ 0 (cc 4 '(1))) 1)
+(+ (cc 4 '(1)) 1)
+(+ (+ (cc 4 (r '(1))) (cc (- 4 (f '(1))) '(1))) 1)
+(+ (+ (cc 4 '()) (cc (- 4 1) '(1))) 1)
+(+ (+ 0 (cc 3 '(1))) 1)
+(+ (cc 3 '(1)) 1)
+(+ (+ (cc 3 (r '(1))) (cc (- 3 (f '(1))) '(1))) 1)
+(+ (+ (cc 3 '()) (cc (- 3 1) '(1))) 1)
+(+ (+ 0 (cc 2 '(1))) 1)
+(+ (cc 2 '(1)) 1)
+(+ (+ (cc 2 (r '(1))) (cc (- 2 (f '(1))) '(1))) 1)
+(+ (+ (cc 2 '()) (cc (- 2 1) '(1))) 1)
+(+ (+ 0 (cc 1 '(1))) 1)
+(+ (cc 1 '(1)) 1)
+(+ (+ (cc 1 (r '(1))) (cc (- 1 (f '(1))) '(1))) 1)
+(+ (+ (cc 1 '()) (cc (- 1 1) '(1))) 1)
+(+ (+ 0 (cc 0 '(1))) 1)
+(+ (cc 0 '(1)) 1)
+(+ 1 1)
+2
+
+
+
+
+
+
+
