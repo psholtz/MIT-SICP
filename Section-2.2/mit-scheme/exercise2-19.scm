@@ -28,7 +28,8 @@
 ;;
 ;; We will be re-defining these procedures below.
 ;;
-
+;; Copying in the code from the problem statement:
+;;
 (define us-coins (list 50 25 10 5 1))
 (define uk-coins (list 100 50 20 10 5 2 1 0.5))
 
@@ -47,6 +48,9 @@
 		   (first-denomination coin-values))
 		coin-values)))))
 
+;;
+;; Supplying the answers required to support the new computational model:
+;;
 (define (first-denomination coin-values)
   (car coin-values))
 
