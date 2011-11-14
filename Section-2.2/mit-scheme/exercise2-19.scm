@@ -160,17 +160,17 @@
 (+ (cc 6 '(25 10 5 1)) (cc (- 6 50) '(50 25 10 5 1)))
 (+ (cc 6 '(25 10 5 1)) (cc -44 '(50 25 10 5 1)))
 (+ (cc 6 '(25 10 5 1)) 0)
-(cc 6 '(25 10 5 1))  ;; <== indicates that we can throw out half-dollars, and get the same answer, which is true
+(cc 6 '(25 10 5 1))  ;; <== we can throw out half-dollars
 (+ (cc 6 (r '(25 10 5 1))) (cc (- 6 (f '(25 10 5 1))) '(25 10 5 1)))
 (+ (cc 6 '(10 5 1)) (cc (- 6 25) '(25 10 5 1)))
 (+ (cc 6 '(10 5 1)) (cc -19 '(25 10 5 1)))
 (+ (cc 6 '(10 5 1)) 0)
-(cc 6 '(10 5 1))     ;; <== indicates that we can throw out half-dollars, and quarters, and get the same answer, which is true.
+(cc 6 '(10 5 1))  ;; <== we can throw out half-dollars, quarters
 (+ (cc 6 (r '(10 5 1))) (cc (- 6 (f '(10 5 1))) '(10 5 1)))
 (+ (cc 6 '(5 1)) (cc (- 6 10) '(10 5 1)))
 (+ (cc 6 '(5 1)) (cc -4 '(10 5 1)))
 (+ (cc 6 '(5 1)) 0)
-(cc 6 '(5 1))        ;; <== indicates that we can throw out half-dollars, and quarters, and dimes, and get the same answers, which is true.
+(cc 6 '(5 1))  ;; <== we can throw out half-dollars, quarters, dimes
 (+ (cc 6 (r '(5 1))) (cc (- 6 (f '(5 1))) '(5 1)))
 (+ (cc 6 '(1)) (cc 1 '(5 1))) ;; <== indicates that we can use either (a) all pennies, or (b) pennies and nickels
 ;;;;;;;;;;;;;;;;
@@ -184,7 +184,7 @@
    (+ (cc 1 '(1)) (cc -4 '(5 1))))
 ;;;;;;;;;;;;;;;; 
 (+ (cc 5 '(1)) (+ (cc 1 '(1)) 0))
-(+ (cc 5 '(1)) (cc 1 '(1))) ;; <== indicates that the answer is the sum of (a) how many ways can you change 5 cents, using just pennies, and (b) how many ways can you change a penny, using just pennies. The answer to both questions is 1. Hence the answer we seek is 2.
+(+ (cc 5 '(1)) (cc 1 '(1))) ;; <== count 5 cents, using pennies + count 1 cent, using pennies
 (+ (cc 5 '(1)) (+ (cc 1 '()) (cc (- 1 (f '(1))) '(1))))
 (+ (cc 5 '(1)) (+ 0 (cc (- 1 1) '(1))))
 (+ (cc 5 '(1)) (cc 0 '(1)))
@@ -211,10 +211,3 @@
 (+ (cc 0 '(1)) 1)
 (+ 1 1)
 2
-
-
-
-
-
-
-
