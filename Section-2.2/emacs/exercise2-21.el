@@ -22,15 +22,15 @@
 ;;
 ;; Define the "square" form:
 ;;
-(define (square x) (* x x))
+(defun square (x) (* x x))
 
 ;;
 ;; Define the first "square-list" procedure:
 ;;
-(define (square-list items)
-  (if (null? items)
+(defun square-list (items)
+  (if (null items)
       '()
-      (cons (square (car items)) (square-list (cdr items)))))
+    (cons (square (car items)) (square-list (cdr items)))))
 
 (square-list (list 1 2 3 4 5))
 ;; ==> (1 4 9 16 25)
@@ -38,8 +38,8 @@
 ;;
 ;; Define the second "square-list" procedure:
 ;;
-(define (square-list items)
-  (map square items))
+(defun square-list (items)
+  (mapcar #'square items))
 
 (square-list (list 1 2 3 4 5))
 ;; ==> (1 4 9 16 25)
