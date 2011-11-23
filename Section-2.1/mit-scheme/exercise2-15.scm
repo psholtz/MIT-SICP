@@ -120,7 +120,59 @@
 ;;   PAR2  
 ;; -------- 
 ;;
-;; Now let's step through the calculation for "par2":
+;; Now let's step through the calculation for "par2".
 ;;
-;; (div-interval one r1) expands as follows:
-(div-interval one r1)
+;; As before, we are interested in taking two intervals, r1 and r2, both modeled as having the 
+;; same percentage uncertainty "p", and understanding what the expected uncertainty in the resulting
+;; value given by "par2" should be. 
+;;
+;; First let's work through the expansion for (div-interval one r1), supposing that 
+;; r1 is defined as the interval (x-a,x+a), and that p, the percentage uncertainty,
+;; is given by a = xp. 
+;;
+;; As before, we have:
+;; 
+;; (div-interval one r1)
+;; (mul-interval one (make-interval (/ 1.0 (upper-bound r1)) (/ 1.0 (lower-bound r1))))
+;;
+;; The interval which represents the second argument to "mul-interval" can be represented at:
+;;
+;;  1.0     1.0
+;; ----- , ----- 
+;;  x+a     x-a
+;;
+;; A Taylor expansion of f(x) = 1/x gives:
+;;
+;; f(x+a) = f(x) + f'(x)*a + f''(x)*a^2 / 2 + ...
+;;
+;; f(x+a) = 1/x - 1/x^2 * a + 2/x^3 *a^2 / 2 + ... 
+;; 
+;; f(x+a) = 1/x * ( 1 - a/x + (a/x)^2 - ...) 
+;;
+;; and since a = px, we can write:
+;;
+;; f(x+a) = 1/x * ( 1 - p + p^2 - ...)
+;;
+;; So to a first order approximation, we can write the interval as:
+;;
+;; [(1/x)(1-p),(1/x)(1+p)]
+;;
+;; In other words, the resulting interval has a percentage uncertainty of "p" (just as the initial
+;; argument interval, r1, had).
+;;
+;; Similarly, the computation (div-interval one r2) will give (supposing that r2 is defined 
+;; as the interval (y-b,y+b) where b=yp, and p is the same percentage uncertainty as in r1):
+;;
+;; [(1/y)(1-p),(1/y)(1+p)]
+;;
+;; Next we must combine these two intervals by adding. If we add two intervals, each with percentage
+;; uncertainty of "p", the resulting interval will still have percentage uncertainty "p":
+;;
+;; [(x+y)/(xy)*(1-p),(x+y)/(xy)*(1+p)]
+;;
+;; Finally, we must divide this interval into "one" (the interval with no uncertainty), but as we have
+;; already shown, dividing an interval with uncertainty "p" into "one" will produce a resulting interval
+;; of uncertainty "p". Hence, we expect the final answer produced by "par2" to have an uncertainty of "p".
+;;
+
+
