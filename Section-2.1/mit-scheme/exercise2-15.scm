@@ -84,3 +84,37 @@
 ;; written it models this latter case, although that will produce an overly pessimistic estimation 
 ;; of the uncertainty of the resulting interval.
 ;;
+
+;;
+;; For the sake of interest, we can walk through a more quantitative example.
+;;
+;; Recall the definition of "div-interval":
+;;
+(define (div-interval x y)
+  (mul-interval x
+		(make-interval (/ 1.0 (upper-bound y))
+			       (/ 1.0 (lower-bound y)))))
+
+;;
+;; First let's step through the calculation for "par1":
+;;
+;; Suppose we have two intervals with the same percentage error:
+;;
+;; (x-a,x+a) and (y-b,y+b)
+;;
+;; where a = xp and b = yp, where p is the same in both equations.
+;;
+;; We could then write:
+;;
+;; [x(1-p),x(1+p)] and [y(1-p),y(1+p)] 
+;;
+;; for the two intervals, and adding them obtain:
+;;
+;; [(x+y)(1-p),(x+y)(1+p)]
+;;
+
+;;
+;; Now let's step through the calculation for "par2":
+;;
+;; (div-interval one r1) expands as follows:
+(div-interval one r1)
