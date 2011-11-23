@@ -84,9 +84,12 @@
 ;; written it models this latter case, although that will produce an overly pessimistic estimation 
 ;; of the uncertainty of the resulting interval.
 ;;
+;; It's not necessarily clear or obvious how to write "par1" so that it models the first case, which 
+;; would produce tighter error bounds, or if this  is even possible.
+;;
 
 ;;
-;; For the sake of interest, we can walk through a more quantitative example.
+;; For the sake of interest, we can walk through a more quantitative analysis as well.
 ;;
 ;; Recall the definition of "div-interval":
 ;;
@@ -99,7 +102,11 @@
 ;;   PAR1 
 ;; -------- 
 ;;
-;; First let's step through the calculation for "par1":
+;; First let's step through the calculation for "par1".
+;;
+;; We are interested here in taking two intervals, r1 and r2, both modeled as having the same percentage
+;; error "p", and understanding what the expected uncertainty in the resulting value given by "par1" 
+;; should be.
 ;;
 ;; Suppose we have two intervals with the same percentage error:
 ;;
@@ -114,6 +121,70 @@
 ;; for the two intervals, and adding them obtain:
 ;;
 ;; [(x+y)(1-p),(x+y)(1+p)]
+;;
+;; Suppose now that we multiply the two intervals together. This calculation was already carried out 
+;; Exericse 2.13 but we repeat it (in essence) here:
+;;
+;; [x-a,x+a] * [y-b,y+b]
+;; [xy - xb - ay + ab, xy + xb + ay + ab]
+;; [xy - xy(b/y + a/x - ab/xy), xy + xy(b/y + a/x + ab/xy)]
+;;
+;; Ignoring the second order terms, and writing p = b/y = a/x, we have:
+;;
+;; [xy - xy(2p), xy + xy(2p)]
+;; (xy(1-2p),xy(1+2p))
+;;
+;; In other words, if we take two intervals, each with percentage uncertainty "p", and multiply 
+;; them together, the resulting interval will have percentage uncertainty "2p". 
+;;
+;; Finally, to calculate "par1", we must take an interval with percentage uncertainty "p" and 
+;; divide it into an interval of percentage uncertainty "2p":
+;;
+;; (div-interval x y)
+;; (mul-interval x (make-interval (/ 1.0 (upper-bound y)) (/ 1.0 (lower-bound y))))
+;;
+;; Consider first the second argument to "mul-interval".. the term "y" in this expression 
+;; is the interval:
+;;
+;; [(x+y)(1-p),(x+y)(1+p)]
+;;
+;; Allowing z = x+y, we can write:
+;;
+;; [z(1-p),z(1+p)]
+;; 
+;; hence
+;;
+;; (make-interval (/ 1.0 (upper-bound y)) (/ 1.0  (lower-bound y)))
+;; 
+;; becomes
+;;
+;;   1.0      1.0
+;;  ------ , ------ 
+;;  z(1+p)   z(1-p)
+;;
+;; Recalling the Taylor expansion for f(z) = 1/z, we have:
+;;
+;; f(z+a) = f(z) + f'(z)*a + f''(z)*a^2/2 + ...
+;;
+;; f(z+a) = 1/z - 1/z^2*a + 2/z^3*a^2/2 - ...
+;;
+;; f(z+a) = 1/z( 1 - (a/z) + (a/z)^2 - ...)
+;;
+;; and since a = zp, we can write:
+;;
+;; f(z+a) = (1/z) * ( 1 - p + p^2 - ...)
+;;
+;; Keeping only the first-order terms, our expression for the argument interval becomes:
+;;
+;; [(1/z)*(1-p),(1/z)*(1+p)]
+;;
+;; Where z = x+y. 
+;;
+;; Hence, (div-interval x y)
+;; 
+;; In our model, this reduces to:
+;;
+;; 
 ;;
 
 ;; -------- 
