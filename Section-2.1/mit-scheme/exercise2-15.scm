@@ -180,11 +180,28 @@
 ;;
 ;; Where z = x+y. 
 ;;
-;; Hence, (div-interval x y)
-;; 
-;; In our model, this reduces to:
+;; Returning now to our definition of "par1", it reduces to:
 ;;
-;; 
+;; (div-interval x y)
+;;
+;; Where the uncertainty in x is known to be (roughly) 2p, and the uncertainty in y is known to 
+;; be (roughly) p. So the question is, if we multiply two intervals, one w/ uncertainty "2p" and 
+;; the other with uncertainty "p", what is the uncertainty of the resulting interval? 
+;;
+;; The answer is straightforward:
+;;
+;; (1-2p,1+2p) x (1-p,1+p) 
+;;
+;; (1-3p+p^2,1+3p+p^2)
+;;
+;; Ignoring the second-order p^2 terms, the answer reduces to:
+;;
+;; (1-3p,1+3p)
+;;
+;; Or in other words, the resulting answer will have an uncertainty of "3p".
+;;
+;; We would thus expect, that it we supply "par1" with two intervals, each with the same percentage
+;; uncertainty "p", that the resulting answer produced by "par1" will have an uncertainty of (roughly) "3p".
 ;;
 
 ;; -------- 
@@ -257,6 +274,8 @@
 ;;
 ;; Note that we interval above has uncertainty 0.1 (10%).
 ;;
+(percent (par1 x y))
+;; ==> 0.292233
 (percent (par2 x y))
 ;; ==> 0.1
 
