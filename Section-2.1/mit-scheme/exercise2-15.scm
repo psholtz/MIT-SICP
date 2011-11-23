@@ -95,6 +95,9 @@
 		(make-interval (/ 1.0 (upper-bound y))
 			       (/ 1.0 (lower-bound y)))))
 
+;; -------- 
+;;   PAR1 
+;; -------- 
 ;;
 ;; First let's step through the calculation for "par1":
 ;;
@@ -113,6 +116,9 @@
 ;; [(x+y)(1-p),(x+y)(1+p)]
 ;;
 
+;; -------- 
+;;   PAR2  
+;; -------- 
 ;;
 ;; Now let's step through the calculation for "par2":
 ;;
