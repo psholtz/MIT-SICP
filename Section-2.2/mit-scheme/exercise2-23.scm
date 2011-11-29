@@ -3,9 +3,11 @@
 ;;
 
 (define (for-each func items)
-  (define (iter list1)
-    (cond ((null? list1) #t)
-	  (else
-	   (g (car list1))
-	   (iter (cdr list1)))))
-  (iter items))
+  (define (for-each-iter work answer)
+    (if (null? work)
+	'()
+	(for-each-iter (cdr work)
+		       (append answer
+			       (list (func (car work)))))))
+  (for-each-iter items '()))
+
