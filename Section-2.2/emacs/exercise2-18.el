@@ -9,18 +9,12 @@
 ;;
 
 ;;
-;; Implement the reverse procedure:
+;; Implement the reverse procedure using "append":
 ;;
 (defun reverse (original)
   (if (null original)
       '()
-    (reverse-iter original '())))
-
-(defun reverse-iter (original copy)
-  (let ((new-copy (cons (car original) copy)))
-    (if (null (cdr original))
-	new-copy
-      (reverse-iter (cdr original) new-copy))))
+    (append (reverse (cdr original)) (list (car original)))))
 
 ;;
 ;; Run a unit test:
