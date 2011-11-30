@@ -44,4 +44,24 @@
 (append (list 1 2 3) (list 4 5 6))
 ;; ==> (1 2 3 4 5 6)
 
-[[ WORKING NOT DONE]]
+;;
+;; (c) Next define the custom version of "length":
+;;
+(define (length sequence)
+  (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
+
+;;
+;; Run some unit tests:
+;; 
+(length '())
+;; ==> 0
+(length (list 112))
+;; ==> 1
+(length (list 33 22))
+;; ==> 2
+(length (list 33 22 111))
+;; ==> 3
+(length (list 'a 'b 'c))
+;; ==> 3
+(length (list 33 55 'a 'b 9000))
+;; ==> 5
