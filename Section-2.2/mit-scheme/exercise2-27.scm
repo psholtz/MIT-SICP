@@ -6,23 +6,16 @@
 ;; The "reverse" procedure of 2.18
 ;;
 (define (reverse original)
-  (define (reverse-iter orig copy)
-    (let ((new-copy (cons (car orig) copy)))
-      (if (null? (cdr orig))
-	  new-copy
-	  (reverse-iter (cdr orig) new-copy))))
   (if (null? original)
       '()
-      (reverse-iter original '())))
+      (append (reverse (cdr original)) (list (car original)))))
 
-
+;;
+;;
+;;
 (define (deep-reverse original)
-  (define (deep-reverse-iter orig copy)
-    (cond ((null? (cdr orig)) new-copy)
-	  (else
-	   (display (length (car orig)))
-	   (newline)
-	   (deep-reverse-iter (cdr orig) new-copy))))
-  (if (null? original)
-      '()
-      (deep-reverse-iter original '())))
+  (cond ((null? original) '())
+	((pair? (car original))
+	 (append (deep-reverse (cdr original)) (list (deep-reverse (car original)))))
+	(else
+	 (append (deep-reverse (cdr original)) (list (car original))))))
