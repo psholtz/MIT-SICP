@@ -22,6 +22,10 @@
 	  (accumulate op initial (cdr sequence)))))
 
 ;;
+;; We would like to "flatten", but this is tricky (perhaps impossible) to implement using "map";
+;;
+
+;;
 ;; New definition of "count-leaves":
 ;;
 (define (count-leaves t)
