@@ -59,6 +59,13 @@
 ;; ==> 1/6
 
 ;;
+;; We see that "fold-right" proceeds from the "right" and applies the operation. In other words, folding (list 1 2 3)
+;; from the "right" is tantamount to calculating "3 divided by 2 divided by 1", which gives 3/2. On the other hand, 
+;; folding from the "left" is tantamount to applying the operator to the list in succession from the left side. So that
+;; folding (list 1 2 3) from the left would be tantamount to calculating "1 divided by 2 divided by 3", or 1/6.
+;; 
+
+;;
 ;; Let's step through the same calculation, but for the second problem:
 ;;
 (fold-right list '() (list 1 2 3))
@@ -78,4 +85,12 @@
 (list (list (list '() 1) 2) 3)
 ;; ==> (((() 1) 2) 3)
 
-;; What is the property?
+;;
+;; To find the property that "op" must satisfy for "fold-right" and "fold-left" to be equal, consider folding a 
+;; simple two-element list (i.e., (list x y)). Based on the preceding discussion, we must have "x op y" equal 
+;; to "y op x". In other words, "op" must be commutative.
+;;
+(fold-right + 0 (list 1 2 3))
+;; ==> 6
+(fold-left + 0 (list 1 2 3))
+;; ==> 6
