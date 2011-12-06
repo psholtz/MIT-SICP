@@ -74,3 +74,57 @@
 ;; ==> ((2 1) (3 1) (3 2))
 (unique-pairs 5)
 ;; ==> ((2 1) (3 1) (3 2) (4 1) (4 2) (4 3) (5 1) (5 2) (5 3) (5 4))
+
+;;
+;; In order to implement the "prime-sum-pairs" procedure, we need to 
+;; implement a prime-testing routine, which we will import from Section 1.2:
+;;
+(define (expmod base exp m)
+  (cond ((= exp 0) 1)
+	((even? exp)
+	 (remainder (square (expmod base (/ exp 2) m)) m))
+	(else
+	 (remainder (* base (expmod base (- exp 1) m)) m))))
+
+(define (prime? n)
+  (define (get-random-a)
+    (+ 2 (random (- n 4))))
+  (define (test a)
+    (= (expmod a (- n 1) n) 1))
+  (cond ((= n 2) #t)
+	((= n 3) #t)
+	((= n 4) #f)
+	((= n 5) #t)
+	(else
+	 (and (test (- n 1))
+	      (test (- n 2))
+	      (test (get-random-a))
+	      (test (get-random-a))
+	      (test (get-random-a))))))
+
+(prime? 3)
+;; ==> #t
+(prime? 1000999)
+;; ==> #t
+
+;;
+;; We also need the supporting procedures defined in the text:
+;;
+(define (prime-sum? pair)
+  (prime? (+ (car pair) (cadr pair))))
+(define (make-pair-sum pair)
+  (list (car pair) (cadr pair) (+ (car pair) (cadr pair))))
+
+;;
+;; With all this machinery in place, we can re-define the "prime-sum-pairs" 
+;; procedure as follows:
+;;
+(define (prime-sum-pairs n)
+  (map make-pair-sum
+       (filter prime-sum? (unique-pairs n))))
+
+;;
+;; Testing this procedure:
+;;
+(prime-sum-pairs 6)
+;; ==> ((2 1 3) (3 2 5) (4 1 5) (4 3 7) (5 2 7) (6 1 7) (6 5 11))
