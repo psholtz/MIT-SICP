@@ -31,11 +31,11 @@
 (enumerate-interval 1 10)
 ;; ==> (1 2 3 4 5 6 7 8 9 10)
 (enumerate-interval 1 1)
-;; ==>
+;; ==> (1)
 (enumerate-interval 1 2)
-;; ==>
+;; ==> (1 2)
 (enumerate-interval 1 0)
-;; ==>
+;; ==> ()
 
 ;;
 ;; "unique-pairs" can be defined by simply abstracting the procedure
@@ -50,8 +50,10 @@
 		   (enumerate-interval 1 n))))
 
 (unique-pairs 1)
-;; ==>
+;; ==> ()
 (unique-pairs 2)
-;; ==>
+;; ==> ((2 1))
+(unique-pairs 3)
+;; ==> ((2 1) (3 1) (3 2))
 (unique-pairs 5)
-;; ==>
+;; ==> ((2 1) (3 1) (3 2) (4 1) (4 2) (4 3) (5 1) (5 2) (5 3) (5 4))
