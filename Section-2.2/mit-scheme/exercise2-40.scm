@@ -49,6 +49,23 @@
 			  (enumerate-interval 1 (- i 1))))
 		   (enumerate-interval 1 n))))
 
+;;
+;; This definition is workable, but as was pointed out in the text, the combination
+;; of mapping and accumulating is so common that it's best to isolate it as its 
+;; own separate procedure:
+;;
+(define (flatmap proc seq)
+  (accumulate append '() (map proc seq)))
+
+;;
+;; Using this abstraction, we can now write:
+;;
+(define (unique-pairs n)
+  (flatmap (lambda (i)
+	     (map (lambda (j) (list i j))
+		  (enumerate-interval 1 (- i 1))))
+	   (enumerate-interval 1 n)))
+
 (unique-pairs 1)
 ;; ==> ()
 (unique-pairs 2)
