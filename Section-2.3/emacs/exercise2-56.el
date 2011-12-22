@@ -65,3 +65,39 @@
 ;;
 ;; Procedures for manipulating sums:
 ;;
+(defun sum? (x)
+  (and (listp x) (eq (car x) '+)))
+
+(defun addend (s) (cadr s))
+
+(defun augend (s) (caddr s))
+
+(defun make-sum (a1 a2)
+  (cond ((=number? a1 0) a2)
+	((=number? a2 0) a1)
+	((and (numberp a1) (numberp a2)) (+ a1 a2))
+	(t
+	 (list '+ a1 a2))))
+
+(make-sum 0 10)
+;; ==> 10
+(make-sum 0 'x)
+;; ==> x
+(make-sum 10 0)
+;; ==> 10
+(make-sum 'x 0)
+;; ==> x 
+(make-sum 10 20)
+;; ==> 30
+(make-sum 'x 'y)
+;; ==> (+ x y)
+(make-sum 10 'x)
+;; ==> (+ 10 x)
+(make-sum 'x 10)
+;; ==> (+ x 10)
+
+;;
+;; Procedures for manipulating products:
+;;
+(defun product? (x)
+  (and (listp x) (eq (car x) '*)))
