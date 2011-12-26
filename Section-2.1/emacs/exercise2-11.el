@@ -233,3 +233,156 @@
 ;; ==> t
 (equal (mul-interval q2 r1) (mul-interval-old q2 r1))
 ;; ==> t
+
+;;
+;; Case IX Tests:
+;;
+;; To test Case 9 accurately, we need to test the following cases:
+;;  
+;; (a) Multiply two intervals that both span 0
+;; (b) (= (lower-bound x) 0)
+;; (c) (= (upper-bound x) 0)
+;; (d) (= (lower-bound y) 0)
+;; (e) (= (upper-bound y) 0)
+;;
+(setq r2 (make-interval -3 3))
+
+;;
+;; Case (a) --> where both argument intervals span 0
+;;
+(mul-interval r1 r1)
+;; ==> (-10 . 25)
+(mul-interval r2 r2)
+;; ==> (-9 . 9)
+(mul-interval r1 r2)
+;; ==> (-15 . 15)
+(mul-interval r2 r1)
+;; ==> (-15 . 15)
+
+(equal (mul-interval r1 r1) (mul-interval-old r1 r1))
+;; ==> t
+(equal (mul-interval r2 r2) (mul-interval-old r2 r2))
+;; ==> t
+(equal (mul-interval r1 r2) (mul-interval-old r1 r2))
+;; ==> t
+(equal (mul-interval r2 r1) (mul-interval-old r2 r1))
+;; ==> t
+
+(setq s1 (make-interval 0 4))
+(setq s2 (make-interval -2 0))
+
+;;
+;; Case (b) --> (= (lower-bound x) 0)
+;;
+(mul-interval s1 p1)
+;; ==> (0 . 16)
+(mul-interval s1 p2)
+;; ==> (0 . 24)
+(mul-interval s1 q1)
+;; ==> (-40 . 0)
+(mul-interval s1 q2)
+;; ==> (-16 . 0)
+(mul-interval s1 r1)
+;; ==> (-8 . 20)
+(mul-interval s1 r2)
+;; ==> (-12 . 12)
+
+(equal (mul-interval s1 p1) (mul-interval-old s1 p1))
+;; ==> t
+(equal (mul-interval s1 p2) (mul-interval-old s1 p2))
+;; ==> t 
+(equal (mul-interval s1 q1) (mul-interval-old s1 q1))
+;; ==> t
+(equal (mul-interval s1 q2) (mul-interval-old s1 q2))
+;; ==> t
+(equal (mul-interval s1 r1) (mul-interval-old s1 r1))
+;; ==> t
+(equal (mul-interval s1 r2) (mul-interval-old s1 r2))
+;; ==> t
+
+;;
+;; Case (c) --> (= (upper-bound x) 0)
+;;
+(mul-interval s2 p1)
+;; ==> (-8 . 0)
+(mul-interval s2 p2)
+;; ==> (-12 . 0)
+(mul-interval s2 q1)
+;; ==> (0 . 20)
+(mul-interval s2 q2)
+;; ==> (0 . 8)
+(mul-interval s2 r1)
+;; ==> (-10 . 4)
+(mul-interval s2 r2)
+;; ==> (-6 . 6)
+
+(equal (mul-interval s2 p1) (mul-interval-old s2 p1))
+;; ==> t
+(equal (mul-interval s2 p2) (mul-interval-old s2 p2))
+;; ==> t
+(equal (mul-interval s2 q1) (mul-interval-old s2 q1))
+;; ==> t
+(equal (mul-interval s2 q2) (mul-interval-old s2 q2))
+;; ==> t
+(equal (mul-interval s2 r1) (mul-interval-old s2 r1))
+;; ==> t
+(equal (mul-interval s2 r2) (mul-interval-old s2 r2))
+;; ==> t
+
+;;
+;; Case (d) --> (= (lower-bound y) 0)
+;;
+(mul-interval p1 s1)
+;; ==> (0 . 16)
+(mul-interval p2 s1)
+;; ==> (0 . 24)
+(mul-interval q1 s1)
+;; ==> (-40 . 0)
+(mul-interval q2 s1)
+;; ==> (-16 . 0)
+(mul-interval r1 s1)
+;; ==> (-8 . 20)
+(mul-interval r2 s1)
+;; ==> (-12 . 12)
+
+(equal (mul-interval p1 s1) (mul-interval-old p1 s1))
+;; ==> t
+(equal (mul-interval p2 s1) (mul-interval-old p2 s1))
+;; ==> t
+(equal (mul-interval q1 s1) (mul-interval-old q1 s1))
+;; ==> t
+(equal (mul-interval q2 s1) (mul-interval-old q2 s1))
+;; ==> t
+(equal (mul-interval r1 s1) (mul-interval-old r1 s1))
+;; ==> t
+(equal (mul-interval r2 s1) (mul-interval-old r2 s1))
+;; ==> t
+
+;;
+;; Case (e) --> (= (upper-bound y) 0)
+;;
+(mul-interval p1 s2)
+;; ==> (-8 . 0)
+(mul-interval p2 s2)
+;; ==> (-12 . 0)
+(mul-interval q1 s2)
+;; ==> (0 . 20)
+(mul-interval q2 s2)
+;; ==> (0 . 8)
+(mul-interval r1 s2)
+;; ==> (-10 . 4)
+(mul-interval r2 s2)
+;; ==> (-6 . 6)
+
+(equal (mul-interval p1 s2) (mul-interval-old p1 s2))
+;; ==> t
+(equal (mul-interval p2 s2) (mul-interval-old p2 s2))
+;; ==> t
+(equal (mul-interval q1 s2) (mul-interval-old q1 s2))
+;; ==> t
+(equal (mul-interval q2 s2) (mul-interval-old q2 s2))
+;; ==> t
+(equal (mul-interval r1 s2) (mul-interval-old r1 s2))
+;; ==> t
+(equal (mul-interval r2 s2) (mul-interval-old r2 s2))
+;; ==> t
