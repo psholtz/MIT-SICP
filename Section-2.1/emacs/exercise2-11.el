@@ -91,7 +91,7 @@
 	;;  y     0  y
 	;; 
 	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (< (upper-bound x) 0))
-	 (make-intetrval
+	 (make-interval
 	  (* (upper-bound x) (lower-bound x))
 	  (* (lower-bound x) (lower-bound y))))
 
@@ -175,3 +175,61 @@
 ;; ==> t
 (equal (mul-interval p2 q2) (mul-interval-old p2 q2))
 ;; ==> t
+
+;;
+;; Case IV Tests:
+;;
+(mul-interval q1 p1)
+;; ==> (-40 . 24)
+(mul-interval q1 p2)
+;; ==> (-60 . -40)
+(mul-interval q2 p1)
+;; ==> (-16 . -9)
+(mul-interval q2 p2)
+;; ==> (-24 . -15)
+
+(equal (mul-interval q1 p1) (mul-interval-old q1 p1))
+;; ==> t
+(equal (mul-interval q1 p2) (mul-interval-old q1 p2))
+;; ==> t
+(equal (mul-interval q2 p1) (mul-interval-old q2 p1))
+;; ==> t
+(equal (mul-interval q2 p2) (mul-interval-old q2 p2))
+;; ==> t
+
+;;
+;; Case V Tests:
+;;
+(setq r1 (make-interval -2 5))
+(mul-interval r1 p1)
+;; ==> (-8 . 20)
+(mul-interval r1 p2)
+;; ==> (-12 . 30)
+
+(equal (mul-interval r1 p1) (mul-interval-old r1 p1))
+;; ==> t
+(equal (mul-interval r1 p2) (mul-interval-old r1 p2))
+;; ==> t
+
+;;
+;; Case VII Tests:
+;;
+(mul-interval p1 r1)
+;; ==> (-8 . 20)
+(mul-interval p2 r1)
+;; ==> (-12 . 30)
+
+(equal (mul-interval p1 r1) (mul-interval-old p1 r1))
+;; ==> t
+(equal (mul-interval p2 r1) (mul-interval-old p2 r1))
+;; ==> t
+
+(mul-interval q1 r1)
+;; ==>
+(mul-interval q2 r1)
+;; ==>
+
+(equal (mul-interval q1 r1) (mul-interval-old q1 r1))
+;; ==>
+(equal (mul-interval q2 r1) (mul-interval-old q2 r1))
+;; ==>
