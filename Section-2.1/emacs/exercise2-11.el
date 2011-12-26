@@ -143,3 +143,35 @@
 ;; ==> (15 . 24)
 (equal (mul-interval p1 p2) (mul-interval-old p1 p2))
 ;; ==> t
+
+;; 
+;; Case II Tests:
+;;
+(setq q1 (make-interval -10 -8))
+(setq q2 (make-interval -4 -3))
+
+(mul-interval q1 q2)
+;; ==> (24 . 40)
+(equal (mul-interval q1 q2) (mul-interval-old q1 q2))
+;; ==> t
+
+;;
+;; Case III Tests:
+;;
+(mul-interval p1 q1)
+;; ==> (-40 . -24)
+(mul-interval p1 p2)
+;; ==> (-16 . -9)
+(mul-interval p2 q1)
+;; ==> (-60 . -40)
+(mul-interval p2 q2)
+;; ==> (-24 . -15)
+
+(equal (mul-interval p1 q1) (mul-interval-old p1 q1))
+;; ==> t
+(equal (mul-interval p1 q2) (mul-interval-old p1 q2))
+;; ==> t
+(equal (mul-interval p2 q1) (mul-interval-old p2 q1))
+;; ==> t
+(equal (mul-interval p2 q2) (mul-interval-old p2 q2))
+;; ==> t
