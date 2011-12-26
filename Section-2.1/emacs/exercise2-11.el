@@ -46,6 +46,55 @@
 	((and (< (upper-bound x) 0) (> (lower-bound y) 0))
 	 (make-interval (* (upper-bound y) (lower-bound x)) (* (lower-bound y) (upper-bound x))))
 
+
+	;;
+	;; CASE V:
+	;;
+	;;   x  0    x
+	;; -----+-------
+	;;      0  y y
+	;;
+	((and (< (lower-bound x) 0) (> (upper-bound x) 0) (> (lower-bound y) 0))
+	 (make-interval
+	  (* (lower-bound x) (upper-bound y))
+	  (* (upper-bound x) (upper-bound y))))
+
+	;;
+	;; CASE VI:
+	;; 
+	;;   x   0     x
+	;; ------+--------
+	;;  y y  0
+	;;
+	((and (< (lower-bound x) 0) (> (upper-bound x) 0) (< (upper-bound y) 0))
+	 (make-interval
+	  (* (upper-bound x) (lower-bound y))
+	  (* (lower-bound x) (lower-bound y))))
+
+	;;
+	;; CASE VII:
+	;;
+	;;       0  x x 
+	;; ------+-------
+	;;   y   0  y
+	;;
+	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (> (lower-bound x) 0))
+	 (make-interval
+	  (* (lower-bound y) (upper-bound x))
+	  (* (upper-bound x) (upper-bound y))))
+
+	;;
+	;; CASE VIII:
+	;;
+	;;   x x  0
+	;; -------+-----
+	;;  y     0  y
+	;; 
+	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (< (upper-bound x) 0))
+	 (make-intetrval
+	  (* (upper-bound x) (lower-bound x))
+	  (* (lower-bound x) (lower-bound y))))
+
 	;;
 	;; CASE IX:
 	;;
@@ -83,3 +132,14 @@
 	 (princ "error constructing interval!"))))
 (defun lower-bound (x) (car x))
 (defun upper-bound (x) (cdr x))
+
+;; 
+;; Case I Tests:
+;;
+(setq p1 (make-interval 3 4))
+(setq p2 (make-interval 5 6))
+
+(mul-interval p1 p2)
+;; ==> (15 . 24)
+(equal (mul-interval p1 p2) (mul-interval-old p1 p2))
+;; ==> t
