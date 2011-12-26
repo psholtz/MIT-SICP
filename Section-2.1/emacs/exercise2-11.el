@@ -92,7 +92,7 @@
 	;; 
 	((and (< (lower-bound y) 0) (> (upper-bound y) 0) (< (upper-bound x) 0))
 	 (make-interval
-	  (* (upper-bound x) (lower-bound x))
+	  (* (upper-bound y) (lower-bound x))
 	  (* (lower-bound x) (lower-bound y))))
 
 	;;
@@ -225,11 +225,11 @@
 ;; ==> t
 
 (mul-interval q1 r1)
-;; ==>
+;; ==> (-50 . 20)
 (mul-interval q2 r1)
-;; ==>
+;; ==> (-20 . 8)
 
 (equal (mul-interval q1 r1) (mul-interval-old q1 r1))
-;; ==>
+;; ==> t
 (equal (mul-interval q2 r1) (mul-interval-old q2 r1))
-;; ==>
+;; ==> t
