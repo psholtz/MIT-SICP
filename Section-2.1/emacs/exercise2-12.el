@@ -42,7 +42,6 @@
 (upper-bound x)
 ;; ==> 3.65
 
-
 ;;
 ;; It looks good.
 ;;
