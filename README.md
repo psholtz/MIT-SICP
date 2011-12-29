@@ -21,6 +21,8 @@ Some useful links:
 
 * [Deriving the Y-Combinator](http://www.catonmat.net/blog/derivation-of-ycombinator/)
 
+* [The Why of Y](http://www.catonmat.net/blog/wp-content/uploads/2010/02/thewhyofywhyofy.pdf)
+
 Don't forget to check out the [wiki](/psholtz/MIT-SICP/wiki) for answers to some of the more mathematically oriented questions.
 
 Finally, A Word From Our Sponsor...
