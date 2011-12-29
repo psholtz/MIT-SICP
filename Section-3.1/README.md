@@ -41,4 +41,34 @@ a = 1664525
 b = 1013904423
 </pre>
 
+Let's see how well these choices meet the constraints we've described above:
+
+<pre>
+(define m (expt 2 32))
+(define a 1664525)
+(define b 1013904423)
+
+(gcd b m)
+;; ==> 1 
+
+;; the only prime factor of m is 2:
+(remainder (- a 1) 2)
+;; ==> 0
+
+(remainder m 4)
+;; ==> 0
+(remainder (- a 1) 4)
+;; ==> 0
+</pre>
+
+It looks like these constants make for a good choice of constants. We can therefore implement the "rand-update" procedure as follows:
+
+<pre>
+(define (rand-update x)
+ (let ((m (expt 2 32))
+       (a 1664525)
+       (b 1013904423))
+  (remainder (+ (* a x) b) m)))
+</pre>
+
 A more thorough discussion of LCGs can be had on Wikipedia: http://en.wikipedia.org/wiki/Linear_congruential_generator
