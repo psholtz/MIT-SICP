@@ -19,6 +19,8 @@ Some useful links:
 
 * [Fixed-Point Combinators in JavaScript: Memoizing Recursive Functions](http://matt.might.net/articles/implementation-of-recursive-fixed-point-y-combinator-in-javascript-for-memoization/)
 
+* [Deriving the Y-Combinator](http://www.catonmat.net/blog/derivation-of-ycombinator/)
+
 Don't forget to check out the [wiki](/psholtz/MIT-SICP/wiki) for answers to some of the more mathematically oriented questions.
 
 Finally, A Word From Our Sponsor...
