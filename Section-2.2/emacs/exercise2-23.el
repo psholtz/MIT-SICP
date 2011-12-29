@@ -1,4 +1,6 @@
 
+;; [WORKING]
+
 (defun for-each (func items)
   (defun for-each-iter (work answer)
     (if (null work)
