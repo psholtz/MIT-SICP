@@ -27,4 +27,18 @@ x(n+1) = (a*x(n) + b) mod m
 
 where a, b and m are appropriately chosen. 
 
+The period of an LCD is at most m. If the other two constants are not chosen correctly, its period may be much shorter than that. The attributes that the variables must meet to have full cycles is:
+
+1. b and m are relatively prime.
+2. a-1 is divisible by all prime factors of m.
+3. a-1 is a multiple of 4 if m is a multiple of 4.
+
+A good choice of variables would be:
+
+<pre>
+m = 2^32
+a = 1664525
+b = 1013904423
+</pre>
+
 A more thorough discussion of LCGs can be had on Wikipedia: http://en.wikipedia.org/wiki/Linear_congruential_generator
