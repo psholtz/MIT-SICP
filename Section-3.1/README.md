@@ -27,3 +27,4 @@ x(n+1) = (a*x(n) + b) mod m
 
 where a, b and m are appropriately chosen. 
 
+A more thorough discussion of LCGs can be had on Wikipedia: http://en.wikipedia.org/wiki/Linear_congruential_generator
