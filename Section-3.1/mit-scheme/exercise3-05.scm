@@ -1,4 +1,62 @@
 ;; [working]
+
+
+;;
+;; Define the "random-in-range" procedure given in text:
+;;
+(define (random-in-range low high)
+  (let ((range (- high low)))
+    (+ low (random range))))
+
+;;
+;; Define predicate for a circle (at origin) with a given radius:
+;;
+(define (circle-with-radius radius)
+  (lambda (x y)
+    (let ((distance (sqrt (+ (* x x) (* y y)))))
+      (<= distance radius))))
+
+;;
+;; Define predicate for the unit circle:
+;;
+(define unit-circle (circle-with-radius 1))
+
+;;
+;; Use "interval arthimetic" of Chapter 2 for representating intervals:
+;;
+(define (make-interval a b)
+  (cond ((< a b) (cons a b))
+	(else
+	 (display "error constructing interval!"))))
+(define (lower-bound x) (car x))
+(define (upper-bound x) (cdr x))
+(define (range x) (- (upper-bound x) (lower-bound x)))
+
+;;
+;; Define the monte-carlo integration:
+;;
+(define (estimate-integral predicate x-bounds y-bounds trials)
+  (let ((x (random-in-range (lower-bound x-bounds) (upper-bound x-bounds)))
+	(y (random-in-range (lower-bound y-bounds) (upper-bound y-bounds))))
+    (define (iter trials-remaining trials-passed)
+      (cond ((= trials-remaining 0)
+	     (/ trials-passed trials))
+	    ((predicate x y)
+	     (iter (- trials-remaining 1) (+ trials-passed 1)))
+	    (else
+	     (iter (- trials-remaining 1) trials-passed))))
+    (let ((fraction (iter trials 0))
+	  (area (* (range x-bounds) (range y-bounds))))
+      (* fraction area))))
+
+  
+
+
+;;;;
+;; do you need this?
+(define (random-update x)
+  (random (expt 2 31)))
+
 (define (random-in-range low high)
   (let ((range (- high low)))
     (+ low (random range))))
