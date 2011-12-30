@@ -21,6 +21,7 @@
 ;; 
 ;; Let's start by definition a procedure "g" that returns the number of 
 ;; times its been invoked, starting with its argument value "start":
+;; (Note that the argument "y" is here a dummy, useless variable)
 ;;
 (define (g start)
   (lambda (y)
@@ -34,7 +35,7 @@
 
 ;;
 ;; Finally, let's define a procedure "f" that returns its argument the first 
-;; time its invokved, and returns 0 for each subsequence invocation:
+;; time its invoked, and returns 0 for each subsequence invocation:
 ;;
 (define (f x)
   (if (= (h x) 1)
