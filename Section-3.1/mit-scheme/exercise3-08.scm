@@ -21,7 +21,7 @@
 ;; 
 ;; Let's start by definition a procedure "g" that returns the number of 
 ;; times its been invoked, starting with its argument value "start":
-;; (Note that the argument "y" is here a dummy, useless variable)
+;; (Note that the argument "y" is here a dummy, unused variable)
 ;;
 (define (g start)
   (lambda (y)
