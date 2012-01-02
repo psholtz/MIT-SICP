@@ -60,9 +60,8 @@ w
 ;; ==> (b c d)
 
 ;;
-;; Box diagram corresponding to (define x (list 'a 'b)):
+;; Box diagram representing (define x (list 'a 'b)):
 ;;
-
        --- ---       --- --- 
 x --> [ * | * | --> [ * | / | 
        --- ---       --- --- 
@@ -71,5 +70,14 @@ x --> [ * | * | --> [ * | / |
        ---           --- 
       | a |         | b | 
        ---           ---
-
-
+;;
+;; Box diagram representing (define y (list 'c 'd)):
+;;
+       --- ---       --- ---
+y --> | * | * | --> | * | / |
+       --- ---       --- --- 
+        |             |
+        v             v
+       ---           --- 
+      | c |         | d | 
+       ---           --- 
