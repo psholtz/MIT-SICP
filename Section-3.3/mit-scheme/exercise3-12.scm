@@ -99,3 +99,28 @@ x --> | * | * | --> | * | / |          | * | * | --> | * | / |
 z --> | * | * | --> | * | * | --- 
        --- ---       --- --- 
       
+;;
+;; Clearly, at this point, invoking "z" will generate the list structure
+;; to which "z" points (i.e., (list a b c d), and invoking "(cdr x)" will 
+;; return the one element list to which the "cdr" of x points (i.e., (b))
+;;
+
+;;
+;; After evaluating (append! x y), the corresponding box diagram will 
+;; look like:
+;;
+
+                                    y
+                                    |
+                                    v
+x -->  --- ---       --- ---       --- ---       --- --- 
+      | * | * | --> | * | * | --> | * | * | --> | * | / |
+w -->  --- ---       --- ---       --- ---       --- --- 
+        |             |             |             |
+        v             v             v             v
+       ---           ---           ---           --- 
+      | a |         | b |         | c |         | d | 
+       ---           ---           ---           --- 
+
+;;
+;; 
