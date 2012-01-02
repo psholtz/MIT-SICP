@@ -1,5 +1,5 @@
 ;;
-;; 3.12
+;; Exercise 3.12
 ;; 
 ;; The following procedure for appending lists was introduced in section 2.2.1:
 ;;
