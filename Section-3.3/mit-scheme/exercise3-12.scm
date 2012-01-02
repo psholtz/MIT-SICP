@@ -63,7 +63,7 @@ w
 ;; Box diagram representing (define x (list 'a 'b)):
 ;;
        --- ---       --- --- 
-x --> [ * | * | --> [ * | / | 
+x --> | * | * | --> | * | / | 
        --- ---       --- --- 
         |             | 
         v             v
