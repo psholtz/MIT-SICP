@@ -54,3 +54,17 @@ z --> | * | * | --> | * | * | --> | * | * |
   (if (null? (cdr x))
       x
       (last-pair (cdr x))))
+
+;;
+;; The "last-pair" procedure iteratively tranverse the list structure, 
+;; looking for the "last pair" in the list structure so that it can 
+;; return it. It decides whether a particle node in the list is the 
+;; "last pair" by testing the "cdr" element of that pair. If the result
+;; is null, the prcedure halts and retursn that element.
+;;
+;; With the way we have defined z above, as a circular list, there is 
+;; no "last pair" (i.e., there is no node in the last whose "cdr" element 
+;; is nil), and hence invoking (last-pair z) initiates a computational
+;; process which never termintes. The processor gets stuck in an infinite 
+;; loop.
+;;
