@@ -53,7 +53,7 @@ z
 (cdr x)
 ;; ==> (b)
 
-(define w  (append! x y))
+(define w (append! x y))
 w
 ;; ==> (a b c d)
 (cdr x)
