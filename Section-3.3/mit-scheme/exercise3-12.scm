@@ -123,4 +123,7 @@ w -->  --- ---       --- ---       --- ---       --- ---
        ---           ---           ---           --- 
 
 ;;
-;; 
+;; "x" and "w" now both point to the same location in memory, and evaluating
+;; "(cdr x)" will generate the same result as evaluating "(cdr w)", namely
+;; (b c d).
+;;
