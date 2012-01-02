@@ -27,6 +27,9 @@ z --> | * | * | --> | * | * | --> | * | / |
   (set-cdr! (last-pair x) x)
   x)
 
+;; 
+;; The corresponding box-and-pointer diagram will look like:
+;;
          --------------------------------
         |                                |
         v                                |
