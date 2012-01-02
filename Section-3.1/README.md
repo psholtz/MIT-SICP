@@ -9,6 +9,8 @@ Assignment and Local State
 Random Variables
 ---------------- 
 
+[![](http://farm8.staticflickr.com/7153/6622400149_8af39d95a9.jpg)](http://farm8.staticflickr.com/7153/6622400149_8af39d95a9.jpg)
+
 The text defines the following code:
 
 <pre>
