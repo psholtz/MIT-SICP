@@ -30,6 +30,7 @@ z --> | * | * | --> | * | * | --> | * | / |
 ;; 
 ;; The corresponding box-and-pointer diagram will look like:
 ;;
+
          --------------------------------
         |                                |
         v                                |
