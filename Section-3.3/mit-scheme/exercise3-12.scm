@@ -60,5 +60,16 @@ w
 ;; ==> (b c d)
 
 ;;
-;; TODO --> draw box and poitner
+;; Box diagram corresponding to (define x (list 'a 'b)):
 ;;
+
+       --- ---       --- --- 
+x --> [ * | * | --> [ * | / | 
+       --- ---       --- --- 
+        |             | 
+        v             v
+       ---           --- 
+      | a |         | b | 
+       ---           ---
+
+
