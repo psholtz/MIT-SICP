@@ -2,6 +2,8 @@
 ;; Exercise 3.14
 ;;
 
+;; [working]
+
 ;;
 ;; Define the "mystery" procedure:
 ;;
@@ -33,7 +35,7 @@
 (loop (list 1 2 3 4) (list 5 6 7 8))
 
 ;;
-;; The "temp" variable is assign (cdr x), i.e., (list 2 3 4):
+;; The "temp" variable is assigned (cdr x), i.e., (list 2 3 4):
 ;; temp <-- (list 2 3 4)
 ;;
 ;; and "set-cdr!" is invoked using "x" and "y":
