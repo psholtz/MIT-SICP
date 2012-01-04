@@ -1,4 +1,7 @@
 
+;; ++++++++++++++++++ 
+;; PRIME TESTING CODE
+;; ++++++++++++++++++ 
 (define (expmod base exp m)
   (cond ((= exp 0) 1)
 	((even? exp)
