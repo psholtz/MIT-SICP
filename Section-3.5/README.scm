@@ -1,3 +1,6 @@
+;; +++++++++++ 
+;; SECTION 3.1
+;; +++++++++++
 
 ;; ++++++++++++++++++ 
 ;; PRIME TESTING CODE
@@ -26,3 +29,30 @@
 	      (test (get-random-a))
 	      (test (get-random-a))
 	      (test (get-random-a))))))
+
+;; ++++++++++++++++++++++
+;; LIST MANIPULATION CODE 
+;; ++++++++++++++++++++++ 
+
+;;
+;; Compare the two summation procedures:
+;;
+
+;; 
+;; First summation procedure:
+;;
+(define (sum-primes a b)
+  (define (iter count accum)
+    (cond ((> count b) accum)
+	  ((prime? count) (iter (+ count 1) (+ count accum)))
+	  (else 
+	   (iter (+ count 1) accum))))
+  (iter a 0))
+
+;;
+;; Second summation procedure:
+;;
+(define (sum-primes a b)
+  (accumulate +
+	      0
+	      (filter prime? (enumerate-interval a b))))
