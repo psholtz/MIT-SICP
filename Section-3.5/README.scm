@@ -53,7 +53,6 @@
       (op (car sequence)
 	  (accumulate op initial (cdr sequence)))))
 
-
 ;;
 ;; Compare the two summation procedures:
 ;;
