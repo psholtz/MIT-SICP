@@ -1,6 +1,8 @@
 ;;
 ;; Exercise 3.15
 ;;
+;; Draw box-and-pointer diagrams to explain the effect of "set-to-wow!" on the structures z1 and z2 above.
+;;
 
 ;;
 ;; The definitions we will use in this exercise:
@@ -16,8 +18,6 @@
 ;;
 ;; Before invoking "set-to-wow!" the z1 (and x) data structures look like:
 ;;
-
-
         --- --- 
 z1 --> | * | * |
         --- --- 
@@ -99,3 +99,8 @@ z2 --> | * | * | --> | * | * | --> | * | / |
                      ----- 
                     | wow |
                      -----
+
+(set-to-wow! z2)
+;; ==> ((wow b) a b)
+z2 
+;; ==> ((wow b) a b)
