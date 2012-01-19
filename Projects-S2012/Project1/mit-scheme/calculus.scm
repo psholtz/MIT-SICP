@@ -72,3 +72,19 @@
 ;;
 
 ;; [working]
+
+;; ++++++++++++++++++++++++ 
+;; Problem 4
+;; 
+;; Integrating any function
+;; ++++++++++++++++++++++++ 
+;; (working --> check the bounds)
+(define (integral func num-steps x1 x2)
+  (let ((dx (* 1.0 (/ (- x2 x1) num-stemps))))
+    (define (integrate x total)
+      (let ((value (func x)))
+	(if (>= x x2)
+	    (+ value total)
+	    (integrate (+ x dx) (+ total value)))))
+    (integrate x1 0.0)))
+
