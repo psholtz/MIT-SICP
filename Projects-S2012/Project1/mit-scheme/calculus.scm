@@ -88,3 +88,40 @@
 	    (integrate (+ x dx) (+ total value)))))
     (integrate x1 0.0)))
 
+
+;; +++++++++++++++++++++ 
+;; Problem 5
+;;
+;; Area of a unit circle
+;; +++++++++++++++++++++ 
+(define (square x) (* x x))
+(define (approx-pi num-steps)
+  (* 
+   4
+   (integral (lambda (x) (sqrt (- 1 (square x)))) num-steps 0 1)))
+
+;; ++++++++++++++++++++++++++++++++++++ 
+;; Problem 6  
+;; 
+;; Integrating with pieces of any shape
+;; ++++++++++++++++++++++++++++++++++++ 
+;; area under rectangle
+(define (rectangle func x1 x2)
+  (let ((dx (- x2 x1)))
+    (* (func x1) dx)))
+
+;; are under trapezoid
+(define (trapezoid func x1 x2)
+  (let ((dx (- x2 x1)))
+    (* dx (/ (+ (func x1) (func x2)) 2.0))))
+
+(define (integral-with piece func num-steps x1 x2)
+  '())
+
+;; ++++++++++++++++++++++++++ 
+;; Problem 7
+;;
+;; Better approximation of pi
+;; ++++++++++++++++++++++++++
+(define (better-pi num-steps)
+  '())
