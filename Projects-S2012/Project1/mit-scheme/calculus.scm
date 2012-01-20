@@ -125,33 +125,30 @@
 ;; Looks like the approximations are pretty good.
 ;;
 
-
-;;
-;; Since f(0) = -14, we would expect (bitfunc-integral-recur 1 0 1) to be -14:
-;;
-(bitfunc-integral-recur 1 0 1)
-;; ==> -14.0
-
-
-
-;;
-;; Run some unit tests:
-;;
-
-;; [working]
+;; [working --> do more integrals here]
 
 ;;
 ;; Iterative function definition:
-;; (working --> adjust conditional)
 ;;
 (define (bitfunc-integral-iter num-steps x1 x2)
   (let ((dx (* 1.0 (/ (- x2 x1) num-steps))))
     (define (integrate x total)
-      (let ((value (bitfunc x)))
-	(if (>= x x2)
-	    (+ value total)
-	    (integrate (+ x dx) (+ total value)))))
-    (integrate x1 0.0)))
+      (if (>= (+ x dx) x2)
+	  (+ (bitfunc-rect x (+ x dx)) total)
+	  (+ (bitfunc-rect x (+ x dx)) (integrate (+ x dx) total))))
+    (integrate x1 0)))
+
+;;
+;; For the unit tests, we can simply verify that the recursive version gives 
+;; the same answer as the iterative version.
+;;
+(= (bitfunc-integral-iter 10 0 1) (bitfunc-integral-recur 10 0 1))
+;; ==> #t
+(= (bitfunc-integral-iter 100 0 1) (bitfunc-integral-recur 100 0 1))
+;; ==> #t
+(= (bitfunc-integral-iter 1000 0 1) (bitfuc-integral-recur 1000 0 1))
+;; ==> #t
+
 
 ;;
 ;; Run some unit tests:
