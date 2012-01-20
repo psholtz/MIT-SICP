@@ -112,7 +112,18 @@
 ;;
 ;; Looks OK, let's see if our definite integrals evaluate to something close to their expected values:
 ;;
+;; Int f(x) from 0 to 1 should work out to (+ (/ 1 5) (/ 1 3) -14) = -13.466666666 or -13 21/45
+;;
+(bitfunc-integral-recur 10 0 1)
+;; ==> -14.76167
+(bitfunc-integral-recur 100 0 1)
+;; ==> -13.476616667
+(bitfunc-integral-recur 1000 0 1)
+;; ==> -13.46766616666667
 
+;;
+;; Looks like the approximations are pretty good.
+;;
 
 
 ;;
