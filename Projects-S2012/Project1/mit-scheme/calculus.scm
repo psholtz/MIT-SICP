@@ -76,10 +76,7 @@
 ;; ==> #t
 (= (bitfunc-rect 2 5) 18)
 ;; ==> #t
-
  
-;; [working]
-
 ;; ++++++++++++++++++++++++++++++++ 
 ;; Problem 3
 ;; 
@@ -87,16 +84,45 @@
 ;; ++++++++++++++++++++++++++++++++ 
 
 ;;
+;; Note that if f(x) = x^4 + x^2 - 14, then 
+;; int f(x) = (1/5)x^5 + (1/3)x^3 - 14x.
+;;
+
+;;
 ;; Recursive function definition:
-;; (working --> adjust conditional)
+;; (use decimals)
 ;;
 (define (bitfunc-integral-recur num-steps x1 x2)
   (let ((dx (* 1.0 (/ (- x2 x1) num-steps))))
     (define (integrate x)
-      (if (>= x x2)
-	  (* (bitfunc x) dx)
-	  (+ (* (bitfunc x) dx) (integrate (+ x dx)))))
+      (if (>= (+ x dx) x2)
+	  (bitfunc-rect x (+ x dx))
+	  (+ (bitfunc-rect x (+ x dx)) (integrate (+ x dx)))))
     (integrate x1)))
+
+;;
+;; Let's see if "step-wise" (for large steps) we can what we expect:
+;;
+(= (bitfunc-integral-recur 1 0 1) (bitfunc 0))
+;; ==> #t
+(= (bitfunc-integral-recur 2 0 1) (/ (+ (bitfunc 0.0) (bitfunc 0.5)) 2.0))
+;; ==> #t
+(= (bitfunc-integral-recur 4 0 1) (/ (+ (bitfunc 0.0) (bitfunc 0.25) (bitfunc 0.5) (bitfunc 0.75)) 4.0))
+;; ==> #t
+
+;;
+;; Looks OK, let's see if our definite integrals evaluate to something close to their expected values:
+;;
+
+
+
+;;
+;; Since f(0) = -14, we would expect (bitfunc-integral-recur 1 0 1) to be -14:
+;;
+(bitfunc-integral-recur 1 0 1)
+;; ==> -14.0
+
+
 
 ;;
 ;; Run some unit tests:
