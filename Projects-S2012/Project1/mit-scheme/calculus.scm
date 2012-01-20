@@ -12,6 +12,18 @@
 ;;
 ;; Run some unit tests:
 ;;
+(= (bitfunc -2) 6)
+;; ==> #t
+(= (bitfunc -1) -12)
+;; ==> #t
+(= (bitfunc 0) -14)
+;; ==> #t
+(= (bitfunc 1) -12)
+;; ==> #t
+(= (bitfunc 2) 6)
+;; ==> #t
+(= (bitfunc 5) 636)
+;; ==> #t
 
 ;; [working]
 
