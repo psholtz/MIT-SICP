@@ -34,6 +34,7 @@
 ;;
 ;; Area of Rectangle
 ;; +++++++++++++++++ 
+;; (assume that x2 > x1 always)
 (define (bitfunc-rect x1 x2)
   (let ((dx (- x2 x1)))
     (* (bitfunc x1) dx)))
@@ -41,6 +42,11 @@
 ;;
 ;; Run some unit tests:
 ;;
+(= (bitfunc-rect -2 -1) 6)
+;; ==> #t
+(= (bitfunc-rect -2 0) 12)
+;; ==> #t
+
 
 ;; [working]
 
