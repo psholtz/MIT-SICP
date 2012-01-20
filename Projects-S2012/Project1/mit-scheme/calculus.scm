@@ -3,6 +3,10 @@
 ;; 
 ;; Bitdiddle's Function
 ;; ++++++++++++++++++++ 
+
+;;
+;; Define the function f(x) = x^4 + x^2 - 14
+;;
 (define (bitfunc x)
   (+ 
    (expt x 4)
@@ -24,8 +28,6 @@
 ;; ==> #t
 (= (bitfunc 5) 636)
 ;; ==> #t
-
-;; [working]
 
 ;; +++++++++++++++++ 
 ;; Problem 2
