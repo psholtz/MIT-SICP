@@ -46,8 +46,38 @@
 ;; ==> #t
 (= (bitfunc-rect -2 0) 12)
 ;; ==> #t
+(= (bitfunc-rect -2 1) 18)
+;; ==> #t
 
+(= (bitfunc-rect -1 0) -12)
+;; ==> #t
+(= (bitfunc-rect -1 1) -24)
+;; ==> #t
+(= (bitfunc-rect -1 2) -36)
+;; ==> #t
 
+(= (bitfunc-rect 0 1) -14)
+;; ==> #t
+(= (bitfunc-rect 0 2) -28)
+;; ==> #t
+(= (bitfunc-rect 0 3) -42)
+;; ==> #t
+
+(= (bitfunc-rect 1 2) -12)
+;; ==> #t
+(= (bitfunc-rect 1 3) -24)
+;; ==> #t 
+(= (bitfunc-rect 1 4) -36)
+;; ==> #t
+
+(= (bitfunc-rect 2 3) 6)
+;; ==> #t
+(= (bitfunc-rect 2 4) 12)
+;; ==> #t
+(= (bitfunc-rect 2 5) 18)
+;; ==> #t
+
+ 
 ;; [working]
 
 ;; ++++++++++++++++++++++++++++++++ 
