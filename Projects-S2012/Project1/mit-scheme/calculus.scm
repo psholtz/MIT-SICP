@@ -233,7 +233,6 @@
 ;; Here the convergence seems to be somewhat better than for the polynomial functions.
 ;;
 
-
 ;; +++++++++++++++++++++ 
 ;; Problem 5
 ;;
@@ -292,6 +291,10 @@
 ;; ==> #t
 
 (= (integral cube 10 0 1) (integral-with rectangle cube 10 0 1))
+;; ==> #t
+(= (integral cube 100 0 1) (integral-with rectangle cube 100 0 1))
+;; ==> #t
+(= (integral cube 1000 0 1) (integral-with rectangle cube 1000 0 1))
 ;; ==> #t
 
 
