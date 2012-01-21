@@ -274,10 +274,25 @@
 (define (integral-with piece func num-steps x1 x2)
   (let ((dx (* 1.0 (/ (- x2 x1) num-steps))))
     (define (integrate x total)
-      (if (>= (+ x dx) x2)
-	  (+ (piece func x (+ x dx)) total)
-	  (+ (piece func x (+ x dx)) (integrate (+ x dx) total))))
+      (let ((value (+ (piece func x (+ x dx)))))
+	(if (>= (+ x dx) x2)
+	    (+ value total)
+	    (+ value (integrate (+ x dx) total)))))
     (integrate x1 0)))
+
+;;
+;; Check that "integral-with rectangle" works out to the same answer that the
+;; original "integral" procedure produced.
+;;
+(= (integral square 10 0 1) (integral-with rectangle square 10 0 1))
+;; ==> #t
+(= (integral square 100 0 1) (integral-with rectangle square 100 0 1))
+;; ==> #t
+(= (integral square 1000 0 1) (integral-with rectangle square 1000 0 1))
+;; ==> #t
+
+(= (integral cube 10 0 1) (integral-with rectangle cube 10 0 1))
+;; ==> #t
 
 
 ;; ++++++++++++++++++++++++++ 
