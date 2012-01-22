@@ -318,6 +318,12 @@
 (= (integral cube 1000 0 1) (integral-with rectangle cube 1000 0 1))
 ;; ==> #t
 
+(= (integral sin 10 0 1) (integral-with rectangle sin 10 0 1))
+;; ==> #t
+(= (integral sin 100 0 1) (integral-with rectangle sin 100 0 1))
+;; ==> #t
+(= (integral sin 1000 0 1) (integral-with rectangle sin 1000 0 1))
+;; ==> #t
 
 ;; ++++++++++++++++++++++++++ 
 ;; Problem 7
