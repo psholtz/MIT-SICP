@@ -125,7 +125,21 @@
 ;; Looks like the approximations are pretty good.
 ;;
 
-;; [WORKING --> do more integrals here]
+;;
+;; Int f(x) from 0 to 2 should work out to (+ (/ 32 5) (/ 8 3) -24) = -18.93333
+;;
+(bitfunc-integral-recur 10 0 2)
+;; ==> -19.61344
+(bitfunc-integral-recur 100 0 2)
+;; ==> -19.13213333
+(bitfunc-integral-recur 1000 0 2)
+;; ==> -18.95332133333
+(bitfunc-integral-recur 10000 0 2)
+;; ==> -18.9341333
+
+;;
+;; Here the approximations seem to converge a bit more slowly.
+;;
 
 ;;
 ;; Iterative function definition:
@@ -149,7 +163,14 @@
 (= (bitfunc-integral-iter 1000 0 1) (bitfuc-integral-recur 1000 0 1))
 ;; ==> #t
 
-;; [WORKING --> more definite integrals]
+(= (bitfunc-integral-iter 10 0 2) (bitfunc-integral-recur 10 0 2))
+;; ==> #t
+(= (bitfunc-integral-iter 100 0 2) (bitfunc-integral-recur 100 0 2))
+;; ==> #t
+(= (bitfunc-integral-iter 1000 0 2) (bitfunc-integral-recur 1000 0 2))
+;; ==> #t
+(= (bitfunc-integral-iter 10000 0 2) (bitfunc-integral-recur 10000 0 2))
+;; ==> #t
 
 ;; ++++++++++++++++++++++++ 
 ;; Problem 4
