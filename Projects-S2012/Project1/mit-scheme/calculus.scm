@@ -280,7 +280,6 @@
 ;; 
 ;; Integrating with pieces of any shape
 ;; ++++++++++++++++++++++++++++++++++++ 
-;; [WORKING --> not quite right yet]
 ;; area under rectangle
 (define (rectangle func x1 x2)
   (let ((dx (- x2 x1)))
@@ -325,6 +324,7 @@
 (= (integral sin 1000 0 1) (integral-with rectangle sin 1000 0 1))
 ;; ==> #t
 
+;; [working --> trapezoid wrong?]
 ;;
 ;; Let's see whether the integrations converge more rapidly using 
 ;; the trapezoid scheme, than with the rectangle scheme.
@@ -404,5 +404,10 @@
 ;;
 ;; Better approximation of pi
 ;; ++++++++++++++++++++++++++
+;; [working --> complex?]
 (define (better-pi num-steps)
-  '())
+  (* 4 (integral-with trapezoid 
+		      (lambda (x) (sqrt (- 1 (square x))))
+		      num-steps
+		      0
+		      1)))
