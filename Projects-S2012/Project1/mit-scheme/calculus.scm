@@ -325,6 +325,80 @@
 (= (integral sin 1000 0 1) (integral-with rectangle sin 1000 0 1))
 ;; ==> #t
 
+;;
+;; Let's see whether the integrations converge more rapidly using 
+;; the trapezoid scheme, than with the rectangle scheme.
+;;
+(integral-with rectangle square 10 0 1)
+;; ==> 0.3845
+(integral-with trapezoid square 10 0 1)
+;; ==> 0.4455
+
+(integral-with rectangle square 100 0 1)
+;; ==> 0.32835
+(integral-with trapezoid square 100 0 1)
+;; ==> 0.3335
+
+(integral-with rectangle square 1000 0 1)
+;; ==> 0.3328335
+(integral-with trapezoid square 1000 0 1)
+;; ==> 0.3333335
+
+;;
+;; For the function "square", the convergence is at first worse 
+;; with the trapezoid integrator, but it rapidly increases in accuracy 
+;; and at smaller step sizes becomes a much better approximation to the 
+;; analytic answer.
+;;
+
+(integral-with rectangle cube 10 0 1)
+;; ==> 0.3025
+(integral-with trapezoid cube 10 0 1)
+;; ==> 0.36905
+
+(integral-with rectangle cube 100 0 1)
+;; ==> 0.245025
+(integral-with trapezoid cube 100 0 1)
+;; ==> 0.250025
+
+(integral-with rectangle cube 1000 0 1)
+;; ==> 0.24950025
+(integral-with trapezoid cube 1000 0 1)
+;; ==> 0.25000025
+
+;;
+;; Again, at very large step sizes, the trapezoid form provides a 
+;; slightly worse approximation, but as the mesh size increases 
+;; (i.e., step size decreases), the accuracy of the trapezoid integrator
+;; increases dramatically.
+;;
+
+;;
+;; It's interesting that in evaluating the "sin" function, the 
+;; two integrators (i.e., rectangle and trapezoid) give the "identical"
+;; answer when integrating from 0 to pi:
+;;
+(integral-with rectangle sin 10 0 pi)
+;; ==> 1.9835235375094546
+(integral-with trapezoid sin 10 0 pi)
+;; ==> 1.9835235375094546
+(= (integral-with rectangle sin 10 0 pi) (integral-with trapezoid sin 10 0 pi))
+;; ==> #t
+
+;;
+;; At subsequent mesh sizes, the trapezoid integrator actually gives a 
+;; slightly "worst" answer than the rectangular integrator:
+;;
+(integral-with rectangle sin 100 0 pi)
+;; ==> 1.999835503...
+(integral-with trapezoid sin 100 0 pi)
+;; ==> 1.9993421048...
+
+(integral-with rectangle sin 1000 0 pi)
+;; ==> 1.99999835506..
+(integral-with trapezoid sin 1000 0 pi) 
+;; ==> 1.99999342027..
+
 ;; ++++++++++++++++++++++++++ 
 ;; Problem 7
 ;;
