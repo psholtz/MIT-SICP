@@ -199,7 +199,7 @@
 ;; Define some procedures, and calculate their integrals:
 ;;
 (define (square x) (* x x))
-(define (cube x) (* x x))
+(define (cube x) (* x x x))
 
 ;;
 ;; For reference:
