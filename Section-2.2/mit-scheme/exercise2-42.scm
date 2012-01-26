@@ -1,6 +1,8 @@
 
+
 ;;
-;; Define "accumulate" procedure:
+;; First define the supporting procedures required by "queens", 
+;; of which there are two: "accumulate" and "flatmap":
 ;;
 (define (accumulate op initial sequence)
   (if (null? sequence)
@@ -8,16 +10,8 @@
       (op (car sequence)
 	  (accumulate op initial (cdr sequence)))))
 
-;;
-;; Define "flatmap" procedure:
-;;
 (define (flatmap proc seq)
   (accumulate append nil (map proc seq)))
-
-;;
-;; Define "empty-board":
-;;
-(define empty-board '())
 
 ;;
 ;; Define "queens" procedure:
@@ -37,12 +31,23 @@
   (queen-cols board-size))
 
 ;;
-;; Procedure is not quite done yet. We still 
-;; need to define "safe?" procedure and 
-;; "adjoin-position" procedure:
+;; To make this work, we need to implement the "safe?" and 
+;; "adjoin-position" procedures. In order to do this, we 
+;; need to form some conception of what, precisely, a "position" 
+;; on the chess board is. 
 ;;
-(define (safe? k positions)
-  '())
+;; We define the following data structure, with supporting accessors:
+;;
+(define (make-position row col)
+  (cons row col))
+(define (position-row position)
+  (car position))
+(define (position-col position)
+  (cdr position))
+(define (positions-equal? a b)
+  (equal a b))
 
-(define (adjoin-position new-row k rest-of-queens)
-  '())
+;;
+;; At this point, we can also define the "empty-board" constant:
+;;
+(define empty-board '())
