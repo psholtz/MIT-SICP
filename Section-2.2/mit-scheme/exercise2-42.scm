@@ -1,8 +1,9 @@
 
 
 ;;
-;; First define the supporting procedures required by "queens", 
-;; of which there are two: "accumulate" and "flatmap":
+;; First define the supporting procedures required by "queens".
+;;
+;; Define "accumulate" procedure:
 ;;
 (define (accumulate op initial sequence)
   (if (null? sequence)
@@ -10,8 +11,19 @@
       (op (car sequence)
 	  (accumulate op initial (cdr sequence)))))
 
+;;
+;; Define "flatmap" procedure:
+;;
 (define (flatmap proc seq)
   (accumulate append nil (map proc seq)))
+
+;;
+;; Define "enumerate-interval" procedure:
+;;
+(define (enumerate-interval low high)
+  (if (> low high)
+      '()
+      (cons low (enumerate-interval (+ low 1) high))))
 
 ;;
 ;; Define "queens" procedure:
