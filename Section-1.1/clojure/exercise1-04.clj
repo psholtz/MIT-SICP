@@ -9,7 +9,9 @@
 ;;
 
 ;; Procedure adds absolute value of b to a.
-(defn a-plus-abs-b [a b]
+(defn a-plus-abs-b
+  {:doc "Add the absolute value of b to a"}
+  [a b]
   ((if (> b 0) + -) a b))
 
 ;;

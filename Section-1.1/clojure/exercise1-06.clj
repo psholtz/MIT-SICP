@@ -31,7 +31,9 @@
 ;;
 ;; Define the new "if" predicate as follows:
 ;;
-(defn new-if [predicate then-clause else-clause]
+(defn new-if
+  {:doc "New 'if' predicate, *not* defined as a special form"}
+  [predicate then-clause else-clause]
   (cond predicate then-clause
         :else else-clause))
 
@@ -44,26 +46,37 @@
 ;;
 ;; Rewrite the "sqrt" procedure using the new "if" predicate:
 ;;
-(defn square [n] (* n n))
+(defn square
+  {:doc "Return the square of the argument"}
+  [n] (* n n))
 
-(defn good-enough? [guess x]
+(defn good-enough?
+  {:doc "Is the square of guess close enough to x?"}
+  [guess x]
   (< (Math/abs (- (square guess) x)) 0.001))
 
-(defn average [x y]
+(defn average
+  {:doc "Return the average of x and y"}
+  [x y]
   (/ (+ x y) 2.0))
 
-(defn improve [guess x]
+(defn improve
+  {:doc "Improve the 'guess', so that its square will be closer to 'x'"}
+  [guess x]
   (average guess (/ x guess)))
 
 ;;
 ;; INSERT NEW "IF" PREDICATE HERE
 ;;
-(defn sqrt-iter [guess x]
+(defn sqrt-iter
+  {:doc "Recursive procedure used to generate approximations to square root x"}
+  [guess x]
   (new-if (good-enough? guess x)
           guess
           (sqrt-iter (improve guess x) x)))
 
 (defn sqrt [x]
+  {:doc "Wrapper function, used to invoke the square root procedure"}
   (sqrt-iter 1.0 x))
 
 ;;
