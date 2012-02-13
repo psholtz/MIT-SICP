@@ -32,11 +32,17 @@
 ;; This implementation is given in the following code:
 ;;
 
-(defn square [n] (* n n))
+(defn square
+  {:doc "Return square of the argument"}
+  [n] (* n n))
 
-(defn average [x y] (/ (+ x y) 2.0))
+(defn average
+  {:doc "Return the average of x and y"}
+  [x y] (/ (+ x y) 2.0))
 
-(defn improve [guess x]
+(defn improve
+  {:doc "Improve the guess, so that (square guess) comes closer to x"}
+  [guess x]
   (average guess (/ x guess)))
 
 ;;
@@ -44,14 +50,19 @@
 ;; changes, rather than on an absolute tolerance.
 ;; The fractional tolerance is set at 0.1%.
 ;;
-(defn good-enough? [guess x]
+(defn good-enough?
+  {:doc "Is (square guess) close enough to x for our tolerance?"}
+  [guess x]
   (< (Math/abs (- (/ (square guess) x) 1.0)) 0.001))
 
-(defn sqrt-iter [guess x]
+(defn sqrt-iter
+  {:doc "Make an iterative improvement to the approximation for (sqrt x)"}
+  [guess x]
   (if (good-enough? guess x)
     guess
     (sqrt-iter (improve guess x)
                x)))
 
 (defn sqrt [x]
+  {:doc "Wrapper function to invoke iterative sqrt procedure"}
   (sqrt-iter 1.0 x))

@@ -7,16 +7,12 @@
 ;;
 
 ;; define the "cube" form
-(defn cube
-  {:doc "Return cube of the argument"}
-  [n] (* n n n))
+(defn cube [n] (* n n n))
 
 ;;
 ;; Block defining the cube root procedure.
 ;;
-(defn cube-root
-  {:doc "Wrapper function to calculate cube-root of x"}
-  [x]
+(defn cube-root [x]
   (def tolerance 0.001)
   (defn good-enough? [guess]
     (< (Math/abs (- (/ (cube guess) x) 1.0)) tolerance))

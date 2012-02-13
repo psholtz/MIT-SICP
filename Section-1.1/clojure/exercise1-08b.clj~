@@ -6,36 +6,26 @@
 ;;
 
 ;; define the "square" form
-(defn square
-  {:doc "Return square of the argument"}
-  [n] (* n n))
+(defn square [n] (* n n))
 
 ;; define supporting procedures
-(defn average
-  {:doc "Return the average of x and y"}
-  [x y]
+(defn average [x y]
   (/ (+ x y) 2.0))
 
-(defn improve
-  {:doc "Make an improvement to guess, relative to x"}
-  [guess x]
+(defn improve [guess x]
   (average guess (/ x guess)))
 
 ;;
 ;; Use the "new" method of approximation, based on fractional changes.
 ;;
-(defn good-enough?
-  {:doc "Is guess a good enough approximation to (sqrt x)"}
-  [guess x]
+(defn good-enough? [guess x]
   (def tolerance 0.001)
   (< (Math/abs (- (/ (square guess) x) 1.0)) tolerance))
 
 ;;
 ;; Define iterative procedure for arriving at square roots.
 ;;
-(defn sqrt-iter
-  {:doc "Make an iterative improvement to (sqrt x), starting from guess"}
-  [guess x]
+(defn sqrt-iter [guess x]
   (if (good-enough? guess x)
     guess
     (sqrt-iter (improve guess x) x)))
@@ -43,7 +33,5 @@
 ;;
 ;; Define interface to "sqrt-iter" procedure
 ;;
-(defn sqrt
-  {:doc "Wrapper function to calculate (sqrt x)"}
-  [x]
+(defn sqrt [x]
   (sqrt-iter 1.0 x))

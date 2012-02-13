@@ -7,16 +7,12 @@
 ;;
 
 ;; define the "square" form
-(defn square
-  {:doc "Return square of argument"}
-  [n] (* n n))
+(defn square [n] (* n n))
 
 ;;
 ;; Block defining the square root procedure.
 ;;
-(defn sqrt
-  {:doc "Wrapper function to calculate (sqrt x)"}
-  [x]
+(defn sqrt [x]
   (def tolerance 0.001)
   (defn good-enough? [guess]
     (< (Math/abs (- (/ (square guess) x) 1.0)) tolerance))
