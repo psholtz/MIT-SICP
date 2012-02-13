@@ -6,11 +6,14 @@
 ;;
 
 ;; define the "square" form
-(defn square [n] (* n n))
+(defn square
+  {:doc "Return the square of the argument"}
+  [n] (* n n))
 
 ;; define the "sum-of-squares" form
-(defn sum-of-squares [x y]
-  (+ (square x) (square y)))
+(defn sum-of-squares
+  {:doc "Return the sum of the squares of the arguments"}
+  [x y] (+ (square x) (square y)))
 
 ;;
 ;; Procedure takes three numbers as arguments, and returns
@@ -19,7 +22,9 @@
 ;; (which can never be a sum of real squares), although
 ;; we should never reach this point.
 ;;
-(defn f [x y z]
+(defn f
+  {:doc "Take three arguments, and return the sum of the squares of the two largest"}
+  [x y z]
   (def smallest (min x y z))
   (cond (= x smallest) (sum-of-squares y z)
         (= y smallest) (sum-of-squares x z)
