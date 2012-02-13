@@ -63,6 +63,7 @@
     (sqrt-iter (improve guess x)
                x)))
 
-(defn sqrt [x]
+(defn sqrt
   {:doc "Wrapper function to invoke iterative sqrt procedure"}
+  [x]
   (sqrt-iter 1.0 x))
