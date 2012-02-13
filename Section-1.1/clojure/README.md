@@ -11,6 +11,9 @@ To load the script into memory after the interpreter has started:
 
 > (load-file "sample.clj")
 
-To obtain metadata on a defined function "sample-function", from the interpreter, type:
+To obtain metadata on a defined function "sample-function", from the interpreter:
 
 > (meta #'sample-function)
+> (:doc (meta #'sample-function))
+
+and so on.
