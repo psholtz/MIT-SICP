@@ -14,13 +14,19 @@
 ;;
 
 ;; define the "cube" form
-(defn cube [n] (* n n n))
+(defn cube
+  {:doc "Return the cube of the argument"}
+  [n] (* n n n))
 
 ;; define the "p" form
-(defn p [x] (- (* 3 x) (* 4 (cube x))))
+(defn p
+  {:doc "Procedure that defines the approximation to sine"}
+  [x] (- (* 3 x) (* 4 (cube x))))
 
 ;; define the "sine" form
-(defn sine [angle]
+(defn sine
+  {:doc "Define an approximation to sine for small angles"}
+  [angle]
   (if (not (> (Math/abs angle) 0.1))
     angle
     (p (sine (/ angle 3.0)))))

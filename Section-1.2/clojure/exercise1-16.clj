@@ -11,12 +11,18 @@
 ;; of iterative algorithms.)
 ;;
 
-(defn square [n] (* n n))
+(defn square
+  {:doc "Return the square of the argument"}
+  [n] (* n n))
 
-(defn fast-expt-iter [b n a]
+(defn fast-expt-iter
+  {:doc "Iterative procedure for (fast) calculation of b^n"}
+  [b n a]
   (cond (= n 0) a
         (even? n) (fast-expt-iter (square b) (/ n 2) a)
         :else (fast-expt-iter b (- n 1) (* a b))))
 
-(defn fast-expt [b n]
+(defn fast-expt
+  {:doc "Wrapper function for procedure for (fast) calculation of b^n"}
+  [b n]
   (fast-expt-iter b n 1))
