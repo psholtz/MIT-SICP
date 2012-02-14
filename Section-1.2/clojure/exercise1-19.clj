@@ -31,12 +31,18 @@
 ;;                         (- count 1)))))
 ;;
 
-(defn square [n] (* n n))
+(defn square
+  {:doc "Return square of the argument"}
+  [n] (* n n))
 
-(defn sum-of-squares [a b]
+(defn sum-of-squares
+  {:doc "Return the sum of the squares of the arguments"}
+  [a b]
   (+ (square a) (square b)))
 
-(defn fib-iter [a b p q count]
+(defn fib-iter
+  {:doc "Iterative procedure for making fast fibonacci calculations"}
+  [a b p q count]
   (cond (= count 0) b
         (even? count) (fib-iter a
                                 b
@@ -49,7 +55,9 @@
                         q
                         (- count 1))))
         
-(defn fib [n]
+(defn fib
+  {:doc "Wrapper procedure for making fast fibonacci calculations"}
+  [n]
   (fib-iter 1 0 0 1 n))
 
 ;;

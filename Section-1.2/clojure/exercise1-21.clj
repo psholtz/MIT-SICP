@@ -8,17 +8,25 @@
 ;;
 ;; Define the procedures
 ;;
-(defn square [n] (* n n))
+(defn square
+  {:doc "Return square of the argument"}
+  [n] (* n n))
 
-(defn divides? [a b]
-  (= (rem b a ) 0))
+(defn divides?
+  {:doc "Does a divide b?"}
+  [a b]
+  (= (rem b a) 0))
 
-(defn find-divisor [n test-divisor]
+(defn find-divisor
+  {:doc "Find the next divisor of n, starting at test-divisor or higher, such that (square test-divisor) does not exceed n"}
+  [n test-divisor]
   (cond (> (square test-divisor) n) n
         (divides? test-divisor n) test-divisor
         :else (find-divisor n (+ test-divisor 1))))
 
-(defn smallest-divisor [n]
+(defn smallest-divisor
+  {:doc "Find the smallest divisor of n"}
+  [n]
   (find-divisor n 2))
 
 ;;
