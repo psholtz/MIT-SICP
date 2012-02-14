@@ -17,10 +17,17 @@
 ;; that uses a logarithmic number of steps.
 ;;
 
-(defn double [x] (+ x x))
-(defn halve [x] (/ x 2))
+(defn double
+  {:doc "Double the argument"}
+  [x] (+ x x))
 
-(defn * [a b]
+(defn halve
+  {:doc "Divide the argument in half"}
+  [x] (/ x 2))
+
+(defn *
+  {:doc "Custom procedure for 'multiplying' two numbers"}
+  [a b]
   (cond (= b 0) 0
         (even? b) (double (* a (halve b)))
         :else (+ a (* a (- b 1)))))

@@ -5,15 +5,23 @@
 ;; process for multiplying two integers in terms of adding, doubling, and halving and uses a
 ;; logarithmic number of steps.
 ;;
-(defn double [x] (+ x x))
+(defn double
+  {:doc "Double the argument"}
+  [x] (+ x x))
 
-(defn halve [x] (/ x 2))
+(defn halve
+  {:doc "Divide the argument in half"}
+  [x] (/ x 2))
 
-(defn *-iter [a b n]
+(defn *-iter
+  {:doc "Iterative procedure for doing custom multiplications"}
+  [a b n]
   (cond (= a 0) n
         (even? a) (*-iter (halve a) (double b) n)
         :else (*-iter (+ a -1) b (+ b n))))
 
-(defn * [a b]
+(defn *
+  {:doc "Wrapper procedure for multiplying two numbers in an iterative fashion"}
+  [a b]
   (*-iter a b 0))
   
