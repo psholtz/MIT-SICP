@@ -11,24 +11,36 @@
 ;; +++++++++++++++++++++++++++++++++++++++
 ;; Procedures to support normal prime test
 ;; +++++++++++++++++++++++++++++++++++++++
-(defn square [n] (* n n))
+(defn square
+  {:doc "Return square of the argument"}
+  [n] (* n n))
 
-(defn divides? [a b]
+(defn divides?
+  {:doc "Does a divide b?"}
+  [a b]
   (= (rem b a) 0))
 
-(defn next-divisor [n] (+ n 2))
+(defn next-divisor
+  {:doc "Only test odd divisors"}
+  [n] (+ n 2))
 
-(defn find-divisor [n test-divisor]
+(defn find-divisor
+  {:doc "Find the next divisor, but only test odd numbers"}
+  [n test-divisor]
   (cond (> (square test-divisor) n) n
         (divides? test-divisor n) test-divisor
         :else (find-divisor n (next-divisor test-divisor))))
 
-(defn smallest-divisor [n]
+(defn smallest-divisor
+  {:doc "Find the smallest divisor of n"}
+  [n]
   (if (divides? 2 n)
     2
     (find-divisor n 3)))
 
-(defn prime? [n]
+(defn prime?
+  {:doc "A number is prime, if it is equal to its smallest divisor"}
+  [n]
   (if (= n (smallest-divisor n))
     true
     false))
@@ -36,20 +48,28 @@
 ;; +++++++++++++++++++++++++++++++++
 ;; Procedures to support Fermat test
 ;; +++++++++++++++++++++++++++++++++
-(defn expmod [base exp m]
+(defn expmod
+  {:doc "Return ((base ^ exp) mod m)"}
+  [base exp m]
   (cond (= exp 0) 1
         (even? exp) (rem (square (expmod base (/ exp 2) m)) m)
         :else (rem (* base (expmod base (- exp 1) m)) m)))
 
-(defn random [n]
+(defn random
+  {:doc "Return random integer, less than n"}
+  [n]
   (Math/floor (rand n)))
 
-(defn fermat-test [n]
+(defn fermat-test
+  {:doc "Run a fermat test for testing primality"}
+  [n]
   (defn try-it [a]
     (= (expmod a n n) a))
   (try-it (+ 1 (random (- n 1)))))
 
-(defn fast-prime? [n times]
+(defn fast-prime?
+  {:doc "Test n for primality, and run the test 'times' times"}
+  [n times]
   (cond (= times 0) true
         (fermat-test n) (fast-prime? n (- times 1))
         :else false))

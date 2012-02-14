@@ -21,9 +21,13 @@
 ;;
 ;; Let's start by looking at the "expmod" procedure given in the text:
 ;;
-(defn square [n] (* n n))
+(defn square
+  {:doc "Return the square of the argument"}
+  [n] (* n n))
 
-(defn expmod [base exp m]
+(defn expmod
+  {:doc "Return ((base ^ exp) mod m)"}
+  [base exp m]
   (cond (= exp 0) 1
         (even? exp) (rem (square (expmod base (/ exp 2) m)) m)
         :else (rem (* base (expmod base (- exp 1) m)) m)))
@@ -33,7 +37,9 @@
 ;; is congruent to 1. Let's develop such a test and run a few tractable (i.e., small) numbers (both prime and
 ;; composite) through the test to get a feel for how we want the procedure to operate:
 ;;
-(defn run-test [n]
+(defn run-test
+  {:doc "Unit testing framework"}
+  [n]
   (defn display-expmod [a]
     (print "(expmod ")
     (print a)
@@ -168,10 +174,14 @@
 ;;     that we have a prime, and will return "true"
 ;; (f) For the numbers 2, 3, 4 and 5 we will return prime values by hand.
 ;;
-(defn random [n]
+(defn random
+  {:doc "Return random integer, less than n"}
+  [n]
   (Math/floor (rand n)))
 
-(defn prime? [n]
+(defn prime?
+  {:doc "Run a statistical test, to test 'n' for primality"}
+  [n]
   ;; need to cast to int, b/c clojure will natively translate to "scientific" mode
   (defn get-random-a []
     (long (+ 2 (random (- n 4)))))
@@ -321,7 +331,9 @@
 (prime? (+ point3 59))
 ;; ==> false
 
-(defn fast-expt [b n]
+(defn fast-expt
+  {:doc "Return b^n (calculate fast)"}
+  [b n]
   (cond (= n 0) 1
         (even? n) (square (fast-expt b (/ n 2)))
         :else (* b (fast-expt b (- n 1)))))
