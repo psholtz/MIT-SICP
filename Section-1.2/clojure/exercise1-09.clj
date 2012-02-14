@@ -24,13 +24,24 @@
 ;; (Note that we may not use the procedure and/or special
 ;; form "+" in the definition of the inc/dec procedures)
 ;;
-(defn inc [n] (- n -1))
-(defn dec [n] (- n 1))
+
+;; (Replace definition found in clojure.core/inc): 
+(defn inc
+  {:doc "Returns a number one greater than argument."}
+  [n] (- n -1))
+
+;; (Replace definition found in clojure.core/dec):
+(defn dec
+  {:doc "Returns a number one less than argument."}
+  [n] (- n 1))
 
 ;;
 ;; The following procedure defines a RECURSIVE process:
+;; (Replace definition found in clojure.core/+)
 ;;
-(defn + [a b]
+(defn +
+  {:doc "Return the sum of arguments."}
+  [a b]
   (if (= a 0)
     b
     (inc (+ (dec a) b))))
@@ -55,8 +66,11 @@
 
 ;;
 ;; The following procedure defines an ITERATIVE process:
+;; (Replace definition found in clojure.core/+)
 ;;
-(defn + [a b]
+(defn +
+  {:doc "Return the sum of arguments."}
+  [a b]
   (if (= a 0)
     b
     (+ (dec a) (inc b))))
