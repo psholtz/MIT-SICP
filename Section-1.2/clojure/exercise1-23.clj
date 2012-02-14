@@ -26,25 +26,37 @@
 ;; in greater depth in the corresponding .md file, give a more detailed
 ;; analysis of the performance improvement resulting from this code modification.
 ;;
-(defn square [x] (* x x))
+(defn square
+  {:doc "Return square of the argument"}
+  [x] (* x x))
 
-(defn divides? [a b]
+(defn divides?
+  {:doc "Does a divide b?"}
+  [a b]
   (= (rem b a) 0))
 
 ;; "next" is already a built-in procedure in clojure
-(defn next-divisor [n]
+(defn next-divisor
+  {:doc "We only need to test odd divisors"}
+  [n]
   (cond (= n 2) 3
         :else (+ n 2)))
 
-(defn find-divisor [n test-divisor]
+(defn find-divisor
+  {:doc "Find the next divisor, but only test 2 and odd numbers"}
+  [n test-divisor]
   (cond (> (square test-divisor) n) n
         (divides? test-divisor n) test-divisor
         :else (find-divisor n (next-divisor test-divisor))))
 
-(defn smallest-divisor [n]
+(defn smallest-divisor
+  {:doc "Find the smallest divisor of n"}
+  [n]
   (find-divisor n 2))
 
-(defn prime? [n]
+(defn prime?
+  {:doc "A number is prime, if it is equal to its smallest divisor"}
+  [n]
   (= n (smallest-divisor n)))
 
 ;;
@@ -59,7 +71,9 @@
 ;; Modify procedure slightly, from what is defined in the text, so that
 ;; we only print the prime numbers (i.e., non-primes are suppressed).
 ;;
-(defn report-prime [n elapsed-time]
+(defn report-prime
+  {:doc "Output the results of a prime test, reporting both the prime and the time taken to calculate it"}
+  [n elapsed-time]
   (println)
   (print n)
   (print " (")
@@ -71,7 +85,9 @@
 ;; depending on whether the test candidate is prime, so that we can more easily
 ;; support the "search-for-n-primes" procedure defined below.
 ;;
-(defn start-prime-test [n start-time]
+(defn start-prime-test
+  {:doc "Start the timed prime test"}
+  [n start-time]
   (cond (prime? n)
         (do
           (report-prime n (- (System/currentTimeMillis) start-time))
@@ -81,7 +97,9 @@
 ;;
 ;; In Clojure, we can make use of the Java libraries for system time.
 ;;
-(defn timed-prime-test [n]
+(defn timed-prime-test
+  {:doc "Run a timed prime test"}
+  [n]
   (start-prime-test n (System/currentTimeMillis)))
 
 ;;
@@ -91,7 +109,9 @@
 ;; inbetween the two integers (inclusive) it will print the prime out
 ;; and display the time required to calculate that it was a prime.
 ;;
-(defn search-for-primes [a b]
+(defn search-for-primes
+  {:doc "Search for all primes between a and b, inclusive"}
+  [a b]
   (defn search [n]
     (cond (<= n b) (timed-prime-test n))
     (cond (< n b) (search (+ n 2))))
@@ -122,7 +142,9 @@
 ;; and finds the next n prime numbers (this is, technically, what
 ;; Exercise 1.22 asks us to do).
 ;;
-(defn search-for-n-primes [a n]
+(defn search-for-n-primes
+  {:doc "Search for n primes, starting at the integer a"}
+  [a n]
   (defn search [j c]
     (let [next-j (+ j 2)]
       (cond (< c n)
