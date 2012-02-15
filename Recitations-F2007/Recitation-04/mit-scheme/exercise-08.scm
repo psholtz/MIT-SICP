@@ -37,4 +37,21 @@
 (slow-mul 3 2)
 ;; ==> 6
 
-;; [working --> orders of growth]
+;;
+;; To determine the order of growth, consider evaluation of (slow-mul 3 4):
+;;
+(slow-mul 3 4)
+(iter 0 0)
+(iter 1 3)
+(iter 2 6)
+(iter 3 9)
+(iter 4 12)
+12
+
+;;
+;; The procedure evaluates in 7 steps (in time), and 1 slow in space.
+;;
+
+;;
+;; The procedure is O(n) in time, and O(1) in space.
+;;
