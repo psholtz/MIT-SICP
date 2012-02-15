@@ -7,3 +7,26 @@
 ;; helper procedure.
 ;;
 
+;;
+;; Define a "divisible?" procedure (so code will run):
+;;
+(define (divisible? a b)
+  (= (remainder a b) 0))
+
+(define (prime? p)
+  (define (helper n)
+    (if (> n (sqrt p))
+	#t
+	(if (divisible? p n)
+	    #f
+	    (helper (+ n 1)))))
+  (helper 2))
+
+;;
+;; There are really two "helper" methods for "helper" itself: "sqrt" and "divisible".
+;;
+;; Supposing that "sqrt" runs in O(1) time, then we have divisible which requires O(n) 
+;; time, and we need to test sqrt(n) numbers using this divisible procedure. Hence, the 
+;; time it takes to run this procedure will be O(n * sqrt(n)), and the space it consumes
+;; will be O(1).
+;;
