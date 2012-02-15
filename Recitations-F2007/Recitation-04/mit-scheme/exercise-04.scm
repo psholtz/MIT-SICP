@@ -16,19 +16,24 @@
 ;; New version of "expt" implemented using successive squaring:
 ;;
 (define (expt b n)
-  (cond ((= n 0) 1)
-	((even? n) (square (expt b (/ n 2))))
-	(else
-	 (* b (expt b (- n 1))))))
+  (define (square x) (* x x))
+  (define (iter k)
+    (cond ((= k 0) 1)
+	  ((even? k)
+	   (square (iter (quotient k 2))))
+	  (else
+	   (* b (iter (- k 1))))))
+  (iter n))
 
 ;;
 ;; Let's expand this procedure call using the substitution model:
 ;;
 (expt 3 5)
-(* 3 (expt 3 4))
-(* 3 (square (expt 3 2)))
-(* 3 (square (square (expt 3 1))))
-(* 3 (square (square (* 3 (expt 3 0)))))
+(iter 5)
+(* 3 (iter 4))
+(* 3 (square (iter 2)))
+(* 3 (square (square 1)))
+(* 3 (square (square (* 3 (iter 0)))))
 (* 3 (square (square (* 3 1))))
 (* 3 (square (square 3)))
 (* 3 (square 9))
@@ -36,7 +41,7 @@
 243
 
 ;;
-;; The procedure takes 10 operations in time, and consumes 5 slots in memory.
+;; The procedure takes 11 operations in time, and consumes 5 slots in memory.
 ;;
 
 ;;
@@ -45,7 +50,7 @@
 (expt 3 10)
 (square (expt 3 5))
 
-.. ==> 10 additional operations in time, and 5 additional slots in memory.
+.. ==> 11 additional operations in time, and 5 additional slots in memory.
 
 (square 243)
 59049
@@ -66,3 +71,5 @@
 
 (square 59049)
 3486784401
+
+Running time: O(log n), Space: O(log n)
