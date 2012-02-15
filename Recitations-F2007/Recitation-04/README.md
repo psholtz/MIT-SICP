@@ -4,7 +4,9 @@ Recitation 4 - Sept 14, 2007 ([PDF](http://people.csail.mit.edu/jastr/6001/fall0
 Orders of Growth
 ---------------- 
 
-xx
+Ignore constants. Ignore lower order terms. For a sum, take the larger term. For a product, multiply the two terms. Orders of growth are concerned with how the effort scales up as the size of the problem increases, rather than an exact measure of the cost.
+
+[working]
 
 Exercises
 --------- 
