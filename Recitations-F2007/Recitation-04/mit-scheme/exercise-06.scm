@@ -102,3 +102,7 @@
 (+ (/ (fact 5)) 2.70833333333)
 (+ 1/120 2.70833333333)
 2.71666666666666
+
+;;
+;; The procedure runs in O(n^2) in time, and O(n) in space.
+;;
