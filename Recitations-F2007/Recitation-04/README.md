@@ -67,3 +67,15 @@ Running time? Space?
 </pre>
 
 Running time? Space?
+
+(7) Assume you have a procedure (divisible? n x) which returns #t if n is divisible by x. It runs in 
+O(n) time and O(1) space. Write a procedure prime? which takes a number and returns #t if it's prime and 
+#f otherwise. You'll want to use a helper procedure.
+
+Running time? Space?
+
+(8) Write a procedure that will multiply two positive integers together, but the only arithmetic operation 
+allowed is addition (i.e., multiplication through repeated addition). In addition, your procedure should
+be iterative, not recursive. What is its order of growth?
+
+(slow-mul 3 4) -> 12
