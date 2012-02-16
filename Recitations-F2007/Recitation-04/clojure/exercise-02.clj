@@ -14,12 +14,12 @@
 ;;
 ;; Define the procedure:
 ;;
-(define (expt b n)
+(defn expt [b n]
   (if (= n 0)
-      1
-      (* b (expt b (- n 1)))))
+    1
+    (* b (expt b (- n 1)))))
 
-;; 
+;;
 ;; Let's expand a few examples, using the substitution model:
 ;;
 (expt 3 5)
@@ -35,19 +35,19 @@
 (* 3 81)
 243
 
-;; 
+;;
 ;; It takes 11 steps (in time) to compute the answer, for n = 5
 ;; It takes 6 slots (in space) to compute the answer, for n = 5
 ;;
 
-;; 
+;;
 ;; Let's compute another example, using n = 7 this time:
 ;;
 (expt 3 7)
 (* 3 (expt 3 6))
 (* 3 (* 3 (expt 3 5)))
 
-... ==> 11 additional steps in time, and 6 additional slots in space. 
+... ==> 11 additional steps in time, and 6 additional slots in space.
 
 (* 3 (* 3 243))
 (* 3 729)

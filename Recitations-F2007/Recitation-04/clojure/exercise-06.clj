@@ -14,10 +14,10 @@
 ;;
 ;; Definition of procedure:
 ;;
-(define (fact n)
+(defn fact [n]
   (if (= n 0)
-      1 
-      (* n (fact (- n 1)))))
+    1
+    (* n (fact (- n 1)))))
 
 ;;
 ;; Let's look at the expansion for n = 5, using the substitution model:
@@ -71,10 +71,10 @@
 ;;
 ;; Now look at the recursive version of "find-e" from last time:
 ;;
-(define (find-e n)
+(defn find-e [n]
   (if (= n 0)
-      1.0
-      (+ (/ (fact n)) (find-e (- n 1)))))
+    1.0
+    (+ (/ (fact n)) (find-e (- n 1)))))
 
 ;;
 ;; What is the resulting order of growth of "find-e"?
