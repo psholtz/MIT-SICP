@@ -39,3 +39,31 @@ Exercises
 </pre>
 
 Running time? Space?
+
+(2) What is the order of growth of the following procedure to calculate b^n by repeated multiplication?
+
+<pre>
+(define (expt b n)
+ (if (= n 0)
+     1
+     (* b (expt b (- n 1)))))
+</pre>
+
+Running time? Space? 
+
+(3) Rewrite the previous definition so that it yields an iterative process. Running time? Space?
+
+(4) Now write a version of "expt" that takes less than O(n) time. Running time? Space?
+
+(5) One last "expt" version: this time, both time and space must be less than O(n). Running time? Space?
+
+(6) Consider the recursive definition of factorial we've seen before:
+
+<pre>
+(define (fact n)
+ (if (= n 0)
+     1 
+     (* n (fact (- n 1)))))
+</pre>
+
+Running time? Space?
