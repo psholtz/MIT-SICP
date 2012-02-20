@@ -43,3 +43,34 @@
 (setq p2 (make-point 1 -1))
 (setq p3 (make-point -1 -1))
 (setq p4 (make-point -1 1))
+
+;;
+;; Define the six line segments joining them together:
+;;
+(setq d1 (make-line-segment p1 p2))
+(setq d2 (make-line-segment p2 p3))
+(setq d3 (make-line-segment p3 p4))
+(setq d4 (make-line-segment p4 p1))
+(setq d5 (make-line-segment p1 p3))
+(setq d6 (make-line-segment p2 p4))
+
+;;
+;; Test the slopes of these line segments:
+;;
+(slope d1)
+;; ==>
+
+(slope d2)
+;; ==>
+
+(slope d3)
+;; ==>
+
+(slope d4)
+;; ==>
+
+(slope d5)
+;; ==>
+
+(slope d6)
+;; ==>
