@@ -58,19 +58,28 @@
 ;; Test the slopes of these line segments:
 ;;
 (slope d1)
-;; ==>
+;; ==> '()
 
 (slope d2)
-;; ==>
+;; ==> 0.0
 
 (slope d3)
-;; ==>
+;; ==> '()
 
 (slope d4)
-;; ==>
+;; ==> 0.0
 
 (slope d5)
-;; ==>
+;; ==> 1.0
 
 (slope d6)
-;; ==>
+;; ==> -1.0
+
+;;
+;; So far, so good.
+;;
+;; Let's make sure that the slope of the line segment is the same, 
+;; no matter which 'direction' we define the line segment as going in:
+;;
+(= (slope (make-line-segment p1 p3)) (slope (make-line-segment p3 p1)))
+;; ==> t
