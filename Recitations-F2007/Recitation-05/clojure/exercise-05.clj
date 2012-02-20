@@ -308,7 +308,7 @@
 ;;
 (defn right-most-point [line-segment]
   (let [start (line-segment-start line-segment)
-        end (line-segment-start line-segment)]
+        end (line-segment-end line-segment)]
     (if (>= (point-x start) (point-x end))
       start
       end)))
