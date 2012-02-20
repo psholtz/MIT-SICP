@@ -107,3 +107,15 @@
 ;; ==> 0.5
 (slope (make-line-segment origin q4))
 ;; ==> 0.33333333333
+
+;;
+;; Next we want to determine the y-intercept of the line segment,
+;; which would give us the "b" in the y=mx+b formulation.
+;;
+(defn y-intercept [line-segment]
+  (let [p (line-segment-start line-segment)
+        m (slope line-segment)]
+    (cond (not (empty? m))
+          (let [x (point-x p)
+                y (point-y p)]
+            (- y (* m x))))))
