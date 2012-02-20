@@ -413,8 +413,8 @@
             right-2 (right-most-point line-segment-2)
             bottom-1 (bottom-most-point line-segment-1)
             bottom-2 (bottom-most-point line-segment-2)
-            top-1 (top-most-point top-segment-1)
-            top-2 (top-most-point top-segment-2)]
+            top-1 (top-most-point line-segment-1)
+            top-2 (top-most-point line-segment-2)]
         (let [x (point-x p)
               y (point-y p)]
           (if
