@@ -381,7 +381,7 @@
 
 (define line-test-2 (make-line-segment
 		     (make-point 2 5)
-		     (mame-point 0 1)))
+		     (make-point 0 1)))
 
 (slope line-test-1)
 ;; ==> 2.0
