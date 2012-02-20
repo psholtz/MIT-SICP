@@ -385,3 +385,49 @@
     (if (and (<= x b) (>= x a))
       true
       false)))
+
+(between? 1 0 2)
+;; ==> true
+(between? 1 1 2)
+;; ==> true
+(between? 2 1 2)
+;; ==> true
+(between? -1 0 2)
+;; ==> false
+(between? 3 0 2)
+;; ==> false
+
+;;
+;; Finally we are able to define the "intersection" procedure.
+;;
+;; This procedure will return #f if the line segments do not intersect,
+;; otherwise it will return the point at which they intersect.
+;;
+(defn intersection [line-segment-1 line-segment-2]
+  (if (parallel? line-segment-1 line-segment-2)
+    false
+    (let [p (intersect line-segment-1 line-segment-2)]
+      (let [left-1 (left-most-point line-segment-1)
+            left-2 (left-most-point line-segment-2)
+            right-1 (right-most-point line-segment-1)
+            right-2 (right-most-point line-segment-2)
+            bottom-1 (bottom-most-point line-segment-1)
+            bottom-2 (bottom-most-point line-segment-2)
+            top-1 (top-most-point top-segment-1)
+            top-2 (top-most-point top-segment-2)]
+        (let [x (point-x p)
+              y (point-y p)]
+          (if
+              (and
+               (between? x (point-x left-1) (point-x right-1))
+               (between? x (point-x left-2) (point-x right-2))
+               (between? y (point-y bottom-1) (point-y top-1))
+               (between? y (point-y bottom-2) (point-y top-2)))
+            p
+            false))))))
+
+;;
+;; Run some unit tests.
+;;
+;; First let's go around the square:
+;;
