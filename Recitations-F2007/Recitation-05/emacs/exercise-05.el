@@ -350,3 +350,157 @@
 (setq line-test-2 (make-line-segment
 		   (make-point 2 5)
 		   (make-point 0 1)))
+
+(slope line-test-1)
+;; ==> 2.0
+(slope line-test-2)
+;; ==> 2.0
+
+(left-most-point line-test-1)
+;; ==> (0 . 1)
+(left-most-point line-test-2)
+;; ==> (0 . 1)
+
+(right-most-point line-test-1)
+;; ==> (2 . 5)
+(right-most-point line-test-2)
+;; ==> (2 . 5)
+
+(bottom-most-point line-test-1)
+;; ==> (0 . 1)
+(bottom-most-point line-test-2)
+;; ==> (0 . 1)
+
+(top-most-point line-test-1)
+;; ==> (2 . 5)
+(top-most-point line-test-2)
+;; ==> (2 . 5)
+
+;;
+;; Let's also define a procedure that let's use determine 
+;; whether one number is "between" two other numbers: 
+;;
+;; a -> lower bound
+;; b -> upper bound
+;; x -> number to test
+;;
+;; Enforce requirement that b must be greater than or equal to a.
+;;
+(defun between? (x a b)
+  (if (> a b)
+      (between? x b a)
+    (if (and (<= x b) (>= x a))
+	t
+      '())))
+
+(between? 1 0 2)
+;; ==> t
+(between? 1 1 2)
+;; ==> t
+(between? 2 1 2)
+;; ==> t
+(between? -1 0 2)
+;; ==> '()
+(between? 3 0 2)
+;; ==> '()
+
+;;
+;; Finally we are able to define the "intersection" procedure.
+;;
+;; This procedure will return #f if the line segments do not intersect, 
+;; otherwise it will return the point at which they intersect.
+;;
+(defun intersection (line-segment-1 line-segment-2)
+  (if (parallel? line-segment-1 line-segment-2)
+      '()
+    (let ((p (intersect line-segment-1 line-segment-2)))
+      (let ((left-1 (left-most-point line-segment-1))
+	    (left-2 (left-most-point line-segment-2))
+	    (right-1 (right-most-point line-segment-1))
+	    (right-2 (right-most-point line-segment-2))
+	    (bottom-1 (bottom-most-point line-segment-1))
+	    (bottom-2 (bottom-most-point line-segment-2))
+	    (top-1 (top-most-point line-segment-1))
+	    (top-2 (top-most-point line-segment-2)))
+	(let ((x (point-x p))
+	      (y (point-y p)))
+	  (if 
+	      (and
+	       (between? x (point-x left-1) (point-x right-1))
+	       (between? x (point-x left-2) (point-x right-2))
+	       (between? y (point-y bottom-1) (point-y top-1))
+	       (between? y (point-y bottom-2) (point-y top-2)))
+	      p
+	    '()))))))
+		     
+;;
+;; Run some unit tests.
+;;
+;; First let's go around the square:
+;;
+(intersection d1 d2)
+;; ==> (1.0 . -1.0)
+(intersection d2 d3)
+;; ==> (-1.0 . -1.0)
+(intersection d3 d4)
+;; ==> (-1.0 . 1.0)
+(intersection d4 d1)
+;; ==> (1.0 . 1.0)
+
+;; 
+;; Now let's check some other intersections:
+;;
+(intersection d1 d3)
+;; ==> nil
+(intersection d1 d5)
+;; ==> (1.0 . 1.0)
+(intersection d1 d6)
+;; ==> (1.0 . -1.0)
+
+(intersection d2 d4)
+;; ==> nil
+(intersection d2 d5)
+;; ==> (-1.0 . -1.0)
+(intersection d2 d6)
+;; ==> (1.0 . -1.0)
+
+(intersection d3 d5)
+;; ==> (-1.0 . -1.0)
+(intersection d3 d6)
+;; ==> (-1.0 . 1.0)
+
+(intersection d4 d5)
+;; ==> (1.0 . 1.0)
+(intersection d4 d6)
+;; ==> (-1.0 . 1.0)
+
+(intersection d5 d6)
+;; ==> (0.0 . 0.0)
+
+;;
+;; Let's do a little more unit testing:
+;;
+(setq segment-1
+      (make-line-segment
+       (make-point -1 1)
+       (make-point 0 0)))
+
+(setq segment-2
+      (make-line-segment
+       (make-point 0 -1)
+       (make-point 1 0)))
+
+(setq segment-3
+      (make-line-segment
+       (make-point -1 1)
+       (make-point 5 -5)))
+
+;;
+;; We expect that segment-1 and segment-2 do not intersect, 
+;; even though they are normal to one another.
+;;
+(intersection segment-1 segment-2)
+;; ==> nil
+
+(intersection segment-2 segment-3)
+;; ==> (0.5 . -0.5)
