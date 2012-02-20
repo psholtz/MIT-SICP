@@ -154,3 +154,77 @@
 ;;
 ;; Run the unit tests:
 ;;
+(parallel? d1 d2)
+;; ==> false
+(parallel? d1 d3)
+;; ==> true
+(parallel? d1 d4)
+;; ==> false
+(parallel? d1 d5)
+;; ==> false
+(parallel? d1 d6)
+;; ==> false
+
+(parallel? d2 d3)
+;; ==> false
+(parallel? d2 d4)
+;; ==> true
+(parallel? d2 d5)
+;; ==> false
+(parallel? d2 d6)
+;; ==> false
+
+(parallel? d3 d4)
+;; ==> false
+(parallel? d3 d5)
+;; ==> false
+(parallel? d3 d6)
+;; ==> false
+
+(parallel? d4 d5)
+;; ==> false
+(parallel? d4 d6)
+;; ==> false
+
+(parallel? d5 d6)
+;; ==> false
+
+
+(parallel? d1 d1)
+;; ==> true
+(parallel? d2 d2)
+;; ==> true
+(parallel? d3 d3)
+;; ==> true
+(parallel? d4 d4)
+;; ==> true
+(parallel? d5 d5)
+;; ==> true
+(parallel? d6 d6)
+;; ==> true
+
+;;
+;; We're getting close to the final solution.
+;;
+;; Next let's define a procedure called "intersect" - it will take two
+;; line segments as arguments, and determine the point at which the
+;; corresponding lines intersect (if they do intersect), or else indicate
+;; to the user that the lines are parallel (and hence do not intersect).
+;;
+(defn intersect [line-segment-1 line-segment-2]
+  (if (parallel? line-segment-1 line-segment-2)
+    (println "The lines are parallel!")
+    (let [m1 (slope line-segment-1)
+          m2 (slope line-segment-2)
+          b1 (y-intercept line-segment-1)
+          b2 (y-intercept line-segment-2)]
+      (cond (= '() m1)
+            (let [x (point-x (line-segment-start line-segment-1))]
+              (make-point x (+ (* m2 x) b2)))
+            (= '() m2)
+            (let [x (point-x (line-segment-start line-segment-2))]
+              (make-point x (+ (* m1 x) b1)))
+            :else
+            (let [x (/ (- b2 b1) (- m1 m2))]
+              (make-point x (+ (* m1 x) b1)))))))
+          
