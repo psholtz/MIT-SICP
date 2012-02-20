@@ -115,7 +115,7 @@
 (defn y-intercept [line-segment]
   (let [p (line-segment-start line-segment)
         m (slope line-segment)]
-    (cond (not (empty? m))
+    (cond (not (= '() m))
           (let [x (point-x p)
                 y (point-y p)]
             (- y (* m x))))))
