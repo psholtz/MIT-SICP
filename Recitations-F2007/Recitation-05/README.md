@@ -8,6 +8,10 @@ Data Structures and Abstractions
 
 (a) `(cons a b)` - makes a cons-cell (pair) from a and b.
 
+(b) `(car c)` - extracts the value of the first part of the pair.
+
+(c) `(cdr c)` - extracts the value of the second part of the pair.
+
 Exercises
 ---------
 
