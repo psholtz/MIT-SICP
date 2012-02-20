@@ -379,7 +379,7 @@
 ;;
 ;; Enforce requirement that b must be greater than or equal to a.
 ;;
-(defn between? [a b]
+(defn between? [x a b]
   (if (> a b)
     (between? x b a)
     (if (and (<= x b) (>= x a))
