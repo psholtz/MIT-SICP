@@ -119,3 +119,38 @@
           (let [x (point-x p)
                 y (point-y p)]
             (- y (* m x))))))
+
+;;
+;; Next we want to determine the y-intercept of the line segment,
+;; which would give us the "b" in the y=mx+b formulation.
+;;
+(y-intercept d1)
+;; ==> ()
+(y-intercept d2)
+;; ==> -1.0
+(y-intercept d3)
+;; ==> ()
+(y-intercept d4)
+;; ==> 1.0
+(y-intercept d5)
+;; ==> 0.0 
+(y-intercept d6)
+;; ==> 0.0
+
+;;
+;; If the lines are parallel, they won't intersect!
+;;
+;; It will be useful to check for this, so let's define it:
+;;
+(defn parallel? [line-segment-1 line-segment-2]
+  (cond (and (= '() (slope line-segment-1)) (= '() (slope line-segment-2))) true
+        (and (= '() (slope line-segment-1)) (not (= '() (slope line-segment-2)))) false
+        (and (= '() (slope line-segment-2)) (not (= '() (slope line-segment-1)))) false
+        :else
+        (if (= (slope line-segment-1) (slope line-segment-2))
+          true
+          false)))
+
+;;
+;; Run the unit tests:
+;;
