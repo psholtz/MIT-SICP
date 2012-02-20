@@ -350,3 +350,38 @@
 ;; ==> 2.0
 
 (left-most-point line-test-1)
+;; ==> (0 1)
+(left-most-point line-test-2)
+;; ==> (0 1)
+
+(right-most-point line-test-1)
+;; ==> (2 5)
+(right-most-point line-test-2)
+;; ==> (2 5)
+
+(bottom-most-point line-test-1)
+;; ==> (0 1)
+(bottom-most-point line-test-2)
+;; ==> (0 1)
+
+(top-most-point line-test-1)
+;; ==> (2 5)
+(top-most-point line-test-2)
+;; ==> (2 5)
+
+;;
+;; Let's also define a procedure that let's use determine
+;; whether one number is "between" two other numbers:
+;;
+;; a -> lower bound
+;; b -> upper bound
+;; x -> number to test
+;;
+;; Enforce requirement that b must be greater than or equal to a.
+;;
+(defn between? [a b]
+  (if (> a b)
+    (between? x b a)
+    (if (and (<= x b) (>= x a))
+      true
+      false)))
