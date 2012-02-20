@@ -47,4 +47,4 @@ Exercises
 
 (4) Now, extend the point abstraction to handle line segments, with a constructor (make-line-segment p1 p2) and selectors "line-segment-start" and "line-segment-end".
 
-(5) Write a procedure (intersection seg1 seg2) that returns a point where two line segments intersect if they do, and returns #f if they do not intersect. Be sure to honor the abstractions defined.
+(**5**) Write a procedure (intersection seg1 seg2) that returns a point where two line segments intersect if they do, and returns #f if they do not intersect. Be sure to honor the abstractions defined.
