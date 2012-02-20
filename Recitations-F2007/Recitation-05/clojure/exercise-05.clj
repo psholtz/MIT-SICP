@@ -431,3 +431,73 @@
 ;;
 ;; First let's go around the square:
 ;;
+(intersection d1 d2)
+;; ==> (1 -1)
+(intersection d2 d3)
+;; ==> (-1 -1)
+(intersection d3 d4)
+;; ==> (-1 1)
+(intersection d4 d1)
+;; ==> (1 1)
+
+;;
+;; Now let's check some other intersections:
+;;
+(intersection d1 d3)
+;; ==> false
+(intersection d1 d5)
+;; ==> (1 1)
+(intersection d1 d6)
+;; ==> (1 -1)
+
+(intersection d2 d4)
+;; ==> false
+(intersection d2 d5)
+;; ==> (-1 -1)
+(intersection d2 d6)
+;; ==> (1 -1)
+
+(intersection d3 d5)
+;; ==> (-1 -1)
+(intersection d3 d6)
+;; ==> (-1 1)
+
+(intersection d4 d5)
+;; ==> (1 1)
+(intersection d4 d6)
+;; ==> (-1 1)
+
+(intersection d5 d6)
+;; ==> (0 0)
+
+;;
+;; Let's do a little more unit testing:
+;;
+(def segment-1
+  (make-line-segment
+   (make-point -1 1)
+   (make-point 0 0)))
+
+(def segment-2
+  (make-line-segment
+   (make-point 0 -1)
+   (make-point 1 0)))
+
+(def segment-3
+  (make-line-segment
+   (make-point -1 1)
+   (make-point 5 -5)))
+
+;;
+;; We expect that segment-1 and segment-2 do not intersect,
+;; even though they are normal to one another.
+;;
+(intersection segment-1 segment-2)
+;; ==> false
+
+;;
+;; On the other hand, segment-3, which is parallel to segment-1,
+;; will intersect segment-2 since it is long enough:
+;;
+(intersection segment-2 segment-3)
+;; ==> (0.5 -0.5)

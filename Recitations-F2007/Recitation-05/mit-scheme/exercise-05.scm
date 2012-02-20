@@ -522,7 +522,7 @@
 ;; ==> (1. . 1)
 
 (intersection d4 d6)
-;; ==> (1. . 1)
+;; ==> (-1.0 . 1)
 
 (intersection d5 d6)
 ;; ==> (0. . 0.)
@@ -543,7 +543,7 @@
 (define segment-3
   (make-line-segment
    (make-point -1 1)
-   (mame-point 5 -5)))
+   (make-point 5 -5)))
 
 ;;
 ;; We expect that segment-1 and segment-2 do not intersect, 
