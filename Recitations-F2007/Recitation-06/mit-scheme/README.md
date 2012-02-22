@@ -5,6 +5,8 @@ Contains worked solutions expressed in the MIT Scheme dialect.
 
 Core code that is used throughout these examples:
 
+**Data Structures**
+
 <pre>
 (define (make-units C L H)
  (list C L H))
@@ -33,4 +35,9 @@ Core code that is used throughout these examples:
 ;;
 (define (same-class? c1 c2)
  (equal? (get-class-number c1) (get-class-number c2)))
+</pre>
+
+**HOPs**
+<pre>
+xx
 </pre>
