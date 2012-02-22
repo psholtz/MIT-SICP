@@ -1,8 +1,6 @@
 ;;
 ;; Exercise 4
 ;;
-
-;;
 ;; Write a procedure that drops a particular class from a schedule.
 ;;
 
