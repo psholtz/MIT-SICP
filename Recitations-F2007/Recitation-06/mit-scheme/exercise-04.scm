@@ -21,7 +21,21 @@
 ;; Run some unit tests:
 ;;
 (define calculus (make-class 'CALC-101 (make-units 4 4 4)))
+(define algebra (make-class 'ALGB-152 (make-units 3 3 3)))
+(define diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
 
+(define schedule (empty-schedule))
+(total-scheduled-units schedule)
+;; ==> 0
+
+(define schedule (add-class calculus schedule))
+;; ==> ((calc-101 (4 4 4)))
+
+(define schedule (add-class algebra schedule))
+;; ==> 
+
+(define schedule (add-class diff-eqs schedule))
+;; ==>
 
 ;;
 ;; Working --> orders of growth
