@@ -1,3 +1,3 @@
-Recitation 7 - Fall 2007 ([PDF](http://people.csail.mit.edu/jastr/6001/fall07/r06.pdf))
+Recitation 7 - Fall 2007 ([PDF](http://people.csail.mit.edu/jastr/6001/fall07/r07.pdf))
 =======================================================================================
 
