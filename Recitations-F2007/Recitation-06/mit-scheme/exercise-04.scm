@@ -1,6 +1,8 @@
 ;;
 ;; Exercise 4
 ;;
+
+;;
 ;; Write a procedure that drops a particular class from a schedule.
 ;;
 
@@ -50,6 +52,20 @@
 (total-scheduled-units schedule)
 ;; ==> 30
 
+;;
+;; Test the "drop-class" procedure:
+;;
+(drop-class schedule 'xxx)
+;; ==> ((calc-101 (4 4 4)) (algb-152 (3 3 3)) (diff-201 (3 3 3)))
+
+(drop-class schedule 'calc-101)
+;; ==> ((algb-152 (3 3 3)) (diff-201 (3 3 3)))
+
+(drop-class schedule 'algb-152)
+;; ==> ((calc-101 (4 4 4)) (diff-201 (3 3 3)))
+
+(drop-class schedule 'diff-201)
+;; ==> ((calc-101 (4 4 4)) (algb-152 (3 3 3)))
 
 ;;
 ;; Working --> orders of growth
