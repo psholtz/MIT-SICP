@@ -12,7 +12,7 @@
   (define (iter elems)
     (if (not (null? elems))
 	(let ((class (car elems)))
-	  (if (= (get-class-number class) classnum)
+	  (if (equal? (get-class-number class) classnum)
 	      (delete class schedule))
 	  (iter (cdr elems)))))
   (iter schedule))
