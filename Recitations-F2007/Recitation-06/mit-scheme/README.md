@@ -24,6 +24,11 @@ Core code that is used throughout these examples:
    (get-units-L units)
    (get-units-H units))))
 
+;;
+;; Change the definition of this procedure, so we can use
+;; non-integer class "numbers" as well (i.e., CALC101 for 
+;; an example calculus class).
+;;
 (define (same-class? c1 c2)
- (= (get-class-number c1) (get-class-number c2)))
+ (equals? (get-class-number c1) (get-class-number c2)))
 </pre>

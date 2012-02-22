@@ -20,6 +20,7 @@
 ;;
 ;; Run some unit tests:
 ;;
+(define calculus (make-class 'CALC-101 (make-units 4 4 4)))
 
 
 ;;
