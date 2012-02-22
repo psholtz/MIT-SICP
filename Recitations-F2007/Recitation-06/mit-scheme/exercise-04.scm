@@ -4,15 +4,23 @@
 ;; Write a procedure that drops a particular class from a schedule.
 ;;
 
-(define (drop-class sched classnum)
+;;
+;; Scheme ships with a "delete" procedure, which we can use as follows:
+;;
+
+(define (drop-class schedule classnum)
   (define (iter elems)
-    (if (null? elems)
-	'()
+    (if (not (null? elems))
 	(let ((class (car elems)))
-	  (if (equal (get-class-number class) classnum)
-	      '()
-	      (iter (cdr elems))))))
-  (iter sched))
+	  (if (= (get-class-number class) classnum)
+	      (delete class schedule))
+	  (iter (cdr elems)))))
+  (iter schedule))
+
+;;
+;; Run some unit tests:
+;;
+
 
 ;;
 ;; Working --> orders of growth
