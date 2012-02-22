@@ -7,7 +7,6 @@
 ;;
 ;; Scheme ships with a "delete" procedure, which we can use as follows:
 ;;
-
 (define (drop-class schedule classnum)
   (define (iter elems)
     (if (not (null? elems))

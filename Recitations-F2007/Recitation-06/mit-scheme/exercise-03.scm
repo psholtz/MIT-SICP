@@ -7,7 +7,8 @@
   (define (iter seq total)
     (if (null? seq)
 	total
-	(iter (cdr seq) (+ total (get-class-total-units (car seq))))))
+	(let ((class (car seq)))
+	  (iter (cdr seq) (+ total (get-class-total-units class))))))
   (iter schedule 0))
 
 ;; ** working --> order of growth
