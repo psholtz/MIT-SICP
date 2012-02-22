@@ -39,5 +39,16 @@ Core code that is used throughout these examples:
 
 **HOPs**
 <pre>
-xx
+(define (make-student number schedule-checker)
+ (list number (list) schedule-checker))
+(define get-student-number car)
+(define get-student-schedule cadr)
+(define get-student-checker caddr)
+
+(define (update-student-schedule student schedule)
+ (if ((get-student-checker student) schedule)
+     (list (get-student-number student)
+           schedule
+           (get-student-checker student))
+     (error "invalid schedule")))
 </pre>
