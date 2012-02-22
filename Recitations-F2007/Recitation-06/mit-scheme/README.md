@@ -29,8 +29,8 @@ Core code that is used throughout these examples:
 ;; non-integer class "numbers" as well (i.e., CALC101 for 
 ;; an example calculus class).
 ;;
-;; Handout uses "=" for comparison, we will use "equals?".
+;; Handout uses "=" for comparison, we will use "equal?".
 ;;
 (define (same-class? c1 c2)
- (equals? (get-class-number c1) (get-class-number c2)))
+ (equal? (get-class-number c1) (get-class-number c2)))
 </pre>

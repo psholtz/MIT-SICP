@@ -9,11 +9,12 @@
 ;;
 (define (drop-class schedule classnum)
   (define (iter elems)
-    (if (not (null? elems))
+    (if (null? elems)
+	'()
 	(let ((class (car elems)))
 	  (if (equal? (get-class-number class) classnum)
-	      (delete class schedule))
-	  (iter (cdr elems)))))
+	      (iter (cdr elems))
+	      (append (list class) (iter (cdr elems)))))))
   (iter schedule))
 
 ;;
@@ -23,18 +24,32 @@
 (define algebra (make-class 'ALGB-152 (make-units 3 3 3)))
 (define diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
 
+(get-class-total-units calculus)
+;; ==> 12
+(get-class-total-units algebra)
+;; ==> 9
+(get-class-total-units diff-eqs)
+;; ==> 9
+
 (define schedule (empty-schedule))
 (total-scheduled-units schedule)
 ;; ==> 0
 
 (define schedule (add-class calculus schedule))
 ;; ==> ((calc-101 (4 4 4)))
+(total-scheduled-units schedule)
+;; ==> 12
 
 (define schedule (add-class algebra schedule))
-;; ==> 
+;; ==> ((calc-101 (4 4 4)) (algb-152 (3 3 3)))
+(total-scheduled-units schedule)
+;; ==> 21
 
 (define schedule (add-class diff-eqs schedule))
-;; ==>
+;; ==> ((calc-101 (4 4 4)) (algb-152 (3 3 3)) (diff-201 (3 3 3)))
+(total-scheduled-units schedule)
+;; ==> 30
+
 
 ;;
 ;; Working --> orders of growth
