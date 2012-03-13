@@ -11,11 +11,6 @@
             (assert (= 9 (square 3))))}
   square [x] (* x x))
 
-;;
-;; Run a unit test
-;;
-(((meta #'square) :test))
-
 (def gravity 9.8)  ;; in m/s
 (def pi (Math/PI))
 
@@ -24,22 +19,21 @@
 ;;
 ;; Simple kinematics equation.
 ;; ++++++++++++++++++++++++++++
-(def position
+(def
+  ^{:doc "Return position of particle subject to acceleration a, velocity v, position u at time t"
+    :test (do
+            (assert (= (position 0 0 0 0) 0))
+            (assert (= (position 0 0 20 0) 20))
+            (assert (= (position 0 5 10 10) 60))
+            (assert (= (position 2 2 2 2) 10))
+            (assert (= (position 5 5 5 5) 92.5))
+            (assert (= (position 0 -10 0 1) -10)))}          
+  position
   (fn [a v u t]
     (+
      (* 0.5 a (square t))
      (* v t)
      u)))
-
-;;
-;; Run some unit tests
-;;
-(= (position 0 0 0 0) 0)
-(= (position 0 0 20 0) 20)
-(= (position 0 5 10 10) 60)
-(= (position 2 2 2 2) 10)
-(= (position 5 5 5 5) 92.5)
-(= (position 0 -10 0 1) -10)
 
 ;; +++++++++++++++++++++++++++++ 
 ;; PROBLEM 2
