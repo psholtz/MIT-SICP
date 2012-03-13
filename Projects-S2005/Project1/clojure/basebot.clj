@@ -11,6 +11,11 @@
             (assert (= 9 (square 3))))}
   square [x] (* x x))
 
+;;
+;; Run a unit test:
+;;
+(((meta #'square) :test))
+
 (def gravity 9.8)  ;; in m/s
 (def pi (Math/PI))
 
