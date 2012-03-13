@@ -12,7 +12,7 @@
   square [x] (* x x))
 
 ;;
-;; Run a unit test:
+;; Run a unit test
 ;;
 (((meta #'square) :test))
 
