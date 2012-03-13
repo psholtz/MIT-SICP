@@ -51,7 +51,7 @@
   (- (square b) (* 4 a c)))
 
 (defn
-  ^{:doc "First quadratic root of a, b, c"
+  ^{:doc "First quadratic root for constants a, b, c"
     :test (do
             ;; basic tests
             (assert (= -1 (root1 1 2 1)))
@@ -66,7 +66,7 @@
       (/ (+ (* -1 b) (Math/sqrt d)) (* 2 a)))))
 
 (defn
-  ^{:doc "Second quadratic root of a, b, c"
+  ^{:doc "Second quadratic root for constants a, b, c"
     :test (do
             ;; basic tests
             (assert (= -1 (root2 1 2 1)))
