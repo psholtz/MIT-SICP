@@ -3,7 +3,13 @@
 ;;
 ;; Clojure implementation.
 ;; ++++++++++++++++++++++++
-(defn square [x] (* x x))
+(defn
+  ^{:doc "Return the square of the argument."
+    :test (do
+            (assert (= 1 (square 1)))
+            (assert (= 4 (square 2)))
+            (assert (= 9 (square 3))))}
+  square [x] (* x x))
 
 (def gravity 9.8)  ;; in m/s
 (def pi (Math/PI))
