@@ -20,7 +20,7 @@
 ;; Simple kinematics equation.
 ;; ++++++++++++++++++++++++++++
 (def
-  ^{:doc "Return position of particle subject to acceleration a, velocity v, position u at time t"
+  ^{:doc "Return position of particle subject to acceleration a, velocity v, position u at time t."
     :test (do
             (assert (= (position 0 0 0 0) 0))
             (assert (= (position 0 0 20 0) 20))
@@ -40,43 +40,42 @@
 ;;
 ;; Implement quadratic formula.
 ;; +++++++++++++++++++++++++++++
-(defn discriminant [a b c]
+(defn
+  ^{:doc "Quadratic discriminant for constants a, b, c."
+    :test (do
+            (assert (= 25 (discriminant 0 5 0)))
+            (assert (= 0 (discriminant 0 0 0)))
+            (assert (= 0 (discriminant 0 0 5)))
+            (assert (= 0 (discriminant 3 6 3))))}
+  discriminant [a b c]
   (- (square b) (* 4 a c)))
 
-(defn root1 [a b c]
+(defn
+  ^{:doc "First quadratic root of a, b, c"
+    :test (do
+            ;; basic tests
+            (assert (= -1 (root1 1 2 1)))
+            (assert (= +1 (root1 1 -2 1)))
+
+            ;; return nil, since roots are complex
+            (assert (= '() (root1 5 3 6))))}
+  root1 [a b c]
   (let [d (discriminant a b c)]
     (if (< d 0)
       '()
       (/ (+ (* -1 b) (Math/sqrt d)) (* 2 a)))))
 
-(defn root2 [a b c]
+(defn
+  ^{:doc "Second quadratic root of a, b, c"
+    :test (do
+            ;; basic tests
+            (assert (= -1 (root2 1 2 1)))
+            (assert (= +1 (root2 1 -2 1))))}
+  root2 [a b c]
   (let [d (discriminant a b c)]
     (if (< d 0)
       '()
       (/ (- (* -1 b) (Math/sqrt d)) (* 2 a)))))
-
-;;
-;; Run some unit tests
-;;
-(= (discriminant 0 5 0) 25)
-(= (discriminant 5 0 0) 0)
-(= (discriminant 0 0 5) 0)
-(= (discriminant 3 6 3) 0)
-
-(= (root1 1 2 1) -1)
-(= (root2 1 2 1) -1)
-(= (root1 1 -2 1) 1)
-(= (root2 1 -2 1) 1)
-
-;;
-;; Try (root1 5 3 6):
-;;
-(root1 5 3 6)
-;; ==> ()
-
-;;
-;; Returns nil, since the roots to this polynomial are complex.
-;;
 
 ;; +++++++++++++++++++++++
 ;; PROBLEM 3
