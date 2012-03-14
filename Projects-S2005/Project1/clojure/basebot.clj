@@ -109,7 +109,7 @@
 ;; We define the polynomial whose roots we are seeking as the equation of motion above:
 ;;
 (defn
-  ^{:doc "Determine the time it takes for a particle, starting at elevation, launched with vertical-velocity upwards, to strike the ground."
+  ^{:doc "Determine time it takes to strike the ground, starting at elevation, launched with vertical-velocity upwards."
     :test (do
             ;;
             ;; The following unit tests model shooting the ball straight upwards from the ground
@@ -151,54 +151,42 @@
 ;; identical terms as before, provided we make this adjustment to the starting elevation from
 ;; which the ball is launched:
 ;;
-(defn time-to-height [vertical-velocity elevation target-elevation]
+(defn
+  ^{:doc "Determine time it takes to reach target-elevation, starting at elevation, launched upwards with vertical-velocity."
+    :test (do
+            ;;
+            ;; We expect the "time to impact" and the "time to height 0" procedures to return the same number:
+            ;;
+            (assert (= (time-to-impact 10 0) (time-to-height 10 0 0)))
+            (assert (= (time-to-impact 20 0) (time-to-height 20 0 0)))
+
+            ;;
+            ;; Similarly, when the ball is shot from varying elevations it should still reach the ground
+            ;; at the same time that it would reach "height 0":
+            ;;
+            (assert (= (time-to-impact 10 10) (time-to-height 10 10 0)))
+            (assert (= (time-to-impact 10 20) (time-to-height 10 20 0)))
+
+            ;;
+            ;; The higher we aim the ball, the "shorter" the time should be, since the ball does not
+            ;; need to "fall" as far as it would if it were falling all the way to the ground.
+            ;;
+            (assert (< (Math/abs (- 3.284 (time-to-height 10 20 0)))))
+            (assert (< (Math/abs (- 2.776 (time-to-height 10 20 10)))))
+            (assert (< (Math/abs (- 2.041 (time-to-height 10 20 20)))))
+            (assert (< (Math/abs (- 1.165 (time-to-height 10 20 25)))))
+
+            ;;
+            ;; Is there a height that we can't reach with a given velocity?
+            ;;
+            (assert (= '() (time-to-height 10 20 50)))
+
+            ;;
+            ;; How about if we increase the velocity? Are we then able to reach the target height?
+            ;;
+            (assert (< (Math/abs (- 2.041 (time-to-height 10 50 50)))))) }
+  time-to-height [vertical-velocity elevation target-elevation]
   (root2 (* -0.5 gravity) vertical-velocity (- elevation target-elevation)))
-
-;;
-;; We expect the "time to impact" and the "time to height 0" procedures to return the same number:
-;;
-(= (time-to-impact 10 0) (time-to-height 10 0 0))
-;; ==> true
-(= (time-to-impact 20 0) (time-to-height 20 0 0))
-;; ==> true
-
-;;
-;; Similarly, when the ball is shot from varying elevations it should still reach the ground at
-;; the same time that time that it would reach "height 0":
-;;
-(= (time-to-impact 10 10) (time-to-height 10 10 0))
-;; ==> true
-(= (time-to-impact 10 20) (time-to-height 10 20 0))
-;; ==> true
-
-;;
-;; The higher we aim the ball, the "shorter" the time should be, since the ball does not
-;; need to "fall" as far as it would if it were falling all the way to the ground.
-;;
-(time-to-height 10 20 0)
-;; ==> 3.284
-(time-to-height 10 20 10)
-;; ==> 2.776
-(time-to-height 10 20 20)
-;; ==> 2.041
-(time-to-height 10 20 25)
-;; ==> 1.165
-
-;;
-;; Is there a height that we can't reach with a given velocity?
-;;
-;; Yes, there is (which is good):
-;;
-(time-to-height 10 20 50)
-;; ==> ()
-
-;;
-;; How about if we increase the velocity? Are we then able to reach the target height?
-;;
-;; Yes, there is (which is good):
-;;
-(time-to-height 10 50 50)
-;; ==> 2.041
 
 ;; +++++++++++++++++
 ;; PROBLEM 4
