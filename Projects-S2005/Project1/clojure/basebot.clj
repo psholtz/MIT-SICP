@@ -185,6 +185,7 @@
             ;; How about if we increase the velocity? Are we then able to reach the target height?
             ;;
             (assert (< (Math/abs (- 2.041 (time-to-height 10 50 50)))))) }
+  
   time-to-height [vertical-velocity elevation target-elevation]
   (root2 (* -0.5 gravity) vertical-velocity (- elevation target-elevation)))
 
@@ -196,19 +197,48 @@
 ;;
 ;; First define the helper procedures:
 ;;
-(defn degree2radian [deg]
+(defn
+  ^{:doc "Calculate degrees for argument radians."
+    :test (do
+            (def tolerance 0.001)
+            (assert (= 0 (degree2radian 0)))
+            (assert (< (Math/abs (- (/ pi 4) (degree2radian 45))) tolerance))
+            (assert (< (Math/abs (- (/ pi 2) (degree2radian 90))) tolerance))
+            (assert (< (Math/abs (- (* (/ pi 4) 3) (degree2radian 135))) tolerance))
+            (assert (< (Math/abs (- pi (degree2radian 180))) tolerance))
+            (assert (< (Math/abs (- (* (/ pi 4) 5) (degree2radian 225))) tolerance))
+            (assert (< (Math/abs (- (* (/ pi 2) 3) (degree2radian 270))) tolerance))
+            (assert (< (Math/abs (- (* (/ pi 4) 7) (degree2radian 315))) tolerance))) }
+  
+  degree2radian [deg]
   (/ (* deg pi) 180.0))
 
-(defn meters-to-feet [m]
+(defn
+  ^{:doc "Calculate feet for argument meters."
+    :test (do
+            (assert (= 1 1))) }
+  meters-to-feet [m]
   (/ (* m 39.6) 12))
 
-(defn feet-to-meters [f]
+(defn
+  ^{:doc "Calculate meters for argument feet."
+    :test (do
+            (assert (= 1 1))) }
+  feet-to-meters [f]
   (/ (* f 12.0) 39.6))
 
-(defn hours-to-seconds [h]
+(defn
+  ^{:doc "Calculate seconds for argument hours."
+    :test (do
+            (assert (= 1 1))) }
+  hours-to-seconds [h]
   (* h 3600.0))
 
-(defn seconds-to-hours [s]
+(defn
+  ^{:doc "Calculate hours for argument seconds."
+    :test (do
+            (assert (= 1 1))) }
+  seconds-to-hours [s]
   (/ s 3600.0))
 
 ;;
