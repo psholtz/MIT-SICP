@@ -77,6 +77,12 @@
       '()
       (/ (- (* -1 b) (Math/sqrt d)) (* 2 a)))))
 
+;;
+;; Define a "tolerance" procedure to test floating-point responses
+;;
+(defn within-tolerance? [f tolerance]
+  (assert (< (f) tolerance)))
+
 ;; +++++++++++++++++++++++
 ;; PROBLEM 3
 ;;
@@ -108,34 +114,31 @@
 ;;
 ;; We define the polynomial whose roots we are seeking as the equation of motion above:
 ;;
-(defn time-to-impact [vertical-velocity elevation]
+(defn
+  ^{:doc "Determine the time it takes for a particle, starting at elevation, launched with vertical-velocity upwards, to strike the ground."
+    :test (do
+            ;;
+            ;; The following unit tests model shooting the ball straight upwards from the ground
+            ;; at various velocities (i.e., elevation = 0 and vertical velocity = 10, 20 and 50 m/s):
+            ;;
+            (def tolerance 0.001)
+            (within-tolerance (fn [] (Math/abs (- 2.041 (time-to-impact 10 0)))) tolerance)
+            (within-tolerance (fn [] (Math/abs (- 4.082 (time-to-impact 20 0)))) tolerance)
+            (within-tolerance (fn [] (Math/abs (- 10.204 (time-to-impact 50 0)))) tolerance)
+
+            ;;
+            ;; The harder the ball is shot upwards, the longer it takes to hit the ground.
+            ;;
+            ;; Suppose now we are standing 10m above the ground, and again we shoot the ball straight
+            ;; upwards. How long will it take to hit the ground this time? It will take longer than
+            ;; before, since it must first follow the same arc (i.e., the same flight time) as when
+            ;; launched from the ground, but this time it must fall an additional distance before
+            ;; it hits the ground.
+            ;;
+            (within-tolerance (fn [] (Math/abs (- 2.776 (time-to-impact 10 10)))) tolerance)
+            (within-tolerance (fn [] (Math/abs (- 3.284 (time-to-impact 10 20)))) tolerance))}
+  time-to-impact [vertical-velocity elevation]
   (root2 (* -0.5 gravity) vertical-velocity elevation))
-
-;;
-;; The following unit tests model shooting the ball straight upwards from the ground
-;; at various velocities (i.e., elevation = 0 and vertical velocity = 10, 20 and 50 m/s):
-;;
-(time-to-impact 10 0)
-;; ==> 2.041
-(time-to-impact 20 0)
-;; ==> 4.082
-(time-to-impact 50 0)
-;; ==> 10.204
-
-;;
-;; The harder the ball is shot upwards, the longer it takes to hit the ground.
-;;
-;; Suppose now we are standing 10m above the ground, and again we shoot the ball straight
-;; upwards. How long will it take to hit the ground this time? It will take longer than before,
-;; since it must first follow the same arc (i.e., same flight time) as when launched from the
-;; ground, but this time it must fall an additional distance before it hits the ground.
-;;
-;; Let's see if our intuition is born out in the code:
-;;
-(time-to-impact 10 10)
-;; ==> 2.776
-(time-to-impact 10 20)
-;; ==> 3.284
 
 ;;
 ;; Launching the ball upwards from an initial elevation > 0 causes the overall flight time to
