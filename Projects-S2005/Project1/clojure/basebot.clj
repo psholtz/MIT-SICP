@@ -262,7 +262,18 @@
             (def tolerance 0.001)
             (assert (< (Math/abs (- 20.329 (travel-distance-simple 1 45 0))) tolerance))
             (assert (< (Math/abs (- 207.628 (travel-distance-simple 1 45 45))) tolerance))
-            (assert (< (Math/abs (- 0 (travel-distance-simple 1 45 90))) tolerance))) }
+            (assert (< (Math/abs (- 0 (travel-distance-simple 1 45 90))) tolerance))
+
+            ;;
+            ;; This last distance, hit straight up, is essentially zero, which we would expect.
+            ;;
+
+            ;;
+            ;; Now let's translate these distances into feet:
+            ;;
+            (assert (< (Math/abs (- 67.085 (meters-to-feet (travel-distance-simple 1 45 0)))) tolerance))
+            (assert (< (Math/abs (- 685.172 (meters-to-feet (travel-distance-simple 1 45 45)))) tolerance))
+            (assert (< (Math/abs (- 0 (meters-to-feet (travel-distance-simple 1 45 90)))) tolerance))) }
   
   travel-distance-simple
   (fn [elevation velocity angle]
@@ -272,30 +283,6 @@
         (let [t0 (time-to-impact vy elevation)]
           (let [x0 (position 0 vx 0 t0)]
             x0))))))
-
-;;
-;; Let's calculate the distances in meters:
-;;
-(travel-distance-simple 1 45 0)
-;; ==> 20.329
-(travel-distance-simple 1 45 45)
-;; ==> 207.628
-(travel-distance-simple 1 45 90)
-;; ==> 2.537e-14
-
-;;
-;; This last distance, hit straight up, is essentially zero, which we would expect.
-;;
-
-;;
-;; Now let's translate these distances into feet:
-;;
-(meters-to-feet (travel-distance-simple 1 45 0))
-;; ==> 67.085
-(meters-to-feet (travel-distance-simple 1 45 45))
-;; ==> 685.172
-(meters-to-feet (travel-distance-simple 1 45 90))
-;; ==> 8.371e-14
 
 ;; +++++++++++++++++++ 
 ;; PROBLEM 5
@@ -316,7 +303,31 @@
 ;;
 ;; Define the actual procedure itself:
 ;;
-(defn find-best-angle [velocity elevation]
+(defn
+  ^{:doc "Find the best angle to hit the ball, given velocity and angle."
+    :test (do
+            ;;
+            ;; Let's step through some sample velocities at the elevation of 1 meter:
+            ;;
+            (def tolerance 0.001)
+            (assert (< (Math/abs (- 42.0 (find-best-angle 10 1))) tolerance))
+            (assert (< (Math/abs (- 44.0 (find-best-angle 20 1))) tolerance))
+            (assert (< (Math/abs (- 45.0 (find-best-angle 30 1))) tolerance))
+            (assert (< (Math/abs (- 45.0 (find-best-angle 40 1))) tolerance))
+            (assert (< (Math/abs (- 45.0 (find-best-angle 45 1))) tolerance))
+            (assert (< (Math/abs (- 45.0 (find-best-angle 50 1))) tolerance))
+
+            ;;
+            ;; Now let's step through these same angles, but at an elevation of 10 meters:
+            ;;
+            (assert (< (Math/abs (- 30.0 (find-best-angle 10 10))) tolerance))
+            (assert (< (Math/abs (- 39.0 (find-best-angle 20 10))) tolerance))
+            (assert (< (Math/abs (- 42.0 (find-best-angle 30 10))) tolerance))
+            (assert (< (Math/abs (- 43.0 (find-best-angle 40 10))) tolerance))
+            (assert (< (Math/abs (- 44.0 (find-best-angle 45 10))) tolerance))
+            (assert (< (Math/abs (- 44.0 (find-best-angle 50 10))) tolerance))) }
+  
+  find-best-angle [velocity elevation]
   (defn find-best-angle-iter [best-distance best-angle test-angle]
     (if (> test-angle 90)
       best-angle
@@ -326,38 +337,6 @@
           (find-best-angle-iter test-distance test-angle next-angle)
           (find-best-angle-iter best-distance best-angle next-angle)))))
   (find-best-angle-iter 0.0 0.0 0.0))
-
-;;
-;; Let's step through some sample velocities at the elevation of 1 meter:
-;;
-(find-best-angle 10 1)
-;; ==> 42.0
-(find-best-angle 20 1)
-;; ==> 44.0
-(find-best-angle 30 1)
-;; ==> 45.0 
-(find-best-angle 40 1)
-;; ==> 45.0
-(find-best-angle 45 1)
-;; ==> 45.0
-(find-best-angle 50 1)
-;; ==> 45.0
-
-;;
-;; Now let's step through these same angles, but at an elevation of 10 meters:
-;;
-(find-best-angle 10 10)
-;; ==> 30.0
-(find-best-angle 20 10)
-;; ==> 39.0
-(find-best-angle 30 10)
-;; ==> 42.0
-(find-best-angle 40 10)
-;; ==> 43.0 
-(find-best-angle 45 10)
-;; ==> 44.0
-(find-best-angle 50 10)
-;; ==> 44.0
 
 ;;
 ;; In both cases, the best angle seems to asymptotically approach 45 degrees,
