@@ -325,7 +325,13 @@
             (assert (< (Math/abs (- 42.0 (find-best-angle 30 10))) tolerance))
             (assert (< (Math/abs (- 43.0 (find-best-angle 40 10))) tolerance))
             (assert (< (Math/abs (- 44.0 (find-best-angle 45 10))) tolerance))
-            (assert (< (Math/abs (- 44.0 (find-best-angle 50 10))) tolerance))) }
+            (assert (< (Math/abs (- 44.0 (find-best-angle 50 10))) tolerance))
+
+            ;;
+            ;; In both cases, the best angle seems to asymptotically approach 45 degrees,
+            ;; although it approaches this limit more slowly when the initial elevation is higher.
+            ;;
+            )}
   
   find-best-angle [velocity elevation]
   (defn find-best-angle-iter [best-distance best-angle test-angle]
@@ -337,11 +343,6 @@
           (find-best-angle-iter test-distance test-angle next-angle)
           (find-best-angle-iter best-distance best-angle next-angle)))))
   (find-best-angle-iter 0.0 0.0 0.0))
-
-;;
-;; In both cases, the best angle seems to asymptotically approach 45 degrees,
-;; although it approaches this limit more slowly when the initial elevation is higher.
-;;
 
 ;; +++++++++++++++++
 ;; PROBLEM 6
