@@ -216,28 +216,37 @@
 (defn
   ^{:doc "Calculate feet for argument meters."
     :test (do
-            (assert (= 1 1))) }
+            (def tolerance 0.001)
+            (assert (< (Math/abs (- 3.3 (meters-to-feet 1))) tolerance))
+            (assert (< (Math/abs (- 6.6 (meters-to-feet 2))) tolerance))) }
+            
   meters-to-feet [m]
   (/ (* m 39.6) 12))
 
 (defn
   ^{:doc "Calculate meters for argument feet."
     :test (do
-            (assert (= 1 1))) }
+            (def tolerance 0.001)
+            (assert (< (Math/abs (- 0.30303 (feet-to-meters 1))) tolerance))
+            (assert (< (Math/abs (- 0.90909 (feet-to-meters 3))) tolerance))
+            (assert (< (Math/abs (- 1.0 (feet-to-meters 3.3))) tolerance))) }
+
   feet-to-meters [f]
   (/ (* f 12.0) 39.6))
 
 (defn
   ^{:doc "Calculate seconds for argument hours."
     :test (do
-            (assert (= 1 1))) }
+            (assert (= 3600 (hours-to-seconds 1)))) }
+
   hours-to-seconds [h]
   (* h 3600.0))
 
 (defn
   ^{:doc "Calculate hours for argument seconds."
     :test (do
-            (assert (= 1 1))) }
+            (assert (= 1.0 (seconds-to-hours 3600))))}
+    
   seconds-to-hours [s]
   (/ s 3600.0))
 
@@ -249,7 +258,18 @@
 ;; Then calculate how long the ball will stay in the air, and how far it can
 ;; travel horizontally during that time, before it hits the ground.
 ;;
-(def travel-distance-simple
+(def
+  ^{:doc "How far will the ball travel, if launched from elevation with velocity at angle."
+    :test (do
+            ;;
+            ;; Let's calculate the distances in meters:
+            ;;
+            (def tolerance 0.001)
+            (assert (< (Math/abs (- 20.329 (travel-distance-simple 1 45 0))) tolerance))
+            (assert (< (Math/abs (- 207.628 (travel-distance-simple 1 45 45))) tolerance))
+            (assert (< (Math/abs (- 0 (travel-distance-simple 1 45 90))) tolerance))) }
+  
+  travel-distance-simple
   (fn [elevation velocity angle]
     (let [rangle (degree2radian angle)]
       (let [vy (* velocity (Math/sin rangle))
