@@ -209,7 +209,6 @@
             (assert (< (Math/abs (- (* (/ pi 4) 5) (degree2radian 225))) tolerance))
             (assert (< (Math/abs (- (* (/ pi 2) 3) (degree2radian 270))) tolerance))
             (assert (< (Math/abs (- (* (/ pi 4) 7) (degree2radian 315))) tolerance))) }
-  
   degree2radian [deg]
   (/ (* deg pi) 180.0))
 
@@ -219,7 +218,6 @@
             (def tolerance 0.001)
             (assert (< (Math/abs (- 3.3 (meters-to-feet 1))) tolerance))
             (assert (< (Math/abs (- 6.6 (meters-to-feet 2))) tolerance))) }
-            
   meters-to-feet [m]
   (/ (* m 39.6) 12))
 
@@ -230,7 +228,6 @@
             (assert (< (Math/abs (- 0.30303 (feet-to-meters 1))) tolerance))
             (assert (< (Math/abs (- 0.90909 (feet-to-meters 3))) tolerance))
             (assert (< (Math/abs (- 1.0 (feet-to-meters 3.3))) tolerance))) }
-
   feet-to-meters [f]
   (/ (* f 12.0) 39.6))
 
@@ -238,7 +235,6 @@
   ^{:doc "Calculate seconds for argument hours."
     :test (do
             (assert (= 3600 (hours-to-seconds 1)))) }
-
   hours-to-seconds [h]
   (* h 3600.0))
 
@@ -246,7 +242,6 @@
   ^{:doc "Calculate hours for argument seconds."
     :test (do
             (assert (= 1.0 (seconds-to-hours 3600))))}
-    
   seconds-to-hours [s]
   (/ s 3600.0))
 
