@@ -20,18 +20,18 @@ An Analysis of a Simple Game Matrix
 Let's examine a simple game, represented by the following game matrix:
 
 <pre>
-             ------------------------------------ 
-             |                 |                |  
-             |   B cooperates  |    B defects   |
-             |                 |                |
+               ------------------------------------ 
+               |                 |                |  
+               |   B cooperates  |    B defects   |
+               |                 |                |
 ------------------------------------------------- 
-             |                 |                |
-A cooperates |  A => 5, B => 5 | A => 2, B => 3 |
-             |                 |                |
+|              |                 |                |
+| A cooperates |  A => 5, B => 5 | A => 2, B => 3 |
+|              |                 |                |
 -------------------------------------------------
-             |                 |                |
-A defects    |  A => 3, B => 2 | A => 1, B => 1 |
-             |                 |                |
+|              |                 |                |
+| A defects    |  A => 3, B => 2 | A => 1, B => 1 |
+|              |                 |                |
 -------------------------------------------------
 </pre>
 
@@ -43,3 +43,57 @@ Player **B** will, of course, reason the same way, and both will choose to coope
 
 **To re-cap:** in any particular game using the matrix above, we would expect both players to cooperate; and in an iterated game, we would expect both players to cooperate repeatedly, on every round.
 
+The Prisoner's Dilemma Game Matrix
+---------------------------------- 
+
+Now consider the following game matrix:
+
+<pre>
+               ------------------------------------ 
+               |                 |                |  
+               |   B cooperates  |    B defects   |
+               |                 |                |
+------------------------------------------------- 
+|              |                 |                |
+| A cooperates |  A => 3, B => 3 | A => 0, B => 5 |
+|              |                 |                |
+-------------------------------------------------
+|              |                 |                |
+| A defects    |  A => 5, B => 0 | A => 1, B => 1 |
+|              |                 |                |
+-------------------------------------------------
+</pre>
+
+In this case, Players **A** and **B** both have a dominant choice - namely, defection. No matter what Player **B** does, Player **A**  improves his own score by defecting, and vice versa. 
+
+However, there is something odd about this game. It seems as though the two players would benefit by choosing the cooperate. Instead of winning only one point each, they could win three points each. So the "rational" choice of mutual defection has a puzzling self-destructive flavor.
+
+The second matrix is an example of a prisoner's dilemma game situation. Just to formalize the situation, let CC be the number of points won by each player when they both cooperate; let DD be the number of points won when boht defect; let CD be the number of points won by the cooperating party when the other defects; and let DC be the number of points won by the defecting party when the other cooperates. Then the prisoner's dilemma situation is characterized by the following conditions:
+
+<pre>
+DC > CC > DD > CD
+
+CC > (DC + CD) / 2
+</pre>
+
+In the second game matrix, we have:
+
+<pre>
+DC = 5, CC = 3, DD = 1, CD = 0
+</pre>
+
+so both conditions are met. In the Bunny and Clod story, by the way, you can verify that:
+
+<pre>
+DC = 0, CC = -1, DD = -10, CD = -20
+</pre>
+
+Again, these values satisfy the prisoner's dilemma conditions.
+
+Alexrod's Tournament
+-------------------- 
+
+In the late 1970s, political scientist Robert Alexrod held a computer tournament designed to investigate the prisoner's dilemma situation (Actually, there were two tournaments. Their rules and results are described in Axelrod's book: *The Evolution of Cooperation*). Contestants in the tournament submitted computer programs that would compete in an iterated prisoner's dilemma game of approximately two hundred rounds, using the second matrix above. Each contestant's program played five iterated games against each of the other programs submitted, and after all games had been played the scores were tallied.
+
+The Two-Player Prisoner's Dilemma Program
+----------------------------------------- 
