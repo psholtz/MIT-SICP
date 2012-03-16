@@ -644,7 +644,9 @@
 ;;
 ;; Add some bounces.
 ;; ++++++++++++++++++
-(defn travel-distance-with-bounce [elevation velocity angle bounces]
+(defn
+  ^{:doc "Calculate how far the ball will travel, when launched from elevation with velocity at angle, including the specified number of bounces"}
+  travel-distance-with-bounce [elevation velocity angle bounces]
   (defn travel-distance-with-bounce-iter [elevation velocity angle maximum count total-distance]
     (let [bounce-distance (travel-distance elevation velocity angle)]
       (let [new-total-distance (+ total-distance bounce-distance)]
@@ -699,7 +701,9 @@
 ;; change in distance is less than some pre-defined tolerance, we suppose
 ;; that we have found the distance traveled on an "arbitrary" number of bounces:
 ;;
-(defn travel-distance-with-infinite-bounces [elevation velocity angle]
+(defn
+  ^{:doc "Calculate how far the ball will travel, when launched from elevation at velocity at angle, incorporating an \"infinite\" number of bounces."}
+  travel-distance-with-infinite-bounces [elevation velocity angle]
   (def tolerance 0.001)
   (defn travel-distance-with-infinite-bounces-iter [number-of-bounces]
     (let [distance1 (travel-distance-with-bounce elevation velocity angle number-of-bounces)
@@ -830,7 +834,9 @@
 ;;
 ;; Add some better bounces.
 ;; +++++++++++++++++++++++++
-(defn integrate-list [x0 y0 u0 v0 g m beta]
+(defn
+  ^{:doc "Numerically integrate, where x0,y0 are 2D position, u0,v0 are 2D velocity and g, m and beta are gravity/mass/drag parameters."}
+  integrate-list [x0 y0 u0 v0 g m beta]
   (if (< y0 0)
     (list x0 y0 u0 v0)
     (let [dt 0.1
@@ -846,13 +852,17 @@
          (+ v0 dv)
          g m beta)))))
 
-(defn travel-distance-list [elevation velocity angle]
+(defn
+  ^{:doc "Calculate travel distance using numerical integration"}
+  travel-distance-list [elevation velocity angle]
   (let [rangle (degree2radian angle)]
     (let [vy (* velocity (Math/sin rangle))
           vx (* velocity (Math/cos rangle))]
       (integrate-list 0 elevation vx vy gravity mass beta))))
 
-(defn travel-distance-with-bounce-integrated [elevation velocity angle bounces]
+(defn
+  ^{:doc "Calculate traveldistance using numerical integration, and incorporating the specified number of bounces."}
+  travel-distance-with-bounce-integrated [elevation velocity angle bounces]
   (defn travel-distance-with-bounce-integrated-iter [elevation velocity angle maximum count total-distance]
     (let [bounce-list (travel-distance-list elevation velocity angle)]
       (let [new-velocity (Math/sqrt (+ (square (first (rest (rest bounce-list))))
