@@ -95,5 +95,17 @@ Alexrod's Tournament
 
 In the late 1970s, political scientist Robert Alexrod held a computer tournament designed to investigate the prisoner's dilemma situation (Actually, there were two tournaments. Their rules and results are described in Axelrod's book: *The Evolution of Cooperation*). Contestants in the tournament submitted computer programs that would compete in an iterated prisoner's dilemma game of approximately two hundred rounds, using the second matrix above. Each contestant's program played five iterated games against each of the other programs submitted, and after all games had been played the scores were tallied.
 
+The contestants in Axelrod's tournament included professors of political science, mathematics, computer science, and economics. The winning program - the program with the higest average score - was submitted by Anatol Rapoport, a professor of pscyhology at the University of Toronto. In this project, we will pursue Alexrod's investigations and make up our own Scheme programs to play the iterated prisoner's dilemma game.
+
+As part of this project, we will be running a similar tournament, but now involving a three-person prisoner's dilemma.
+
+Before we look at the two-player program, it is worth speculating on what possible strategies might be employed in the iterated prisoner's dilemma game. Here are some examples:
+
+**Nasty** - a program using the **Nasty** strategy simply defects on every round of every game.
+
+**Patsy** - a program using the **Patsy** strategy cooperates on every round of every game.
+
+**Spastic** - this program cooperates or defects on a random basis.
+
 The Two-Player Prisoner's Dilemma Program
 ----------------------------------------- 
