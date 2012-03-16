@@ -443,9 +443,50 @@
             ;; Suppose the outfield fence is 300 ft from home plate, and the ball
             ;; is hit at 45 m/s. For what range of angles will the ball land over the fence?
             ;;
-            
-            (assert (= 1 1))) }
+            (assert (= (list 28.0 48.0) (range-of-angles 1 45 (feet-to-meters 300))))
 
+            ;;
+            ;; Hence, the answer is, for angles between 28 degrees and 48 degrees, the ball
+            ;; will land over the fence. We can verify:
+            ;;
+            (assert (< (Math/abs (- 297.520 (meters-to-feet (travel-distance 1 45 27))))))
+            (assert (< (Math/abs (- 300.596 (meters-to-feet (travel-distance 1 45 28))))))
+            (assert (< (Math/abs (- 301.417 (meters-to-feet (travel-distance 1 45 48))))))
+            (assert (< (Math/abs (- 296.486 (meters-to-feet (travel-distance 1 45 49))))))
+
+            ;;
+            ;; Let's run through these same examples, as though in Denver, rather than in Boston.
+            ;;
+            ;; We adjust the density of air down from 1.25 to 1.06:
+            ;;
+            (def density 1.06)
+            (def beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
+
+            (assert (< (Math/abs (- 332.960 (travel-distance 1 45 45)))))
+            (assert (< (Math/abs (- 339.029 (travel-distance 1 45 40)))))
+            (assert (< (Math/abs (- 334.671 (travel-distance 1 45 35)))))
+
+            (assert (= (list 24.0 55.0) (range-of-angles 1 45 (feet-to-meters 300))))
+
+            ;;
+            ;; So this time, the range of angles for which the ball can travel 300 ft is substantially
+            ;; larger than in Boston. This makes sense, it's what we would expect.
+            ;;
+
+            ;;
+            ;; Let's check the boundaries:
+            ;;
+            (assert (< (Math/abs 297.602 (meters-to-feet (travel-distance 1 45 23)))))
+            (assert (< (Math/abs 308.402 (meters-to-feet (travel-distance 1 45 24)))))
+            (assert (< (Math/abs 300.430 (meters-to-feet (travel-distance 1 45 55)))))
+            (assert (< (Math/abs 296.813 (meters-to-feet (travel-distance 1 45 56)))))
+
+            ;;
+            ;; Let's go "back to Boston" for the rest of this exercise:
+            ;;
+            (def density 1.25)
+            (def beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))) }
+               
   range-of-angles [elevation velocity target-distance]
 
   ;;
