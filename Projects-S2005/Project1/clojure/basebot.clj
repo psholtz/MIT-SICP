@@ -476,10 +476,10 @@
             ;;
             ;; Let's check the boundaries:
             ;;
-            (assert (< (Math/abs 297.602 (meters-to-feet (travel-distance 1 45 23)))))
-            (assert (< (Math/abs 308.402 (meters-to-feet (travel-distance 1 45 24)))))
-            (assert (< (Math/abs 300.430 (meters-to-feet (travel-distance 1 45 55)))))
-            (assert (< (Math/abs 296.813 (meters-to-feet (travel-distance 1 45 56)))))
+            (assert (< (Math/abs (- 297.602 (meters-to-feet (travel-distance 1 45 23))))))
+            (assert (< (Math/abs (- 308.402 (meters-to-feet (travel-distance 1 45 24))))))
+            (assert (< (Math/abs (- 300.430 (meters-to-feet (travel-distance 1 45 55))))))
+            (assert (< (Math/abs (- 296.813 (meters-to-feet (travel-distance 1 45 56))))))
 
             ;;
             ;; Let's go "back to Boston" for the rest of this exercise:
