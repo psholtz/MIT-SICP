@@ -519,6 +519,13 @@
 (def density 1.25)
 (def beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
 
+
+;;
+;; Convert from miles-per-hour to meters-per-second:
+;;
+(defn mph-to-ms [mph]
+  (feet-to-meters (* (seconds-to-hours mph) 5280)))
+
 ;; +++++++++++++++++++++++++
 ;; PROBLEM 7
 ;;
@@ -530,7 +537,45 @@
 ;; Procedure will return the time needed to throw the ball the given distance, at
 ;; the given velocity, from the given elevation.
 ;;
-(defn throw-ball [elevation velocity distance]
+(defn
+  ^{:doc "Procedure will return the time needed to throw the ball the given distance, at the given velocity, from the given elevation."
+    :test (do
+            ;;
+            ;; Answer the question:
+            ;;
+            ;; How long does it take for a ball thrown from home plate at 45 m/s to reach second base?
+            ;;
+            (def tolerance 0.001)
+            (assert (< (Math/abs (- 0.640 (throw-ball 1 45 36))) tolerance))
+
+            ;;
+            ;; How long does it take for a ball thrown from home plate at 35 m/s to reach second base?
+            ;;
+            (assert (< (Math/abs (- 0.959 (throw-ball 1 35 36))) tolerance))
+
+            ;;
+            ;; How long does it take for a ball thrown from home plate at 55 m/s to reach second base?
+            ;;
+            (assert (< (Matb/abs (- 0.560 (throw-ball 1 55 36))) tolerance))
+
+            ;;
+            ;; These numbers make sense: the slower the ball is thrown the longer it takes to get to second base.
+            ;;
+
+            ;;
+            ;; If the pitcher throws at 90 mph, how long does it take to reach home?
+            ;;
+            ;; If the distance between home plate and second base is 36m, we will take the
+            ;; distance between home and the pitcher's mound to be half that, or 18m.
+            ;;
+            (assert (< (Math/abs (- 0.286 (throw-ball 1 (mph-to-ms 90) 18))) tolerance))
+
+            ;;
+            ;; How long does it take a ball thrown by the catcher at 90 mph to reach second base?
+            ;;
+            (assert (< (Math/abs (- 0.819 (throw-ball 1 (mph-to-ms 90) 36))) tolerance)) )}
+  
+  throw-ball [elevation velocity distance]
   (defn throw-ball-iter [shortest-time test-angle]
     (if (> test-angle 90)
       shortest-time
@@ -546,51 +591,6 @@
                 (throw-ball-iter shortest-time next-angle))))
           (throw-ball-iter shortest-time next-angle)))))
   (throw-ball-iter 0 -90))
-
-;;
-;; Convert from miles-per-hour to meters-per-second:
-;;
-(defn mph-to-ms [mph]
-  (feet-to-meters (* (seconds-to-hours mph) 5280)))
-
-;;
-;; Answer the questions:
-;;
-;; How long does it take for a ball thrown from home plate at 45 m/s to reach second base?
-;;
-(throw-ball 1 45 36)
-;; ==> 0.640
-
-;;
-;; How long does it take for a ball thrown from home plate at 35 m/s to reach second base?
-;;
-(throw-ball 1 35 36)
-;; ==> 0.959
-
-;;
-;; How long does it take for a ball thrown from home plate at 55 m/s to reach second base?
-;;
-(throw-ball 1 55 36)
-;; ==> 0.560
-
-;;
-;; These numbers make sense: the slower the ball is thrown the longer it takes to get to second base.
-;;
-
-;;
-;; If the pitcher throws at 90 mph, how long does it take to reach home?
-;;
-;; If the distance between home plate and second base is 36m, we will take the
-;; distance between home and the pitcher's mound to be half that, or 18m.
-;;
-(throw-ball 1 (mph-to-ms 90) 18)
-;; ==> 0.286
-
-;;
-;; How long does it take a ball thrown by the catcher at 90 mph to reach second base?
-;;
-(throw-ball 1 (mph-to-ms 90) 36)
-;; ==> 0.819
 
 ;;
 ;; Note that a really good base runner should be able to get from first to second base in roughly 3 seconds.
