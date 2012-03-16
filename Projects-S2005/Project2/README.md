@@ -20,9 +20,19 @@ An Analysis of a Simple Game Matrix
 Let's examine a simple game, represented by the following game matrix:
 
 <pre>
------
-A cooperates
------
+             ------------------------------------ 
+             |                 |                |  
+             |   B cooperates  |    B defects   |
+             |                 |                |
+------------------------------------------------- 
+             |                 |                |
+A cooperates |  A => 5, B => 5 | A => 2, B => 3 |
+             |                 |                |
+-------------------------------------------------
+             |                 |                |
+A defects    |  A => 3, B => 2 | A => 1, B => 1 |
+             |                 |                |
+-------------------------------------------------
 </pre>
 
 Let's examine a simple game, and let's begin by examining the situation from Player **A**'s point of view (Player **B**'s point of view is identical). Let's also transition to the terminology used in this programming exercise, i.e., "cooperate" and "defect" instead of "testify" and "remain silent":
