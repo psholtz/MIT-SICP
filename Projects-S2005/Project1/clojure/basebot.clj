@@ -380,21 +380,22 @@
 ;;
 ;; Use the "integreate" procedure to calculate the travel-distance, incorporating drag:
 ;;
-(defn travel-distance [elevation velocity angle]
+(defn
+  ^{:doc "Determine the distance the ball travels, when hit at elevation with velocity at angle, incorporating drag (using integration)"
+    :test (do
+            ;;
+            ;; Run the proposed unit tests, answers are given in meters:
+            ;;
+            (def tolerance 0.001)
+            (assert (< (Math/abs (- 92.508 (travel-distance 1 45 45))) tolerance))
+            (assert (< (Math/abs (- 95.357 (travel-distance 1 45 40))) tolerance))
+            (assert (< (Math/abs (- 94.206 (travel-distance 1 45 35))) tolerance))) }
+  
+  travel-distance [elevation velocity angle]
   (let [rangle (degree2radian angle)]
     (let [vy (* velocity (Math/sin rangle))
           vx (* velocity (Math/cos rangle))]
       (integrate 0 elevation vx vy gravity mass beta))))
-
-;;
-;; Run the proposed unit tests, answers are given in meters:
-;;
-(travel-distance 1 45 45)
-;; ==> 92.508
-(travel-distance 1 45 40)
-;; ==> 95.337
-(travel-distance 1 45 35)
-;; ==> 94.206
 
 ;;
 ;; Let's build a procedure to answer the question, "for what range of angles will
