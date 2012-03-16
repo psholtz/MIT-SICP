@@ -361,7 +361,10 @@
 ;;
 ;; Define the integrate procedure:
 ;;
-(defn integrate [x0 y0 u0 v0 g m beta]
+(defn
+  ^{:doc "Numerically integrate the path integral - x0, y0 are 2D position coords, u0, v0 are 2D velocity coords, g is gravity acceleration, m is mass, beta is drag coefficient." }
+    
+  integrate [x0 y0 u0 v0 g m beta]
   (if (< y0 0)
     x0
     (let [dt 0.1
@@ -404,7 +407,19 @@
 ;; list. To find "maximum" we invoke the procedure with the comparator ">", and to
 ;; find the "minimum" we invoke the procedure with the comparator "<":
 ;;
-(defn extremum-in-list [list-a comparator limit]
+(defn
+  ^{:doc "Find the most extreme element in a set, according to the argument comparator."
+    :test (do
+            ;;
+            ;; Find the max element:
+            ;;
+            (assert (= 50 (extremum-in-list (list 1 2 4 50 2 5) > -1)))
+
+            ;;
+            ;; Find the min element:
+            ;;
+            (assert (= 1 (extremum-in-list (list 1 2 4 50 2 5) < 51)))) }
+  extremum-in-list [list-a comparator limit]
   (defn extremum-in-list-iter [list-b extreme-element]
     (if (= (count list-b) 0)
       extreme-element
@@ -415,24 +430,22 @@
   (extremum-in-list-iter list-a limit))
 
 ;;
-;; Run some unit tests to see how well the procedure works.
-;;
-;; Find the max element:
-;;
-(extremum-in-list (list 1 2 4 50 2 5) > -1)
-;; ==> 50
-
-;;
-;; Find the min element:
-;;
-(extremum-in-list (list 1 2 4 50 2 5) < 51)
-;; ==> 1
-
-;;
 ;; Find the range of angles for which a ball launched at a given elevation
 ;; and a given velocity will travel to or beyond the target distance.
 ;;
-(defn range-of-angles [elevation velocity target-distance]
+(defn
+  ^{:doc "Find the range of angles for which the ball will reach the target-distance, if hit from elevation at velocity."
+    :test (do
+            ;;
+            ;; Now answer the question:
+            ;;
+            ;; Suppose the outfield fence is 300 ft from home plate, and the ball
+            ;; is hit at 45 m/s. For what range of angles will the ball land over the fence?
+            ;;
+            
+            (assert (= 1 1))) }
+
+  range-of-angles [elevation velocity target-distance]
 
   ;;
   ;; This procedure will produce a list of *all* angles which
