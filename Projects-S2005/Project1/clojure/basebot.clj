@@ -514,64 +514,6 @@
      (extremum-in-list range > -1))))
 
 ;;
-;; Now answer the question:
-;;
-;; Suppose the outfield fence is 300 ft from home plate, and the ball is hit at 45 m/s.
-;; For what range of angles will the ball land over the fense?
-;;
-(range-of-angles 1 45 (feet-to-meters 300))
-;; ==> (28.0 48.0)
-
-;;
-;; Hence, the answer is, for angles between 28 degrees and 48 degrees, the ball
-;; will land over the fence. We can verify:
-;;
-(meters-to-feet (travel-distance 1 45 27))
-;; ==> 297.520
-(meters-to-feet (travel-distance 1 45 28))
-;; ==> 300.596
-(meters-to-feet (travel-distance 1 45 48))
-;; ==> 301.417
-(meters-to-feet (travel-distance 1 45 49))
-;; ==> 296.486
-
-;;
-;; Let's run through these same examples, as though in Denver, rather than in Boston.
-;;
-;; We adjust the density of air down from 1.25 to 1.06:
-;;
-(def density 1.06)
-(def beta (* 0.5 drag-coeff density (* pi 0.25 (square diameter))))
-
-(meters-to-feet (travel-distance 1 45 45))
-;; ==> 332.960
-(meters-to-feet (travel-distance 1 45 40))
-;; ==> 339.029
-(meters-to-feet (travel-distance 1 45 35))
-;; ==> 334.671
-
-(range-of-angles 1 45 (feet-to-meters 300))
-;; ==> (24.0 55.0)
-
-;;
-;; So this time, the range of angles for which the ball can travel 300 ft is substantially
-;; larger than in Boston. This makes sense, it's what we would expect.
-;;
-
-
-;;
-;; Let's check the boundaries:
-;;
-(meters-to-feet (travel-distance 1 45 23))
-;; ==> 297.602
-(meters-to-feet (travel-distance 1 45 24))
-;; ==> 308.402
-(meters-to-feet (travel-distance 1 45 55))
-;; ==> 300.430
-(meters-to-feet (travel-distance 1 45 56))
-;; ==> 296.813
-
-;;
 ;; Let's go "back to Boston" for the rest of this exercise:
 ;;
 (def density 1.25)
