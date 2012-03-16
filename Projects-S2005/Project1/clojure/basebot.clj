@@ -391,7 +391,7 @@
             ;;
             (def tolerance 0.001)
             (assert (< (Math/abs (- 92.508 (travel-distance 1 45 45))) tolerance))
-            (assert (< (Math/abs (- 95.357 (travel-distance 1 45 40))) tolerance))
+            (assert (< (Math/abs (- 95.337 (travel-distance 1 45 40))) tolerance))
             (assert (< (Math/abs (- 94.206 (travel-distance 1 45 35))) tolerance))) }
   
   travel-distance [elevation velocity angle]
@@ -419,6 +419,7 @@
             ;; Find the min element:
             ;;
             (assert (= 1 (extremum-in-list (list 1 2 4 50 2 5) < 51)))) }
+  
   extremum-in-list [list-a comparator limit]
   (defn extremum-in-list-iter [list-b extreme-element]
     (if (= (count list-b) 0)
