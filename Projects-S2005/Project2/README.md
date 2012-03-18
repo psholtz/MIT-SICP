@@ -107,5 +107,23 @@ Before we look at the two-player program, it is worth speculating on what possib
 
 **Spastic** - this program cooperates or defects on a random basis.
 
+**Egalitarian** - this program cooperates on the first round. On all subsequent rounds, **Egalitarian** examines the history of the other player's actions, counting the total number of defections and cooperations by the other player. If the other player's defections outnumber her cooperations, **Egalitarian** will defect; otherwise this strategy will cooperate.
+
+**Eye-for-Eye** - this program cooperates on the first round, and then on every subsequent round it mimics the other player's previous move. Thus, if the player cooperates (defects) on the nth round, then **Eye-for-Eye** will cooperate (defect) on the (n+1)th round.
+
+All of these strategies are extremely simple. (Indeed, the first three do not even pay any attention to the other player; their responses are uninfluenced by the previous rounds of the game). Nevertheless, simplicity is not necessarily a disadvantage. Rapoport's first-prize program employed the **Eye-for-Eye** strategy, and achieved the highest average score in a field of far more complicated programs.
+
 The Two-Player Prisoner's Dilemma Program
 ----------------------------------------- 
+A Scheme program for an iterated prisoner's dilemma game is provided as part of the code for this project. The procedure "play-loop" pits two players (or, to be more precise, two "strategies") against one another for approximately 100 games, then prints out the average score of each player.
+
+Player strategies are represented as procedures. Each strategy takes two iputs - its own "history" (that is, a list of all its previous "plays", where for convenience we will use "c" to represent cooperate, and "d" to represent defect) and its opponent's "history". The strategy returns either the string "c" for "cooperate" or the string "d" for "defect". (Note that we will need to use procedures appropriate for comparing strings when we analyze these results).
+
+At the beginning of an iterated game, each history is an empty list. As the game progresses, the histories grow (via "extend-history") into lists of "c"s and "d"s, thus each history is stored from most recent to least recent. Note how each strategy must have its own history as its first input. So in "play-loop-iter", "strat0" has "history0" as its first input, and "strat1" has "history1" as its first input.
+
+The values from the game matrix are stored in a list named "game-association-list". This list is used to calculate the scores at the end of the iterated game.
+
+<pre>
+(define *game-association-list*
+ (list 
+</pre>
