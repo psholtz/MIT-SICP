@@ -117,7 +117,7 @@ The Two-Player Prisoner's Dilemma Program
 ----------------------------------------- 
 A Scheme program for an iterated prisoner's dilemma game is provided as part of the code for this project. The procedure "play-loop" pits two players (or, to be more precise, two "strategies") against one another for approximately 100 games, then prints out the average score of each player.
 
-Player strategies are represented as procedures. Each strategy takes two iputs - its own "history" (that is, a list of all its previous "plays", where for convenience we will use "c" to represent cooperate, and "d" to represent defect) and its opponent's "history". The strategy returns either the string "c" for "cooperate" or the string "d" for "defect". (Note that we will need to use procedures appropriate for comparing strings when we analyze these results).
+Player strategies are represented as procedures. Each strategy takes two inputs - its own "history" (that is, a list of all its previous "plays", where for convenience we will use "c" to represent cooperate, and "d" to represent defect) and its opponent's "history". The strategy returns either the string "c" for "cooperate" or the string "d" for "defect". (Note that we will need to use procedures appropriate for comparing strings when we analyze these results).
 
 At the beginning of an iterated game, each history is an empty list. As the game progresses, the histories grow (via "extend-history") into lists of "c"s and "d"s, thus each history is stored from most recent to least recent. Note how each strategy must have its own history as its first input. So in "play-loop-iter", "strat0" has "history0" as its first input, and "strat1" has "history1" as its first input.
 
@@ -125,5 +125,28 @@ The values from the game matrix are stored in a list named "game-association-lis
 
 <pre>
 (define *game-association-list*
- (list 
+ (list (list (list "c" "c") (list 3 3))
+       (list (list "c" "d") (list 0 5))
+       (list (list "d" "c") (list 5 0))
+       (list (list "d" "d") (list 1 1)))) 
 </pre>
+
+Thus if both players cooperate, the payoff to each player is 3, if one player cooperates and the other defects, the defecting player gets a payoff of 5, the cooperating player gets a zero payoff, if both players defect, each gets a payoff of 1.
+
+Some simple strategies are given in the code. "Nasty" and "Patsy" are particularly simple: each returns a constant value regardless of the histories. "Spastic" also ignores the histories and chooses randomly between cooperation and defection. You should study "Egalitarian" and "Eye-for-Eye" to see that their behavior is consistent with the descriptions in the previous section.
+
+Problem 1
+--------- 
+
+To be able to test out the system, we need to complete a definition for "extract-entry". This procedure will retrieve the payoff information from the game association list. The procedure's behavior is as follows: it takes as input a play, represented as a list of choices for each strategy (i.e., a "c" or "d") and the game association list. Thus a play will in this case be a list of two entries (since there are two players), each of which is the choice of action for that player. Each entry in the game association list is a list itself, with a first element representing a list of game choices, and the second element representing a list of scores (or payoffs) for each player. Thus "extract-entry" wants to search down the game association list trying to match its first argument against the first element of each entry in the game association list, one by one. When it succeeds, it returns that whole entry.
+
+For example, we expect the following behavior:
+
+<pre>
+(define a-play (make-play "c" "d"))
+
+(extract-entry a-play *game-association-list*)
+;Value: (("c" "d") (0 5))
+</pre>
+
+Write the procedure "extract-entry" and test it out using the above case *game-assocation-list*. Turn in a copy of your documented procedure and some test examples. You may want to use a diagram of the list structure to guide the creation of your code.
