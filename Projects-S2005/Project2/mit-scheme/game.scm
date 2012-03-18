@@ -63,6 +63,28 @@
 ;;
 ;; We can test our procedure as follows:
 ;;
+(extract-entry (make-play "c" "c") *game-association-list*)
+;; ==> (("c" "c") (3 3))
+(extract-entry (make-play "c" "d") *game-association-list*)
+;; ==> (("c" "d") (0 5))
+(extract-entry (make-play "d" "c") *game-association-list*)
+;; ==> (("d" "c") (5 0))
+(extract-entry (make-play "d" "d") *game-association-list*)
+;; ==> (("d" "d") (1 1))
+(extract-entry (make-play "x" "x") *game-association-list*)
+;; ==> ()
 
+;;
+;; Similarly, since "get-point-list" is defined as:
+;;
+(define (get-point-list game)
+  (cadr (extract-entry game *game-association-list*)))
 
-
+(get-point-list (make-play "c" "c"))
+;; ==> (3 3)
+(get-point-list (make-play "c" "d"))
+;; ==> (0 5)
+(get-point-list (make-play "d" "c"))
+;; ==> (5 0)
+(get-point-list (make-play "d" "d"))
+;; ==> (1 1)
