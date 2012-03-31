@@ -88,3 +88,89 @@
 ;; ==> (5 0)
 (get-point-list (make-play "d" "d"))
 ;; ==> (1 1)
+
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+;; Problem 2
+;;
+;; Use "play-loop" to play games between the five strategies.
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+;;
+;; For reference, the five strategies are defined as:
+;;
+(define (NASTY my-history other-history)
+  "d")
+
+(define (PATSY my-history other-history)
+  "c")
+
+(define (SPASTIC my-history other-history)
+  (if (= (random 2) 0)
+      "c"
+      "d"))
+
+(define (EGALITARIAN my-history other-history)
+  (define (count-instances-of test hist)
+    (cond ((empty-history? hist) 0)
+	  ((string=? (most-recent-play hist) test)
+	   (+ (count-instances-of test (rest-of-plays hist)) 1))
+	  (else
+	    (count-instances-of test (rest-of-plays hist)))))
+  (let ((ds (count-instances-of "d" other-history))
+	(cs (count-instances-of "c" other-history)))
+    (if (> ds cs) "d" "c")))
+
+(define (EYE-FOR-EYE my-history other-history)
+  (if (empty-history? my-history)
+      "c"
+      (most-recent-play other-history)))
+
+;;
+;; ----------------- 
+;; NASTY plays NASTY
+;; ----------------- 
+;;
+;; ==> NASTY ties with 1.0 points
+;; ==> NASTY ties with 1.0 points
+;;
+ 
+;;
+;; ----------------- 
+;; NASTY plays PATSY
+;; ----------------- 
+;; 
+;; ==> NASTY wins with 5.0 points
+;; ==> PATSY loses with 0.0 points
+;;
+
+;;
+;; ------------------- 
+;; NASTY plays SPASTIC
+;; ------------------- 
+;;
+;; ==> NASTY wins with 3.030532 points
+;; ==> SPASTIC loses with 0.492 points
+;;
+
+;;
+;; ----------------------- 
+;; NASTY plays EGALITARIAN
+;; ----------------------- 
+;;
+;; ==> NASTY wins with 1.0408 points
+;; ==> EGALITARIAN loses with 0.9898 points
+;;
+
+;;
+;; ----------------------- 
+;; NASTY plays EYE-FOR-EYE
+;; -----------------------
+;;
+;; ==> NASTY wins with 1.0430 points
+;; ==> EYE-FOR-EYE loses with 0.9892 points
+;;
+
+;;
+;; NASTY is a highly "dominant" strategy. It never "loses" outright.. at worst, it ties against itself.
+;; Otheriwse, NASTY is able to beat all the other strategies played.
+;; 
