@@ -132,9 +132,43 @@
 ;; When NASTY plays against the following opponents, we obtain the following results:
 ;;
 
+;;
 ;;           -------------------------------------------------------------------------------------------------------------------------------
 ;;           |        NASTY         |         PATSY        |          SPASTIC          |       EGALITARIAN       |       EYE-FOR-EYE       |
 ;;------------------------------------------------------------------------------------------------------------------------------------------ 
 ;;   NASTY   | Ties with 1.0 points | Wins with 5.0 points | Wins with 3.030532 points | Wins with 1.0408 points | Wins with 1.0430 points | 
 ;;------------------------------------------------------------------------------------------------------------------------------------------
 ;; 
+
+;;
+;; PATSY never wins, and it loses badly against NASTY and SPASTIC. However, it ties with
+;; itself, EGALITARIAN and EYE-FOR-EYE.
+;;
+;; When PATSY plays against the following opponents, we obtain the following results:
+;;
+
+;;
+;;           ------------------------------------------------------------------------------------------------------------------------ 
+;;           |         NASTY         |         PATSY        |         SPASTIC         |      EGALITARIAN     |      EYE-FOR-EYE     |
+;;----------------------------------------------------------------------------------------------------------------------------------- 
+;;   PATSY   | Loses with 0.0 points | Ties with 3.0 points | Loses with 1.588 points | Ties with 3.0 points | Ties with 3.0 points |
+;;----------------------------------------------------------------------------------------------------------------------------------- 
+;;
+
+;;
+;; Despite being ostensibly "random", the SPASTIC strategy fares quite well. When playing
+;; against itself, the results are (essentially) a draw, where it wins or loses by a slight
+;; random margin. Similarly, the results against EYE-FOR-EYE are usually nuetral, with a 
+;; slight bias towards winning on the side of SPASTIC. However, it wins decisively against
+;; PATSY and EGALITARIAN. It only loses against NASTY.
+;;
+;; When SPASTIC plays against the following opponents, we obtain the following results:
+;;
+
+;;
+;;           ------------------------------------------------------------------------------------------------------------------------------ 
+;;           |          NASTY          |        PATSY         |         SPASTIC          |       EGALITARIAN      |      EYE-FOR-EYE      |
+;;----------------------------------------------------------------------------------------------------------------------------------------- 
+;;  SPASTIC  | Loses with 0.529 points | Wins with 4.3 points | "Wins" with 2.239 points | Wins with 2.766 points | Wins with 2.30 points |
+;;----------------------------------------------------------------------------------------------------------------------------------------- 
+;;
