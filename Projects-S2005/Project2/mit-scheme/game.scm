@@ -124,53 +124,17 @@
   (if (empty-history? my-history)
       "c"
       (most-recent-play other-history)))
-
+       
 ;;
-;; ----------------- 
-;; NASTY plays NASTY
-;; ----------------- 
+;; NASTY is a highly "dominant" strategy. It never "loses" outright, at worst tying only 
+;; when it plays against itself. Otherwise, NASTY is able to beat all the other strategies.
 ;;
-;; ==> NASTY ties with 1.0 points
-;; ==> NASTY ties with 1.0 points
-;;
- 
-;;
-;; ----------------- 
-;; NASTY plays PATSY
-;; ----------------- 
-;; 
-;; ==> NASTY wins with 5.0 points
-;; ==> PATSY loses with 0.0 points
+;; When NASTY plays against the following opponents, we obtain the following results:
 ;;
 
-;;
-;; ------------------- 
-;; NASTY plays SPASTIC
-;; ------------------- 
-;;
-;; ==> NASTY wins with 3.030532 points
-;; ==> SPASTIC loses with 0.492 points
-;;
-
-;;
-;; ----------------------- 
-;; NASTY plays EGALITARIAN
-;; ----------------------- 
-;;
-;; ==> NASTY wins with 1.0408 points
-;; ==> EGALITARIAN loses with 0.9898 points
-;;
-
-;;
-;; ----------------------- 
-;; NASTY plays EYE-FOR-EYE
-;; -----------------------
-;;
-;; ==> NASTY wins with 1.0430 points
-;; ==> EYE-FOR-EYE loses with 0.9892 points
-;;
-
-;;
-;; NASTY is a highly "dominant" strategy. It never "loses" outright.. at worst, it ties against itself.
-;; Otheriwse, NASTY is able to beat all the other strategies played.
+;;           -------------------------------------------------------------------------------------------------------------------------------
+;;           |        NASTY         |         PATSY        |          SPASTIC          |       EGALITARIAN       |       EYE-FOR-EYE       |
+;;------------------------------------------------------------------------------------------------------------------------------------------ 
+;;   NASTY   | Ties with 1.0 points | Wins with 5.0 points | Wins with 3.030532 points | Wins with 1.0408 points | Wins with 1.0430 points | 
+;;------------------------------------------------------------------------------------------------------------------------------------------
 ;; 
