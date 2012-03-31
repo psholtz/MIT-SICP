@@ -150,3 +150,8 @@ For example, we expect the following behavior:
 </pre>
 
 Write the procedure "extract-entry" and test it out using the above case *game-assocation-list*. Turn in a copy of your documented procedure and some test examples. You may want to use a diagram of the list structure to guide the creation of your code.
+
+Problem 2
+--------- 
+
+Use "play-loop" to play games among the five defined strategies. Notice how a strategy's performance varies sharply depending on its opponent. For example, "Patsy" does quite well against "Eye-for-Eye" or against another "Patsy", but it loses badly against "Nasty". Pay special attention to "Eye-for-Eye". Notice how it never beats its opponent -- but it never loses badly. Create a matrix in which you show the average score for tournaments pitting all possible pairings of the five different strategies: "Nasty", "Patsy", "Eye-for-Eye", "Spastic", "Egalitarian". Describe the behavior you observe for the different strategies.
