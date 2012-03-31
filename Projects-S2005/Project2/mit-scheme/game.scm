@@ -98,12 +98,16 @@
 ;;
 ;; For reference, the five strategies are defined as:
 ;;
+
+;; Always "defect"
 (define (NASTY my-history other-history)
   "d")
 
+;; Always "cooperate"
 (define (PATSY my-history other-history)
   "c")
 
+;; "Defect" or "cooperate" with 50-50 chance
 (define (SPASTIC my-history other-history)
   (if (= (random 2) 0)
       "c"
@@ -120,6 +124,7 @@
 	(cs (count-instances-of "c" other-history)))
     (if (> ds cs) "d" "c")))
 
+;; "Cooperate" on first round, otherwise return "eye for eye"
 (define (EYE-FOR-EYE my-history other-history)
   (if (empty-history? my-history)
       "c"
@@ -164,6 +169,8 @@
 ;;
 ;; When SPASTIC plays against the following opponents, we obtain the following results:
 ;;
+
+;; TODO --> revisit results for SPASTIC
 
 ;;
 ;;           ------------------------------------------------------------------------------------------------------------------------------ 
