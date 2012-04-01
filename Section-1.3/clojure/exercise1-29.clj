@@ -21,15 +21,28 @@
 ;; conventional Lisp dialects. Accordingly, we will define our procedure using
 ;; "next-point" rather than simply "next".
 ;;
-(defn simpson [f a b n]
+(defn simpson
+  {:doc "Numericaly integrate f between a and b, dividing interval into n intervals."}
+  [f a b n]
+
+  ;; "Delta-x" by which to increase the integration point at each interval.
   (def h (/ (- b a) n))
-  (defn next-point [x] (+ x h))
-  (defn term [a i]
-    (cond (= i 0) (f a)
-          (= i n) (f a)
-          (even? i) (* 2 (f a))
-          (odd? i) (* 4 (f a))))
-  (defn sum [term a next-point b i]
+  
+  (defn next-point
+    {:doc "Return the next integration point after x."}
+    [x] (+ x h))
+  
+  (defn term
+    {:doc "Return the value to use in the numerical integration at point x, at interval i."}
+    [x i]
+    (cond (= i 0) (f x)
+          (= i n) (f x)
+          (even? i) (* 2 (f x))
+          (odd? i) (* 4 (f x))))
+  
+  (defn sum
+    {:doc "Recursive procedure to sum the numerical terms from x to b, where i is the step number in the integration."}
+    [term a next-point b i]
     (if (> a b)
       0
       (+ (term a i)
@@ -37,6 +50,7 @@
                  
   ;;
   ;; Check to make sure we have even n.
+  ;; Carry out the numerical integration using Simpson's rule.
   ;;
   (if (even? n)
     (* (/ h 3) (sum term a next-point b 0))
@@ -45,7 +59,9 @@
 ;;
 ;; Now carry out the numerical integration on "cube" between 0 and 1 with n=100, n=1000
 ;; 
-(defn cube [x] (* x x x))
+(defn cube
+  {:doc "Return cube of argument."}
+  [x] (* x x x))
 
 (simpson cube 0 1 100)
 ;; --> 1/4
