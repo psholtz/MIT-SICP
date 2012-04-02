@@ -53,7 +53,7 @@
   ;; Carry out the numerical integration using Simpson's rule.
   ;;
   (if (even? n)
-    (* (/ h 3) (sum term a next-point b 0))
+    (* (/ h 3) (sum a 0))
     2))
 
 ;;
