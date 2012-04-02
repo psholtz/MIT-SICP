@@ -42,11 +42,11 @@
   
   (defn sum
     {:doc "Recursive procedure to sum the numerical terms from x to b, where i is the step number in the integration."}
-    [term a next-point b i]
-    (if (> a b)
+    [x i]
+    (if (> x b)
       0
-      (+ (term a i)
-         (sum term (next-point a) next-point b (+ i 1)))))
+      (+ (term x i)
+	 (sum (next-point x) (+ i 1)))))
                  
   ;;
   ;; Check to make sure we have even n.
