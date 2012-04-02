@@ -39,7 +39,8 @@
           (= i n) (f x)
           (even? i) (* 2 (f x))
           (odd? i) (* 4 (f x))))
-  
+
+  ;; This definition is a slight modification/optimization over what is presented in the text.
   (defn sum
     {:doc "Recursive procedure to sum the numerical terms from x to b, where i is the step number in the integration."}
     [x i]
