@@ -6,16 +6,12 @@
   {:doc "Construct a rational number with n as the numerator, and d as the denominator."}
   [n d]
   
-  (defn gcd
-    {:doc "Return the greatest common divisor of a and b."}
-    [a b]
+  (defn gcd [a b]
     (if (= b 0)
       a
       (gcd b (mod a b))))
   
-  (defn negative?
-    {:doc "Return true if the number is less than zero, otherwise false."}
-    [x]
+  (defn negative? [x]
     (< x 0))
   
   (let [g (gcd (Math/abs n) (Math/abs d))]
