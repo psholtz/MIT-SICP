@@ -3,7 +3,7 @@
 ;; Modified version of the "make-rat" constructor, incorporating the "gcd" test as in text:
 ;;
 (defn make-rat
-  {:doc "Construct a rational number where n is the numerator, and d is the denominator."}
+  {:doc "Construct a rational number with n as the numerator, and d as the denominator."}
   [n d]
   
   (defn gcd
