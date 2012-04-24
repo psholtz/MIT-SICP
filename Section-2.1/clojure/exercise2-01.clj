@@ -26,7 +26,13 @@
       ;;
       (cons (/ (* -1 n) g) (list (/ (* -1 d) g)))
       (cons (/ n g) (list (/ d g))))))
- 
+
+;;
+;; Need selectors for numerator and denominator as well:
+;;
+(defn numer {:doc "Extract numerator of rational number,"} [x] (first x))
+(defn denom {:doc "Extract denominator of rational number."} [x] (second x))
+
 ;;
 ;; Let's define the "print-rat" procedure so we can run some unit tests.
 ;;
@@ -37,9 +43,3 @@
   (print "/")
   (print (denom x))
   (println ""))
-
-;;
-;; Need selectors for numerator and denominator as well:
-;;
-(defn numer {:doc "Extract numerator of rational number,"} [x] (first x))
-(defn denom {:doc "Extract denominator of rational number."} [x] (second x))
