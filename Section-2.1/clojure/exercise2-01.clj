@@ -11,6 +11,10 @@
     (< x 0))
   (let [g (gcd (Math/abs n) (Math/abs d))]
     (if (negative? d)
+      ;;
+      ;; Clojure has a different notion of "cons" than traditional Lisps do,
+      ;; hence we "close" the cons with a "list".. 
+      ;;
       (cons (/ (* -1 n) g) (list (/ (* -1 d) g)))
       (cons (/ n g) (list (/ d g))))))
  
