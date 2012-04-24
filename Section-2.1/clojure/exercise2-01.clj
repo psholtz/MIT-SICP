@@ -11,8 +11,8 @@
     (< x 0))
   (let [g (gcd (Math/abs n) (Math/abs d))]
     (if (negative? d)
-      (cons (/ (* -1 n) g) '(/ (* -1 d) g))
-      (cons (/ n g) '(/ d g)))))
+      (cons (/ (* -1 n) g) (list (/ (* -1 d) g)))
+      (cons (/ n g) (list (/ d g))))))
  
 ;;
 ;; Let's define the "print-rat" procedure so we can run some unit tests.
