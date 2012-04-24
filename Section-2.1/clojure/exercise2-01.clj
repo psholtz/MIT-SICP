@@ -1,3 +1,11 @@
+;;
+;; Exercise 2.1
+;;
+;; Define a better version of "make-rat" that handles both positive and negative argument.
+;; "make-rat" should normalize the sign so that if the rational number is positive, both
+;; the numerator and denominator are positive, and if the rational number is negative,
+;; only the numerator is negative.
+;;
 
 ;;
 ;; Modified version of the "make-rat" constructor, incorporating the "gcd" test as in text:
