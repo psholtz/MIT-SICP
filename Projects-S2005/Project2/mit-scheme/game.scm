@@ -170,19 +170,30 @@
 ;;
 ;; Despite being ostensibly "random", the SPASTIC strategy fares quite well. When playing
 ;; against itself, the results are (essentially) a draw, where it wins or loses by a slight
-;; random margin. Similarly, the results against EYE-FOR-EYE are usually nuetral, with a 
-;; slight bias towards winning on the side of SPASTIC. However, it wins decisively against
-;; PATSY and EGALITARIAN. It only loses against NASTY.
+;; random margin. Similarly, the results against EYE-FOR-EYE are usually neutral (i.e., a tie)
+;; with an occasional very slighty win on the side of SPASTIC. SPASTIC wins decisively against
+;; PATSY, and loses against NASTY.
+;;
+;; The most interesting behavior is when SPASTIC plays EGALITARIAN. Usually (roughly 70% of 
+;; the time), SPASTIC will win decisively, but occassionally (roughly 30% of the time) it 
+;; will lose (quite badly).
+;; 
+;; Note that SPASTIC is a stochastic strategy and will generate slightly different point 
+;; values which vary from round to round. Specifically, when playing against itself, 
+;; SPASTIC will either win or lose, but only by a very narrow margin, both opponents 
+;; obtaining nearly the same number of points. This state of affairs is labeled a
+;; "stochastic tie".
 ;;
 ;; When SPASTIC plays against the following opponents, we obtain the following results:
 ;;
 
-;; TODO --> revisit results for SPASTIC
-
 ;;
-;;           ------------------------------------------------------------------------------------------------------------------------------ 
-;;           |          NASTY          |        PATSY         |         SPASTIC          |       EGALITARIAN      |      EYE-FOR-EYE      |
-;;----------------------------------------------------------------------------------------------------------------------------------------- 
-;;  SPASTIC  | Loses with 0.529 points | Wins with 4.3 points | "Wins" with 2.239 points | Wins with 2.766 points | Wins with 2.30 points |
-;;----------------------------------------------------------------------------------------------------------------------------------------- 
+;;           ---------------------------------------------------------------------------------------------
+;;           |     NASTY     |     PATSY    |       SPASTIC      |   EGALITARIAN   |     EYE-FOR-EYE     |
+;;--------------------------------------------------------------------------------------------------------
+;;  SPASTIC  |     Loses     |     Wins     |  "Stochastic Tie"  |  Usually Wins   |  Tie or Slight Win  |
+;;           |  0.527 points |  4.1 points  |     2.32 points    |   2.77 points   |     2.29 points     |
+;;           |               |              |                    |   Rare Loss     |                     |
+;;           |               |              |                    |  1.22 points    |                     |
+;;--------------------------------------------------------------------------------------------------------
 ;;
