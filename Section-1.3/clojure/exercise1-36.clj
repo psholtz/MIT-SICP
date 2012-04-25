@@ -11,7 +11,9 @@
 ;;
 ;; Define the modified "fixed-point" procedure:
 ;;
-(defn fixed-point [f first-guess]
+(defn fixed-point
+  {:doc "Find the fixed point of the function f."}
+  [f first-guess]
   (def tolerance 0.00001)
   (defn close-enough? [v1 v2]
     (< (Math/abs (- v1 v2)) tolerance))

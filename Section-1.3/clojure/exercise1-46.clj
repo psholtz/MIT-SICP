@@ -18,7 +18,9 @@
 ;; define an "inner" procedure that we can invoke repeatedly until we arrive
 ;; at a "good enough" answer.
 ;;
-(defn iterative-improvement [good-enough? improve]
+(defn iterative-improvement
+  {:doc "Improve the guesses iteratively. Both arguments to this procedure are themselves procedures."}
+  [good-enough? improve]
   (fn [first-guess]
     (defn iteration [guess]
       (if (good-enough? guess)
@@ -29,7 +31,9 @@
 ;;
 ;; Define "sqrt" in terms of "iterative-improvement":
 ;;
-(defn sqrt [x]
+(defn sqrt
+  {:doc "Return sqrt of x, using iterative improvement method."}
+  [x]
   (def tolerance 0.00001)
   (defn average [x y] (/ (+ x y) 2.0))
   (defn square [x] (* x x))
@@ -57,7 +61,9 @@
 ;;
 ;; Define the "fixed-point" procedure in terms of "iterative-improvement":
 ;;
-(defn fixed-point [f x]
+(defn fixed-point
+  {:doc "Find the fixed point of the function f."}
+  [f x]
   (def tolerance 0.00001)
   (defn close-enough? [guess]
     (< (Math/abs (- guess (f guess))) tolerance))
