@@ -207,6 +207,7 @@
 ;; When EGALITARIAN plays against the following opponents, we obtain the following results:
 ;;
 
+;;
 ;;              ------------------------------------------------------------------------------- 
 ;;              |     NASTY     |    PATSY     |   SPASTIC     |  EGALITARIAN |  EYE-FOR-EYE  |
 ;;--------------------------------------------------------------------------------------------- 
@@ -217,3 +218,17 @@
 ;;--------------------------------------------------------------------------------------------- 
 ;;    
 
+;;
+;; Like EGALITARIAN, EYE-FOR-EYE also almost always "ties", or, even when "winning" or "losing",
+;; does so only by a very narrow margin. EYE-FOR-EYE will tie PATSY, EGALITARIAN and EYE-FOR-EYE
+;; (itself). It will tie or slightly lose to SPASTIC, and will slightly lose to NASTY.
+;;
+
+;;
+;;              ------------------------------------------------------------------------------------ 
+;;              |     NASTY     |   PATSY    |       SPASTIC       |  EGALITARIAN  |  EYE-FOR-EYE  |
+;;--------------------------------------------------------------------------------------------------
+;;  EYE-FOR-EYE |  Slight Loss  |    Tie     |  Tie or Slight Loss |      Tie      |      Tie      |
+;;              |  0.99 points  | 3.0 points |    2.23 points      |   3.0 points  |  3.0 points   |
+;;-------------------------------------------------------------------------------------------------- 
+;;
