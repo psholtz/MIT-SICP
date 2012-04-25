@@ -144,6 +144,8 @@
 ;;   NASTY   |    Ties    |    Wins    |    Wins     |     Wins      |     Wins      | 
 ;;           | 1.0 points | 5.0 points | 2.88 points |  1.04 points  |  1.04 points  | 
 ;;------------------------------------------------------------------------------------
+;;
+
 ;; 
 ;; Note that in all these plays, SPASTIC is a stochastic strategy and will generate 
 ;; slightly different point values which vary from round to round.
