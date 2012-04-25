@@ -197,3 +197,51 @@
 ;;
 ;; Again, let's check to make sure it rejects bad rectangles:
 ;;
+(def r1 (make-rectangle 0 0 0 0))
+;; ==> Invalid
+(def r1 (make-rectangle 0 0 -1 0))
+;; ==> Invalid
+(def r1 (make-rectangle 0 0 0 -1))
+;; ==> Invalid
+(def r1 (make-rectangle 0 0 -1 -1))
+;; ==> Invalid
+(def r1 (make-rectangle 0 0 1 0))
+;; ==> Invalid
+(def r1 (make-rectangle 0 0 0 1))
+;; ==> Invalid
+
+;;
+;; Let's re-run our test cases from before (without changing of any of the other selectors),
+;; and see if we still get the same answers. The "semantics" of the constructor have changed,
+;; and we must pass in different arguments to generate the "same" rectangle, but otherwise
+;; the selectors need not be updated.
+;;
+(def r1 (make-rectangle 0 1 1 1))
+;; ==> #'user/r1
+(upper-left r1)
+;; ==> (0,1)
+(lower-right r1)
+;; ==> (1,0)
+(width r1)
+;; ==> 1.0
+(height r1)
+;; ==> 1.0
+(perimeter r1)
+;; ==> 4.0
+(area r1)
+;; ==> 1.0
+
+(def r2 (make-rectangle 0 1 2 1))
+;; ==> #'user/r2
+(print-point (upper-left r2))
+;; ==> (0,1)
+(print-point (lower-right r2))
+;; ==> (2,0)
+(width r2)
+;; ==> 2.0
+(height r2)
+;; ==> 1.0
+(perimeter r2)
+;; ==> 6.0
+(area r2)
+;; ==> 2.0
