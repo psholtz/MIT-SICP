@@ -155,3 +155,23 @@ Problem 2
 --------- 
 
 Use "play-loop" to play games among the five defined strategies. Notice how a strategy's performance varies sharply depending on its opponent. For example, "Patsy" does quite well against "Eye-for-Eye" or against another "Patsy", but it loses badly against "Nasty". Pay special attention to "Eye-for-Eye". Notice how it never beats its opponent -- but it never loses badly. Create a matrix in which you show the average score for tournaments pitting all possible pairings of the five different strategies: "Nasty", "Patsy", "Eye-for-Eye", "Spastic", "Egalitarian". Describe the behavior you observe for the different strategies.
+
+Problem 3
+--------- 
+
+Games involving "Egalitarian" tend to be slower than other games. Why is that so? Use order-of-growth notation to explain your answer.
+
+Alyssa P. Hacker, upon seeing the code for "Egalitarian", suggested the following iterative version of the procedure:
+
+<pre>
+(define (Egalitarian my-history other-history)
+  (define (majority-loop cs ds hist)
+    (cond ((empty-history? hist) (if (> ds cs) "d" "c"))
+          ((string=? (most-recent-play hist) "c")
+           (majority-loop (+ 1 cs) ds (rest-of-plays hist)))
+          (else
+           (majority-loop cs (+ 1 ds) (rest-of-plays hist)))))
+  (majority-loop 0 0 other-history))
+</pre>
+
+Compare this procedure with the original version. Do the orders of growth (in time) for the two procedures differ? Is the newer version faster?
