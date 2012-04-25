@@ -175,3 +175,30 @@ Alyssa P. Hacker, upon seeing the code for "Egalitarian", suggested the followin
 </pre>
 
 Compare this procedure with the original version. Do the orders of growth (in time) for the two procedures differ? Is the newer version faster?
+
+Problem 4
+--------- 
+
+Write a new strategy "eye-for-two-eyes." The strategy should always cooperate unless the opponent defected on both of the previous two rounds. (Looked at another way: "eye-for-two-eyes" should cooperate if the opponent cooperated on either of the previous two rounds). Play "eye-for-two-eyes" against other strategies. Describe the behavior you observe.
+
+Problem 5
+--------- 
+
+Write a procedure "make-eye-for-n-eyes." This procedure should take a number as input and return the approprite "Eye-for-eye"-like strategy. For example, "(make-eye-for-n-eyes 2)" should return a strategy equivalent to "eye-for-two-eyes." Use this procedure to create a new strategy and test it against the other strategies. Describe the observed behavior.
+
+Problem 6
+--------- 
+
+Write a procedure "make-rotating-strategy" which takes as input two strategies (say, "strat0" and "strat1"), and two integers (say "freq0" and "freq1"). "Make-rotating-strategy" should return a strategy which plays "strat0" for the first "freq0" rounds in the iterated game, then switches to "strat1" for the next "freq1" rounds, and so on. (Hint: you may find it useful to think about the "remainder" procedure in order to decide whihc strategy to use at each iteration). Test it against other strategies and describe the performance.
+
+Problem 7
+--------- 
+
+Write a new strategy, "make-higher-order-spastic", which takes a list of strategies as input. It returns a new strategy that loops through this list of strategies, using the next one in the list for each play, and then starting against the beginning of the list when it has used all the strategies. Test this new strategy against other strategies and describe the performance.
+
+Problem 8
+--------- 
+
+Write a procedure "gentle", which takes as input a strategy (say "strat"), and a number between 0 and 1 (call it "gentleness-factor"). The "gentle" procedure should return a strategy that plays the same as "strat" except: when "strat" defects, the new strategy should have a "gentleness-factor" chance of cooperating. (If "gentleness-factor" is 0, the return strategy performs exactly the same as "strat"; if "gentleness-factor" is 0.5, the returned strategy cooperates half the time that "strat" defects; if "gentleness-factor" is 1, the returned strategy performs the same as "Patsy").
+
+Use "gentle" with a low value for "gentleness-factor" -- say 0.1 -- to create two new strategies: "slightly-gentle-Nasty" and "slightly-gentle-Eye-for-Eye".
