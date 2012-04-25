@@ -191,9 +191,29 @@
 ;;           ---------------------------------------------------------------------------------------------
 ;;           |     NASTY     |     PATSY    |       SPASTIC      |   EGALITARIAN   |     EYE-FOR-EYE     |
 ;;--------------------------------------------------------------------------------------------------------
-;;  SPASTIC  |     Loses     |     Wins     |  "Stochastic Tie"  |  Usually Wins   |  Tie or Slight Win  |
+;;  SPASTIC  |     Loses     |     Wins     |  "Stochastic Tie"  |    70% Wins     |  Tie or Slight Win  |
 ;;           |  0.527 points |  4.1 points  |     2.32 points    |   2.77 points   |     2.29 points     |
-;;           |               |              |                    |   Rare Loss     |                     |
+;;           |               |              |                    |    30% Loss     |                     |
 ;;           |               |              |                    |  1.22 points    |                     |
 ;;--------------------------------------------------------------------------------------------------------
 ;;
+
+;;
+;; EGALITARIAN almost always "ties", or, even when "winning" or "losing", does so only 
+;; by a very narrow margin. The most interesting behavior comes with SPASTIC, where 
+;; 50% of the time, EGALITARIAN wins with a score of 2.47, whereas 50% of the time, 
+;; EGALITARIAN loses with a score of 1.87. 
+;;
+;; When EGALITARIAN plays against the following opponents, we obtain the following results:
+;;
+
+;;              ------------------------------------------------------------------------------- 
+;;              |     NASTY     |    PATSY     |   SPASTIC     |  EGALITARIAN |  EYE-FOR-EYE  |
+;;--------------------------------------------------------------------------------------------- 
+;;  EGALITARIAN |  Slight Loss  |     Tie      |   50% Wins    |     Tie      |      Tie      |
+;;              |  0.99 points  |  3.0 points  |  2.47 points  |  3.0 points  |   3.0 points  |
+;;              |               |              |   50% Loses   |              |               |
+;;              |               |              |  1.87 points  |              |               |
+;;--------------------------------------------------------------------------------------------- 
+;;    
+
