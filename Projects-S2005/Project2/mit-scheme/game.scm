@@ -138,12 +138,16 @@
 ;;
 
 ;;
-;;           -------------------------------------------------------------------------------------------------------------------------------
-;;           |        NASTY         |         PATSY        |          SPASTIC          |       EGALITARIAN       |       EYE-FOR-EYE       |
-;;------------------------------------------------------------------------------------------------------------------------------------------ 
-;;   NASTY   | Ties with 1.0 points | Wins with 5.0 points | Wins with 3.030532 points | Wins with 1.0408 points | Wins with 1.0430 points | 
-;;------------------------------------------------------------------------------------------------------------------------------------------
+;;           -------------------------------------------------------------------------
+;;           |    NASTY   |    PATSY   |   SPASTIC   |  EGALITARIAN  |  EYE-FOR-EYE  |
+;;------------------------------------------------------------------------------------
+;;   NASTY   |    Ties    |    Wins    |    Wins     |     Wins      |     Wins      | 
+;;           | 1.0 points | 5.0 points | 2.88 points |  1.04 points  |  1.04 points  | 
+;;------------------------------------------------------------------------------------
 ;; 
+;; Note that in all these plays, SPASTIC is a stochastic strategy and will generate 
+;; slightly different point values which vary from round to round.
+;;
 
 ;;
 ;; PATSY never wins, and it loses badly against NASTY and SPASTIC. However, it ties with
