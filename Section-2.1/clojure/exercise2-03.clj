@@ -20,11 +20,17 @@
 ;;
 ;; Support for Euclidean distances:
 ;;
-(defn square [x] (* x x))
-(defn distance-points [p1 p2]
+(defn square {:doc "Return square of argument."} [x] (* x x))
+
+(defn distance-points
+  {:doc "Return Euclidean distance between two points."}
+  [p1 p2]
   (Math/sqrt (+ (square (- (x-point p1) (x-point p2)))
                 (square (- (y-point p1) (y-point p2))))))
-(defn length-segment [s]
+
+(defn length-segment
+  {:doc "Return the length of the argument line segment."}
+  [s]
   (distance-points (start-segment s) (end-segment s)))
 
 ;;
