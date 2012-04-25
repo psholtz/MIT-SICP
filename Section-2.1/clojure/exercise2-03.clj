@@ -118,16 +118,82 @@
 ;; The following cases should all fail, owing to bad dimensions.
 ;;
 (def r1 (make-rectangle 0 0 0 0))
-;; ==>
+;; ==> Invalid
 (def r1 (make-rectangle 0 1 0 0))
-;; ==>
+;; ==> Invalid
 (def r1 (make-rectangle 0 0 1 0))
-;; ==>
+;; ==> Invalid
 (def r1 (make-rectangle 0 0 -1 0))
-;; ==>
+;; ==> Invalid
 (def r1 (make-rectangle 0 0 0 -1))
-;; ==>
+;; ==> Invalid
 (def r1 (make-rectangle 0 0 -1 -1))
-;; ==>
+;; ==> Invalid
 (def r1 (make-rectangle 0 0 1 1))
-;; ==>
+;; ==> Invalid
+
+;;
+;; Now let's start working with "real" rectangles, and run them through our selectors:
+;;
+(def r1 (make-rectangle 0 1 1 0))
+;; ==> #'user/r1
+(print-point (upper-left r1))
+;; ==> (0,1)
+(print-point (lower-right r1))
+;; ==> (1,0)
+(width r1)
+;; ==> 1.0
+(height r1)
+;; ==> 1.0
+(perimeter r1)
+;; ==> 4.0
+(area r1)
+;; ==> 1.0
+
+(def r2 (make-rectangle 0 1 2 0))
+;; ==> #'user/r2
+(print-point (upper-left r2))
+;; ==> (0,1)
+(print-point (lower-right r2))
+;; ==> (2,0)
+(width r2)
+;; ==> 2.0
+(height r2)
+;; ==> 1.0
+(perimeter r2)
+;; ==> 6.0
+(area r2)
+;; ==> 2.0
+
+;;
+;; Now let's implement representational Model (2).
+;;
+;; As before, we still require 4 parameters to specify the rectangle, but this time
+;; we will use:
+;;
+;; (a) upper-left-x
+;; (b) upper-left-y
+;; (c) width
+;; (d) height
+;;
+;; Again, do some error checking to make sure the rectangle is valid.
+;;
+(defn make-rectangle [upper-left-x upper-left-y width height]
+  (cond (and (> width 0) (> height 0))
+        (let [p1 (make-point upper-left-x upper-left-y)]
+          (let [p2 (make-point
+                    (+ (x-point p1) width)
+                    (- (y-point p1) height))]
+            (cons p1 (list p2))))
+        :else
+        (println "Error: rectangle dimensions area invalid!")))
+
+;;
+;; Note that if we construct the rectangle in this manner, we do not need
+;; to alter any of the remaining selectors, nor do we need to change the
+;; "perimeter" or "area" procedures.
+;;
+
+;;
+;; Again, let's check to make sure it rejects bad rectangles:
+;;
