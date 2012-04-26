@@ -264,3 +264,35 @@
 	  (else
 	   (majority-loop cs (+ 1 ds) (rest-of-plays hist)))))
   (majority-loop 0 0 other-history))
+
+;; [working] --> analysis
+
+;;
+;; As a test, let's implement a "timed-play-loop" procedure that
+;; (a) runs more play sets; and (b) prints out timing statistics, 
+;; so we can see whether program execution actually performs the 
+;; way we would predict.
+;;
+(define (timed-play-loop strat0 strat1)
+
+  ;;
+  ;; Play-loop-iter procedure for executing the game play an arbitrary number of times
+  ;;
+  (define (timed-play-loop-iter count history0 history1 limit)
+    (cond ((= count limit) (print-out-results history0 history1 limit))
+	  (else
+	   (let ((result0 (strat0 history0 history1))
+		 (result1 (strat1 history1 history0)))
+	     (timed-play-loop-iter (+ count 1)
+				   (extend-history result0 history0)
+				   (extend-history result1 history1)
+				   limit)))))
+
+  ;;
+  ;; Bracket execution loop for timing purposes
+  ;;
+  (let ((start (real-time-clock)))
+    (timed-play-loop-iter 0 the-empty-history the-empty-history 1000)
+    (let ((finish (real-time-clock)))
+      (display "Timing: ")
+      (display (- finish start)))))
