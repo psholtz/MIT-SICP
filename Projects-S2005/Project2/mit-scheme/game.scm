@@ -232,3 +232,35 @@
 ;;              |  0.99 points  | 3.0 points |    2.23 points      |   3.0 points  |  3.0 points   |
 ;;-------------------------------------------------------------------------------------------------- 
 ;;
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+;; Problem 3
+;;
+;; Explore more efficient ways to code EGALITARIAN.
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;;
+;; For reference, the original definition of EGALITARIAN was given as:
+;;
+(define (EGALITARIAN my-history other-history)
+  (define (count-instances-of test hist)
+    (cond ((empty-history? hist) 0)
+	  ((string=? (most-recent-play hist) test)
+	   (+ (count-instances-of test (rest-of-plays hist)) 1))
+	  (else
+	   (count-instances-of test (rest-of-plays hist)))))
+  (let ((ds (count-instances-of "d" other-history))
+	(cs (count-instances-of "c" other-history)))
+    (if (> ds cs) "d" "c")))
+
+;;
+;; Alyssa's new definition of EGALITARIAN is given as:
+;;
+(define (EGALITARIAN my-history other-history)
+  (define (majority-loop cs ds hist)
+    (cond ((empty-history? hist) (if (> ds cs) "d" "c"))
+	  ((string=? (most-recent-play hist) "c")
+	   (majority-loop (+ 1 cs) ds (rest-of-plays hist)))
+	  (else
+	   (majority-loop cs (+ 1 ds) (rest-of-plays hist)))))
+  (majority-loop 0 0 other-history))
