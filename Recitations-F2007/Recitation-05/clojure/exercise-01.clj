@@ -18,3 +18,7 @@
 ;;
 ;; Clojure does not have the same notion of CONS as do other versions of Lisp.
 ;;
+;; Unlike traditional versions of Lisp, in Clojure lists are not the primary data
+;; structure. Data structures in Clojure can implement the ISeq interface, and
+;; the "seq?" procedure checks whether an object implements ISeq. When "cons" is
+;; used in Clojure, the [...]
