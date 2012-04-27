@@ -347,3 +347,29 @@
     (let ((finish (real-time-clock)))
       (display "Timing: ")
       (display (- finish start)))))
+
+;;
+;; Let's build a matrix of the time it takes to execute 500 game plays 
+;; (roughly 5 times more plays than in a normal round, using "play-loop"), 
+;; and see which procedures are the slowest.
+;;
+;; The entries in the matrix correspond to the time (ticks) required for the 
+;; 500 game plays to execute. The following matrix uses the "original"
+;; definition of the EGALITARIAN procedure:
+;;
+
+;;
+;;                 ----------------------------------------------------------------- 
+;;                 |  NASTY  |  PATSY  |  SPASTIC  |  EGALITARIAN  |  EYE-FOR-EYE  |
+;; --------------------------------------------------------------------------------- 
+;; |     NASTY     |   15    |    13   |     40    |      415      |       15      |
+;; --------------------------------------------------------------------------------- 
+;; |     PATSY     |   13    |    10   |     11    |      407      |       10      |
+;; --------------------------------------------------------------------------------- 
+;; |    SPASTIC    |   40    |    11   |     14    |      439      |       13      |
+;; ---------------------------------------------------------------------------------  
+;; |  EGALITARIAN  |   415   |   407   |    439    |      801      |      408      |
+;; --------------------------------------------------------------------------------- 
+;; |  EYE-FOR-EYE  |   15    |    10   |     13    |      408      |       10      |
+;; ---------------------------------------------------------------------------------
+;; 
