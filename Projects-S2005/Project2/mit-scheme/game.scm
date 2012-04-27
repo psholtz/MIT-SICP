@@ -373,3 +373,36 @@
 ;; |  EYE-FOR-EYE  |   15    |    10   |     13    |      408      |       10      |
 ;; ---------------------------------------------------------------------------------
 ;; 
+
+;;
+;; Clear EGALITARIAN takes much longer to execute than do the other strategies, requiring
+;; roughly 400 ticks to execute the 500 plays. Notice also that when playing against itself,
+;; EGALITARIAN requires roughly 2 * 400 = 800 ticks to execute the 500 plays. 
+;;
+
+;;
+;; We anticipate that the new definition of the EGALITARIAN procedure will run roughly 
+;; twice as quickly. Using the new definition, we obtain the following performance matrix:
+;;
+
+;;
+;;                 ----------------------------------------------------------------- 
+;;                 |  NASTY  |  PATSY  |  SPASTIC  |  EGALITARIAN  |  EYE-FOR-EYE  |
+;; --------------------------------------------------------------------------------- 
+;; |     NASTY     |    15   |    13   |     14    |      250      |       17      |
+;; --------------------------------------------------------------------------------- 
+;; |     PATSY     |    13   |     9   |     12    |      243      |       10      |
+;; --------------------------------------------------------------------------------- 
+;; |    SPASTIC    |    14   |    12   |     13    |      253      |       14      |
+;; --------------------------------------------------------------------------------- 
+;; |  EGALITARIAN  |   250   |   243   |    253    |      476      |      241      |
+;; --------------------------------------------------------------------------------- 
+;; |  EYE-FOR-EYE  |    17   |    10   |     14    |      241      |       10      |
+;; --------------------------------------------------------------------------------- 
+;;
+
+;;
+;; As anticipated, the performance is still slow (i.e., O(n^2)), although the new 
+;; procedure performs roughly twice as efficiently as the original procedure (as 
+;; we anticipated).
+;;
