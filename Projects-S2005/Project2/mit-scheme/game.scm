@@ -572,3 +572,27 @@
 ;; ------------------------------- 
 ;;
 
+;;
+;; EYE-FOR-TWO-EYES is a very "neutral" strategy. Usually it ties, and it never wins. 
+;; It loses slighlty against NASTY, and loses slightly worse against SPASTIC. In this
+;; way it's very similar to its close-cousin EYE-FOR-EYE, which similarly loses (slightly) 
+;; against NASTY, ties or loses (slightly) against SPASTIC, and ties all the other strategies.
+;;
+
+;;
+;; Next let's run timing results for the EYE-FOR-TWO-EYES procedure. 
+;;
+;; For the EGALITARIAN procedure, we will use the second (faster) definition.
+;;
+
+;;                     ----------------------------------------------------------------------------------------
+;;                     |  NASTY  |   PATSY   |  SPASTIC  |  EGALITARIAN  |  EYE-FOR-EYE  |  EYE-FOR-TWO-EYES  |
+;; ------------------------------------------------------------------------------------------------------------
+;;   EYE-FOR-TWO-EYES  |   19    |    14     |     14    |      256      |      11       |        12          |
+;; ------------------------------------------------------------------------------------------------------------
+;;
+
+;;
+;; In terms of perforamnce, EYE-FOR-TWO-EYES executes about as fast as all the other structures, with relatively
+;; fast performance against most strategies, except for EGALITARIAN, where the performance is slightly slower.
+;;
