@@ -516,3 +516,59 @@
 ;; ==> "d"
 (EYE-FOR-TWO-EYES temp-my-4 (list "d" "d" "d" "d"))
 ;; ==> "d"
+
+;;
+;; Looks like the strategy works as advertised. 
+;;
+;; Let's run the strategy against the other strategies, and compile the results:
+;;
+
+;;
+;; -------------------------------
+;;       Loses against NASTY
+;; -------------------------------
+;;  NASTY:  1.09 points
+;;  EYE-FOR-TWO-EYES: 0.98 points
+;; -------------------------------
+;;
+;;
+;; ------------------------------- 
+;;       Ties against PATSY 
+;; ------------------------------- 
+;;  PATSY: 3.0 points
+;;  EYE-FOR-TWO-EYES: 3.0 points 
+;; ------------------------------- 
+;;
+;;
+;; ------------------------------- 
+;;      Loses against SPASTIC 
+;; ------------------------------- 
+;;  SPASTIC: 3.0 points
+;;  EYE-FOR-TWO-EYES: 1.78 points 
+;; ------------------------------- 
+;;
+;;
+;; ------------------------------- 
+;;    Ties against EGALITARIAN 
+;; ------------------------------- 
+;;  EGALITARIAN: 3.0 points
+;;  EYE-FOR-TWO-EYES: 3.0 points
+;; -------------------------------
+;;
+;; 
+;; -------------------------------
+;;    Ties against EYE-FOR-EYE
+;; ------------------------------- 
+;;  EYE-FOR-EYE: 3.0 points
+;;  EYE-FOR-TWO-EYES: 3.0 points
+;; ------------------------------- 
+;;
+;;
+;; -------------------------------
+;;  Ties against EYE-FOR-TWO-EYES
+;; -------------------------------
+;;  EYE-FOR-TWO-EYES: 3.0 points
+;;  EYE-FOR-TWO-EYES: 3.0 points
+;; ------------------------------- 
+;;
+
