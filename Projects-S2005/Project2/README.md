@@ -184,7 +184,7 @@ Write a new strategy "eye-for-two-eyes." The strategy should always cooperate un
 Problem 5
 --------- 
 
-Write a procedure "make-eye-for-n-eyes." This procedure should take a number as input and return the approprite "Eye-for-eye"-like strategy. For example, "(make-eye-for-n-eyes 2)" should return a strategy equivalent to "eye-for-two-eyes." Use this procedure to create a new strategy and test it against the other strategies. Describe the observed behavior.
+Write a procedure "make-eye-for-n-eyes." This procedure should take a number as input and return the appropriate "Eye-for-eye"-like strategy. For example, "(make-eye-for-n-eyes 2)" should return a strategy equivalent to "eye-for-two-eyes." Use this procedure to create a new strategy and test it against the other strategies. Describe the observed behavior.
 
 Problem 6
 --------- 

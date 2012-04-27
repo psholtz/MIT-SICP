@@ -603,6 +603,39 @@
 ;; Write a procedure "make-eye-for-n-eyes".
 ;; ++++++++++++++++++++++++++++++++++++++++++++++ 
 
+;;
+;; This procedure should take a number as input and return the appropriate "eye-for-eye"-like strategy.
+;; For example, (make-eye-for-n-eyes 2) should return a strategy equivalent to "eye-for-two-eyes". Use 
+;; this procedure to create a new strategy and test it against the other strategies. Describe the 
+;; observed behavior.
+;;
 (define (make-eye-for-n-eyes n)
-  (lambda (x y z) '()))
+  ;;
+  ;; We need to return a two-argument procedure.
+  ;;
+  (lambda (my-history other-history)
+    ;;
+    ;; Extract current play, returning "c" if there are no more plays.
+    ;;
+    (define (current-play history)
+      (if (empty-history? history)
+	  "c"
+	  (most-recent-play history)))
 
+    ;;
+    ;; Define iterative procedure for making "n" eyes.
+    ;;
+    (define (make-eye-for-n-eyes-iter k history)
+      (cond ((= k 1) (current-play history))
+	    (else
+	     (if 
+	      (or 
+	       (string=? "c" (current-play history))
+	       (string=? "c" (make-eye-for-n-eyes-iter (- k 1) (rest-of-plays history))))
+	      "c"
+	      "d"))))
+    
+    ;;
+    ;; Invoke the iterative procedure.
+    ;;
+    (make-eye-for-n-eyes-iter n other-history)))
