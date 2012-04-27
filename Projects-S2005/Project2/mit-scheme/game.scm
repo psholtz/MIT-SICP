@@ -596,3 +596,13 @@
 ;; In terms of perforamnce, EYE-FOR-TWO-EYES executes about as fast as all the other structures, with relatively
 ;; fast performance against most strategies, except for EGALITARIAN, where the performance is slightly slower.
 ;;
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++ 
+;; Problem 5
+;;
+;; Write a procedure "make-eye-for-n-eyes".
+;; ++++++++++++++++++++++++++++++++++++++++++++++ 
+
+(define (make-eye-for-n-eyes n)
+  (lambda (x y z) '()))
+
