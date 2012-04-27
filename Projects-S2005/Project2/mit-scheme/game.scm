@@ -421,6 +421,10 @@
       "c"
       (most-recent-play other-history)))
 
+;;
+;; EYE-FOR-TWO-EYES will cooperate if either of the two most recent
+;; plays of the opponent where cooperate.
+;;
 (define (EYE-FOR-TWO-EYES my-history other-history)
   (if (empty-history? other-history)
       "c"
@@ -431,3 +435,84 @@
 	      (if (or (string=? result1 "c") (string=? result2 "c"))
 		  "c"
 		  "d"))))))
+
+;;
+;; Let's run some unit tests, to make sure the procedure works the way we want.
+;; For this game strategy, "our" history does not enter into the calculation. 
+;; We can pad our strategy with a random number "x":
+;;
+(define temp-my-0 the-empty-history)
+(define temp-my-1 (list "x"))
+(define temp-my-2 (list "x" "x"))
+(define temp-my-3 (list "x" "x" "x"))
+(define temp-my-4 (list "x" "x" "x" "x"))
+
+;;
+;; Run the actual unit tests:
+;;
+(EYE-FOR-TWO-EYES temp-my-0 the-empty-history)
+;; ==> "c"
+
+(EYE-FOR-TWO-EYES temp-my-1 (list "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-1 (list "d"))
+;; ==> "c"
+
+(EYE-FOR-TWO-EYES temp-my-2 (list "c" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-2 (list "c" "d"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-2 (list "d" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-2 (list "d" "d"))
+;; ==> "d"
+
+(EYE-FOR-TWO-EYES temp-my-3 (list "c" "c" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-3 (list "c" "c" "d"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-3 (list "c" "d" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-3 (list "c" "d" "d"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-3 (list "d" "c" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-3 (list "d" "c" "d"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-3 (list "d" "d" "c"))
+;; ==> "d" 
+(EYE-FOR-TWO-EYES temp-my-3 (list "d" "d" "d"))
+;; ==> "d"
+
+(EYE-FOR-TWO-EYES temp-my-4 (list "c" "c" "c" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "c" "c" "c" "d"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "c" "c" "d" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "c" "c" "d" "d"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "c" "d" "c" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "c" "d" "c" "d"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "c" "d" "d" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "c" "d" "d" "d"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "d" "c" "c" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "d" "c" "c" "d"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "d" "c" "d" "c"))
+;; ==> "c"
+(EYE-FOR-TWO-EYES temp-my-4 (list "d" "c" "d" "d"))
+;; ==> "c" 
+(EYE-FOR-TWO-EYES temp-my-4 (list "d" "d" "c" "c"))
+;; ==> "d"
+(EYE-FOR-TWO-EYES temp-my-4 (list "d" "d" "c" "d"))
+;; ==> "d"
+(EYE-FOR-TWO-EYES temp-my-4 (list "d" "d" "d" "c"))
+;; ==> "d"
+(EYE-FOR-TWO-EYES temp-my-4 (list "d" "d" "d" "d"))
+;; ==> "d"
