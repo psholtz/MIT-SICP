@@ -406,3 +406,28 @@
 ;; procedure performs roughly twice as efficiently as the original procedure (as 
 ;; we anticipated).
 ;;
+
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; Problem 4
+;;
+;; Write a new "eye-for-two-eyes" strategy.
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+;;
+;; For reference, the original EYE-FOR-EYE strategy is defined as:
+;;
+(define (EYE-FOR-EYE my-history other-history)
+  (if (empty-history? my-history)
+      "c"
+      (most-recent-play other-history)))
+
+(define (EYE-FOR-TWO-EYES my-history other-history)
+  (if (empty-history? other-history)
+      "c"
+      (let ((result1 (most-recent-play other-history)))
+	(if (empty-history? (rest-of-plays other-history))
+	    "c"
+	    (let ((result2 (most-recent-play (rest-of-plays other-history))))
+	      (if (or (string=? result1 "c") (string=? result2 "c"))
+		  "c"
+		  "d"))))))
