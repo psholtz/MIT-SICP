@@ -702,3 +702,94 @@
 (two-eye temp-my-2 (list "d" "d"))
 ;; ==> "d"
 
+(two-eye temp-my-3 (list "c" "c" "c"))
+;; ==> "c"
+(two-eye temp-my-3 (list "c" "c" "d"))
+;; ==> "c"
+(two-eye temp-my-3 (list "c" "d" "c"))
+;; ==> "c" 
+(two-eye temp-my-3 (list "c" "d" "d"))
+;; ==> "c"
+(two-eye temp-my-3 (list "d" "c" "c"))
+;; ==> "c"
+(two-eye temp-my-3 (list "d" "c" "d"))
+;; ==> "c"
+(two-eye temp-my-3 (list "d" "d" "c"))
+;; ==> "d"
+(two-eye temp-my-3 (list "d" "d" "c"))
+;; ==> "d"
+
+;;
+;; "two-eye" performs as we would expect "eye-for-two-eyes" to perform.
+;;
+
+;;
+;; Run the tests for "three-eye":
+;;
+(three-eye temp-my-1 (list "c"))
+;; ==> "c"
+(three-eye temp-my-1 (list "d"))
+;; ==> "c"
+
+(three-eye temp-my-2 (list "c" "c"))
+;; ==> "c"
+(three-eye temp-my-2 (list "c" "d"))
+;; ==> "c"
+(three-eye temp-my-2 (list "d" "c"))
+;; ==> "c"
+(three-eye temp-my-2 (list "d" "d"))
+;; ==> "c"
+
+(three-eye temp-my-3 (list "c" "c" "c"))
+;; ==> "c"
+(three-eye temp-my-3 (list "c" "c" "d"))
+;; ==> "c"
+(three-eye temp-my-3 (list "c" "d" "c"))
+;; ==> "c"
+(three-eye temp-my-3 (list "c" "d" "d"))
+;; ==> "c"
+(three-eye temp-my-3 (list "d" "c" "c"))
+;; ==> "c"
+(three-eye temp-my-3 (list "d" "c" "d"))
+;; ==> "c"
+(three-eye temp-my-3 (list "d" "d" "c"))
+;; ==> "c"
+(three-eye temp-my-3 (list "d" "d" "d"))
+;; ==> "d"
+
+(three-eye temp-my-4 (list "c" "c" "c" "c"))
+;; ==> "c"
+(three-eye temp-my-4 (list "c" "c" "c" "d"))
+;; ==> "c"
+(three-eye temp-my-4 (list "c" "c" "d" "c"))
+;; ==> "c"
+(three-eye temp-my-4 (list "c" "c" "d" "d"))
+;; ==> "c"
+(three-eye temp-my-4 (list "c" "d" "c" "c"))
+;; ==> "c"
+(three-eye temp-my-4 (list "c" "d" "c" "d"))
+;; ==> "c"
+(three-eye temp-my-4 (list "c" "d" "d" "c"))
+;; ==> "c"
+(three-eye temp-my-4 (list "c" "d" "d" "d"))
+;; ==> "c"
+(three-eye temp-my-4 (list "d" "c" "c" "c"))
+;; ==> "c"
+(three-eye temp-my-4 (list "d" "c" "c" "d"))
+;; ==> "c"
+(three-eye temp-my-4 (list "d" "c" "d" "c"))
+;; ==> "c"
+(three-eye temp-my-4 (list "d" "c" "d" "d"))
+;; ==> "c"
+(three-eye temp-my-4 (list "d" "d" "c" "c"))
+;; ==> "c"
+(three-eye temp-my-4 (list "d" "d" "c" "d"))
+;; ==> "c"
+(three-eye temp-my-4 (list "d" "d" "d" "c"))
+;; ==> "d"
+(three-eye temp-my-4 (list "d" "d" "d" "d"))
+;; ==> "d"
+
+;;
+;; "three-eye" performs as we would expect "eye-for-three-eyes" to perform.
+;;
