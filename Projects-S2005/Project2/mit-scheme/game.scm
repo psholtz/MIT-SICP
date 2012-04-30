@@ -639,3 +639,66 @@
     ;; Invoke the iterative procedure.
     ;;
     (make-eye-for-n-eyes-iter n other-history)))
+
+;;
+;; Let's define strategies for 1, 2 and 3 eyes, and see if they perform the way we anticipate:
+;;
+(define one-eye (make-eye-for-n-eyes 1))
+(define two-eye (make-eye-for-n-eyes 2))
+(define three-eye (make-eye-for-n-eyes 3))
+
+;;
+;; Run the tests for "one-eye":
+;;
+(one-eye temp-my-1 (list "c"))
+;; ==> "c"
+(one-eye temp-my-1 (list "d"))
+;; ==> "d"
+
+(one-eye temp-my-2 (list "c" "c"))
+;; ==> "c"
+(one-eye temp-my-2 (list "c" "d"))
+;; ==> "c"
+(one-eye temp-my-2 (list "d" "c"))
+;; ==> "d"
+(one-eye temp-my-2 (list "d" "d"))
+;; ==> "d"
+
+(one-eye temp-my-3 (list "c" "c" "c"))
+;; ==> "c"
+(one-eye temp-my-3 (list "c" "c" "d"))
+;; ==> "c"
+(one-eye temp-my-3 (list "c" "d" "c"))
+;; ==> "c"
+(one-eye temp-my-3 (list "c" "d" "d"))
+;; ==> "c"
+(one-eye temp-my-3 (list "d" "c" "c"))
+;; ==> "d"
+(one-eye temp-my-3 (list "d" "c" "d"))
+;; ==> "d"
+(one-eye temp-my-3 (list "d" "d" "c"))
+;; ==> "d"
+(one-eye temp-my-3 (list "d" "d" "d"))
+;; ==> "d"
+
+;;
+;; "one-eye" performs as we would expect "eye-for-eye" to perform.
+;;
+
+;;
+;; Run the tests for "two-eye":
+;;
+(two-eye temp-my-1 (list "c"))
+;; ==> "c"
+(two-eye temp-my-1 (list "d"))
+;; ==> "c"
+
+(two-eye temp-my-2 (list "c" "c"))
+;; ==> "c"
+(two-eye temp-my-2 (list "c" "d"))
+;; ==> "c"
+(two-eye temp-my-2 (list "d" "c"))
+;; ==> "c"
+(two-eye temp-my-2 (list "d" "d"))
+;; ==> "d"
+
