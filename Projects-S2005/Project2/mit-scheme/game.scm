@@ -793,3 +793,43 @@
 ;;
 ;; "three-eye" performs as we would expect "eye-for-three-eyes" to perform.
 ;;
+
+;;
+;; How should "eye-for-n-eyes" perform as n increases? 
+;; 
+;; At n=1, we would expect perform identical to EYE-FOR-EYE.
+;;
+;; As n increases, we would expect the performance of "eye-for-n-eyes" to asymptotically
+;; approach the performance of PATSY. Let's define "eye-for-n-eyes" strategies up to n=5, 
+;; and then n=20 and n=100, and see how these compare and contrast with EYE-FOR-EYE and PATSY:
+;;
+(define four-eye (make-eye-for-n-eyes 4))
+(define five-eye (make-eye-for-n-eyes 5))
+(define twenty-eye (make-eye-for-n-eyes 20))
+(define hundred-eye (make-eye-for-n-eyes 100))
+
+;;
+;;               ------------------------------------------------------------------------ 
+;;               |    NASTY   |   PATSY   |   SPASTIC   |  EGALITARIAN  |  EYE-FOR-EYE  |
+;; -------------------------------------------------------------------------------------- 
+;;   EYE-FOR-EYE |
+;;               |
+;; -------------------------------------------------------------------------------------- 
+;;      ONE      |
+;;               |
+;; -------------------------------------------------------------------------------------- 
+;;      TWO      |
+;;               |
+;; -------------------------------------------------------------------------------------- 
+;;     THREE     |
+;;               |
+;; -------------------------------------------------------------------------------------- 
+;;     FOUR      |
+;;               |
+;; --------------------------------------------------------------------------------------
+;;     FIVE      |
+;;               |
+;; --------------------------------------------------------------------------------------
+;;     PATSY     |
+;;               |  
+;; -------------------------------------------------------------------------------------- 
