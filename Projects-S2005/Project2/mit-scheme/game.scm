@@ -860,7 +860,7 @@
 ;;
 (define (make-rotating-strategy strat0 strat1 freq0 freq1)
   ;;
-  ;; We need to monitor how many strategy is executed:
+  ;; We need to monitor how many times the strategy is executed:
   ;;
   (define (make-monitored f)
     (let ((count 0))
