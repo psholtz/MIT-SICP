@@ -854,44 +854,33 @@
 ;; Write a "make-rotating-strategy" procedure.
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-(define (make-rotating-strategy strat0 strat1 freq0 freq1)
-  (define (make-monitored f)
-    (let ((count 0))
-      (define (mf m1 m2)
-	(set! count (+ count 1))
-	(f m1 m2))
-      mf))
-  (make-monitored 
-   (lambda (my-history other-history)
-     (strat0 my-history other-history))))
 ;;
-;; new attempt
+;; I don't know how to do this without using mutators and local assignment.
+;; The implementation that follows uses these techniques:
 ;;
 (define (make-rotating-strategy strat0 strat1 freq0 freq1)
+  ;;
+  ;; We need to monitor how many strategy is executed:
+  ;;
   (define (make-monitored f)
     (let ((count 0))
+      ;;
+      ;; We need to return a two-argument procedure, where
+      ;; the arguments are "my-history" and "other-history".
+      ;; Depending on where we are in the "count", this will 
+      ;; determine which strategy is executed.
+      ;;
       (define (mf m1 m2)
-	(set! count (+ count 1))
 	(let ((total (remainder count (+ freq0 freq1))))
-	  (cond ((<= total freq0) (f strat0 m1 m2))
-		((<= total (+ freq0 freq1)) (f strat1 m1 m2)))))
+	  (set! count (+ count 1))
+	  (cond ((< total freq0) (f strat0 m1 m2))
+		(else (f strat1 m1 m2)))))
       mf))
-  
+
+  ;;
+  ;; Return the monitored game strategy:
+  ;;
   (make-monitored
    (lambda (strategy my-history other-history)
      (strategy my-history other-history))))
 
-
-
-
-
-
-
-;;  (lambda (my-history other-history)
-;;    (define invocations 0)
-;;    (define (rotating-strategy-iter count)
-;;      (set! invocations count))
-;;    (define (rotating-strategy-iter count)
-;;      (let ((total (remainder (+ freq0 freq1) count)))
-;;	"c"))
-;;    (rotating-strategy-iter 1)))
