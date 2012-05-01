@@ -864,6 +864,24 @@
   (make-monitored 
    (lambda (my-history other-history)
      (strat0 my-history other-history))))
+;;
+;; new attempt
+;;
+(define (make-rotating-strategy strat0 strat1 freq0 freq1)
+  (define (make-monitored f)
+    (let ((count 0))
+      (define (mf m1 m2)
+	(set! count (+ count 1))
+	(let ((total (remainder count (+ freq0 freq1))))
+	  (cond ((<= total freq0) (f strat0 m1 m2))
+		((<= total (+ freq0 freq1)) (f strat1 m1 m2)))))
+      mf))
+  
+  (make-monitored
+   (lambda (strategy my-history other-history)
+     (strategy my-history other-history))))
+
+
 
 
 
