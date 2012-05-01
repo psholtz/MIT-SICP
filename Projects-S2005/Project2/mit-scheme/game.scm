@@ -847,3 +847,33 @@
 ;; behavior (roughly) similar to EYE-FOR-EYE. With large "n" we see behavior (roughly) similar to 
 ;; PATSY.
 ;;
+
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; Problem 6
+;; 
+;; Write a "make-rotating-strategy" procedure.
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+(define (make-rotating-strategy strat0 strat1 freq0 freq1)
+  (define (make-monitored f)
+    (let ((count 0))
+      (define (mf m1 m2)
+	(set! count (+ count 1))
+	(f m1 m2))
+      mf))
+  (make-monitored 
+   (lambda (my-history other-history)
+     (strat0 my-history other-history))))
+
+
+
+
+
+;;  (lambda (my-history other-history)
+;;    (define invocations 0)
+;;    (define (rotating-strategy-iter count)
+;;      (set! invocations count))
+;;    (define (rotating-strategy-iter count)
+;;      (let ((total (remainder (+ freq0 freq1) count)))
+;;	"c"))
+;;    (rotating-strategy-iter 1)))

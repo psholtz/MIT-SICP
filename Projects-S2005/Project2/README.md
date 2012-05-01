@@ -189,7 +189,7 @@ Write a procedure "make-eye-for-n-eyes." This procedure should take a number as 
 Problem 6
 --------- 
 
-Write a procedure "make-rotating-strategy" which takes as input two strategies (say, "strat0" and "strat1"), and two integers (say "freq0" and "freq1"). "Make-rotating-strategy" should return a strategy which plays "strat0" for the first "freq0" rounds in the iterated game, then switches to "strat1" for the next "freq1" rounds, and so on. (Hint: you may find it useful to think about the "remainder" procedure in order to decide whihc strategy to use at each iteration). Test it against other strategies and describe the performance.
+Write a procedure "make-rotating-strategy" which takes as input two strategies (say, "strat0" and "strat1"), and two integers (say "freq0" and "freq1"). "Make-rotating-strategy" should return a strategy which plays "strat0" for the first "freq0" rounds in the iterated game, then switches to "strat1" for the next "freq1" rounds, and so on. (Hint: you may find it useful to think about the "remainder" procedure in order to decide which strategy to use at each iteration). Test it against other strategies and describe the performance.
 
 Problem 7
 --------- 
