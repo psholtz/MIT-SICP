@@ -999,9 +999,21 @@
 ;; Write a new strategy "make-higher-order-spastic".
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++++ 
 
+;;
+;; Again, we use mutators and local assigment to keep track of which strategy we are invoking:
+;;
 (define (make-higher-order-spastic strategies)
+  ;;
+  ;; We need to monitor how many times the strategy is executed:
+  ;;
   (define (make-monitored f)
     (let ((count 0))
+      ;;
+      ;; We need to return a two-argument procedure, where
+      ;; the arguments are "my-history" and "other-history".
+      ;; Depending on where we are in the "count", this will
+      ;; determine which strategy is executed.
+      ;;
       (define (mf m1 m2)
 	(let ((total (remainder count (length strategies))))
 	  (set! count (+ count 1))
@@ -1009,6 +1021,9 @@
 	    (f item m1 m2))))
       mf))
 
+  ;;
+  ;; Return the monitored strategy:
+  ;;
   (make-monitored 
    (lambda (strategy my-history other-history)
      (strategy my-history other-history))))
