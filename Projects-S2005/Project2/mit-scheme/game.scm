@@ -1027,3 +1027,17 @@
   (make-monitored 
    (lambda (strategy my-history other-history)
      (strategy my-history other-history))))
+
+;; [working]
+
+(define (gentle strat gentleness-factor)
+  (lambda (my-history other-history)
+    (let ((result (strat my-history other-history)))
+      (cond ((string=? result "d")
+	     (let ((test (random 1.0)))
+	       (if (< test gentleness-factor)
+		   "c"
+		   result)))
+	    (else result)))))
+
+;; [working]
