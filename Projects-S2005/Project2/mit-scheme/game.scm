@@ -1028,6 +1028,32 @@
    (lambda (strategy my-history other-history)
      (strategy my-history other-history))))
 
+;;
+;; The easiest way to test this is to use NASTY and PATSY, since these generate deterministic results:
+;;
+(define NASTY-PATSY (make-higher-order-spastic (list NASTY PATSY)))
+
+;;
+;; The "test-rotating" harness will work here as it did before (for these two strategies, NASTY and PATSY):
+;;
+(test-rotating nasty-patsy)
+;; ==> "d"
+(test-rotating nasty-patsy)
+;; ==> "c"
+(test-rotating nasty-patsy)
+;; ==> "d"
+(test-rotating nasty-patsy)
+;; ==> "c"
+
+;;
+;; Looks good. Let's build a strategy called CHAOS that "samples" from all the five canonical strategies
+;; we had initially defined. We can also build a strategy called SUPER-SPASTIC, which takes a list of all
+;; SPASTIC strategies. Note that this should perform the same (w/in stochastic limits) as the regular SPASTIC.
+;;
+(define CHAOS (make-higher-order-spastic (list NASTY PATSY SPASTIC EGALITARIAN EYE-FOR-EYE)))
+
+(define SUPER-SPASTIC (make-higher-order-spastic (list SPASTIC SPASTIC SPASTIC SPASTIC SPASTIC)))
+
 ;; [working]
 
 (define (gentle strat gentleness-factor)

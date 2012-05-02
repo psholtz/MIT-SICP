@@ -202,3 +202,44 @@ Problem 8
 Write a procedure "gentle", which takes as input a strategy (say "strat"), and a number between 0 and 1 (call it "gentleness-factor"). The "gentle" procedure should return a strategy that plays the same as "strat" except: when "strat" defects, the new strategy should have a "gentleness-factor" chance of cooperating. (If "gentleness-factor" is 0, the return strategy performs exactly the same as "strat"; if "gentleness-factor" is 0.5, the returned strategy cooperates half the time that "strat" defects; if "gentleness-factor" is 1, the returned strategy performs the same as "Patsy").
 
 Use "gentle" with a low value for "gentleness-factor" -- say 0.1 -- to create two new strategies: "slightly-gentle-Nasty" and "slightly-gentle-Eye-for-Eye".
+
+The Three-Player Prisoner's Dilemma
+----------------------------------- 
+
+So far, all of our prisoner's dilemma examples have involved two players (and, indeed, most game-theory research on the prisoner's dilemma has focused on two-player games). But it is possible to create a prisoner's dilemma game involve three -- or even more -- player.
+
+Strategies from the two-player game do not necessarily extend to a three-person game in a natural way. For example, what does EYE-FOR-EYE mean? Should the player defect if *either* of the opponents defected on the previous round? Or only if *both* opponents defected? And are either of these strategies nearly as effective in the three-player game as EYE-FOR-EYE is in the two-player game?
+
+Before we analyze the three-player game more closely, we must introduce some notation for representing the payoffs. We use a notation similar to that used for the two-player game. For example, we let DCC represent the payoff to a defecting player if both opponents cooperate. Note that the first position represents the player under consideration. The second and third positions represent the opponents.
+
+Another example: CCD represents the payoff to a cooperating player if one opponent cooperates and the other opponent defects. Since we assume a symmetric game matrix, CCD could be written as CDC. The choice is arbitrary.
+
+Now we are ready to discuss the payoffs for the three-player game. We impose three rules (Actually, there is no universal definition for the multi-player prisoner's dilemma. The constraints used here represent one possible version of the three-player prisoner's dilemma).
+
+1) Defection should be the dominant choice for each player. In other words, it should always be better for a player to defect, regardless of what the opponents do. This rule gives three constraints:
+
+<pre>DCC > CCC
+
+DDD > CDD
+
+DCD > CCD</pre>
+
+2) A player should always be better off if more of his opponents choose to cooperate. This rules gives:
+
+<pre>DCC > DCD > DDD
+
+CCC > CCD > CDD</pre>
+
+3) If one player's choice is fixed, the other two players should be left in a two-player prisoner's dilemma. This rule gives the following constraints:
+
+<pre>CCD > DDD
+
+CCC > DCD 
+
+CCD > (CDD + DCD)/2
+
+CCC > (CCD + DCC)/2</pre>
+
+We can satisfy all of these constraints with the following payoffs:
+
+<pre>CDD = 0, DDD = 1, CCD = 2, DCD = 3, CCC = 4, DCC = 5</pre>
