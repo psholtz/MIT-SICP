@@ -884,3 +884,43 @@
    (lambda (strategy my-history other-history)
      (strategy my-history other-history))))
 
+;;
+;; The simplest strategies to use for unit testing will be "nasty" and "patsy", 
+;; since these two strategies always generate the same response. 
+;;
+(define rotating-1 (make-rotating-strategy nasty patsy 1 1))
+
+;;
+;; Let's define a test harness, for running the unit tests. Neither "nasty" 
+;; nor "patsy" really looks at the history, so we can feed in "fake" histories 
+;; to generate results:
+;;
+(define (test-rotating rotating)
+  (rotating (list "x" "x") (list "x" "x")))
+
+(test-rotating rotating-1)
+;; ==> "d"
+(test-rotating rotating-1)
+;; ==> "c"
+(test-rotating rotating-1)
+;; ==> "d"
+(test-rotating rotating-1)
+;; ==> "c"
+(test-rotating rotating-1)
+;; ==> "d"
+(test-rotating rotating-1)
+;; ==> "c"
+
+;;
+;; Let's define a new other rotation strategies, based on nasty and pasty:
+;;
+(define rotating-2 (make-rotating-strategy patsy nasty 1 1))
+
+(test-rotating rotating-2)
+;; ==> "c"
+(test-rotating rotating-2)
+;; ==> "d"
+(test-rotating rotating-2)
+;; ==> "c"
+(test-rotating rotating-2)
+;; ==> "d"
