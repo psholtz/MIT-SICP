@@ -992,3 +992,23 @@
 ;;                  |  0.0 points  |  3.0 points  |  1.52 points  |  3.0 points   |  3.0 points   |
 ;; ------------------------------------------------------------------------------------------------
 ;;
+
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++
+;; Problem 7
+;; 
+;; Write a new strategy "make-higher-order-spastic".
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+(define (make-higher-order-spastic strategies)
+  (define (make-monitored f)
+    (let ((count 0))
+      (define (mf m1 m2)
+	(let ((total (remainder count (length strategies))))
+	  (set! count (+ count 1))
+	  (let ((item (list-ref strategies total)))
+	    (f item m1 m2))))
+      mf))
+
+  (make-monitored 
+   (lambda (strategy my-history other-history)
+     (strategy my-history other-history))))
