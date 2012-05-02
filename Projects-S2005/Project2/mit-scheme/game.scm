@@ -924,3 +924,71 @@
 ;; ==> "c"
 (test-rotating rotating-2)
 ;; ==> "d"
+
+(define rotating-3 (make-rotating-strategy nasty patsy 2 2))
+
+(test-rotating rotating-3)
+;; ==> "d"
+(test-rotating rotating-3)
+;; ==> "d"
+(test-rotating rotating-3)
+;; ==> "c"
+(test-rotating rotating-3)
+;; ==> "c"
+(test-rotating rotating-3)
+;; ==> "d"
+(test-rotating rotating-3)
+;; ==> "d"
+(test-rotating rotating-3)
+;; ==> "c"
+(test-rotating rotating-3)
+;; ==> "c"
+
+(define rotating-4 (make-rotating-strategy nasty patsy 3 5))
+(test-rotating rotating-4)
+;; ==> "d"
+(test-rotating rotating-4)
+;; ==> "d"
+(test-rotating rotating-4)
+;; ==> "d"
+(test-rotating rotating-4)
+;; ==> "c"
+(test-rotating rotating-4)
+;; ==> "c"
+(test-rotating rotating-4)
+;; ==> "c"
+(test-rotating rotating-4)
+;; ==> "c"
+(test-rotating rotating-4)
+;; ==> "c"
+(test-rotating rotating-4)
+;; ==> "d"
+(test-rotating rotating-4)
+;; ==> "d"
+(test-rotating rotating-4)
+;; ==> "d"
+
+;;
+;; So far, so good. The rotating strategy seems to work as advertised. 
+;; 
+;; In terms of testing combinations, we could invent a very wide range of 
+;; combinations. So as to limit the scope, let's define a strategy that 
+;; is "half nasty", "half patsy", and see how that compares to the regular 
+;; "nasty" and regular "patsy":
+;;
+(define half-and-half (make-rotating-strategy nasty patsy 2 2))
+
+;;
+;;                  ------------------------------------------------------------------------------- 
+;;                  |    NASTY     |    PATSY     |    SPASTIC    |  EGALITARIAN  |  EYE-FOR-EYE  |
+;; ------------------------------------------------------------------------------------------------
+;;       NASTY      |     Ties     |     Wins     |     Wins      |     Wins      |     Wins      |
+;;                  |  1.0 points  |  5.0 points  |  3.0 points   |  1.04 points  |  1.04 points  |
+;; ------------------------------------------------------------------------------------------------ 
+;;   HALF-AND-HALF  |     Loses    |     Wins     |    Loses      |     Wins      |     Wins      |
+;;                  |  0.5 points  |  4.0 points  |  2.11 points  |  3.25 points  |  2.28 points  |
+;; ------------------------------------------------------------------------------------------------ 
+;;       PATSY      |     Loses    |     Ties     |     Loses     |     Ties      |     Ties      |
+;;                  |  0.0 points  |  3.0 points  |  1.52 points  |  3.0 points   |  3.0 points   |
+;; ------------------------------------------------------------------------------------------------
+;;
