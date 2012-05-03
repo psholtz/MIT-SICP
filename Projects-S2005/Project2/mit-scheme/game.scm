@@ -1082,6 +1082,11 @@
 ;; -----------------------------------------------------------------------------------------------
 ;;
 
+;; ++++++++++++++++++++++++++++++++++++++++++++ 
+;; Problem 8
+;;
+;; Write a procedure "gentle".
+;; ++++++++++++++++++++++++++++++++++++++++++++
 (define (gentle strat gentleness-factor)
   (lambda (my-history other-history)
     (let ((result (strat my-history other-history)))
