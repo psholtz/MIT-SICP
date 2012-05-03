@@ -1054,7 +1054,33 @@
 
 (define SUPER-SPASTIC (make-higher-order-spastic (list SPASTIC SPASTIC SPASTIC SPASTIC SPASTIC)))
 
-;; [working]
+;;
+;; Comparing how these strategies play against the five "canonical" strategies, we have:
+;;
+
+;;       
+;;                  ------------------------------------------------------------------------------ 
+;;                  |     NASTY    |    PATSY     |    SPASTIC   |  EGALITARIAN  |  EYE-FOR-EYE  |
+;; ----------------------------------------------------------------------------------------------- 
+;;       NASTY      |     Ties     |     Wins     |     Wins     |     Wins      |      Wins     |
+;;                  |  1.0 points  |  5.0 points  |  2.8 points  |   1.04 points |   1.04 points |
+;; ----------------------------------------------------------------------------------------------- 
+;;     NASTY-PATSY  |     Loses    |     Wins     |   Win/Lose   |     Ties      |      Ties     |
+;;                  |  0.5 points  |  4.0 points  | ~2.4 points  |   2.5 points  |   2.5 points  |
+;; ----------------------------------------------------------------------------------------------- 
+;;       PATSY      |     Loses    |     Ties     |     Loses    |     Ties      |     Ties      |
+;;                  |  0.0 points  |  3.0 points  |  1.42 points |   3.0 points  |   3.0 points  |
+;; ----------------------------------------------------------------------------------------------- 
+;;      SPASTIC     |     Loses    |     Wins     |   Win/Lose   |    Win/Lose   |     Wins      |
+;;                  |  0.53 points |  4.0 points  | ~2.2 points  |  ~1.9 points  |   2.3 points  |
+;; ----------------------------------------------------------------------------------------------- 
+;;   SUPER-SPASTIC  |     Loses    |     Wins     |   Win/Lose   |    Win/Lose   |     Wins      |
+;;                  |  0.52 points |  4.1 points  | ~2.3 points  |  ~1.9 points  |   2.4 points  |
+;; ----------------------------------------------------------------------------------------------- 
+;;       CHAOS      |     Loses    |     Wins     |   Win/Lose   |    Win/Lose   |     Ties      |
+;;                  |  0.71 points |  3.6 points  | ~2.3 points  |   3.5 points  |   2.4 points  |
+;; -----------------------------------------------------------------------------------------------
+;;
 
 (define (gentle strat gentleness-factor)
   (lambda (my-history other-history)
