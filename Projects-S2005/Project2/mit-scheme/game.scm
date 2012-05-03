@@ -1092,4 +1092,54 @@
 		   result)))
 	    (else result)))))
 
-;; [working]
+;;
+;; The "test-rotating" procedure still works OK as a test harness, if we model "gentle" using the NASTY strategy.
+;;
+(define q1 (gentle NASTY 0.0))
+(define q2 (gentle NASTY 0.5))
+(define q3 (gentle NASTY 1.0))
+
+;; 
+;; We expect q1 to perform just like NASTY, and we expect q3 to perform just like PATSY. 
+;; We expect q2 to perform 50% like NASTY, and 50% like PATSY, although the distribution will be stochastic.
+;;
+(test-rotating q1)
+;; ==> "d"
+(test-rotating q1)
+;; ==> "d"
+(test-rotating q1)
+;; ==> "d"
+(test-rotating q1)
+;; ==> "d"
+(test-rotating q1)
+;; ==> "d"
+
+(test-rotating q2)
+;; ==> "d"
+(test-rotating q2)
+;; ==> "c"
+(test-rotating q2)
+;; ==> "c"
+(test-rotating q2)
+;; ==> "c"
+(test-rotating q2)
+;; ==> "d"
+
+(test-rotating q3)
+;; ==> "c"
+(test-rotating q3)
+;; ==> "c"
+(test-rotating q3)
+;; ==> "c"
+(test-rotating q3)
+;; ==> "c"
+(test-rotating q3)
+;; ==> "c"
+
+;;
+;; So far, so good. GENTLE seems to perform as we anticipate. 
+;;
+;; Now define the SLIGHTLY-GENTLE-NASTY and SLIGHTLY-GENTLE-EYE-FOR-EYE as defined in problem statement:
+;;
+(define SLIGHTLY-GENTLE-NASTY (gentle NASTY 0.1))
+(define SLIGHTLY-GENTLE-EYE-FOR-EYE (gentle EYE-FOR-EYE 0.1))
