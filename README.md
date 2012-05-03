@@ -23,7 +23,7 @@ Some useful links:
 
 * [The Why of Y](http://www.catonmat.net/blog/wp-content/uploads/2010/02/thewhyofywhyofy.pdf)
 
-* [Hyperpolyglot - Common Lisp / Scheme / Clojure / Emacs Commands](http://hyperpolyglot.org/lisp)
+* [Hyperpolyglot - Commands for Common Lisp / Scheme / Clojure / Emacs](http://hyperpolyglot.org/lisp)
 
 Don't forget to check out the [wiki](/psholtz/MIT-SICP/wiki) for answers to some of the more mathematically oriented questions.
 
