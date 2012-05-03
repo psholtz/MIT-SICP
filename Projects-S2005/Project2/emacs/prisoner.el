@@ -80,3 +80,32 @@
 (defun empty-history? (x)
   (funcall 'null x))
 		      
+(defun most-recent-play (x)
+  (funcall 'car x))
+(defun rest-of-plays (x)
+  (funcall 'cdr x))
+
+;;
+;; A sampler of strategies
+;;
+(defun NASTY (my-history other-history)
+  "d")
+
+(defun PATSY (my-history other-history)
+  "c")
+
+(defun SPASTIC (my-history other-history)
+  (if (= (random 2) 0)
+      "c"
+    "d"))
+
+;; [working]
+;;(defun EGALITARIAN (my-history other-history)
+;;  (defun count-instances-of (test hist)
+;;    (cond ((empty-history? hist) 0)
+;;	  ((
+
+(defun EYE-FOR-EYE (my-history other-history)
+  (if (empty-history? my-history)
+      "c"
+    (most-recent-play other-history)))
