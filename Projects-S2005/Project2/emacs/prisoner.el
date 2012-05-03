@@ -99,11 +99,16 @@
       "c"
     "d"))
 
-;; [working]
-;;(defun EGALITARIAN (my-history other-history)
-;;  (defun count-instances-of (test hist)
-;;    (cond ((empty-history? hist) 0)
-;;	  ((
+(defun EGALITARIAN (my-history other-history)
+  (defun count-instances-of (test hist)
+    (cond ((empty-history? hist) 0)
+	  ((string= (most-recent-play hist) test)
+	   (+ (count-instances-of test (rest-of-plays hist)) 1))
+	  (t
+	   (count-instances-of test (rest-of-plays hist)))))
+  (let ((ds (count-instances-of "d" other-history))
+	(cs (count-instances-of "c" other-history)))
+    (if (> ds cs) "d" "c")))
 
 (defun EYE-FOR-EYE (my-history other-history)
   (if (empty-history? my-history)
