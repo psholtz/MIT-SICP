@@ -15,7 +15,7 @@
 	    (list (list "d" "c") (list 5 0))
 	    (list (list "d" "d") (list 1 1))))
 
-;
+;;
 ;; We can extract a specific entry in this list by using the "list-ref" procedure. 
 ;;
 ;; For example:
