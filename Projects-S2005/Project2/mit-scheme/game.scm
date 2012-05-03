@@ -1148,3 +1148,30 @@
 ;;
 (define SLIGHTLY-GENTLE-NASTY (gentle NASTY 0.1))
 (define SLIGHTLY-GENTLE-EYE-FOR-EYE (gentle EYE-FOR-EYE 0.1))
+
+;;
+;; We obtain the following performance statistics, when playing against the other strategies:
+;;
+
+;;
+;;                         ------------------------------------------------------------------------------ 
+;;                         |     NASTY    |    PATSY     |    SPASTIC   |  EGALITARIAN  |  EYE-FOR-EYE  |
+;; ------------------------------------------------------------------------------------------------------ 
+;;          NASTY          |     Ties     |     Wins     |     Wins     |      Wins     |      Wins     |
+;;                         |  1.0 points  |  5.0 points  |  2.8 points  |  1.04 points  |  1.04 points  |
+;; ------------------------------------------------------------------------------------------------------ 
+;;      SLIGHT-NASTY       |     Loses    |     Wins     |     Wins     |     Loses     |      Wins     |
+;;                         |  0.93 points |  4.8 points  |  2.6 points  |  1.0 points   |  1.3 points   |
+;; ------------------------------------------------------------------------------------------------------ 
+;;       EYE-FOR-EYE       |     Loses    |     Ties     |  Ties/Loses  |     Ties      |      Wins     |
+;;                         |  0.99 points |  3.0 points  |  2.3 points  |  3.0 points   |  3.0 points   |
+;; ------------------------------------------------------------------------------------------------------ 
+;;   SLIGHTLY-EYE-FOR-EYE  |     Loses    |     Ties     |     Loses    |     Ties      |      Ties     |
+;;                         |  0.88 points |  3.0 points  |  2.2 points  |  3.0 points   |  3.0 points   |
+;; ------------------------------------------------------------------------------------------------------
+;;
+
+;;
+;; Note that the "slightly" strategies are stochastic, and so will not always produce exactly the same
+;; results on subsequent play rounds.
+;;
