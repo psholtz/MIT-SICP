@@ -8,18 +8,21 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun play-loop (strat0 strat1)
-  (defun play-loop-iter (strat0 strat1 count history0 history1 limit)
+  (defun play-loop-iter (count history0 history1 limit)
     (cond ((= count limit) (print-out-results history0 history1 limit))
 	  (t
-	   (let ((result0 (strat0 history0 history1))
-		 (result1 (strat1 history1 history0)))
-	     (play-loop-iter strat0 
-			     strat1 
-			     (+ count 1) 
-			     (extend-history result0 history0) 
+	   (let ((result0 (funcall strat0 history0 history1))
+		 (result1 (funcall strat1 history1 history0)))
+	     (play-loop-iter (+ count 1)
+			     (extend-history result0 history0)
 			     (extend-history result1 history1)
 			     limit)))))
-  (play-loop-iter strat0 strat1 0 the-empty-history the-empty-history (+ 90 (random 21))))
+
+  ;;
+  ;; The Emacs interpreter has a problem w/ "depth-of-recursion".
+  ;; Let's only make 10 runs, instead of the more normal ~100:
+  ;;
+  (play-loop-iter 0 the-empty-history the-empty-history 10))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -51,7 +54,7 @@
   (get-scores-helper history0 history1 0 0))
 
 (defun get-player-points (num game)
-  (list-ref (get-point--list game) num))
+  (nth num (get-point-list game)))
 
 (setq *game-association-list*
   ;; format is that first sublist identifies the players' choices 
