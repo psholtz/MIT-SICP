@@ -193,6 +193,14 @@
 ;;
 
 ;;
+;; Define a "real-time-clock" procedure to give a reading of time:
+;;
+(defun real-time-clock ()
+  (let ((q (current-time)))
+    (+ (car (cdr q))
+       (/ (car (cdr (cdr q))) 10000000.0))))
+
+;;
 ;; As a test, let's implement a "timed-play-loop" procedure that
 ;; (a) runs more play sets; and (b) prints out timing statistics, 
 ;; so we can see whether program execution actually performs the 
@@ -206,8 +214,8 @@
   (defun timed-play-loop-iter (count history0 history1 limit)
     (cond ((= count limit) (print-out-results history0 history1 limit))
 	  (t
-	   (let ((result0 (strat0 history0 history1))
-		 (result1 (strat1 history1 history0)))
+	   (let ((result0 (funcall strat0 history0 history1))
+		 (result1 (funcall strat1 history1 history0)))
 	     (timed-play-loop-iter (+ count 1)
 				   (extend-history result0 history0)
 				   (extend-history result1 history1)
@@ -216,8 +224,8 @@
   ;;
   ;; Bracket execution loop for timing purposes
   ;;
-  (let ((start (current-time)))
+  (let ((start (real-time-clock)))
     (timed-play-loop-iter 0 the-empty-history the-empty-history times)
-    (let ((finish (current-time)))
+    (let ((finish (real-time-clock)))
       (princ "Timing: ")
-      (princ (- finish start)))))
+      (princ (number-to-string (- finish start))))))
