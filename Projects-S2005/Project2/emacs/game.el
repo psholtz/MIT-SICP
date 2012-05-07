@@ -100,3 +100,124 @@
 ;;
 ;; Use "play-loop" to play games between the five strategies.
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+;;
+;; I'm not going to reproduce all the game play statistics here, but
+;; the results basically mirror those in the reference MIT-SCHEME implementation.
+;; Refer to the reference MIT-SCHEME implementation for further details.
+;;
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; Problem 3
+;; 
+;; Explore more efficient ways to code EGALITARIAN.
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+;;
+;; For reference, the original definition of EGALITARIAN was given as:
+;;
+(defun EGALITARIAN (my-history other-history)
+  (defun count-instances-of (test hist)
+    (cond ((empty-history? hist) 0)
+	  ((string= (most-recent-play hist) test)
+	   (+ (count-instances-of test (rest-of-plays hist)) 1))
+	  (t
+	   (count-instances-of test (rest-of-plays hist)))))
+  (let ((ds (count-instances-of "d" other-history))
+	(cs (count-instances-of "c" other-history)))
+    (if (> ds cs) "d" "c")))
+
+;;
+;; For any one particular game play, the code here makes:
+;;
+;;  (1) a "linear" walk down the "other-history" list;
+;;  (2) a second "linear" walk down the "other-history" list; 
+;;
+;; So for each game play, if the "other-history" is of size k, 
+;; the procedure executes in O(2*k) time.
+;; 
+;; In other words, when the history is of length 1, the play 
+;; executes in time 2*1. When the history is of length 2, the 
+;; play executes in time 2*2. When the history is of length k, 
+;; the play executes in time 2*k. 
+;;
+;; We are executing a total of n plays. That means the total 
+;; time to execute all n plays is:
+;;
+;; T(n) = 2 * ( 1 + 2 + ... + n )
+;; T(n) = 2 * n * ( n + 1 ) / 2
+;; T(n) = n * (n+1)
+;;
+;; In O-notation, this procedure will execute in O(n^2) time.
+;;
+
+;;
+;; Alyssa's new definition of EGALITARIAN is given as:
+;;
+(defun EGALITARIAN (my-history other-history)
+  (defun majority-loop (cs ds hist)
+    (cond ((empty-history? hist) (if (> ds cs) "d" "c"))
+	  ((string= (most-recent-play hist) "c")
+	   (majority-loop (+ 1 cs) ds (rest-of-plays hist)))
+	  (else
+	   (majority-loop cs (+ 1 ds) (rest-of-plays hist)))))
+  (majority-loop 0 0 other-history))
+
+;;
+;; Using this procedure, for any one particular game play, we 
+;; still make a "linear" walk down the length of the "other-history"
+;; list, but for each game play, we only make one linear walk down 
+;; this list, not two. 
+;;
+;;
+;; Hence, for each game play, if the "history" is of size k, the 
+;; procedure executes in O(k) time.
+;;
+;; In other words, we expect the procedure to execute roughly twice
+;; as fast as the previous EGALITARIAN procedure.
+;;
+;; We are executing a total of n plays. That means the total 
+;; time to execute all n plays is:
+;;
+;; T(n) = 1 + 2 + .. + n
+;; T(n) = n * (n+1) / 2
+;;
+;; In O-notation, this procedure will execute in O(n^2) time.
+;;
+;; In other words, in O-notation, this procedure will executes in 
+;; roughly the same order of magnitude time as the previous 
+;; procedure: it scales as n^2, where n is the number of game plays.
+;; However, there is some (considerable) savings in this procedure, 
+;; owing to the fact that each game play executes in roughly 1/2
+;; the time that it took using the first procedure.
+;;
+
+;;
+;; As a test, let's implement a "timed-play-loop" procedure that
+;; (a) runs more play sets; and (b) prints out timing statistics, 
+;; so we can see whether program execution actually performs the 
+;; way we would predict.
+;;
+(defun timed-play-loop strat0 strat1 times)
+
+  ;;
+  ;; Play-loop-iter procedure for executing the game play an arbitrary number of times
+  ;;
+  (defun timed-play-loop-iter (count history0 history1 limit)
+    (cond ((= count limit) (print-out-results history0 history1 limit))
+	  (t
+	   (let ((result0 (strat0 history0 history1))
+		 (result1 (strat1 history1 history0)))
+	     (timed-play-loop-iter (+ count 1)
+				   (extend-history result0 history0)
+				   (extend-history result1 history1)
+				   limit)))))
+
+  ;;
+  ;; Bracket execution loop for timing purposes
+  ;;
+  (let ((start (current-time)))
+    (timed-play-loop-iter 0 the-empty-history the-empty-history times)
+    (let ((finish (current-time)))
+      (display "Timing: ")
+      (display (- finish start)))))
