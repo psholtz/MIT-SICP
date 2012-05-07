@@ -7,7 +7,9 @@
 ;;  returns either a "c" for cooperate or a "d" for defect.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defn play-loop [strat0 strat1]
+(defn
+  ^{:doc "Model a game of roughly 100 plays between two strategies."}
+  play-loop [strat0 strat1]
   (defn play-loop-iter [strat0 strat1 count history0 history1 limit]
     (cond (= count limit) (print-out-results history0 history1 limit)
           :else
