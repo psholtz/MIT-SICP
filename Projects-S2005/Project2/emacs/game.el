@@ -198,7 +198,7 @@
 ;; so we can see whether program execution actually performs the 
 ;; way we would predict.
 ;;
-(defun timed-play-loop strat0 strat1 times)
+(defun timed-play-loop (strat0 strat1 times)
 
   ;;
   ;; Play-loop-iter procedure for executing the game play an arbitrary number of times
@@ -219,5 +219,5 @@
   (let ((start (current-time)))
     (timed-play-loop-iter 0 the-empty-history the-empty-history times)
     (let ((finish (current-time)))
-      (display "Timing: ")
-      (display (- finish start)))))
+      (princ "Timing: ")
+      (princ (- finish start)))))
