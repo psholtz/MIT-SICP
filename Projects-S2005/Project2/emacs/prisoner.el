@@ -17,12 +17,7 @@
 			     (extend-history result0 history0)
 			     (extend-history result1 history1)
 			     limit)))))
-
-  ;;
-  ;; The Emacs interpreter has a problem w/ "depth-of-recursion".
-  ;; Let's only make 10 runs, instead of the more normal ~100:
-  ;;
-  (play-loop-iter 0 the-empty-history the-empty-history 10))
+  (play-loop-iter 0 the-empty-history the-empty-history (+ 90 (random 20))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -34,10 +29,10 @@
   (let ((scores (get-scores history0 history1)))
     (newline)
     (princ "Player 1 Score:  ")
-    (princ (* 1.0 (/ (car scores) number-of-games)))
+    (princ (/ (* 1.0 (car scores)) (* 1.0 number-of-games)))
     (newline)
     (princ "Player 2 Score:  ")
-    (princ (* 1.0 (/ (cadr scores) number-of-games)))
+    (princ (/ (* 1.0 (cadr scores)) (* 1.0 number-of-games)))
     (newline)))
 
 (defun get-scores (history0 history1)

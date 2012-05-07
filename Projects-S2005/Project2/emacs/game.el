@@ -1,5 +1,11 @@
 (load-file "prisoner.el")
 
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+;; First, modify the max recursion depth, since emacs is pretty feeble this way:
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+(setq max-lisp-eval-depth 1000)
+(setq max-specpdl-size 1800)
+
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++++ 
 ;; Problem 1
 ;; 
