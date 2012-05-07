@@ -229,3 +229,28 @@
     (let ((finish (real-time-clock)))
       (princ "Timing: ")
       (princ (number-to-string (- finish start))))))
+
+;;
+;; Let's build a matrix of the time it takes to execute 150 game plays 
+;; and see which procedures are the slowest.
+;;
+;; The entries in the matrix correspond to the time required for the 
+;; 150 game plays to execute. The following matrix uses the "original"
+;; definition of the EGALITARIAN procedure:
+;;
+
+;;
+;;                   ------------
+;;                   | NASTY
+;; -------------------------------
+;; |   NASTY 
+;; ---------- 
+;; |   PATSY
+;; ---------- 
+;; |  SPASTIC
+;; ----------- 
+;; | EGALITARIAN
+;; --------------
+;; |   EYE-FOR-EYE
+;; -------------------
+;;
