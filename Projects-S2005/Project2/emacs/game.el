@@ -159,7 +159,7 @@
     (cond ((empty-history? hist) (if (> ds cs) "d" "c"))
 	  ((string= (most-recent-play hist) "c")
 	   (majority-loop (+ 1 cs) ds (rest-of-plays hist)))
-	  (else
+	  (t
 	   (majority-loop cs (+ 1 ds) (rest-of-plays hist)))))
   (majority-loop 0 0 other-history))
 
