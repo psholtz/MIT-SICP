@@ -256,7 +256,15 @@
 ;;
 
 ;;
-;; [Running with new EGALITARIAN]:
+;; The average running time for all the strategies, other than those involving EGALITARIAN,
+;; is 0.00030. The average running time for EGALITARIAN playing against one other 
+;; non-EGALITARIAN strategy is 0.0034, which is roughly 10 times as long. Playing EGALITARIAN
+;; against EGALITARIAN takes nearly twice as long as this, at 0.006.
+;;
+
+;;
+;; We anticipate that the new definition of the EGALITARIAN procedure will run roughly 
+;; twice as quickly. Using the new definition, we obtain the following performance matrix:
 ;;
 
 ;;
@@ -274,3 +282,44 @@
 ;; |  EYE-FOR-EYE  |  0.00037  |  0.00027  |  0.00034  |    0.0018     |    0.0015     |
 ;; ------------------------------------------------------------------------------------- 
 ;;
+
+;;
+;; Using this definition, the average running time of EGALITARIAN playing against one other
+;; non-EGALITARIAN strategy is 0.0019, which is nearly twice as fast as the previous definition
+;; of the procedure.
+;;
+
+;;
+;; As anticipated, the performance is still slow (i.e., O(n^2)), although the new 
+;; procedure performs roughly twice as efficiently as the original procedure (as 
+;; we anticipated).
+;;
+
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; Problem 4
+;;
+;; Write a new "eye-for-two-eyes" strategy.
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+
+;;
+;; For reference, the original EYE-FOR-EYE strategy is defined as:
+;;
+(defun EYE-FOR-EYE (my-history other-history)
+  (if (empty-history? my-history)
+      "c"
+    (most-recent-play other-history)))
+
+;;
+;; EYE-FOR-TWO-EYES will cooperate if either of the two most recent
+;; plays of the opponent where cooperate.
+;;
+(defun EYE-FOR-TWO-EYES (my-history other-history)
+  (if (empty-history? other-history)
+      "c"
+    (let ((result1 (most-recent-play other-history)))
+      (if (empty-history? (rest-of-plays other-history))
+	  "c"
+	(let ((result2 (most-recent-play (rest-of-plays other-history))))
+	  (if (or (string= result1 "c") (string= result2 "c"))
+	      "c"
+	    "d"))))))
