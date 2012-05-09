@@ -429,7 +429,7 @@
 ;; this procedure to create a new strategy and test it against the other strategies. Describe the 
 ;; observed behavior.
 ;;
-(defun make-eye-for-n-eyes (n)
+(defun make-eye-for-n-eyes-helper (n)
   ;;
   ;; We need to return a two-argument procedure.
   ;;
@@ -461,47 +461,3 @@
       ;;
       (make-eye-for-n-eyes-iter nval other-history))))
 
-;;
-;; Let's define strategies for 1, 2 and 3 eyes, and see if they perform the way we anticipate:
-;;
-(setq one-eye (make-eye-for-n-eyes 1))
-(setq two-eye (make-eye-for-n-eyes 2))
-(setq three-eye (make-eye-for-n-eyes 3))
-	       
-;;
-;; Run the tests for "one-eye":
-;;
-(funcall one-eye temp-my-1 (list "c"))
-;; ==> "c"
-(funcall one-eye temp-my-1 (list "d"))
-;; ==> "d"
-
-(funcall one-eye temp-my-2 (list "c" "c"))
-;; ==> "c"
-(funcall one-eye temp-my-2 (list "c" "d"))
-;; ==> "c"
-(funcall one-eye temp-my-2 (list "d" "c"))
-;; ==> "d"
-(funcall one-eye temp-my-2 (list "d" "d"))
-;; ==> "d"
-
-(funcall one-eye temp-my-3 (list "c" "c" "c"))
-;; ==> "c"
-(funcall one-eye temp-my-3 (list "c" "c" "d"))
-;; ==> "c"
-(funcall one-eye temp-my-3 (list "c" "d" "c"))
-;; ==> "c"
-(funcall one-eye temp-my-3 (list "c" "d" "d"))
-;; ==> "c"
-(funcall one-eye temp-my-3 (list "d" "c" "c"))
-;; ==> "d"
-(funcall one-eye temp-my-3 (list "d" "c" "d"))
-;; ==> "d"
-(funcall one-eye temp-my-3 (list "d" "d" "c"))
-;; ==> "d"
-(funcall one-eye temp-my-3 (list "d" "d" "d"))
-;; ==> "d"
-
-;;
-;; "one-eye" performs as we would expect "eye-for-eye" to perform.
-;;
