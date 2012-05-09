@@ -410,3 +410,9 @@
 ;;
 ;; Let's run the strategy against the other strategies, and compile the results:
 ;;
+
+;;
+;; I'm not going to reproduce all the game play statistics, but they 
+;; mirror the results obtained in the reference MIT-SCHEME implementation.
+;; For more information, refer to the reference MIT-SCHEME implementation.
+;;
