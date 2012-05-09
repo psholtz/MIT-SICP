@@ -430,26 +430,36 @@
 ;; observed behavior.
 ;;
 (defun make-eye-for-n-eyes (n)
-  (lambda (my-history other-history)
-    (defun current-play (history)
-      (if (empty-histoyr? history)
-	  "c"
-	(most-recent-play history)))
-
-    (defun make-eye-for-n-eyes-iter (k history)
-      (cond ((= k 1) (current-play history))
-	    (t
-	     (if 
-		 (or 
-		  (string= "c" (current-play history))
-		  (string= "c" (make-eye-for-n-eyes-iter (- k 1) (rest-of-plays history))))
-		 "c"
-	       "d"))))
-    
-    ;;
-    ;; Invoke the iterative procedure.
-    ;;
-    (make-eye-for-n-eyes-iter n other-history)))
+  ;;
+  ;; We need to return a two-argument procedure.
+  ;;
+  (lexical-let ((nval n))
+    (lambda (my-history other-history)
+      ;;
+      ;; Extract current play, returning "c" if there are no more plays.
+      ;;
+      (defun current-play (history)
+	(if (empty-history? history)
+	    "c"
+	  (most-recent-play history)))
+      
+      ;;
+      ;; Define iterative procedure for making "n" eyes.
+      ;;
+      (defun make-eye-for-n-eyes-iter (k history)
+	(cond ((= k 1) (current-play history))
+	      (t
+	       (if 
+		   (or 
+		    (string= "c" (current-play history))
+		    (string= "c" (make-eye-for-n-eyes-iter (- k 1) (rest-of-plays history))))
+		   "c"
+		 "d"))))
+      
+      ;;
+      ;; Invoke the iterative procedure.
+      ;;
+      (make-eye-for-n-eyes-iter nval other-history))))
 
 ;;
 ;; Let's define strategies for 1, 2 and 3 eyes, and see if they perform the way we anticipate:
@@ -458,4 +468,40 @@
 (setq two-eye (make-eye-for-n-eyes 2))
 (setq three-eye (make-eye-for-n-eyes 3))
 	       
-		
+;;
+;; Run the tests for "one-eye":
+;;
+(funcall one-eye temp-my-1 (list "c"))
+;; ==> "c"
+(funcall one-eye temp-my-1 (list "d"))
+;; ==> "d"
+
+(funcall one-eye temp-my-2 (list "c" "c"))
+;; ==> "c"
+(funcall one-eye temp-my-2 (list "c" "d"))
+;; ==> "c"
+(funcall one-eye temp-my-2 (list "d" "c"))
+;; ==> "d"
+(funcall one-eye temp-my-2 (list "d" "d"))
+;; ==> "d"
+
+(funcall one-eye temp-my-3 (list "c" "c" "c"))
+;; ==> "c"
+(funcall one-eye temp-my-3 (list "c" "c" "d"))
+;; ==> "c"
+(funcall one-eye temp-my-3 (list "c" "d" "c"))
+;; ==> "c"
+(funcall one-eye temp-my-3 (list "c" "d" "d"))
+;; ==> "c"
+(funcall one-eye temp-my-3 (list "d" "c" "c"))
+;; ==> "d"
+(funcall one-eye temp-my-3 (list "d" "c" "d"))
+;; ==> "d"
+(funcall one-eye temp-my-3 (list "d" "d" "c"))
+;; ==> "d"
+(funcall one-eye temp-my-3 (list "d" "d" "d"))
+;; ==> "d"
+
+;;
+;; "one-eye" performs as we would expect "eye-for-eye" to perform.
+;;
