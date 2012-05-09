@@ -416,3 +416,46 @@
 ;; mirror the results obtained in the reference MIT-SCHEME implementation.
 ;; For more information, refer to the reference MIT-SCHEME implementation.
 ;;
+
+;; ++++++++++++++++++++++++++++++++++++++++++++++ 
+;; Problem 5
+;;
+;; Write a procedure "make-eye-for-n-eyes".
+;; ++++++++++++++++++++++++++++++++++++++++++++++ 
+
+;;
+;; This procedure should take a number as input and return the appropriate "eye-for-eye"-like strategy.
+;; For example, (make-eye-for-n-eyes 2) should return a strategy equivalent to "eye-for-two-eyes". Use 
+;; this procedure to create a new strategy and test it against the other strategies. Describe the 
+;; observed behavior.
+;;
+(defun make-eye-for-n-eyes (n)
+  (lambda (my-history other-history)
+    (defun current-play (history)
+      (if (empty-histoyr? history)
+	  "c"
+	(most-recent-play history)))
+
+    (defun make-eye-for-n-eyes-iter (k history)
+      (cond ((= k 1) (current-play history))
+	    (t
+	     (if 
+		 (or 
+		  (string= "c" (current-play history))
+		  (string= "c" (make-eye-for-n-eyes-iter (- k 1) (rest-of-plays history))))
+		 "c"
+	       "d"))))
+    
+    ;;
+    ;; Invoke the iterative procedure.
+    ;;
+    (make-eye-for-n-eyes-iter n other-history)))
+
+;;
+;; Let's define strategies for 1, 2 and 3 eyes, and see if they perform the way we anticipate:
+;;
+(setq one-eye (make-eye-for-n-eyes 1))
+(setq two-eye (make-eye-for-n-eyes 2))
+(setq three-eye (make-eye-for-n-eyes 3))
+	       
+		
