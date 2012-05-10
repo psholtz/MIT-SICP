@@ -86,3 +86,10 @@ Now define the procedure itself:
                       (enumerate-iterval 1 (- i 1))))
                 (enumerate-interval 1 n)))))
 </pre>
+
+We can now run the procedure:
+
+<pre>
+(prime-sum-pairs 4)
+;; ==> ((2 1 3) (3 2 5) (4 1 5) (4 3 7))
+</pre>
