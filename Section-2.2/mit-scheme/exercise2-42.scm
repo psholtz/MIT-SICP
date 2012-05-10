@@ -15,7 +15,7 @@
 ;; Define "flatmap" procedure:
 ;;
 (define (flatmap proc seq)
-  (accumulate append nil (map proc seq)))
+  (accumulate append '() (map proc seq)))
 
 ;;
 ;; Define "enumerate-interval" procedure:
