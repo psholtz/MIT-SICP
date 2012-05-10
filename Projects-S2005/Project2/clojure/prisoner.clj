@@ -92,28 +92,41 @@
 ;;
 ;; A sample of strategies
 ;;
-(defn NASTY [my-history other-history] "d")
+(defn
+  ^{:doc "Always defect"}
+  NASTY [my-history other-history]
+  "d")
 
-(defn PATSY [my-history other-history] "c")
+(defn
+  ^{:doc "Always cooperate"}
+  PATSY [my-history other-history]
+  "c")
 
-(defn SPASTIC [my-history other-history]
+(defn
+  ^{:doc "Cooperate 50% of the time, defect 50% of the time"}
+  SPASTIC [my-history other-history]
   (if (= (rand-int 2) 0)
     "c"
     "d"))
 
-(defn EGALITARIAN [my-history other-history]
+(defn
+  ^{:doc "Evaluate history of opponents plays, cooperate if history is cooperative, defect is history is defective."}
+  EGALITARIAN [my-history other-history]
+  ;; Define counting procedure
   (defn count-instances-of [test hist]
     (cond (empty-history? hist) 0
           (.equals (most-recent-play hist) test) (+ (count-instances-of test (rest-of-plays hist)) )
           :else
           (count-instances-of test (rest-of-plays hist))))
 
+  ;; Examine the history
   (let [ds (count-instances-of "d" other-history)
         cs (count-instances-of "c" other-history)]
     (if (> ds cs) "d" "c")))
 
-(defn EYE-FOR-EYE [my-history other-history]
+(defn
+  ^{:doc "Cooperate if opponent cooperated on most recent play, defect if opponent defected on most recent play."}
+  EYE-FOR-EYE [my-history other-history]
   (if (empty-history? my-history)
     "c"
     (most-recent-play other-history)))
-         
