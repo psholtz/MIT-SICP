@@ -41,7 +41,7 @@ We can define the nesting procedures:
 
 (define (enumerate-interval low high)
  (if (> low high)
-     nil
+     '()
      (cons low (enumerate-interval (+ low 1) high))))
 </pre>
 
