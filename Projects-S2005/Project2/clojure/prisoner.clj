@@ -1,3 +1,10 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
+;;
+;; Clojure handles procedure definitions slightly different than other
+;; Lisps, so we have to re-order the manner in which these procedures
+;; are defined.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (def make-play list)
 (def the-empty-history '())
 (def extend-history cons)
@@ -11,18 +18,35 @@
     (("d" "c") (5 0))
     (("d" "d") (1 1))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Placeholder for "extract-entry" (although we need to define this in the problem set)
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defn extract-entry [play *list*]
+  ;;
+  ;; Empty definition
+  ;;
+  '())
+
+(defn get-point-list [game]
+  (fnext (extract-entry game *game-association-list*)))
+
+(defn get-player-points [num game]
+  (nth (get-point-list game) num))
+
 (defn get-scores [history0 history1]
   (defn get-scores-helper [history0 history1 score0 score1]
     (cond (empty-history? history0) (list score0 score1)
           :else
           (let [game (make-play (most-recent-play history0)
                                 (most-recent-play history1))]
-            (get-scores-helper (rest-of-players history0)
-                               (rest-of-players history1)
+            (get-scores-helper (rest-of-plays history0)
+                               (rest-of-plays history1)
                                (+ (get-player-points 0 game) score0)
                                (+ (get-player-points 1 game) score1)))))
   (get-scores-helper history0 history1 0 0))
-  
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;  The following procedures are used to compute and print
@@ -38,6 +62,8 @@
     (print "Player 2 Score: ")
     (print (* 1.0 (/ (first (rest scores)) number-of-games)))
     (println "")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;  The play-loop procedure takes as its  arguments two prisoner's
 ;;  dilemma strategies, and plays an iterated game of approximately
