@@ -23,19 +23,27 @@
 ;; Placeholder for "extract-entry" (although we need to define this in the problem set)
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defn extract-entry [play *list*]
+(defn
+  ^{:doc "Extract the game play record associated with the argument play. For instance, invoking with ('c' 'c') and *game-association-list* will return (('c' 'c') (3 3))."}
+  extract-entry [play *list*]
   ;;
   ;; Empty definition
   ;;
   '())
 
-(defn get-point-list [game]
+(defn
+  ^{:doc "Return the point list associated with a particular play. For instance, invoking with ('c' 'c') will return (3 3)."}
+  get-point-list [game]
   (fnext (extract-entry game *game-association-list*)))
 
-(defn get-player-points [num game]
+(defn
+  ^{:doc "Return the points associated with the particular player and game. For instance, invoking with 0 and ('d' 'c') will return 5, while invoking with 1 and ('d' 'c') will return 0."}
+  get-player-points [num game]
   (nth (get-point-list game) num))
 
-(defn get-scores [history0 history1]
+(defn
+  ^{:doc "Return a two-element list, holding scores for player0 and player1, based on the game history."}
+  get-scores [history0 history1]
   (defn get-scores-helper [history0 history1 score0 score1]
     (cond (empty-history? history0) (list score0 score1)
           :else
@@ -53,7 +61,9 @@
 ;;  out the players' scores at the end of an iterated game
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defn print-out-results [history0 history1 number-of-games]
+(defn
+  ^{:doc "Print out the game results"}
+  print-out-results [history0 history1 number-of-games]
   (let [scores (get-scores history0 history1)]
     (println "")
     (print "Player 1 Score: ")
