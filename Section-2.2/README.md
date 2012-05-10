@@ -38,6 +38,11 @@ We can define the nesting procedures:
 
 (define (make-pair-sum pair)
  (list (car pair) (cadr pair) (+ (car pair) (cadr pair))))
+
+(define (enumerate-interval low high)
+ (if (> low high)
+     nil
+     (cons low (enumerate-interval (+ low 1) high))))
 </pre>
 
 Define the prime procedure:
@@ -67,4 +72,17 @@ Define the prime procedure:
              (test (get-random-a))
              (test (get-random-a))
              (test (get-random-a))))))
+</pre>
+
+Now define the procedure itself:
+
+<pre>
+(define (prime-sum-pairs n)
+ (mape make-pair-sum
+       (filter prime-sum?
+               (flatmap
+                (lambda (i)
+                 (map (lambda (j) (list i j))
+                      (enumerate-iterval 1 (- i 1))))
+                (enumerate-interval 1 n)))))
 </pre>
