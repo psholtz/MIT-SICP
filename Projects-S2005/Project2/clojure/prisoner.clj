@@ -8,7 +8,7 @@
 (def make-play list)
 (def the-empty-history '())
 (def extend-history cons)
-(def empty-history? nil?)
+(def empty-history? (fn [x] (= (.size x) 0)))
 (def most-recent-play first)
 (def rest-of-plays rest)
 

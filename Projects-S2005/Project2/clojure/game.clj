@@ -89,3 +89,15 @@
 ;; ==> (5 0)
 (get-point-list (make-play "d" "d"))
 ;; ==> (1 1)
+
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; Problem 2
+;;
+;; Use "play-loop" to play games between the five strategies.
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;;
+;; I'm not going to reproduce all the game play statistics here, but
+;; the results basically mirror those in the reference MIT-SCHEME implementation.
+;; Refer to the reference MIT-SCHEME implementation for further details.
+;;
