@@ -78,7 +78,7 @@ Now define the procedure itself:
 
 <pre>
 (define (prime-sum-pairs n)
- (mape make-pair-sum
+ (map make-pair-sum
        (filter prime-sum?
                (flatmap
                 (lambda (i)
