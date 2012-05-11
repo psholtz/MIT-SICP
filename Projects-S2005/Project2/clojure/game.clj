@@ -32,7 +32,9 @@
 ;;
 ;; We define our "extract-entry" procedure as follows:
 ;;
-(defn extract-entry [play *list*]
+(defn
+  ^{:doc "Extract the game play record associated with the argument play. For instance, invoking with ('c' 'c') and *game-association-list* will return (('c' 'c') (3 3))."}
+  extract-entry [play *list*]
   ;;
   ;; Return "true" if the play matches the entry:
   ;;

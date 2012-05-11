@@ -125,7 +125,7 @@
   ;; Define counting procedure
   (defn count-instances-of [test hist]
     (cond (empty-history? hist) 0
-          (.equals (most-recent-play hist) test) (+ (count-instances-of test (rest-of-plays hist)) )
+          (.equals (most-recent-play hist) test) (+ (count-instances-of test (rest-of-plays hist)) 1)
           :else
           (count-instances-of test (rest-of-plays hist))))
 
