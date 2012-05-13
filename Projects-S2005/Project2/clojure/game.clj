@@ -199,3 +199,79 @@
 ;; so we can see whether program execution actually performs the
 ;; way we would predict.
 ;;
+(defn timed-play-loop [strat0 strat1 times]
+
+  ;;
+  ;; Play-loop-iter procedure for executing the game play an arbitrary number of times
+  ;;
+  (defn timed-play-loop-iter [count history0 history1 limit]
+    (cond (= count limit) (print-out-results history0 history1 limit)
+	  :else
+	  (let [result0 (strat0 history0 history1)
+		result1 (strat1 history1 history0)]
+	    (timed-play-loop-iter (+ count 1)
+				  (extend-history result0 history0)
+				  (extend-history result1 history1)
+				  limit))))
+
+  ;;
+  ;; Bracket execution loop for timing purposes
+  ;;
+  (let [start (System/currentTimeMillis)]
+    (timed-play-loop-iter 0 the-empty-history the-empty-history times)
+    (let [finish (System/currentTimeMillis)]
+      (print "Timing: ")
+      (println (- finish start)))))
+
+;;
+;; Let's build a matrix of the time it takes to execute 150 game plays
+;; and see which procedures are the slowest.
+;;
+;;
+;; The entries in the matrix correspond to the time required for the
+;; 150 game plays to execute. The following matrix uses the "original"
+;; definition of the EGALITARIAN procedure:
+;;
+
+;;
+;;                 ----------------------------------------------------------------- 
+;;                 |  NASTY  |  PATSY  |  SPASTIC  |  EGALITARIAN  |  EYE-FOR-EYE  |
+;; --------------------------------------------------------------------------------- 
+;; |     NASTY     |    16   |    13   |     12    |      180      |      13       | 
+;; --------------------------------------------------------------------------------- 
+;; |     PATSY     |    13   |    10   |      9    |      178      |       7       | 
+;; --------------------------------------------------------------------------------- 
+;; |    SPASTIC    |    12   |     9   |     12    |      180      |      12       | 
+;; --------------------------------------------------------------------------------- 
+;; |  EGALITARIAN  |   180   |   178   |    180    |      344      |     177       | 
+;; --------------------------------------------------------------------------------- 
+;; |  EYE-FOR-EYE  |    13   |     7   |     12    |      177      |       9       |
+;; --------------------------------------------------------------------------------- 
+;;
+
+;;
+;; Clearly EGALITARIAN takes much longer to execute than do the other strategies, requiring
+;; roughly 180 ticks to execute the 150 plays. Notice also that when playing against itself,
+;; EGALITARIAN requires roughly twice as much time (i.e., 344 ticks) to execute the 150 plays.
+;;
+
+;;
+;; We anticipate that the new definition of the EGALITARIAN procedure will run roughly
+;; twice as quickly. Using the new definition, we obtain the following performance matrix:
+;;
+
+;;
+;;                 ----------------------------------------------------------------- 
+;;                 |  NASTY  |  PATSY  |  SPASTIC  |  EGALITARIAN  |  EYE-FOR-EYE  |
+;; --------------------------------------------------------------------------------- 
+;; |     NASTY     |    13   |    10   |     9     |      103      |       14      |
+;; --------------------------------------------------------------------------------- 
+;; |     PATSY     |    10   |     7   |     8     |       91      |       10      | 
+;; --------------------------------------------------------------------------------- 
+;; |    SPASTIC    |     9   |     8   |    10     |       91      |        9      |
+;; --------------------------------------------------------------------------------- 
+;; |  EGALITARIAN  |   103   |    91   |    91     |      175      |       92      |
+;; --------------------------------------------------------------------------------- 
+;; |  EYE-FOR-EYE  |    14   |    10   |     9     |       92      |        8      |
+;; ---------------------------------------------------------------------------------
+;;
