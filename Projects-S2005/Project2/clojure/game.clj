@@ -275,3 +275,19 @@
 ;; |  EYE-FOR-EYE  |    14   |    10   |     9     |       92      |        8      |
 ;; ---------------------------------------------------------------------------------
 ;;
+
+;;
+;; As anticipated, the performance is still slow (i.e., O(n^2)), although the new
+;; procedure performs roughly twice as efficiently as the original procedure (as
+;; we anticipated).
+;;
+
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;; Problem 4
+;;
+;; Write a new "eye-for-two-eyes" strategy.
+;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;;
+;; For reference, the original EYE-FOR-EYE strategy is defined as:
+;;
