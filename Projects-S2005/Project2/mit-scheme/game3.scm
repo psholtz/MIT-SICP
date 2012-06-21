@@ -99,3 +99,26 @@
      ((compare play seventh) seventh)
      ((compare play eighth) eighth)
      (else '()))))
+
+;;
+;; We can test our procedure as follows:
+;;
+(extract-entry (make-play "c" "c" "c") *game-association-list*)
+;; ==> (("c" "c" "c") (4 4 4)) 
+(extract-entry (make-play "c" "c" "d") *game-association-list*)
+;; ==> (("c" "c" "d") (2 2 5))
+(extract-entry (make-play "c" "d" "c") *game-association-list*)
+;; ==> (("c" "d" "c") (2 5 2))
+(extract-entry (make-play "c" "d" "d") *game-association-list*)
+;; ==> (("c" "d" "d") (0 3 3))
+(extract-entry (make-play "d" "c" "c") *game-association-list*)
+;; ==> (("d" "c" "c") (5 2 2))
+(extract-entry (make-play "d" "c" "d") *game-association-list*)
+;; ==> (("d" "c" "d") (3 0 3))
+(extract-entry (make-play "d" "d" "c") *game-association-list*)
+;; ==> (("d" "d" "c") (3 3 0))
+(extract-entry (make-play "d" "d" "d") *game-association-list*)
+;; ==> (("d" "d" "d") (1 1 1))
+(extract-entry (make-play "x" "x" "x") *game-association-list*)
+;; ==> ()
+
