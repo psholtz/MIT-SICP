@@ -1,4 +1,4 @@
-(load "prisoner3.scm")
+;;(load "prisoner3.scm")
 
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++
 ;; Problem 9
