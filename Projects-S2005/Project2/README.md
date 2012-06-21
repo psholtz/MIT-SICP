@@ -208,9 +208,6 @@ The Three-Player Prisoner's Dilemma
 
 So far, all of our prisoner's dilemma examples have involved two players (and, indeed, most game-theory research on the prisoner's dilemma has focused on two-player games). But it is possible to create a prisoner's dilemma game involve three -- or even more -- players.
 
-Test
-----
-
 Strategies from the two-player game do not necessarily extend to a three-person game in a natural way. For example, what does EYE-FOR-EYE mean? Should the player defect if *either* of the opponents defected on the previous round? Or only if *both* opponents defected? And are either of these strategies nearly as effective in the three-player game as EYE-FOR-EYE is in the two-player game?
 
 Before we analyze the three-player game more closely, we must introduce some notation for representing the payoffs. We use a notation similar to that used for the two-player game. For example, we let DCC represent the payoff to a defecting player if both opponents cooperate. Note that the first position represents the player under consideration. The second and third positions represent the opponents.
@@ -219,11 +216,10 @@ Another example: CCD represents the payoff to a cooperating player if one oppone
 
 Now we are ready to discuss the payoffs for the three-player game. We impose three rules (Actually, there is no universal definition for the multi-player prisoner's dilemma. The constraints used here represent one possible version of the three-player prisoner's dilemma).
 
-Test again
-----------
-
 1) Defection should be the dominant choice for each player. In other words, it should always be better for a player to defect, regardless of what the opponents do. This rule gives three constraints:
 
+Test
+---- 
 <pre>DCC > CCC
 
 DDD > CDD
@@ -231,6 +227,9 @@ DDD > CDD
 DCD > CCD</pre>
 
 2) A player should always be better off if more of his opponents choose to cooperate. This rules gives:
+
+Test now
+--------
 
 <pre>DCC > DCD > DDD
 
