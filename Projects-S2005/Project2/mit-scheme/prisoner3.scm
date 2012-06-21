@@ -43,3 +43,12 @@
 ;;
 (define (get-player-points num game)
   (list-ref (get-point-list game) num))
+(define (get-point-list game)
+  (cadr (extract-entry game *game-association-list*)))
+
+(define make-play list)
+(define the-empty-history '())
+(define extend-history cons)
+(define empty-history? null?)
+(define most-recent-play car)
+(define rest-of-plays cdr)
