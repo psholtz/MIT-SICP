@@ -218,51 +218,5 @@ Now we are ready to discuss the payoffs for the three-player game. We impose thr
 
 1) Defection should be the dominant choice for each player. In other words, it should always be better for a player to defect, regardless of what the opponents do. This rule gives three constraints:
 
-Test
----- 
-<pre>DCC > CCC
-
-DDD > CDD
-
-DCD > CCD</pre>
-
-2) A player should always be better off if more of his opponents choose to cooperate. This rules gives:
-
-Test now
---------
-
-<pre>DCC > DCD > DDD
-
-CCC > CCD > CDD</pre>
-
-3) If one player's choice is fixed, the other two players should be left in a two-player prisoner's dilemma. This rule gives the following constraints:
-
-<pre>CCD > DDD
-
-CCC > DCD 
-
-CCD > (CDD + DCD)/2
-
-CCC > (CCD + DCC)/2</pre>
-
-We can satisfy all of these constraints with the following payoffs:
-
-<pre>CDD = 0, DDD = 1, CCD = 2, DCD = 3, CCC = 4, DCC = 5</pre>
-
-
-Revise the Scheme code for the two-player game to make a three-player iterated game. The program should take three strategies as input, keep track of three histories, and print out results for three players. You need to change only three procedures: "**play-loop**", "**print-out-results**", and "**get-scores**" (although you may also have to change your definition of "**extract-entry**" if you did not write it in a general enough manner). We would suggest that you make copies of the necessary code and rename them so that you can separate the two person version from the three person one.
-
-You also need to change *game-association-list* as follows:
-
-<pre>
-(define *game-association-list*
- (list 
-  (list (list "c" "c" "c") (list 4 4 4))
-  (list (list "c" "c" "d") (list 2 2 5))
-  (list (list "c" "d" "c") (list 2 5 2))
-  (list (list "d" "c" "c") (list 5 2 2))
-  (list (list "c" "d" "d") (list 0 3 3))
-  (list (list "d" "c" "d") (list 3 0 3))
-  (list (list "d" "d" "c") (list 3 3 0))
-  (list (list "d" "d" "d") (list 1 1 1))))     
-</pre>
+Test me
+-------
