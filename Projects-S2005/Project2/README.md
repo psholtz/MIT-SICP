@@ -256,3 +256,17 @@ Problem 9
 ---------
 
 Revise the Scheme code for the two-player game to make a three-player iterated game. The program should take three strategies as input, keep track of three histories, and print out results for three players. You need to change only three procedures: **play-loop**, **print-out-results** and **get-scores** (although you may also have to change your definition of **extract-entry** if you did not write it in a general enough manner). We would suggest that you make copies of the necessary code and rename them so that you can separate the two person version from the three person one.
+
+You also need to change **game-association-list** as follows:
+
+<pre>
+(define *game-association-list*
+ (list (list (list "c" "c" "c") (list 4 4 4))
+       (list (list "c" "c" "d") (list 2 2 5))
+       (list (list "c" "d" "c") (list 2 5 2))
+       (list (list "d" "c" "c") (list 5 2 2))
+       (list (list "c" "d" "d") (list 0 3 3))
+       (list (list "d" "c" "d") (list 3 0 3))
+       (list (list "d" "d" "c") (list 3 3 0))
+       (list (list "d" "d" "d") (list 1 1 1))))
+</pre>
