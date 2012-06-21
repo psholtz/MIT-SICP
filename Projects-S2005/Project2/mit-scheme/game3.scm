@@ -43,8 +43,8 @@
 ;; Define "get-scores" for handling three strategies:
 ;;
 (define (get-scores history0 history1 history2)
-  (define (get-scores-helper hist1 hist2 hist3 score0 score1 score2)
-    (cond ((empty-history? history0)
+  (define (get-scores-helper hist0 hist1 hist2 score0 score1 score2)
+    (cond ((empty-history? hist0)
 	   (list score0 score1 score2))
 	  (else
 	   (let ((game (make-play 
@@ -58,7 +58,7 @@
 	      (+ (get-player-points 0 game) score0)
 	      (+ (get-player-points 1 game) score1)
 	      (+ (get-player-points 2 game) score2))))))
-  (get-scores-helper history1 history2 history3 0 0 0))
+  (get-scores-helper history0 history1 history2 0 0 0))
 
 ;;
 ;; Define "extract-entry" for handling three strategies:
