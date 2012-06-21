@@ -219,7 +219,11 @@ Now we are ready to discuss the payoffs for the three-player game. We impose thr
 1) Defection should be the dominant choice for each player. In other words, it should always be better for a player to defect, regardless of what the opponents do. This rule gives three constraints:
 
 <pre>
+DCC &gt; CCC
 
+DDD &gt; CDD
+
+DCD &gt; CCD
 </pre>
 
 Test now?
