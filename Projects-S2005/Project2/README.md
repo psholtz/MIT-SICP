@@ -246,5 +246,10 @@ CCD &gt; (CDD + DCD)/2
 CCC &gt; (CCD + DCC)/2
 </pre>
 
+We can satisfy all of these constraints with the following payoffs:
+
+<pre>
+CDD = 0, DDD = 1, CCD = 2, DCD = 3, CCC = 4, DCC = 5
+</pre>
 Test now?
 ---------
