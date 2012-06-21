@@ -228,5 +228,11 @@ DCD &gt; CCD
 
 2) A player should always be better off if more of his opponents choose to cooperate. This rule gives:
 
+<pre>
+DCC &gt; DCD &gt; DDD
+
+CCC &gt; CCD &gt; CDD
+</pre>
+
 Test now?
 ---------
