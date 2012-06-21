@@ -122,3 +122,49 @@
 (extract-entry (make-play "x" "x" "x") *game-association-list*)
 ;; ==> ()
 
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++ 
+;; Problem 10
+;;
+;; Write a range of three player strategies.
+;; ++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+;;
+;; Write strategies "PATSY-3", "NASTY-3" and "SPASTIC-3":
+;;
+
+;;
+;; These three procedures are straightforward, as the
+;; results returned do not depend on the state of either
+;; of the other argument histories.
+;;
+(define (PATSY-3 my-history other-history-1 other-history-2)
+  "c")
+
+(define (NASTY-3 my-history other-history-1 other-history-2)
+  "d")
+
+(define (SPASTIC-3 my-history other-history-1 other-history-2)
+  (if (= (random 2) 0)
+      "c"
+      "d"))
+
+;;
+;; Write strategies "TOUGH-EYE-FOR-EYE" and "SOFT-EYE-FOR-EYE":
+;;
+(define (TOUGH-EYE-FOR-EYE my-history other-history-1 other-history-2)
+  (if (empty-history? my-history)
+      "c"
+      (let ((p1 (most-recent-play other-history-1))
+	    (p2 (most-recent-play other-history-2)))
+	(or (string=? p1 "d")
+	    (string=? p2 "d"))
+	"d" "c")))
+
+(define (SOFT-EYE-FOR-EYE my-history other-history-1 other-history-2)
+  (if (empty-history? my-history)
+      "c"
+      (let ((p1 (most-recent-play other-history-1))
+	    (p2 (most-recent-play other-history-2)))
+	(and (string=? p1 "d")
+	     (string=? p2 "d"))
+	"d" "c")))
