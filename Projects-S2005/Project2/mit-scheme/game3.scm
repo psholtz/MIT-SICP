@@ -80,7 +80,11 @@
       ((first (list-ref *list* 0))
        (second (list-ref *list* 1))
        (third (list-ref *list* 2))
-       (fourth (list-ref *list* 3)))
+       (fourth (list-ref *list* 3))
+       (fifth (list-ref *list* 4))
+       (sixth (list-ref *list* 5))
+       (seventh (list-ref *list* 6))
+       (eighth (list-ref *list* 7)))
 
     ;;
     ;; If we find a match, return that specific entry:
@@ -90,4 +94,8 @@
      ((compare play second) second)
      ((compare play third) third)
      ((compare play fourth) fourth)
+     ((compare play fifth) fifth)
+     ((compare play sixth) sixth)
+     ((compare play seventh) seventh)
+     ((compare play eighth) eighth)
      (else '()))))
