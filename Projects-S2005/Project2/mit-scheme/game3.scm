@@ -60,5 +60,34 @@
 	      (+ (get-player-points 2 game) score2))))))
   (get-scores-helper history1 history2 history3 0 0 0))
 
-;; possible:
-(define (extract-entry) '())
+;;
+;; Define "extract-entry" for handling three strategies:
+;;
+(define (extract-entry play *list*)
+  ;;
+  ;; Return "true" if the play matches the entry:
+  ;;
+  (define (compare play entry)
+    (let ((test (car entry)))
+      (and (string=? (car play) (car test))
+	   (string=? (cadr play) (cadr test))
+	   (string=? (caddr play) (caddr test)))))
+
+  (let
+      ;; 
+      ;; Get references to each entry in the *game-association-list*:
+      ;;
+      ((first (list-ref *list* 0))
+       (second (list-ref *list* 1))
+       (third (list-ref *list* 2))
+       (fourth (list-ref *list* 3)))
+
+    ;;
+    ;; If we find a match, return that specific entry:
+    ;;
+    (cond 
+     ((compare play first) first)
+     ((compare play second) second)
+     ((compare play third) third)
+     ((compare play fourth) fourth)
+     (else '()))))
