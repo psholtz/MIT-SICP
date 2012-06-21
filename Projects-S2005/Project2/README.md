@@ -234,5 +234,17 @@ DCC &gt; DCD &gt; DDD
 CCC &gt; CCD &gt; CDD
 </pre>
 
+3) If one player's choice is fixed, the other two players should be left in a two-player prisoner's dilemma. This rule gives the following constraints:
+
+<pre>
+CCD &gt; DDD
+
+CCC &gt; DCD
+
+CCD &gt; (CDD + DCD)/2
+
+CCC &gt; (CCD + DCC)/2
+</pre>
+
 Test now?
 ---------
