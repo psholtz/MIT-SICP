@@ -38,3 +38,8 @@
                                                                hist1
                                                                hist2)))))
 
+;;
+;; Import these from the "old" prisoner code:
+;;
+(define (get-player-points num game)
+  (list-ref (get-point-list game) num))
