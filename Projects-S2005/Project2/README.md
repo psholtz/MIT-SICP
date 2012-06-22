@@ -336,16 +336,43 @@ Once you have designed your data abstraction, build a procedure that takes the t
 REMEMBER: the goal of our data structure is to correlate player-0's behavior on round n, with player-1 and player-2's behavior on round n-1. For example, the result of an implementation, call it **make-history-summary**, on an example set of histories is shown below:
 
 <pre>
+(define summary (make-history-summary
+	(list "c" "c" "d" "d" "c" "d" "c" "c")   ;; hist-0
+	(list "c" "c" "c" "d" "d" "c" "d" "c")   ;; hist-1
+	(lsit "c" "c" "d" "d" "d" "c" "c" "c"))  ;; hist-2
 
+summary
+; Value: ((3 0 3) (1 1 2) (0 2 2))
 </pre>
 
-To help you decode this result, first remember that since we are going to compare the decision for, say, the most recent round in the first history, this means we compare that value ("c") against the values of the previous round in the other two histories (also both "c"), or we compare the value in the previous round ("c") against the values in the preceding round of the other two histories (a "c" and a "d"). As a result of this process, the first list in this summary describes what player-0 did on a round immediately after both opponents cooperated, in this case she cooperated 3 times, and never defected.
+To help you decode this result, first remember that since we are going to compare the decision for, say, the most recent round in the first history, this means we compare that value ("c") against the values of the previous round in the other two histories (also both "c"), or we compare the value in the previous round ("c") against the values in the preceding round of the other two histories (a "c" and a "d"). As a result of this process, the first list in this summary describes what player-0 did on a round immediately after both opponents cooperated, in this case she cooperated 3 times, and never defected. The second list describes what player-0 did on a round immediately after one opponent cooperated and one defected, in this case she coopearted once and defected once; and the final list describes what player-0 did on a round immediately after both opponents defected, in this case she defected twice and never cooperated. Note that there are only 7 cases counted, since we compare the result on one round against the opponent's decisions on the previous round.
 
 Problem 13
 ---------- 
 
-xx
+Finally, using this data structure, we can build a new procedure that will return a list of three numbers: the probability that the **hist-0** player cooperates given that the other two players cooperated on the previous round, the probability that the **hist-0** players cooperates given that only one other player cooperated on the previous round, and the probability that the **hist-0** player cooperates given that both others defected on the previous round. To fill out some details in this picture, let's look at a couple of examples. We will call our procedure **get-probability-of-c**: here are a couple of sample calls:
 
+<pre>
+(define summary (make-history-summary
+	(list "c" "c" "c" "c")		;; hist-0
+	(list "d" "d" "d" "c")		;; hist-1
+	(list "d" "d" "c" "c")))	;; hist-2
+
+(get-probability-of-c summary)
+; Value: (1 1 1)
+
+(define new-summary (make-history-summer
+	(list "c" "c" "c" "d" "c")
+	(list "d" "c" "d" "d" "c")
+	(list "d" "c" "c" "c" "c")))
+
+(get-probability-of-c new-summary)
+; Value: (0.5 1 ())
+</pre>
+
+In the top example, the returned list indicates that the first player cooperates with probability 1 no matter what the other two players do. In the bottom example, the first player cooperates with probability 0.5 when the other two players cooperate; the first player cooperates with probability 1 when one of the other two players defects, and since we have no data regarding what happens when both of the other players defect, our procedure returns () for that case.
+
+Write the **get-probability-of-c** procedure.
 
 Problem 14
 ---------- 
