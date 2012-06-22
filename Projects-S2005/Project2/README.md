@@ -276,12 +276,12 @@ Problem 10
 
 Write strategies **Patsy-3**, **Nasty-3** and **Spastic-3** that will work in a three-player game. Try them out to make sure your code is working.
 
-Write two new strategies: **touch-Eye-for-Eye** and **soft-Eye-for-Eye**. **Touch-Eye-for-Eye** should defect is *either* of the opponents defected on the previous round. **Soft-Eye-for-Eye** should defect only if *both* opponents defected on the previous round. Play some games using these two new strategies. Describe the observed behavior of the strategies.
+Write two new strategies: **tough-Eye-for-Eye** and **soft-Eye-for-Eye**. **Tough-Eye-for-Eye** should defect is *either* of the opponents defected on the previous round. **Soft-Eye-for-Eye** should defect only if *both* opponents defected on the previous round. Play some games using these two new strategies. Describe the observed behavior of the strategies.
 
 Problem 11
 ----------
 
-Write a procedure **make-combined-strategies** which takes as input two *two-player* strategies and a "combining" procedure, **Make-combined-strategies** should return a *three-player* strategy that plays one of the two-player strategies against the other opponent, then calls the "combining" procedure on the two two-player results. Here's an exmaple: this call to **make-combined-strategies** returns a strategy equivalent to **tough-Eye-for-Eye** in Problem 10.
+Write a procedure **make-combined-strategies** which takes as input two *two-player* strategies and a "combining" procedure. **Make-combined-strategies** should return a *three-player* strategy that plays one of the two-player strategies against the other opponent, and the other two-player strategy against the other opponent, then calls the "combining" procedure on the two two-player results. Here's an example: this call to **make-combined-strategies** returns a strategy equivalent to **tough-Eye-for-Eye** in Problem 10.
 
 <pre>
 (make-combined-strategies
@@ -303,7 +303,9 @@ Here's another example. This call to **make-combined-strategies** returns a thre
 Problem 12
 ---------- 
 
-xx
+A natural idea in creating a prisoner's dilemma strategy is to try and deduce what kind of strategies the *other* players might be using. In this problem, we will implement a simple version of this idea.
+
+The underlying idea is to keep track of how the strategy for one player correlates with the decisions of the other two players on the previous round (of course, you can imagine generalizing this to several previous rounds). Thus, we want to build an intermediary data structure which keeps track of what player-0 did, correlated with what the other two players did, over the course of the histories for the three players. Imagine creating a procedure that takes three histories as arguments: call them **hist-0**, **hist-1**, and **hist-2**. The idea is that we wish to characterize the strategy of the player responsible for **hist-0**. Given this is a three-player game, there are three possible situations we need to keep track of: what did player-0 do on one round when the two other players both cooperated on the previous round; what did player-0 do on one round when one of the others cooperated and the other defected on the previous round; and what did player-0 do on one round when both other players defected on the previous round. Since these three situations will occur multiple times, we want to keep track of how often in each case did player-0 cooperate, and how often did she defect in response to these choices, and how often did each of these three cases occur (although that could be found by adding the number of times player-0 cooperated and defected).
 
 Problem 13
 ---------- 
