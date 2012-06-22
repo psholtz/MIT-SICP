@@ -248,3 +248,13 @@
 (SOFT-EYE-FOR-EYE (list "d") (list "d") (list "d"))
 ;; ==> "d"
 
+;; [WORKING]
+
+;; Problem 11
+;;
+
+(define (make-combined-strategies strat0 strat1 combiner)
+  (lambda (a b c)
+    (let ((r1 (strat0 a b))
+	  (r2 (strat0 a c)))
+      (combiner r1 r2))))
