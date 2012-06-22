@@ -363,14 +363,14 @@ Finally, using this data structure, we can build a new procedure that will retur
 
 (define new-summary (make-history-summer
 	(list "c" "c" "c" "d" "c")
-	(list "d" "c" "d" "d" "c")
-	(list "d" "c" "c" "c" "c")))
+	(list "c" "c" "d" "d" "c")
+	(list "c" "c" "c" "c" "c")))
 
 (get-probability-of-c new-summary)
-; Value: (0.5 1 ())
+; Value: (1.0 0.5 ())
 </pre>
 
-In the top example, the returned list indicates that the first player cooperates with probability 1 no matter what the other two players do. In the bottom example, the first player cooperates with probability 0.5 when the other two players cooperate; the first player cooperates with probability 1 when one of the other two players defects, and since we have no data regarding what happens when both of the other players defect, our procedure returns () for that case.
+In the top example, the returned list indicates that the first player cooperates with probability 1 no matter what the other two players do. In the bottom example, the first player cooperates with probability 1.0 when the other two players cooperate; the first player cooperates with probability 0.5 when one of the other two players defects, and since we have no data regarding what happens when both of the other players defect, our procedure returns () for that case.
 
 Write the **get-probability-of-c** procedure.
 
