@@ -281,7 +281,24 @@ Write two new strategies: **touch-Eye-for-Eye** and **soft-Eye-for-Eye**. **Touc
 Problem 11
 ----------
 
-xx
+Write a procedure **make-combined-strategies** which takes as input two *two-player* strategies and a "combining" procedure, **Make-combined-strategies** should return a *three-player* strategy that plays one of the two-player strategies against the other opponent, then calls the "combining" procedure on the two two-player results. Here's an exmaple: this call to **make-combined-strategies** returns a strategy equivalent to **tough-Eye-for-Eye** in Problem 10.
+
+<pre>
+(make-combined-strategies
+ Eye-for-Eye Eye-for-Eye
+ (lambda (r1 r2) (if (or (string=? r1 "d") (string=? r2 "d")) "d" "c")))
+</pre>
+
+The resulting strategy plays **Eye-for-Eye** against each opponent, and then calls the combining procedure on the two results. If either of the two two-player strategies has returned "d", then the three-player strategy will also return "d".
+
+
+Here's another example. This call to **make-combined-strategies** returns a three-player strategy that plays **Eye-for-Eye** against one oppoennt, **Egalitarian** against another, and chooses randomly between the two results:
+
+<pre>
+(make-combined-strategies
+ Eye-for-Eye Egalitarian
+ (lambda (r1 r2) (if (= (random 2) 0) r1 r2)))
+</pre>
 
 Problem 12
 ---------- 
