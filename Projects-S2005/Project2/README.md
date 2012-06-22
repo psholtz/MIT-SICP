@@ -270,3 +270,29 @@ You also need to change **game-association-list** as follows:
        (list (list "d" "d" "c") (list 3 3 0))
        (list (list "d" "d" "d") (list 1 1 1))))
 </pre>
+
+Problem 10
+---------- 
+
+Write strategies **Patsy-3**, **Nasty-3** and **Spastic-3** that will work in a three-player game. Try them out to make sure your code is working.
+
+Problem 11
+----------
+
+xx
+
+Problem 12
+---------- 
+
+xx
+
+Problem 13
+---------- 
+
+xx
+
+
+Problem 14
+---------- 
+
+xx
