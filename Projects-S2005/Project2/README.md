@@ -310,17 +310,23 @@ The underlying idea is to keep track of how the strategy for one player correlat
 Thus, you should design and implement a data structure called a **history-summary**, with the overall structure shown in Figure 1. The **history-summary** has three subpieces, one for the case where both player-1 and player-2 cooperated, one for when one of them cooperated and the other defected, and a third for when both of these players defected. This means that your data abstraction for a **history-summary** should have three selectors, for these three pieces. For each piece, there is another data structure that keeps track of the number of times player-0 cooperated on the next round, the number of times she defected, and the total number of examples (though, as we noted, this is redundant). You may find it convenient to think of this as a kind of tree structure. Thus, your first task is to design constructors and selectors to implement this multilevel abstraction:
 
 <pre>
-             summary 
-                |
-                |
-       --------------------
-      /         |          \
-     /          |           \
-   cc          cd           dd
-   /|\         /|\          /|\
-  / | \       / | \        / | \ 
- /  |  \     /  |  \      /  |  \
-c   d  ttl  c   d  ttl   c  d  ttl
+             summary
+               /|\  
+              / | \
+             /  |  \
+            /   |   \
+           /    |    \
+          /     |     \
+         /      |      \
+        /       |       \
+       /        |        \
+      /         |         \
+     /          |          \
+   cc          cd          dd
+   /|\         /|\         /|\
+  / | \       / | \       / | \ 
+ /  |  \     /  |  \     /  |  \
+c   d  ttl  c   d  ttl  c  d  ttl
 </pre>
 
 **Figure 1:**  Example of the summary data structure as a tree. The top level has three pieces, corresponding to the actions of the other players (both cooperated, only one cooperated, both defected). The second level has three pieces, listing the number of times the player cooperated, defected, and the total number of times the sitaution specified by the actions of the opponents occurred.
