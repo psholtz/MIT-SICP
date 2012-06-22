@@ -313,9 +313,9 @@ Thus, you should design and implement a data structure called a **history-summar
              summary 
                 |
                 |
-    -------------------------- 
-    |           |            |
-    |           |            |
+       --------------------
+      /         |          \
+     /          |           \
    cc          cd           dd
    /|\         /|\          /|\
   / | \       / | \        / | \ 
@@ -323,6 +323,17 @@ Thus, you should design and implement a data structure called a **history-summar
 c   d  ttl  c   d  ttl   c  d  ttl
 </pre>
 
+**Figure 1:**  Example of the summary data structure as a tree. The top level has three pieces, corresponding to the actions of the other players (both cooperated, only one cooperated, both defected). The second level has three pieces, listing the number of times the player cooperated, defected, and the total number of times the sitaution specified by the actions of the opponents occurred.
+
+Once you have designed your data abstraction, build a procedure that takes the three histories as arguments, and returns a **history-summary**. If we extract from this data structure the piece corresponding to **cooperate-cooperate**, this should give us all the information about what happened when player-1 and player-2 both cooperated. Thus, we should be able to extract from this piece the number of times player-0 cooperated and the number of times she defected.
+
+REMEMBER: the goal of our data structure is to correlate player-0's behavior on round n, with player-1 and player-2's behavior on round n-1. For example, the result of an implementation, call it **make-history-summary**, on an example set of histories is shown below:
+
+<pre>
+
+</pre>
+
+To help you decode this result, first remember that since we are going to compare the decision for, say, the most recent round in the first history, this means we compare that value ("c") against the values of the previous round in the other two histories (also both "c"), or we compare the value in the previous round ("c") against the values in the preceding round of the other two histories (a "c" and a "d"). As a result of this process, the first list in this summary describes what player-0 did on a round immediately after both opponents cooperated, in this case she cooperated 3 times, and never defected.
 
 Problem 13
 ---------- 
