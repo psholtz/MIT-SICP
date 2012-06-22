@@ -377,7 +377,7 @@ Write the **get-probability-of-c** procedure.
 Problem 14
 ---------- 
 
-Using this procedure, you shoudl able be able to write some predicate procedures that help in deciphering another player's strategy. For instance, we can use **get-probability-of-c** to record the behavior of an opponent. We could then compare this against what we would expect for a behavior to see if they match. Thus, the first procedure tests to see if two lists are the same. Using this we could check to see if an opponent is a fool by seeing if he always cooperates (i.e., the observed behavior would be a "c" for cooperate in all cases).
+Using this procedure, you should able be able to write some predicate procedures that help in deciphering another player's strategy. For instance, we can use **get-probability-of-c** to record the behavior of an opponent. We could then compare this against what we would expect for a behavior to see if they match. Thus, the first procedure tests to see if two lists are the same. Using this we could check to see if an opponent is a fool by seeing if he always cooperates (i.e., the observed behavior would be a "c" for cooperate in all cases).
 
 <pre>
 (define (test-entry index trial)
@@ -402,4 +402,4 @@ Using this procedure, you shoudl able be able to write some predicate procedures
 	        (get-probability-of-c (make-history-summary hist0 hist1 hist2)))))
 </pre>
 
-Use the **get-probability-of-c** procedure to write a predicate that tests whether another player is using the **soft-Eye-for-eye** strategy from Problem 10. Also, write a new strategy named **dont-tolerate*fools**. This strategy should cooperate for the first ten rounds; on subsequent rounds it checks (on each round) to see whether the other players might both be playing **Patsy**. If our strategy finds that both our players seem to be cooperating uniformly, it defects; otherwise, it cooperates. 
+Use the **get-probability-of-c** procedure to write a predicate that tests whether another player is using the **soft-Eye-for-eye** strategy from Problem 10. Also, write a new strategy named **dont-tolerate-fools**. This strategy should cooperate for the first ten rounds; on subsequent rounds it checks (on each round) to see whether the other players might both be playing **Patsy**. If our strategy finds that both our players seem to be cooperating uniformly, it defects; otherwise, it cooperates. 
