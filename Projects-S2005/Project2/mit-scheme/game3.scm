@@ -149,6 +149,48 @@
       "d"))
 
 ;;
+;; Test the strategies:
+;;
+(NASTY-3 (list "c") (list "c") (list "c"))
+;; ==> "d"
+(NASTY-3 (list "c") (list "c") (list "d"))
+;; ==> "d" 
+(NASTY-3 (list "c") (list "d") (list "c"))
+;; ==> "d"
+(NASTY-3 (list "c") (list "d") (list "d"))
+;; ==> "d"
+(NASTY-3 (list "d") (list "c") (list "c"))
+;; ==> "d" 
+(NASTY-3 (list "d") (list "c") (list "d"))
+;; ==> "d" 
+(NASTY-3 (list "d") (list "d") (list "c"))
+;; ==> "d"
+(NASTY-3 (list "d") (list "d") (list "d"))
+;; ==> "d"
+
+(PATSY-3 (list "c") (list "c") (list "c"))
+;; ==> "c"
+(PATSY-3 (list "c") (list "c") (list "d"))
+;; ==> "c" 
+(PATSY-3 (list "c") (list "d") (list "c"))
+;; ==> "c"
+(PATSY-3 (list "c") (list "d") (list "d"))
+;; ==> "c"
+(PATSY-3 (list "d") (list "c") (list "c"))
+;; ==> "c"
+(PATSY-3 (list "d") (list "c") (list "d"))
+;; ==> "c"
+(PATSY-3 (list "d") (list "d") (list "c"))
+;; ==> "c"
+(PATSY-3 (list "d") (list "d") (list "d"))
+;; ==> "c"
+
+(SPASTIC-3 (list "c") (list "c") (list "c"))
+;; ==> "d"
+;; ==> "c"
+;; ==> "d"
+
+;;
 ;; Write strategies "TOUGH-EYE-FOR-EYE" and "SOFT-EYE-FOR-EYE":
 ;;
 (define (TOUGH-EYE-FOR-EYE my-history other-history-1 other-history-2)
@@ -156,15 +198,53 @@
       "c"
       (let ((p1 (most-recent-play other-history-1))
 	    (p2 (most-recent-play other-history-2)))
-	(or (string=? p1 "d")
-	    (string=? p2 "d"))
-	"d" "c")))
+	(if (or (string=? p1 "d")
+		(string=? p2 "d"))
+	    "d" "c"))))
 
 (define (SOFT-EYE-FOR-EYE my-history other-history-1 other-history-2)
   (if (empty-history? my-history)
       "c"
       (let ((p1 (most-recent-play other-history-1))
 	    (p2 (most-recent-play other-history-2)))
-	(and (string=? p1 "d")
-	     (string=? p2 "d"))
-	"d" "c")))
+	(if (and (string=? p1 "d")
+		 (string=? p2 "d"))
+	    "d" "c"))))
+
+;;
+;; Test the strategies:
+;;
+(TOUGH-EYE-FOR-EYE (list "c") (list "c") (list "c"))
+;; ==> "c"
+(TOUGH-EYE-FOR-EYE (list "c") (list "c") (list "d"))
+;; ==> "d" 
+(TOUGH-EYE-FOR-EYE (list "c") (list "d") (list "c"))
+;; ==> "d"
+(TOUGH-EYE-FOR-EYE (list "c") (list "d") (list "d"))
+;; ==> "d"
+(TOUGH-EYE-FOR-EYE (list "d") (list "c") (list "c"))
+;; ==> "c"
+(TOUGH-EYE-FOR-EYE (list "d") (list "c") (list "d"))
+;; ==> "d" 
+(TOUGH-EYE-FOR-EYE (list "d") (list "d") (list "c"))
+;; ==> "d"
+(TOUGH-EYE-FOR-EYE (list "d") (list "d") (list "d"))
+;; ==> "d"
+
+(SOFT-EYE-FOR-EYE (list "c") (list "c") (list "c"))
+;; ==> "c"
+(SOFT-EYE-FOR-EYE (list "c") (list "c") (list "d"))
+;; ==> "c"
+(SOFT-EYE-FOR-EYE (list "c") (list "d") (list "c"))
+;; ==> "c"
+(SOFT-EYE-FOR-EYE (list "c") (list "d") (list "d"))
+;; ==> "d"
+(SOFT-EYE-FOR-EYE (list "d") (list "c") (list "c"))
+;; ==> "c"
+(SOFT-EYE-FOR-EYE (list "d") (list "c") (list "d"))
+;; ==> "c"
+(SOFT-EYE-FOR-EYE (list "d") (list "d") (list "c"))
+;; ==> "c"
+(SOFT-EYE-FOR-EYE (list "d") (list "d") (list "d"))
+;; ==> "d"
+
