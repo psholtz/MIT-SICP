@@ -377,4 +377,29 @@ Write the **get-probability-of-c** procedure.
 Problem 14
 ---------- 
 
-xx
+Using this procedure, you shoudl able be able to write some predicate procedures that help in deciphering another player's strategy. For instance, we can use **get-probability-of-c** to record the behavior of an opponent. We could then compare this against what we would expect for a behavior to see if they match. Thus, the first procedure tests to see if two lists are the same. Using this we could check to see if an opponent is a fool by seeing if he always cooperates (i.e., the observed behavior would be a "c" for cooperate in all cases).
+
+<pre>
+(define (test-entry index trial)
+ (cond ((null? index)
+        (null? trial))
+       ((null? trial) #f)
+       ((= (car index) (car trial))
+        (test-entry (cdr index) (cdr trial)))
+       (else #f)))
+
+(define (is-he-a-fool? hist0 hist1 hist2)
+ (test-entry (list 1 1 1)
+    	     (get-probability-of-c 
+	      (make-history-summary hist0 hist1 hist2))))
+
+(define (could-he-be-a-fool? hist0 hist1 hist2)
+ (test-entry (list 1 1 1)
+ 	     (map (lambda (elt)
+	           (cond ((null? elt) 1)
+		   	 ((= elt 1) 1)
+			 (else 0)))
+	        (get-probability-of-c (make-history-summary hist0 hist1 hist2)))))
+</pre>
+
+Use the **get-probability-of-c** procedure to write a predicate that tests whether another player is using the **soft-Eye-for-eye** strategy from Problem 10. Also, write a new strategy named **dont-tolerate*fools**. This strategy should cooperate for the first ten rounds; on subsequent rounds it checks (on each round) to see whether the other players might both be playing **Patsy**. If our strategy finds that both our players seem to be cooperating uniformly, it defects; otherwise, it cooperates. 
