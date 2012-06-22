@@ -276,6 +276,8 @@ Problem 10
 
 Write strategies **Patsy-3**, **Nasty-3** and **Spastic-3** that will work in a three-player game. Try them out to make sure your code is working.
 
+Write two new strategies: **touch-Eye-for-Eye** and **soft-Eye-for-Eye**. **Touch-Eye-for-Eye** should defect is *either* of the opponents defected on the previous round. **Soft-Eye-for-Eye** should defect only if *both* opponents defected on the previous round. Play some games using these two new strategies. Describe the observed behavior of the strategies.
+
 Problem 11
 ----------
 
