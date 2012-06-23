@@ -202,9 +202,7 @@
      (strategy my-history other-history))))
 
 (define NASTY-PATSY (make-higher-order-spastic (list NASTY PATSY)))
-
 (define CHAOS (make-higher-order-spastic (list NASTY PATSY SPASTIC EGALITARIAN EYE-FOR-EYE)))
-
 (define SUPER-SPASTIC (make-higher-order-spastic (list SPASTIC SPASTIC SPASTIC SPASTIC)))
 
 (define (gentle strat gentleness-factor)
