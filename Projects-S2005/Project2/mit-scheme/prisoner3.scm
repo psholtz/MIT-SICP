@@ -139,3 +139,83 @@
 (define FIVE-EYE (make-eye-for-n-eyes 5))
 (define TWENTY-EYE (make-eye-for-n-eyes 20))
 (define HUNDRED-EYE (make-eye-for-n-eyes 100))
+
+;;
+;; I don't know how to do this without using mutators and local assignment.
+;; The implementation that follows uses these techniques:
+;;
+(define (make-rotating-strategy strat0 strat1 freq0 freq1)
+  ;;
+  ;; We need to monitor how many times the strategy is executed:
+  ;;
+  (define (make-monitored f)
+    (let ((count 0))
+      ;;
+      ;; We need to return a two-argument procedure, where
+      ;; the arguments are "my-history" and "other-history".
+      ;; Depending on where we are in the "count", this will 
+      ;; determine which strategy is executed.
+      ;;
+      (define (mf m1 m2)
+	(let ((total (remainder count (+ freq0 freq1))))
+	    (set! count (+ count 1))
+	      (cond ((< total freq0) (f strat0 m1 m2))
+		    (else (f strat1 m1 m2)))))
+      mf))
+
+  ;;
+  ;; Return the monitored game strategy:
+  ;;
+  (make-monitored
+   (lambda (strategy my-history other-history)
+     (strategy my-history other-history))))
+
+(define HALF-AND-HALF (make-rotating-strategy NASTY PATSY 2 2))
+
+;;
+;; Again, we use mutators and local assigment to keep track of which strategy we are invoking:
+;;
+(define (make-higher-order-spastic strategies)
+  ;;
+  ;; We need to monitor how many times the strategy is executed:
+  ;;
+  (define (make-monitored f)
+    (let ((count 0))
+      ;;
+      ;; We need to return a two-argument procedure, where
+      ;; the arguments are "my-history" and "other-history".
+      ;; Depending on where we are in the "count", this will
+      ;; determine which strategy is executed.
+      ;;
+      (define (mf m1 m2)
+	(let ((total (remainder count (length strategies))))
+	    (set! count (+ count 1))
+	      (let ((item (list-ref strategies total)))
+		    (f item m1 m2))))
+      mf))
+
+  ;;
+  ;; Return the monitored strategy:
+  ;;
+  (make-monitored 
+   (lambda (strategy my-history other-history)
+     (strategy my-history other-history))))
+
+(define NASTY-PATSY (make-higher-order-spastic (list NASTY PATSY)))
+
+(define CHAOS (make-higher-order-spastic (list NASTY PATSY SPASTIC EGALITARIAN EYE-FOR-EYE)))
+
+(define SUPER-SPASTIC (make-higher-order-spastic (list SPASTIC SPASTIC SPASTIC SPASTIC)))
+
+(define (gentle strat gentleness-factor)
+  (lambda (my-history other-history)
+    (let ((result (strat my-history other-history)))
+      (cond ((string=? result "d")
+	          (let ((test (random 1.0)))
+		           (if (< test gentleness-factor)
+			          "c"
+				     result)))
+	        (else result)))))
+
+(define SLIGHTLY-GENTLE-NASTY (gentle NASTY 0.1))
+(define SLIGHTLY-GENTLE-EYE-FOR-EYE (gentle EYE-FOR-EYE 0.1))
