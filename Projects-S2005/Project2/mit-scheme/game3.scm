@@ -250,11 +250,38 @@
 
 ;; [WORKING]
 
+;; ++++++++++++++++++++++++++++++++++++++++++++++++
 ;; Problem 11
 ;;
+;; Create a "make-combined-strategies" procedure.
+;; ++++++++++++++++++++++++++++++++++++++++++++++++
 
+;;
+;; Define "make-combined-strategies":
+;;
 (define (make-combined-strategies strat0 strat1 combiner)
   (lambda (a b c)
     (let ((r1 (strat0 a b))
 	  (r2 (strat0 a c)))
       (combiner r1 r2))))
+
+;;
+;; Try out the strategies:
+;; 
+(define NEW-TOUGH-EYE-FOR-EYE (make-combined-strategies
+			       EYE-FOR-EYE 
+			       EYE-FOR-EYE
+			       (lambda (r1 r2) (if (or (string=? r1 "d") (string=? r2 "d")) "d" "c"))))
+
+;;
+;; Let's see if it acts the way we expect, i.e.,
+;; like the old "TOUGH-EYE-FOR-EYE" strategy:
+;;
+(NEW-TOUGH-EYE-FOR-EYE (list "c") (list "c") (list "c"))		      
+(NEW-TOUGH-EYE-FOR-EYE (list "c") (list "c") (list "d"))
+(NEW-TOUGH-EYE-FOR-EYE (list "c") (list "d") (list "c"))		      
+(NEW-TOUGH-EYE-FOR-EYE (list "c") (list "d") (list "d"))		      
+(NEW-TOUGH-EYE-FOR-EYE (list "d") (list "c") (list "c"))		      
+(NEW-TOUGH-EYE-FOR-EYE (list "d") (list "c") (list "d"))		      
+(NEW-TOUGH-EYE-FOR-EYE (list "d") (list "d") (list "c"))		      
+(NEW-TOUGH-EYE-FOR-EYE (list "d") (list "d") (list "d"))		      
