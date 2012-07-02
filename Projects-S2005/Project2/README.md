@@ -361,7 +361,7 @@ Finally, using this data structure, we can build a new procedure that will retur
 (get-probability-of-c summary)
 ; Value: (1 1 1)
 
-(define new-summary (make-history-summer
+(define new-summary (make-history-summary
 	(list "c" "c" "c" "d" "c")
 	(list "c" "c" "d" "d" "c")
 	(list "c" "c" "c" "c" "c")))

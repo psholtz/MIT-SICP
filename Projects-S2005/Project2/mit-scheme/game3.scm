@@ -335,3 +335,12 @@
 ;; ==> "d"
 (NEW-TOUGH-EYE-FOR-EYE (list "d") (list "d") (list "d"))		      
 ;; ==> "d"
+
+;;
+;; We can define the "random" strategy that was defined in the problem statement:
+;;
+(define RANDOM-STRATEGY
+  (make-combined-strategies
+   EYE-FOR-EYE
+   EGALITARIAN
+   (lambda (r1 r2) (if (= (random 2) 0) r1 r2))))
