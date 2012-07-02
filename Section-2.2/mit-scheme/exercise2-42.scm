@@ -63,3 +63,22 @@
 ;; At this point, we can also define the "empty-board" constant:
 ;;
 (define empty-board '())
+
+
+;;
+;; [WORKING]
+;;
+(define (adjoin-position new-row column rest-of-queens)
+  (cons new-row rest-of-queens))
+
+(define (safe? column positions)
+  (define (next-column-safe? new-row positions row-offset)
+    (if (null? positions)
+	true
+	(let ((this-row (car positions)))
+	  (if (or (= this-row new-row)
+		  (= (+ this-row row-offset) new-row)
+		  (= (- this-row row-offset) new-row))
+	      false
+	      (next-column-safe? new-row (cdr positions) (+ 1 row-offset))))))
+  (next-column-safe? (car positions) (cdr positions) 1))
