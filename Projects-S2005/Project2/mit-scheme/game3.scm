@@ -1,4 +1,4 @@
-;;(load "prisoner3.scm")
+(load "prisoner3.scm")
 
 ;; +++++++++++++++++++++++++++++++++++++++++++++++++
 ;; Problem 9
@@ -248,7 +248,49 @@
 (SOFT-EYE-FOR-EYE (list "d") (list "d") (list "d"))
 ;; ==> "d"
 
-;; [WORKING]
+;;
+;; Let's play some rounds with these new strategies:
+;;
+
+;; ----------------------
+;; |  PATSY-3  |  1.18  |
+;; ----------------------
+;; |  NASTY-3  |  4.18  |
+;; ---------------------- 
+;; | SPASTIC-3 |  2.41  |
+;; ----------------------
+
+;;
+;; Again, SPASTIC-3 is a stochastic strategy and will not 
+;; always generate the same results on two conseuctive runs.
+;;
+
+;;
+;; -------------------------------- 
+;; |       PATSY-3       |  0.00  |
+;; -------------------------------- 
+;; |       NASTY-3       |  3.02  |
+;; -------------------------------- 
+;; |  TOUGH-EYE-FOR-EYE  |  2.99  |
+;; -------------------------------- 
+;;
+
+;;
+;; ------------------------------
+;; |       PATSY-3      |  2.0  |
+;; ------------------------------
+;; |       NASTY-3      |  5.0  |
+;; ------------------------------ 
+;; |  SOFT-EYE-FOR-EYE  |  2.0  |
+;; ------------------------------
+;;
+
+;;
+;; As before, the highly aggressive, "negative" strategies, the 
+;; ones which choose "defect" with a higher rate of probability, 
+;; are the ones which tend to "win" more often. Examples include
+;; NASTY-3 and TOUGH-EYE-FOR-EYE.
+;;
 
 ;; ++++++++++++++++++++++++++++++++++++++++++++++++
 ;; Problem 11
@@ -278,10 +320,18 @@
 ;; like the old "TOUGH-EYE-FOR-EYE" strategy:
 ;;
 (NEW-TOUGH-EYE-FOR-EYE (list "c") (list "c") (list "c"))		      
+;; ==> "c"
 (NEW-TOUGH-EYE-FOR-EYE (list "c") (list "c") (list "d"))
+;; ==> "d"
 (NEW-TOUGH-EYE-FOR-EYE (list "c") (list "d") (list "c"))		      
+;; ==> "d"
 (NEW-TOUGH-EYE-FOR-EYE (list "c") (list "d") (list "d"))		      
+;; ==> "d"
 (NEW-TOUGH-EYE-FOR-EYE (list "d") (list "c") (list "c"))		      
+;; ==> "c"
 (NEW-TOUGH-EYE-FOR-EYE (list "d") (list "c") (list "d"))		      
+;; ==> "d"
 (NEW-TOUGH-EYE-FOR-EYE (list "d") (list "d") (list "c"))		      
+;; ==> "d"
 (NEW-TOUGH-EYE-FOR-EYE (list "d") (list "d") (list "d"))		      
+;; ==> "d"
