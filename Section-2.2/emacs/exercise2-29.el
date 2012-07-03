@@ -170,3 +170,74 @@
 ;; ==> 7
 (total-weight m5)
 ;; ==> 12
+
+;;
+;; (c) A mobile is said to be "balanced" if the torque applied by its top-left branch is equal to that 
+;; applied by its top-right branch (that is, if the length of the left rod multiplied by the weight 
+;; hanging from that rod is equal to the corresponding product for the right side), and if each of the 
+;; submobiles hanging off its branches is balancecd. Design a procedure that tests whether a binary mobile
+;; is balanced.
+;;
+
+;;
+;; First let's design a "selector" for branches that returns the torque of the argument branch:
+;;
+(defun torque (branch)
+  (* (branch-length branch) (branch-weight branch)))
+
+(torque (left-branch m1))
+;; ==> 1
+(torque (right-branch m1))
+;; ==> 1
+(torque (left-branch m2))
+;; ==> 6
+(torque (right-branch m2))
+;; ==> 6
+(torque (left-branch m3))
+;; ==> 3
+(torque (right-branch m3))
+;; ==> 15
+(torque (left-branch m4))
+;; ==> 6 
+(torque (right-branch m4))
+;; ==> 15
+(torque (left-branch m5))
+;; ==> 15
+(torque (right-branch m5))
+;; ==> 35
+
+;;
+;; Let's also define a selector "balanced-branch?" which determines whether the mobile attached
+;; to the branch is balanced. If the attached structure is simply a weight, then we presume yes, 
+;; the single weight is balanced. If the attach structure is a mobile, we return whether the 
+;; mobile is balanced.
+;;
+(defun balanced-branch? (branch)
+  (let ((structure (branch-structure branch)))
+    (cond ((numberp structure) t)
+	  (t
+	   (balanced-mobile? structure)))))
+
+(defun balanced-mobile? (mobile)
+  (let ((left (left-branch mobile))
+	(right (right-branch mobile)))
+    (and (= (torque left) (torque right))
+	 (balanced-branch? left) (balanced-branch? right))))
+
+(balanced-mobile? m1)
+;; ==> t
+(balanced-mobile? m2)
+;; ==> t
+(balanced-mobile? m3)
+;; ==> nil
+(balanced-mobile? m4)
+;; ==> nil
+(balanced-mobile? m5)
+;; ==> nil
+
+;;
+;; Let's construct a compound mobile, which is balanced:
+;;
+
+
+
