@@ -1,10 +1,27 @@
+;;
+;; Exercise 2.29
+;;
+;; A binary mobile consists of two branches, a left branch and a right branch. Each branch is a rod of a
+;; certain length, from which hangs either a weight or another binary mobile. We can represent a binary
+;; mobile using compound data by constructing it from two branches (for example, using "list"):
+;;
+;; (define (make-mobile left right)
+;;  (list left right))
+;;
+;; A branch is constructed from a "length" (which must be a number) together with a "structure" which 
+;; may be either a number (representing a simple weight) or another mobile:
+;;
+;; (define (make-branch length structure)
+;;  (list length structure))
+;;
 
 ;;
-;; [WORKING]
+;; (a) Write the corresponding selectors "left-branch" and "right-branch", which return the branches
+;; of a mobile, and "branch-length" and "branch-structure" whihc return the components of a branch.
 ;;
 
 ;;
-;; Defin the "mobile" code:
+;; Define the "mobile" code:
 ;;
 (defun make-mobile (left right)
   (list left right))
@@ -338,6 +355,3 @@
 ;; ==> nil
 (balanced-mobile? m6)
 ;; ==> t
-
-
-
