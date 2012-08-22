@@ -1,10 +1,27 @@
+;;
+;; Exercise 2.29
+;;
+;; A binary mobile consists of two branches, a left branch and a right branch. Each branch is a rod of a
+;; certain length, from which hangs either a weight or another binary mobile. We can represent a binary
+;; mobile using compound data by constructing it from two branches (for example, using "list"):
+;;
+;; (define (make-mobile left right)
+;;  (list left right))
+;;
+;; A branch is constructed from a "length" (which must be a number) together with a "structure" which 
+;; may be either a number (representing a simple weight) or another mobile:
+;;
+;; (define (make-branch length structure)
+;;  (list length structure))
+;;
 
 ;;
-;; [WORKING]
+;; (a) Write the corresponding selectors "left-branch" and "right-branch", which return the branches
+;; of a mobile, and "branch-length" and "branch-structure" whihc return the components of a branch.
 ;;
 
 ;;
-;; Defin the "mobile" code:
+;; Define the "mobile" code:
 ;;
 (defun make-mobile (left right)
   (list left right))
@@ -238,6 +255,103 @@
 ;;
 ;; Let's construct a compound mobile, which is balanced:
 ;;
+(setq m6 (make-mobile
+	  (make-branch 3 m1)
+	  (make-branch 3 m1)))
 
+(balanced-mobile? m6)
+;; ==> t
 
+;;
+;; (d) Suppose we change the representation of mobiles so that the constructors are:
+;; 
+;; (define (make-mobile left right) (cons left right))
+;; (define (make-branch length structure) (cons length structure))
+;;
+;; How much do you need to change your programs to convert to the new representations?
+;;
 
+;;
+;; We only need to change the constructors, and the second of the two selectors attached to 
+;; each objects, to wit, "right-branch" and "branch-structure" respectively. 
+;;
+
+;;
+;; Using the new constructors, we have:
+;;
+(defun make-mobile (left right)
+  (cons left right))
+
+(defun left-branch (mobile)
+  (car mobile))
+
+(defun right-branch (mobile)
+  (cdr mobile))
+
+(defun make-branch (length structure)
+  (cons length structure))
+
+(defun branch-length (branch)
+  (car branch))
+
+(defun branch-structure (branch)
+  (cdr branch))
+
+;;
+;; Let's reconstruct the test objects using our new constructors:
+;;
+(setq m1 (make-mobile
+	  (make-branch 1 1)
+	  (make-branch 1 1)))
+
+(setq m2 (make-mobile
+	  (make-branch 2 3)
+	  (make-branch 3 2)))
+
+(setq m3 (make-mobile
+	  (make-branch 1 3)
+	  (make-branch 3 5)))
+
+(setq m4 (make-mobile
+	  (make-branch 3 m1)
+	  (make-branch 3 m2)))
+
+(setq m5 (make-mobile
+	  (make-branch 3 5)
+	  (make-branch 5 m4)))
+
+(setq m6 (make-mobile
+	  (make-branch 3 m1)
+	  (make-branch 3 m1)))
+
+;;
+;; Does the procedure "total-weight" still function as we anticipate?
+;;
+(total-weight m1)
+;; ==> 2
+(total-weight m2)
+;; ==> 5
+(total-weight m3)
+;; ==> 8 
+(total-weight m4)
+;; ==> 7
+(total-weight m5)
+;; ==> 12
+(total-weight m6)
+;; ==> 4
+
+;;
+;; Does the procedure "balanced-mobile?" still function as we anticipate?
+;;
+(balanced-mobile? m1)
+;; ==> t
+(balanced-mobile? m2)
+;; ==> t
+(balanced-mobile? m3)
+;; ==> nil
+(balanced-mobile? m4)
+;; ==> nil
+(balanced-mobile? m5)
+;; ==> nil
+(balanced-mobile? m6)
+;; ==> t
