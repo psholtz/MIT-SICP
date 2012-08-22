@@ -19,7 +19,7 @@
 ;;
 ;; Simple kinematics equation.
 ;; ++++++++++++++++++++++++++++
-(def
+(defn
   ^{:doc "Return position of particle subject to acceleration a, velocity v, position u at time t."
     :test (do
             (assert (= (position 0 0 0 0) 0))
