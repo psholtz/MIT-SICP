@@ -4,6 +4,6 @@ Recitation 6 - Fall 2007 ([PDF](http://people.csail.mit.edu/jastr/6001/fall07/r0
 Higher Order Procedures
 ----------------------- 
 
-** Special Forms **
+**Special Forms**
 
 
