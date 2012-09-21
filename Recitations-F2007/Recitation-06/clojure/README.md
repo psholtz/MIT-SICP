@@ -3,7 +3,7 @@ Recitation 6
 
 Contains worked solutions expressed in Clojure.
 
-Clojure (obviously) allows both Lisp-style programming, but it also accomodates a more "Clojure-esque" style of programming, which we call the "Joy" style in reference to the "Joy of Clojure" programming book.
+Clojure (obviously) allows both Lisp-style programming, but it also accomodates a more "Clojure-esque" style of programming, which we call the "Joy" style in reference to the "Joy of Clojure" programming book. We use two separate namespaces, one for each programming style, and give two separate sets of solutions for the questions.
 
 Working Definitions
 -------------------
@@ -11,6 +11,7 @@ Working Definitions
 **Lisp-style Definitions**
 <pre>
 (ns sicp.clojure.lisp)
+
 (defn make-units [C L H] (list C L H))
 (defn get-units-C [x] (first x))
 (defn get-units-L [x] (first (rest x)))
@@ -33,6 +34,7 @@ Working Definitions
 **Clojure-style Definitions**
 <pre>
 (ns sicp.clojure.joy)
+
 (defn make-units [C L H] {:C C :L L :H H})
 (defn get-units-C [x] (x :C))
 (defn get-units-L [x] (x :L))
