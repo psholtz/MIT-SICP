@@ -1,5 +1,5 @@
 ;;
-;; Working definitions
+;; Working definitions (Lisp style)
 ;;
 (ns sicp.clojure.lisp)
 
@@ -90,10 +90,12 @@
 ;; ==> #'sicp.clojure.lisp/s1
 (total-scheduled-units s1)
 ;; ==> 30
- 
-;; =========
-;; [WORKING] (order of growth)
-;; =========
+
+;;
+;; The order of growth is linear in both time and space in the variable
+;; "schedule", that is, it is O(n) where "n" is the length of the list
+;; structure "schedule".
+;;
 
 ;; =============================================================================
 
