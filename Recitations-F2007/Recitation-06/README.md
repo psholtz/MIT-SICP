@@ -58,11 +58,23 @@ Next, you need to define constructors and selectors to form class schedules.
 
 <pre>(define (add-class class schedule))</pre>
 
-(**3**)
+What are the order of growth in time and space?
 
-(**4**)
+(**3**) Write a selector that takes in a schedule and returns the total number of units in that schedule.
 
-(**5**)
+<pre>(define (total-scheduled-units sched) ...)</pre>
+
+What are the order of growth in time and space?
+
+(**4**) Write a procedure that drops a particular class from a schedule.
+
+<pre>(define (drop-class sched classnum) ...)</pre>
+
+What are the order of growth in time and space?
+
+(**5**) Enforce a credit limit by taking in a schedule, and removing classes unit the total number of units is less than max-credits.
+
+<pre>(define (credit-limit sched max-credits) ...)</pre>
 
 HOPs
 ---- 
