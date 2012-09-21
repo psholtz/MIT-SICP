@@ -60,3 +60,9 @@
 
 (first (rest s))
 ;; ==> (102 (3 3 3))
+
+;;
+;; The order of growth in both time and space is linear in the variable
+;; "schedule", that is, it is O(n) where "n" is the length of the list
+;; structure "schedule".
+;;
