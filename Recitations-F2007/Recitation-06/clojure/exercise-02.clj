@@ -50,9 +50,9 @@
 ;; Now try to build a schedule using these:
 ;;
 (def s (add-class calc1 (empty-schedule)))
-;; ==> #'user/s
+;; ==> #'sicp.clojure.lisp/s
 (def s (add-class calc2 s))
-;; ==> #'user/s
+;; ==> #'sicp.clojure.lisp/s
 
 ;;
 ;; Inspect the schedule:
@@ -106,3 +106,29 @@
   ^{:doc "'schedule' must already be a vector"}
   add-class [class schedule]
   (conj schedule class))
+
+;;
+;; Run some unit tests.
+;;
+;; First define some units and classes:
+;;
+(def u1 (make-units 3 3 3))
+(def calc1 (make-class 101 u1))
+(def calc2 (make-class 102 u1))
+
+;;
+;; Now try to build a schedule using these:
+;;
+(def s (add-class calc1 (empty-schedule)))
+;; ==> #'sicp.clojure.joy/s
+(def s (add-class calc2 s))
+;; ==> #'sicp.clojure.joy/s
+
+;;
+;; Inspect the schedule
+;;
+(nth s 0)
+;; ==> {:number 101, :units {:C 3, :L 3, :H 3}}
+
+(nth s 1)
+;; ==> {:number 102, :units {:C 3, :L 3, :H 3}}
