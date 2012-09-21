@@ -30,3 +30,16 @@
 ;;
 ;; The order of growth is constant in both time and space.
 ;;
+
+
+;; WORKING ;;
+;; THERE IS A MUCH MORE "CLOJURe-SPECIFIC" WAY TO COMPUTE THIS
+(defn make-units [C L H] {:C C :L L :H H})
+(defn get-units-C [x] (x :C))
+(defn get-units-L [x] (x :L))
+(defn get-units-H [x] (x :H))
+
+(defn make-class [number units] {:number number :units units})
+(defn get-class-number [x] (x :number))
+(defn get-class-units [x] (x :units))
+
