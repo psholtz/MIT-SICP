@@ -1,6 +1,8 @@
 ;;
-;; Working definitions
+;; Working definitions (Lisp-style)
 ;;
+(ns sicp.clojure.lisp)
+
 (defn make-units [C L H] (list C L H))
 (defn get-units-C [x] (first x))
 (defn get-units-L [x] (first (rest x)))
@@ -31,9 +33,15 @@
 ;; The order of growth is constant in both time and space.
 ;;
 
+;;
+;; =========================================================================
+;;
 
-;; WORKING ;;
-;; THERE IS A MUCH MORE "CLOJURe-SPECIFIC" WAY TO COMPUTE THIS
+;;
+;; Working definitions (Joy-style)
+;;
+(ns sicp.clojure.joy)
+
 (defn make-units [C L H] {:C C :L L :H H})
 (defn get-units-C [x] (x :C))
 (defn get-units-L [x] (x :L))
@@ -43,3 +51,18 @@
 (defn get-class-number [x] (x :number))
 (defn get-class-units [x] (x :units))
 
+(defn get-class-total-units [class]
+  (let [units (get-class-units class)]
+    (+ (get-units-C units)
+       (get-units-L units)
+       (get-units-H units))))
+
+(defn same-class? [c1 c2]
+  (= (get-class-number c1) (get-class-number c2)))
+
+;;
+;; Solution:
+;;
+;; We define the constructor using a Vector, rather than a List.
+;;
+(defn empty-schedule [] [])

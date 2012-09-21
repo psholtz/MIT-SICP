@@ -51,5 +51,5 @@ Working Definitions
      (get-units-H units))))
 
 (defn same-class? [c1 c2]
- (= (get-class-number c1) (get-class-number c1)))
+ (= (get-class-number c1) (get-class-number c2)))
 </pre>
