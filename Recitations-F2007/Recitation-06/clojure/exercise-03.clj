@@ -52,3 +52,39 @@
 
   ;; Invoke the iterative process
   (total-scheduled-units-iter 0 schedule))
+
+;;
+;; Run some unit tests:
+;;
+(def calculus-1 (make-class 'CALC-101 (make-units 4 4 4)))
+(def calculus-2 (make-class 'CALC-102 (make-units 4 4 4)))
+(def algebra (make-class 'ALGB-152 (make-units 3 3 3)))
+(def diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
+
+(get-class-total-units calculus-1)
+;; ==> 12
+(get-class-total-units calculus-2)
+;; ==> 12
+(get-class-total-units algebra)
+;; ==> 9 
+(get-class-total-units diff-eqs)
+;; ==> 9
+
+(def s1 (empty-schedule))
+(total-scheduled-units s1)
+;; ==> 0
+
+(def s1 (add-class calculus-1 s1))
+;; ==> #'user/s1
+(total-scheduled-units s1)
+;; ==> 12
+
+(def s1 (add-class algebra s1))
+;; ==> #'user/s1
+(total-scheduled-units s1)
+;; ==> 21
+
+(def s1 (add-class diff-eqs s1))
+;; ==> #'user/s1
+(total-scheduled-units s1)
+;; ==> 30
