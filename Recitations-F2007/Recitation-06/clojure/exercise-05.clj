@@ -59,6 +59,68 @@
             first-class (first working)]
         (if (> total-credits max-credits)
           (credit-limit-iter
-           (drop-class (get-class-number first-class) schedule))
+           (drop-class working (get-class-number first-class)))
           working))))
   (credit-limit-iter schedule))
+
+;;
+;; Run some unit tests:
+;;
+(def calculus-1 (make-class 'CALC-101 (make-units 4 4 4)))
+(def calculus-2 (make-class 'CALC-102 (make-units 4 4 4)))
+(def algebra (make-class 'ALGB-152 (make-units 3 3 3)))
+(def diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
+
+(def s1 (empty-schedule))
+(def s1 (add-class calculus-1 s1))
+(def s1 (add-class calculus-1 s1))
+(def s1 (add-class algebra s1))
+(def s1 (add-class diff-eqs s1))
+
+;;
+;; Introspect s1:
+;;
+;; ==> ((CALC-101 (4 4 4)) (CALC-102 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+;;
+
+;;
+;; Total number of units in s1:
+;;
+(total-scheduled-units s1)
+;; ==> 42
+
+;;
+;; First test the empty case:
+;;
+(credit-limit '() 10)
+;; ==> '()
+
+;;
+;; Then test the "do nothing" case:
+;;
+(credit-limit s1 50)
+;; ==> ((CALC-101 (4 4 4)) (CALC-102 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+
+(credit-limit s1 42)
+;; ==> ((CALC-101 (4 4 4)) (CALC-102 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+
+(credit-limit s1 41)
+;; ==> ((CALC-102 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+
+(credit-limit s1 25)
+;; ==> ((ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+
+(total-scheduled-units (credit-limit s1 42))
+;; ==> 42
+(total-scheduled-units (credit-limit s1 41))
+;; ==> 30
+(total-scheduled-units (credit-limit s1 30))
+;; ==> 30
+(total-scheduled-units (credit-limit s1 25))
+;; ==> 18
+
+;; [WORKING --> order of growth]
+
+;; =================================================================================
+
+;; [WORKGIN]
