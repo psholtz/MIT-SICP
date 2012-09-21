@@ -32,7 +32,8 @@ Exercises
 You've been asked to help the registrar manage class schedules, and have started by creating an abstraction for a class's units, and another for a class. So far, you have the following:
 
 <pre>
-(define (make-units C L H))
+(define (make-units C L H) 
+ (list C L H))
 (define get-units-C car)
 (define get-units-L cadr)
 (define get-units-H caddr)
@@ -56,7 +57,7 @@ Next, you need to define constructors and selectors to form class schedules.
 
 (**2**) Write a selector that when given a class and a schedule, returns a new schedule including the new class:
 
-<pre>(define (add-class class schedule))</pre>
+<pre>(define (add-class class schedule) ...)</pre>
 
 What are the order of growth in time and space?
 
