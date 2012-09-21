@@ -54,4 +54,42 @@ Next, you need to define constructors and selectors to form class schedules.
 
 (**1**) Define a constructor **empty-schedule** that returns an empty schedule. What are the order of growth in time and space?
 
-(**2**)
+(**2**) Write a selector that when given a class and a schedule, returns a new schedule including the new class:
+
+<pre>(define (add-class class schedule))</pre>
+
+(**3**)
+
+(**4**)
+
+(**5**)
+
+HOPs
+---- 
+
+<pre>
+(define (make-student number sched-checker)
+ (list number (list) sched-checker))
+(define get-student-number car)
+(Define get-student-schedule cadr)
+(define get-student-checker caddr)
+
+(define (update-student-schedule student schedule)
+ (if ((get-student-checker student) schedule)
+     (list (get-student-number student) 
+           schedule
+           (get-student-checker student))
+     (error "Invalid schedule")))
+</pre>
+
+(**6**)
+
+(**7**)
+
+(**8**) Write a procedure that takes a schedule and returns a list of the class numbers in the schedule. Use **map**.
+
+<pre>(define (class-numbers schedule) ...)</pre>
+
+(**9**) Rewrite **drop-calss* to use **filter**.
+
+(**10**) Rewrite **credit-limit** to run in O(n) time.
