@@ -33,9 +33,7 @@
 ;; The order of growth is constant in both time and space.
 ;;
 
-;;
 ;; =========================================================================
-;;
 
 ;;
 ;; Working definitions (Joy-style)
