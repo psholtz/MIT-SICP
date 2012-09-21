@@ -62,15 +62,43 @@
   ;; We want to keep all the classes which are *not* equal to the class number.
   ;;
   (defn predicate [class]
-    (= (get-class-number class) classnum))
+    (not (= (get-class-number class) classnum)))
 
   ;;
   ;; Filter out the classes we want to delete:
   ;;
-  (remove-if-not predicate schedule))
+  (filter predicate schedule))
 
-;; [ WOKRING ]
-;; [ WORKING ]
+;;
+;; Run some unit tests:
+;;
+(def calculus-1 (make-class 'CALC-101 (make-units 4 4 4)))
+(def calculus-2 (make-class 'CALC-102 (make-units 4 4 4)))
+(def algebra (make-class 'ALGB-152 (make-units 3 3 3)))
+(def diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
+
+(def s1 (empty-schedule))
+(def s1 (add-class calculus-1 s1))
+(def s1 (add-class algebra s1))
+(def s1 (add-class diff-eqs s1))
+
+;;
+;; Introspecting s1:
+;;
+;; ((CALC-101 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+;;
+
+;;
+;; Now try to drop a class:
+;;
+(drop-class s1 'CALC-101)
+;; ==> ((ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+
+;;
+;; The order of growth is linear in both time and space in the variable
+;; "schedule", that is, it is O(n) where "n" is the length of the list
+;; structure "schedule".
+;;
 
 ;; ==============================================================================
 

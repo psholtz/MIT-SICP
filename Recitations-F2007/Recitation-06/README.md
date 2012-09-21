@@ -77,6 +77,8 @@ What are the order of growth in time and space?
 
 <pre>(define (credit-limit sched max-credits) ...)</pre>
 
+What are the order of growth in time and space?
+
 HOPs
 ---- 
 
