@@ -1,6 +1,8 @@
 ;;
 ;; Working definitions (Lisp-style)
 ;;
+(ns sicp.clojure.lisp)
+
 (defn make-units [C L H] (list C L H))
 (defn get-units-C [x] (first x))
 (defn get-units-L [x] (first (rest x)))
@@ -125,9 +127,38 @@
   ;; We want to keep all the classes whihc are *not* equal to the class number.
   ;;
   (defn predicate [class]
-    (not (= get-class-number class) classnum))
+    (not (= (get-class-number class) classnum)))
 
   ;;
   ;; Filter out the classes we want to delete:
   ;;
   (filter predicate schedule))
+
+;;
+;; Run some unit tests:
+;;
+(def calculus-1 (make-class 'CALC-101 (make-units 4 4 4)))
+(def calculus-2 (make-class 'CALC-102 (make-units 4 4 4)))
+(def algebra (make-class 'ALGB-152 (make-units 3 3 3)))
+(def diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
+
+(def s1 (empty-schedule))
+(def s1 (add-class calculus-1 s1))
+(def s1 (add-class algebra s1))
+(def s1 (add-class diff-eqs s1))
+
+;;
+;; Introspecting s1:
+;;
+;; [{:number CALC-101, :units {:C 4, :L 4, :H 4}}
+;;  {:number ALGB-152, :units {:C 3, :L 3, :H 3}}
+;;  {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
+;;
+
+;;
+;; Now try to drop a class:
+;;
+(drop-class s1 'CALC-101)
+;; ==>
+;; [{:number ALGB-152, :units {:C 3, :L 3, :H 3}}
+;;  {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
