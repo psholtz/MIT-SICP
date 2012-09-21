@@ -82,14 +82,18 @@ HOPs
      (error "Invalid schedule")))
 </pre>
 
-(**6**)
+(**6**) Finish the call to **make-student** to require the student takes at least 1 class.
 
-(**7**)
+<pre>(make-student 575904467 ...)</pre>
+
+(**7**) Finish the call to **make-student** to create a first-term freshman (limited to 54 units).
+
+<pre>(make-student 575904467 ...)</pre>
 
 (**8**) Write a procedure that takes a schedule and returns a list of the class numbers in the schedule. Use **map**.
 
 <pre>(define (class-numbers schedule) ...)</pre>
 
-(**9**) Rewrite **drop-calss* to use **filter**.
+(**9**) Rewrite **drop-class** to use **filter**.
 
 (**10**) Rewrite **credit-limit** to run in O(n) time.
