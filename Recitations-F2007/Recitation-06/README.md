@@ -8,7 +8,7 @@ Higher Order Procedures
 
 <pre>(let bindings body)</pre>
 
-Binds the given bindings for the duration of the body. The bindings are a list of (name-value) pairs. The body consists of one or more expressions which are evaluated in order and hte value of the last is returned. Let is an example of syntactic sugar:
+Binds the given bindings for the duration of the body. The bindings are a list of (name-value) pairs. The body consists of one or more expressions which are evaluated in order and the value of the last is returned. Let is an example of syntactic sugar:
 
 <pre>(let ((arg1 val1) (arg2 val2)) body)</pre>
 
