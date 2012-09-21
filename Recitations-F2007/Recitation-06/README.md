@@ -4,7 +4,7 @@ Recitation 6 - Fall 2007 ([PDF](http://people.csail.mit.edu/jastr/6001/fall07/r0
 Higher Order Procedures
 ----------------------- 
 
-**Special Forms**
+**Special Form - Let**
 
 <pre>(let bindings body)</pre>
 
@@ -15,3 +15,13 @@ Binds the given bindings for the duration of the body. The bindings are a list o
 Is equivalent to:
 
 <pre>((lambda (arg1 arg2) body) val1 val2)</pre>
+
+**Procedures**
+
+<pre>(map op lst)</pre> 
+
+Apply *op* to each element of *lst* in turn and return a list of the results.
+
+<pre>(filter pred let)</pre>
+
+Apply the predicate *pred* to each element of *lst* and return a list of all elements for which the predicate returned true (anything other tahn #f)
