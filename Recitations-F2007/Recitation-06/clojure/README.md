@@ -3,6 +3,9 @@ Recitation 6
 
 Contains worked solutions expressed in Clojure.
 
+Working Definitions
+-------------------
+
 <pre>
 (defn make-units [C L H] (list C L H))
 (defn get-units-C [x] (first x))
