@@ -199,12 +199,13 @@
 ;; so we can see whether program execution actually performs the
 ;; way we would predict.
 ;;
-(defn timed-play-loop [strat0 strat1 times]
+(defn
+  ^{:doc "Time how long it takes for two strategies to run against each other 'times' number of times."}
+  timed-play-loop [strat0 strat1 times]
 
-  ;;
-  ;; Play-loop-iter procedure for executing the game play an arbitrary number of times
-  ;;
-  (defn timed-play-loop-iter [count history0 history1 limit]
+  (defn
+    ^{:doc "Procedure for executing the game play an arbitrary number of times."}
+    timed-play-loop-iter [count history0 history1 limit]
     (cond (= count limit) (print-out-results history0 history1 limit)
 	  :else
 	  (let [result0 (strat0 history0 history1)

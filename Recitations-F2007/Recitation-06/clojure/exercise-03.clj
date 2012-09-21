@@ -35,8 +35,13 @@
 ;; Write a selector that takes in a schedule and returns the total number
 ;; of units in that schedule:
 ;;
-(defn total-scehduled-units [schedule]
-  (defn total-scheduled-units-iter [total working]
+(defn
+  ^{:doc "Return the total number of units in an entire schedule"}
+  total-scehduled-units [schedule]
+  
+  (defn
+    ^{:doc "Iterative process to recursively count the number of units."}
+    total-scheduled-units-iter [total working]
     (if (empty? working)
       total
       (let [current-class (first working)]
@@ -44,4 +49,6 @@
          (+ total
             (get-class-total-units current-class))
          (rest working)))))
+
+  ;; Invoke the iterative process
   (total-scheduled-units-iter 0 schedule))
