@@ -1,0 +1,33 @@
+;;
+;; Exercise 2.5
+;;
+;; Show that we can represent pairs of nonnegative integers using only numbers and arithmetic operations
+;; if we represent the pair a and b as the integer that is the product 2^a*3^b. Give the corresponding
+;; definitions of the procedures cons, car and cdr.
+;;
+
+;;
+;; Definition for the cons procedure:
+;;
+(defn cons [a b] (* (Math/pow 2 a) (Math/pow 3 b)))
+
+;;
+;; The definitions for car and cdr can
+;; be given either as recursive or
+;; iterative processes.
+;;
+;; The following procedures generate a recursive process:
+;;
+(defn car [n]
+  (if (= (rem n 2) 0)
+    (+ 1 (car (/ n 2)))
+    0))
+
+(defn cdr [n]
+  (if (= (rem n 3) 0)
+    (+ 1 (cdr (/ n 3)))
+    0))
+
+;;
+;; The following procedures generate an iterative process:
+;;
