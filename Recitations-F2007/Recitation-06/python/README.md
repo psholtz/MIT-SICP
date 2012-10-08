@@ -8,7 +8,7 @@ For this reason, this branch contains some of the solutions, worked out in Pytho
 Working Definitions
 ------------------- 
 
-*Python Definitions*
+**Python Definitions**
 
 <pre>
 
