@@ -26,3 +26,15 @@ def get_class_total_units(klass):
 def same_class(klass1,klass2):
   return get_class_number(klass1) == get_class_number(klass2)
 
+#
+# Exercise 1
+#
+# Define a constructor "empty-schedule" that returns an empty schedule.
+# What are the orders of growth in time and space?
+#
+def empty_schedule():
+  return []
+
+#
+# The order of growth is constant in both time and space.
+# 
