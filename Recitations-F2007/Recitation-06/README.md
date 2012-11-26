@@ -53,27 +53,27 @@ You've been asked to help the registrar manage class schedules, and have started
 
 Next, you need to define constructors and selectors to form class schedules.
 
-(**1**) Define a constructor **empty-schedule** that returns an empty schedule. What are the order of growth in time and space?
+(1) Define a constructor **empty-schedule** that returns an empty schedule. What are the order of growth in time and space?
 
-(**2**) Write a selector that when given a class and a schedule, returns a new schedule including the new class:
+(2) Write a selector that when given a class and a schedule, returns a new schedule including the new class:
 
 <pre>(define (add-class class schedule) ...)</pre>
 
 What are the order of growth in time and space?
 
-(**3**) Write a selector that takes in a schedule and returns the total number of units in that schedule.
+(3) Write a selector that takes in a schedule and returns the total number of units in that schedule.
 
 <pre>(define (total-scheduled-units sched) ...)</pre>
 
 What are the order of growth in time and space?
 
-(**4**) Write a procedure that drops a particular class from a schedule.
+(4) Write a procedure that drops a particular class from a schedule.
 
 <pre>(define (drop-class sched classnum) ...)</pre>
 
 What are the order of growth in time and space?
 
-(**5**) Enforce a credit limit by taking in a schedule, and removing classes unit the total number of units is less than max-credits.
+(5) Enforce a credit limit by taking in a schedule, and removing classes unit the total number of units is less than max-credits.
 
 <pre>(define (credit-limit sched max-credits) ...)</pre>
 
@@ -97,18 +97,18 @@ HOPs
      (error "Invalid schedule")))
 </pre>
 
-(**6**) Finish the call to **make-student** to require the student takes at least 1 class.
+(6) Finish the call to **make-student** to require the student takes at least 1 class.
 
 <pre>(make-student 575904467 ...)</pre>
 
-(**7**) Finish the call to **make-student** to create a first-term freshman (limited to 54 units).
+(7) Finish the call to **make-student** to create a first-term freshman (limited to 54 units).
 
 <pre>(make-student 575904467 ...)</pre>
 
-(**8**) Write a procedure that takes a schedule and returns a list of the class numbers in the schedule. Use **map**.
+(8) Write a procedure that takes a schedule and returns a list of the class numbers in the schedule. Use **map**.
 
 <pre>(define (class-numbers schedule) ...)</pre>
 
-(**9**) Rewrite **drop-class** to use **filter**.
+(9) Rewrite **drop-class** to use **filter**.
 
-(**10**) Rewrite **credit-limit** to run in O(n) time.
+(10) Rewrite **credit-limit** to run in O(n) time.
