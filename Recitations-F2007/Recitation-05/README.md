@@ -23,7 +23,7 @@ Data Structures and Abstractions
 Exercises
 ---------
 
-(**1**) Draw box-and-pointer diagrams for the values of the following expressions. Also give the printed representation.
+(1) Draw box-and-pointer diagrams for the values of the following expressions. Also give the printed representation.
 
 (a) (cons 1 2)
 
@@ -35,7 +35,7 @@ Exercises
 
 (e) (list (cons 1 2) (list 4 5) 3)
 
-(**2**) Write expressions whose values will print out like the folllowing:
+(2) Write expressions whose values will print out like the folllowing:
 
 (a) (1 2 3)
 
@@ -43,8 +43,8 @@ Exercises
 
 (c) ((1 2) (3 4) (5 6))
 
-(**3**) Create a data abstraction for points in a place. It should have a constructor (make-point x y), which returns a point, and two selectors (point-x pt) and (point-y pt), which return the x and y coordinates.
+(3) Create a data abstraction for points in a place. It should have a constructor (make-point x y), which returns a point, and two selectors (point-x pt) and (point-y pt), which return the x and y coordinates.
 
-(**4**) Now, extend the point abstraction to handle line segments, with a constructor (make-line-segment p1 p2) and selectors "line-segment-start" and "line-segment-end".
+(4) Now, extend the point abstraction to handle line segments, with a constructor (make-line-segment p1 p2) and selectors "line-segment-start" and "line-segment-end".
 
-(**5**) Write a procedure (intersection seg1 seg2) that returns a point where two line segments intersect if they do, and returns #f if they do not intersect. Be sure to honor the abstractions defined.
+(5) Write a procedure (intersection seg1 seg2) that returns a point where two line segments intersect if they do, and returns #f if they do not intersect. Be sure to honor the abstractions defined.
