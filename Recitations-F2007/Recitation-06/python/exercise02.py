@@ -61,8 +61,10 @@ s = add_class(calc2,s)
 # Inspect the schedule:
 #
 print "First class:\t", s[0]
+# ==> [101, [3, 3, 3]]
 
 print "Second class:\t", s[1]
+# ==> [102, [3, 3, 3]]
 
 #
 # The order of growth in both time and space is linear in the variable
