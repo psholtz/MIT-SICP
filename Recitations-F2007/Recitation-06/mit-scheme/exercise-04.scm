@@ -127,4 +127,9 @@
 
 ;;
 ;; The order of growth for the less efficient version of "drop-class",
-;; the one which does not use the "filter" procedure, is XXX in space.
+;; the one which does not use the "filter" procedure, is O(n) in space.
+;; The procedure uses on copy of the "schedule" data structure as an 
+;; argument, and it dynamically builds a second copy of the structure 
+;; using recursive calls to append. The result is a procedure call that 
+;; requires 2*n units of memory.
+;;
