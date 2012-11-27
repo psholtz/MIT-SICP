@@ -37,16 +37,12 @@ def add_class(klass,schedule):
   return schedule
 
 def total_scheduled_units(schedule):
-  """ Return the total number of units in an entire schedule """
-  
   def total_scheduled_units_iter(total,working):
-    """ Iterative process to recursively count the number of units """
     if not working:
       return total
     else:
       return total_scheduled_units_iter(total + get_class_total_units(working[0]), working[1:])
 
-  # Make the recursive call to the inner iterative function
   return total_scheduled_units_iter(0,schedule)
 
 #
@@ -85,13 +81,13 @@ s1 = add_class(diff_eqs, s1)
 #
 # [['CALC-101', [4, 4, 4]], ['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]
 #
-print "Schedule: ", s1
+print "Schedule:", s1
 
 #
 # Now try to drop a class:
 #
 s1 = drop_class(s1, "CALC-101")
-print "Schedule: ", s1
+print "Schedule:", s1
 # ==> [['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]
 
 #

@@ -66,13 +66,13 @@ diff_eqs = make_class("DIFF-201", make_units(3,3,3))
 #
 # Display the Classes
 #
-print "Calculus 101 Total Units: ", get_class_total_units(calculus_1)
+print "Calculus 101 Total Units:", get_class_total_units(calculus_1)
 # ==> 12 
-print "Calculus 102 Total Units: ", get_class_total_units(calculus_2)
+print "Calculus 102 Total Units:", get_class_total_units(calculus_2)
 # ==> 12
-print "Algebra 152 Total Units: ", get_class_total_units(algebra)
+print "Algebra 152 Total Units:", get_class_total_units(algebra)
 # ==> 9
-print "Differential Equations 201 Total Units: ", get_class_total_units(diff_eqs)
+print "Differential Equations 201 Total Units:", get_class_total_units(diff_eqs)
 # ==> 9
 print
 
@@ -80,16 +80,16 @@ print
 # Display the Total Units
 #
 s1 = empty_schedule()
-print "Total Scheduled Units: ", total_scheduled_units(s1)
+print "Total Scheduled Units:", total_scheduled_units(s1)
 
 s1 = add_class(calculus_1, s1)
-print "Total Scheduled Units: ", total_scheduled_units(s1)
+print "Total Scheduled Units:", total_scheduled_units(s1)
 
 s1 = add_class(algebra, s1)
-print "Total Scheduled  Units: ", total_scheduled_units(s1)
+print "Total Scheduled  Units:", total_scheduled_units(s1)
 
 s1 = add_class(diff_eqs, s1)
-print "Total Scheduled Units: ", total_scheduled_units(s1)
+print "Total Scheduled Units:", total_scheduled_units(s1)
 
 #
 # The order of growth is linear in both time and space in the variable
