@@ -92,9 +92,29 @@
 ;; ==> 30
 
 ;;
-;; The order of growth is linear in both time and space in the variable
-;; "schedule", that is, it is O(n) where "n" is the length of the list
-;; structure "schedule".
+;; The order of the growth is time in linear in the size of the
+;; variable "schedule", since we have to iterate over the entire
+;; length of the variable to count all the units. Calculating the
+;; number of units at each node of "schedule" is a constant-time
+;; operation, and hence, the order of growth in time is O(n), where
+;; n is the size of the variable "schedule".
+;;
+;; The order of growth in space is linear in the size of the
+;; variable "schedule", presuming that we do not have to make
+;; new copies of the variable at each invocation of the iteration
+;; procedure; that is, presuming that the (cdr seq) call does not
+;; create a copy of the sequence. If no copies are made, then only
+;; the first copy of the variable "schedule" is used, and so the
+;; order of growth in space is O(n), or linear in the size of the
+;; variable "schedule".
+;;
+;; If copies of the variable are made at each procedure invocation,
+;; then the order of growth statistics are O(n^2), where n is the
+;; size of the variable "schedule". Specifically, n(n+1)/2, or roughly
+;; (1/2)n^2 units of memory must be allocated to accomodate execution
+;; of the procedure, since first then size-n "schedule" variable is
+;; used, then the size-(n-1) "cdr" of that variable is used, and so on,
+;; down to size 1.
 ;;
 
 ;; =============================================================================
