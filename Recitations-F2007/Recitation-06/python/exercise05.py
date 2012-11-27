@@ -104,3 +104,7 @@ print "Credit Limit:", credit_limit(empty_schedule(), 10)
 # Then test the "do nothing" case:
 #
 print "Credit Limit:", credit_limit(s1, 50)
+
+#
+# [WORKING]
+#
