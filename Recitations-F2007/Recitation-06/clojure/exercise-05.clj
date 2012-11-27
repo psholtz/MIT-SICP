@@ -202,5 +202,72 @@
 ;; the total number of units is less than max-credits.
 ;;
 (defn credit-limit [schedule max-credits]
-  '())
+  (defn credit-limit-iter [working]
+    (if (empty? working)
+      '()
+      (let [total-credits (total-scheduled-units working)
+	    first-class (first working)]
+	(if (> total-credits max-credits)
+	  (credit-limit-iter
+	   (drop-class working (get-class-number first-class)))
+	  working))))
+  (credit-limit-iter schedule))
 
+;;
+;; Run some unit tests:
+;;
+(def calculus-1 (make-class 'CALC-101 (make-units 4 4 4)))
+(def calculus-2 (make-class 'CALC-102 (make-units 4 4 4)))
+(def algebra (make-class 'ALGB-152 (make-units 3 3 3)))
+(def diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
+
+(def s1 (empty-schedule))
+(def s1 (add-class calculus-1 s1))
+(def s1 (add-class calculus-2 s1))
+(def s1 (add-class algebra s1))
+(def s1 (add-class diff-eqs s1))
+
+;;
+;; Introspect s1:
+;;
+;; ==> [{:number CALC-101, :units {:C 4, :L 4, :H 4}} {:number CALC-102, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}] 
+;;
+
+;;
+;; Total number of units in s1:
+;;
+(total-scheduled-units s1)
+;; ==> 42
+
+;;
+;; First test the empty case:
+;;
+(credit-limit '() 10)
+;; ==> ()
+
+;;
+;; Then test the "do nothing" case:
+;;
+(credit-limit s1 50)
+;; ==> [{:number CALC-101, :units {:C 4, :L 4, :H 4}} {:number CALC-102, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
+
+(credit-limit s1 42)
+;; ==> [{:number CALC-101, :units {:C 4, :L 4, :H 4}} {:number CALC-102, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
+
+(credit-limit s1 41)
+;; ==> [{:number CALC-102, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
+
+(credit-limit s1 30)
+;; ==> [{:number CALC-102, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
+
+(credit-limit s1 25)
+;; ==> [{:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
+
+(total-scheduled-units (credit-limit s1 42))
+;; ==> 42
+(total-scheduled-units (credit-limit s1 41))
+;; ==> 30
+(total-scheduled-units (credit-limit s1 30))
+;; ==> 30
+(total-scheduled-units (credit-limit s1 25))
+;; ==> 18
