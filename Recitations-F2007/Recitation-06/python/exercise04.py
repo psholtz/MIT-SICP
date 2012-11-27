@@ -66,4 +66,39 @@ def drop_class(schedule,classnum):
   #
   return filter(predicate, schedule)
 
-print "done"
+#
+# Run some unit tests:
+#
+calculus_1 = make_class("CALC-101", make_units(4,4,4))
+calculus_2 = make_class("CALC-102", make_units(4,4,4))
+algebra = make_class("ALGB-152", make_units(3,3,3))
+diff_eqs = make_class("DIFF-201", make_units(3,3,3))
+
+s1 = empty_schedule()
+s1 = add_class(calculus_1, s1)
+s1 = add_class(algebra, s1)
+s1 = add_class(diff_eqs, s1)
+
+#
+# Introspecting s1:
+#
+# [['CALC-101', [4, 4, 4]], ['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]
+#
+print "Schedule: ", s1
+
+#
+# Now try to drop a class:
+#
+drop_class(s1, "CALC-101")
+
+#
+# [WORKING --> NOT QUITE DONE!!]
+#
+
+print "Schedule: ", s1
+
+#
+# The order of growth is linear in both time and space in the variable
+# "schedule", that is, it is O(n) where "n" is the length of the list
+# structure "schedule".
+#
