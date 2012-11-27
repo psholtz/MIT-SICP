@@ -128,23 +128,16 @@ print "Total Scheduled Units:", total_scheduled_units(credit_limit(s1, 25))
 print
 
 #
-# Do more extensive testing for the orders of growth:
+# Order of growth in time is O(n^2), where "n" is the length of the "schedule" 
+# data structure.  In a worst-case scenario, we need to step through all n 
+# elements of the structure, and (again in a worst-case scenario) we may need 
+# to invoke the "drop_class" procedure at each step. The precise number of steps
+# in this worst-case scenario is n(n+1)/2, or about 1/2 of n^2.
 #
-import string
-SAMPLE_SPACE = string.letters.upper()
-tokens = []
-for x in range(len(SAMPLE_SPACE)):
-  a1 = SAMPLE_SPACE[x]
-  for y in range(len(SAMPLE_SPACE)):
-    a2 = SAMPLE_SPACE[y]
-    for z in range(len(SAMPLE_SPACE)):
-      a3 = SAMPLE_SPACE[z]
-      tokens.append(a1+a2+a3)
-
-print tokens
-print len(tokens)
-print SAMPLE_SPACE
+# In most cases, though, the algorithm will run much faster than this.
+#
 
 #
-# [WORKING] (what is the order of growth??)
-#
+# [3 --> might be wrong]
+# [4 --> might be wrong]
+# 
