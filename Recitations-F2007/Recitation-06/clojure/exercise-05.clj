@@ -73,7 +73,7 @@
 
 (def s1 (empty-schedule))
 (def s1 (add-class calculus-1 s1))
-(def s1 (add-class calculus-1 s1))
+(def s1 (add-class calculus-2 s1))
 (def s1 (add-class algebra s1))
 (def s1 (add-class diff-eqs s1))
 
@@ -193,7 +193,7 @@
 (defn drop-class [schedule classnum]
   (defn predicate [class]
     (not (= (get-class-number class) classnum)))
-  (filter predicate schedule))
+  (vec (filter predicate schedule)))
 
 ;;
 ;; Exercise 5

@@ -160,7 +160,7 @@
   ;;
   ;; Filter out the classes we want to delete:
   ;;
-  (filter predicate schedule))
+  (vec (filter predicate schedule)))
 
 ;;
 ;; Run some unit tests:
