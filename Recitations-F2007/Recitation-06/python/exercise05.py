@@ -128,16 +128,28 @@ print "Total Scheduled Units:", total_scheduled_units(credit_limit(s1, 25))
 print
 
 #
-# Order of growth in time is O(n^2), where "n" is the length of the "schedule" 
-# data structure.  In a worst-case scenario, we need to step through all n 
-# elements of the structure, and (again in a worst-case scenario) we may need 
-# to invoke the "drop_class" procedure at each step. The precise number of steps
-# in this worst-case scenario is n(n+1)/2, or about 1/2 of n^2.
+# In a worst-case scenario, we need to step through all "n" elements of
+# the schedule structure, and at each step, we need to  invoke the 
+# "total-scheduleded-units" procedure, which itself runs on O(n) time. 
+# Walking down the list structure costs "n" steps, and invoking 
+# "total-scheduled-units" at each nodes costs a total of an additional
+# (1/2)*(n)*(n+1) steps, so the total number of steps involved thus 
+# far is (1/2)*(n^2+3*n). 
 #
-# In most cases, though, the algorithm will run much faster than this.
+# Furthermore, in a worst-case scenario we need to invoke the "drop-class"
+# procedure at each node, which is also linear in "n". Invoking this linear-time
+# procedure at each step of the structure will add an additional n*(n+1)/2
+# steps to the computation. The total number of steps required (in a worst 
+# case scenario) will be n^2 + 2*n, so the procedure (in a worst-case 
+# scenario) will run in O(n^2) time.
 #
-
+# In most instances, the procedure will run much more quickly than this.
 #
-# [3 --> might be wrong]
-# [4 --> might be wrong]
-# 
+# To calculate the space requirements, let's assume that the "total-scheduled-units"
+# procedure requires O(n) linear space. In a worst case scenario, we need to create
+# a new copy of the schedule, of size (n-1), at each step of the procedure 
+# using the "drop-class" procedure. "drop-class" is linear in space, but 
+# creating a new copy of the structure, of size (n-1), at each step, will require
+# a total of n(n+1)/2 units of memory. Hence the space requirements for the 
+# algorithm - in a worst-case scenario - are O(n^2).
+#
