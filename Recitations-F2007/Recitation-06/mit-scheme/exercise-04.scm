@@ -43,7 +43,7 @@
 ;;
 
 ;;
-;; Scheme ships with a "delete" procedure, which we can use as follows:
+;; One way to implement the procedure would be as follows:
 ;;
 (define (drop-class schedule classnum)
   (define (iter elems)
@@ -56,8 +56,7 @@
   (iter schedule))
 
 ;;
-;; A more efficient way to implement the "drop-class" procedure would be 
-;; to use "filter":
+;; A more efficient way to implement the "drop-class" procedure would be to use "filter":
 ;;
 (define (drop-class schedule classnum)
   (define (predicate class)
@@ -117,3 +116,15 @@
 ;; which uses the "filter" procedure is linear in both space and time, 
 ;; that is, O(n) where n is the length of the list structure "schedule".
 ;;
+
+;;
+;; The order of growth for the less efficient version of "drop-class",
+;; the one which does not use the "filter" procedure, is O(n^2) in time.
+;; In a worst-case scenario, the procedure must step through each element
+;; of the schedule structure, and call the "append" procedure, which 
+;; likewise is O(n). The result is a procedure call that uses n(n+1)/2 steps.
+;;
+
+;;
+;; The order of growth for the less efficient version of "drop-class",
+;; the one which does not use the "filter" procedure, is XXX in space.

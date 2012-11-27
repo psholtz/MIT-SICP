@@ -26,8 +26,10 @@
 ;; Previous solutions
 ;;
 (define (empty-schedule) '())
+
 (define (add-class class schedule)
   (append schedule (list class)))
+
 (define (total-scheduled-units schedule)
   (define (iter seq total)
     (if (null? seq)
@@ -35,6 +37,11 @@
 	(let ((class (car seq)))
 	    (iter (cdr seq) (+ total (get-class-total-units class))))))
   (iter schedule 0))
+
+(define (drop-class schedule classnum)
+  (define (predicate class)
+    (not (equal? (get-class-number class) classnum)))
+  (filter predicate schedule))
 
 ;;
 ;; Exercise 5
