@@ -151,5 +151,5 @@ print
 # using the "drop-class" procedure. "drop-class" is linear in space, but 
 # creating a new copy of the structure, of size (n-1), at each step, will require
 # a total of n(n+1)/2 units of memory. Hence the space requirements for the 
-# algorithm - in a worst-case scenario - are O(n^2).
+# algorithm (in a worst-case scenario) are O(n^2).
 #
