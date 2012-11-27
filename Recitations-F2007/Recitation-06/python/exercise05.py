@@ -125,6 +125,25 @@ print "Total Scheduled Units:", total_scheduled_units(credit_limit(s1, 30))
 # ==> 30
 print "Total Scheduled Units:", total_scheduled_units(credit_limit(s1, 25))
 # ==> 18
+print
+
+#
+# Do more extensive testing for the orders of growth:
+#
+import string
+SAMPLE_SPACE = string.letters.upper()
+tokens = []
+for x in range(len(SAMPLE_SPACE)):
+  a1 = SAMPLE_SPACE[x]
+  for y in range(len(SAMPLE_SPACE)):
+    a2 = SAMPLE_SPACE[y]
+    for z in range(len(SAMPLE_SPACE)):
+      a3 = SAMPLE_SPACE[z]
+      tokens.append(a1+a2+a3)
+
+print tokens
+print len(tokens)
+print SAMPLE_SPACE
 
 #
 # [WORKING] (what is the order of growth??)
