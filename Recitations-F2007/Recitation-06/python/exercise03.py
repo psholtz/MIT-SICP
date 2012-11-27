@@ -90,3 +90,9 @@ print "Total Scheduled  Units: ", total_scheduled_units(s1)
 
 s1 = add_class(diff_eqs, s1)
 print "Total Scheduled Units: ", total_scheduled_units(s1)
+
+#
+# The order of growth is linear in both time and space in the variable
+# "schedule", that is, it is O(n) where "n" is the length of the list 
+# structure "schedule".
+#
