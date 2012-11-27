@@ -148,4 +148,59 @@
 
 ;; =================================================================================
 
-;; [WORKGIN]
+;;
+;; Working definitions (Joy-style)
+;;
+(ns sicp.clojure.joy)
+
+(defn make-units [C L H] {:C C :L L :H H})
+(defn get-units-C [x] (x :C))
+(defn get-units-L [x] (x :L))
+(defn get-units-H [x] (x :H))
+
+(defn make-class [number units] {:number number :units units})
+(defn get-class-number [x] (x :number))
+(defn get-class-units [x] (x :units))
+
+(defn get-class-total-units [class]
+  (let [units (get-class-units class)]
+    (+ (get-units-C units)
+       (get-units-L units)
+       (get-units-H units))))
+
+(defn same-class? [c1 c2]
+  (= (get-class-number c1) (get-class-number c2)))
+
+;;
+;; Previous solutions
+;;
+(defn empty-schedule [] [])
+
+(defn add-class [class schedule]
+  (conj schedule class))
+
+(defn total-scheduled-units [schedule]
+  (defn total-scheduled-units-iter [total working]
+    (if (empty? working)
+      total
+      (let [current-class (first working)]
+	(total-scheduled-units-iter
+	 (+ total
+	    (get-class-total-units current-class))
+	 (subvec working 1)))))
+    (total-scheduled-units-iter 0 schedule))
+
+(defn drop-class [schedule classnum]
+  (defn predicate [class]
+    (not (= (get-class-number class) classnum)))
+  (filter predicate schedule))
+
+;;
+;; Exercise 5
+;;
+;; Enforce a credit limit by taking in a schedule, and removing classes until
+;; the total number of units is less than max-credits.
+;;
+(defn credit-limit [schedule max-credits]
+  '())
+
