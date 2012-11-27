@@ -89,13 +89,9 @@ print "Schedule: ", s1
 #
 # Now try to drop a class:
 #
-drop_class(s1, "CALC-101")
-
-#
-# [WORKING --> NOT QUITE DONE!!]
-#
-
+s1 = drop_class(s1, "CALC-101")
 print "Schedule: ", s1
+# ==> [['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]
 
 #
 # The order of growth is linear in both time and space in the variable
