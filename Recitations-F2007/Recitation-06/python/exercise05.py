@@ -66,7 +66,7 @@ def credit_limit(schedule, max_credits):
         return credit_limit_iter(drop_class(working, get_class_number(first_class)))
       else:
         return working
-  credit_limit_iter(schedule)
+  return credit_limit_iter(schedule)
 
 #
 # Run some unit tests:
@@ -93,18 +93,39 @@ print "Schedule:", s1
 #
 print "Total Units:", total_scheduled_units(s1)
 # ==> 42
+print
 
 #
 # First test the empty case:
 #
 print "Credit Limit:", credit_limit(empty_schedule(), 10)
-# ==> None
+# ==> []
 
 #
 # Then test the "do nothing" case:
 #
 print "Credit Limit:", credit_limit(s1, 50)
+# ==> [['CALC-101', [4, 4, 4]], ['CALC-102', [4, 4, 4]], ['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]
+
+print "Credit Limit:", credit_limit(s1, 42)
+# ==> [['CALC-101', [4, 4, 4]], ['CALC-102', [4, 4, 4]], ['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]
+
+print "Credit LImit:", credit_limit(s1, 41)
+# ==> [['CALC-102', [4, 4, 4]], ['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]
+
+print "Credit Limit:", credit_limit(s1, 25)
+# ==> [['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]
+print 
+
+print "Total Scheduled Units:", total_scheduled_units(credit_limit(s1, 42))
+# ==> 42
+print "Total Scheduled Units:", total_scheduled_units(credit_limit(s1, 41))
+# ==> 30
+print "Total Scheduled Units:", total_scheduled_units(credit_limit(s1, 30))
+# ==> 30
+print "Total Scheduled Units:", total_scheduled_units(credit_limit(s1, 25))
+# ==> 18
 
 #
-# [WORKING]
+# [WORKING] (what is the order of growth??)
 #
