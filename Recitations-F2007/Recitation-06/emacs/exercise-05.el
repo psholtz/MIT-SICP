@@ -154,5 +154,3 @@
 ;; a total of n(n+1)/2 units of memory. Hence the space requirements for the
 ;; algorithm - in a worst-case scenario - are O(n^2).
 ;;
-
-
