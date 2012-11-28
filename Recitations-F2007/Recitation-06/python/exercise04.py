@@ -52,11 +52,17 @@ def total_scheduled_units(schedule):
 #
 def drop_class(schedule,classnum):
   """ Drop a particular class from a schedule, identify class with "classnum" """
+
+  # 
+  # Use a "tmp" class so that we can conform to the "provided API"
+  #
+  tmp = make_class(classnum,[])
+
   #
   # Define the predicate used to filter the schedule.
   #
   def predicate(klass):
-    return not same_class(get_class_number(klass), classnum)
+    return not same_class(klass, tmp)
 
   #
   # Filter out the classes we want to delete:

@@ -41,9 +41,10 @@
   (total-scheduled-units-iter 0 schedule))
 
 (defn drop-class [schedule classnum]
-  (defn predicate [class]
-    (not (same-class (get-class-number class) classnum)))
-  (filter predicate schedule))
+  (let [temp-class (make-class classnum '())]
+    (defn predicate [class]
+      (not (same-class? class temp-class)))
+    (vec (filter predicate schedule))))
 
 ;;
 ;; Exercise 5
