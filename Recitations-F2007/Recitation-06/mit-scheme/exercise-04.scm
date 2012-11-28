@@ -50,7 +50,7 @@
     (if (null? elems)
 	'()
 	(let ((class (car elems)))
-	  (if (equal? (get-class-number class) classnum)
+	  (if (same-class? (get-class-number class) classnum)
 	      (iter (cdr elems))
 	      (append (list class) (iter (cdr elems)))))))
   (iter schedule))
@@ -60,7 +60,7 @@
 ;;
 (define (drop-class schedule classnum)
   (define (predicate class)
-    (not (equal? (get-class-number class) classnum)))
+    (not (same-class? (get-class-number class) classnum)))
   (filter predicate schedule))
 
 ;;

@@ -62,7 +62,7 @@
   ;; We want to keep all the classes which are *not* equal to the class number.
   ;;
   (defn predicate [class]
-    (not (= (get-class-number class) classnum)))
+    (not (same-class (get-class-number class) classnum)))
 
   ;;
   ;; Filter out the classes we want to delete:
@@ -155,7 +155,7 @@
   ;; We want to keep all the classes whihc are *not* equal to the class number.
   ;;
   (defn predicate [class]
-    (not (= (get-class-number class) classnum)))
+    (not (same-class? (get-class-number class) classnum)))
 
   ;;
   ;; Filter out the classes we want to delete:

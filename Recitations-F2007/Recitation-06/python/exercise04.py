@@ -56,7 +56,7 @@ def drop_class(schedule,classnum):
   # Define the predicate used to filter the schedule.
   #
   def predicate(klass):
-    return get_class_number(klass) != classnum
+    return not same_class(get_class_number(klass), classnum)
 
   #
   # Filter out the classes we want to delete:

@@ -42,7 +42,7 @@
 
 (defn drop-class [schedule classnum]
   (defn predicate [class]
-    (not (= (get-class-number class) classnum)))
+    (not (same-class (get-class-number class) classnum)))
   (filter predicate schedule))
 
 ;;
@@ -192,7 +192,7 @@
 
 (defn drop-class [schedule classnum]
   (defn predicate [class]
-    (not (= (get-class-number class) classnum)))
+    (not (same-class? (get-class-number class) classnum)))
   (vec (filter predicate schedule)))
 
 ;;

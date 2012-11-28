@@ -40,7 +40,7 @@
 
 (define (drop-class schedule classnum)
   (define (predicate class)
-    (not (equal? (get-class-number class) classnum)))
+    (not (same-class (get-class-number class) classnum)))
   (filter predicate schedule))
 
 ;;
