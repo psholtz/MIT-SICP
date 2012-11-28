@@ -161,7 +161,7 @@
   ;;
   (let [temp-class (make-class classnum '())]
     (defn predicate [class]
-      (not (same-class? (get-class-number class) classnum)))
+      (not (same-class? class temp-class)))
 
     ;;
     ;; Filter out the classes we want to delete:
