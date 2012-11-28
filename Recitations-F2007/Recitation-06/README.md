@@ -86,7 +86,7 @@ HOPs
 (define (make-student number sched-checker)
  (list number (list) sched-checker))
 (define get-student-number car)
-(Define get-student-schedule cadr)
+(define get-student-schedule cadr)
 (define get-student-checker caddr)
 
 (define (update-student-schedule student schedule)
