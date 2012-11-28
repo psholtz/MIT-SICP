@@ -51,14 +51,14 @@
   ;; procedure "same-class" that is provided in the "API"
   ;;
   (let ((temp-class (make-class classnum '())))
-    (defun iter (elems)
+    (defun diter (elems)
       (if (null elems)
 	  '()
 	(let ((class (car elems)))
 	  (if (same-class? class temp-class)
-	      (iter (cdr elems))
+	      (diter (cdr elems))
 	    (append (list class) (iter (cdr elems)))))))
-    (iter schedule)))
+    (diter schedule)))
 
 ;;
 ;; A more efficient way to implement the "drop-class" procedure would be to use "filter".
