@@ -71,7 +71,7 @@
   ;;
   (let ((temp-class (make-class classnum '())))
     (define (predicate class)
-      (not (same-class? (get-class-number class) classnum)))
+      (not (same-class? class temp-class)))
     (filter predicate schedule)))
 
 ;;
