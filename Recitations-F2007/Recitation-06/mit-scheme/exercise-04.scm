@@ -46,14 +46,20 @@
 ;; One way to implement the procedure would be as follows:
 ;;
 (define (drop-class schedule classnum)
-  (define (iter elems)
-    (if (null? elems)
-	'()
-	(let ((class (car elems)))
-	  (if (same-class? (get-class-number class) classnum)
-	      (iter (cdr elems))
-	      (append (list class) (iter (cdr elems)))))))
-  (iter schedule))
+  ;; 
+  ;; "Temp" class is defined so that we can use the
+  ;; procedure "same-class" that is provided in the "API"
+  ;;
+  (let ((temp-class (make-class classnum '())))
+
+    (define (iter elems)
+      (if (null? elems)
+	  '()
+	  (let ((class (car elems)))
+	    (if (same-class? class temp-class)
+		(iter (cdr elems))
+		(append (list class) (iter (cdr elems)))))))
+    (iter schedule)))
 
 ;;
 ;; A more efficient way to implement the "drop-class" procedure would be to use "filter":
