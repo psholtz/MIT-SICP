@@ -45,8 +45,9 @@ def total_scheduled_units(schedule):
   return total_scheduled_units_iter(0,schedule)
 
 def drop_class(schedule,classnum):
+  tmp = make_class(classnum,[])
   def predicate(klass):
-    return get_class_number(klass) != classnum
+    return not same_class(klass,tmp)
   return filter(predicate, schedule)
 
 #
