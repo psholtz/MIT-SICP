@@ -99,7 +99,7 @@
 ;; ==> 0
 
 (setq schedule (add-class calculus-1 schedule))
-(total-schedlued-units schedule)
+(total-scheduled-units schedule)
 ;; ==> 12 
 
 (setq schedule (add-class algebra schedule))
