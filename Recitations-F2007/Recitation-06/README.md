@@ -24,7 +24,7 @@ Apply *op* to each element of *lst* in turn and return a list of the results.
 
 <pre>(filter pred let)</pre>
 
-Apply the predicate *pred* to each element of *lst* and return a list of all elements for which the predicate returned true (anything other tahn #f)
+Apply the predicate *pred* to each element of *lst* and return a list of all elements for which the predicate returned true (anything other than #f)
 
 Exercises
 --------- 
