@@ -1,32 +1,32 @@
 ;;
 ;; Working definitions
 ;;
-(define (make-units C L H)
+(defun make-units (C L H)
  (list C L H))
-(define get-units-C car)
-(define get-units-L cadr)
-(define get-units-H caddr)
+(defun get-units-C (x) (car x))
+(defun get-units-L (x) (cadr x))
+(defun get-units-H (x) (cadr (cdr x)))
 
-(define (make-class number units)
+(defun make-class (number units)
  (list number units))
-(define get-class-number car)
-(define get-class-units cadr)
+(defun get-class-number (x) (car x))
+(defun get-class-units (x) (cadr x))
 
-(define (get-class-total-units class)
+(defun get-class-total-units (class)
  (let ((units (get-class-units class)))
   (+ 
    (get-units-C units)
    (get-units-L units)
    (get-units-H units))))
 
-(define (same-class? c1 c2)
- (equal? (get-class-number c1) (get-class-number c2)))
+(defun same-class? (c1 c2)
+ (equal (get-class-number c1) (get-class-number c2)))
 
 ;;
 ;; Previous solutions
 ;;
-(define (empty-schedule) '())
-(define (add-class class schedule)
+(defun empty-schedule () '())
+(defun add-class (class schedule)
   (append schedule (list class)))
 
 ;;
@@ -34,44 +34,44 @@
 ;;
 ;; Write a selector that takes in a schedule and returns the total number of units in that schedule
 ;;
-(define (total-scheduled-units schedule)
-  (define (iter seq total)
-    (if (null? seq)
+(defun total-scheduled-units (schedule)
+  (defun iter (seq total)
+    (if (null seq)
 	total
-	(let ((class (car seq)))
-	  (iter (cdr seq) (+ total (get-class-total-units class))))))
+      (let ((class (car seq)))
+	(iter (cdr seq) (+ total (get-class-total-units class))))))
   (iter schedule 0))
 
 ;;
 ;; Run some unit tests:
 ;;
-(define calculus-1 (make-class 'CALC-101 (make-units 4 4 4)))
-(define calculus-2 (make-class 'CALC-102 (make-units 4 4 4)))
-(define algebra (make-class 'ALGB-152 (make-units 3 3 3)))
-(define diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
+(setq calculus-1 (make-class 'CALC-101 (make-units 4 4 4)))
+(setq calculus-2 (make-class 'CALC-102 (make-units 4 4 4)))
+(setq algebra (make-class 'ALGB-152 (make-units 3 3 3)))
+(setq diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
 
 (get-class-total-units calculus-1)
 ;; ==> 12
 (get-class-total-units calculus-2)
-;; ==> 12
+;; ==> 12 
 (get-class-total-units algebra)
 ;; ==> 9
 (get-class-total-units diff-eqs)
 ;; ==> 9
 
-(define s1 (empty-schedule))
+(setq s1 (empty-schedule))
 (total-scheduled-units s1)
 ;; ==> 0
 
-(define s1 (add-class calculus-1 s1))
+(setq s1 (add-class calculus-1 s1))
 (total-scheduled-units s1)
+;; ==> 12
 
-;; ==> 12 
-(define s1 (add-class algebra s1))
+(setq s1 (add-class algebra s1))
 (total-scheduled-units s1)
 ;; ==> 21
 
-(define s1 (add-class diff-eqs s1))
+(setq s1 (add-class diff-eqs s1))
 (total-scheduled-units s1)
 ;; ==> 30
 
