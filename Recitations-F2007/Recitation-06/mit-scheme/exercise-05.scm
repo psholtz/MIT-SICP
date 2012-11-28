@@ -39,9 +39,10 @@
   (iter schedule 0))
 
 (define (drop-class schedule classnum)
-  (define (predicate class)
-    (not (same-class (get-class-number class) classnum)))
-  (filter predicate schedule))
+  (let ((temp-class (make-class classnum '())))
+    (define (predicate class)
+      (not (same-class? class temp-class)))
+    (filter predicate schedule)))
 
 ;;
 ;; Exercise 5
