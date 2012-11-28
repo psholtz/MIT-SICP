@@ -57,7 +57,7 @@
 	(let ((class (car elems)))
 	  (if (same-class? class temp-class)
 	      (diter (cdr elems))
-	    (append (list class) (iter (cdr elems)))))))
+	    (append (list class) (diter (cdr elems)))))))
     (diter schedule)))
 
 ;;
