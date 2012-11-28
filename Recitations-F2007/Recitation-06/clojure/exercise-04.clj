@@ -61,7 +61,7 @@
   ;;
   ;; We want to keep all the classes which are *not* equal to the class number.
   ;;
-  ;; Use the "temp-class" construct so that can conform to the "provided API".
+  ;; Use the "temp-class" construct so that we can conform to the "provided API".
   ;;
   (let [temp-class (make-class classnum '())]
     (defn predicate [class]
@@ -157,13 +157,16 @@
   ;;
   ;; We want to keep all the classes whihc are *not* equal to the class number.
   ;;
-  (defn predicate [class]
-    (not (same-class? (get-class-number class) classnum)))
+  ;; Use the "temp-class" construct so that we can conform to the "provided API".
+  ;;
+  (let [temp-class (make-class classnum '())]
+    (defn predicate [class]
+      (not (same-class? (get-class-number class) classnum)))
 
-  ;;
-  ;; Filter out the classes we want to delete:
-  ;;
-  (vec (filter predicate schedule)))
+    ;;
+    ;; Filter out the classes we want to delete:
+    ;;
+    (vec (filter predicate schedule))))
 
 ;;
 ;; Run some unit tests:
