@@ -124,7 +124,7 @@
 
 (define sid1 575904476)
 
-(define student1 (make-student sid1 (make-schedule-checker-2)))
+(define student1 (make-student sid1 (make-schedule-checker-2 54)))
 
 ;;
 ;; Now try updating the student with the respective schedules:
