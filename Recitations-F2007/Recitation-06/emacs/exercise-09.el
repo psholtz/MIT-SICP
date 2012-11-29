@@ -87,6 +87,12 @@
   (lambda (schedule)
     (> (length schedule) 0)))
 
+(defmacro make-schedule-checker-2 (var)
+  (list 'lambda (list 'schedule) (list '<= (list 'total-scheduled-units 'schedule) var)))
+
+(defun class-numbers (schedule)
+  (mapcar #'(lambda (x) (get-class-number x)) schedule))
+
 ;;
 ;; Basic Classes
 ;;
@@ -97,3 +103,63 @@
 (setq us-history (make-class 'HIST-122 (make-units 4 4 4)))
 (setq world-history (make-class 'HIST-324 (make-units 4 4 4)))
 (setq basket-weaving (make-class 'BASKETS (make-units 1 1 1)))
+
+;;
+;; Exercise 9
+;;
+;; Rewrite "drop-class" to use "filter".
+;;
+
+;;
+;; We had already written "drop-class" to use filter (which we had to define ourselves, 
+;; since emacs does not ship with a "filter" procedure defined):
+;;
+(require 'cl)
+(defun filter (condp lst)
+  (delq nil
+	(mapcar (lambda (x) (and (funcall condp x) x)) lst)))
+
+(defun drop-class (schedule classnum)
+  (let ((temp-class (make-class classnum '())))
+    (defun predicate (class)
+      (not (same-class? class  temp-class)))
+    (filter 'predicate schedule)))
+
+;;
+;; Run some unit tests:
+;;
+(define s2 (empty-schedule))
+(define s2 (add-class calc1 s2))
+(define s2 (add-class algebra s2))
+(define s2 (add-class diff-eqs s2))
+
+;;
+;; Introspect s2:
+;;
+s2
+;; ==> ((CALC-101 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+(drop-class s2 'CALC-101)
+;; ==> ((ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+
+;;
+;; The "non-filter" version is given as:
+;;
+(defun drop-class (schedule classnum)
+  (let ((temp-class (make-class classnum '())))
+    (defun diter (elems)
+      (if (null elems)
+	  '()
+	(let ((class (car elems)))
+	  (if (same-class? class temp-class)
+	      (diter (cdr elems))
+	    (append (list class) (diter (cdr elems)))))))
+    (diter schedule)))
+
+;;
+;; Introspect s2:
+;;
+s2
+;; ==> ((CALC-101 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
+
+(drop-class s2 'CALC-101)
+;; ==> ((ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)))
