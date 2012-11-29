@@ -35,8 +35,8 @@
   (let ((test-function (get-student-checker student)))
     (if (funcall test-function schedule)
 	(list (get-student-number student)
-	                  schedule
-			            test-function)
+	                        schedule
+				            test-function)
       (error "Invalid schedule!"))))
 
 ;;
@@ -65,11 +65,11 @@
   (let ((temp-class (make-class classnum '())))
     (defun diter (elems)
       (if (null elems)
-	          '()
+	            '()
 	(let ((class (car elems)))
-	          (if (same-class? class temp-class)
-		                  (diter (cdr elems))
-		                (append (list class) (diter (cdr elems)))))))
+	            (if (same-class? class temp-class)
+			                  (diter (cdr elems))
+		                      (append (list class) (diter (cdr elems)))))))
     (diter schedule)))
 
 (defun credit-limit (schedule max-credits)
@@ -77,18 +77,15 @@
     (if (null elems)
 	'()
       (let ((class (car elems))
-	                (credits (total-scheduled-units elems)))
+	                    (credits (total-scheduled-units elems)))
 	(if (> credits max-credits)
-	                (citer (drop-class elems (get-class-number class)))
-	        elems))))
+	                    (citer (drop-class elems (get-class-number class)))
+	          elems))))
   (citer schedule))
 
 (defun make-schedule-checker-1 ()
   (lambda (schedule)
     (> (length schedule) 0)))
-
-(defmacro make-schedule-checker-2 (var)
-  (list 'lambda (list 'schedule) (list '<= (list 'total-scheduled-units 'schedule) var)))
 
 ;;
 ;; Basic Classes
@@ -100,34 +97,3 @@
 (setq us-history (make-class 'HIST-122 (make-units 4 4 4)))
 (setq world-history (make-class 'HIST-324 (make-units 4 4 4)))
 (setq basket-weaving (make-class 'BASKETS (make-units 1 1 1)))
-
-;;
-;; Exercise 8
-;; 
-;; Write a procdure that takes a schedule and returns a list of the class numbers in the schedule. Use map.
-;;
-(defun class-numbers (schedule)
-  (mapcar #'(lambda (x) (get-class-number x)) schedule))
-
-;;
-;; Let's run some unit tests:
-;;
-(define s1 (empty-schedule))
-(define s2 (empty-schedule))
-(define s2 (add-class calc1 s2))
-(define s2 (add-class algebra s2))
-(define s2 (add-class diff-eqs s2))
-(define s3 s2)
-(define s3 (add-class us-history s3))
-(define s3 (add-class world-history s3))
-(define s4 s3)
-(define s4 (add-class basket-weaving s4))
-
-(class-numbers s1)
-;; ==> nil
-(class-numbers s2)
-;; ==> (CALC-101 ALGB-152 DIFF-201)
-(class-numbers s3)
-;; ==> (CALC-101 ALGB-152 DIFF-201 HIST-122 HIST-324)
-(class-numbers s4)
-;; ==> (CALC-101 ALGB-152 DIFF-201 HIST-122 HIST-324 BASKETS)
