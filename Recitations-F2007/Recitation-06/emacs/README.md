@@ -40,9 +40,10 @@ Core code that is used throughout these examples:
 (defun get-student-checker (x) (cadr (cdr x)))
 
 (defun update-student-schedule (student schedule)
- (if ((get-student-checker student) schedule)
-     (list (get-student-number student)
-           schedule
-           (get-student-checker student))
-     (error "invalid schedule")))
+ (let ((test-function (get-student-checker student)))
+  (if (funcall test-function schedule)
+      (list (get-student-number student)
+            schedule
+	    test-function)
+       (error "Invalid schedule!"))))
 </pre>
