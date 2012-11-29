@@ -114,7 +114,7 @@
 (defmacro make-schedule-checker-2 (var)
   (list 'lambda (list 'schedule) (list '<= (list 'total-scheduled-units 'schedule) var)))
 
-(macro-expand '(make-schedule-checker-2 54))
+(macroexpand '(make-schedule-checker-2 54))
 ;; ==> (function (lambda (schedule) (<= (total-scheduled-units schedule) 54)))
 
 ;;
