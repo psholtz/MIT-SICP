@@ -95,9 +95,9 @@
 ;;
 ;; Define the appropriate constructor:
 ;;
-(define (make-schedule-checker-2)
+(define (make-schedule-checker-2 max-units)
   (lambda (schedule)
-    (<= (total-scheduled-units schedule) 54)))
+    (<= (total-scheduled-units schedule) max-units)))
 
 ;;
 ;; Let's run some unit tests:
@@ -129,14 +129,14 @@
 ;;
 ;; Now try updating the student with the respective schedules:
 ;;
-(update-student-schedule student s1)
+(update-student-schedule student1 s1)
 ;; ==> (575904476 () #[compound-procedure])
 
-(update-student-schedule student s2)
+(update-student-schedule student1 s2)
 ;; ==> (575904476 ((calc-101 (4 4 4)) (algb-152 (3 3 3)) (diff-201 (3 3 3))) #[compound-procedure 36])
 
-(update-student-schedule student s3)
+(update-student-schedule student1 s3)
 ;; ==> (575904476 ((calc-101 (4 4 4)) (algb-152 (3 3 3)) (diff-201 (3 3 3) (hist-122 (4 4 4) (hist-324 (4 4 4))) #[compound-procedure 36]) 
 
-(update-student-schedule student s4)
+(update-student-schedule student1 s4)
 ;; ==> "Invalid schedule!"

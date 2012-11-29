@@ -75,9 +75,9 @@
   (lambda (schedule) 
     (> (length schedule) 0)))
 
-(define (make-schedule-checker-2)
+(define (make-schedule-checker-2 max-units)
   (lambda (schedule)
-    (<= (total-scheduled-units schedule) 54)))
+    (<= (total-scheduled-units schedule) max-units)))
 
 ;;
 ;; Basic Classes
