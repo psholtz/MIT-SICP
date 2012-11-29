@@ -39,6 +39,9 @@ Core code that is used throughout these examples:
 (defun get-student-schedule (x) (cadr x))
 (defun get-student-checker (x) (cadr (cdr x)))
 
+;;
+;; Emacs does not handle HOPs gracefully, hence the "let":
+;;
 (defun update-student-schedule (student schedule)
  (let ((test-function (get-student-checker student)))
   (if (funcall test-function schedule)
