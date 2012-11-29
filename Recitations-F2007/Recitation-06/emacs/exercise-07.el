@@ -105,11 +105,17 @@
 ;;
 
 ;;
-;; Define the appropriate constructor:
+;; Define the appropriate constructor.
 ;;
-(defun make-schedule-checker-2 (max-units)
-  (lambda (schedule)
-    (<= (total-scheduled-units schedule) max-units)))
+;; IMPORTANT NOTE: Emacs does not play nicely with HOPs, and to make this work 
+;; (using the pattern we defined in the Scheme solution), we need to resort 
+;; to using Lisp Macros.
+;;
+(defmacro make-schedule-checker-2 (var)
+  (list 'lambda (list 'schedule) (list '<= (list 'total-scheduled-units 'schedule) var)))
+
+(macro-expand '(make-schedule-checker-2 54))
+;; ==> (function (lambda (schedule) (<= (total-scheduled-units schedule) 54)))
 
 ;;
 ;; Let's run some unit tests:
@@ -136,16 +142,22 @@
 
 (setq sid1 575904476)
 
+;;
+;; IMPORTANT NOTE: We can invoke the routine here using the identical syntax
+;; as in the Scheme example. Lisp macros takes care of the syntactic details for us!
+;;
 (setq student1 (make-student sid1 (make-schedule-checker-2 54)))
 
 ;;
 ;; Now try updating the student with the respective schedules:
 ;;
 (update-student-schedule student1 s1)
-;; ==>
+;; ==> (575904476 nil (lambda (schedule) (<= (total-scheduled-units schedule) 54)))
 (update-student-schedule student1 s2)
-;; ==>
+;; ==> (575904476 ((CALC-101 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3))) (lambda (schedule) (<= (total-schedul\
+ed-units schedule) 54)))
 (update-student-schedule student1 s3)
-;; ==>
+;; ==> (575904476 ((CALC-101 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3)) (HIST-122 (4 4 4)) (HIST-324 (4 4 4)))\
+ (lambda (schedule) (<= (total-scheduled-units schedule) 54)))
 (update-student-schedule student1 s4)
-;; ==>
+;; ==> "Invalid schedule!"
