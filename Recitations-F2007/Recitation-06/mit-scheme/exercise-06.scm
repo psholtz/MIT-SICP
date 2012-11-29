@@ -72,9 +72,47 @@
   (iter schedule))
 
 ;;
+;; Basic Classes
+;;
+(define calc1 (make-class 'CALC-101 (make-units 4 4 4)))
+(define calc2 (make-class 'CALC-102 (make-units 4 4 4)))
+(define algebra (make-class 'ALGB-152 (make-units 3 3 3)))
+(define diff-eqs (make-class 'DIFF-201 (make-units 3 3 3)))
+
+;;
 ;; Exercise 6
 ;;
 ;; Finish the call to "make-student" to require the student takes at least 1 classs.
 ;;
 ;; (make-student 575904467 ...)
 ;;
+
+;;
+;; First we need a constructor/factory for creating schedule checkers 
+;; that will validate that the student has elected at least one class.
+;;
+(define (make-schedule-checker-1)
+  (lambda (schedule) 
+    (> (length schedule) 0)))
+
+;;
+;; Let's run some unit tests:
+;;
+(define s1 (empty-schedule))
+(define s2 (empty-schedule))
+(define s2 (add-class calc1 s2))
+(define s2 (add-class algebra s2))
+(define s2 (add-class diff-eqs s2))
+
+(define sid1 575904476)
+
+(define student1 (make-student sid1 (make-schedule-checker-1)))
+
+;;
+;; Now try updating the student with schedules 1 and 2, respectively:
+;;
+(update-student-schedule student s1)
+;; ==> "Invalid schedule!"
+
+(update-student-schedule student s2)
+;; ==> (575904476 ((calc-101 (4 4 4)) (algb-152 (3 3 3)) (diff-201 (3 3 3))) #[compound-procedure 36])
