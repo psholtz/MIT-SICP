@@ -117,7 +117,7 @@ def make_schedule_checker_2(max_units):
 s1 = empty_schedule()
 s2 = empty_schedule()
 s2 = add_class(calc1, s2)
-s2 = add_class(algebra s2)
+s2 = add_class(algebra, s2)
 s2 = add_class(diff_eqs, s2)
 s3 = s2[:]
 s3 = add_class(us_history, s3)

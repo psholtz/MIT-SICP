@@ -114,7 +114,7 @@ def make_schedule_checker_1():
 s1 = empty_schedule()
 s2 = empty_schedule()
 s2 = add_class(calc1, s2)
-s2 = add_class(algebra s2)
+s2 = add_class(algebra, s2)
 s2 = add_class(diff_eqs,s2)
 
 sid1 = 575904476

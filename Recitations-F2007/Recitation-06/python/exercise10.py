@@ -91,6 +91,9 @@ def make_schedule_checker_1():
 def make_schedule_checker_2(max_credits):
   return lambda x: total_scheduled_units(x) <= max_units
 
+def class_numbers(schedule):
+  return map(lambda x: get_class_number(x), schedule)
+
 # 
 # Basic Classes
 #
@@ -103,12 +106,24 @@ world_history = make_class("HIST-324", make_units(4,4,4))
 basket_weaving = make_class("BASKETS", make_units(1,1,1))
 
 #
-# Exercise 8
-# 
-# Write a procedure that takes a schedule and returns a list of the class numbers in the schedule. Use map.
+# Exercise 10
 #
-def class_numbers(schedule):
-  return map(lambda x: get_class_number(x), schedule)
+# Rewrite "credit-limit" to run in O(n) time.
+#
+def credit_limit(schedule, max_credits):
+ def credit_limit_iter(sched, working, total):
+  if len(sched) == 0:
+   return working
+  else:
+   klass = sched[0]
+   credits = get_class_total_units(klass)
+   if (credits+total) > max_credits:
+    return working
+   else:
+     if working is None: working = []
+     working = working.append(klass)
+     return credit_limit_iter(sched[1:], working, (credits+total))
+ return credit_limit_iter(schedule,[],0)
 
 #
 # Let's run some unit tests:
@@ -118,17 +133,11 @@ s2 = empty_schedule()
 s2 = add_class(calc1, s2)
 s2 = add_class(algebra, s2)
 s2 = add_class(diff_eqs, s2)
-s3 = s2[:]
-s3 = add_class(us_history, s3)
-s3 = add_class(world_history, s3)
-s4 = s3[:]
-s4 = add_class(basket_weaving, s4)
 
-class_numbers(s1)
-# ==> []
-class_numbers(s2)
-# ==> ['CALC-101', 'ALGB-152', 'DIFF-201']
-class_numbers(s3)
-# ==> ['CALC-101', 'ALGB-152', 'DIFF-201', 'HIST-122', 'HIST-324']
-class_numbers(s4)
-# ==> ['CALC-101', 'ALGB-152', 'DIFF-201', 'HIST-122', 'HIST-324', 'BASKETS']
+#
+# Introspect s2:
+#
+s2 
+# ==> [['CALC-101', [4, 4, 4]], ['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]
+drop_class(s2,"CALC-101")
+# ==> [['ALGB-152', [3, 3, 3]], ['DIFF-201', [3, 3, 3]]]

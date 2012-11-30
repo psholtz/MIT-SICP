@@ -126,7 +126,7 @@ def drop_class(schedule, classnum):
 s1 = empty_schedule()
 s2 = empty_schedule()
 s2 = add_class(calc1, s2)
-s2 = add_class(algebra s2)
+s2 = add_class(algebra, s2)
 s2 = add_class(diff_eqs, s2)
 
 #
