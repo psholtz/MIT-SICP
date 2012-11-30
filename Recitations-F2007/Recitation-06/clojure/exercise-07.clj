@@ -136,4 +136,3 @@
 ;; ==> [{:number CALC-101, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}} {:number HIST-122, :units {:C 4, :L 4, :H 4}} {:number HIST-324, :units {:C 4, :L 4, :H 4}}]
 (get-student-schedule (update-student-schedule student1 s4))
 ;; ==> "Invalid schedule!"
-
