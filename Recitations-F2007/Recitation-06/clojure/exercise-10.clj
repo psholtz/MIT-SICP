@@ -242,7 +242,7 @@
 ;;
 (defn credit-limit [schedule max-credits]
   (defn credit-limit-iter [sched working total]
-    (if (or (nil? sched) (= (count sched) 0))
+    (if (empty? sched)
       (vec working)
       (let [class (first sched)]
 	(let [credits (get-class-total-units class)]
