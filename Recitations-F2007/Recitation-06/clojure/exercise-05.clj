@@ -271,4 +271,4 @@
 (total-scheduled-units (credit-limit s1 30))
 ;; ==> 30
 (total-scheduled-units (credit-limit s1 25))
-;; ==> 18
+;; ==> 18 
