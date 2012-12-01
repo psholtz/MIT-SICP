@@ -47,12 +47,12 @@
   (append schedule (list class)))
 
 (define (total-scheduled-units schedule)
-  (define (iter seq total)
+  (define (total-scheduled-units-iter seq total)
     (if (null? seq)
 	total
 	(let ((class (car seq)))
-	  (iter (cdr seq) (+ total (get-class-total-units class))))))
-  (iter schedule 0))
+	        (total-scheduled-units-iter (cdr seq) (+ total (get-class-total-units class))))))
+  (total-scheduled-units-iter schedule 0))
 
 (define (drop-class schedule classnum)
   (let ((temp-class (make-class classnum '())))
@@ -61,15 +61,15 @@
     (filter predicate schedule)))
 
 (define (credit-limit schedule max-credits)
-  (define (iter elems)
+  (define (credit-limit-iter elems)
     (if (null? elems)
 	'()
 	(let ((class (car elems))
-	      (credits (total-scheduled-units elems)))
-	  (if (>= credits max-credits)
-	      (iter (drop-class elems (get-class-number class)))
-	      elems))))
-  (iter schedule))
+	            (credits (total-scheduled-units elems)))
+	    (if (>= credits max-credits)
+		      (credit-limit-iter (drop-class elems (get-class-number class)))
+		            elems))))
+  (credit-limit-iter schedule))
 
 (define (make-schedule-checker-1)
   (lambda (schedule) 
@@ -95,11 +95,11 @@
 ;;
 ;; Rewrite "credit-limit" to run in O(n) time.
 ;;
-(define (credit-limit sched max-credits)
+(define (credit-limit schedule max-credits)
   ;;
   ;; Recursive loop to walk down "schedule" in O(n) time.
   ;;
-  (define (iter sched working total)
+  (define (credit-limit-iter sched working total)
     ;;
     ;; If we are the end of the list, then halt.
     ;;
@@ -116,12 +116,12 @@
 		;;
 		;; Otherwise, keep recursing through the list structure.
 		;;
-		(iter (cdr sched) (append working (list class)) (+ credits total)))))))	  
+		(credit-limit-iter (cdr sched) (append working (list class)) (+ credits total)))))))	  
   
   ;;
   ;; Invoke the method with schedule and 0 credits
   ;;
-  (iter sched '() 0))
+  (credit-limit-iter schedule '() 0))
 
 ;;
 ;; Run some unit tests:

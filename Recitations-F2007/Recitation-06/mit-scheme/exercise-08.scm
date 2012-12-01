@@ -47,12 +47,12 @@
   (append schedule (list class)))
 
 (define (total-scheduled-units schedule)
-  (define (iter seq total)
+  (define (total-scheduled-units-iter seq total)
     (if (null? seq)
 	total
 	(let ((class (car seq)))
-	          (iter (cdr seq) (+ total (get-class-total-units class))))))
-  (iter schedule 0))
+	        (total-scheduled-units-iter (cdr seq) (+ total (get-class-total-units class))))))
+  (total-scheduled-units-iter schedule 0))
 
 (define (drop-class schedule classnum)
   (let ((temp-class (make-class classnum '())))
@@ -61,15 +61,15 @@
     (filter predicate schedule)))
 
 (define (credit-limit schedule max-credits)
-  (define (iter elems)
+  (define (credit-limit-iter elems)
     (if (null? elems)
 	'()
 	(let ((class (car elems))
-	                        (credits (total-scheduled-units elems)))
-	        (if (>= credits max-credits)
-		            (iter (drop-class elems (get-class-number class)))
-			                elems))))
-  (iter schedule))
+	            (credits (total-scheduled-units elems)))
+	    (if (>= credits max-credits)
+		      (credit-limit-iter (drop-class elems (get-class-number class)))
+		            elems))))
+  (credit-limit-iter schedule))
 
 (define (make-schedule-checker-1)
   (lambda (schedule) 
