@@ -190,4 +190,4 @@
 ;; ==> "Invalid schedule!"
 
 (update-student-schedule student s2)
-;; ==> (575904476 [{:number CALC-101, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}] #<joy$make_schedule_checker_1$fn__177 sicp.clojure.joy$make_schedule_checker_1$fn__177@5006279d>)
+;; ==> {:number 575904476, :schedule [{:number CALC-101, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}], :checker #<joy$make_schedule_checker_1$fn__74 sicp.clojure.joy$make_schedule_checker_1$fn__74@1badd463>}
