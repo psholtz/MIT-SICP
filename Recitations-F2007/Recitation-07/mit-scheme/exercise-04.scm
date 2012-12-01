@@ -1,12 +1,13 @@
 ;;
 ;; Exercise 4
 ;;
-
-(define x (list 1 2 3 4 5 6 7))
-
+;; Suppose x is bound to the list (1 2 3 4 5 6 7). Using "map", "filter" and/or "fold-right", write 
+;; an expression involving "x" that returns:
 ;;
 ;; (a) (1 4 9 16 25 36 49)
 ;;
+(define x (list 1 2 3 4 5 6 7))
+
 (map square x)
 
 ;;
@@ -59,5 +60,6 @@
 ;; Which is what we were looking for.
 ;;
 
-
-
+;; 
+;; [WORKING --> but redo this using fold-right]
+;;
