@@ -34,8 +34,8 @@
 (define (update-student-schedule student schedule)
   (if ((get-student-checker student) schedule)
       (list (get-student-number student)
-	                    schedule
-			            (get-student-checker student))
+	    schedule
+	    (get-student-checker student))
       (error "Invalid schedule!")))
 
 ;;
@@ -51,7 +51,7 @@
     (if (null? seq)
 	total
 	(let ((class (car seq)))
-	              (iter (cdr seq) (+ total (get-class-total-units class))))))
+	  (iter (cdr seq) (+ total (get-class-total-units class))))))
   (iter schedule 0))
 
 (define (drop-class schedule classnum)
@@ -65,10 +65,10 @@
     (if (null? elems)
 	'()
 	(let ((class (car elems))
-	                                    (credits (total-scheduled-units elems)))
-	            (if (>= credits max-credits)
-			                  (iter (drop-class elems (get-class-number class)))
-					                    elems))))
+	      (credits (total-scheduled-units elems)))
+	  (if (>= credits max-credits)
+	      (iter (drop-class elems (get-class-number class)))
+	      elems))))
   (iter schedule))
 
 (define (make-schedule-checker-1)
