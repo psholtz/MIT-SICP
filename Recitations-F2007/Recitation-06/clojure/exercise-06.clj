@@ -60,7 +60,7 @@
   (let [temp-class (make-class classnum '())]
     (defn predicate [class]
       (not (same-class? class temp-class)))
-    (filter predicate schedule)))x
+    (filter predicate schedule)))
 
 ;;
 ;; Basic Classes
@@ -85,8 +85,27 @@
 (defn make-schedule-checker-1 []
   (fn [schedule] (> (count schedule) 0)))
 
+;;
+;; Let's run some unit tests:
+;;
+(def s1 (empty-schedule))
+(def s2 (empty-schedule))
+(def s2 (add-class calc1 s2))
+(def s2 (add-class algebra s2))
+(def s2 (add-class diff-eqs s2))
 
+(def sid1 575904476)
 
+(def student1 (make-student sid1 (make-schedule-checker-1)))
+
+;;
+;; Now try updating the student with schedules 1 and 2, respectively:
+;;
+(update-student-schedule student1 s1)
+;; ==> "Invalid schedule!"
+
+(update-student-schedule student1 s2)
+;; ==> (575904476 ((CALC-101 (4 4 4)) (ALGB-152 (3 3 3)) (DIFF-201 (3 3 3))) #<lisp$make_schedule_checker_1$fn__86 sicp.clojure.lisp$make_schedule_checker_1$fn__86@52cd19d>)
 
 ;; ==============================================================
 
