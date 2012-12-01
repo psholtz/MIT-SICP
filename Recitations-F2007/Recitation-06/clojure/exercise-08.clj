@@ -186,7 +186,7 @@
   (let [temp-class (make-class classnum '())]
     (defn predicate [class]
       (not (same-class? class temp-class)))
-    (filter predicate schedule)))
+    (vec (filter predicate schedule))))
 
 (defn credit-limit [schedule max-credits]
   (defn credit-limit-iter [working]
