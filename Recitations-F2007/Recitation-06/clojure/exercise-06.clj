@@ -20,7 +20,7 @@
 
 (defn same-class? [c1 c2]
   (= (get-class-number c1) (get-class-number c2)))
-
+ 
 ;;
 ;; Working definitions (HOPs)
 ;;
