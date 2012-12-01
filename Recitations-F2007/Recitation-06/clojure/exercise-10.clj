@@ -25,16 +25,16 @@
 ;; Working definitions (HOPs)
 ;;
 (defn make-student [number sched-checker]
-  (list number (list) sched-checker))
-(defn get-student-number [x] (first x))
-(defn get-student-schedule [x] (first (rest x)))
-(defn get-student-checker [x] (first (rest (rest x))))
+  {:number number :schedule [] :checker sched-checker})
+(defn get-student-number [x] (x :number))
+(defn get-student-schedule [x] (x :schedule))
+(defn get-student-checker [x] (x :checker))
 
 (defn update-student-schedule [student schedule]
   (if ((get-student-checker student) schedule)
-    (list (get-student-number student)
-	  schedule
-	  (get-student-checker student))
+    {:number (get-student-number student)
+     :schedule schedule
+     :checker (get-student-checker student)}
     (throw (Exception. "Invalid schedule!"))))
 
 ;;
