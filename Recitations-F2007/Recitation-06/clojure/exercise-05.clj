@@ -195,7 +195,7 @@
   (let [temp-class (make-class classnum '())]
     (defn predicate [class]
       (not (same-class? class temp-class)))
-    (filter predicate schedule)))
+    (vec (filter predicate schedule))))
 
 ;;
 ;; Exercise 5
@@ -206,12 +206,11 @@
 (defn credit-limit [schedule max-credits]
   (defn credit-limit-iter [working]
     (if (empty? working)
-      '()
+      []
       (let [total-credits (total-scheduled-units working)
 	    first-class (first working)]
 	(if (> total-credits max-credits)
-	  (credit-limit-iter
-	   (drop-class working (get-class-number first-class)))
+	  (credit-limit-iter (drop-class working (get-class-number first-class)))
 	  working))))
   (credit-limit-iter schedule))
 
@@ -232,7 +231,7 @@
 ;;
 ;; Introspect s1:
 ;;
-;; ==> [{:number CALC-101, :units {:C 4, :L 4, :H 4}} {:number CALC-102, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}] 
+;; ==> [{:number CALC-101, :units {:C 4, :L 4, :H 4}} {:number CALC-102, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
 ;;
 
 ;;
@@ -244,8 +243,8 @@
 ;;
 ;; First test the empty case:
 ;;
-(credit-limit '() 10)
-;; ==> ()
+(credit-limit '() 5)
+;; ==> []
 
 ;;
 ;; Then test the "do nothing" case:
