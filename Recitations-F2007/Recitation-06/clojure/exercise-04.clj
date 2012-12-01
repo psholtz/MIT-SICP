@@ -33,7 +33,7 @@
 
 (defn
   ^{:doc "Return the total number of units in an entire schedule"}
-  total-scehduled-units [schedule]
+  total-scheduled-units [schedule]
 
   (defn
     ^{:doc "Iterative process to recursively count the number of units."}
@@ -44,7 +44,7 @@
 	(total-schedued-units-iter
 	 (+ total
 	    (get-class-total-units current-class))
-	 (rest working)))))
+	 (subvec working 1)))))
 
   ;; Invoke the iterative process
   (total-scheduled-units-iter 0 schedule))

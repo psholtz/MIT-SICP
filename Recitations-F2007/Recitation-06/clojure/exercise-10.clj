@@ -65,12 +65,11 @@
 (defn credit-limit [schedule max-credits]
   (defn credit-limit-iter [working]
     (if (empty? working)
-      '()
+      []
       (let [total-credits (total-scheduled-units working)
 	    first-class (first working)]
 	(if (> total-credits max-credits)
-	  (credit-limit-iter
-	   (drop-class working (get-class-number first-class)))
+	  (credit-limit-iter (drop-class working (get-class-number first-class)))
 	  working))))
   (credit-limit-iter schedule))
 
