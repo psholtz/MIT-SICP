@@ -57,9 +57,10 @@
   (total-scheduled-units-iter 0 schedule))
 
 (defn drop-class [schedule classnum]
-  (defn predicate [class]
-    (not (same-class? (get-class-number class) classnum)))
-  (vec (filter predicate schedule)))
+  (let [temp-class (make-class classnum '())]
+    (defn predicate [class]
+      (not (same-class? class temp-class)))
+        (filter predicate schedule)))
 
 (defn credit-limit [schedule max-credits]
   (defn credit-limit-iter [working]
@@ -140,6 +141,3 @@ s2
 ;; ==> [{:number CALC-101, :units {:C 4, :L 4, :H 4}} {:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
 (drop-class s2 'CALC-101)
 ;; ==> [{:number ALGB-152, :units {:C 3, :L 3, :H 3}} {:number DIFF-201, :units {:C 3, :L 3, :H 3}}]
-
-
-
