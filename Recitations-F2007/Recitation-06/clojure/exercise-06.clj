@@ -22,6 +22,22 @@
   (= (get-class-number c1) (get-class-number c2)))
 
 ;;
+;; Working definitions (HOPs)
+;;
+(defn make-student [number sched-checker]
+  (list number (list) sched-checker))
+(defn get-student-number [x] (first x))
+(defn get-student-schedule [x] (first (rest x)))
+(defn get-student-checker [x] (first (rest (rest x))))
+
+(defn update-student-schedule [student schedule]
+  (if ((get-student-checker student) schedule)
+    (list (get-student-number student)
+	  schedule
+	  (get-student-checker student))
+    (throw (Exception. "Invalid schedule!"))))
+
+;;
 ;; Previous solutions
 ;;
 (defn empty-schedule [] '())
@@ -68,6 +84,8 @@
 ;;
 (defn make-schedule-checker-1 []
   (fn [schedule] (> (count schedule) 0)))
+
+
 
 
 ;; ==============================================================
