@@ -29,12 +29,12 @@
 (define (add-class class schedule)
   (append schedule (list class)))
 (define (total-scheduled-units schedule)
-  (define (iter seq total)
+  (define (total-scheduled-units-iter seq total)
     (if (null? seq)
 	total
 	(let ((class (car seq)))
-	      (iter (cdr seq) (+ total (get-class-total-units class))))))
-  (iter schedule 0))
+	      (total-scheduled-units-iter (cdr seq) (+ total (get-class-total-units class))))))
+  (total-scheduled-units-iter schedule 0))
 
 ;;
 ;; Exercise 4
@@ -52,14 +52,14 @@
   ;;
   (let ((temp-class (make-class classnum '())))
 
-    (define (iter elems)
+    (define (drop-class-iter elems)
       (if (null? elems)
 	  '()
 	  (let ((class (car elems)))
 	    (if (same-class? class temp-class)
-		(iter (cdr elems))
-		(append (list class) (iter (cdr elems)))))))
-    (iter schedule)))
+		(drop-class-iter (cdr elems))
+		(append (list class) (drop-class-iter (cdr elems)))))))
+    (drop-class-iter schedule)))
 
 ;;
 ;; A more efficient way to implement the "drop-class" procedure would be to use "filter":
