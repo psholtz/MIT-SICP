@@ -61,7 +61,7 @@
 ;;
 ;; However, this method uses a custom-defined procedure, rather than the predicates we were furnished with.
 ;; 
-;; Let's see if we can rewrite is using the "fold-right" procedure:
+;; Let's see if we can rewrite it using the "fold-right" procedure:
 ;;
 (fold-right (lambda (a b) (list (list a) b)) 
 	    '()
@@ -73,9 +73,13 @@
 ;; Which again, is the answer we are seeking.
 ;;
 
-;; [WORKING --> explain this]
-	    
+;;
+;; The reasons this work is that we first extract the "even" numbers using the filter procedure:
+;;
+(filter (lambda (y) (even? y)) x)
+;; ==> (2 4 6)
 
-;; 
-;; [WORKING --> but redo this using fold-right]
+;;
+;; And then we "fold from the right" using the custom-defined anonymous function 
+;; (lambda (a b) (list (list a b) b)) to generate the final result.
 ;;
