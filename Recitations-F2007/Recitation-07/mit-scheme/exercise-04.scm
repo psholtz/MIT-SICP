@@ -59,6 +59,22 @@
 ;;
 ;; Which is what we were looking for.
 ;;
+;; However, this method uses a custom-defined procedure, rather than the predicates we were furnished with.
+;; 
+;; Let's see if we can rewrite is using the "fold-right" procedure:
+;;
+(fold-right (lambda (a b) (list (list a) b)) 
+	    '()
+	    (filter (lambda (y) (even? y)) x))
+
+;; ==> ((2) ((4) ((6) ())))     
+
+;;
+;; Which again, is the answer we are seeking.
+;;
+
+;; [WORKING --> explain this]
+	    
 
 ;; 
 ;; [WORKING --> but redo this using fold-right]
