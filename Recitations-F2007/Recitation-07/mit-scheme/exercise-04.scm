@@ -63,9 +63,10 @@
 ;; 
 ;; Let's see if we can rewrite it using the "fold-right" procedure:
 ;;
-(fold-right (lambda (a b) (list (list a) b)) 
-	    '()
-	    (filter (lambda (y) (even? y)) x))
+(fold-right 
+ (lambda (a b) (list (list a) b)) 
+ '()
+ (filter (lambda (y) (even? y)) x))
 
 ;; ==> ((2) ((4) ((6) ())))     
 
@@ -82,4 +83,67 @@
 ;;
 ;; And then we "fold from the right" using the custom-defined anonymous function 
 ;; (lambda (a b) (list (list a b) b)) to generate the final result.
+;;
+
+;;
+;; (e) The maximum element of x: 7
+;;
+
+;;
+;; Let's walk down the list structure using "fold-right" and compare each two successive
+;; elements, saving the largest one. We need to "initialize" the algorithm using a number
+;; we know will be "smaller" than the smallest element in the list. In C/C++ we might set
+;; this variable to something like (-1) * MAX_INT or some such value. 
+;;
+;; Here, let's just set this sentinel value to something like -1000, since we know that all 
+;; the elements in the list will be larger than this value:
+;;
+(fold-right (lambda (a b) (if (> a b) a b))
+	    -1000
+	    x)
+
+;; ==> 7
+
+;;
+;; Playing around with this procedure on other lists shows that it returns the maximum 
+;; element (even if that element is not the last element in the last structure), so long 
+;; as the "minimum sentinel" value is correctly initialized.
+;;
+
+;;
+;; (f) A list of the last element of x: (7)
+;;
+
+;; [working]
+
+;;
+;; Another way this can be done is to use the "fold-left" procedure:
+;;
+(fold-left 
+ (lambda (a b)
+   (if (null? a)
+       (list b)
+       '()))
+ '()
+ x)
+
+;; ==> (7)
+
+;;
+;; As an aside, it is note that we can obtain the "first" element in the list using a procedure 
+;; like this:
+;;
+(fold-right 
+ (lambda (a b)
+   (if (null? b)
+       (list a)
+       '()))
+ '()
+ x)
+
+;; ==> (1)
+
+;;
+;; The utility of this approach is dubious, given the existence of the "car" procedure, but is
+;; cited here nevertheless.
 ;;
