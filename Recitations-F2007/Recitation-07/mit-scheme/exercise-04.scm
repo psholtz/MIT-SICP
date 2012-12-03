@@ -1,45 +1,4 @@
 ;;
-;; Working definitions:
-;;
-(define (length lst)
-  (if (null? lst)
-      0
-      (+ 1 (length (cdr lst)))))
-
-(define (map proc lst)
-  (if (null? lst)
-      '()
-      (cons (proc (car lst))
-	    (map proc (cdr lst)))))
-
-(define (filter pred lst)
-  (if (null? lst)
-      '()
-      (if (pred (car lst))
-	  (cons (car lst) (filter pred (cdr lst)))
-	  (filter pred (cdr lst)))))
-
-;;
-;; "fold-right" is also known as "accmulate":
-;;
-(define (fold-right op init lst)
-  (if (null? lst)
-      init
-      (op (car lst)
-	  (fold-right op init (cdr lst)))))
-
-(define (list-ref lst n)
-  (if (= n 0)
-      (car lst)
-      (list-ref (cdr lst) (- n 1))))
-
-(define (append lst1 lst2)
-  (if (null? lst1)
-      lst2
-      (cons (car lst1)
-	    (append (cdr lst1) lst2))))
-
-;;
 ;; Exercise 4
 ;;
 ;; Suppose x is bound to the list (1 2 3 4 5 6 7). Using "map", "filter" and/or "fold-right", write 
