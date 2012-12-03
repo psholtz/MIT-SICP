@@ -65,8 +65,8 @@
 
 (define s1 (add-class calculus-1 s1))
 (total-scheduled-units s1)
-
 ;; ==> 12 
+
 (define s1 (add-class algebra s1))
 (total-scheduled-units s1)
 ;; ==> 21
