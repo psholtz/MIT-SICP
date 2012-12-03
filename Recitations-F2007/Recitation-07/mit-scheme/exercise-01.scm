@@ -47,3 +47,23 @@
 ;; Running the unit tests defined above gives the same results.
 ;;
 
+;;
+;; Now write the definition using the "fold-right" procedure:
+;;
+(define (occurrences num a)
+  (define (func x y)
+    (if (= x num)
+	(append y (list x))
+	y))
+  (length (fold-right func '() a)))
+
+;;
+;; Running the unit tests defined above gives the same results.
+;;
+
+;;
+;; Let's expand the call graph for (occurrences 1 (list 1 2 1 1 3)), 
+;; at least insofar as the calls to "fold-right" are concerned:
+;;
+
+;; [WORKING]
