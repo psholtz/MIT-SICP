@@ -114,7 +114,7 @@
 ;; (f) A list of the last element of x: (7)
 ;;
 
-;; [working]
+;; [WORKING]
 
 ;;
 ;; Another way this can be done is to use the "fold-left" procedure:
@@ -147,3 +147,13 @@
 ;; The utility of this approach is dubious, given the existence of the "car" procedure, but is
 ;; cited here nevertheless.
 ;;
+
+;;
+;; (g) The list in reverse order: (7 6 5 4 3 2 1)
+;;
+
+(define (reverse items)
+  (fold-right (lambda (a b) (append b (list a))) '() items))
+
+(reverse x)
+;; ==> (7 6 5 4 3 2 1)
