@@ -369,4 +369,42 @@
 ;; In other words, the procedure executes in O(n^2) time.
 ;;
 
-;; [WORKING] --> LESS THAN O(n^2) time
+;;
+;; (h) Bonus: reverse a list in less than O(n^2) time.
+;;
+
+;; 
+;; The trick to getting a list reversal algorithm working in less than O(n^2) time
+;; (or even, ideally, in linear time), is to do away with the call to "append", which 
+;; is where the "performance hit" we are currently experiencing is taking place.
+;;
+;; In the implementation that follows, we replace the call with "append" with a call 
+;; to "cons", which is much more efficient. The procedure uses an iterative "running 
+;; total" of the reversed list that has been constructed thus far (i.e., "lst2").
+;;
+(define (reverse items)
+  (define (reverse-iter lst1 lst2)
+    (if (null? lst1)
+	lst2
+	(reverse-iter (cdr lst1) (cons (car lst1) lst2))))
+  (reverse-iter items '()))
+
+;;
+;; Run some unit tests:
+;;
+(reverse x)
+;; ==> '(7 6 5 4 3 2 1)
+
+;;
+;; Let's expand the call graph, to see just what is taking place here:
+;;
+(reverse '(1 2 3))
+(reverse-iter '(1 2 3) '())
+(reverse-iter '(2 3) '(1))
+(reverse-iter '(3) '(2 1))
+(reverse-iter '() '(3 2 1))
+'(3 2 1)
+
+;;
+;; Clearly, the algorithm executes in O(n) time, and much more rapidly than the previous definition of reverse.
+;;
