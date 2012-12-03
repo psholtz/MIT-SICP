@@ -66,4 +66,26 @@
 ;; at least insofar as the calls to "fold-right" are concerned:
 ;;
 
-;; [WORKING]
+(define (func x y)
+  (let ((num 1))  ;; assign a value for 1 for heuristic purposes
+    (if (= x num)
+	(append y (list x))
+	y)))
+
+(fold-right func '() '(1 1 2 1 3))
+(func 1 (fold-right func '() '(1 2 1 3)))
+(func 1 (func 1 (fold-right func '() '(2 1 3))))
+(func 1 (func 1 (func 2 (fold-right func '() '(1 3)))))
+(func 1 (func 1 (func 2 (func 1 (fold-right func '() '(3))))))
+(func 1 (func 1 (func 2 (func 1 (func 3 (fold-right func '() '()))))))
+(func 1 (func 1 (func 2 (func 1 (func 3 '())))))
+(func 1 (func 1 (func 2 (func 1 '()))))
+(func 1 (func 1 (func 2 '(1))))
+(func 1 (func 1 '(1)))
+(func 1 '(1 1))
+'(1 1 1)
+
+;;
+;; We then take the "length" of this list to arrive at the final answer.
+;;
+
