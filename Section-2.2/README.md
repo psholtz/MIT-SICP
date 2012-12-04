@@ -102,6 +102,9 @@ Picture Language
 (define einstein2 (beside einstein (flip-vert einstein)))
 (paint einstein2)
 </pre>
+**Combining painters by flipping one of them.***
+
+<p>&nbsp;</p>
 
 ![http://farm9.staticflickr.com/8350/8244248376_205c30d8a6_m.jpg](http://farm9.staticflickr.com/8350/8244248376_205c30d8a6_m.jpg)
 <pre>
@@ -115,6 +118,7 @@ Picture Language
   (below painter2 painter2)))
 (paint (flipped-pairs einstein))
 </pre>
+**Combining painters by stacking them one on top of another.***
  
 <p>&nbsp;</p>
 
