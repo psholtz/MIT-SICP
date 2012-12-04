@@ -21,10 +21,17 @@
       '()
       (cons low (enumerate-interval (+ low 1) high))))
 
-
+;;
+;; Let's also review the definition of "map":
+;;
+(define (map proc items)
+  (if (null? items)
+      '()
+      (cons (proc (car items))
+	    (map proc (cdr items)))))
 
 ;;
-;; Application of flatmap from Exercise 2.42:
+;; Let's first look at the application of flatmap from Exercise 2.42:
 ;;
 (flatmap 
  (lambda (rest-of-queens)
@@ -34,19 +41,28 @@
  (queen-cols (- k 1)))
 
 ;;
-;; Using this procedure, one invocation of "flatmap" will execute 
-;; the following procedures the following number of times:
+;; Expanding the definition of flatmap can make it easier to see what is going on:
 ;;
-;;  (queen-cols (- k 1)) ==> 1 call
-;;  (adjoin-position new-row k rest-of-queens) ==> # of elements in (queen-cols (- k 1))
-;;  (enumerate-interval 1 board-size) ==> 1 call
+(accumulate append '() (map 
+			(lambda (rest-of-queens)
+			  (map (lambda (new-row)
+				 (adjoin-position new-row k rest-of-queens))
+			       (enumerate-interval 1 board-size)))
+			(queen-cols (- k 1))))
+
+;;
+;; Using this method, the following procedures are called the following number of times:
+;;
+;;  (queen-cols (- k 1)) ==> 1 CALL
+;;  (enumerate-interval 1 board-size) ==> # OF ELEMENTS IN (QUEEN-COLS (- K 1))
+;;  (adjoin-position new-row k rest-of-queens) ==> (# OF ELEMENTS IN (QUEEN-COLS (- K 1)))^2
 ;;
 ;; Note that "adjoin-position", which is invoked the most frequently, is 
 ;; a relatively cheap operation, only making a linear-time call to "cons".
 ;;
 
 ;;
-;; Louis Reasoner's application of flatmap:
+;; Now let's look at Louis Reasoner's application of flatmap:
 ;;
 (flatmap
  (lambda (new-row)
@@ -54,6 +70,27 @@
 	  (adjoin-position new-row k rest-of-queens))
 	(queen-cols (- k 1))))
  (enumerate-interval 1 board-size))
+
+;;
+;; Again, expanding the definition of flatmap out can make it easier to see what's going on:
+;;
+(accumulate append '() (map
+			(lambda (new-row)
+			  (map (lambda (rest-of-queens)
+				 (adjoin-position new-row k rest-of-queens))
+			       (queen-cols (- k 1))))
+			(enumerate-interval 1 board-size)))
+
+;;
+;; Using this method, the following procedures are called the following number of times:
+;;
+;;  (enumerate-interval 1 board-size) ==> 1 CALL
+;;  (lambda (new-row) (map (lambda (rest-of-queens) (adjoin-position new-row k rest-of-queens)) (queen-cols (- k 1)))) ==> BOARD-SIZE CALLS (i.e., 8 CALLS)
+;;  (queen-cols (- k  1)) ==> BOARD-SIZE CALLS (i.e., 8 CALLS)
+;;  (lambda (rest-of-queens) (adjoin-position new-row k rest-of-queens)) ==> BOARD_SIZE * # OF ELEMENTS IN (QUEEN-COLS (- K 1))
+;; 
+
+
 
 ;;
 ;; Using this procedure, one invocation of "flatmap" will execute

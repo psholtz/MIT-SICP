@@ -93,3 +93,18 @@ We can now run the procedure:
 (prime-sum-pairs 4)
 ;; ==> ((2 1 3) (3 2 5) (4 1 5) (4 3 7))
 </pre>
+
+Picture Language
+---------------- 
+
+Following examples in the text:
+
+<pre>
+(define einstein2 (beside einstein (flip-vert einstein)))
+(paint einstein2)
+</pre>
+
+<pre>
+(define einstein4 (below einstein2 einstein2))
+(paint einstein4)
+</pre>
