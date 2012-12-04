@@ -212,7 +212,23 @@
 ;; Checking for row safety is easy: just make sure a number if not 
 ;; repeated in the list. 
 ;;
+;; [TO CHECK FOR DIAGONALS, WE MAKE AN OFFSET CHECK] [WORKING]
 ;; 
+
+;;
+;; [WORKING]
+;;
+(define (safe? column positions)
+  (define (is-column-safe-iter? new-row remaining-rows row-offset)
+    (if (null? remaining-rows)
+	#t
+	(let ((current-row (car remaining-rows)))
+	  (if (or (= new-row current-row)
+		  (= new-row (+ current-row row-offset))
+		  (= new-row (- current-row row-offset)))
+	      #f
+	      (is-column-safe-iter? new-row (cdr remaining-rows) (+ row-offset 1))))))
+  (is-column-safe-iter? (car positions) (cdr positions) 1))
 
 
 ;;
