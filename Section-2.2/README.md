@@ -99,6 +99,7 @@ Picture Language
 
 Following examples in the text:
 
+![http://farm9.staticflickr.com/8350/8244248350_1c7e734a3e_m.jpg](http://farm9.staticflickr.com/8350/8244248350_1c7e734a3e_m.jpg)
 <pre>
 (define einstein2 (beside einstein (flip-vert einstein)))
 (paint einstein2)
