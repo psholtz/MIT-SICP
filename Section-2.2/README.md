@@ -1,9 +1,6 @@
 Section 2.2
 =========== 
 
-![http://farm9.staticflickr.com/8197/8245029656_0a5611cb7a_z.jpg](http://farm9.staticflickr.com/8197/8245029656_0a5611cb7a_z.jpg)
-**Fractal paintings by M.C. Escher ("Square Limit") nicely illustrate the closure property in a vivid, geometrical way.**
-
 Hierarchical Data and the Closure Property
 ------------------------------------------ 
 
@@ -14,6 +11,9 @@ http://en.wikipedia.org/wiki/Eight_queens_puzzle
 Functional Geometry:
 
 http://eprints.ecs.soton.ac.uk/7577/1/funcgeo2.pdf
+
+![http://farm9.staticflickr.com/8197/8245029656_0a5611cb7a_z.jpg](http://farm9.staticflickr.com/8197/8245029656_0a5611cb7a_z.jpg)
+*Fractal paintings by M.C. Escher ("Square Limit") nicely illustrate the closure property in a vivid, geometrical way.*
 
 Square Limit:
 
@@ -46,55 +46,6 @@ We can define the nesting procedures:
  (if (> low high)
      '()
      (cons low (enumerate-interval (+ low 1) high))))
-</pre>
-
-Define the prime procedure:
-
-<pre>
-(define (expmod base exp m)
-  (cond ((= exp 0) 1)
-        ((even? exp) 
-         (remainder (square (expmod base (/ exp 2) m))
-                    m))
-        (else
-         (remainder (* base (expmod base (- exp 1) m))
-                    m))))
-
-(define (prime? n)
- (define (get-random-a)
-  (+ 2 (random (- n 4))))
- (define (test a)
-  (= (expmod a (- n 1) n) 1))
- (cond ((= n 2) #t)
-       ((= n 3) #t)
-       ((= n 4) #f)
-       ((= n 5) #t)
-       (else 
-        (and (test (- n 1))
-             (test (- n 2))
-             (test (get-random-a))
-             (test (get-random-a))
-             (test (get-random-a))))))
-</pre>
-
-Now define the procedure itself:
-
-<pre>
-(define (prime-sum-pairs n)
- (map make-pair-sum
-       (filter prime-sum?
-               (flatmap
-                (lambda (i)
-                 (map (lambda (j) (list i j))
-                      (enumerate-iterval 1 (- i 1))))
-                (enumerate-interval 1 n)))))
-</pre>
-
-We can now run the procedure:
-
-<pre>
-(prime-sum-pairs 4)
-;; ==> ((2 1 3) (3 2 5) (4 1 5) (4 3 7))
 </pre>
 
 Picture Language
