@@ -105,6 +105,7 @@ Following examples in the text:
 (paint einstein2)
 </pre>
 
+![http://farm9.staticflickr.com/8350/8244248376_205c30d8a6_m.jpg](http://farm9.staticflickr.com/8350/8244248376_205c30d8a6_m.jpg)
 <pre>
 (define einstein4 (below einstein2 einstein2))
 (paint einstein4)
