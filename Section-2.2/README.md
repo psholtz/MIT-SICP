@@ -107,3 +107,15 @@ Picture Language
 </pre>
 
 **Using the "corner-split" procedure at n = 2, 3 and 4.**
+
+<p>&nbsp;</p>
+
+![http://farm9.staticflickr.com/8069/8245129272_faa0166a62_m.jpg](http://farm9.staticflickr.com/8069/8245129272_faa0166a62_m.jpg)
+<pre>
+(define (square-limit painter n)
+ (let ((quarter (corner-split painter n)))
+  (let ((half (beside (flip-horiz quarter) quarter)))
+   (below (flip-vert half) half))))
+</pre>
+
+**The "square-limit" procedure applied to Einstein. Compare with the M.C. Escher painting above.**
