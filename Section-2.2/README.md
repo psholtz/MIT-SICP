@@ -97,8 +97,6 @@ We can now run the procedure:
 Picture Language
 ---------------- 
 
-Following examples in the text:
-
 ![http://farm9.staticflickr.com/8350/8244248350_1c7e734a3e_m.jpg](http://farm9.staticflickr.com/8350/8244248350_1c7e734a3e_m.jpg)
 <pre>
 (define einstein2 (beside einstein (flip-vert einstein)))
@@ -109,4 +107,11 @@ Following examples in the text:
 <pre>
 (define einstein4 (below einstein2 einstein2))
 (paint einstein4)
+</pre>
+
+<pre>
+(define (flipped-pairs painter)
+ (let ((painter2 (beside painter (flip-vert painter))))
+  (below painter2 painter2)))
+(paint (flipped-pairs einstein))
 </pre>
