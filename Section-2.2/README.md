@@ -84,7 +84,7 @@ Picture Language
 </pre>
 **Using the "right-split" procedure at n = 2, 3 and 4.**
 
-<p>&nsbp;</p>
+<p>&nbsp;</p>
 
 ![http://farm9.staticflickr.com/8205/8245073340_a1b9ac8029_m.jpg](http://farm9.staticflickr.com/8205/8245073340_a1b9ac8029_m.jpg) ![http://farm9.staticflickr.com/8066/8245073298_b708a21e9b_m.jpg](http://farm9.staticflickr.com/8066/8245073298_b708a21e9b_m.jpg) ![http://farm9.staticflickr.com/8479/8245073270_e873644b27_m.jpg](http://farm9.staticflickr.com/8479/8245073270_e873644b27_m.jpg)
 <pre>
