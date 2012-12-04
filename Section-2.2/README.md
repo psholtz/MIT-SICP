@@ -13,11 +13,9 @@ Functional Geometry:
 http://eprints.ecs.soton.ac.uk/7577/1/funcgeo2.pdf
 
 ![http://farm9.staticflickr.com/8197/8245029656_0a5611cb7a_z.jpg](http://farm9.staticflickr.com/8197/8245029656_0a5611cb7a_z.jpg)
+
 *Fractal paintings by M.C. Escher ("Square Limit") nicely illustrate the closure property in a vivid, geometrical way.*
-
-Square Limit:
-
-http://euler.slu.edu/escher/index.php/File:Square-limit.jpg
+(http://euler.slu.edu/escher/index.php/File:Square-limit.jpg)
 
 Nested Mappings
 --------------- 
