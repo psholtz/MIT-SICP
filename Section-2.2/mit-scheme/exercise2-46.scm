@@ -33,7 +33,7 @@
    (- (xcor-vect a) (xcor-vect b))
    (- (ycor-vect a) (ycor-vect b))))
 
-(define (scale-vect a c)
+(define (scale-vect c a)
   (make-vect
    (* c (xcor-vect a))
    (* c (ycor-vect a))))
@@ -66,5 +66,5 @@
 (sub-vect u v)
 ;; ==> (2 2)
 
-(scale-vect u 3)
+(scale-vect 3 u)
 ;; ==> (9 12)
