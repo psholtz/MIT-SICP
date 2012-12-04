@@ -124,4 +124,6 @@ Compare with the M.C. Escher painting above.
 
 These pictures were generated using the "SICP Picture Language" module in Dr. Racket. 
 
-More information is available here: http://planet.racket-lang.org/package-source/soegaard/sicp.plt/2/0/planet-docs/sicp-manual/index.html
+More information is available here: 
+
+http://planet.racket-lang.org/package-source/soegaard/sicp.plt/2/0/planet-docs/sicp-manual/index.html
