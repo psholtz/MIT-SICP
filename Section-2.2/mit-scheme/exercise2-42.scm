@@ -1,6 +1,6 @@
 
 ;;
-;; [WORKING]
+;; Exercise 2.42
 ;;
 
 ;;
@@ -25,9 +25,21 @@
 
 
 ;;
-;; [WORKING]
+;; The "eight-queens puzzle" asks how to place eight queens on a chessboard so that no 
+;; queen is in check from any other (i.e,. no two queens are in the same row, column 
+;; or diagonal). One possible solution is shown above. One way to solve the puzzle is to work
+;; across the board, placing a queen in each column. Once we have placed k-1 queens, we must place
+;; the kth queen in a position where it does not check any of the queens already on the 
+;; board. We can formulate this approach recursively: Assume that we have already generated the 
+;; sequence of all possible ways to place k-1 queens in the first k-1 columns of the board. 
+;; For each of these ways, generate an extended set of positions by placing a queen in each
+;; row of the kth column. Now filter these, keeping only the positions for which the queen
+;; in the kth column is safe with respect to the other queens. This produces the sequence
+;; of all ways to place k queens in the first k columns. By continuing this process, we will 
+;; produce not only one solution, but all solutions to the puzzle.
 ;;
 
+;;
 ;; We implement this solution as a procedure "queens", which returns a sequence of all solutions
 ;; to the problem of placing n queens on an n x n chessboard. "queens" has an internal procedure
 ;; "queen-cols" that returns the sequence of all ways to place queens in the first k columns of
@@ -204,51 +216,63 @@
 ;;
 
 ;;
-;; Also, in terms of defining the "safe?" procdure, note that because 
-;; of how we defined our data structure, we don't need to actually 
-;; for a conflict in the columns; there can be only one queen per column
-;; in our data structure representation. 
-;; 
-;; Checking for row safety is easy: just make sure a number if not 
-;; repeated in the list. 
+;; There are three things we need to check for in the "safe?" procedure:
 ;;
-;; [TO CHECK FOR DIAGONALS, WE MAKE AN OFFSET CHECK] [WORKING]
-;; 
-
+;;  (1) Columns: we need to make sure there is no column w/ more than one queen in it
+;;  (2) Rows: we need to make sure that there is no row w/ more than one queen in it
+;;  (3) Diagonals: we need to make sure there is no diagonal w/ more than one queen in it
 ;;
-;; [WORKING]
+;; The column-safety is an artefact of the data structure we have choosen: there 
+;; is no possible way to have more than one queen in one column, given the way 
+;; we are counting. Checking for the row-safety should, similarly, be relatively 
+;; straightforward: just make sure that the "newly added" row number does not 
+;; re-occur anywhere else in the list data structure. The check for diagonal-safety
+;; can be implemented recursively: we define a procedure to walk down the list 
+;; structure from the first row-element next to the newly added row. At each iteration
+;; we keep track of the number of steps down the list structure we are. If this 
+;; number - added to or subtracted from - the newly added row number equals the 
+;; row number, we know that we are in conflict along the diagonal. 
 ;;
 (define (safe? column positions)
-  (define (is-column-safe-iter? new-row remaining-rows row-offset)
+  (define (safe-iter? new-row remaining-rows row-offset)
     (if (null? remaining-rows)
 	#t
 	(let ((current-row (car remaining-rows)))
-	  (if (or (= new-row current-row)
-		  (= new-row (+ current-row row-offset))
-		  (= new-row (- current-row row-offset)))
+	  (if (or
+	       (= new-row current-row)
+	       (= new-row (+ current-row row-offset))
+	       (= new-row (- current-row row-offset)))
 	      #f
-	      (is-column-safe-iter? new-row (cdr remaining-rows) (+ row-offset 1))))))
-  (is-column-safe-iter? (car positions) (cdr positions) 1))
-
-
-;;
-;; Define the "safe?" procedure:
-;;
-(define (safe? column positions)
-  (define (two-queens-safe? q1 q2)
-    '())
-  
-  (define (next-column-safe? new-row positions row-offset)
-    (if (null? positions)
-	true
-	(let ((this-row (car positions)))
-	  (if (or (= this-row new-row)
-		  (= (+ this-row row-offset) new-row)
-		  (= (- this-row row-offset) new-row))
-	      false
-	      (next-column-safe? new-row (cdr positions) (+ 1 row-offset))))))
-  (next-column-safe? (car positions) (cdr positions) 1))
+	      (safe-iter? new-row (cdr remaining-rows) (+ row-offset 1))))))
+  (safe-iter? (car positions) (cdr positions) 1))
 
 ;;
-;; [WORKING]
+;; Let's run some unit tests:
+;;
+(queens 1)
+;; ==> ((1))
+
+(queens 2)
+;; ==> ()
+
+(queens 3)
+;; ==> ()
+
+(queens 4)
+;; ==> ((3 1 4 2) (2 4 1 3))
+
+;;
+;; For the larger board sizes, let's just count the number of solutions:
+;;
+(length (queens 5))
+;; ==> 10
+(length (queens 6))
+;; ==> 4
+(length (queens 7))
+;; ==> 40
+(length (queens 8))
+;; ==> 92
+
+;;
+;; These are the answers we anticipated getting.
 ;;
