@@ -1,6 +1,9 @@
 Section 2.2
 =========== 
 
+![http://farm9.staticflickr.com/8197/8245029656_0a5611cb7a_z.jpg](http://farm9.staticflickr.com/8197/8245029656_0a5611cb7a_z.jpg)
+**Fractal paintings by M.C. Escher ("Square Limit") nicely illustrate the closure property in a vivid, geometrical way.**
+
 Hierarchical Data and the Closure Property
 ------------------------------------------ 
 
@@ -102,7 +105,7 @@ Picture Language
 (define einstein2 (beside einstein (flip-vert einstein)))
 (paint einstein2)
 </pre>
-**Combining painters by flipping one of them.***
+**Combining painters by flipping one of them.**
 
 <p>&nbsp;</p>
 
@@ -118,7 +121,7 @@ Picture Language
   (below painter2 painter2)))
 (paint (flipped-pairs einstein))
 </pre>
-**Combining painters by stacking them one on top of another.***
+**Combining painters by stacking them one on top of another.**
  
 <p>&nbsp;</p>
 
