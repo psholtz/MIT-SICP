@@ -115,3 +115,12 @@ Picture Language
   (below painter2 painter2)))
 (paint (flipped-pairs einstein))
 </pre>
+
+![http://farm9.staticflickr.com/8210/8244992686_512e0e47e4_m.jpg](http://farm9.staticflickr.com/8210/8244992686_512e0e47e4_m.jpg) ![http://farm9.staticflickr.com/8348/8244992736_70b8b08c85_m.jpg](http://farm9.staticflickr.com/8348/8244992736_70b8b08c85_m.jpg) ![http://farm9.staticflickr.com/8203/8244992766_3fa2c74fd2_m.jpg](http://farm9.staticflickr.com/8203/8244992766_3fa2c74fd2_m.jpg)
+<pre>
+(define (right-split painter n)
+ (if (= n 0)
+  painter
+  (let ((smaller (right-split picture (- n 1))))
+   (beside painter (below smaller smaller)))))
+</pre>
