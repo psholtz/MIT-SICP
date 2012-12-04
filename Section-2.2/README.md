@@ -118,4 +118,6 @@ Picture Language
    (below (flip-vert half) half))))
 </pre>
 
-**The "square-limit" procedure applied to Einstein. Compare with the M.C. Escher painting above.**
+**The "square-limit" procedure applied to Einstein.** 
+
+Compare with the M.C. Escher painting above.
