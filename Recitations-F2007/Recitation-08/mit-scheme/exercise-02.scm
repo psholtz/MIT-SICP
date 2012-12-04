@@ -1,13 +1,6 @@
 ;;
 ;; Working definitions
 ;;
-(define (variable? exp) 
-  (symbol? exp))
-(define (make-variable var)
-  var)
-(define (variable-name exp)
-  exp)
-
 (define (or? exp)
   (and (pair? exp) (eq? (car exp) 'or)))
 (define (make-or exp1 exp2)
