@@ -78,3 +78,18 @@ Write a definition for "apply-procs" using "map".
 (4) Suppose "x" is bound to the list (1 2 3 4 5 6 7). Using "map", "filter" and/or "fold-right", 
     write an expression involving "x" that returns:
 
+(a) (1 4 9 16 25 36 49)
+
+(b) (1 3 5 7)
+
+(c) ((1 1) (2 2) (3 3) (4 4) (5 5) (6 6) (7 7))
+
+(d) ((2) ((4) ((6) ())))
+
+(e) The maximum element of x: 7
+
+(f) List of last element of x: (7)
+
+(g) The list in reverse order: (7 6 5 4 3 2 1)
+
+(h) Bonus: reverse a list in less than O(n^2) time.
