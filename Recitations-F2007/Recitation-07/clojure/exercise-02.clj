@@ -5,6 +5,8 @@
 ;;
 ;; Presently "length" is defined as follows:
 ;;
+(ns sicp.clojure.lisp)
+
 (defn length [lst]
   (if (empty? lst)
     0

@@ -22,6 +22,8 @@
 ;;
 ;; First let's define the procedures that we need:
 ;;
+(ns sicp.clojure.lisp)
+
 (defn square [x] (* x x))
 (defn double [x] (* x 2))
 (defn inc [x] (+ x 1))
