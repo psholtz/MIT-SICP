@@ -9,16 +9,20 @@
 ;;
 
 ;;
+;; Note: we will use the same data model that is used in "SICP Picture Language" for Dr. Racket
+;;
+
+;;
 ;; Constructors and Selectors:
 ;;
 (define (make-vect x y)
-  (list x y))
+  (cons x y))
 
 (define (xcor-vect p)
   (car p))
 
 (define (ycor-vect p)
-  (cadr p))
+  (cdr p))
 
 ;;
 ;; Mathematical operations:
