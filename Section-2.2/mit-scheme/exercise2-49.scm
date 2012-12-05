@@ -84,6 +84,42 @@
 (define s9 (make-segment p7 p8))
 (define s10 (make-segment p5 p5))
 
+;; draw the "wave" man:
+(define points
+  '((0.3 0)
+    (0.4 0)
+    (0.5 0.3)
+    (0.6 0)
+    (0.7 0)
+    (0.6 0.4)
+    (0.99 0.2)
+    (0.99 0.3)
+    (0.8 0.55)
+    (0.6 0.55)
+    (0.7 0.075)
+    (0.6 0.99)
+    (0.4 0.99)
+    (0.3 0.75)
+    (0.4 0.55)
+    (0.3 0.55)
+    (0.2 0.5)
+    (0 0.75)
+    (0 0.55)
+    (0.2 0.45)))
+
+(define u1 (make-segment t1 t2))
+(define u2 (make-segment t2 t3))
+(define u3 (make-segment t3 t4))
+(define u4 (make-segment t4 t5))
+(define u5 (make-segment t5 t6))
+(define u6 (make-segment t6 t7))
+(define u7 (make-segment t7 t8))
+(define u8 (make-segment t8 t9))
+(define u9 (make-segment t9 t10))
+(define u10 (make-segment t10 t11))
+(define u11 (make-segment t11 t12))
+(define u12 (make-segment t12 t13))
+
 ;; (a) The painter that draws the outline of the designated frame:
 (define painter1 (segments->painter (list s1 s2 s3 s4)))
 

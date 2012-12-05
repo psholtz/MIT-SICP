@@ -124,6 +124,8 @@ Compare with the M.C. Escher painting above.
 
 These pictures were generated using the "SICP Picture Language" module in Dr. Racket. 
 
+The "Picture Language" can be loaded into Racket at the command prompt by typing *(require (planet "sicp.ss" ("soegaard" "sicp.plt" 2 0))))*
+
 More information is available here: 
 
 http://planet.racket-lang.org/package-source/soegaard/sicp.plt/2/0/planet-docs/sicp-manual/index.html
