@@ -85,6 +85,30 @@
  (enumerate-interval 1 board-size))
 
 ;;
+;; ========================== 
+;; LOUIS REASONER'S PROCEDURE
+;; ========================== 
+;;
+;; In this application, flatmap will invoke "enumerate-interval" only once,
+;;
+;; The argument method used by flatmap, however, will be invoked "board-size" 
+;; number of times (let's use 8, so 8 times). For each on of these invocations 
+;; (again, let's call this number n(k)), we will invoke "adjoin-position" once.
+;; So the total number of invocations for "adjoin-position" will be n(k)*8.
+;;
+;; Adding up the totals for this invocation of "flatmap", we have:
+;;
+;;  ENUMERATE-INTERVAL: 1
+;;  QUEEN-COLS: 8
+;;  ADJOIN-POSITION: n(k) * 8
+;;
+;; where n(k) is the value of (queen-cols (- k 1)).
+;;
+
+;;
+;; So the difference between the two procedures is that they essentially 
+
+
 ;; Again, expanding the definition of flatmap out can make it easier to see what's going on:
 ;;
 (accumulate append '() (map
