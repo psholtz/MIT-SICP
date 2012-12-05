@@ -56,6 +56,7 @@ def queens(board_size):
 
 def queens_bad(board_size):
  def queen_cols(k):
+  print "invocation", k
   global total_bad
   total_bad += 1
   if k==0:
@@ -67,12 +68,12 @@ def queens_bad(board_size):
 def run_bad():
  #print queens_bad(1)
  #print queens_bad(2)
- #print queens_bad(3)
+ print queens_bad(3)
  #print queens_bad(4)
  #print len(queens_bad(5))
  #print len(queens_bad(6))
  #print len(queens_bad(7))
- print len(queens_bad(8))
+ #print len(queens_bad(8))
 
 def run_good():
  #print queens(1)

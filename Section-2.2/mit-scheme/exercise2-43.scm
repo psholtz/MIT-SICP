@@ -85,78 +85,116 @@
  (enumerate-interval 1 board-size))
 
 ;;
-;; Again, expanding the definition of flatmap out can make it easier to see what's going on:
+;; ========================== 
+;; LOUIS REASONER'S PROCEDURE
+;; ========================== 
 ;;
-(accumulate append '() (map
-			(lambda (new-row)
-			  (map (lambda (rest-of-queens)
-				 (adjoin-position new-row k rest-of-queens))
-			       (queen-cols (- k 1))))
-			(enumerate-interval 1 board-size)))
+;; In this application, flatmap will invoke "enumerate-interval" only once,
+;;
+;; The argument method used by flatmap, however, will be invoked "board-size" 
+;; number of times (let's use 8, so 8 times). For each on of these invocations 
+;; (again, let's call this number n(k)), we will invoke "adjoin-position" once.
+;; So the total number of invocations for "adjoin-position" will be n(k)*8.
+;;
+;; Adding up the totals for this invocation of "flatmap", we have:
+;;
+;;  ENUMERATE-INTERVAL: 1
+;;  QUEEN-COLS: 8
+;;  ADJOIN-POSITION: n(k) * 8
+;;
+;; where n(k) is the value of (queen-cols (- k 1)).
+;;
 
 ;;
-;; Using this method, the following procedures are called the following number of times:
+;; So the difference between the two procedures is that they essentially "switch"
+;; the order/cost of evaluating "enumerate-interval" and "queen-cols". Since "queen-cols"
+;; is BY FAR the most time-consuming operation in this call stack ("adjoin-position" and 
+;; "enumerate-interval" being extremely quick, linear-time-or-less operations for the 
+;; purposes of this application), the time it takes to evaluate "queen-cols" is going to 
+;; dominate the time it takes for the entire procedure to complete.
 ;;
-;;  (enumerate-interval 1 board-size) ==> 1 CALL
-;;  (lambda (new-row) (map (lambda (rest-of-queens) (adjoin-position new-row k rest-of-queens)) (queen-cols (- k 1)))) ==> BOARD-SIZE CALLS (i.e., 8 CALLS)
-;;  (queen-cols (- k  1)) ==> BOARD-SIZE CALLS (i.e., 8 CALLS)
-;;  (lambda (rest-of-queens) (adjoin-position new-row k rest-of-queens)) ==> BOARD_SIZE * # OF ELEMENTS IN (QUEEN-COLS (- K 1))
-;; 
-
-
-
+;; And in Louis Reasoner's procedure, "queen-cols" is being invoked 8 times at each 
+;; iteration step, while in the original procedure, "queen-cols" was invoked only once
+;; at each iteration step. This is the reason why Louis' procedure runs so much slower.
 ;;
-;; Using this procedure, one invocation of "flatmap" will execute
-;; the following procedures the following number of times:
-;;
-;;  (enumerate-interval 1 board-size) ==> 1 call
-;;  (queen-cols (- k 1) ==> 1 call
-
-
-
 
 ;;
-;; Let's step through some call graphs.
+;; I wrote a small Python script to count the number of invocations made to "queen-cols"
+;; when using Louis Reasoner's application of the flatmap procedure. In this table, n 
+;; represents the board size, and varies from n=2 to n=8:
 ;;
-;; As we showed in the previous exercise, if the board size is 4
-;; then (queen-cols 3) will be:
+;; -----------------------
+;; |  N  |  Total calls  |
+;; -----------------------
+;; |  2  |  7            |
+;; |  3  |  40           |
+;; |  4  |  341          |
+;; |  5  |  3,906        |
+;; |  6  |  55,987       |
+;; |  7  |  960,800      |
+;; |  8  |  19,173,961   |
+;; ----------------------- 
 ;;
-;;  ((1 4 2) (2 4 1) (3 1 4) (4 1 3))
+;; Indeed, the numbers skyrocket very quickly with increasing n.
 ;;
-;; So the call to flatmap, at the iteration with k=4, might look something like:
+;; Working it out with a pen and paper, or else following the call graphs in Python 
+;; leads us to understand what is happening: the procedure "queen-cols" is being called
+;; 1 + 2 + 4 for n=2, it is being called 1 + 3 + 9 + 27 times for n=3, and so on. For 
+;; n=8, it is being called 1 + 8 + 8^2 + ... + 8^8 times. 
 ;;
-(flatmap
- (lambda (rest-of-queens)
-   (map (lambda (new-row)
-	  (adjoin-position new-row 4 rest-of-queens))
-	(enumerate-interval 1 board-size)))
- '((1 4 2) (2 4 1) (3 1 4) (4 1 3)))
+;; In fact, we can generate a quick procedure to give us the number of times "queen-cols"
+;; will be invoked, given n:
+;;
+(define (f n)
+  (define (f-iter k total)
+    (let ((value (expt n k)))
+      (if (= k n)
+	  (+ total value)
+	  (f-iter (+ k 1) (+ total value)))))
+  (f-iter 0 0))
 
-(flatmap
- (lambda (rest-of-queens)
-   (map (lambda (new-row)
-	  (adjoin-position new-row 4 rest-of-queens))
-	'(1 2 3 4)))
- '((1 4 2) (2 4 1) (3 1 4) (4 1 3)))
-
-'((1 1 4 2) (2 1 4 2) (3 1 4 2) (4 1 4 2)
- (1 2 4 1) (2 2 4 1) (3 2 4 1) (4 2 4 1)
- (1 3 1 4) (2 3 1 4) (3 3 1 4) (4 3 1 4)
- (1 4 1 3) (2 4 1 3) (3 4 1 3) (4 4 1 3))
+;;
+;; Invoking this procedure with the various "n" will regenerate the table listed above.
+;;
+;; To answer the question of how long it takes Louis Reasoner's program to run, if 
+;; the "normal" program runs in time T, we will assume that the "bulk" of the computational 
+;; time is spent evaluating the "queen-cols" procedure. The other two procedures involved, 
+;; "enumerate-interval" and "adjoin-position", execute in near constant time for n = 8. 
+;;
+;; Thus, in Louis Reasoner's program, "queen-cols" is invoked (f 8) ==> 19.173,961 times.
+;;
+;; In the "normal" execution of the program, "queen-cols" is invoked 9 times. 
+;;
+;; We obtain the ratio of the performance difference:
+;;
+(define a (/ (f 8) 9.0))
+a
+;; ==> 2,130,440
 
 ;;
-;; Let's look at what the call graph looks like using Louis Reasoner's approach:
+;; In other words, Louis Reasoner's program may run up to 2 million times slower(!!)
 ;;
-(flatmap
- (lambda (new-row)
-   (map (lambda (rest-of-queens)
-	  (adjoin-position new-row k rest-of-queens))
-	(queen-cols (- k 1))))
- (enumerate-interval 1 board-size))
+;; We can express this as a power of 8 (the number of squares on the board):
+;;
+(/ (log a) (log 8))
+;; ==> 7.008
 
-(flatmap
- (lambda (new-row)
-   (map (lambda (rest-of-queens)
-	  (adjoin-position new-row 4 rest-of-queens))
-	'((1 4 2) (2 4 1) (3 1 4) (4 1 3))))
- '(1 2 3 4))
+;;
+;; Or in other words, Louis Reasoner's program runs nearly 8^7 times slower than the "normal" version(!!)
+;;
+
+;;
+;; Taking the following calculation into consideration, we see that if the normal version 
+;; of the program executes in about 100 microseconds -- not unreasonable on today's computing hardware --
+;; Louis' version of the program will take about 213 seconds, or about 3 1/2 minutes, to complete:
+;;
+
+(* a (expt 10 -4.0))
+;; ==> 213.0
+(/ (* a (expt 10 -4.0)) 60.0)
+;; ==> 3.55
+
+;;
+;; This is (very roughly) the level of performance we saw in the program (i.e., it took several 
+;; minutes to completely for n = 8).
+;;
