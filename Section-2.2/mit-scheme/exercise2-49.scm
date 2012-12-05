@@ -96,7 +96,7 @@
     (0.99 0.3)
     (0.8 0.55)
     (0.6 0.55)
-    (0.7 0.075)
+    (0.7 0.75)
     (0.6 0.99)
     (0.4 0.99)
     (0.3 0.75)
@@ -105,20 +105,31 @@
     (0.2 0.5)
     (0 0.75)
     (0 0.55)
-    (0.2 0.45)))
+    (0.2 0.45)
+    (0.3 0.55)
+    (0.35 0.5)))    
 
-(define u1 (make-segment t1 t2))
-(define u2 (make-segment t2 t3))
-(define u3 (make-segment t3 t4))
-(define u4 (make-segment t4 t5))
-(define u5 (make-segment t5 t6))
-(define u6 (make-segment t6 t7))
-(define u7 (make-segment t7 t8))
-(define u8 (make-segment t8 t9))
-(define u9 (make-segment t9 t10))
-(define u10 (make-segment t10 t11))
-(define u11 (make-segment t11 t12))
-(define u12 (make-segment t12 t13))
+;; map the "make-vect" procedure over these points:
+(define (make-vectors points)
+  (map (lambda (p)
+	 (let ((x (car p))
+	       (y (cadr p)))
+	   (make-vect x y)))
+       points))
+
+(define vectors (make-vectors points))
+
+;; create a way to generate segments from these vectors:
+(define (make-segments vectors)
+  (define (make-segments-iter working total)
+    (if (null? (cdr working))
+	(append total (list (make-segment (car working) (car (car total)))))
+	(let ((one (car working))
+	      (two (cadr working)))
+	  (make-segments-iter (cdr working) (append total (list (make-segment one two)))))))
+  (make-segments-iter vectors '()))
+
+(define segments (make-segments vectors))
 
 ;; (a) The painter that draws the outline of the designated frame:
 (define painter1 (segments->painter (list s1 s2 s3 s4)))
@@ -128,5 +139,9 @@
 
 ;; (c) The painter that draws a diamond shape by connecting the midpoints of the sides of the frame:
 (define painter3 (segments->painter (list s7 s8 s9 s10)))
+
+;; (d) The "wave" painter:
+(define wave (segments->painter segments))
+
 
 ;; [WORKING]
