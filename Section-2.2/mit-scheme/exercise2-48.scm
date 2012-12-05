@@ -11,11 +11,11 @@
 ;; First import the necessary code from Exercise 2.46:
 ;;
 (define (make-vect x y)
-  (list x y))
+  (cons x y))
 (define (xcor-vect p)
   (car p))
 (define (ycor-vect p)
-  (cadr p))
+  (cdr p))
 
 (define (add-vect a b)
   (make-vect 
@@ -31,28 +31,32 @@
    (* c (ycor-vect a))))
 
 ;;
+;; Note: we will use the same data model that is used in "SICP Picture Language" for Dr. Racket
+;;
+
+;;
 ;; Now define the constructors and selectors:
 ;;
 (define (make-segment start end)
-  (list start end))
+  (cons start end))
 
 (define (start-segment segment)
   (car segment))
 
 (define (end-segment segment)
-  (cadr segment))
+  (cdr segment))
 
 ;;
 ;; Run some unit tests:
 ;;
 (define p1 (make-vect 1 2))
-;; ==> (1 2)
+;; ==> (1 . 2)
 (define p2 (make-vect 3 5))
-;; ==> (3 5)
+;; ==> (3 . 5)
 
 (define s (make-segment p1 p2))
-;; ==> ((1 2) (3 5))
+;; ==> ((1 . 2) 3 . 5)
 (start-segment s)
-;; ==> (1 2)
+;; ==> (1 . 2)
 (end-segment s)
-;; ==> (3 5)
+;; ==> (3 . 5)
