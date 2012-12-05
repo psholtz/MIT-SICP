@@ -1,7 +1,12 @@
 ;;
 ;; Exercise 2.49
 ;;
-;; {WORKING]
+;; Use "segments->painter" to define the following primitive painters:
+;; 
+;;  (a) The painter that draws the outline of the designated frame.
+;;  (b) The painter that draws an "X" by connecting opposite corners of the frame.
+;;  (c) The painter that draws a diamond shape by connecting the midpoints of the sides of the frame.
+;;  (d) The "wave" painter.
 ;;
 
 ;;
@@ -86,28 +91,28 @@
 
 ;; draw the "wave" man:
 (define points
-  '((0.3 0)
-    (0.4 0)
-    (0.5 0.3)
-    (0.6 0)
-    (0.7 0)
-    (0.6 0.4)
-    (0.99 0.2)
-    (0.99 0.3)
-    (0.8 0.55)
-    (0.6 0.55)
-    (0.7 0.75)
+  '((0.4 0.0)
+    (0.5 0.33)
+    (0.6 0.0)
+    (0.75 0.0)
+    (0.6 0.45)
+    (0.99 0.15)
+    (0.99 0.35)
+    (0.8 0.65)
+    (0.6 0.65)
+    (0.65 0.8)
     (0.6 0.99)
     (0.4 0.99)
-    (0.3 0.75)
-    (0.4 0.55)
-    (0.3 0.55)
-    (0.2 0.5)
-    (0 0.75)
-    (0 0.55)
-    (0.2 0.45)
-    (0.3 0.55)
-    (0.35 0.5)))    
+    (0.35 0.8)
+    (0.4 0.65)
+    (0.33 0.65)
+    (0.1 0.6)
+    (0.0 0.8)
+    (0.0 0.6)
+    (0.1 0.4)
+    (0.3 0.6)
+    (0.33 0.5)
+    (0.25 0.0)))
 
 ;; map the "make-vect" procedure over these points:
 (define (make-vectors points)
@@ -143,5 +148,6 @@
 ;; (d) The "wave" painter:
 (define wave (segments->painter segments))
 
-
-;; [WORKING]
+;;
+;; See the attached .md file for actual pictures.
+;;

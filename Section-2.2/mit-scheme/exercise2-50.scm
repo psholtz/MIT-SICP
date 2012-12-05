@@ -60,3 +60,7 @@
 		       (make-vect 0.0 1.0)
 		       (make-vect 0.0 0.0)
 		       (make-vect 1.0 1.0)))
+
+;;
+;; See the attached .md file for actual images from Dr. Racket
+;;
