@@ -132,13 +132,13 @@
 (define segments (make-segments vectors))
 
 ;; (a) The painter that draws the outline of the designated frame:
-(define painter1 (segments->painter (list s1 s2 s3 s4)))
+(define square (segments->painter (list s1 s2 s3 s4)))
 
 ;; (b) The painter that draws an "X" by connecting opposite corners of the frame:
-(define painter2 (segments->painter (list s5 s6)))
+(define x-marks-the-spot (segments->painter (list s5 s6)))
 
 ;; (c) The painter that draws a diamond shape by connecting the midpoints of the sides of the frame:
-(define painter3 (segments->painter (list s7 s8 s9 s10)))
+(define diamond (segments->painter (list s7 s8 s9 s10)))
 
 ;; (d) The "wave" painter:
 (define wave (segments->painter segments))
