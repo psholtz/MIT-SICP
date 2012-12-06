@@ -28,7 +28,7 @@
 (define (make-sum a1 a2)
   (cond ((=number? a1 0) a2)
 	((=number? a2 0) a1)
-	((and (number? a1) (number? a2) ) (+ a1 a2))
+	((and (number? a1) (number? a2)) (+ a1 a2))
 	(else
 	 (list '+ a1 a2))))
 
@@ -263,10 +263,32 @@
 
 (define (multiplicand p) (reduce-expression p '*))
 
+
 ;;
-;; Running the unit tests against these procedures generates the same results as before.
+;; [WORKING]
 ;;
 
+;;
+;; THIS IS THE ONE USE CASE WE MIGHT WANT TO TEST AGAINST DREWs:
+;;
+
+
+(deriv '(+ y z 5 (* 2 x t 5)) 'x)
+
+
+;;
+;; Use cases:
+;;
+(deriv 3 'x)
+;; =>
+(deriv 'x 'x)
+;; ==>
+(deriv '(+ x y) 'x)
+;; ==>
+(deriv '(+ x y) 'y)
+;; ==>
+(deriv '(+ x y) 'z)
+;; ==>
 
 ;;
 ;; Give credit to the people who [WORKING]
