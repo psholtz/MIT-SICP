@@ -13,11 +13,11 @@
 ;; The supporting vector procedures are given here:
 ;;
 (define (make-vect x y)
-  (list x y))
+  (cons x y))
 (define (xcor-vect p)
   (car p))
 (define (ycor-vect p)
-  (cadr p))
+  (cdr p))
 
 (define (add-vect a b)
   (make-vect 
