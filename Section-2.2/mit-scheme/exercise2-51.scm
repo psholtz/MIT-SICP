@@ -36,4 +36,3 @@
 ;;
 ;; See the attached .md file for actual images from Dr. Racket
 ;;
-	   
