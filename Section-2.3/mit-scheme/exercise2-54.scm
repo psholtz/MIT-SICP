@@ -17,22 +17,17 @@
 
 ;; [[WORKING]]
 
-;;
-;; We define "halting" conditions when both elements are null. 
-;;
-;; Otherwise, test for "eq?" if they are symbols, and implement the recursion if they are lists.
-;;
-;; Return false otherwise.
-;;
 (define (equal? a b)
-  (cond ((and (null? a) (null? b))
+  (cond ((and (list? a) (list? b))
+	 (and (equal? (car a) (car b))
+	      (equal? (cdr a) (cdr b))))
+	((or (list? a) (list? b))
+	 #f)
+	((and (null? a) (null? b))
 	 #t)
-	((and (symbol? a) (symbol? b))
-	 (eq? a b))
-	((and (list? a) (list? b))
-	 (and (equal? (car a) (car b)) (equal? (cdr a) (cdr b))))
-	(else
-	 #f)))
+	((or (null? a) (null? b))
+	 #f)
+	(else (eq? a b))))
 
 ;;
 ;; Run the unit tests:
@@ -43,6 +38,9 @@
 (equal? 'a '())
 ;; ==>
 
+(equal? 'a 'b)
+;; ==>
+
 (equal? '() '())
 ;; ==>
 
@@ -50,7 +48,25 @@
 ;; ==>
 
 (equal? '(this is a list) '(this (is a) list))
-;; ==>
+;; ==> #f
 
 (equal? '(a b c) 'b)
+;; ==> #f 
+
+(equal? 1 1)
+;; ==> #t
+
+(equal? 1 2)
+;; ==> #f
+
+(equal? 1 '())
+;; ==>
+
+(equal? 1 '(this is a list))
+;; ==>
+
+(equal? '() '(this is a list))
+;; ==>
+
+(equal? 1 'a)
 ;; ==>
