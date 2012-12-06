@@ -228,57 +228,37 @@
 ;;
 (define (deriv expression var)
 
-  ;;
-  ;; Derivative of a constant is 0
-  ;;
-  (cond ((number? expression) 0)
+  (cond 
+   ((number? expression) 0) 
 
-	;;
-	;; Derivative of a linear variable is 1, otherwise 0 if differentiating against a different variable
-	;;
-	((variable? expression)
-	 (if (same-variable? expression var) 1 0))
+   ((variable? expression)
+    (if (same-variable? expression var) 1 0)) 
+   
+   ((sum? expression)
+    (make-sum (deriv (addend expression) var)
+	      (deriv (augend expression) var)))
 
-	;;
-	;; Differentiate sum
-	;;
-	((sum? expression)
-	 (make-sum (deriv (addend expression) var)
-		    (deriv (augend expression) var)))
+   ((difference? expression)
+    (make-difference (deriv (minuend expression) var)
+		     (deriv (subtrahend expression) var)))
+   
+   ((product? expression)
+    (make-sum
+     (make-product (multiplier expression)
+		   (deriv (multiplicand expression) var))
+     (make-product (deriv (multiplier expression) var)
+		   (multiplicand expression))))
 
-	;;
-	;; For completeness, let's add differentiation of differences
-	;;
-	((difference? expression)
-	 (make-difference (deriv (minuend expression) var)
-			  (deriv (subtrahend expression) var)))
-
-	;;
-	;; Differentiate product
-	;;
-	((product? expression)
-	 (make-sum
-	  (make-product (multiplier expression)
-			(deriv (multiplicand expression) var))
-	  (make-product (deriv (multiplier expression) var)
-			(multiplicand expression))))
-
-	;;
-	;; Differentiate an exponentiation. 
-	;; Again, only support the case where the base is a variable.
-	;;
-	((exponentiation? expression)
-	 (make-product
-	  (exponent expression)
-	  (make-exponentiation
-	   (base expression)
-	   (make-difference (exponent expression) 1))))))
-
-	;;
-	;; Signal an error condition
-	;;
-	(else
-	 (error "Unknown expression type -- DERIV" expression))))
+   ((exponentiation? expression)
+    (make-product
+     (exponent expression)
+     (make-exponentiation
+      (base expression)
+      (make-difference (exponent expression) 1))))
+   
+   
+   (else
+    (error "Unknown expression type -- DERIV" expression))))
 
 ;;
 ;; Let's walk through each condition, testing if deriv gives expected answers:
