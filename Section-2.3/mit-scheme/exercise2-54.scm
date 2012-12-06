@@ -15,17 +15,18 @@
 ;; "(cdr b)". Using this idea, implement "equal?" as a procedure.
 ;;
 
-;; [[WORKING]]
-
+;;
+;; We terminate recursion by checking for "null?" .. Otherwise, implement as described above:
+;;
 (define (equal? a b)
-  (cond ((and (list? a) (list? b))
+  (cond ((and (null? a) (null? b))
+	 #t)
+	((or (null? a) (null? b))
+	 #f)
+	((and (list? a) (list? b))
 	 (and (equal? (car a) (car b))
 	      (equal? (cdr a) (cdr b))))
 	((or (list? a) (list? b))
-	 #f)
-	((and (null? a) (null? b))
-	 #t)
-	((or (null? a) (null? b))
 	 #f)
 	(else (eq? a b))))
 
@@ -33,19 +34,19 @@
 ;; Run the unit tests:
 ;;
 (equal? 'a 'a)
-;; ==>
+;; ==> #t
 
 (equal? 'a '())
-;; ==>
+;; ==> #f
 
 (equal? 'a 'b)
-;; ==>
+;; ==> #f
 
 (equal? '() '())
-;; ==>
+;; ==> #t
 
 (equal? '(this is a list) '(this is a list))
-;; ==>
+;; ==> #t
 
 (equal? '(this is a list) '(this (is a) list))
 ;; ==> #f
@@ -60,13 +61,13 @@
 ;; ==> #f
 
 (equal? 1 '())
-;; ==>
+;; ==> #f
 
 (equal? 1 '(this is a list))
-;; ==>
+;; ==> #f
 
 (equal? '() '(this is a list))
-;; ==>
+;; ==> #f
 
 (equal? 1 'a)
-;; ==>
+;; ==> #f
