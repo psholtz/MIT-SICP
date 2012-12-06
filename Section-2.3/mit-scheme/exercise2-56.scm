@@ -256,7 +256,6 @@
       (base expression)
       (make-difference (exponent expression) 1))))
    
-   
    (else
     (error "Unknown expression type -- DERIV" expression))))
 
@@ -279,6 +278,8 @@
 ;; ==> y
 (deriv '(+ (* 2 x) y) 'y)
 ;; ==> 1
+(deriv '(+ (* x y) y) 'y)
+;; ==> (+ x 1)
 (deriv '(- x 1) 'x)
 ;; ==> 1
 (deriv '(- y x) 'x)
@@ -299,5 +300,36 @@
 ;; ==> 1
 (deriv '(* x y) 'x)
 ;; ==> y
+(deriv '(+ (* x y) (+ x 3)) 'x)
+;; ==> (+ y 1)
+(deriv '(+ (* x y) x 3) 'x)
+;; ==> (+ y 1)
 (deriv '(* (* x y) (+ x 3)) 'x)
 ;; ==> (+ (* x y) (* y (+ x 3)))
+
+;;
+;; Note that this replicates the "response" given in the text, althogh 
+;; as indicated, the respnose is not in the "simpelst" possible form. 
+;; Specifically, the expression to differentiate was given as:
+;;
+;;  ==> xy(x+3)
+;;  
+;;  ==> (x^2)*y + 3xy
+;;
+;; Differentiating, we obtain:
+;;
+;;  ==> 2xy + 3y
+;;
+;; The response given by the symbolic differentiator is:
+;;
+;;  ==> xy + y(x+3)
+;; 
+;; Which we can simplify as:
+;;
+;;  ==> xy + xy + 3y
+;;
+;;  ==> 2xy + 3y
+;;
+;; Indeed, the correct answer, but the symbolic differentiator did 
+;; not "simplify" the result especially well.
+;;
