@@ -25,6 +25,13 @@
       set
       (cons x set)))
 
+(adjoin-set 1 '())
+;; ==> (1)
+(adjoin-set 1 '(1))
+;; ==> (1)
+(adjoin-set 'z '(1 2 3))
+;; ==> (z 1 2 3)
+
 ;;
 ;; Now define the union (most of the logic is already in "adjoin-set"):
 ;;
