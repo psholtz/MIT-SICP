@@ -501,50 +501,25 @@
 ;; ==> (* a b c)
 
 ;;
-;; [WORKING]
+;; There is a temptation here to "abstract" out some of the internals of the 
+;; two methods, much as we did for "augend" and "multiplicand", but in fact 
+;; the fact structures are not completely congruent, so we won't go into that
+;; exercise here.
 ;;
 
 ;;
-;; THIS IS THE ONE USE CASE WE MIGHT WANT TO TEST AGAINST DREWs:
+;; At any rate, let's try to recompute the example derivative we had used earlier:
 ;;
-
-
-(deriv '(+ y z 5 (* 2 x t 5)) 'x)
-
-
-(define (get-symbol-list elems)
-  (filter (lambda (x) (not (number? x))) elems))
-(define (get-number-list elems)
-  (filter (lambda (x) (number? (x))) elems))
-
-(define (make-sum . elems)
-  (cond ((null? elems) 0)
-	((null? (cdr elems)) (car elems))
-	(else
-	 (let ((numbers (get-number-list elems))
-	       (symbols (get-symbol-list elems)))
-	   (cond ((null? symbols) (apply + elems))
-		 ((> (length numbers) 1)
-		  
-		  
-
-	   (cond ((> (length numbers) 1)
-
+(deriv (make-sum-n 'y 'z 5 (make-product-n 2 'x 't 5)) 'x)
+;; ==> (* t 10)
 
 ;;
-;; Use cases:
+;; Which, indeed, is a much more readable way of rendering the answer.
 ;;
-(deriv 3 'x)
-;; =>
-(deriv 'x 'x)
-;; ==>
-(deriv '(+ x y) 'x)
-;; ==>
-(deriv '(+ x y) 'y)
-;; ==>
-(deriv '(+ x y) 'z)
-;; ==>
 
 ;;
-;; Give credit to the people who [WORKING]
+;; Further references on this problem set are available at:
+;;
+;;  http://wqzhang.wordpress.com/sicp-solutions/
+;;  http://wiki.drewhess.com/wiki/Category:SICP_solutions
 ;;
