@@ -132,3 +132,7 @@
 ;; is not already part of the set.
 ;;
 
+;;
+;; The first algorithm is just a tiny bit more efficient, but the second algorithm
+;; has the benefit of leaving the elements of the joined set in order. 
+;;
