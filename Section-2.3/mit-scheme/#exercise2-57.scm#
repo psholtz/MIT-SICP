@@ -430,16 +430,6 @@
 ;; ==> 6
 (make-sum-n 1 'a 'b)
 ;; ==> (+ 1 a b)
-(make-sum-n 3 'a 'b)
-;; ==> (+ 3 a b)
-(make-sum-n 3 'a 'b 4 'c)
-;; ==> (+ a b c 7)
-(make-sum-n 0 'a 'b)
-;; ==> (+ a b)
-(make-sum-n 0 'a 'b 0)
-;; ==> (+ a b)
-(make-sum-n 'a 'b 'c)
-;; ==> (+ a b c)
 
 ;;
 ;; We can define "make-product-input" in nearly the identical way:
@@ -457,7 +447,7 @@
 				 (list (apply * numbers)))))
 		 ((is-n-the-only-number? 0 elems) 0)
 		 ((is-n-the-only-number? 1 elems)
-		  (apply make-product-n symbols))
+		
 		 (else 
 		  (append '(*) elems)))))))
 
