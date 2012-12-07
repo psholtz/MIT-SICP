@@ -1,8 +1,15 @@
 ;;
 ;; Exercise 2.57
 ;;
-;; [WORKING]
+;; Extend the differentiation program to handle sums and products of arbitrary numbers of (two or
+;; more) terms. Then the last example above could be expressed as:
 ;; 
+;;  (deriv '(* x y (+ x 3)) 'x)
+;;
+;; Try to do this by changing only the representation for sums and products, without changing the 
+;; "deriv" procedure at all. For example, the "addend" of a sum would be the first term, and the 
+;; "augend" would be the sum of the rest of the terms.
+;;
 
 ;;
 ;; Let's import all the code we need to do symbolic differentiation, 
@@ -516,6 +523,58 @@
 ;;
 ;; Which, indeed, is a much more readable way of rendering the answer.
 ;;
+
+;;
+;; Let's try the example cited in the text:
+;;
+(deriv '(* x y (+ x 3)) 'x)
+;; ==> (+ (* x y) (* y (+ x 3)))
+
+;; 
+;; For completeness, let's walk through some of the unit tests we 
+;; did in the previous exercise:
+;;
+(deriv 3 'x)
+;; ==> 0
+(deriv 'x 'x)
+;; ==> 1
+(deriv 'x 'y)
+;; ==> 0
+(deriv '(+ x y) 'x)
+;; ==> 1
+(deriv '(+ x y) 'y)
+;; ==> 1
+(deriv '(+ x y) 'z)
+;; ==> 0
+(deriv '(+ (* 2 x) y) 'x)
+;; ==> 2
+(deriv '(+ (* 2 x) y) 'y)
+;; ==> 1
+(deriv '(+ (* x y) y) 'x)
+;; ==> y
+(deriv '(+ (* x y) y) 'y)
+;; ==> (+ x 1)
+(deriv '(- x 1) 'x)
+;; ==> 1
+(deriv '(- y x) 'x)
+;; ==> -1
+(deriv '(* x y) 'x)
+;; ==> y
+(deriv '(** x 3) 'x)
+;; ==> (* 3 (** x 2))
+(deriv '(** x y) 'x)
+;; ==> (* y (** x (- y 1)))
+
+(deriv '(+ x 3) 'x)
+;; ==> 1
+(deriv '(* x y) 'x)
+;; ==> y
+(deriv '(+ (* x y) (+ x 3)) 'x)
+;; ==> (+ y 1)
+(deriv '(+ (* x y) x 3) 'x)
+;; ==> (+ y 1)
+(deriv '(* (* x y) (+ x 3)) 'x)
+;; ==> (+ (* x y) (* y (+ x 3)))
 
 ;;
 ;; Further references on this problem set are available at:
