@@ -373,8 +373,65 @@
     ;;
     (/ (* 1.0 n1) (* 1.0 n2))))
  
-(jaccard '(a a a b) '(a a b b c))
+(define s1 '(a a a b))
+(define s2 '(a a b b c))
 
+(intersection-set s1 s2)
+;; ==> '(a a b)
+(union-set s1 s2)
+;; ==> '(a a a b a a b b c)
+(jaccard s1 s2)
+;; ==> 0.333333333333
+
+(define t1 '(1 2 3 4))
+(define t2 '(2 3 5 7))
+(define t3 '(2 4 6))
+
+(intersection-set t1 t2)
+;; ==> (2 3)
+(union-set t1 t2)
+;; ==> (1 2 3 4 2 3 5 7)
+(jaccard t1 t2)
+;; ==> 0.25
+
+(intersection-set t2 t3)
+;; ==> (2)
+(union-set t2 t3)
+;; ==> (2 3 5 7 2 4 6)
+(jaccard t2 t3)
+;; ==> 0.142857...
+
+(intersection-set t1 t3)
+;; ==> (2 4)
+(union-set t1 t3)
+;; ==> (1 2 3 4 2 4 6)
+(jaccard t1 t3)
+;; ==> 0.285714...
+
+(define u1 '(1 1 1 2))
+(define u2 '(1 1 2 2 3))
+(define u3 '(1 2 3 4))
+
+(intersection-set u1 u2)
+;; ==> (1 1 2)
+(union-set u1 u2)
+;; ==> (1 1 1 2 1 1 2 2 3)
+(jaccard u1 u2)
+;; ==> 0.33333333333
+
+(intersection-set u2 u3)
+;; ==> (1 2 3)
+(union-set u2 u3)
+;; ==> (1 1 2 2 3 1 2 3 4)
+(jaccard u2 u3)
+;; ==> 0.33333333333
+
+(intersection-set u1 u3)
+;; ==> (1 2)
+(union-set u1 u3)
+;; ==> (1 1 1 2 1 2 3 4)
+(jaccard u1 u3)
+;; ==> 0.25
 
 ;;
 ;; See Prof. Ullman's Stanford CS345 course on Data Mining for more information.
