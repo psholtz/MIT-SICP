@@ -169,7 +169,7 @@
 ;; ==> (* -1 x)
 (make-difference 'x 1)
 ;; ==> (- x 1)
-(make-differnece 1 'x)
+(make-difference 1 'x)
 ;; ==> (- 1 x)
 (make-difference 'x 'y)
 ;; ==> (- x y)
