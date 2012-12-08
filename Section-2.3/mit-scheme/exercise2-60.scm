@@ -27,9 +27,8 @@
   (cons x set))
 
 ;;
-;; It turns out that neither "intersection-set" nor "union-set" need to be modified.
-;;
-;; We can still use both these procedures as before:
+;; Suppose next that we take the definition of "intersection-set" that was given in the 
+;; text, and see whether it works for multisets:
 ;;
 (define (intersection-set s1 s2)
   (cond ((or (null? s1) (null? s2)) '())
@@ -39,18 +38,103 @@
 	(else
 	 (intersection-set (cdr s1) s2))))
 
-;;
-;; We'll use the "second" definition of "union-set" given in Exercise 2.59, since it 
-;; leaves the elements of the joined set listed in a more natural order:
-;;
-(define (accumulate op init seq)
-  (if (null? seq)
-      init
-      (op (car seq)
-	  (accumulate op init (cdr seq)))))
+(intersection-set '(5 5) '(5 5 5))
+;; ==> (5 5)
 
+;;
+;; Which is the correct answer.
+;;
+;; But now consider:
+;;
+(intersection-set '(5 5 5) '(5 5))
+;; ==> (5 5 5)
+
+;;
+;; Which is, of course, the wrong answer.
+;;
+;; Expanding the call graph for "intersection-set", we can see why it's wrong:
+;;
+(intersection-set '(5 5 5) '(5 5))
+(cons 5 (intersection-set '(5 5) '(5 5)))
+
+;;
+;; That second expression is already false, since (intersection-set '(5 5 5) '(5 5)) is NOT 
+;; equivalent to (cons 5 (intersection-set '(5 5) '(5 5))). If we wish to use this same 
+;; approach of iteratively recursing down set1, looking for matches in set2, we must 
+;; remove from set2 all elements that we find in set1:
+;;
+(define (remove-element-set x set)
+  (define (remove-element-set-iter working total)
+    (cond ((null? working) total)
+	  ((equal? x (car working))
+	   (append total (cdr working)))
+	  (else 
+	   (remove-element-set-iter (cdr working) (adjoin-set (car working) total)))))
+  (remove-element-set-iter set '()))
+
+(remove-element-set 5 '(1 2 3))
+;; ==> (3 2 1)
+(remove-element-set 5 '(1 2 5))
+;; ==> (2 1)
+(remove-element-set 5 '(1 5 3))
+;; ==> (1 3)
+(remove-element-set 5 '(5 1 2))
+;; ==> (1 2)
+(remove-element-set 5 '(5 5 1))
+;; ==> (5 1)
+(remove-element-set 5 '(5 5 5))
+;; ==> (5 5)
+
+;;
+;; This looks like just want need. We integrate it into "intersection-set" as follows:
+;;
+(define (intersection-set s1 s2)
+  (cond ((or (null? s1) (null? s2)) '())
+	((element-of-set? (car s1) s2)
+	 (cons (car s1)
+	       (intersection-set (cdr s1) (remove-element-set (car s1) s2))))
+	(else 
+	 (intersection-set (cdr s1) s2))))
+
+
+
+;;
+;; Our previous definition of "union-set" deferred the "union"-ing to the 
+;; the "adjoin-set" procedure, which we've modified accordingly. So in 
+;; principle, we should be able to use the old "union-set" procedure.
+;; However, since we're not checking for duplicates anymore, the expression
+;; "union-set" just as succinctly using the "append" procedure:
+;; 
 (define (union-set s1 s2)
-  (accumulate (lambda (a b) (adjoin-set a b)) s1 s2))
+  (append s1 s2))
+
+;;
+;; Where append is defined as:
+;;
+;; (define (append lst1 lst2)
+;;  (if (null? lst1)
+;;      lst1
+;;      (cons (car lst1)
+;;            (append (cdr lst1) lst2))))
+;;
+
+;;
+;; Let's expand a call graph, and compare to the call graph in the previous exercise:
+;;
+(union-set '(1 2 3) '(4 5 6))
+(append '(1 2 3) '(4 5 6))
+(cons 1 (append '(2 3) '(4 5 6)))
+(cons 1 (cons 2 (append '(3) '(4 5 6))))
+(cons 1 (cons 2 (cons 3 (append '() '(4 5 6)))))
+(cons 1 (cons 2 (cons 3 '(4 5 6))))
+(cons 1 (cons 2 '(3 4 5 6)))
+(cons 1 '(2 3 4 5 6))
+'(1 2 3 4 5 6)
+
+;;
+;; Subtracting out the calls to "adjoin-set", which in the previous exercise was a O(n)
+;; operation, we see that now the entire "union-set" procedure executes in linear time.
+;;
 
 ;;
 ;; Let's first run through the old use cases, to make sure they behave as we expect:
@@ -64,11 +148,11 @@
 (union-set '(1 2 3) '(1 2 3))
 ;; ==> (1 2 3 1 2 3)
 (union-set '(1) '(1 2 3))
-;; ==> (1 2 3 1)
+;; ==> (1 1 2 3)
 (union-set '(4) '(1 2 3))
-;; ==> (1 2 3 4)
+;; ==> (4 1 2 3)
 (union-set '(1 2 3) '(4 5 6))
-;; ==> (4 5 6 1 2 3)
+;; ==> (1 2 3 4 5 6)
 
 ;;
 ;; Let's run the same tests on intersection:
@@ -83,22 +167,33 @@
 ;; ==> (1 2 3)
 (intersection-set '(1) '(1 2 3))
 ;; ==> (1)
+(intersection-set '(1 2 3) '(1))
+;; ==> ??? [WORKING]
 (intersection-set '(4) '(1 2 3))
 ;; ==> ()
+(intersection-set '(1 2 3) '(4))
+;; ==> ??? [WORKING]
 (intersection-set '(1 2 3) '(4 5 6))
 ;; ==> ()
+(intersection-set '(4 5 6) '(1 2 3))
+;; ==> ??? [WORKING]
 
 ;;
 ;; Some specific multiset examples:
 ;;
 (union-set '(5 5) '(5 5 5))
 ;; ==> (5 5 5 5 5)
+(union-set '(5 5 5) '(5 5))
+;; ==> (5 5 5 5 5)
 (intersection-set '(5 5) '(5 5 5))
 ;; ==> (5 5)
+(intersection-set '(5 5 5) '(5 5))
+;; ==> ??? [WORKING]
 
 ;;
 ;; Let's step through a call-graph for "intersection-set", to get a 
-;; sense for the performance of this procedure:
+;; sense for the performance of this procedure. First we step through 
+;; the call graph for the "old" implementation of "intersection-set":
 ;;
 (intersection-set '(1 2 3 4) '(3 4 5 6))
 (if (element-of-set? 1 '(3 4 5 6))
@@ -120,6 +215,12 @@
 (cons 3 (cons 4 '()))
 (cons 3 '(4))
 '(3 4)
+
+;;
+;; Now let's expand a call graph for the "new" implementation of "intersection-set":
+;;
+
+;; [WORKING]
 
 ;;
 ;; The algorithm must make a linear walk down each element of set1 (if the size of 
@@ -172,6 +273,19 @@
 ;;
 
 ;;
+;; We can build the following table:
+;;
+;;  +--------------------+----------+-------------+
+;;  |  PROCEDURE         |  SET     |  MULTI-SET  |    
+;;  +--------------------+----------+-------------+
+;;  |  element-of-set?   |  O(n)    |  O(n)       |
+;;  |  adjoin-set        |  O(n)    |  constant   |
+;;  |  intersection-set  |          |             |
+;;  |  union-set         |  O(n^2)  |  O(n)       |
+;;  +--------------------+----------+-------------+
+;;
+
+;;
 ;; Sets are a very common mathematical construct and are used widely throughout 
 ;; computer science. For instance, a relational database is designed to return 
 ;; a matching "set" of tuples in response to SQL queries.
@@ -195,9 +309,19 @@
 ;; of two multisets A and B:
 ;;
 (define (jaccard s1 s2)
-  '())
+  ;;
+  ;; "union-set" and "intersection-set" are already 
+  ;; adapted to handle multisets, so we can use them:
+  ;;
+  (let ((n1 (length (intersection-set s1 s2)))
+	(n2 (length (union-set s1 s2))))
+    ;;
+    ;; Multiply by 1.0 to ensure casting to double:
+    ;;
+    (/ (* 1.0 n1) (* 1.0 n2))))
+ 
+(jaccard '(a a a b) '(a a b b c))
 
-;; [WORKING]
 
 ;;
 ;; See Prof. Ullman's Stanford CS345 course on Data Mining for more information.
