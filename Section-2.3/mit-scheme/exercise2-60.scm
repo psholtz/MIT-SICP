@@ -96,7 +96,100 @@
 	(else 
 	 (intersection-set (cdr s1) s2))))
 
+;;
+;; Let's see whether this new definition passes our use cases:
+;;
+(intersection-set '(5 5 5) '(5 5))
+;; ==> (5 5)
+(intersection-set '(5 5) '(5 5 5))
+;; ==> (5 5)
 
+;;
+;; Looks good so far. A few more unit tests:
+;;
+(intersection-set '() '())
+;; ==> ()
+(intersection-set '(1 2 3) '())
+;; ==> ()
+(intersection-set '() '(1 2 3))
+;; ==> ()
+(intersection-set '(1 2 3) '(1 2 3))
+;; ==> (1 2 3)
+(intersection-set '(1) '(1 2 3))
+;; ==> (1)
+(intersection-set '(1 2 3) '(1))
+;; ==> (1)
+(intersection-set '(4) '(1 2 3))
+;; ==> ()
+(intersection-set '(1 2 3) '(4))
+;; ==> ()
+(intersection-set '(1 2 3) '(4 5 6))
+;; ==> ()
+(intersection-set '(4 5 6) '(1 2 3))
+;; ==> ()
+
+;;
+;; To get a sense for how "intersection-set" performs, let's 
+;; step through some call graphs, for both the old and new 
+;; versions, to compare their respective performance.
+;;
+;; First, stepping through a call graph for the old version:
+;;
+(intersection-set '(1 2 3 4) '(3 4 5 6))
+(if (element-of-set? 1 '(3 4 5 6))                     ;; element-of-set? takes 4 (i.e., N2) steps
+    (cons 1 (intersection-set '(2 3 4) '(3 4 5 6)))
+    (intersection-set '(2 3 4) '(3 4 5 6)))
+(intersection-set '(2 3 4) '(3 4 5 6))        
+(if (element-of-set? 2 '(3 4 5 6))                     ;; element-of-set? takes 4 (i.e,. N2) steps
+    (cons 2 (intersection-set '(3 4) '(3 4 5 6)))
+    (intersection-set '(3 4) '(3 4 5 6)))
+(intersection-set '(3 4) '(3 4 5 6))
+(if (element-of-set? 3 '(3 4 5 6))                     ;; element-of-set? takes 1 (but possible max of N2) steps
+    (cons 3 (intersection-set '(4) '(3 4 5 6)))
+    (inter-section-set '(4) '(3 4 5 6)))
+(cons 3 (intersection-set '(4) '(3 4 5 6)))
+(cons 3 (if (element-of-set? 4 '(3 4 5 6))             ;; element-of-set? takes 2 (but possible max of N2) steps
+	        (cons 4 (intersection-set '() '(3 4 5 6)))
+		    (intersection-set '() '(3 4 5 6))))
+(cons 3 (cons 4 (intersection-set '() '(3 4 5 6))))
+(cons 3 (cons 4 '()))
+(cons 3 '(4))
+'(3 4)
+
+;;
+;; Now let's expand the same function call for the new
+;; implementation of "intersection-set":
+;;
+(intersection-set '(1 2 3 4) '(3 4 5 6))
+(if (element-of-set? 1 '(3 4 5 6))                     ;; element-of-set? takes 4 (i.e., N2) steps
+    (cons 1 (intersection-set '(2 3 4) (remove-element-set 1 '(3 4 5 6))))
+    (intersection-set '(2 3 4) '(3 4 5 6)))
+(intersection-set '(2 3 4) '(3 4 5 6))
+(if (element-of-set? 2 '(3 4 5 6))                     ;; element-of-set? takes 4 (i.e., N2) steps
+    (cons 2 (intersection-set '(3 4) (remove-element-set 2 '(3 4 5 6))))
+    (intersection-set '(3 4) '(3 4 5 6)))
+(intersection-set '(3 4) '(3 4 5 6))
+(if (element-of-set? 3 '(3 4 5 6))                     ;; element-of-set? takes 1 (but possible max of N2) steps
+    (cons 3 (intersection-set '(4) (remove-element-set 3 '(3 4 5 6))))
+    (intersection-set '(4) '(3 4 5 6)))                ;; remove-element-set takes max of N2 steps
+(cons 3 (intersection-set '(4) (remove-element-set 3 '(3 4 5 6))))
+(cons 3 (intersection-set '(4) '(4 5 6)))
+(cons 3 (if (element-of-set? 4 '(4 5 6))               ;; element-of-set? takes 1 (but possible max of N2) steps
+	    (cons 4 (intersection-set '() (remove-element-set 4 '(4 5 6))))
+	    (intersection-set '() '(4 5 6))))          ;; remove-element-set takes max of N2 steps
+(cons 3 (cons 4 (intersection-set '() (remove-element-set 4 '(4 5 6)))))
+(cons 3 (cons 4 (intersection-set '() '(5 6))))
+(cons 3 (cons 4 '()))
+(cons 3 '(4))
+'(3 4)
+
+;;
+;; The "outer 
+
+;;
+;; Counting the steps, let n1 be the size of set1 and n2 be the size of set2.
+;; Then the total number of steps taken is on the order of n1*n2 + n1, or O(n^2).
+;;
 
 ;;
 ;; Our previous definition of "union-set" deferred the "union"-ing to the 
@@ -155,30 +248,6 @@
 ;; ==> (1 2 3 4 5 6)
 
 ;;
-;; Let's run the same tests on intersection:
-;;
-(intersection-set '() '())
-;; ==> ()
-(intersection-set '(1 2 3) '())
-;; ==> ()
-(intersection-set '() '(1 2 3))
-;; ==> ()
-(intersection-set '(1 2 3) '(1 2 3))
-;; ==> (1 2 3)
-(intersection-set '(1) '(1 2 3))
-;; ==> (1)
-(intersection-set '(1 2 3) '(1))
-;; ==> ??? [WORKING]
-(intersection-set '(4) '(1 2 3))
-;; ==> ()
-(intersection-set '(1 2 3) '(4))
-;; ==> ??? [WORKING]
-(intersection-set '(1 2 3) '(4 5 6))
-;; ==> ()
-(intersection-set '(4 5 6) '(1 2 3))
-;; ==> ??? [WORKING]
-
-;;
 ;; Some specific multiset examples:
 ;;
 (union-set '(5 5) '(5 5 5))
@@ -188,46 +257,7 @@
 (intersection-set '(5 5) '(5 5 5))
 ;; ==> (5 5)
 (intersection-set '(5 5 5) '(5 5))
-;; ==> ??? [WORKING]
-
-;;
-;; Let's step through a call-graph for "intersection-set", to get a 
-;; sense for the performance of this procedure. First we step through 
-;; the call graph for the "old" implementation of "intersection-set":
-;;
-(intersection-set '(1 2 3 4) '(3 4 5 6))
-(if (element-of-set? 1 '(3 4 5 6))
-    (cons 1 (intersection-set '(2 3 4) '(3 4 5 6)))
-    (intersection-set '(2 3 4) '(3 4 5 6)))
-(intersection-set '(2 3 4) '(3 4 5 6))
-(if (element-of-set? 2 '(3 4 5 6))
-    (cons 2 (intersection-set '(3 4) '(3 4 5 6)))
-    (intersection-set '(3 4) '(3 4 5 6)))
-(intersection-set '(3 4) '(3 4 5 6))
-(if (element-of-set? 3 '(3 4 5 6))
-    (cons 3 (intersection-set '(4) '(3 4 5 6)))
-    (inter-section-set '(4) '(3 4 5 6)))
-(cons 3 (intersection-set '(4) '(3 4 5 6)))
-(cons 3 (if (element-of-set? 4 '(3 4 5 6))
-	    (cons 4 (intersection-set '() '(3 4 5 6)))
-	    (intersection-set '() '(3 4 5 6))))
-(cons 3 (cons 4 (intersection-set '() '(3 4 5 6))))
-(cons 3 (cons 4 '()))
-(cons 3 '(4))
-'(3 4)
-
-;;
-;; Now let's expand a call graph for the "new" implementation of "intersection-set":
-;;
-
-;; [WORKING]
-
-;;
-;; The algorithm must make a linear walk down each element of set1 (if the size of 
-;; set1 is n1, there are n1 steps here), and at each step it must check whether the 
-;; element is in set1 (if the size of set2 is n2, this could require as many as n2 
-;; steps). Hence, the total running time is n1*n2, or O(n^2).
-;;	     
+;; ==> (5 5)
 
 ;;
 ;; In terms of performance:
@@ -240,7 +270,9 @@
 ;;                 O(k), or constant-time for multisets. In other words, it runs much faster 
 ;;                 for multisets.
 ;; 
-;;  intersection-set ==> As indicated above, the running time for "intersect-set" is O(n^2) 
+;;  intersection-set ==> 
+
+;;As indicated above, the running time for "intersect-set" is O(n^2) 
 ;;                       for sets. Nothing changes in this procedure in the case of multisets, 
 ;;                       so the running time is still O(n^2). Hence, the running time for 
 ;;                       "intersection-set" is O(n^2) for sets, and O(n^2) for multisets.
@@ -280,7 +312,7 @@
 ;;  +--------------------+----------+-------------+
 ;;  |  element-of-set?   |  O(n)    |  O(n)       |
 ;;  |  adjoin-set        |  O(n)    |  constant   |
-;;  |  intersection-set  |          |             |
+;;  |  intersection-set  |  O(n^2)  |             |
 ;;  |  union-set         |  O(n^2)  |  O(n)       |
 ;;  +--------------------+----------+-------------+
 ;;
