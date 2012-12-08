@@ -157,6 +157,11 @@
 '(3 4)
 
 ;;
+;; Counting the steps, let n1 be the size of set1 and n2 be the size of set2.
+;; Then the total number of steps taken is on the order of n1*n2 + n1, or O(n^2).
+;;
+
+;;
 ;; Now let's expand the same function call for the new
 ;; implementation of "intersection-set":
 ;;
@@ -184,12 +189,28 @@
 '(3 4)
 
 ;;
-;; The "outer 
-
+;; The "outer loop", which steps through set1, will execute a total of 2*n1 times (where n1 is the 
+;; size of set1, and n2 is the size of set2): there are n1 steps in "building" the recursion, and 
+;; another n1 steps in "unwinding" it. At each step on the "way out", the procedure must invoke
+;; "element-of-set?" to check whether the element is in the set. Let us consider the case where 
+;; the target element is never in the set, and hence "remove-element-set" is never invoked. Since
+;; "element-of-set?" runs in n2 steps, this means that in this case the intersection procedure 
+;; completes in a total of n1*n2 + n1 steps, or again, on the order of O(n^2).
 ;;
-;; Counting the steps, let n1 be the size of set1 and n2 be the size of set2.
-;; Then the total number of steps taken is on the order of n1*n2 + n1, or O(n^2).
+;; Suppose now that the target element is found in the set (always), but only after all the entire
+;; set2 has been searched. Suppose now also that remove-element must be called. This calculation is a 
+;; little difficult to model, since set2 is decreasing in size at each step, the boundaries of its 
+;; growth are determined in large part by the parameters. But let's suppose the following:
 ;;
+;;  element-of-set? ==> n2 + (n2-1) + (n2-2) + ... + (n2-n1) 
+;;  remove-element-set ==> n2 + (n2-1) + (n2-2) + .. + (n2-1)
+;;
+;; These two sums added together, together with the 2*n1 steps of the outer loop, total a number 
+;; that is still on the order of O(n^2). 
+;;
+;; So in either case, performance of "intersection-set" is on the order of O(n^2), and if anything, 
+;; the computation is slower and more involved in the multiset case than in the set case.
+;; 
 
 ;;
 ;; Our previous definition of "union-set" deferred the "union"-ing to the 
@@ -312,7 +333,7 @@
 ;;  +--------------------+----------+-------------+
 ;;  |  element-of-set?   |  O(n)    |  O(n)       |
 ;;  |  adjoin-set        |  O(n)    |  constant   |
-;;  |  intersection-set  |  O(n^2)  |             |
+;;  |  intersection-set  |  O(n^2)  |  O(n^2)     |
 ;;  |  union-set         |  O(n^2)  |  O(n)       |
 ;;  +--------------------+----------+-------------+
 ;;
