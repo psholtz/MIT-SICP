@@ -676,8 +676,53 @@
 (deriv '(x * (y * (x + 3))) 'x)
 ;; ==> ((x * y) + (y * (x + 3)))
 
-;;
-;; And the old use cases from Exercise 2.56:
-;;
+(deriv '((x * y) + x + 3) 'x)
+;; ==> (y + 1)
+
+(deriv '((x + y) * x * 3) 'x)
+;; ==> (((x + y) * 3) + (x * 3))
+
 (deriv '(x + 1) 'x)
 ;; ==> 1
+
+;;
+;; And the old use cases from Exercise 2.56 (to make sure we didn't break anything):
+;;
+(deriv 3 'x)
+;; ==> 0
+(deriv 'x 'x)
+;; ==> 1
+(deriv 'x 'y)
+;; ==> 0
+(deriv '(x + y) 'x)
+;; ==> 1
+(deriv '(x + y) 'y)
+;; ==> 1
+(deriv '(x + y) 'z)
+;; ==> 0
+(deriv '((2 * x) + y) 'x)
+;; ==> 2
+(deriv '((2 * x) + y) 'y)
+;; ==> 1
+(deriv '((x * y) + y) 'x)
+;; ==> y
+(deriv '((x * y) + y) 'y)
+;; ==> (x + 1)
+(deriv '(x - 1) 'x)
+;; ==> 1
+(deriv '(1 - x) 'x)
+;; ==> -1
+(deriv '(y - x) 'x)
+;; ==> -1
+(deriv '(x * y) 'x)
+;; ==> y
+(deriv '(x ** 3) 'x)
+;; ==> (3 * (x ** 2))
+(deriv '(x ** y) 'x)
+;; ==> (y * (x ** (y - 1)))
+
+;;
+;; Further references on this problem set are available at:
+;;
+;; http://community.schemewiki.org/?sicp-ex-2.58
+;;
