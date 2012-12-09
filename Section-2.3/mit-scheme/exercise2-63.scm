@@ -202,7 +202,7 @@
 ;; We surmise, then, that tree->list-2 will execute in roughly O(log(n)) time. 
 ;;
 ;; The performance of "tree->list-1" is similar to this, but for each iteration step, an additional call 
-;; to "append" is made. Since "append" runs in linear, or O(n) time, we would expect tree->list-1 to perform
-;; slower on larger trees than tree->list-2. Specifically, we would expect tree->list-1 to execute 
-;; in roughly O(n*log(n)) time.
+;; to "append" is made. Since "append" runs in linear, or O(n) time, where n is the size of the first 
+;; argument to "append", we would expect tree->list-1 to perform slower on larger trees than tree->list-2. 
+;; Specifically, we would expect tree->list-1 to execute in roughly O(n*log(n)) time.
 ;;
