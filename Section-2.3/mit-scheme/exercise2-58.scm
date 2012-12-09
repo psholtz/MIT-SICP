@@ -331,3 +331,120 @@
 ;;
 ;; Indeed, the procedeure seems to work correctly.
 ;;
+
+;;
+;; Now, to address part (b). [WORKING]
+;;
+
+;;
+;; The first we need to create is the notion of precedence in mathematical operations.
+;; We will only be dealing with two operators: addition (+) and multiplication (*), 
+;; which two are delineated, with their appropriate relative precedence in the table 
+;; below. We also use a "maximum" sentinel to kick-start the accumulator we'll be using 
+;; below.
+;;
+(define *precedence-table*
+  (list
+   (list '+ 0)
+   (list '* 1)
+   (list 'MAX-OPERATOR 10000)))
+
+;;
+;; Given an operator (either '+ or '*), this procedure returns the precedence ranking:
+;;
+(define (precedence op)
+  (define (precedence-iter table)
+    (if (null? table)
+	(error "Operator not defined -- PRECEDENCE: " op)
+	(let ((entry (car table)))
+	  (cond ((eq? op (car entry))
+		 (cadr entry))
+		(else
+		 (precedence-iter (cdr table)))))))
+  (precedence-iter *precedence-table*))
+
+(precedence '+)
+;; ==> 0
+(precedence '*)
+;; ==> 1
+
+;;
+;; Given two argument operators, this procedure returns the lowest ranking operator.
+;;
+(define (get-lowest-operator op1 op2)
+  (let ((is-op1 (operator? op1))
+	(is-op2 (operator? op2)))
+    (cond ((and is-op1 (not is-op2)) op1)
+	  ((and (not is-op1) is-op2) op2)
+	  ((and (not is-op1) (not is-op2)) 'MAX-OPERATOR)
+	  (else
+	   (let ((p1 (precedence op1))
+		 (p2 (precedence op2)))
+	     (if (< p1 p2)
+		 op1
+		 op2))))))
+
+(get-lowest-operator '+ '+)
+;; ==> +
+(get-lowest-operator '+ '*)
+;; ==> +
+(get-lowest-operator '* '+)
+;; ==> +
+(get-lowest-operator '* '*)
+;; ==> *
+
+;;
+;; This notion of operator is merely a selector indicating whether the argument
+;; operator is in our precedence symbol table. Presently we're only extending 
+;; this framework to the addition and multiplication. Invoking this procedure 
+;; with, for instance, the subtraction ('-) symbol will return false:
+;;
+(define (operator? x)
+  (define (operator-iter table)
+    (if (null? table)
+	#f
+	(let ((entry (car table)))
+	  (if (eq? x (car entry))
+	      #t
+	      (operator-iter (cdr table))))))
+  (operator-iter *precedence-table*))
+
+(operator? '+)
+;; ==> #t
+(operator? '*)
+;; ==> #t
+(operator? '-)
+;; ==> #f
+
+(operator? '())
+;; ==> #f
+
+
+
+;; 
+;; Next we need to reimport our old friend "accumulate":
+;;
+(define (accumulate op init seq)
+  (if (null? seq)
+      init
+      (op (car seq)
+	  (accumulate op init (cdr seq)))))
+
+;;
+;; We use accumulate to find the "lowest-order" operator in a particular expression:
+;;
+(define (lowest-operator expression)
+  (accumulate (lambda (a b)
+		(if (operator? b)
+		    (get-lowest-operator a b)
+		    a))
+	      'MAX-OPERATOR
+	      expression))
+
+
+(define (sum? expression)
+  (eq? '+ (lowest-operator expression)))
+(define (product? expression)
+  (eq? '* (lowest-operator expression)))
+
+	      
