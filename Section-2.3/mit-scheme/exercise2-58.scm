@@ -350,6 +350,32 @@
    (list 'MAX-OPERATOR 10000)))
 
 ;;
+;; This notion of operator is merely a selector indicating whether the argument
+;; operator is in our precedence symbol table. Presently we're only extending 
+;; this framework to the addition and multiplication. Invoking this procedure 
+;; with, for instance, the subtraction ('-) symbol will return false:
+;;
+(define (operator? x)
+  (define (operator-iter table)
+    (if (null? table)
+	#f
+	(let ((entry (car table)))
+	    (if (eq? x (car entry))
+		      #t
+		            (operator-iter (cdr table))))))
+  (operator-iter *precedence-table*))
+
+(operator? '+)
+;; ==> #t
+(operator? '*)
+;; ==> #t
+(operator? '-)
+;; ==> #f
+
+(operator? '())
+;; ==> #f
+
+;;
 ;; Given an operator (either '+ or '*), this procedure returns the precedence ranking:
 ;;
 (define (precedence op)
@@ -393,33 +419,12 @@
 (get-lowest-operator '* '*)
 ;; ==> *
 
-;;
-;; This notion of operator is merely a selector indicating whether the argument
-;; operator is in our precedence symbol table. Presently we're only extending 
-;; this framework to the addition and multiplication. Invoking this procedure 
-;; with, for instance, the subtraction ('-) symbol will return false:
-;;
-(define (operator? x)
-  (define (operator-iter table)
-    (if (null? table)
-	#f
-	(let ((entry (car table)))
-	  (if (eq? x (car entry))
-	      #t
-	      (operator-iter (cdr table))))))
-  (operator-iter *precedence-table*))
-
-(operator? '+)
-;; ==> #t
-(operator? '*)
-;; ==> #t
-(operator? '-)
-;; ==> #f
-
-(operator? '())
-;; ==> #f
-
-
+(get-lowest-operator 2 '+)
+;; ==> +
+(get-lowest-operator '+ 2)
+;; ==> + 
+(get-lowest-operator 2 2)
+;; ==> max-operator
 
 ;; 
 ;; Next we need to reimport our old friend "accumulate":
@@ -441,10 +446,238 @@
 	      'MAX-OPERATOR
 	      expression))
 
+;; 
+;; Let's run some unit tests:
+;;
+(lowest-operator '(x * z + y)
+;; ==> +
+(lowest-operator '(x * (z + 1))
+;; ==> *
 
+;;
+;; Which is correct, the first expression should be interpreted first as an addition,
+;; then as a multiplication, while the second expression should be interpreted first 
+;; as a summation, and then as an addition.
+;;                                
+
+;;
+;; Some more examples:
+;;
+(lowest-operator '(x + 3 * (x + y + 2)))
+;; ==> +
+(lowest-operator '(x + 3))
+;; ==> +
+(lowest-operator '(x * y * (x + 3)))
+;; ==> *
+(lowest-operator '((x * y) * (x + 3)))
+;; ==> *
+(lowest-operator '(x * (y * (x + 3))))
+;; ==> *
+
+;;
+;; Let's now redefine the "sum?" and "product?" selectors:
+;;
 (define (sum? expression)
   (eq? '+ (lowest-operator expression)))
+
 (define (product? expression)
   (eq? '* (lowest-operator expression)))
 
-	      
+(define t1 '(x + 3 * (x + y + 2)))
+(sum? t1)
+;; ==> #t
+(product? t1)
+;; ==> #f
+
+(define t2 '(x + 3))
+(sum? t2)
+;; ==> #t
+(product? t2)
+;; ==> #f
+
+(define t3 '(x * y * (x + 3)))
+(sum? t3)
+;; ==> #f
+(product? t3)
+;; ==> #t
+
+(define t4 '(x * (y * (x + 3))))
+(sum? t4)
+;; ==> #f
+(product? t4)
+;; ==> #t
+ 
+(define t5 '((x * y) * (x + 3)))
+(sum? t5)
+;; ==> #f
+(product? t5)
+;; ==> #t
+
+;;
+;; Now we are ready to redefine the addition/multiplication selectors
+;; to fit our new data model. First we need a selector "singleton?" 
+;; which indicates whether the expression in question has just one element:
+;;
+(define (singleton? a)
+  (if (and (pair? a) (= (length a) 1))
+      #t
+      #f))
+
+;;
+;; With this, we can redefine the "augend" and "multiplicand" procedures:
+;;
+(define (augend expression)
+  (let ((terms (cdr (memq '+ expression))))
+    (if (singleton? terms)
+	(car terms)
+	terms)))
+
+(define (multiplicand expression)
+  (let ((terms (cdr (memq '* expression))))
+    (if (singleton? terms)
+	(car terms)
+	terms)))
+
+;;
+;; As in some other exercises, these two procedures are so congreunt to 
+;; one another that we can reduce the one to the other by abstracting 
+;; out the common functionality to a new procedure:
+;;
+(define (reduce-expression-1 expression op)
+  (let ((terms (cdr (memq op expression))))
+    (if (singleton? terms)
+	(car terms)
+	terms)))
+(define (augend expression)
+  (reduce-expression-1 expression '+))
+(define (multiplicand expression)
+  (reduce-expression-1 expression '*))
+
+;;
+;; Let's run some unit tests:
+;;
+(augend '(1 + 2))
+;; ==> 2
+(augend '(x + 3))
+;; ==> 3
+(augend '(x + y + 4))
+;; ==> (y + 4)
+(augend '(x + y * z))
+;; ==> (y * z)
+(augend '(y * z + x))
+;; ==> x
+
+(multiplicand '(1 * 2))
+;; ==> 2
+(multiplicand '(x * 3))
+;; ==> 3
+(multiplicand '(x * y * 4))
+;; ==> (y * 4)
+(multiplicand '(x * (y + z)))
+;; ==> (y + z)
+(multiplicand '((y + z) * x))
+;; ==> x
+ 
+;;
+;; In order to get the "addend", we basically have to do the same thing as "memq", 
+;; but get the produce to return everything BEFORE the symbol, rather than after.
+;; We will call this procedure "prefix":
+;;
+(define (prefix sym elems)
+  (if (or (null? elems) (eq? sym (car elems)))
+      '()
+      (cons (car elems) (prefix sym (cdr elems)))))
+
+(prefix '+ '(1 + 2 + 3))
+;; ==> (1)
+(prefix '+ '((x * y) + z))
+;; ==> ((x * y))
+(prefix '+ '(x * y * z))
+;; ==> (x * y * z)
+
+;;
+;; Now we are ready to redefine "addend" and "multiplicand":
+;;
+(define (addend expression)
+  (let ((terms (prefix '+ expression)))
+    (if (singleton? expression)
+	(car terms)
+	terms)))
+
+(define (multiplier expression)
+  (let ((terms (prefix '* expression)))
+    (if (singleton? expression)
+	(car terms)
+	terms)))
+
+;;
+;; Again, the congruency between these two procedures invites us
+;; to create a second reduction along the lines of the first:
+;;
+(define (reduce-expression-2 expression op)
+  (let ((terms (prefix op expression)))
+    (if (singleton? terms)
+	(car terms)
+	terms)))
+(define (addend expression)
+  (reduce-expression-2 expression '+))
+(define (multiplier expression)
+  (reduce-expression-2 expression '*))
+
+;;
+;; Let's run through some unit tests:
+;;
+(addend '(1 + 2))
+;; ==> 1
+(addend '(1 + x))
+;; ==> 1
+(addend '(x + 1))
+;; ==> x
+(addend '(x + y + z))
+;; ==> x
+(addend '(x + (y * z))
+;; ==> x 
+(addend '((x + y) + (z + u)))
+;; ==> (x + y)
+(addend '((y * z) + x))
+;; ==> (y * z)
+
+;;
+;; Testing multiplier:
+;;
+(multiplier '(1 * 2))
+;; ==> 1
+(multiplier '(1 * x))
+;; ==> 1
+(multiplier '(x * 1))
+;; ==> x 
+(multiplier '(x * y * z))
+;; ==> x
+(multiplier '(x * (y + z)))
+;; ==> x
+(multiplier '((x + y) * (z + u)))
+;; ==> (x + y)
+(multiplier '((y + z) * x))
+;; ==> (y + z)
+
+;;
+;; Now, finally, so long as "make-sum" and "make-product" remain defined in terms
+;; of the standard infix notation that we had defined in part (a), we should be 
+;; OK.
+;;
+;; Let's try some differentiations:
+;;
+(deriv '(x + 3 * (x + y + 2)) 'x)
+;; ==> 4
+(deriv '(x * y * (x + 3)) 'x)
+;; ==> ((x * y) + (y * (x + 3)))
+(deriv '((x * y) * (x + 3)) 'x)
+;; ==> ((x * y) + (y * (x + 3)))
+(deriv '(x * (y * (x + 3))) 'x)
+;; ==> ((x * y) + (y * (x + 3)))
+
+;;
+;; And the old use cases from Exercise 2.56:
+;;
+(deriv '(x + 1) 'x)
+;; ==> 1
