@@ -53,7 +53,19 @@
 ;; In order to unit test, we need a "key" procedure: [WORKING]
 ;;
 (define (key record)
-  'A)
+  (cond ((eq? record 1001) 1)
+	((eq? record 2001) 2)
+	((eq? record 3001) 3)
+	((eq? record 4001) 4)
+	((eq? record 5001) 5)
+	(else
+	 (error "Record not found! KEY"))))
+
+;;
+;; Let's define a tree of records. The "valid" records are 1001, 2001, 3001, 4001 and 5001. 
+;; In our current set of records, let's just use 1001, 3001, 5001:
+;;
+(define records (list->tree '(1001 3001 5001)))
 
 ;;
 ;; We can define "lookup" as a recursive procedure:
@@ -66,6 +78,20 @@
 	  (cond ((= target current-key) current-record)
 		((< target current-key) (lookup target (left-branch records)))
 		((> target current-key) (lookup target (right-branch records))))))))
+
+;;
+;; Let's see if we can "lookup" the records by key:
+;;
+(lookup 1 records)
+;; ==> 1001
+(lookup 2 records)
+;; ==> #f
+(lookup 3 records)
+;; ==> 3001
+(lookup 4 records)
+;; ==> #f
+(lookup 5 records)
+;; ==> 5001
 
 ;;
 ;; (could also give iterative definition);
