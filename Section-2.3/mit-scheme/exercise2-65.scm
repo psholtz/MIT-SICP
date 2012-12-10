@@ -92,10 +92,67 @@
 				(tree->list tree2))))
 
 ;;
-;; [UNIT TESTS]
+;; Let's run some unit tests:
 ;;
+(define t1 (list->tree '(1)))
+;; ==> (1 () ())
+(define t2 (list->tree '(1 2)))
+;; => (1 () (2 () ()))
+(define t3 (list->tree '(1 2 3)))
+;; ==> (2 (1 () ()) (3 () ()))
+(define t4 (list->tree '(2 3 4)))
+;; ==> (3 (2 () ()) (4 () ()))
+(define t5 (list->tree '(4 5 6)))
+;; ==> (5 (4 () ()) (6 () ()))
+
+(union-tree '() '())
+;; ==> ()
+(union-tree t1 '())
+;; ==> (1 () ())
+(union-tree '() t1)
+;; ==> (1 () ())
+(union-tree (list->tree '(1)) (list->tree '(1)))
+;; ==> (1 () ())
+(union-tree (list->tree '(1 2)) (list->tree '(1 2)))
+;; ==> (1 () (2 () ()))
+(union-tree t1 t2)
+;; ==> (1 () (2 () ()))
+(union-tree t2 t1)
+;; ==> (1 () (2 () ()))
+(union-tree t3 t4)
+;; ==> (2 (1 () ()) (3 () (4 () ())))
+(union-tree t3 t5)
+;; ==> (3 (1 () (2 () ())) (5 (4 () ()) (6 () ())))
+
+(intersection-tree '() '())
+;; ==> ()
+(intersection-tree t1 '())
+;; ==> ()
+(intersection-tree '() t1)
+;; ==> ()
+(intersection-tree (list->tree '(1)) (list->tree '(1)))
+;; ==> (1 () ())
+(intersection-tree (list->tree '(1 2)) (list->tree '(1 2)))
+;; ==> (1 () (2 () ()))
+(intersection-tree t1 t2)
+;; ==> (1 () ())
+(intersection-tree t2 t1)
+;; ==> (1 () ())
+(intersection-tree t3 t4)
+;; ==> (2 () (3 () ()))
+(intersection-tree t3 t5)
+;; ==> ()
 
 ;; 
-;; [EXPLANATION OF WHY ITS O(n)
+;; Why do these procedures run in O(n) time?
+;;
+;; Consider the "union-tree" procedure. The "tree->list" procedure runs in O(n) time, and this 
+;; procedure is called twice. The "union-set" procedure runs in O(n), and the final call to 
+;; "list->tree" also runs in O(n) time. So we have four procedure calls, each of which run in 
+;; linear time. Invoking the "union-tree" may, therefore, take (up to) 4 times longer than 
+;; executing any single one of these O(n) procedures, but the sum of four O(n) is still a procedure
+;; which runs in linear O(n) time.
+;;
+;; The same arguments can be made for "intersection-tree".
 ;;
   
