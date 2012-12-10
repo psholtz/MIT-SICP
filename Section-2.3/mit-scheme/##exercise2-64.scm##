@@ -1,0 +1,91 @@
+;;
+;; Exercise 2.64
+;; 
+;; [WORKING]
+;;
+
+;;
+;; First import the supporting procedures:
+;;
+(define (entry tree) (car tree))
+(define (left-branch tree) (cadr tree))
+(define (right-branch tree) (caddr tree))
+(define (make-tree entry left right)
+  (list entry left right))
+
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+	((= x (entry set)) true)
+	((< x (entry set))
+	 (element-of-set? x (left-branch set)))
+	((> x (entry set))
+	 (element-of-set? x (right-branch set)))))
+
+(define (adjoin-set x set)
+  (cond ((null? set) (make-tree x '() '()))
+	((= x (entry set)) set)
+	((< x (entry set))
+	 (make-tree (entry set)
+		    (adjoin-set x (left-branch set))
+		    (right-branch set)))
+	((> x (entry set))
+	 (make-tree (entry set)
+		    (left-branch set)
+		    (adjoin-set x (right-branch set))))))
+
+;;
+;; Now define the current procedures:
+;;
+(define (list->tree elements)
+  (car (partial-tree elements (length elements))))
+
+(define (partial-tree elts n)
+  (if (= n 0)
+      (cons '() elts)
+      (let ((left-size (quotient (- n 1) 2)))
+	(let ((left-result (partial-tree elts left-size)))
+	  (let ((left-tree (car left-result))
+		(non-left-elts (cdr left-result))
+		(right-size (- n (+ left-size 1))))
+	    (let ((this-entry (car non-left-elts))
+		  (right-result (partial-tree (cdr non-left-elts)
+					      right-size)))
+	      (let ((right-tree (car right-result))
+		    (remaining-elts (cdr right-result)))
+		(cons (make-tree this-entry left-tree right-tree)
+		      remaining-elts))))))))
+
+;;
+;; Let's experiment to see how the procedure generates trees from lists:
+;;
+(list->tree '(1 2 3))
+;; ==> (2 (1 () ()) (3 () ()))
+
+(list->tree '(1 3 5 7 9 11))
+;; ==> (5 (1 () (3 () ())) (9 (7 () ()) (11 () ())))
+
+;;
+;; We can graphically represent this tree as:
+;;
+;;        5
+;;       / \
+;;      /   \
+;;     /     \ 
+;;    1       9
+;;     \     / \ 
+;;      3   7   11
+;;
+;; Note that this is different from any of the three trees given in the text
+;; for these ordered list.
+;;
+
+;;
+;; To get a feel for how the procedure works, let's step through the call graph 
+;; of (list->tree '(1 3 5 7 9 11)):
+;;
+
+
+;;
+;;
+;; [WORKNG --> description]
+;;
