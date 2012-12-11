@@ -1,7 +1,9 @@
 ;;
 ;; Exercise 2.71
 ;;
-;; [WORKING]
+;; Suppose we have a Huffman tree for an alphabet of "n" symbols, and that the relative frequencies 
+;; of the symbols are 1, 2, 4, ..., 2^(n-1). Sketch the tree for n=5 and n=10. In such a tree (for 
+;; general n) how many bits are required to encode the most frequent symbol? The last frequency symbol?
 ;;
 
 (define tree1 (generate-huffman-tree '((a 1) (b 2) (c 4) (d 8) (e 16))))
