@@ -43,3 +43,43 @@
   (* (magnitude-polar z) (cos (angle-polar z))))
 (define (imag-part-polar z)
   (* (magnitude-polar z) (sin (angle-polar z))))
+
+;;
+;; The four selectors above can now be written as:
+;;
+(define (real-part z)
+  (cond ((rectangular? z)
+	  (real-part-rectangular (contents z)))
+	((polar? z)
+	  (real-part-polar (contents z)))
+	(else 
+	  (error "Unknown type -- REAL-PART" z))))
+(define (imag-part z)
+  (cond ((rectangular? z)
+	  (imag-part-rectangular (contents z)))
+	((polar? z)
+	  (imag-part-polar (contents z)))
+	(else 
+	  (error "Unknown type -- IMAG-PART" z))))
+(define (magnitude z)
+  (cond ((rectangular? z)
+	  (magnitude-rectangular (contents z)))
+	((polar? z)
+	  (magnitude-polar (contents z)))
+	(else
+	  (error "Unknown type -- MAGNTIUDE" z))))
+(define (angle z)
+  (cond ((rectangular? z)
+	  (angle-rectangular (contents z)))
+	((polar? z)
+	  (angle-polar (contents z)))
+	(else 
+	  (error "Unknown type -- ANGLE" z))))
+
+;;
+;; We can likewise redefine the following "general" constructors:
+;;
+(define (make-from-real-imag x y)
+  (make-from-real-imag-rectangular x y))
+(define (make-from-mag-ang r a)
+  (make-from-mag-ang-polar r a))

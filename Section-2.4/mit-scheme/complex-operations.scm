@@ -17,3 +17,9 @@
 (define (div-complex z1 z2)
   (make-from-mag-ang (/ (magnitude z1) (magnitude z2))
 		     (- (angle z1) (angle z2))))
+
+;;
+;; Let's define the "table" that we will use for "put/get":
+;;
+;; (This is from peeking ahead into Section 3 of the text)
+;;
