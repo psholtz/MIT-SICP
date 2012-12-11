@@ -125,10 +125,22 @@
 (encode '(sha na na na na na na na na) tree)
 ;; ==> (1 1 0 0 0 0 0 0 0 0 0)
 (encode '(get a job) tree)
-;; ==>
+;; ==> (1 1 1 1 0 1 1 1 0 1 1 1 1 1 0)
 (encode '(sha ha na na na na na na na na) tree)
-;; ==>
+;; ==> (1 1 0 0 0 0 0 0 0 0 0)
 (encode '(wah yip yip yip yip yip yip yip yip yip) tree)
 ;; ==> (1 1 1 1 1 1 1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0)
 (encode '(sha boom) tree)
 ;; ==> (1 1 0 1 1 1 1 1 1 0)
+
+;;
+;; Let's see if these decode correctly:
+;;
+(decode '(1 1 1 1 0 1 1 1 0 1 1 1 1 1 0) tree)
+;; ==>
+(decode '(1 1 0 0 0 0 0 0 0 0 0) tree)
+;; ==>
+(decode '(1 1 1 1 1 1 1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0) tree)
+;; ==>
+(decode '(1 1 0 1 1 1 1 1 1 0) tree)
+;; ==>
