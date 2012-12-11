@@ -58,3 +58,41 @@
 (encode-symbol 'j tree2)
 ;; ==> (0)
 
+;;
+;; The tree looks like this:
+;;
+;;     (root) 
+;;      /  \
+;;     /    \
+;; (j 512)  () 
+;;         /  \
+;;        /    \
+;;    (i 256)  () 
+;;            /  \
+;;           /    \
+;;       (h 128)  ()
+;;               /  \
+;;              /    \
+;;          (g 64)   () 
+;;                  /  \
+;;                 /    \
+;;              (f 32)  ()
+;;                     /  \
+;;                    /    \
+;;                 (e 16)  ()
+;;                        /  \
+;;                       /    \
+;;                    (d 8)   () 
+;;                           /  \
+;;                          /    \
+;;                       (c 4)   ()
+;;                              /  \
+;;                             /    \
+;;                          (b 2)  (a 1)
+;;
+
+;;
+;; For a general tree of size n, (n-1) bits are required to encode the 
+;; least frequent symbol, and 1 bit is required to encode the most 
+;; frequent symbol.
+;;
