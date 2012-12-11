@@ -1,5 +1,8 @@
-Generic Programming
-=================== 
+Section 2.4
+===========
+
+Multiple Representations for Abstract Data
+------------------------------------------
 
 Rectangular Representation:
 
