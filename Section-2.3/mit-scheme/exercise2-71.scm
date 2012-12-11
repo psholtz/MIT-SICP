@@ -6,6 +6,8 @@
 ;; general n) how many bits are required to encode the most frequent symbol? The last frequency symbol?
 ;;
 
+(load "huffman.scm")
+
 (define tree1 (generate-huffman-tree '((a 1) (b 2) (c 4) (d 8) (e 16))))
 
 (encode-symbol 'a tree1)
