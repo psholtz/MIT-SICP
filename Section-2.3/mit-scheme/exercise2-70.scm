@@ -137,10 +137,31 @@
 ;; Let's see if these decode correctly:
 ;;
 (decode '(1 1 1 1 0 1 1 1 0 1 1 1 1 1 0) tree)
-;; ==>
+;; ==> (get a job)
 (decode '(1 1 0 0 0 0 0 0 0 0 0) tree)
-;; ==>
+;; ==> (sha na na na na na na na na)
 (decode '(1 1 1 1 1 1 1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0) tree)
-;; ==>
+;; ==> (wah yip yip yip yip yip yip yip yip yip)
 (decode '(1 1 0 1 1 1 1 1 1 0) tree)
-;; ==>
+;; ==> (sha boom)
+
+;;
+;; How many bits are required by this encoding?
+;;
+(* 2 (length (encode '(get a job) tree)))
+;; ==> 30
+(* 2 (length (encode '(sha na na na na na na na na) tree)))
+;; ==> 22
+(length (encode '(wah yip yip yip yip yip yip yip yip yip) tree))
+;; ==> 25
+(length (encode '(sha boom) tree))
+;; ==> 10
+
+(+ 30 22 25 10)
+;; ==> 87
+
+;;
+;; So 87 bits are required using the Huffman encoding.
+;;
+
+;; [WORKING]
