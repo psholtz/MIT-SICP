@@ -1,7 +1,27 @@
 ;;
 ;; Exercise 2.70
 ;;
-;; [WORKING]
+;; The following eight-symbol alphabet with associated relative frequencies was designed to 
+;; efficiently encode the lyrics of 1950s rock songs. (Note that the "symbols" of an "alphabet"
+;; need not be individual letters.)
+;; 
+;;  A 2     NA 16
+;;  BOOM 1  SHA 3
+;;  GET 2   YIP 9
+;;  JOB 2   WAH 1
+;;
+;; Use "generate-huffman-tree" (Exercise 2.69) to generate a corresponding Huffman tree, and use
+;; "encode" (Exercise 2.68) to encode the following message:
+;;
+;;  Get a job
+;;  Sha na na na na na na na na
+;;  Get a job
+;;  Sha na na na na na na na na
+;;  Wah yip yip yip yip yip yip yip yip yip
+;;  Sha boom
+;;
+;; How many bits aer required for the encoding? What is the smallest number of bits that would be 
+;; needed to encode this song if we used a fixed-length code for the 8-symbol alphabet?
 ;;
 
 ;;
@@ -164,4 +184,21 @@
 ;; So 87 bits are required using the Huffman encoding.
 ;;
 
-;; [WORKING]
+;;
+;; Let's calculate how much space is required if we used a fixed-length 
+;; encoding of 3 bits:
+;;
+;;  '(get a job) ==> 3 symbols ==> 9 bits
+;;  '(sha na na na na na na na na) ==> 9 symbols ==> 27 bits
+;;  '(wah yip yip yip yip yip yip yip yip yip) ==> 10 symbols ==> 30 bits
+;;  '(sha boom) ==> 2 symbols ==> 6 bits
+;;
+(+ (* 2 (+ 9 27)) 30 6)
+;; ==> 108
+
+;;
+;; If we used fixed-length encoding, we would require 108 bits.
+;;
+;; The Huffman encoding saves requires bout 80.6% the amount of space as the 
+;; fixed length encoding does.
+;;
