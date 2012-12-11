@@ -1,7 +1,8 @@
 ;;
 ;; Exercise 2.66
 ;;
-;; [WORKING]
+;; Implement the "lookup" procedure for the case where the set of records is structured as a binary tree, 
+;; ordered by the numerical values of the keys.
 ;;
 
 ;;
@@ -91,9 +92,4 @@
 (lookup 4 records)
 ;; ==> #f
 (lookup 5 records)
-;; ==> 5001
-
-;;
-;; (could also give iterative definition);
-;;
-	
+;; ==> 5001     
