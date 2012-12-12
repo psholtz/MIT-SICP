@@ -50,4 +50,5 @@ With this, we can define our painters as follows:
 </pre>
 
 ![http://farm9.staticflickr.com/8484/8266210282_f5b6744780_m.jpg](http://farm9.staticflickr.com/8484/8266210282_f5b6744780_m.jpg)
+
 **Square Painter**
