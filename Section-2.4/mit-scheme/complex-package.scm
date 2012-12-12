@@ -171,3 +171,34 @@
 (define (div-complex z1 z2)
   (make-from-mag-ang (/ (magnitude z1) (magnitude z2))
 		          (- (angle z1) (angle z2))))
+
+;;
+;; Run some unit tests:
+;;
+(define c1 (make-from-mag-ang 1 0))
+;; ==> (polar 1 . 0)
+
+(real-part c1)
+;; ==> 1
+(imag-part c2)
+;; ==> 0
+
+(define pi 3.14159)
+(define c2 (make-from-mag-ang 1 (/ pi 2)))
+;; ==> (polar 1 . 1.570795)
+
+(real-part c2)
+;; ==> 0
+(imag-part c2)
+;; ==> 1
+
+(add-complex c1 c2)
+;; ==> (rectangular 1 1)
+
+(define c3 (make-from-real-imag 2 1))
+;; => (rectangular 2 1)
+
+(magnitude c3)
+;; ==> 2.236068
+(angle c3)
+;; ==> 0.463648
