@@ -65,9 +65,9 @@
 ;; map the "make-vect" procedure over these points:
 (define (make-vectors points)
   (map (lambda (p)
-	  (let ((x (car p))
-		       (y (cadr p)))
-	       (make-vect x y)))
+	 (let ((x (car p))
+	       (y (cadr p)))
+	   (make-vect x y)))
        points))
 
 ;; create a way to generate segments from these vectors:
@@ -76,8 +76,8 @@
     (if (null? (cdr working))
 	(append total (list (make-segment (car working) (car (car total)))))
 	(let ((one (car working))
-	            (two (cadr working)))
-	    (make-segments-iter (cdr working) (append total (list (make-segment one two)))))))
+	      (two (cadr working)))
+	  (make-segments-iter (cdr working) (append total (list (make-segment one two)))))))
   (make-segments-iter vectors '()))
 
 (define vectors (make-vectors points))
