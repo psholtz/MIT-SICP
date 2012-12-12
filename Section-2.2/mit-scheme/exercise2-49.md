@@ -33,6 +33,7 @@ It's useful to have two helper procedures defined:
 
 With this, we can define our painters as follows:
 
+**Square Painter**
 <pre>
 (define p1 (make-vect 0 0))
 (define p2 (make-vect 1 0))
@@ -50,5 +51,3 @@ With this, we can define our painters as follows:
 </pre>
 
 ![http://farm9.staticflickr.com/8484/8266210282_f5b6744780_m.jpg](http://farm9.staticflickr.com/8484/8266210282_f5b6744780_m.jpg)
-
-**Square Painter**
