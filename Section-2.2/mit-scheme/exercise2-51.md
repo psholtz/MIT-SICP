@@ -30,6 +30,12 @@ The first definition of "below" is given as:
      (paint-top frame)))))
 </pre>
 
+We paint with "wave" and "einstein":
+
+<pre>
+(paint (below einstein wave))
+</pre>
+
 ![http://farm9.staticflickr.com/8482/8266751172_6aff18737f_m.jpg](http://farm9.staticflickr.com/8482/8266751172_6aff18737f_m.jpg)
 
 The second definition of "below" is given as:
@@ -37,6 +43,8 @@ The second definition of "below" is given as:
 <pre>
 (define (below painter1 painter2)
  (rotate270 (beside (rotate90 painter2) (rotate90 painter1))))
+
+(paint (below einstein wave))
 </pre>
 
 ![http://farm9.staticflickr.com/8482/8266751172_6aff18737f_m.jpg](http://farm9.staticflickr.com/8482/8266751172_6aff18737f_m.jpg)
