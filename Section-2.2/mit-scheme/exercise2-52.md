@@ -147,4 +147,6 @@ To reverse the way Einstein looks, we'll reverse the way the four procedures in 
   (combine4 (corner-split painter n))))
 </pre>
 
-[WORKING]
+![http://farm9.staticflickr.com/8059/8266829550_ccc1811a04_m.jpg](http://farm9.staticflickr.com/8059/8266829550_ccc1811a04_m.jpg)
+
+**Modified Square Limit of Einstein**
