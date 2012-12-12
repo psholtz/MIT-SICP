@@ -82,6 +82,8 @@ Again, define the supporting procedures:
 
 ![http://farm9.staticflickr.com/8482/8266809146_5eaa123dac_m.jpg](http://farm9.staticflickr.com/8482/8266809146_5eaa123dac_m.jpg)
 
+**Wave Man Smiles**
+
 (b) We'll change "corner-split" as suggested in the problem statement.
 
 The definitions of "right-split" and "up-split":
