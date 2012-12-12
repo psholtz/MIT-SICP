@@ -85,7 +85,7 @@
 (define (polar? z)
   (eq? (type-tag z) 'polar))
 
-;; Finally, define the installation package:
+;; Now, define the installation package:
 (define (install-rectangular-package)
   ;; Internal procedures
   (define (real-part z) (car z))
@@ -110,6 +110,26 @@
   (put 'make-from-mag-ang 'rectangular 
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done)
+
+;; Generic procedure application:
+(define (apply-generic op . args)
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+          (apply proc (map contents args))
+          (error
+            "No method for these types -- APPLY-GENERIC"
+            (list op type-tags))))))
+
+(define (real-part z) (apply-generic 'real-part z))
+(define (imag-part z) (apply-generic 'imag-part z))
+(define (magnitude z) (apply-generic 'magnitude z))
+(define (angle z) (apply-generic 'angle z))
+
+(define (make-from-real-imag x y)
+  ((get 'make-from-real-imag 'rectangular) x y))
+(define (make-from-mag-ang r a)
+  ((get 'make-from-mag-ang 'polar) r a))
 
 ;; Finally, include arithmetic routines so that we can work with the data:
 (define (add-complex z1 z2)
