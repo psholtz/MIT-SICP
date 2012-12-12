@@ -117,6 +117,8 @@ The following is our new definition of "corner-split":
                (below bottom-right corner))))))
 </pre> 
 
+![http://farm9.staticflickr.com/8485/8265740211_bbefb512e6_m.jpg](http://farm9.staticflickr.com/8485/8265740211_bbefb512e6_m.jpg)
+
 (c) We want to modify the "square-limit" to work differently, say reverse the way Einstein is looking.
 
 In the text, the necessary definitions are given as:
@@ -142,3 +144,5 @@ To reverse the way Einstein looks, we'll reverse the way the four procedures in 
  (let ((combine4 (square-of-four flip-vert rotate180 identity flip-horiz)))
   (combine4 (corner-split painter n))))
 </pre>
+
+[WORKING]
