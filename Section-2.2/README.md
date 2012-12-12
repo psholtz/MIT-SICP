@@ -124,7 +124,7 @@ Compare with the M.C. Escher painting above.
 
 These pictures were generated using the "SICP Picture Language" module in Dr. Racket. 
 
-![http://farm9.staticflickr.com/8219/8266210246_7195831966_m.jpg](http://farm9.staticflickr.com/8219/8266210246_7195831966_m.jpg)
+![http://farm9.staticflickr.com/8489/8266210406_8e417fc961_m.jpg](http://farm9.staticflickr.com/8489/8266210406_8e417fc961_m.jpg)  ![http://farm9.staticflickr.com/8219/8266210246_7195831966_m.jpg](http://farm9.staticflickr.com/8219/8266210246_7195831966_m.jpg)
 
 **Custom painters defined in Exercise 2.49**
 
