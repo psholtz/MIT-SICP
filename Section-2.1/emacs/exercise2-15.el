@@ -1,5 +1,5 @@
 ;;
-;; Exericse 2.15
+;; Exercise 2.15
 ;;
 ;; Eva Lu Ator, another user, has also noticed the different intervals computed by different but
 ;; algebraically equivalent expressions. She says that a formula to compute with intervals using
@@ -167,7 +167,7 @@
 ;; [(x+y)(1-p),(x+y)(1+p)]
 ;;
 ;; Suppose now that we multiply the two intervals together. This calculation was already carried out 
-;; Exericse 2.13 but we repeat it (in essence) here:
+;; Exercise 2.13 but we repeat it (in essence) here:
 ;;
 ;; [x-a,x+a] * [y-b,y+b]
 ;; [xy - xb - ay + ab, xy + xb + ay + ab]
