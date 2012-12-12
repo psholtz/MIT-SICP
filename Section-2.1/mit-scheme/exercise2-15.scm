@@ -278,7 +278,7 @@
 (define y (make-center-percent 12500 0.1))
 
 ;;
-;; Note that we interval above has uncertainty 0.1 (10%).
+;; Note that the interval above has uncertainty 0.1 (10%).
 ;;
 (percent (par1 x y))
 ;; ==> 0.292233
