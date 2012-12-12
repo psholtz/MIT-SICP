@@ -122,11 +122,11 @@ Picture Language
 
 Compare with the M.C. Escher painting above.
 
-These pictures were generated using the "SICP Picture Language" module in Dr. Racket. 
-
-![http://farm9.staticflickr.com/8484/8266210282_f5b6744780_m.jpg](http://farm9.staticflickr.com/8484/8266210282_f5b6744780_m.jpg)  ![http://farm9.staticflickr.com/8223/8266210384_61e21dfa9d_m.jpg](http://farm9.staticflickr.com/8223/8266210384_61e21dfa9d_m.jpg)  ![http://farm9.staticflickr.com/8489/8266210406_8e417fc961_m.jpg](http://farm9.staticflickr.com/8489/8266210406_8e417fc961_m.jpg)  ![http://farm9.staticflickr.com/8219/8266210246_7195831966_m.jpg](http://farm9.staticflickr.com/8219/8266210246_7195831966_m.jpg)
+![http://farm9.staticflickr.com/8220/8266315236_78525dce5b_z.jpg](http://farm9.staticflickr.com/8220/8266315236_78525dce5b_z.jpg)
 
 **Custom painters defined in Exercise 2.49**
+
+These pictures were generated using the "SICP Picture Language" module in Dr. Racket. 
 
 The "Picture Language" can be loaded into Racket at the command prompt by typing
 <pre>
