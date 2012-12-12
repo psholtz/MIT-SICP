@@ -63,3 +63,59 @@ With this, we can define our painters as follows:
 </pre>
 
 ![http://farm9.staticflickr.com/8223/8266210384_61e21dfa9d_m.jpg](http://farm9.staticflickr.com/8223/8266210384_61e21dfa9d_m.jpg)
+
+**Diamond**
+<pre>
+(define p5 (scale-vect 0.5 (add-vect p1 p2)))
+(define p6 (scale-vect 0.5 (add-vect p2 p3)))
+(define p7 (scale-vect 0.5 (add-vect p3 p4)))
+(define p8 (scale-vect 0.5 (add-vect p4 p1)))
+
+(define s7 (make-segment p1 p2))
+(define s8 (make-segment p2 p3))
+(define s9 (make-segment p3 p4))
+(define s10 (make-segment p4 p1))
+
+(define diamond (segments->painter (list s7 s8 s9 s10)))
+
+(paint diamond)
+</pre>
+
+![http://farm9.staticflickr.com/8489/8266210406_8e417fc961_m.jpg](http://farm9.staticflickr.com/8489/8266210406_8e417fc961_m.jpg)
+
+**Wave**
+<pre>
+(define points
+  '((0.4 0.0)
+    (0.5 0.33)
+    (0.6 0.0)
+    (0.75 0.0)
+    (0.6 0.45)
+    (0.99 0.15)
+    (0.99 0.35)
+    (0.8 0.65)
+    (0.6 0.65)
+    (0.65 0.8)
+    (0.6 0.99)
+    (0.4 0.99)
+    (0.35 0.8)
+    (0.4 0.65)
+    (0.33 0.65)
+    (0.1 0.6)
+    (0.0 0.8)
+    (0.0 0.6)
+    (0.1 0.4)
+    (0.3 0.6)
+    (0.33 0.5)
+    (0.25 0.0)))
+
+(define vectors (make-vectors points))
+
+(define segments (make-segments points))
+
+(define wave (segments->painter segments)
+
+(paint wave)
+</pre>
+
+![http://farm9.staticflickr.com/8219/8266210246_7195831966_m.jpg](http://farm9.staticflickr.com/8219/8266210246_7195831966_m.jpg)
