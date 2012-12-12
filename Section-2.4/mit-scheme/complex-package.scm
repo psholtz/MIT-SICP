@@ -1,9 +1,8 @@
 ;;
-;; Define the full "rectangular" package:
+;; Define the full complex number package:
 ;;
 
 ;; Start by defining the table operations that are required:
-
 (define (assoc key records)
   (cond ((null? records) false)
 	((equal? key (caar records)) (car records))
@@ -85,7 +84,7 @@
 (define (polar? z)
   (eq? (type-tag z) 'polar))
 
-;; Now, define the installation package:
+;; Define the rectangular package:
 (define (install-rectangular-package)
   ;; Internal procedures
   (define (real-part z) (car z))
@@ -108,6 +107,32 @@
   (put 'make-from-real-imag 'rectangular
        (lambda (x y) (tag (make-from-real-imag x y))))
   (put 'make-from-mag-ang 'rectangular 
+       (lambda (r a) (tag (make-from-mag-ang r a))))
+  'done)
+
+;; Define the polar package:
+(define (install-polar-package)
+  ;; Internal procedures
+  (define (magnitude z) (car z))
+  (define (angle z) (cdr z))
+  (define (make-from-mag-ang r a) (cons r a))
+  (define (real-part z)
+    (* (magnitude z) (cos (angle z))))
+  (define (imag-part z)
+    (* (magnitude z) (sin (angle z))))
+  (define (make-from-real-imag x y)
+    (cons (sqrt (+ (square x) (square y)))
+	  (atan y x)))
+
+  ;; Interface to the rest of the system
+  (define (tag x) (attach-tag 'polar x))
+  (put 'real-part '(polar) real-part)
+  (put 'imag-part '(polar) imag-part)
+  (put 'magnitude '(polar) magnitude)
+  (put 'angle '(polar) angle)
+  (put 'make-from-real-imag 'polar
+       (lambda (x y) (tag (make-from-real-imag x y))))
+  (put 'make-from-mag-ang 'polar
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done)
 
