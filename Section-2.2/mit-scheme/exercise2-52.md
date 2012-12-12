@@ -81,7 +81,6 @@ Again, define the supporting procedures:
 </pre>
 
 ![http://farm9.staticflickr.com/8482/8266809146_5eaa123dac_m.jpg](http://farm9.staticflickr.com/8482/8266809146_5eaa123dac_m.jpg)
-
 **Wave Man Smiles**
 
 (b) We'll change "corner-split" as suggested in the problem statement.
@@ -118,7 +117,6 @@ The following is our new definition of "corner-split":
 </pre> 
 
 ![http://farm9.staticflickr.com/8485/8265740211_bbefb512e6_m.jpg](http://farm9.staticflickr.com/8485/8265740211_bbefb512e6_m.jpg) ![http://farm9.staticflickr.com/8487/8265740233_c5b53bf88f_m.jpg](http://farm9.staticflickr.com/8487/8265740233_c5b53bf88f_m.jpg) ![http://farm9.staticflickr.com/8212/8265740243_02e0b9028b_m.jpg](http://farm9.staticflickr.com/8212/8265740243_02e0b9028b_m.jpg)
-
 **New Corner-Split at n=2,3,4**
 
 (c) We want to modify the "square-limit" to work differently, say reverse the way Einstein is looking.
