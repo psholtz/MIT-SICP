@@ -51,3 +51,15 @@ With this, we can define our painters as follows:
 </pre>
 
 ![http://farm9.staticflickr.com/8484/8266210282_f5b6744780_m.jpg](http://farm9.staticflickr.com/8484/8266210282_f5b6744780_m.jpg)
+
+**X-Marks-the-Spot**
+<pre>
+(define s5 (make-segment p1 p3))
+(define s6 (make-segment p2 p4))
+
+(define x-marks-the-spot (segments->painter (list s5 s6)))
+
+(paint x-marks-the-spot)
+</pre>
+
+![http://farm9.staticflickr.com/8223/8266210384_61e21dfa9d_m.jpg](http://farm9.staticflickr.com/8223/8266210384_61e21dfa9d_m.jpg)
