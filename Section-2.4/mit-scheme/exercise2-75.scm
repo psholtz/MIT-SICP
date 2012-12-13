@@ -125,5 +125,5 @@
 ;; ==> 1
 
 ;;
-;; These results corresopnd with what we obtained earlier.
+;; These results correspond with what we obtained earlier.
 ;;
