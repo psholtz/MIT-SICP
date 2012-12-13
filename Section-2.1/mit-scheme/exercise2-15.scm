@@ -154,7 +154,7 @@
 ;;
 ;; [(x+y)(1-p),(x+y)(1+p)]
 ;;
-;; Allowing z = x+y, we can write:
+;; Allowing z = x + y, we can write:
 ;;
 ;; [z(1-p),z(1+p)]
 ;; 
@@ -184,7 +184,7 @@
 ;;
 ;; [(1/z)*(1-p),(1/z)*(1+p)]
 ;;
-;; Where z = x+y. 
+;; Where z = x + y. 
 ;;
 ;; Returning now to our definition of "par1", it reduces to:
 ;;
