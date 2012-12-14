@@ -121,6 +121,17 @@
 ;; [WORKING ENGINEERING]
 ;;
 
+(define (generate-engineering-records)
+  (let ((*engineering-records* '()))
+    *engineering-records*))
+
+(define *engineering-file* (make-personnel-file 'engineering (generate-engineering-records)))
+
+(division *engineering-file*)
+;; ==>
+(personnel-file *engineering-file*)
+;; ==>
+
 ;;
 ;; Suppose on the contrary, that the marketing department wants to 
 ;; implement their data model in a more "simple" manner. For marketing, 
@@ -130,65 +141,23 @@
 ;; So for instance, a record from the marketing department might 
 ;; look like:
 ;;
-;;  '(smith '(vp marketing) 110000)
+;;  '(smith '(vp marketing) 130000)
 ;;
 ;; A very different structure from that used by engineering!
 ;;
 ;; Let's design a procedure to install these records.
 ;;
-(define (generate-marketing-file)
-  (let ((*marketing-records* '()))
+(define (generate-marketing-records)
+  (let ((*marketing-records* 
+	 '((smith (vp marketing) 130000)
+	   (anderson creative 70000)
+	   (wilson advertising 85000))))
     *marketing-records*))
 
-(define *m
-(define (install-engineering-records)
-  (define (get-record employee
-  (put 'get-record 'engineering
-;;
-;; We can now implement "get-record" as follows:
-;;
+(define *marketing-file* (make-personnel-file 'marketing (generate-marketing-records)))
 
-		      
+(division *marketing-file*)
+;; ==>
+(personnel-file *marketing-file)
+;; ==>
 
-(define (make-engineering-record name title)
-  (type-tag 'engineering (list name title)))
-
-(define (make-marketing-record name title age)
-  (type-tag 'marketing (list name title age)))
-
-;;
-;; Define the installation routines:
-;;
-;; ==================== 
-;; ENGINEERING DIVISION
-;; ==================== 
-(define (install-engineering-records)
-  (let ((*records* (make-table))
-	(get-engineering (*records* 'lookup-proc))
-	(put-engineering (*records* 'insert!)))
-    ;;
-    ;; (put 'get-by-name 'engineering (lambda (n) return-record-by-name))
-    ;;
-    
-    
-    'done))
-
-;; ==================
-;; MARKETING DIVISION
-;; ================== 
-(define (install-marketing-records)
-  ;;
-  ;; (put 'get-by-name 'marketing (lambda (name) return-record-by-name))
-  ;;
-  'done)
-
-(define (apply-generic op . args)
-  '())
-
-(define (get-record name) (apply-generic 'get-by-name name))
-
-;;
-;; To use this architecture, you have to have it as 
-;;
-;; (lookup 'get-by-name 'marketing)
-;; (lookup 'get-by-name 'engineering)
