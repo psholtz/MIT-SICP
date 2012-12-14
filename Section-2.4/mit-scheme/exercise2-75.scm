@@ -100,7 +100,7 @@
 ;; ==> 0
 
 (define PI 3.14159)
-(define c2 (make-from-mag-ang 1 (/ pi 2)))
+(define c2 (make-from-mag-ang 1 (/ PI 2)))
 ;; ==> #[compound procedure]
 
 (real-part c2)
