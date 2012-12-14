@@ -16,6 +16,23 @@
 	(else
 	   (assoc key (cdr records)))))
 
+;; procedures for 1-d table
+(define (lookup key table)
+  (let ((record (assoc key (cdr table))))
+    (if record
+	(cdr record)
+	false)))
+(define (insert! key value table)
+  (let ((record (assoc key (cdr table))))
+    (if record
+	(set-cdr! record value)
+	(set-cdr! table
+		  (cons (cons key value) (cdr table)))))
+  'ok)
+(define (make-table-1d)
+  (list '*table*))
+
+;; procedures for 2-d table
 (define (make-table-2d)
   ;; procedure for defining 2-dimensional tables
   (let ((local-table (list '*table*)))
@@ -49,7 +66,7 @@
 
 (define *operations* (make-table-2d))
 (define get (*operations* 'lookup-proc))
-(define put (*operations* 'insert!))
+(define put (*operations* 'insert-proc!))
 
 ;;
 ;; We also require tagging support:
@@ -118,19 +135,35 @@
   (eq? (division file) 'marketing))
 
 ;;
-;; [WORKING ENGINEERING]
+;; Suppose that the engineering department, being sophisticated, 
+;; wants to use a table to store their employee records. We will 
+;; use a 1d table to store the record itself (i.e., name, title 
+;; and salary), and we will use a second 1d table to store the 
+;; collection of records.
 ;;
 
 (define (generate-engineering-records)
-  (let ((*engineering-records* '()))
+  (let ((*engineering-records* (make-table-1d)))
+    ;; method for updating the records
+    (define (append-record name title salary)
+      (define *record* (make-table-1d))
+      (insert! 'name name *record*)
+      (insert! 'title title *record*)
+      (insert! 'salary salary *record*)
+      (insert! name *record* *engineering-records*))
+
+    ;; append the employee records
+    (append-record 'jones '(c++ programmer) 105000)
+    (append-record 'brown '(java programmer) 105000)
+    (append-record 'dashwood '(php programmer) 92000)
     *engineering-records*))
 
 (define *engineering-file* (make-personnel-file 'engineering (generate-engineering-records)))
 
 (division *engineering-file*)
-;; ==>
+;; ==> 'engineering
 (personnel-file *engineering-file*)
-;; ==>
+;; ==> #[complicated data structure]
 
 ;;
 ;; Suppose on the contrary, that the marketing department wants to 
@@ -157,7 +190,63 @@
 (define *marketing-file* (make-personnel-file 'marketing (generate-marketing-records)))
 
 (division *marketing-file*)
-;; ==>
+;; ==> marketing
 (personnel-file *marketing-file)
-;; ==>
+;; ==> ((smith (vp marketing) 130000) (anderson creative 70000) (wilson advertising 85000))
 
+;;
+;; Now let's define the procedures for installing these modules at headquarters (so to speak):
+;;
+(define (install-engineering-records)
+  (define (get-record employee file)
+    (lookup employee file))
+  (put 'get-record 'engineering get-record)
+  'done)
+
+(define (install-marketing-records)
+  (define (get-record employee file)
+    (define (get-record-iter working)
+      (if (null? working)
+	  #f
+	  (let ((record (car working)))
+	    (if (eq? (car record) employee)
+		record
+		(get-record-iter (cdr working))))))
+    (get-record-iter file))
+  (put 'get-record 'marketing get-record)
+  'done)
+
+(install-engineering-records)
+;; ==> 'done
+(install-marketing-records)
+;; ==> 'done
+
+;;
+;; Let's see how well this works!
+;;
+;; First look up names in the engineering division:
+;;
+(get-record 'jones *engineering-file*)
+;; ==> #[data structure for jones]
+(get-record 'brown *engineering-file*)
+;; ==> #[data structure for brown]
+(get-record 'dashwood *engineering-file*)
+;; ==> #[data structure for dashwood]
+(get-record 'smith *engineering-file*)
+;; ==> #f
+
+;;
+;; Now look up names in the marketing division:
+;;
+(get-record 'smith *marketing-file*)
+;; ==> (smith (vp marketing 130000)
+(get-record 'anderson *marketing-file*)
+;; ==> (anderson creative 70000)
+(get-record 'wilson *marketing-file*)
+;; ==> (wilson advertising 85000)
+(get-record 'jones *marketing-file*)
+;; ==> #f
+
+;;
+;; Seems to work pretty well!
+;;
