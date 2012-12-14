@@ -141,7 +141,6 @@
 ;; and salary), and we will use a second 1d table to store the 
 ;; collection of records.
 ;;
-
 (define (generate-engineering-records)
   (let ((*engineering-records* (make-table-1d)))
     ;; method for updating the records
@@ -250,3 +249,116 @@
 ;;
 ;; Seems to work pretty well!
 ;;
+
+;;
+;; (b) Implement for headquarters a get-salary procedure that returns the salary information 
+;; from a given employee's record from any division's personnel file. How should the record 
+;; be structured in order to make this operation work?
+;;
+
+;;
+;; We need to make two changes:
+;;
+;;  (1) We need to update the "generate-records" procedure to tag each
+;;      individual record with the appropriate generic label.
+;;  (2) We need to update the "install-records" procedure to include
+;;      the "get-salary" procedure.
+;;
+
+;;
+;; Update the "generate-engineering-records" procedure:
+;;
+(define (generate-engineering-records)
+  (let ((*engineering-records* (make-table-1d)))
+    ;; method for updating the records
+    (define (append-record name title salary)
+      (define *record* (make-table-1d))
+      (insert! 'name name *record*)
+      (insert! 'title title *record*)
+      (insert! 'salary salary *record*)
+      (insert! name                                  ;; <== add a generic label to each record
+	       (attach-tag 'engineering *record*)
+	       *engineering-records*))
+
+    ;; append the employee records
+    (append-record 'jones '(c++ programmer) '105000)
+    (append-record 'brown '(java programmer) '105000)
+    (append-record 'dashwood '(php programmer) '92000)
+    *engineering-records*))
+
+(define *engineering-file* (make-personnel-file 'engineering (generate-engineering-records)))
+
+;;
+;; Engineering files now contain the generic label, which is what we want:
+;;
+(define record1 (get-record 'brown *engineering-file*))
+(division record1)
+;; ==> engineering
+(contents record1)
+;; ==> (*table* (salary . 105000) (title java programmer) (name . brown))
+
+;;
+;; Updating the installation procedure is straightforward (just add the "get-salary" procedure):
+;;
+(define (install-engineering-records)
+  ;; define the procedures:
+  (define (get-record employee file)
+    (lookup employee file))
+  (define (get-salary record)
+    (lookup 'salary record))
+
+  ;; install the procedures:
+  (put 'get-record 'engineering get-record)
+  (put 'get-salary 'engineering get-salary)
+  'done)
+
+;;
+;; Changes to make to the "generate-marketing-records" procedure
+;; (add a generic label to each record using map):
+;;
+(define (generate-marketing-records)
+  (define (make-record name title salary)
+    (list name title salary))
+  (let ((record1 (make-record 'smith '(vp marketing) 130000))
+	(record2 (make-record 'anderson 'creative 70000))
+	(record3 (make-record 'wilson 'advertising 85000)))
+    (let ((records (list record1 record2 record3)))
+      (map (lambda (x) (attach-tag 'marketing x)) records))))
+
+(define *marketing-file* (make-personnel-file 'marketing (generate-marketing-records)))
+
+;;
+;; Updating the installation package is straightforward:
+;;
+(define (install-marketing-records)
+  ;; define the procedures:
+  (define (get-record employee file)
+    (define (get-record-iter working)
+      (if (null? working)
+	  #f
+	  (let ((tagged-record (car working)))
+	    (if (eq? (cadr tagged-record) employee)    ;; <== name is now in second position, generic label in first
+		tagged-record
+		(get-record-iter (cdr working))))))
+    (get-record-iter file))
+  (define (get-salary record)
+    (caddr record))
+  
+  ;; install the procedures:
+  (put 'get-record 'marketing get-record)
+  (put 'get-salary 'marketing get-salary)
+  'done)
+
+;;
+;; We need to reinstall these records:
+;;
+(install-engineering-records)
+;; ==> 'done
+(install-marketing-records)
+;; ==> 'done
+
+;;
+;; Finally, define the generic "get-salary" file:
+;;
+(define (get-salary record)
+  ((get 'get-salary (division record)) (contents record)))
