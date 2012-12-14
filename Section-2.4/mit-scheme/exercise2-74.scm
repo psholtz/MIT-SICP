@@ -1,7 +1,15 @@
 ;;
 ;; Exercise 2.74
 ;;
-;; [WORKING]
+;; Insatiable Enterprises, Inc., is a highly decentralized conglomerate company consisting of a large 
+;; number of independent divisions located all over the world. The company's computer facilities have 
+;; just been interconnected by means of a clever network-interfacing scheme that makes the entire network 
+;; appear to any user to be a single computer. Insatiable's president, in her first attempt to exploit the 
+;; ability of the network to extract administrative information from division files, is dismayed to discover 
+;; that, although all the division files have been implemented as data structures in Scheme, the particular 
+;; data structure used varies from division to division. A meeting of division managers is hastily called to 
+;; search for a strategy to integrate the files that will satisfy headquarters' needs while preserving the 
+;; existing autonomy of the divisions.
 ;;
 
 ;; 
@@ -289,15 +297,6 @@
 (define *engineering-file* (make-personnel-file 'engineering (generate-engineering-records)))
 
 ;;
-;; Engineering files now contain the generic label, which is what we want:
-;;
-(define record1 (get-record 'brown *engineering-file*))
-(division record1)
-;; ==> engineering
-(contents record1)
-;; ==> (*table* (salary . 105000) (title java programmer) (name . brown))
-
-;;
 ;; Updating the installation procedure is straightforward (just add the "get-salary" procedure):
 ;;
 (define (install-engineering-records)
@@ -358,7 +357,80 @@
 ;; ==> 'done
 
 ;;
+;; Engineering files now contain the generic label, which is what we want:
+;;
+(define record1 (get-record 'brown *engineering-file*))
+(division record1)
+;; ==> engineering
+(contents record1)
+;; ==> (*table* (salary . 105000) (title java programmer) (name . brown))
+
+;;
+;; Marketing files now contain the generic label, which is what we want:
+;;
+(define record2 (get-record 'smith *marketing-file*))
+(division record2)
+;; ==> marketing
+(contents record2)
+;; ==> (smith (vp marketing) 130000)
+
+;;
 ;; Finally, define the generic "get-salary" file:
 ;;
 (define (get-salary record)
   ((get 'get-salary (division record)) (contents record)))
+
+(get-salary record1)
+;; ==> 105000
+(get-salary record2)
+;; ==> 130000
+
+;;
+;; "record1" and "record2" have two totally different data representations
+;; underlying them, but we can use the same generic procedures to get 
+;; the right information/data out of each object!
+;;
+
+;;
+;; (c) Implement for headquarters a find-employee-record procedure. This should search all 
+;;     the divisions' files for the record of a given employee and return the record. Assume that 
+;;     this procedure takes as arguments an employee's name and a list of all the divisions' files.
+;;
+(define (find-employee-record employee files)
+  (define (find-employee-record-iter working total)
+    (if (null? working)
+	total
+	(let ((file (car working)))
+	  (let ((record (get-record employee file)))
+	    (if record
+		(find-employee-record-iter (cdr working) (append total record))
+		(find-employee-record-iter (cdr working) total))))))
+  (find-employee-record-iter files '()))
+
+(define *records* (list *engineering-file* *marketing-file*))
+
+;;
+;; Let's see if this works:
+;;
+(get-salary (find-employee-record 'smith *records*))
+;; ==> 130000
+(get-salary (find-employee-record 'brown *records*))
+;; ==> 105000
+
+;;
+;; (d) When Insatiable takes over a new company, what changes must be made in order to incorporate 
+;; the new personnel information into the central system?
+;;
+
+;; 
+;; We have differentiated/identified divisions by the respective labels "marketing" and "engineering". 
+;; As new divisions are added to the company, we would have to make sure that new divisions names are 
+;; chosen which are unique, so that there is no naming conflict in the *operations* table.
+;; 
+;; The interface which are have defined is that (a) the personnel file itself must be tagged with the 
+;; division name; and (b) each record in that file must be tagged with the division name. New divisions 
+;; would have to conform to this interface convention. New divisions would also have to define and 
+;; implement their own "generate-XXX-records" and "install-XXX-records" procedures. However, new divisions
+;; would be free to use whatever data structure they desired to represent the underlying data, much as 
+;; we have done in this example.
+;;
