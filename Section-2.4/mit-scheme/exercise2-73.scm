@@ -35,6 +35,12 @@
   'done)
 
 ;;
+;; Install the differentiator:
+;;
+(install-symbolic-differentiator)
+;; ==> 'done
+
+;;
 ;; Now let's try to define our symbolic differentiator:
 ;;
 (define (operator exp) (car exp))
@@ -127,5 +133,91 @@
 ;; ==> (+ y 1)
 
 ;;
-;; (a) [???] ANSWER THE QUESTION
+;; (a)  Explain what was done above. Why can't we assimilate the predicates number? and same-variable? 
+;;      into the data-directed dispatch?
+;;
+
+;;
+;; In the earlier definition of "deriv", the differentiation rules that were supported by "deriv" were 
+;; hard-coded into the procedure. So if we wanted to add new differentiation rules for new mathematical
+;; operations (i.e., adding exponentiation), or if we wanted to change the way that a differentiation 
+;; rule worked (i.e., switch from binary operations to n-ary operations), we had to rewrite the entire
+;; "deriv" procedure. This is opens the possibility of introducing errors, and in a "real-life" commercial
+;; settings introduces the problem of how to update code that has already been distributed out into the 
+;; marketplace.
+;;
+;; With the new data-driven model, we never need to redefine "deriv". The definition for this procedure
+;; can remain as it is, and support for new procedures can be added dynamically. Similarly, the way support
+;; for existing procedures is implemented can be changed dynamically. All that is required is to update 
+;; the database/table where the procedures are defined. This can be done without redefining or changing
+;; the "deriv" procedure.
+;;
+
+;;
+;; (b) Write the procedures for derivatives of sums and products, and the auxiliary code required to install 
+;;     them in the table used by the program above.
+;;
+
+;;
+;; Already did that above.
+;;
+
+;;
+;; (c) Choose any additional differentiation rule that you like, such as the one for exponents (exercise 2.56), and 
+;;     install it in this data-directed system.
+;;
+
+;;
+;; Already did that above.
+;;
+
+;;
+;; (d) In this simple algebraic manipulator the type of an expression is the algebraic operator that binds it together. 
+;; Suppose, however, we indexed the procedures in the opposite way, so that the dispatch line in deriv looked like
+;;
+;;  ((get (operator exp) 'deriv) (operands exp) var)
+;;
+;; What corresponding changes to the derivative system are required?
+;;
+
+;;
+;; We would need to change our "installation" procedure and the "deriv" procedure itself:
+;;
+
+(define (install-symbolic-differentiator)
+  (put '+ 'deriv (lambda (exp var)
+		   (make-sum (deriv (addend exp) var)
+			     (deriv (augend exp) var))))
+  (put '- 'deriv (lambda (exp var)
+		   (make-difference (deriv (minuend exp) var)
+				    (deriv (subtrahend exp) var))))
+  (put '* 'deriv (lambda (exp var)
+		   (make-sum
+		    (make-product (multiplier exp)
+				  (deriv (multiplicand exp) var))
+		    (make-product (deriv (multiplier exp) var)
+				  (multiplicand exp)))))
+  (put '** 'deriv (lambda (exp var)
+		    (make-product (exponent exp)
+				  (make-exponentiation 
+				   (base exp) 
+				   (make-difference (exponent exp) 1)))))
+  'done)
+
+(install-symbolic-differentiator)
+;; ==> 'done
+
+(define (deriv exp var)
+  (cond ((number? exp) 0)
+	((variable? exp) (if (same-variable? exp var) 1 0))
+	(else
+	 ((get 'deriv (operator exp)) (operands exp) var))))
+
+;;
+;; Other than this, no other changes are required.
+;;
+
+;;
+;; Running the unit tests above generates the same results
+;; using the new data model/architecture.
 ;;
