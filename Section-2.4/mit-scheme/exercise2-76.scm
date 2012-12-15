@@ -90,7 +90,128 @@
 ;; PROS AND CONS
 ;; ============= 
 
+;;
+;; The first way of dealing with generic operations, i.e., EXPLICIT DISPATCH, or
+;; DISPATCHING ON TYPE, is a powerful way of obtaining modularity in a software
+;; system. However, it suffers from at least two noticable defects:
+;;
+;;  1. Each generic procedure must know everything about each generic type. 
+;;     That is, whenever a new type is added to the system, EVERY generic 
+;;     procedure must be updated to "recognize" and "dispatch" on this type
+;;     appropriately. 
+;;
+;;  2. Although individual sub-procedures can be designed separately, we must
+;;     take steps to ensure that no naming conflicts arise among these 
+;;     sub-procedures.
+;;
+;; As described in the text, the issue is that this way of handling generic operations
+;; is not "additive"; A programming system is "additive" if it can be incorporated into 
+;; a larger system without needing to be redesigned or reimplemented.
+;;
+;; One way to impart "additivity" into this design is to use the second generic
+;; programming model, i.e., DATA-DIRECTED STYLE, where the dispatch table is abstracted
+;; entirely out of the generic procedures and maintained in a separate table or 
+;; "database". This model overcomes both of these weaknesses.
+;;
+;; When new types are added to the system, we do not need to modify either the 
+;; existing sub-procedures, or the generic procedures for handling them. We simply
+;; program the new sub-procedures for handling these types, and add the appropriate
+;; entries in the dispatch table.
+;;
+
+;;
+;; ====== 
+;; ANSWER
+;; ====== 
+;;
+;; First, we answer the question: For each of these strategies -- generic operations
+;; with explicit dispatches, data-directed style and message-passing style -- describe 
+;; the changes that must be made to a system in order to add new types or new operations.
+;; First, we address the issue of adding new types:
+;;
+;; EXPLICIT DISPATCH: ADDING A NEW TYPE
+;; ------------------------------------ 
+;;  1. We must create new type-specific constructors and selectors.
+;;  2. These type-specific constructors and selectors must be named
+;;     in such a way as to avoid naming conflicts with the rest of 
+;;     the system.
+;;  3. The constructors must "tag" the newly constructed data with the 
+;;     appropriate type-specific tag.
+;;  4. Each of the generic selectors must be modified and updated to 
+;;     recognize the new type and dispatch accordingly when invoked.
+;;
+;; DATA-DIRECTED STYLE: ADDING A NEW TYPE
+;; -------------------------------------- 
+;;  1. We must create new type-specific constructors and selectors.
+;;  2. Names for these new type-specific constructors and selectors 
+;;     must be chosen in an internally consistent and coherent way, but 
+;;     we need not concern ourselves with potential naming conflicts 
+;;     arising from outside the new module we are designing. 
+;;  3. The constructors must "tag" the newly constructed data with the
+;;     appropriate type-specific tag.
+;;  4. We must install the newly created type-specific constructors and 
+;;     selectors into the operations table, under the correct "operation"
+;;     and "type" selectors.
+;;
+;; MESSAGE-PASSING STYLE: ADDING A NEW TYPE
+;; ---------------------------------------- 
+;;  1. We must define a new type-specific constructor for the type.
+;;  2. The constructor must internally define and implement procedures for 
+;;     handling any possible invocation made to it by a generic selector
+;;     (i.e., define the generic selectors in its own type-specific way).
+;;  3. The new constructor must be named in a globally unique way, but 
+;;     the names chosen internally for handling the various generic selection
+;;     operations need not be globally unique.
+;;
+;; Next we address the issue of adding new operations:
+;;
+;; EXPLICIT DISPATCH: ADDING A NEW OPERATION
+;; -----------------------------------------
+;;  1. For each pre-existing type, we must define a new type-specific 
+;;     procedure for handling the new operation.
+;;  2. The names chosen for each new procedure/type must be globally unique
+;;     across the entire system.
+;;  3. A new generic selector must be defined and added to the system.
+;;  4. This new generic selector must be programmed to recognize and dispatch
+;;     across all pre-existing types in the system appropriately.
+;;
+;; DATA-DIRECTED STYLE: ADDING A NEW OPERATION
+;; -------------------------------------------
+;;  1. A new type-specific procedure for handling the operation must 
+;;     be added to the installation package for each type.
+;;  2. The dispatch table must be updated so that this newly defined
+;;     procedure is installed in the correct type/operation combination, 
+;;     for each pre-existing type.
+;;
+;; MESSAGE-PASSING STYLE: ADDING A NEW OPERATION
+;; --------------------------------------------- 
+;;  1. For each pre-existing type, the constructor must be modified 
+;;     to internally recognize the new operation and dispatch on it
+;;     appropriately.
+;;
+;; QUESTION: which organization would be most appropriate for a system in 
+;; which new types must be often added?
+;;
+;; The most appropriate organization for this would be message passing.
+;;
+;; None of the existing types, or their constructors, need to be modified
+;; if we are adding a new type. Instead, all we need to do is define the 
+;; constructor for the new type in a globally unique way, and implement 
+;; type-specific procedures for responding to the generic selectors.
+;;
+;; QUESTION: which organization would be most appropriate for a system in 
+;; which new operations must often be added?
+;;
+;; The most appropriate organization for this would be data-directed style.
+;;
 ;; 
+
+
+;; First we describe the changes required for adding a new type:
+;;
+;; EXPLICIT DISPATCH -  
+
+
 ;; Now, to answer the question.
 ;;
 

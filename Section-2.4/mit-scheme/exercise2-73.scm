@@ -181,6 +181,34 @@
 ;;
 
 ;;
+;; To answer the question of why the predicates "number?" and "same-variable?" cannot be assimilated
+;; into the data-directed dispatch routine, let's see what would happen were we to try to do so:
+;;
+;; We would (presumably) redefine "dervi" something like:
+;;
+;; (define (deriv exp var)
+;;  (cond ((get 'deriv (operator exp)) (operands exp) var)))
+;;
+;; and immediately we see that we would be reduced to evaluating expressions like:
+;;
+;;  (operator 1)
+;;  (operands 1)
+;;
+;; and/or
+;;
+;;  (operator x)
+;;  (operands x)
+;;
+;; which, given our definition of "operator" and "operands", would signal errors since they 
+;; procedures are designed to extract the operator and operands from a particular expression, 
+;; and then dispatch on the type of the submitted operation.
+;;
+;; Here, since there is no "operation" and there is consequently no "type", there is nothing 
+;; to dispatch on. Consequently, these two use cases must be handled using special predicates 
+;; like "number?" and "same-variable?".
+;;
+
+;;
 ;; (b) Write the procedures for derivatives of sums and products, and the auxiliary code required to install 
 ;;     them in the table used by the program above.
 ;;
