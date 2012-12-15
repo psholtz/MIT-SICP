@@ -204,39 +204,10 @@
 ;;
 ;; The most appropriate organization for this would be data-directed style.
 ;;
-;; 
-
-
-;; First we describe the changes required for adding a new type:
-;;
-;; EXPLICIT DISPATCH -  
-
-
-;; Now, to answer the question.
-;;
-
-;;
-;; The relative strengths and weaknesses of the three methods are as follows:
-;;
-
-
-;;
-;; Segment table horizontally ..
-;; Segment table vertically ..
-;;
-
-;; (1)
-;; -->(a) must know about all the different types. 
-;;        if you want to add a new type, you have to reprogram each method
-;;    (b) naming: no two procedures can have the same name. 
-;; As described in the next, it is not additive. 
-
-;; (2) --> data-directed 
-;
-;; It is moved to a database,
-;; This is additive. 
-
-;;
-;; A programming system is "additive" if it can be incorporated into a larger system 
-;; without needing to be redesigned or reimplemented.
+;; Message-passing style becomes a bit more cumbersome when we are constantly
+;; adding new operations, since the dispatch routine in each pre-existing
+;; constructor must be modified to handle the new operation. It's true that 
+;; in the data-directed style we similarly have to update the install package
+;; for each type to support the new operation, but this seems like a less 
+;; cumbersome route to go than in the case of message-passing style.
 ;;
