@@ -199,9 +199,10 @@
 ;;  (operator x)
 ;;  (operands x)
 ;;
-;; which, given our definition of "operator" and "operands", would signal errors since they 
-;; procedures are designed to extract the operator and operands from a particular expression, 
-;; and then dispatch on the type of the submitted operation.
+;; which, given our definition of "operator" and "operands", would signal errors since these
+;; procedures are designed to extract the operator and operands from a particular expression 
+;; (which expression is expected to be in the form of a list structure), and then dispatch on 
+;; the type of the submitted operation.
 ;;
 ;; Here, since there is no "operation" and there is consequently no "type", there is nothing 
 ;; to dispatch on. Consequently, these two use cases must be handled using special predicates 
