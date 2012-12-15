@@ -4,6 +4,10 @@
 ;; [WORKING]
 ;;
 
+;; ===========================
+;; HANDLING GENERIC OPERATIONS
+;; =========================== 
+
 ;; 
 ;; The question asks us to consider three ways of handling generic operations: 
 ;; 
@@ -82,6 +86,10 @@
 ;; something that can be represented or used as a database (i.e., a table of some sort).
 ;;
 
+;; =============
+;; PROS AND CONS
+;; ============= 
+
 ;; 
 ;; Now, to answer the question.
 ;;
@@ -107,4 +115,7 @@
 ;; It is moved to a database,
 ;; This is additive. 
 
-;; (3)
+;;
+;; A programming system is "additive" if it can be incorporated into a larger system 
+;; without needing to be redesigned or reimplemented.
+;;
