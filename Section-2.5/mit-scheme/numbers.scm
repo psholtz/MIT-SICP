@@ -3,9 +3,9 @@
 ;;
 (load "table.scm")
 
-;;
+;; ==============
 ;; Tagging Libary
-;;
+;; ============== 
 (define (attach-tag type-tag contents)
   (cons type-tag contents))
 
@@ -27,9 +27,9 @@
 	  (error
 	   "No method for these types -- APPLY-GENERIC" (list op type-tags))))))
 
-;;
-;; Scheme-numbers:
-;;
+;; ==============
+;; Scheme Numbers
+;; ============== 
 (define (add x y) (apply-generic 'add x y))
 (define (sub x y) (apply-generic 'sub x y))
 (define (mul x y) (apply-generic 'mul x y))
