@@ -6,7 +6,9 @@ Higher Order Procedures
 
 **Special Form - Let**
 
-<pre>(let bindings body)</pre>
+```scheme
+(let bindings body)
+```
 
 Binds the given bindings for the duration of the body. The bindings are a list of (name-value) pairs. The body consists of one or more expressions which are evaluated in order and the value of the last is returned. Let is an example of syntactic sugar:
 
