@@ -1,0 +1,2090 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="project0_files/filelist.xml">
+<link rel=Edit-Time-Data href="project0_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>6.001 Fall 2006: Project 0</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="city"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="time"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="place" downloadurl="http://www.5iantlavalamp.com/"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Eric Grimson</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Eric Grimson</o:LastAuthor>
+  <o:Revision>14</o:Revision>
+  <o:TotalTime>508</o:TotalTime>
+  <o:LastPrinted>2005-09-02T12:41:00Z</o:LastPrinted>
+  <o:Created>2006-08-27T17:59:00Z</o:Created>
+  <o:LastSaved>2007-02-05T21:03:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>9778</o:Words>
+  <o:Characters>46545</o:Characters>
+  <o:Company>AI Lab at MIT</o:Company>
+  <o:Lines>788</o:Lines>
+  <o:Paragraphs>104</o:Paragraphs>
+  <o:CharactersWithSpaces>56219</o:CharactersWithSpaces>
+  <o:Version>11.5703</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"\FF2D\FF33 \660E\671D";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-format:other;
+	mso-font-pitch:fixed;
+	mso-font-signature:1 134676480 16 0 131072 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-format:other;
+	mso-font-pitch:fixed;
+	mso-font-signature:1 134676480 16 0 131072 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	font-weight:bold;}
+h2
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	font-weight:bold;}
+h3
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:13.5pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+address
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	font-style:italic;}
+pre
+	{mso-style-link:"HTML Preformatted Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+tt
+	{font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+span.HTMLPreformattedChar
+	{mso-style-name:"HTML Preformatted Char";
+	mso-style-locked:yes;
+	mso-style-link:"HTML Preformatted";
+	font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";
+	mso-ansi-language:EN-US;
+	mso-fareast-language:EN-US;
+	mso-bidi-language:AR-SA;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:311756319;
+	mso-list-template-ids:482368866;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l0:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1
+	{mso-list-id:859928662;
+	mso-list-template-ids:1805434338;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l1:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Wingdings;}
+@list l1:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l1:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2
+	{mso-list-id:1146705420;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-2018206278 1575099976 849763204 1307597812 -207707232 -1524600708 -1620134822 1884161182 -1982683960 730653042;}
+@list l2:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l2:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l2:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l2:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3
+	{mso-list-id:1474054303;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1541560692 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l3:level1
+	{mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l3:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4
+	{mso-list-id:1989357063;
+	mso-list-template-ids:-116126508;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l4:level2
+	{mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level3
+	{mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level4
+	{mso-level-tab-stop:2.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level5
+	{mso-level-tab-stop:2.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level6
+	{mso-level-tab-stop:3.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level7
+	{mso-level-tab-stop:3.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level8
+	{mso-level-tab-stop:4.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level9
+	{mso-level-tab-stop:4.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]--><!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="4098"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=EN-US link=blue vlink=blue style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<h3 align=center style='margin:0in;margin-bottom:.0001pt;text-align:center'>MASSACHVSETTS
+INSTITVTE OF TECHNOLOGY</h3>
+
+<h3 align=center style='margin:0in;margin-bottom:.0001pt;text-align:center'>Department
+of Electrical Engineering and Computer Science</h3>
+
+<h3 align=center style='margin:0in;margin-bottom:.0001pt;text-align:center'>6.001
+&#8211; Structure and Interpretation of Computer Programs</h3>
+
+<h3 align=center style='margin:0in;margin-bottom:.0001pt;text-align:center'>Spring
+Semester, 2007</h3>
+
+<h2 align=center style='text-align:center'>Project 0</h2>
+
+<ul style='margin-top:0in' type=disc>
+ <li class=MsoNormal style='text-align:justify;mso-list:l2 level1 lfo1;
+     tab-stops:list .5in'>Issued: Tuesday, February 6</li>
+ <li class=MsoNormal style='text-align:justify;mso-list:l2 level1 lfo1;
+     tab-stops:list .5in'>To Be Completed By: Friday, February 16, 6:00pm</li>
+ <li class=MsoNormal style='text-align:justify;mso-list:l2 level1 lfo1;
+     tab-stops:list .5in'><st1:city st="on" w:st="on"><st1:place st="on" w:st="on">Reading</st1:place></st1:city>:</li>
+ <ul style='margin-top:0in' type=circle>
+  <li class=MsoNormal style='text-align:justify;mso-list:l2 level2 lfo1;
+      tab-stops:list 1.0in'>Read &#8220;6.001 General Information&#8221; found
+      at the course web page <a
+      href="http://sicp.csail.mit.edu/Spring-2007/generalinfo_st07.htm">http://sicp.csail.mit.edu/Spring-2007/generalinfo_st07.htm</a>.
+      Be especially sure to read the 6.001 policy on collaborative work, and to
+      read the detailed information on collaboration on the course web page.</li>
+  <li class=MsoNormal style='text-align:justify;mso-list:l2 level2 lfo1;
+      tab-stops:list 1.0in'>Browse the 6.001 Home Page on the web at <a
+      href="http://sicp.csail.mit.edu/">http://sicp.csail.mit.edu/</a>. All
+      handouts (including this one) can be found there. The web page also
+      contains announcements, Scheme software, projects, documentation, advice
+      on where to get help, and other useful information. You should make a
+      habit of looking at this page at least once a week during the semester.
+      Note in particular that the calendar outlining the schedule of lectures
+      may change during the term as the course content is adjusted, and you
+      should check this regularly to know what is coming.</li>
+ </ul>
+</ul>
+
+<p class=MsoNormal style='text-align:justify'>&nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify'>The purpose of Project 0 is to
+familiarize you with the Scheme programming environment and the resources
+available to you. The format of this project is different from the more
+substantive ones you will see later in the term. Those projects will focus on
+extended experience in creating and testing code, and integrating such code
+with existing computational frameworks. As a consequence, those projects will
+take a significant amount of time to complete. This project is really just a
+warm up, and is intended to get you up to speed on the mechanics of using
+Scheme and the course resources. This project is mostly reading &#8211; getting
+you to understand the environment you will be using during the term. We expect
+that this project should not take much time, and while we understand that some
+of the things we ask you to do seem fairly obvious, we want to make sure you
+get the mechanics down right. Don't worry; the later projects and problem sets
+will involve much more extensive thinking and coding! </p>
+
+<p class=MsoNormal style='text-align:justify'>&nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify'>Note that the first part of this
+material also appears as the <i>Don't Panic</i> handout, which is an
+introductory guide to using Scheme in 6.001. This can be found on the 6.001 web
+site, as well.<span style='mso-spacerun:yes'>&nbsp; </span>You may want to
+consult that manual often over the next few weeks as you are getting used to the
+Scheme computing system.<span style='mso-spacerun:yes'>&nbsp; </span>The actual
+work to be done for this project (which is quite small in size) appears under
+the &#8220;Your Turn&#8221; tab.</p>
+
+<p class=MsoNormal style='text-align:justify'>&nbsp;</p>
+
+<h2>Table of contents</h2>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a name=TOC1></a><a
+     href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC1"></a><a
+     href="#SEC1"></a><a href="#SEC1"></a><a href="#SEC1"><span
+     style='mso-bookmark:TOC1'>The 6.001 Lab and Scheme Implementations</span><span
+     style='mso-bookmark:TOC1'></span></a><span style='mso-bookmark:TOC1'></span></li>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC2></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC2"></a><a
+      href="#SEC2"></a><a href="#SEC2"></a><a href="#SEC2"><span
+      style='mso-bookmark:TOC2'>Important Information</span><span
+      style='mso-bookmark:TOC2'></span></a><span style='mso-bookmark:TOC2'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC3></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC3"></a><a
+      href="#SEC3"></a><a href="#SEC3"></a><a href="#SEC3"><span
+      style='mso-bookmark:TOC3'>Scheme Implementations for 6.001</span><span
+      style='mso-bookmark:TOC3'></span></a><span style='mso-bookmark:TOC3'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC4></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC4"></a><a
+      href="#SEC4"></a><a href="#SEC4"></a><a href="#SEC4"><span
+      style='mso-bookmark:TOC4'>Lab Location</span><span style='mso-bookmark:
+      TOC4'></span></a><span style='mso-bookmark:TOC4'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC5></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC5"></a><a
+      href="#SEC5"></a><a href="#SEC5"></a><a href="#SEC5"><span
+      style='mso-bookmark:TOC5'>Lab Assistants</span><span style='mso-bookmark:
+      TOC5'></span></a><span style='mso-bookmark:TOC5'></span></li>
+ </ul>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a name=TOC6></a><a
+     href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC6"></a><a
+     href="#SEC6"></a><a href="#SEC6"></a><a href="#SEC6"><span
+     style='mso-bookmark:TOC6'>The Scheme of Things</span><span
+     style='mso-bookmark:TOC6'></span></a><span style='mso-bookmark:TOC6'></span></li>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC7></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC7"></a><a
+      href="#SEC7"></a><a href="#SEC7"></a><a href="#SEC7"><span
+      style='mso-bookmark:TOC7'>Flow of Control</span><span style='mso-bookmark:
+      TOC7'></span></a><span style='mso-bookmark:TOC7'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC9></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC9"></a><a
+      href="#SEC9"></a><a href="#SEC9"></a><a href="#SEC9"><span
+      style='mso-bookmark:TOC9'>Standard Conventions</span><span
+      style='mso-bookmark:TOC9'></span></a><span style='mso-bookmark:TOC9'></span></li>
+ </ul>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a name=TOC10></a><a
+     href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC10"></a><a
+     href="#SEC10"></a><a href="#SEC10"></a><a href="#SEC10"><span
+     style='mso-bookmark:TOC10'>Logging In and Loading Projects</span><span
+     style='mso-bookmark:TOC10'></span></a><span style='mso-bookmark:TOC10'></span></li>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC11></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC11"></a><a
+      href="#SEC11"></a><a href="#SEC11"></a><a href="#SEC11"><span
+      style='mso-bookmark:TOC11'>Logging In</span><span style='mso-bookmark:
+      TOC11'></span></a><span style='mso-bookmark:TOC11'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC12></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC12"></a><a
+      href="#SEC12"></a><a href="#SEC12"></a><a href="#SEC12"><span
+      style='mso-bookmark:TOC12'>Loading Problem Sets</span><span
+      style='mso-bookmark:TOC12'></span></a><span style='mso-bookmark:TOC12'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><span
+      style='mso-bookmark:TOC12'><a name=TOC12A></a></span><a href="#SEC12A"></a><a
+      href="#SEC12A"></a><a href="#SEC12A"><span style='mso-bookmark:TOC12'>Loading
+      Project Code</span><span style='mso-bookmark:TOC12'></span></a><span
+      style='mso-bookmark:TOC12'></span></li>
+ </ul>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a name=TOC13></a><a
+     href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC13"></a><a
+     href="#SEC13"></a><a href="#SEC13"></a><a href="#SEC13"><span
+     style='mso-bookmark:TOC13'>Editing Your Code</span><span style='mso-bookmark:
+     TOC13'></span></a><span style='mso-bookmark:TOC13'></span></li>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC14></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC14"></a><a
+      href="#SEC14"></a><a href="#SEC14"></a><a href="#SEC14"><span
+      style='mso-bookmark:TOC14'>Loading a File</span><span style='mso-bookmark:
+      TOC14'></span></a><span style='mso-bookmark:TOC14'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC17></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC17"></a><a
+      href="#SEC17"></a><a href="#SEC17"></a><a href="#SEC17"><span
+      style='mso-bookmark:TOC17'>Editing A File</span><span style='mso-bookmark:
+      TOC17'></span></a><span style='mso-bookmark:TOC17'></span></li>
+  <ul type=square>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l1 level3 lfo2;tab-stops:list 1.5in'><a name=TOC18></a><a
+       href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC18"></a><a
+       href="#SEC18"></a><a href="#SEC18"></a><span style='mso-bookmark:TOC18'></span><a
+       name=TOC19></a><a
+       href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC19"></a><a
+       href="#SEC19"></a><a href="#SEC19"></a><a href="#SEC19"><span
+       style='mso-bookmark:TOC19'>Inserting Letters and Moving The Point</span><span
+       style='mso-bookmark:TOC19'></span></a><span style='mso-bookmark:TOC19'></span></li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l1 level3 lfo2;tab-stops:list 1.5in'><a name=TOC20></a><a
+       href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC20"></a><a
+       href="#SEC20"></a><a href="#SEC20"></a><a href="#SEC20"><span
+       style='mso-bookmark:TOC20'>Undoing Mistakes</span><span
+       style='mso-bookmark:TOC20'></span></a><span style='mso-bookmark:TOC20'></span></li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l1 level3 lfo2;tab-stops:list 1.5in'><a name=TOC21></a><a
+       href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC21"></a><a
+       href="#SEC21"></a><a href="#SEC21"></a><a href="#SEC21"><span
+       style='mso-bookmark:TOC21'>Using a Region to Copy or Move Text</span><span
+       style='mso-bookmark:TOC21'></span></a><span style='mso-bookmark:TOC21'></span></li>
+  </ul>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC22></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC22"></a><a
+      href="#SEC22"></a><a href="#SEC22"></a><a href="#SEC22"><span
+      style='mso-bookmark:TOC22'>Saving A File</span><span style='mso-bookmark:
+      TOC22'></span></a><span style='mso-bookmark:TOC22'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC23></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC23"></a><a
+      href="#SEC23"></a><a href="#SEC23"></a><a href="#SEC23"><span
+      style='mso-bookmark:TOC23'>Managing Your Files</span><span
+      style='mso-bookmark:TOC23'></span></a><span style='mso-bookmark:TOC23'></span></li>
+ </ul>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a name=TOC24></a><a
+     href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC24"></a><a
+     href="#SEC24"></a><a href="#SEC24"></a><a href="#SEC24"><span
+     style='mso-bookmark:TOC24'>Running and Testing Your Code</span><span
+     style='mso-bookmark:TOC24'></span></a><span style='mso-bookmark:TOC24'></span></li>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC25></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC25"></a><a
+      href="#SEC25"></a><a href="#SEC25"></a><a href="#SEC25"><span
+      style='mso-bookmark:TOC25'>Evaluating Code</span><span style='mso-bookmark:
+      TOC25'></span></a><span style='mso-bookmark:TOC25'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC27></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC27"></a><a
+      href="#SEC27"></a><a href="#SEC27"></a><a href="#SEC27"><span
+      style='mso-bookmark:TOC27'>Debugging</span><span style='mso-bookmark:
+      TOC27'></span></a><span style='mso-bookmark:TOC27'></span></li>
+ </ul>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a name=TOC29></a><a
+     href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC29"></a><a
+     href="#SEC29"></a><a href="#SEC29"></a><a href="#SEC29"><span
+     style='mso-bookmark:TOC29'>Using On-Line Documentation</span><span
+     style='mso-bookmark:TOC29'></span></a><span style='mso-bookmark:TOC29'></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a name=TOC32></a><a
+     href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC32"></a><a
+     href="#SEC32"></a><a href="#SEC32"></a><a href="#SEC32"><span
+     style='mso-bookmark:TOC32'>Printing</span><span style='mso-bookmark:TOC32'></span></a><span
+     style='mso-bookmark:TOC32'></span></li>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC33></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC33"></a><a
+      href="#SEC33"></a><a href="#SEC33"></a><a href="#SEC33"><span
+      style='mso-bookmark:TOC33'>Printing A Buffer</span><span
+      style='mso-bookmark:TOC33'></span></a><span style='mso-bookmark:TOC33'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC34></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC34"></a><a
+      href="#SEC34"></a><a href="#SEC34"></a><a href="#SEC34"><span
+      style='mso-bookmark:TOC34'>Making A Transcript</span><span
+      style='mso-bookmark:TOC34'></span></a><span style='mso-bookmark:TOC34'></span></li>
+ </ul>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a name=TOC37></a><a
+     href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC37"></a><a
+     href="#SEC37"></a><a href="#SEC37"></a><a href="#SEC37"><span
+     style='mso-bookmark:TOC37'>Logging Out and Giving Feedback</span><span
+     style='mso-bookmark:TOC37'></span></a><span style='mso-bookmark:TOC37'></span></li>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC38></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC38"></a><a
+      href="#SEC38"></a><a href="#SEC38"></a><a href="#SEC38"><span
+      style='mso-bookmark:TOC38'>Logging Out</span><span style='mso-bookmark:
+      TOC38'></span></a><span style='mso-bookmark:TOC38'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC39></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC39"></a><a
+      href="#SEC39"></a><a href="#SEC39"></a><a href="#SEC39"><span
+      style='mso-bookmark:TOC39'>Feedback</span><span style='mso-bookmark:TOC39'></span></a><span
+      style='mso-bookmark:TOC39'></span></li>
+ </ul>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a name=TOC40></a><a
+     href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC40"></a><a
+     href="#SEC40"></a><a href="#SEC40"></a><a href="#SEC40"><span
+     style='mso-bookmark:TOC40'>Common Problems and Solutions</span><span
+     style='mso-bookmark:TOC40'></span></a><span style='mso-bookmark:TOC40'></span></li>
+ <ul type=circle>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC41></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC41"></a><a
+      href="#SEC41"></a><a href="#SEC41"></a><a href="#SEC41"><span
+      style='mso-bookmark:TOC41'>DrScheme won't respond to anything I type!</span><span
+      style='mso-bookmark:TOC41'></span></a><span style='mso-bookmark:TOC41'></span></li>
+  <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+      auto;mso-list:l1 level2 lfo2;tab-stops:list 1.0in'><a name=TOC42></a><a
+      href="http://sicp.csail.mit.edu/Spring-2005/manuals/galaxy.html#SEC42"></a><a
+      href="#SEC42"></a><a href="#SEC42"></a><a href="#SEC42"><span
+      style='mso-bookmark:TOC42'>How Can I Reach a &quot;Steady State?&quot;</span><span
+      style='mso-bookmark:TOC42'></span></a><span style='mso-bookmark:TOC42'></span></li>
+ </ul>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><a href="#_Your_Turn">Your
+     Turn</a></li>
+</ul>
+
+<h2><a name=SEC1></a><a href="#TOC1"></a><a href="#TOC1"></a><a href="#TOC1"><span
+style='mso-bookmark:SEC1'>The 6.001 Lab and Scheme Implementations</span><span
+style='mso-bookmark:SEC1'></span></a><span style='mso-bookmark:SEC1'></span></h2>
+
+<h2><a name=SEC2></a><a href="#TOC2"></a><a href="#TOC2"></a><a href="#TOC2"><span
+style='mso-bookmark:SEC2'>Important Information</span><span style='mso-bookmark:
+SEC2'></span></a><span style='mso-bookmark:SEC2'></span></h2>
+
+<p class=MsoNormal>Please make special note of the following points: </p>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'>If you are working on a
+     project (as opposed to an online problem set) <b>read the entire project
+     BEFORE </b>you begin your work. Often, a question you may have will be explained
+     in a later section of the project, and this will provide clarity before
+     you start answering questions.<span style='mso-spacerun:yes'>&nbsp;
+     </span>As well, reading the entire project will give you a sense of the
+     full range of problems you will be expected to solve, so you can plan your
+     time accordingly.</li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><b style='mso-bidi-font-weight:
+     normal'>PLEASE </b>browse the 6.001 home web page regularly. It contains
+     course handouts, announcements, Scheme software, documentation, advice on
+     where to get help, and other useful information. It will also be the
+     location where corrections to projects are posted, so you will want to
+     check it regularly. The page is located at <tt><span style='font-size:
+     10.0pt'><a href="http://sicp.csail.mit.edu/"><span style='mso-fareast-font-family:
+     "Times New Roman"'>http://sicp.csail.mit.edu/</span></a></span></tt>.</li>
+</ul>
+
+<h2><a name=SEC3></a><a href="#TOC3"></a><a href="#TOC3"></a><a href="#TOC3"><span
+style='mso-bookmark:SEC3'>Scheme Implementations for 6.001</span><span
+style='mso-bookmark:SEC3'></span></a><span style='mso-bookmark:SEC3'></span></h2>
+
+<p class=MsoNormal>The 6.001 Lab (34-501) is a space that is provided to give
+you an opportunity to work on your projects and problem sets, with access to
+computational and personnel resources. You'll find it convenient to work here
+because the Lab Assistants are available to help you, and you can share the
+warmth and camaraderie of your classmates while you work on problem sets and
+projects. If you use one of the 6.001 lab machines, you will automatically have
+access to the Scheme programming environment, as well as a web browser for
+linking to information on the course web site.<span
+style='mso-spacerun:yes'>&nbsp; </span>If you want to bring your own machine,
+the space is set up to support that, and again you will have access to the
+helpful Lab Assistants.<span style='mso-spacerun:yes'>&nbsp; </span>If you want
+to use your own computer, the 6.001 web site provides implementations of Scheme
+for a variety of platforms. See the course web page for software and
+installation instructions.<span style='mso-spacerun:yes'>&nbsp; </span>Note
+that you will be sharing this lab space with 6.004 students and students taking
+the new introductory courses to EECS.<span style='mso-spacerun:yes'>&nbsp;
+</span>We have tried to stagger due date times so that the lab is not
+overloaded, but you may still want to plan your time in the lab in
+advance.<span style='mso-spacerun:yes'>&nbsp; </span>As well, if the load becomes
+particularly bad, we have a backup plan to use some additional space as
+needed.<span style='mso-spacerun:yes'>&nbsp; </span>And the Lab Assistants are
+also accessible by email to answer questions &#8211; use <a
+href="mailto:6001-help@mit.edu">6001-help@mit.edu</a> </p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>For the Spring 2007 term, we are going continue our
+experiment, in which we use DrScheme as the base language for the course, as
+opposed to MIT Scheme, which has been used for many years prior to this.<span
+style='mso-spacerun:yes'>&nbsp; </span>As a consequence, there may be the
+occasional &#8220;glitch&#8221;, as legacy software may collide with minor
+language differences between the implementations.<span
+style='mso-spacerun:yes'>&nbsp; </span>Please bear with us if this
+happens.<span style='mso-spacerun:yes'>&nbsp; </span>Nonetheless, we expect to
+use DrScheme as the principal programming environment, and the 6.001 Lab is set
+up to support interactions using the DrScheme system.<span
+style='mso-spacerun:yes'>&nbsp; </span>If you choose to use one of the other
+versions of Scheme (such as MIT Scheme) you may, but we don&#8217;t guarantee
+that everything is consistent between the different versions.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>The problem sets and projects are designed so that you can
+freely move from your home machine to the lab; for example you might start a
+project at home, then spend some time debugging it in the lab where the Lab
+Assistants can help you, and finally finish things up at home. </p>
+
+<p>6.001 is <i>not </i>officially supported on Athena. The implementation of
+Scheme on Athena that runs on Linux machines should be compatible with other
+6.001 implementations, although we do not guarantee that it can run all the
+projects.&nbsp; Other versions of Scheme on Athena are likely <b>not</b> to be
+compatible with 6.001. </p>
+
+<p>The lab machines are set up as Athena machines in the following manner,
+however.&nbsp; They will automatically save all your work in your Athena home
+directory (in ~/u6001/work by default).&nbsp; You can perform most Athena
+operations on these machines.&nbsp; Please note that this is <b>not</b> a
+supported Athena platform, so don't bug IS&amp;T employees with problems.&nbsp;
+Send all bug reports, comments, and questions about the lab setup to
+6001-lab@mit.edu. </p>
+
+<h2><a name=SEC4></a><a href="#TOC4"></a><a href="#TOC4"></a><a href="#TOC4"><span
+style='mso-bookmark:SEC4'>Lab Location</span><span style='mso-bookmark:SEC4'></span></a><span
+style='mso-bookmark:SEC4'></span></h2>
+
+<p class=MsoNormal>The 6.001 lab is located in room 34-501. The easiest way to
+get there is by the elevator in building 36. Since the door outside the lab has
+an electronic lock, you will want to bring along the combination, which was
+given out in lecture and in recitation. Make sure you also bring your textbook,
+this guide, and a copy of the project if that is what you are planning to work
+on. </p>
+
+<h2><a name=SEC5></a><a href="#TOC5"></a><a href="#TOC5"></a><a href="#TOC5"><span
+style='mso-bookmark:SEC5'>Lab Assistants</span><span style='mso-bookmark:SEC5'></span></a><span
+style='mso-bookmark:SEC5'></span></h2>
+
+<p class=MsoNormal>Lab Assistants (LAs) are an integral part of the 6.001 lab.
+They make sure that everything runs smoothly by maintaining hardware and fixing
+certain problems so that the lab is available to as many students as possible.
+However, LAs are not in the lab just to maintain hardware; their primary
+purpose is to offer you assistance on problems that you encounter while trying
+to do the projects and problem sets. If you get stuck, check the blackboard for
+the help queue status. If the queue is on, write the name of your machine in
+the next available space. If the queue is off, look for an LA walking around or
+using a computer to assist you. </p>
+
+<p>Don't think that you must have a major problem to ask for help. Although the
+LAs are not there to write your code for you, they can assist you when you stop
+making progress on your problem set. The best way to make sure that all of your
+questions get answered is to get to the lab early. The night before the project
+or problem set is due is not a good time to ask an LA to explain a complicated
+issue. Instead, come to the lab early or make an office appointment with your
+recitation instructor or TA if you begin having difficulties. The lab will be
+very busy the night before the project is due. </p>
+
+<p>Note that while it is often most effective to work in the lab, so you can
+ask questions of the LA present, if you are working elsewhere, you can send a
+note to <a href="mailto:6001-help@mit.edu">6001-help@mit.edu</a> and an LA will
+respond as soon as they can get to it.<span style='mso-spacerun:yes'>&nbsp;
+</span>This provides another way to get help, though a direct conversation is
+typically more effective.</p>
+
+<p>If you notice hardware problems, you should contact one of the LAs on duty.
+If one is not in the room, place a note by the computer that explains what you
+think the problem is and when you noticed it. If an extreme problem occurs
+(like a fire) when an LA is not around, contact someone at the equipment desk
+located outside of the lab. </p>
+
+<h2><a name=SEC6></a><a href="#TOC6"></a><a href="#TOC6"></a><a href="#TOC6"><span
+style='mso-bookmark:SEC6'>The Scheme of Things</span><span style='mso-bookmark:
+SEC6'></span></a><span style='mso-bookmark:SEC6'></span></h2>
+
+<p class=MsoNormal>The 6.001 text book describes how to program in Scheme but
+it gives none of the details of how these programs are entered into the
+computer, tested and changed. This section describes the basic things that
+occur when you use the computer to write and evaluate code written in Scheme.</p>
+
+<h2><a name=SEC7></a><a href="#TOC7"></a><a href="#TOC7"></a><a href="#TOC7"><span
+style='mso-bookmark:SEC7'>Flow of Control</span><span style='mso-bookmark:SEC7'></span></a><span
+style='mso-bookmark:SEC7'></span></h2>
+
+<p class=MsoNormal>Control of the computer begins with you. You can direct the
+computer by moving the mouse or by typing at the keyboard. These keystrokes and
+mouse actions are first inspected by a program called the &quot;window
+manager&quot; to see if you are requesting that it perform some operation. The
+window manager then passes your keystrokes to the application that has the <b>focus</b>
+(the highlighted window has the focus). Ordinarily, the only application that
+you see is the DrScheme window, a user interface for entering code, editing
+files, and running Scheme programs.<span style='mso-spacerun:yes'>&nbsp;
+</span>You will usually want DrScheme to have the focus. You can tell the
+window manager to give DrScheme the focus by clicking the mouse on the border
+surrounding the DrScheme window. This should make the border a different color
+(whatever the default is for your machine &#8211; typically this will turn it
+from a pale blue to a dark blue) and allow DrScheme to receive your keystrokes.
+</p>
+
+<p>DrScheme acts, in part, as a text editor, that is as a program that allows
+you to compose text (programs, memos, letters, books, etc.) much as you would
+with a typewriter. Unlike a typewriter, DrScheme will allow you to modify text
+that you have already written so that you don't have to type it in all over again.
+DrScheme also allows you to work on more than one piece of text at a time, each
+in its own <b>buffer</b>.<span style='mso-spacerun:yes'>&nbsp;&nbsp;
+</span>Thus, you can open files you have previously saved by using the mouse to
+click on the <i style='mso-bidi-font-style:normal'>File</i> tab, and then on <i
+style='mso-bidi-font-style:normal'>Open</i>, or by simply typing Ctl-o (that
+is, the &#8220;control&#8221; key followed by the &#8220;O&#8221; key).<span
+style='mso-spacerun:yes'>&nbsp; </span>In either case, use the mouse to select
+the file you want from the list shown, or click on the arrow next to the <i
+style='mso-bidi-font-style:normal'>Look in </i>window to select some other
+directory in which to find your file.<span style='mso-spacerun:yes'>&nbsp;
+</span>Note that there is also an <i style='mso-bidi-font-style:normal'>Open
+recent</i> option, which shows you links to files you have recently
+opened.<span style='mso-spacerun:yes'>&nbsp; </span>Clicking on one of these
+will allow you to open a recently visited file.</p>
+
+<p>To save your files, there are several options.<span
+style='mso-spacerun:yes'>&nbsp; </span>You can again click on the <i
+style='mso-bidi-font-style:normal'>File</i> tab, and then on <i
+style='mso-bidi-font-style:normal'>Save Definitions </i>or <i style='mso-bidi-font-style:
+normal'>Save Definitions As</i>.<span style='mso-spacerun:yes'>&nbsp; </span>In
+the former case, the file will save as the latest version of whatever name the
+file had when you opened it.<span style='mso-spacerun:yes'>&nbsp; </span>If the
+file is a new one that you have created in DrScheme, the system will prompt you
+for a location and name under which to store the file.<span
+style='mso-spacerun:yes'>&nbsp; </span>In the latter case, you are explicitly
+asking to save the file under a new name. <b style='mso-bidi-font-weight:normal'>However,
+we have had several problems with this option, which stores the file in a
+binary form.<span style='mso-spacerun:yes'>&nbsp; </span></b>Instead, we
+recommend that you click on the <i style='mso-bidi-font-style:normal'>File</i>
+tab, and then on <i style='mso-bidi-font-style:normal'>Save Other </i>and then
+on <i style='mso-bidi-font-style:normal'>Save Definitions As Text</i> and then
+proceed as above.</p>
+
+<p>Now, why does the command say <i style='mso-bidi-font-style:normal'>Save
+Definitions&#8230;</i>? When you first start up DrScheme, you will notice that
+it provides you with a window containing two parts. <span
+style='mso-spacerun:yes'>&nbsp;</span>The upper part is the
+&#8220;definitions&#8221; window.<span style='mso-spacerun:yes'>&nbsp;
+</span>This is where you will typically enter your code &#8211; each subprogram
+is typically a definition, as you will discover in lecture.<span
+style='mso-spacerun:yes'>&nbsp; </span>The lower part is the interaction
+window.<span style='mso-spacerun:yes'>&nbsp; </span>This is where you will
+enter expressions that you want to evaluate, and where the Scheme interpreter
+will print out results associated with evaluating expressions.<span
+style='mso-spacerun:yes'>&nbsp; </span>For your projects you will often want to
+save examples of your code running on test cases.<span
+style='mso-spacerun:yes'>&nbsp; </span>You can do this by opening the File tab,
+and the clicking on<i style='mso-bidi-font-style:normal'> Save Othe</i>r
+followed by <i style='mso-bidi-font-style:normal'>Save Interactions</i> or <i
+style='mso-bidi-font-style:normal'>Save Interactions As</i> or <i
+style='mso-bidi-font-style:normal'>Save Interactions as Text.</i><span
+style='mso-spacerun:yes'>&nbsp; </span>Again, we recommend the latter format.</p>
+
+<p>Be sure to save your files before quitting.&nbsp; Otherwise your work will
+be lost.<span style='mso-spacerun:yes'>&nbsp; </span>Note that if you try to
+exit DrScheme without having saved all of your files, it will prompt you about
+this.</p>
+
+<p>Once you have written your programs using DrScheme, you can instruct
+DrScheme to send them to the Scheme interpreter and record the results. You can
+do this by clicking on the <i style='mso-bidi-font-style:normal'>Run</i> tab at
+the top of the window.&nbsp; You can also (as we describe below) enter
+expressions directly into the interaction window, such as for example
+evaluating your procedures on different input values.</p>
+
+<h2><a name=SEC9></a><a href="#TOC9"></a><a href="#TOC9"></a><a href="#TOC9"><span
+style='mso-bookmark:SEC9'>Standard Conventions</span><span style='mso-bookmark:
+SEC9'></span></a><span style='mso-bookmark:SEC9'></span></h2>
+
+<p class=MsoNormal>We have already told you enough about communicating with the
+window manager to get you started on 6.001. Obviously, much more will be said
+about communicating with DrScheme and thus the Scheme interpreter. </p>
+
+<p>Normally, pressing an alphanumeric key tells DrScheme to insert a character
+in the current buffer. However, you can press special keys in combination with
+normal keys to give DrScheme commands. Most of these keys are now standard
+parts of keyboards.&nbsp; Thus, the <tt><span style='font-size:10.0pt'>Control</span></tt>
+key is located next to the <tt><span style='font-size:10.0pt'>`a'</span></tt>
+key. It works like the shift key meaning that you should hold it down while
+pressing another key. For example, when we say <tt><span style='font-size:10.0pt'>C-x</span></tt>
+we mean: hold down the key labeled <tt><span style='font-size:10.0pt'>CTRL</span></tt>
+while you press <tt><span style='font-size:10.0pt'>`x'</span></tt>. Note that
+many of the control sequences follow standard conventions of other text editors
+and window based interfaces (e.g. <tt><span style='font-size:10.0pt'>C-o </span></tt>to
+open a file, <tt><span style='font-size:10.0pt'>C-s </span></tt>to save a file,<tt><span
+style='font-size:10.0pt'> C-w</span></tt> to close a file, etc.).<span
+style='font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<h2><a name=SEC10></a><a href="#TOC10"></a><a href="#TOC10"></a><a href="#TOC10"><span
+style='mso-bookmark:SEC10'>Logging In and Loading Project Code</span><span
+style='mso-bookmark:SEC10'></span></a><span style='mso-bookmark:SEC10'></span><span
+style='font-size:24.0pt'><o:p></o:p></span></h2>
+
+<h2><a name=SEC11></a><a href="#TOC11"></a><a href="#TOC11"></a><a href="#TOC11"><span
+style='mso-bookmark:SEC11'>Logging In</span><span style='mso-bookmark:SEC11'></span></a><span
+style='mso-bookmark:SEC11'></span></h2>
+
+<p class=MsoNormal>If you are in the 6.001 Lab, use your Athena username and
+password to log in. If you don't have an Athena account yet (e.g., because you
+have Special Student status, are cross-registered, etc.), go to the Athena
+Accounts office at building N42's front desk. Their phone number is 253-1325
+and their hours are: </p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Monday, Wednesday, Friday
+......................&nbsp;<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+<st1:time Minute="0" Hour="14" w:st="on">2:00pm -&nbsp; 5:00pm</st1:time> <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tuesday, Thursday
+..............................&nbsp;<span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+<st1:time Minute="0" Hour="9" w:st="on">9:00am - 12:00pm</st1:time> </p>
+
+<p>Athena login proceeds as normal.&nbsp; To run Scheme, do </p>
+
+<p><tt><span style='font-size:10.0pt'>add 6.001</span></tt> <br>
+<tt><span style='font-size:10.0pt'>6001-drscheme &amp;</span></tt> </p>
+
+<p>If you have downloaded DrScheme onto your home machine, the installation
+should have placed an icon for starting DrScheme on your desktop or as PLT
+Scheme under your Programs icon.</p>
+
+<h2><a name=SEC12></a><a href="#TOC12"></a><a href="#TOC12"></a><a href="#TOC12"><span
+style='mso-bookmark:SEC12'>Loading Problem Sets</span><span style='mso-bookmark:
+SEC12'></span></a><span style='mso-bookmark:SEC12'></span></h2>
+
+<p class=MsoNormal><span style='mso-bookmark:SEC12'>Normally, you will just use
+the online tutor to deal with problem sets.&nbsp; You may find it convenient,
+however, to use your own Scheme environment to experiment with your
+answer.&nbsp; In this case, you should be able to cut-and-paste your answer
+from your Scheme environment into the tutor's window for submission. In those
+cases where a problem set has supporting code, we will provide a link from the
+tutor page that will enable you to access that code. </span></p>
+
+<h2><span style='mso-bookmark:SEC12'><a name=SEC12A></a></span><a href="#TOC12A"></a><a
+href="#TOC12A"></a><a href="#TOC12A"><span style='mso-bookmark:SEC12'>Loading
+Project Code</span><span style='mso-bookmark:SEC12'></span></a><span
+style='mso-bookmark:SEC12'></span></h2>
+
+<p class=MsoNormal>Projects will involve more extensive coding that problem
+sets, and for this we will provide a mechanism for letting you get access to
+that code.&nbsp; The easiest way to do this is to open a web browser, go the course
+web page (<a href="http://sicp.csail.mit.edu/">http://sicp.csail.mit.edu/</a>),
+and find the code on the Projects page.<span style='mso-spacerun:yes'>&nbsp;
+</span>If you save versions of the code for each project in your Athena
+directory, you can then download onto the machine you are using in the Lab and
+use them.</p>
+
+<p>If you are working on your own computer, and starting a new project, you'll
+need to download the project files to the correct directory on your own
+machine. </p>
+
+<h2><a name=SEC13></a><a href="#TOC13"></a><a href="#TOC13"></a><a href="#TOC13"><span
+style='mso-bookmark:SEC13'>Editing Your Code</span><span style='mso-bookmark:
+SEC13'></span></a><span style='mso-bookmark:SEC13'></span></h2>
+
+<p class=MsoNormal>As noted above, DrScheme normally displays two
+subwindows:<span style='mso-spacerun:yes'>&nbsp; </span>the top window is for
+entering definitions that you plan to save in a file (or for editing an
+existing file), the bottom window is to display interactions with the Scheme
+interpreter.<span style='mso-spacerun:yes'>&nbsp; </span>You can hide (or
+expose) the definitions subwindow by typing <tt><span style='font-size:10.0pt'>C-d</span></tt>,
+and you can hide (or expose) the interactions window by typing <tt><span
+style='font-size:10.0pt'>C-e.</span></tt> Note that if you open a new file, you
+will get a new DrScheme window containing a copy of that file, displayed as a
+single subwindow.<span style='mso-spacerun:yes'>&nbsp; </span>If you click on
+the <i style='mso-bidi-font-style:normal'>Run</i> tab, the window will be split
+into two, displaying an interaction window at the bottom.</p>
+
+<h2><a name=SEC14></a><a href="#TOC14"></a><a href="#TOC14"></a><a href="#TOC14"><span
+style='mso-bookmark:SEC14'>Loading a File</span><span style='mso-bookmark:SEC14'></span></a><span
+style='mso-bookmark:SEC14'></span></h2>
+
+<p class=MsoNormal>In order to modify a file or to create a new one, you must
+first instruct DrScheme to &quot;open&quot; the file. As noted, you can do this
+by clicking on the <i style='mso-bidi-font-style:normal'>File</i> and <i
+style='mso-bidi-font-style:normal'>Open</i> tabs, or by simply typing <tt><span
+style='font-size:10.0pt'>C-o </span></tt>and finding the file you want in the
+displayed directory structure.</p>
+
+<h2><a name=SEC17></a><a href="#TOC17"></a><a href="#TOC17"></a><a href="#TOC17"><span
+style='mso-bookmark:SEC17'>Editing A File</span><span style='mso-bookmark:SEC17'></span></a><span
+style='mso-bookmark:SEC17'></span></h2>
+
+<h3><a name=SEC19></a><a href="#TOC19"></a><a href="#TOC19"></a><a href="#TOC19"><span
+style='mso-bookmark:SEC19'>Inserting Letters and Moving The Point</span><span
+style='mso-bookmark:SEC19'></span></a><span style='mso-bookmark:SEC19'></span></h3>
+
+<p class=MsoNormal>Once you are in the buffer you want to edit, typing
+characters causes text to be inserted into the buffer at the <b>point</b> (the
+little blinking vertical line), but nothing is overwritten. If you would like
+to delete a character or two use <tt><span style='font-size:10.0pt'>Back space</span></tt>
+to remove the character to the left of the point and <tt><span
+style='font-size:10.0pt'>Delete</span></tt> to delete to the right of the
+point. For larger sections of code or text, see below.</p>
+
+<p>The cursor motion keys (the keys with triangles on them) allow you to move
+the point to a new location and begin inserting characters there. </p>
+
+<h3><a name=SEC20></a><a href="#TOC20"></a><a href="#TOC20"></a><a href="#TOC20"><span
+style='mso-bookmark:SEC20'>Undoing Mistakes</span><span style='mso-bookmark:
+SEC20'></span></a><span style='mso-bookmark:SEC20'></span></h3>
+
+<p class=MsoNormal>If you make a mistake while editing your code, type <tt><span
+style='font-size:10.0pt'>C-z. </span></tt>In many cases DrScheme can undo the
+previous few edits that you have made, allowing you to restore your previous
+state.<span style='mso-spacerun:yes'>&nbsp; </span>This can also be done using
+the Edit and Undo tabs. Consecutive repetitions of <tt><span style='font-size:
+10.0pt'>C-z </span></tt>will cause DrScheme to undo older and older changes.
+Any command other than an undo breaks the sequence. </p>
+
+<p>If you really mess up, it is sometimes desirable to restore the buffer to
+the way it was the last time you saved it. You can do this using the <i
+style='mso-bidi-font-style:normal'>File</i> tab followed by the <i
+style='mso-bidi-font-style:normal'>Revert</i> tab.<span
+style='mso-spacerun:yes'>&nbsp; </span>Note that DrScheme asks you if you
+really want to revert before doing this. </p>
+
+<h3><a name=SEC21></a><a href="#TOC21"></a><a href="#TOC21"></a><a href="#TOC21"><span
+style='mso-bookmark:SEC21'>Using a Region to Copy or Move Text</span><span
+style='mso-bookmark:SEC21'></span></a><span style='mso-bookmark:SEC21'></span></h3>
+
+<p class=MsoNormal>If you want to delete, copy or move a whole line or a larger
+section of code, use the mouse to find the start of the section, then click the
+left button and hold it down while you move the mouse to the end of the section
+of code in which you are interested. This will highlight the entire section of
+code, which you can then either delete (using the <tt><span style='font-size:
+10.0pt'>Delete</span></tt> key) or cut (by either using the <i
+style='mso-bidi-font-style:normal'>Edit</i> and <i style='mso-bidi-font-style:
+normal'>Cut</i> tabs, or typing <tt><span style='font-size:10.0pt'>C-x)</span></tt>
+or copy (by either using the <i style='mso-bidi-font-style:normal'>Edit</i> and
+<i style='mso-bidi-font-style:normal'>Copy</i> tabs or typing <tt><span
+style='font-size:10.0pt'>C-c</span></tt>)<span style='mso-spacerun:yes'>&nbsp;
+</span>Note that &#8220;cut&#8221; means you will remove the entire
+section<span style='mso-spacerun:yes'>&nbsp; </span>in a form in which it can
+be retrieved, while &#8220;copy&#8221; means that a version of the code is
+saved in a form in which it can be retrieved but the initial code remains.<span
+style='mso-spacerun:yes'>&nbsp; </span>In either case, you can move the mouse to
+a new location, left click to insert the cursor, and then insert the saved text
+by either using the <i style='mso-bidi-font-style:normal'>Edit</i> and <i
+style='mso-bidi-font-style:normal'>Paste</i> tabs, or typing <tt><span
+style='font-size:10.0pt'>C-v.</span></tt> If you make a mistake, you can often
+revert by typing <tt><span style='font-size:10.0pt'>C-z.</span></tt> </p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h2><a name=SEC22></a><a href="#TOC22"></a><a href="#TOC22"></a><a href="#TOC22"><span
+style='mso-bookmark:SEC22'>Saving A File</span><span style='mso-bookmark:SEC22'></span></a><span
+style='mso-bookmark:SEC22'></span></h2>
+
+<p class=MsoNormal>You should save your code files periodically so that if the
+computer crashes, you do not lose all your work. As we noted earlier, we
+recommend that you use the </p>
+
+<p class=MsoNormal><i style='mso-bidi-font-style:normal'>Save Definitions As
+Text</i> and the <i style='mso-bidi-font-style:normal'>Save Interactions As
+Text</i> options. Also, be sure to save your files before you log out or quit
+the machine. We strongly recommend that you save your files with the <tt><span
+style='font-size:10.0pt'>.scm</span></tt><span style='mso-spacerun:yes'>&nbsp;
+</span>extension, as this will enable DrScheme to recognize this as a Scheme
+file.<span style='mso-spacerun:yes'>&nbsp; </span>DrScheme only allows one file
+to be loaded into the &#8220;definitions&#8221; window at a time.<span
+style='mso-spacerun:yes'>&nbsp; </span>This means that you will need to make
+all your additions to the project code to a version of the file we
+provide.<span style='mso-spacerun:yes'>&nbsp; </span>In order to keep things
+clean, we recommend that you save versions of your code file under different
+names (e.g.<span style='mso-spacerun:yes'>&nbsp; </span><tt><span
+style='font-size:10.0pt'>project1_month_day_version.scm </span></tt>as in <tt><span
+style='font-size:10.0pt'>project1_09_13_1.scm) </span></tt>so that you can
+always revert back to a prior version if you get messed up.</p>
+
+<h2><a name=SEC23></a><a href="#TOC23"></a><a href="#TOC23"></a><a href="#TOC23"><span
+style='mso-bookmark:SEC23'>Managing Your Files</span><span style='mso-bookmark:
+SEC23'></span></a><span style='mso-bookmark:SEC23'></span></h2>
+
+<p class=MsoNormal>Generating all these files means that we will need some way
+to manage them. We recommend that you create a directory explicitly for your
+6.001 files.<span style='mso-spacerun:yes'>&nbsp; </span>That way, when you use
+the <i style='mso-bidi-font-style:normal'>Open</i> tab in DrScheme, you will be
+able to see all of the files available to you.<span
+style='mso-spacerun:yes'>&nbsp; </span>Note that using the<span
+style='mso-spacerun:yes'>&nbsp; </span>&#8220;scm&#8221; suffix, as in<span
+style='mso-spacerun:yes'>&nbsp; </span><tt><span style='font-size:10.0pt'>filename.scm,
+</span></tt>will ensure that when DrScheme opens the file, it does so as a
+Scheme file.</p>
+
+<h2><a name=SEC24></a><a href="#TOC24"></a><a href="#TOC24"></a><a href="#TOC24"><span
+style='mso-bookmark:SEC24'>Running and Testing Your Code</span><span
+style='mso-bookmark:SEC24'></span></a><span style='mso-bookmark:SEC24'></span></h2>
+
+<h2><a name=SEC25></a><a href="#TOC25"></a><a href="#TOC25"></a><a href="#TOC25"><span
+style='mso-bookmark:SEC25'>Evaluating Code</span><span style='mso-bookmark:
+SEC25'></span></a><span style='mso-bookmark:SEC25'></span></h2>
+
+<p>There are several different ways to interact with DrScheme&#8217;s
+evaluator.<span style='mso-spacerun:yes'>&nbsp; </span>The first is to write
+definitions of procedures and constants in the &#8220;definitions&#8221; window
+(these are typically expressions that you will want to save as a <tt><span
+style='font-size:10.0pt'>filename.scm </span></tt>file for future use).<span
+style='mso-spacerun:yes'>&nbsp; </span>When you press the &#8220;Run&#8221;
+button at the top of the DrScheme window, all of the definitions and other
+expressions in this window are evaluated by the Scheme evaluator, and are available
+for use in the &#8220;interaction&#8221; window (the bottom of the two
+subwindows).<span style='mso-spacerun:yes'>&nbsp; </span>This leads to the
+second way with which to interact with Scheme.<span
+style='mso-spacerun:yes'>&nbsp; </span>You can also type expressions in the
+interaction window, such that when you press the &#8220;enter&#8221; key, the
+expression is evaluated and its value is returned and printed in the
+interaction window.</p>
+
+<p>We suggest that you develop a coding discipline, in which you keep all of
+your code in the &#8220;definitions&#8221; window, and use the
+&#8220;interaction&#8221; window for running test cases or other evaluation of
+your code.<span style='mso-spacerun:yes'>&nbsp; </span>Note that whenever you
+hit the <i style='mso-bidi-font-style:normal'>Run</i> tab, however, the
+environment associated with the &#8220;interaction&#8221; window is
+re-initialized so that values associated with any expressions evaluated
+previously in the &#8220;interaction&#8221; window are lost.<span
+style='mso-spacerun:yes'>&nbsp; </span>Thus, you may find it occasionally
+useful to create a definition in the &#8220;interaction&#8221; window, in order
+to be able to use the state of previous computations as a basis for further
+testing.<span style='mso-spacerun:yes'>&nbsp; </span>If you choose to do this,
+you should be sure to copy your new definitions into the
+&#8220;definitions&#8221; window before saving.</p>
+
+<p>Your &#8220;interactions&#8221; window is also very valuable, especially for
+keeping a record of your test cases and evaluation of code that you write.<span
+style='mso-spacerun:yes'>&nbsp; </span>We recommend that you save these
+interactions (by hitting File then Save Other then Save Interactions or Save
+Interactions As) in a separate file.<span style='mso-spacerun:yes'>&nbsp;
+</span>When you are ready to submit your project, you can create a single file,
+interspersing your saved interactions with your saved code, for submission to
+your TA.</p>
+
+<p>One major difference between MIT Scheme and DrScheme is that the latter
+provides a series of different versions of the Scheme language for use.<span
+style='mso-spacerun:yes'>&nbsp; </span>For the purposes of 6.001, <b
+style='mso-bidi-font-weight:normal'>we recommend that you select PLT/Pretty Big
+as the option</b>.<span style='mso-spacerun:yes'>&nbsp; </span>You can do this
+either using the Language tab, or by typing <tt><span style='font-size:10.0pt'>Ctl-L.<span
+style='mso-spacerun:yes'>&nbsp; </span></span></tt>When you set this language,
+you can also click on the &#8220;Show Details&#8221; tab.<span
+style='mso-spacerun:yes'>&nbsp; </span>This will allow you to set some
+parameters, in particular, we recommend that you do <b style='mso-bidi-font-weight:
+normal'>NOT</b> use the case sensitive option.<tt><span style='mso-ansi-font-size:
+12.0pt;font-family:"Times New Roman"'><o:p></o:p></span></tt></p>
+
+<h2><a name=SEC27></a><a href="#TOC27"></a><a href="#TOC27"></a><a href="#TOC27"><span
+style='mso-bookmark:SEC27'>Debugging</span><span style='mso-bookmark:SEC27'></span></a><span
+style='mso-bookmark:SEC27'></span></h2>
+
+<p class=MsoNormal>When testing your code you will find that often it doesn't
+work as expected. Sometimes your code will stop dead in its tracks and produce an
+error message on the screen, sometimes it will return an incorrect result, and
+sometimes it won't return anything at all because it is caught in an infinite
+(or at least an unreasonably long) loop. These mistakes in your code are called
+<b>bugs</b> and getting rid of them is an art-form known as <b>debugging</b>. </p>
+
+<p>The first kind of bug is often the easiest to fix. Sometimes you have just
+misspelled a variable or procedure name, or have misplaced a parenthesis.
+Usually your typos are obvious when the computer points them out to you. At
+other times the computer screams at you when your program is trying to do an
+illegal operation (like trying to add two procedures!). In cases like this, it
+is useful to enter the debugger and see what you can learn about the bug.
+Questions you should ask yourself are: </p>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo4;tab-stops:list .5in'>How did my procedure get into
+     this state?</li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo4;tab-stops:list .5in'>Do any variables have values
+     that they clearly should not?</li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo4;tab-stops:list .5in'>Are all the procedures that I
+     use in this procedure working correctly?</li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo4;tab-stops:list .5in'>Do I have the arguments in
+     the correct order?</li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo4;tab-stops:list .5in'>Am I using the correct
+     variables?</li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo4;tab-stops:list .5in'>Does my procedure have a
+     logical error?</li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo4;tab-stops:list .5in'>Did I remember to evaluate
+     all the changes that I made?</li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo4;tab-stops:list .5in'>Did I do anything that would
+     cause any old definitions to still be around?</li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l4 level1 lfo4;tab-stops:list .5in'>Did I write this code?</li>
+</ul>
+
+<p class=MsoNormal>These are useful questions to ask no matter what kind of
+bugs you have. Remember that even if your procedure seems to work with one or
+two test cases, you could still have errors in it. Make sure to test the
+boundary conditions (if you don't your TA will). For example, maybe you forgot
+to test your absolute value procedure with the number zero. Question: how many
+fence posts do you need to buy to make 100 feet of fence with a fence post
+every 10 feet? If you quickly answered 10, then you are especially susceptible
+to fence-post errors. Otherwise, see how many of your friends will fall for
+this one. </p>
+
+<p>Only experience can help you become a master debugger. However, good
+discipline in trying to debug code can be very valuable experience.<span
+style='mso-spacerun:yes'>&nbsp; </span>Fortunately, DrScheme comes with several
+built in tools to help.<span style='mso-spacerun:yes'>&nbsp; </span>The first
+is the <b style='mso-bidi-font-weight:normal'>Debug</b> button at the top of
+the window.<span style='mso-spacerun:yes'>&nbsp; </span>If you press this
+button, DrScheme will enter a mode in which it will evaluate expressions in a
+manner where you can control things.<span style='mso-spacerun:yes'>&nbsp;
+</span>Try the following.<span style='mso-spacerun:yes'>&nbsp; </span>Type
+these expressions into the definitions window.</p>
+
+<p><span style='font-size:11.0pt;font-family:"Courier New"'>(define (square x)
+(*x x))<o:p></o:p></span></p>
+
+<p><span style='font-size:11.0pt;font-family:"Courier New"'>(define (foobar x
+y) (+ (square x) (square y)))<o:p></o:p></span></p>
+
+<p>Now press the &#8220;run&#8221; button to evaluate these definitions.<span
+style='mso-spacerun:yes'>&nbsp; </span>Now press the &#8220;debug&#8221; button
+and go to the &#8220;interactions&#8221; window and type (foobar 3 4), followed
+by &#8220;enter&#8221;.<span style='mso-spacerun:yes'>&nbsp; </span>You are now
+in a mode where you can carefully step through your code. If you use the
+&#8220;step&#8221; button, DrScheme will step to and execute the next
+evaluation, putting a small marker at the current point, and in many cases
+displaying the subexpression being evaluated at the top of the window next to
+the buttons.<span style='mso-spacerun:yes'>&nbsp; </span>This will let you walk
+your way through the code to spot where a problem may be occurring.<span
+style='mso-spacerun:yes'>&nbsp; </span>If you do this, you will see the
+evaluation progress until it tries to evaluate &#8220;*x&#8221;, which of
+course is an error (in this case a typographical error).<span
+style='mso-spacerun:yes'>&nbsp; </span>If you use the &#8220;Continue&#8221;
+button, the evaluation carries on without interruption, until you press the
+&#8220;Pause&#8221; button.<span style='mso-spacerun:yes'>&nbsp; </span>Notice
+when you reach an error, DrScheme displays information about the error in the
+interaction window, and also highlights the corresponding spot in the
+definitions window, so you can see the chain of evaluations that led to the
+error.<span style='mso-spacerun:yes'>&nbsp; </span>In addition, if you click on
+the &#8220;ladybug&#8221; icon, DrScheme will display information that will
+help you isolate the source of the bug.</p>
+
+<p>If the debugger doesn't give you the needed information, sometimes it is
+useful to put a <tt><span style='font-size:10.0pt'>display</span></tt> or <tt><span
+style='font-size:10.0pt'>display</span></tt> expression into your code to
+gather information. Also, you may make your procedures robust so that when they
+get illegal values, they give you information that the debugger wouldn't give
+you. These two methods are especially useful with the never-ending-procedure
+variety of bugs. </p>
+
+<p>A more useful way to gather information is to use the procedure <tt><span
+style='font-size:10.0pt'>error</span></tt>. <tt><span style='font-size:10.0pt'>error</span></tt>
+displays its first argument which should be a string and then displays the rest
+of its arguments which are any objects of special concern to debugging. Then
+you are asked if you would like to enter the debugger. Here is an example: </p>
+
+<pre>(define (cube x)</pre><pre>&nbsp; (if (not (number? x))</pre><pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (error &quot;Argument should be a number instead of&quot; x)</pre><pre>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (* x x x)))</pre><pre>&nbsp;</pre><pre>(cube 'hi)</pre><pre>;Argument should be a number instead of hi</pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>In
+this latter case, not only will you get an error message in your
+&#8220;interaction&#8221; window, but the corresponding piece of code in the
+&#8220;definitions&#8221; window will be highlighted (in pink) so you can see
+where it occurred.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Another
+handy tool provided by DrScheme is a syntax checker.<span
+style='mso-spacerun:yes'>&nbsp; </span>Pressing the &#8220;Check Syntax&#8221;
+button will cause DrScheme to scan through your definitions window, looking for
+illegal expressions.<span style='mso-spacerun:yes'>&nbsp; </span>Note that it
+won&#8217;t catch errors in which an incorrect value is passed in as an
+argument, since those occur at run time.<span style='mso-spacerun:yes'>&nbsp;
+</span>But it will catch errors in which expressions are incorrectly
+formed.<span style='mso-spacerun:yes'>&nbsp; </span>For example, if you type
+the following into your definitions window</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<pre>(define square</pre><pre><span style='mso-spacerun:yes'>&nbsp;&nbsp; </span>(lambda (x) (* y y)))</pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>then
+the syntax checker will highlight the two variables &#8220;y&#8221; in red, in
+this case to indicate that these are not bound variables (i.e. they do not
+correspond either to a variable in the parameter list of the scoping lambda,
+nor are they bound by a top level definition elsewhere in the window). Checking
+syntax can often spot typos or other errors for you.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Note
+that if you want to find a particular definition to edit, you can use the tab
+labeled (define &#8230;) to get a list of all your definitions, from which you
+can select the one you want.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>One
+of the best ways of debugging code is to get a lab assistant to help you. Even
+if they can't immediately find your bug, they can probably tell you whether
+what you are trying to do is a good idea. Another powerful debugging technique
+is to completely rewrite some of your code in an improved way. It is often
+easier to avoid bugs than to find them so use a clear design instead of clever
+or tricky code that is sure to fail during the next waning crescent. However,
+if you enjoy debugging code, feel free to make lots of mistakes so that you can
+find them later. </p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC29></a><a href="#TOC29"></a><a href="#TOC29"></a><a href="#TOC29"><span
+style='mso-bookmark:SEC29'>Using On-Line Documentation</span><span
+style='mso-bookmark:SEC29'></span></a><span style='mso-bookmark:SEC29'></span></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>DrScheme&#8217;s
+web site includes a number of useful sources of online documentation.<span
+style='mso-spacerun:yes'>&nbsp; </span>We recommend that you explore these to
+see what is available.</p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC32></a><a href="#TOC32"></a><a href="#TOC32"></a><a href="#TOC32"><span
+style='mso-bookmark:SEC32'>Printing</span><span style='mso-bookmark:SEC32'></span></a><span
+style='mso-bookmark:SEC32'></span></h2>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC33></a><a href="#TOC33"></a><a href="#TOC33"></a><a href="#TOC33"><span
+style='mso-bookmark:SEC33'>Printing A Buffer</span><span style='mso-bookmark:
+SEC33'></span></a><span style='mso-bookmark:SEC33'></span></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>You
+can print out your definitions window by selecting <i style='mso-bidi-font-style:
+normal'>File</i> followed by <i style='mso-bidi-font-style:normal'>Print
+Definitions</i>, or by simply entering <tt><span style='font-size:10.0pt'>Ctl-P.<span
+style='mso-spacerun:yes'>&nbsp; </span></span></tt>Similarly, you can print out
+a copy of your interactions window by selecting <i style='mso-bidi-font-style:
+normal'>File</i> followed by <i style='mso-bidi-font-style:normal'>Print
+Interactions</i>. Remember to get your print-out right away or it may get lost
+in a huge heap of paper. The header has the machine name on it. <span
+style='font-size:10.0pt;font-family:"Courier New"'><o:p></o:p></span></p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Alternatively,
+from a top level window, use the Linux commands to print a file: </p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><tt><span
+style='font-size:10.0pt'>cd ~/u6001/work</span></tt> <br>
+<tt><span style='font-size:10.0pt'>lpr project1.scm</span></tt> </p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>will
+for example connect to your work directory, then print out the Scheme file
+(note the <tt><span style='font-size:10.0pt'>.scm</span></tt> extension) titled
+<tt><span style='font-size:10.0pt'>project1</span></tt>. </p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC34></a><a href="#TOC34"></a><a href="#TOC34"></a><a href="#TOC34"><span
+style='mso-bookmark:SEC34'>Making A Transcript</span><span style='mso-bookmark:
+SEC34'></span></a><span style='mso-bookmark:SEC34'></span></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>The
+easiest way to get a transcript is to save a copy of your
+&#8220;interactions&#8221; window.<span style='mso-spacerun:yes'>&nbsp; </span>You
+can insert comments or other annotations into this file, to help your TA
+understand your work.<span style='mso-spacerun:yes'>&nbsp; </span>For example,
+you should remove the test cases that you do not wish to keep and place your
+name and other information including the problem set number and the exercise at
+the top. You might also want to make special comments about some of the test
+cases. When you are done with the entire project, you can print out this
+buffer. It's a good idea to comment the transcript after each problem, while
+the details are still in your mind. Incrementally building your final
+transcript takes less effort than doing it all at the end. Note that if you
+want to edit the file, it is easiest to use the <i style='mso-bidi-font-style:
+normal'>Save Interactions as Text</i> option, and then <i style='mso-bidi-font-style:
+normal'>Open</i> this file in a new buffer.<span
+style='mso-spacerun:yes'>&nbsp; </span>You can then edit this using normal text
+editing commands, such as inserting comments into your examples.</p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC37></a><a href="#TOC37"></a><a href="#TOC37"></a><a href="#TOC37"><span
+style='mso-bookmark:SEC37'>Logging Out and Giving Feedback</span><span
+style='mso-bookmark:SEC37'></span></a><span style='mso-bookmark:SEC37'></span></h2>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC38></a><a href="#TOC38"></a><a href="#TOC38"></a><a href="#TOC38"><span
+style='mso-bookmark:SEC38'>Logging Out</span><span style='mso-bookmark:SEC38'></span></a><span
+style='mso-bookmark:SEC38'></span></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>To
+logout, make sure your have saved all of your files and then type <tt><span
+style='font-size:10.0pt'>Ctl-w</span></tt>. If you have forgotten to save any
+of your buffers, DrScheme will give you a chance to do it now. If you still
+don't save all of the buffers, DrScheme will ask one more time just to be
+sure.<span style='mso-spacerun:yes'>&nbsp; </span></p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC39></a><a href="#TOC39"></a><a href="#TOC39"></a><a href="#TOC39"><span
+style='mso-bookmark:SEC39'>Feedback</span><span style='mso-bookmark:SEC39'></span></a><span
+style='mso-bookmark:SEC39'></span></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>If
+you find any bugs, or problems dealing with the lab, send mail to: </p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><tt><span
+style='font-size:10.0pt'>6001-lab@mit.edu</span></tt> </p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>You
+can send email to the entire 6001 staff via the address <tt><span
+style='font-size:10.0pt'>6001-staff@csail.mit.edu</span></tt>. For comments
+specific to the course you can send mail to <tt><span style='font-size:10.0pt'>6001-lecturers@csail.mit.edu.</span></tt>
+</p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC41></a><a href="#TOC41"></a><a href="#TOC41"></a><a href="#TOC41"><span
+style='mso-bookmark:SEC41'>DrScheme won't respond to anything I type!</span><span
+style='mso-bookmark:SEC41'></span></a><span style='mso-bookmark:SEC41'></span></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>One
+cause of this is that DrScheme is not receiving any keystrokes from the window
+manager. If this is the case, the border around DrScheme will be light blue
+instead of dark blue. To fix this problem, click the left mouse button when the
+cursor is in the border of the DrScheme window. </p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC42></a><a href="#TOC42"></a><a href="#TOC42"></a><a href="#TOC42"><span
+style='mso-bookmark:SEC42'>How Can I Reach a &quot;Steady State?&quot;</span><span
+style='mso-bookmark:SEC42'></span></a><span style='mso-bookmark:SEC42'></span></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Often
+times you will lose and just want to return to some sort of steady state so
+that you can continue to do your work. If all of a sudden you do something that
+seems to trash half of your buffer, <b style='mso-bidi-font-weight:normal'>stop
+and relax</b>. The first thing that you should try is <tt><span
+style='font-size:10.0pt'>C-z,</span></tt> the undo command. If this fails to do
+any good, you might try performing a paste using <tt><span style='font-size:
+10.0pt'>C-v</span></tt>. If neither of these seems to work, use the <i
+style='mso-bidi-font-style:normal'>Save As</i> command, which will allow you to
+save the file under a different name. Now you can load up the old version.
+Next, visually compare these two buffers to see if you can recover any recent
+changes. You might also want to save your buffers often so that you can always
+restore to a steady state by doing a <tt><span style='font-size:10.0pt'>revert</span></tt>.
+If your problem is that DrScheme does not seem to be evaluating things properly,
+try hitting the Stop button. For really drastic problems, try saving all of
+your buffers that don't seem screwed up and logging out. When you log back in,
+things should be back to normal. If this doesn't help then it is time to talk
+to an LA. </p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-spacerun:yes'>&nbsp;</span></p>
+
+<h2 style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name=SEC51></a><a href="#TOC51"></a><a href="#TOC51"></a><a href="#TOC51"><span
+style='mso-bookmark:SEC51'>Debugger</span><span style='mso-bookmark:SEC51'></span></a><span
+style='mso-bookmark:SEC51'></span></h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>When
+an error occurs in your code, you will often see a bug display in the
+interaction window that highlights the type of error encountered.<span
+style='mso-spacerun:yes'>&nbsp; </span>A simple example helps highlight some of
+the key aspects of DrScheme&#8217; debugger:</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<pre>(define square (lambda (x) (* y y)))</pre><pre>&nbsp;</pre><pre>(define my-fcn (lambda (x y) (+ (* x x) (square y))))</pre><pre>&nbsp;</pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Now
+suppose we enter</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><tt><span
+style='font-size:10.0pt'>(my-fcn 3 5)<o:p></o:p></span></tt></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><tt><span
+style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></tt></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>followed
+by an &#8220;enter&#8221;.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>This
+causes an error, which is highlighted with the bug message <i style='mso-bidi-font-style:
+normal'>&#8220;reference to undefined identifier: y&#8221;,</i> telling you
+what was the immediate cause of the error.<span style='mso-spacerun:yes'>&nbsp;
+</span>It also, however, shows you in the definitions window where this error
+occurred (try this to see for yourself).<span style='mso-spacerun:yes'>&nbsp;
+</span>Specifically, DrScheme shows an overlay of a set of red arrows
+indicating the sequence of subexpression evaluations that led to the error
+&#8211; in this case, it shows that while evaluating the body of <tt><span
+style='font-size:10.0pt'>my-fcn, </span></tt>an error occurred, specifically
+the call to the body of <tt><span style='font-size:10.0pt'>square.<span
+style='mso-spacerun:yes'>&nbsp; </span></span></tt>This can be useful in
+unwinding the stages of computation to identify the source of the error.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>This
+can also be found by using the Debugger directly.<span
+style='mso-spacerun:yes'>&nbsp; </span>Try entering the three expressions above
+into a definitions window, and then press the Debug button.<span
+style='mso-spacerun:yes'>&nbsp; </span>Now, &#8220;step&#8221; through the
+evaluation.<span style='mso-spacerun:yes'>&nbsp; </span>Note how for the last
+expression, the debugger shows you each step, using a green marker to indicate
+the stage of evaluation (placed at the beginning of a subexpression as it
+enters the subcomputation, then placed at the end of the expression when that
+subcomputation is completed and printing at the top of the window the actual
+expression and returned value).<span style='mso-spacerun:yes'>&nbsp;
+</span>Walk through this example to see the stages of<span
+style='mso-spacerun:yes'>&nbsp; </span>computation, and how the debugger lets you
+walk through these to isolate the error.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<div class=MsoNormal align=center style='text-align:center;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>
+
+<hr size=2 width="100%" align=center>
+
+</div>
+
+<h1 style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><a
+name="_Your_Turn"></a>Your Turn</h1>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>There
+are several things that you need to do for this part: evaluate some simple
+Scheme expressions, use the provided tools to manipulate these expressions, and
+answer some documentation and administrative questions. The answers for all
+these parts should be <b>submitted electronically on the tutor</b>, using the <tt><span
+style='font-size:10.0pt'>Submit Project Files</span></tt> button. Remember that
+this is Project 0; when you have completed all the work and saved it in a file,
+you should upload that file and submit it for Project 0.<span
+style='mso-spacerun:yes'>&nbsp;&nbsp; </span><b style='mso-bidi-font-weight:
+normal'>This is a simple project &#8211; the goal is primarily to get you used
+to using the DrScheme system so that you will be agile with this system when we
+get to the real programming projects later in the term!<o:p></o:p></b></p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b
+style='mso-bidi-font-weight:normal'>&nbsp;<o:p></o:p></b></p>
+
+<h2 style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Some
+background on interpreters</h2>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>While
+this project is mostly intended to get you used to interacting with DrScheme,
+it is worth reviewing some of the concepts you have seen (or will see) in
+lecture about interpreters and evaluators.<span style='mso-spacerun:yes'>&nbsp;
+</span>At an abstract level, our goal is to interact with the machine in order
+to have it evaluate expressions, or in other words to determine values
+associated with expressions.<span style='mso-spacerun:yes'>&nbsp; </span>A
+simple example would be to write a piece of code that computes squares.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>We
+can distinguish between the expression that captures this computational idea,
+and the process by which we apply the idea to different instances.<span
+style='mso-spacerun:yes'>&nbsp; </span>To capture the idea, we use a definition
+of a procedure:</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><o:p>&nbsp;</o:p></p>
+
+<pre>(define square (lambda (x) (* x x)))</pre>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-spacerun:yes'>&nbsp;</span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>How
+do we get the computer to use this concept?<span
+style='mso-spacerun:yes'>&nbsp; </span>First, we need to get the computer to
+&#8220;read&#8221; this expression, that is, accept each of the characters in
+the sequence above and convert that sequence into a set of words (sequences of
+characters separated by spaces, parentheses and other delimiters) that it
+recognizes.<span style='mso-spacerun:yes'>&nbsp; </span>Next, we want the
+computer to use the rules of Scheme to interpret this expression&#8212;these
+are the rules about which we have been talking in lecture. </p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>In
+DrScheme we can get this interpretation to happen in two different ways.<span
+style='mso-spacerun:yes'>&nbsp; </span>First, we can pass the expression
+directly to the interpreter.<span style='mso-spacerun:yes'>&nbsp; </span>We do
+this by typing this expression in the bottom (or interpreter) window of
+DrScheme.<span style='mso-spacerun:yes'>&nbsp; </span>Once we hit &#8220;enter&#8221;,
+the system reads the expression, uses its rules of interpretation to decode the
+expression, and returns the value associated with the expression.<span
+style='mso-spacerun:yes'>&nbsp; </span>In this case, it would evaluate the <i>lambda</i>
+expression to create a procedure of one argument, whose body is the <i>(* x x)</i>
+expression.<span style='mso-spacerun:yes'>&nbsp; </span>Evaluation of the <i>define</i>
+expression causes the name <i>square</i> to be associated with this procedure
+object.<span style='mso-spacerun:yes'>&nbsp; </span>If we subsequently use <i>square,</i>
+as in <i>(square 5)</i>, our substitution rules (described in lecture) will
+lead to a new evaluation in which this procedure is applied to the value
+5.<span style='mso-spacerun:yes'>&nbsp; </span>In general, anything we type at
+the interpretation window is evaluated as soon as we complete the expression
+and hit &#8220;enter&#8221;.<span style='mso-spacerun:yes'>&nbsp; </span>A
+second method is to use the upper (or definitions) window.<span
+style='mso-spacerun:yes'>&nbsp; </span>Here, we are basically typing characters
+into a standard editor.<span style='mso-spacerun:yes'>&nbsp; </span>That is, we
+can correct things, change things, replace things, or add things.<span
+style='mso-spacerun:yes'>&nbsp; </span>Once we have completed entering our
+expressions into this window, pressing the <i>Run</i> button will cause each
+expression in this window to be read and interpreted in order, with the effects
+or results of that evaluation taking place in the interpretation window.<span
+style='mso-spacerun:yes'>&nbsp; </span>Typically in this setting, we will be
+typing definitions into the window, to be saved for later use; we can then use
+those definitions in the interpretation window to compute specific values.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>We
+will explore both of these methods in the exercises below.</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><o:p>&nbsp;</o:p></p>
+
+<h2 style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Part
+1: Expressions to Evaluate</h2>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>If
+you are working in the lab, you should simply follow the instructions above to
+login to the system using your Athena ID and password.<span
+style='mso-spacerun:yes'>&nbsp; </span>Athena login proceeds as normal.&nbsp;
+To run Scheme, do </p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><tt><span
+style='font-size:10.0pt'>add 6.001</span></tt> <br>
+<tt><span style='font-size:10.0pt'>6001-drscheme &amp;</span></tt> </p>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>If
+you have downloaded DrScheme onto your own machine, and are working there, the
+installation should have placed an icon for starting DrScheme on your desktop
+or as PLT Scheme under your Programs icon.</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>In
+either case, start up DrScheme.<span style='mso-spacerun:yes'>&nbsp; </span><b
+style='mso-bidi-font-weight:normal'>We recommend that you select PLT/Pretty Big
+as the language choice</b> (use <tt><span style='font-size:10.0pt'>Ctl-L</span></tt>
+to select a language, or go to the <i style='mso-bidi-font-style:normal'>Language</i>
+tab).</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Below
+is a sequence of Scheme expressions. Can you predict what the value of each
+expression would be when evaluated? Although it may seem like grunt work,
+please type in and evaluate each expression in the order it is presented.<span
+style='mso-spacerun:yes'>&nbsp; </span>Do this in the
+&#8220;interactions&#8221; window. In this case, evaluation simply means typing
+in each expression followed by a carriage return or <i style='mso-bidi-font-style:
+normal'>enter.</i></p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<pre style='text-align:justify'>-37&nbsp;</pre><pre style='text-align:justify'>&nbsp;</pre><pre
+style='text-align:justify'>(* 3 4)</pre><pre style='text-align:justify'>&nbsp;</pre><pre
+style='text-align:justify'>(&gt; 10 9.7)</pre><pre style='text-align:justify'>&nbsp;</pre><pre
+style='text-align:justify'>(- (if (&gt; 3 4)</pre><pre style='text-align:justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7</pre><pre
+style='text-align:justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10)</pre><pre
+style='text-align:justify'>&nbsp;&nbsp; (/ 16 10))</pre><pre style='text-align:
+justify'>&nbsp;</pre>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Note
+for the previous example, we have used &#8220;pretty printing&#8221;. You could
+just enter this as one big expression as in</p>
+
+<pre style='text-align:justify'>(- (if (&gt; 3 4)7 10) (/ 16 10))</pre>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>However,
+this can quickly get unwieldy and hard to read.<span
+style='mso-spacerun:yes'>&nbsp; </span>To get code that is typeset in a uniform
+manner, you simply need to hit the <i style='mso-bidi-font-style:normal'>enter</i>
+button at the end of each line.<span style='mso-spacerun:yes'>&nbsp;
+</span>DrScheme will not evaluate the expression until you reach the end of the
+entire expression (i.e. have an appropriate number of close parentheses).<span
+style='mso-spacerun:yes'>&nbsp; </span>Also note how DrScheme helps you out by
+highlighting the entire expression every time you enter a close parenthesis.<span
+style='mso-spacerun:yes'>&nbsp; </span>Also, note the value returned by this
+last expression.<span style='mso-spacerun:yes'>&nbsp; </span>Pretty funky, huh?<span
+style='mso-spacerun:yes'>&nbsp; </span>Now try this one:</p>
+
+<pre style='text-align:justify'>(- (if (&gt; 3 4)</pre><pre style='text-align:
+justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7</pre><pre style='text-align:
+justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10)</pre><pre style='text-align:
+justify'>&nbsp;&nbsp; (/ 16.0 10))</pre>
+
+<p style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Here
+are some more expressions to try:</p>
+
+<pre style='text-align:justify'>(* (- 25 10)</pre><pre style='text-align:justify'>&nbsp;&nbsp; (+ 6 3))</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>+</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(define double (lambda (x) (* 2 x)))</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>double</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(define c 4)</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>c</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(double c)</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>c</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(double (double (+ c 5)))</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(define times-2 double)</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(times-2 c)</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(define d c)</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(= c d)</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(cond ((&gt;= c 2) d)</pre><pre
+style='text-align:justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ((= c (- d 5)) (+ c d))</pre><pre
+style='text-align:justify'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (else (abs (- c d))))</pre><pre
+style='text-align:justify'>&nbsp;</pre>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+style='mso-bidi-font-weight:bold'>When you get to this stage, you should have a
+series of expressions and their values in the <i style='mso-bidi-font-style:
+normal'>interactions</i> buffer of DrScheme.<span
+style='mso-spacerun:yes'>&nbsp; </span>You need to save this away as a file. <b>Save
+this file using a name that describes the content (e.g. project0_09_10.scm)</b></span>.
+In particular, use <i style='mso-bidi-font-style:normal'>File</i> then <i
+style='mso-bidi-font-style:normal'>Save Other</i> then <i style='mso-bidi-font-style:
+normal'>Save Interactions </i>links.<span style='mso-spacerun:yes'>&nbsp;
+</span>Saving in this manner will allow you to load that file into a fresh
+version of DrScheme and edit it to add annotations or other comments.<span
+style='mso-spacerun:yes'>&nbsp; </span></p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Now,
+close DrScheme and restart it.<span style='mso-spacerun:yes'>&nbsp; </span>Open
+the file you just saved.<span style='mso-spacerun:yes'>&nbsp; </span>Using the
+mouse, outline the region of your interactions, and then using the mouse, click
+on <i style='mso-bidi-font-style:normal'>Scheme</i> and then on <i
+style='mso-bidi-font-style:normal'>Comment out with semicolons.</i><span
+style='mso-spacerun:yes'>&nbsp; </span>Notice what this does.<span
+style='mso-spacerun:yes'>&nbsp; </span>Scheme&#8217;s protocol is to use a
+semicolon (;) as the beginning of a comment, and the remainder of that line is
+not evaluated.<span style='mso-spacerun:yes'>&nbsp; </span>For example:</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>nothing
+on the following line is evaluated<br>
+<span class=HTMLPreformattedChar><span style='font-size:10.0pt'>; (+ 1 2)
+&nbsp;this is a comment</span></span> <br>
+<br>
+in the following line, the addition expression is evaluated, but nothing after<br>
+<span class=HTMLPreformattedChar><span style='font-size:10.0pt'>(+ 1 2) &nbsp;;
+this is a comment</span></span><br>
+<br>
+and multiple semicolons don't matter<br>
+<span class=HTMLPreformattedChar><span style='font-size:10.0pt'>;;; this is a
+fine comment also<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><span
+class=HTMLPreformattedChar><span style='font-size:10.0pt'>&nbsp;<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>What
+this means is that anything following a semicolon is not seen by the Scheme
+interpreter, and is simply provided as textual comments for the reader.</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>In
+this version of the file, you can now add your own comments, using semicolons
+to begin each line.<span style='mso-spacerun:yes'>&nbsp; </span>Add some
+appropriate comments to your expressions and save the file.</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>Remember
+that your real-life flesh and bones tutor will be reading and grading your
+project. Commenting your code and otherwise explaining your work is an
+important part of your project submission -- it is a good habit to get into
+NOW! For example: </b></p>
+
+<pre style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>;;;</pre><pre
+style='text-align:justify'>;;; The following test cases explore the evaluation of simple expressions.</pre><pre
+style='text-align:justify'>;;;</pre><pre style='text-align:justify'>&nbsp;</pre>
+
+<h2 style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Part
+2: Using definitions</h2>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Now
+let&#8217;s try using the <i style='mso-bidi-font-style:normal'>definitions</i>
+window of DrScheme.<span style='mso-spacerun:yes'>&nbsp;&nbsp; </span>Start up
+a fresh version of DrScheme, and type some expressions into the interaction
+window, just as you did above.<span style='mso-spacerun:yes'>&nbsp; </span>Now,
+place the cursor in the <i style='mso-bidi-font-style:normal'>definitions </i>window
+(e.g. by placing the mouse over that window and clicking), and type the
+following expressions:</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<pre style='text-align:justify'>(define square (lambda (x) (* x x)))</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(define abs (lambda (x) (if (&lt; x 0) (- x) x)))</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(define my-test (lambda (x y)</pre><pre
+style='text-align:justify'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(if (&gt; x y)</pre><pre
+style='text-align:justify'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(+ (abs y) (square x))</pre><pre
+style='text-align:justify'><span style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(+ (square y) (abs x)))))</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(my-test 5 -3)</pre><pre
+style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>(my-test -5 2)</pre><pre
+style='text-align:justify'>&nbsp;</pre>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Note
+that the first three expressions are definitions, assigning a name to a
+procedure (you will see what this means in lecture on September 12<sup>th</sup>).<span
+style='mso-spacerun:yes'>&nbsp; </span>The latter two expressions are simply
+combinations.<span style='mso-spacerun:yes'>&nbsp; </span>Now use the mouse to
+press the <i style='mso-bidi-font-style:normal'>Run</i> button.<span
+style='mso-spacerun:yes'>&nbsp; </span>Note what happens.<span
+style='mso-spacerun:yes'>&nbsp; </span>All of the previous output in your <i
+style='mso-bidi-font-style:normal'>interactions</i> window has disappeared
+(this is why we had you save it first).<span style='mso-spacerun:yes'>&nbsp;
+</span>In DrScheme, pressing the <i style='mso-bidi-font-style:normal'>Run</i>
+button always causes the environment of the evaluator to be reinitialized, and
+the expressions in the <i style='mso-bidi-font-style:normal'>definitions</i> window
+to be evaluated.<span style='mso-spacerun:yes'>&nbsp; </span>Also note what is
+printed out in the <i style='mso-bidi-font-style:normal'>interactions </i>window
+&#8211; any values associated with expressions are printed out, in order.</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Now,
+we would like to create one file, which contains the evaluations from Part 1, with
+the definitions from Part 2.<span style='mso-spacerun:yes'>&nbsp; </span>There
+are several ways to do this, here is one.<span style='mso-spacerun:yes'>&nbsp;
+</span>An easy one is to use the mouse to highlight the values that resulted
+from each expression&#8217;s evaluation, and cut and paste those values below
+the expression in the <i style='mso-bidi-font-style:normal'>definitions</i>
+window (commenting out by use of a semicolon). Cut and paste is done by:
+selecting the text (e.g., using <tt><span style='font-size:10.0pt'>Ctl-a)</span></tt>
+and making a copy (e.g., using <tt><span style='font-size:10.0pt'>Ctl-c)</span></tt>,
+which you then insert by placing the mouse at the desired point and using <tt><span
+style='font-size:10.0pt'>Ctl-v.</span></tt> This puts all of your work in one
+place, where you can add appropriate comments and then save. This now becomes a
+file that you can submit as your project 0.</p>
+
+<h2 style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Part
+3 (Optional): Real printing</h2>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>If
+you want to print your a hardcopy of your work (at the end of this project),
+you will need commands to do this. These commands are issued from an interface
+to the operating system. If you logged in at the 6.001 Lab, an <tt><span
+style='font-size:10.0pt'>xterm</span></tt> window opened up. Inside that
+window, you can issue commands for printing. To see what the printer queue
+looks like, use <tt><span style='font-size:10.0pt'>lpq</span></tt> (this
+automatically selects the first available printer among those physically in the
+lab). </p>
+
+<p style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>To
+print, assume that you have saved your work in <tt><span style='font-size:10.0pt'>~/u6001/work/project0.scm</span></tt>.
+Then go to <tt><span style='font-size:10.0pt'>xterm</span></tt> and type the
+following </p>
+
+<pre style='text-align:justify'>cd ~/u6001/work&nbsp;&nbsp; (to connect to this directory)</pre><pre
+style='text-align:justify'>ls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (make sure the file you want is in fact there)</pre><pre
+style='text-align:justify'>lpr project0.scm</pre><pre style='text-align:justify'>lpq&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (to check the status of your print job)</pre>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>To
+remove a job, use <tt><span style='font-size:10.0pt'>lprm job-number</span></tt>.
+</p>
+
+<p style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>If
+you are working on Athena (as opposed to in the 6.001 Lab), you may use <tt><span
+style='font-size:10.0pt'>cview printers</span></tt> to get a list of available
+printers. This can be done from an <tt><span style='font-size:10.0pt'>xterm</span></tt>
+window. To queue a print job, use </p>
+
+<pre style='text-align:justify'>lpr -P <b>printername</b> <b>filename</b></pre>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>or
+if you prefer </p>
+
+<pre style='text-align:justify'>&nbsp;</pre><pre style='text-align:justify'>lpr -P <b>printername</b>2 <b>filename</b></pre>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>which
+will print things two-sided rather than single-sided. </p>
+
+<h2 style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Part
+4: Documentation and Administrative Questions</h2>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Explore
+the 6.001 webpages to find the answers to the following questions. Add your
+answers to these questions to your project 0 solutions write-up.</p>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>&nbsp;<b><o:p></o:p></b></p>
+
+<ol style='margin-top:0in' start=1 type=1>
+ <li class=MsoNormal style='text-align:justify;mso-list:l3 level1 lfo5;
+     tab-stops:list .5in left 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>Referring
+     to the course policy on collaboration, describe the policy on the use of
+     &#8220;bibles.&#8221;<o:p></o:p></b></li>
+</ol>
+
+<p class=MsoNormal style='margin-left:.25in;text-align:justify;text-indent:
+3.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>&nbsp;<o:p></o:p></b></p>
+
+<ol style='margin-top:0in' start=2 type=1>
+ <li class=MsoNormal style='text-align:justify;mso-list:l3 level1 lfo5;
+     tab-stops:list .5in left 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>List
+     three people with whom you might collaborate on projects this term. You
+     are not required to actively collaborate with these people, we just want
+     you to start thinking about what collaboration means in this course. <o:p></o:p></b></li>
+</ol>
+
+<p class=MsoNormal style='margin-left:.25in;text-align:justify;text-indent:
+3.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>&nbsp;<o:p></o:p></b></p>
+
+<ol style='margin-top:0in' start=3 type=1>
+ <li class=MsoNormal style='text-align:justify;mso-list:l3 level1 lfo5;
+     tab-stops:list .5in left 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>Locate
+     the list of announcements for the class. What do these announcements say
+     about recitation attendance during the first week of classes?<o:p></o:p></b></li>
+</ol>
+
+<p class=MsoNormal style='margin-left:.25in;text-align:justify;text-indent:
+3.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>&nbsp;<o:p></o:p></b></p>
+
+<ol style='margin-top:0in' start=4 type=1>
+ <li class=MsoNormal style='text-align:justify;mso-list:l3 level1 lfo5;
+     tab-stops:list .5in left 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>What
+     are the three methods for controlling complexity described in the learning
+     objectives section of the course objectives and outcomes? List one example
+     from each category. <o:p></o:p></b></li>
+</ol>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>&nbsp;<o:p></o:p></b></p>
+
+<ol style='margin-top:0in' start=5 type=1>
+ <li class=MsoNormal style='text-align:justify;mso-list:l3 level1 lfo5;
+     tab-stops:list .5in left 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>If
+     you go to the online version of the textbook, what year was this version
+     published?<o:p></o:p></b></li>
+</ol>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>&nbsp;<o:p></o:p></b></p>
+
+<ol style='margin-top:0in' start=6 type=1>
+ <li class=MsoNormal style='text-align:justify;mso-list:l3 level1 lfo5;
+     tab-stops:list .5in left 45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>What
+     are the dates for the two quizzes this term?<o:p></o:p></b></li>
+</ol>
+
+<p class=MsoNormal style='margin-left:.25in;text-align:justify;text-indent:
+3.0pt;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'><b>&nbsp;<o:p></o:p></b></p>
+
+<h3 style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Submission</h3>
+
+<p class=MsoNormal style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Once
+you have completed this introductory project, your file should be <b>submitted
+electronically on the tutor</b>, using the <tt><span style='font-size:10.0pt'>Submit
+Project Files</span></tt> button. Remember that this is Project 0; when you are
+have completed all the work and saved it in a file, upload that file and submit
+it for Project 0. </p>
+
+<h3 style='text-align:justify;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt'>Congratulations!
+You have reached the end of Project 0!</h3>
+
+</div>
+
+</body>
+
+</html>
