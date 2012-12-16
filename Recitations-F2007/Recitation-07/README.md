@@ -45,9 +45,7 @@ List Functions
 Exercises
 ---------
 
-(1) Write a function **occurrences** that takes a number and a list and counts the number 
-    of times the number appears in the list. Write two version -- one that uses "filter" and 
-    one that uses "fold-right". For example:
+(1) Write a function **occurrences** that takes a number and a list and counts the number of times the number appears in the list. Write two version -- one that uses **filter** and one that uses **fold-right**. For example:
 
 ```scheme
 (occurrences 1 (list 1 2 1 1 3)) 
@@ -76,8 +74,7 @@ Now say we want a function **apply-procs** that behaves as follows:
 
 Write a definition for "apply-procs" using "map".
 
-(4) Suppose **x** is bound to the list ```(1 2 3 4 5 6 7)```. Using **map**, **filter** and/or **fold-right**, 
-    write an expression involving ```x``` that returns:
+(4) Suppose **x** is bound to the list ```(1 2 3 4 5 6 7)```. Using **map**, **filter** and/or **fold-right**, write an expression involving ```x``` that returns:
 
 (a) ```(1 4 9 16 25 36 49)```
 
