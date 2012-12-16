@@ -19,21 +19,21 @@ We are going to begin by modeling how far a baseball can travel -- the same phys
 
 Write a procedure that takes as input values for a, v, u and t, and returns as output the position of the baseball at time t:
 
-<pre>
+```scheme
 (define position 
   (lambda (a v u t)
      YOUR-CODE-HERE))
-</pre>
+```
 
 Test your position code for at least the following cases:
 
-<pre>
+```scheme
 (position 0 0 0 0)     ;; --> 0
 (position 0 0 20 0)    ;; --> 20
 (position 0 5 10 10)   ;; --> 60
 (position 2 2 2 2)     ;; --> ?
 (position 5 5 5 5)     ;; --> ?
-</pre>
+```
 
 The template code file `basebot.scm` will have these tests, and other test cases for other procedures, which you should run (you can add/show your output values). In addition, you should add some test cases of your own to these to cover other boundary and typical conditions.
 
@@ -42,7 +42,7 @@ Problem 2: Basic Math
 
 One of our goals is to determine how far a baseball will travel in the air, if it is hit with some initial velocity at some initial angle with respect to the ground. To do this, we will need to know when the baseball hits the ground, and for that we'll want to find when the y coordinate of the baseball's position reaches zero. This can be discovered by finding the roots of the y position equation, and selecting the one that is larger (later in time). The proper tool for this is the quadratic formula. Given the coefficients of the quadratic equation az^2 + bz + c = 0, write a procedure to find one of the roots (call this `root1`), and another procedure to find the other root (call this `root2`).
 
-<pre>
+```scheme
 (define root1
   (lambda (a b c)
     YOUR-CODE-HERE))
@@ -50,7 +50,7 @@ One of our goals is to determine how far a baseball will travel in the air, if i
 (define root2
   (lambda (a b c)
     YOUR-CODE-HERE))
-</pre>
+```
 
 You may notice that, depending on how you wrote your procedures, for some test cases you get an error. For example, try `(root1 5 3 6)`. What happens? If you get an error, which is likely if you wrote your code the straightforward way, figure out how to change it so that your procedure returns a false value in those cases where there is not a valid solution.
 
@@ -59,19 +59,19 @@ Problem 3: Flight Time
 
 Given an initial upward velocity (in meters per second, or m/s) and initial elevation or height (in meters, or m), write a procedure that computes how long the baseball will be in flight. Remember that gravity is a downward acceleration of 9.8 m/s^2. Note that to solve this you will need a root of a quadratic equation. Try using `root1`, and using `root2`. Only one of these solutions makes sense. Which one? And why? Use this to create a correct version of the procedure below.
 
-<pre>
+```scheme
 (define time-to-impact
   (lambda (vertical-velocity elevation)
     YOUR-CODE-HERE))
-</pre>
+```
 
 In some cases, we may want to know how long it takes for the ball to drop to a particular height, other than 0. Using your previous procedure as a template, write a procedure that computes the time for the ball to reach a given target elevation.
 
-<pre>
+```scheme
 (define time-to-height
   (lambda (vertical-velocity elevation target-elevation)
     YOUR-CODE-HERE))
-</pre>
+```
 
 Problem 4: Flight Distance
 -------------------------- 
@@ -84,19 +84,19 @@ Suppose the baseball is hit with some velocity v, at a starting angle `alpha` re
 
 Checking the Scheme manual, you will find procedures `sin` and `cos`. To use these (which require angles in radians rather than degrees), you may also find the procedure `degree2radian` useful. It is given below:
 
-<pre>
+```scheme
 (define degree2radian
   (lambda (deg)
     (/ (* deg pi) 180.)))
-</pre>
+```
 
 Write a procedure `travel-distance-simple` that returns the lateral distance the baseball thrown with given velocity, angle and initial elevation will travel before hitting the ground. 
 
-<pre>
+```scheme
 (define travel-distance-simple
   (lambda (elevation velocity angle)
     YOUR-CODE-HERE))
-</pre>
+```
 
 Try this out for some values. Note that we are doing everything in metric units (distances in meters, weight in kilograms). You may be more accustomed to thinking about baseball in English units (e.g., feet). So we have created some simple procedures to convert feet to meters and <i>vice versa</i> (see the code file for details).
 
@@ -109,11 +109,11 @@ Problem 5: What's the best angle to hit?
 
 Before we figure out why professional players don't normally hit 700 foot home runs, let's first see if we can find out the optimal angle at which to launch a baseball, in order to have it travel the furthest. Write a procedure `find-best-angle` that takes as arguments an initial elevation and an initial velocity, and which finds the best angle at which to hit the baseball to optimize distance traveled. You will probably want to write a recursive procedure that tries different angles between 0 and pi/2 radians, sampled every 0.01 radian (say) or between 0 and 90 degrees, sampled every 1 degree (depending on whether your code works in radians or degrees -- either way be sure that you provide the right kind of unit to your trigonometric functions).
 
-<pre>
+```scheme
 (define find-best-angle 
   (lambda (velocity elevation)
     YOUR-CODE-HERE))
-</pre>
+```
 
 Use this for some sample values of elevation and velocity. What conclusion can you reach about the optimal angle of hitting?
 
