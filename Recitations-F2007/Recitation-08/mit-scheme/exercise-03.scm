@@ -136,7 +136,7 @@ env
 ;;
 ;; Now to answer the question:
 ;;
-(define (eval exp env)
+(define (eval-boolean exp env)
   ;; return the boolean value of the argument symbol
   (define (boolean-value sym)
     (if (variable? sym)
@@ -164,34 +164,34 @@ env
 ;;
 ;; Let's test it using the boolean expression constructors we have defined:
 ;;
-(eval (make-and 'a 'b) env)
+(eval-boolean (make-and 'a 'b) env)
 ;; ==> #t
-(eval (make-or 'a 'b) env)
+(eval-boolean (make-or 'a 'b) env)
 ;; ==> #t
-(eval (make-not 'a) env)
+(eval-boolean (make-not 'a) env)
 ;; ==> #f
-(eval (make-not 'b) env)
+(eval-boolean (make-not 'b) env)
 ;; ==> #f
 
-(eval (make-and 'a 'c) env)
+(eval-boolean (make-and 'a 'c) env)
 ;; ==> #f
-(eval (make-or 'a 'c) env)
+(eval-boolean (make-or 'a 'c) env)
 ;; ==> #t
-(eval (make-and 'a 'd) env)
+(eval-boolean (make-and 'a 'd) env)
 ;; ==> #[error]
 
-(eval (make-and 'a #t) env)
+(eval-boolean (make-and 'a #t) env)
 ;; ==> #t
-(eval (make-and 'a 1) env)
+(eval-boolean (make-and 'a 1) env)
 ;; ==> #t
-(eval (make-and 'a 0) env)
+(eval-boolean (make-and 'a 0) env)
 ;; ==> #t 
 ;; Note that "0" is not false in Scheme!
 (if 0 1 2)
 ;; ==> 1 
 ;; i.e., "0" evaluates to "true"
 
-(eval (make-and 'a #f) env)
+(eval-boolean (make-and 'a #f) env)
 ;; ==> #f
-(eval (make-and 'a '()) env)
+(eval-boolean (make-and 'a '()) env)
 ;; ==> #f
