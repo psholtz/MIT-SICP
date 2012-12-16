@@ -9,7 +9,7 @@ Working Definitions
 -------------------
 
 **Lisp-style Definitions**
-<pre>
+```clojure
 (ns sicp.clojure.lisp)
 
 (defn make-units [C L H] (list C L H))
@@ -29,7 +29,7 @@ Working Definitions
 
 (defn same-class? [c1 c2]
   (= (get-class-number c1) (get-class-number c2)))
-</pre>
+```
 
 **Clojure-style Definitions**
 <pre>
