@@ -15,7 +15,7 @@ Exercises
 
 (1) Consider the following definitions:
 
-<pre>
+```scheme
 (define (our-display x)
         (display x)      ;; this prints x to the console
         x)               ;; this returns x as the value
@@ -29,7 +29,7 @@ Exercises
   (cond ((= x 0) 0)
         (else (count2 (- x 1))
               (our-display x))))
-</pre>
+```
 
 What will `(count1 4)` and `(count2 4)` display?
 
