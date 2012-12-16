@@ -123,13 +123,13 @@ At the beginning of an iterated game, each history is an empty list. As the game
 
 The values from the game matrix are stored in a list named "game-association-list". This list is used to calculate the scores at the end of the iterated game.
 
-<pre>
+```scheme
 (define *game-association-list*
  (list (list (list "c" "c") (list 3 3))
        (list (list "c" "d") (list 0 5))
        (list (list "d" "c") (list 5 0))
        (list (list "d" "d") (list 1 1)))) 
-</pre>
+```
 
 Thus if both players cooperate, the payoff to each player is 3, if one player cooperates and the other defects, the defecting player gets a payoff of 5, the cooperating player gets a zero payoff, if both players defect, each gets a payoff of 1.
 
@@ -142,12 +142,12 @@ To be able to test out the system, we need to complete a definition for "extract
 
 For example, we expect the following behavior:
 
-<pre>
+```scheme
 (define a-play (make-play "c" "d"))
 
 (extract-entry a-play *game-association-list*)
 ;Value: (("c" "d") (0 5))
-</pre>
+```
 
 Write the procedure "extract-entry" and test it out using the above case *game-assocation-list*. Turn in a copy of your documented procedure and some test examples. You may want to use a diagram of the list structure to guide the creation of your code.
 
@@ -163,7 +163,7 @@ Games involving "Egalitarian" tend to be slower than other games. Why is that so
 
 Alyssa P. Hacker, upon seeing the code for "Egalitarian", suggested the following iterative version of the procedure:
 
-<pre>
+```scheme
 (define (Egalitarian my-history other-history)
   (define (majority-loop cs ds hist)
     (cond ((empty-history? hist) (if (> ds cs) "d" "c"))
@@ -172,7 +172,7 @@ Alyssa P. Hacker, upon seeing the code for "Egalitarian", suggested the followin
           (else
            (majority-loop cs (+ 1 ds) (rest-of-plays hist)))))
   (majority-loop 0 0 other-history))
-</pre>
+```
 
 Compare this procedure with the original version. Do the orders of growth (in time) for the two procedures differ? Is the newer version faster?
 
@@ -259,7 +259,7 @@ Revise the Scheme code for the two-player game to make a three-player iterated g
 
 You also need to change **game-association-list** as follows:
 
-<pre>
+```scheme
 (define *game-association-list*
  (list (list (list "c" "c" "c") (list 4 4 4))
        (list (list "c" "c" "d") (list 2 2 5))
@@ -269,7 +269,7 @@ You also need to change **game-association-list** as follows:
        (list (list "d" "c" "d") (list 3 0 3))
        (list (list "d" "d" "c") (list 3 3 0))
        (list (list "d" "d" "d") (list 1 1 1))))
-</pre>
+```
 
 Problem 10
 ---------- 
@@ -283,22 +283,22 @@ Problem 11
 
 Write a procedure **make-combined-strategies** which takes as input two *two-player* strategies and a "combining" procedure. **Make-combined-strategies** should return a *three-player* strategy that plays one of the two-player strategies against the other opponent, and the other two-player strategy against the other opponent, then calls the "combining" procedure on the two two-player results. Here's an example: this call to **make-combined-strategies** returns a strategy equivalent to **tough-Eye-for-Eye** in Problem 10.
 
-<pre>
+```scheme
 (make-combined-strategies
  Eye-for-Eye Eye-for-Eye
  (lambda (r1 r2) (if (or (string=? r1 "d") (string=? r2 "d")) "d" "c")))
-</pre>
+```
 
 The resulting strategy plays **Eye-for-Eye** against each opponent, and then calls the combining procedure on the two results. If either of the two two-player strategies has returned "d", then the three-player strategy will also return "d".
 
 
 Here's another example. This call to **make-combined-strategies** returns a three-player strategy that plays **Eye-for-Eye** against one oppoennt, **Egalitarian** against another, and chooses randomly between the two results:
 
-<pre>
+```scheme
 (make-combined-strategies
  Eye-for-Eye Egalitarian
  (lambda (r1 r2) (if (= (random 2) 0) r1 r2)))
-</pre>
+```
 
 Problem 12
 ---------- 
@@ -335,7 +335,7 @@ Once you have designed your data abstraction, build a procedure that takes the t
 
 REMEMBER: the goal of our data structure is to correlate player-0's behavior on round n, with player-1 and player-2's behavior on round n-1. For example, the result of an implementation, call it **make-history-summary**, on an example set of histories is shown below:
 
-<pre>
+```scheme
 (define summary (make-history-summary
 	(list "c" "c" "d" "d" "c" "d" "c" "c")   ;; hist-0
 	(list "c" "c" "c" "d" "d" "c" "d" "c")   ;; hist-1
@@ -343,7 +343,7 @@ REMEMBER: the goal of our data structure is to correlate player-0's behavior on 
 
 summary
 ; Value: ((3 0 3) (1 1 2) (0 2 2))
-</pre>
+```
 
 To help you decode this result, first remember that since we are going to compare the decision for, say, the most recent round in the first history, this means we compare that value ("c") against the values of the previous round in the other two histories (also both "c"), or we compare the value in the previous round ("c") against the values in the preceding round of the other two histories (a "c" and a "d"). As a result of this process, the first list in this summary describes what player-0 did on a round immediately after both opponents cooperated, in this case she cooperated 3 times, and never defected. The second list describes what player-0 did on a round immediately after one opponent cooperated and one defected, in this case she coopearted once and defected once; and the final list describes what player-0 did on a round immediately after both opponents defected, in this case she defected twice and never cooperated. Note that there are only 7 cases counted, since we compare the result on one round against the opponent's decisions on the previous round.
 
@@ -352,7 +352,7 @@ Problem 13
 
 Finally, using this data structure, we can build a new procedure that will return a list of three numbers: the probability that the **hist-0** player cooperates given that the other two players cooperated on the previous round, the probability that the **hist-0** players cooperates given that only one other player cooperated on the previous round, and the probability that the **hist-0** player cooperates given that both others defected on the previous round. To fill out some details in this picture, let's look at a couple of examples. We will call our procedure **get-probability-of-c**: here are a couple of sample calls:
 
-<pre>
+```scheme
 (define summary (make-history-summary
 	(list "c" "c" "c" "c")		;; hist-0
 	(list "d" "d" "d" "c")		;; hist-1
@@ -368,7 +368,7 @@ Finally, using this data structure, we can build a new procedure that will retur
 
 (get-probability-of-c new-summary)
 ; Value: (1.0 0.5 ())
-</pre>
+```
 
 In the top example, the returned list indicates that the first player cooperates with probability 1 no matter what the other two players do. In the bottom example, the first player cooperates with probability 1.0 when the other two players cooperate; the first player cooperates with probability 0.5 when one of the other two players defects, and since we have no data regarding what happens when both of the other players defect, our procedure returns () for that case.
 
@@ -379,7 +379,7 @@ Problem 14
 
 Using this procedure, you should able be able to write some predicate procedures that help in deciphering another player's strategy. For instance, we can use **get-probability-of-c** to record the behavior of an opponent. We could then compare this against what we would expect for a behavior to see if they match. Thus, the first procedure tests to see if two lists are the same. Using this we could check to see if an opponent is a fool by seeing if he always cooperates (i.e., the observed behavior would be a "c" for cooperate in all cases).
 
-<pre>
+```scheme
 (define (test-entry index trial)
  (cond ((null? index)
         (null? trial))
@@ -400,6 +400,6 @@ Using this procedure, you should able be able to write some predicate procedures
 		   	 ((= elt 1) 1)
 			 (else 0)))
 	        (get-probability-of-c (make-history-summary hist0 hist1 hist2)))))
-</pre>
+```
 
 Use the **get-probability-of-c** procedure to write a predicate that tests whether another player is using the **soft-Eye-for-eye** strategy from Problem 10. Also, write a new strategy named **dont-tolerate-fools**. This strategy should cooperate for the first ten rounds; on subsequent rounds it checks (on each round) to see whether the other players might both be playing **Patsy**. If our strategy finds that both our players seem to be cooperating uniformly, it defects; otherwise, it cooperates. 
