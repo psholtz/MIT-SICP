@@ -137,9 +137,61 @@ env
 ;; Now to answer the question:
 ;;
 (define (eval exp env)
-  (define (eval-iter working)
-    '())
-  (eval-iter exp))
+  ;; return the boolean value of the argument symbol
+  (define (boolean-value sym)
+    (if (variable? sym)
+	(variable-value sym env)
+	(not (or (null? sym) (eq? sym #f)))))
 
-(define (eval-boolean exp env)
-  '())
+  ;; evaluate the boolean expression
+  (cond ((or? exp)
+	 (let ((first (or-first exp))
+	       (second (or-second exp)))
+	   (or (boolean-value first) (boolean-value second))))
+
+	((and? exp)
+	 (let ((first (and-first exp))
+	       (second (and-second exp)))
+	   (and (boolean-value first) (boolean-value second))))
+
+	((not? exp)
+	 (let ((first (not-first exp)))
+	   (not (boolean-value first))))
+
+	(else
+	 (error "EVAL - expression is not a boolean expression: " exp))))
+
+;;
+;; Let's test it using the boolean expression constructors we have defined:
+;;
+(eval (make-and 'a 'b) env)
+;; ==> #t
+(eval (make-or 'a 'b) env)
+;; ==> #t
+(eval (make-not 'a) env)
+;; ==> #f
+(eval (make-not 'b) env)
+;; ==> #f
+
+(eval (make-and 'a 'c) env)
+;; ==> #f
+(eval (make-or 'a 'c) env)
+;; ==> #t
+(eval (make-and 'a 'd) env)
+;; ==> #[error]
+
+(eval (make-and 'a #t) env)
+;; ==> #t
+(eval (make-and 'a 1) env)
+;; ==> #t
+(eval (make-and 'a 0) env)
+;; ==> #t 
+;; Note that "0" is not false in Scheme!
+(if 0 1 2)
+;; ==> 1 
+;; i.e., "0" evaluates to "true"
+
+(eval (make-and 'a #f) env)
+;; ==> #f
+(eval (make-and 'a '()) env)
+;; ==> #f
