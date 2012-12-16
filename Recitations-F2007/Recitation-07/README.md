@@ -4,7 +4,7 @@ Recitation 7 - Fall 2007 ([PDF](http://people.csail.mit.edu/jastr/6001/fall07/r0
 List Functions
 -------------- 
 
-<pre>
+```scheme
 (define (length lst)
  (if (null? lst)
   0
@@ -40,7 +40,7 @@ List Functions
   lst2
   (cons (car lst)
         (append (cdr lst1) lst2))))
-</pre>
+```
 
 Exercises
 ---------
@@ -49,7 +49,7 @@ Exercises
     of times the number appears in the list. Write two version -- one that uses "filter" and 
     one that uses "fold-right". For example:
 
-<pre>
+```scheme
 (occurrences 1 (list 1 2 1 1 3)) ==> 3
 </pre>
 
@@ -62,16 +62,16 @@ Exercises
 (define (double x) (* x 2))
 (define (inc x) (+ x 1))
 (define ls (list square double inc))
-</pre>
+```
 
 Now say we want a function "apply-procs" that behaves as follows:
 
-<pre>
+```scheme
 (apply-procs ls 4)
 ==> ((square 4) (double 4) (inc 4)) ==> (16 8 5)
 (apply-procs ls 3)
 ==> ((square 3) (double 3) (inc 3)) ==> (9 6 4)
-</pre>
+```
 
 Write a definition for "apply-procs" using "map".
 
