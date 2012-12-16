@@ -31,23 +31,23 @@ Exercises
 
 (2) What is the order of growth of the following procedure to calculate b^n by repeated multiplication?
 
-<pre>
+```scheme
 (define (expt b n)
  (if (= n 0)
      1
      (* b (expt b (- n 1)))))
-</pre>
+```
 
 Running time? Space?
 
 (2) What is the order of growth of the following procedure to calculate b^n by repeated multiplication?
 
-<pre>
+```scheme
 (define (expt b n)
  (if (= n 0)
      1
      (* b (expt b (- n 1)))))
-</pre>
+```
 
 Running time? Space? 
 
@@ -59,12 +59,12 @@ Running time? Space?
 
 (6) Consider the recursive definition of factorial we've seen before:
 
-<pre>
+```scheme
 (define (fact n)
  (if (= n 0)
      1 
      (* n (fact (- n 1)))))
-</pre>
+```
 
 Running time? Space?
 
