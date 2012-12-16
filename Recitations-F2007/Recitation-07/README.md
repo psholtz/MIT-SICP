@@ -72,7 +72,7 @@ Now say we want a function **apply-procs** that behaves as follows:
 ;; ==> ((square 3) (double 3) (inc 3)) ==> (9 6 4)
 ```
 
-Write a definition for "apply-procs" using "map".
+Write a definition for **apply-procs** using **map**.
 
 (4) Suppose **x** is bound to the list ```(1 2 3 4 5 6 7)```. Using **map**, **filter** and/or **fold-right**, write an expression involving ```x``` that returns:
 
