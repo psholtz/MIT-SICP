@@ -7,7 +7,7 @@ Core code that is used throughout these examples:
 
 **Data Structures**
 
-<pre>
+```scheme
 (define (make-units C L H)
  (list C L H))
 (define get-units-C car)
@@ -35,10 +35,10 @@ Core code that is used throughout these examples:
 ;;
 (define (same-class? c1 c2)
  (equal? (get-class-number c1) (get-class-number c2)))
-</pre>
+```
 
 **HOPs**
-<pre>
+```scheme
 (define (make-student number schedule-checker)
  (list number (list) schedule-checker))
 (define get-student-number car)
@@ -51,4 +51,4 @@ Core code that is used throughout these examples:
            schedule
            (get-student-checker student))
      (error "invalid schedule")))
-</pre>
+```
