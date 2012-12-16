@@ -32,7 +32,7 @@ Core code that is used throughout these examples:
 
 **HOPs**
 
-<pre>
+```lisp
 (defun make-student (number schedule-checker)
  (list number (list) schedule-checker))
 (defun get-student-number (x) (car x))
@@ -49,4 +49,4 @@ Core code that is used throughout these examples:
             schedule
 	    test-function)
        (error "Invalid schedule!"))))
-</pre>
+```
