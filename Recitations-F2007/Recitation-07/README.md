@@ -4,7 +4,7 @@ Recitation 7 - Fall 2007 ([PDF](http://people.csail.mit.edu/jastr/6001/fall07/r0
 List Functions
 -------------- 
 
-<pre>
+```scheme
 (define (length lst)
  (if (null? lst)
   0
@@ -40,56 +40,54 @@ List Functions
   lst2
   (cons (car lst)
         (append (cdr lst1) lst2))))
-</pre>
+```
 
 Exercises
 ---------
 
-(1) Write a function "occurrences" that takes a number and a list and counts the number 
-    of times the number appears in the list. Write two version -- one that uses "filter" and 
-    one that uses "fold-right". For example:
+(1) Write a function **occurrences** that takes a number and a list and counts the number of times the number appears in the list. Write two version -- one that uses **filter** and one that uses **fold-right**. For example:
 
-<pre>
-(occurrences 1 (list 1 2 1 1 3)) ==> 3
-</pre>
+```scheme
+(occurrences 1 (list 1 2 1 1 3)) 
+;; ==> 3
+```
 
-(2) Define "length" using a higher order list procedure.
+(2) Define **length** using a higher order list procedure.
 
-(3) Define "ls" to be a list of "procedures":
+(3) Define **ls** to be a list of "procedures":
 
-<pre>
+```scheme
 (define (square x) (* x x))
 (define (double x) (* x 2))
 (define (inc x) (+ x 1))
 (define ls (list square double inc))
-</pre>
+```
 
-Now say we want a function "apply-procs" that behaves as follows:
+Now say we want a function **apply-procs** that behaves as follows:
 
-<pre>
+```scheme
 (apply-procs ls 4)
-==> ((square 4) (double 4) (inc 4)) ==> (16 8 5)
+;; ==> ((square 4) (double 4) (inc 4)) ==> (16 8 5)
 (apply-procs ls 3)
-==> ((square 3) (double 3) (inc 3)) ==> (9 6 4)
-</pre>
+;; ==> ((square 3) (double 3) (inc 3)) ==> (9 6 4)
+```
 
-Write a definition for "apply-procs" using "map".
+Write a definition for **apply-procs** using **map**.
 
-(4) Suppose "x" is bound to the list (1 2 3 4 5 6 7). Using "map", "filter" and/or "fold-right", 
-    write an expression involving "x" that returns:
+(4) Suppose **x** is bound to the list ```(1 2 3 4 5 6 7)```. Using **map**, **filter** and/or **fold-right**, write an expression involving ```x``` that returns:
 
-(a) (1 4 9 16 25 36 49)
+(a) ```(1 4 9 16 25 36 49)```
 
-(b) (1 3 5 7)
+(b) ```(1 3 5 7)```
 
-(c) ((1 1) (2 2) (3 3) (4 4) (5 5) (6 6) (7 7))
+(c) ```((1 1) (2 2) (3 3) (4 4) (5 5) (6 6) (7 7))```
 
-(d) ((2) ((4) ((6) ())))
+(d) ```((2) ((4) ((6) ())))```
 
-(e) The maximum element of x: 7
+(e) The maximum element of x: ```7```
 
-(f) List of last element of x: (7)
+(f) List of last element of x: ```(7)```
 
-(g) The list in reverse order: (7 6 5 4 3 2 1)
+(g) The list in reverse order: ```(7 6 5 4 3 2 1)```
 
 (h) Bonus: reverse a list in less than O(n^2) time.

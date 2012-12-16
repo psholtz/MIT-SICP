@@ -10,7 +10,7 @@ Working Definitions
 
 **Python Definitions**
 
-<pre>
+```python
 def make_units(C,L,H):
   return [C,L,H]
 def get_units_C(x):
@@ -33,4 +33,4 @@ def get_class_total_units(klass):
 
 def same_class(klass1,klass2):
   return get_class_number(klass1) == get_class_number(klass2)
-</pre>
+```
