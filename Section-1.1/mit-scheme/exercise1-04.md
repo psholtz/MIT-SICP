@@ -5,10 +5,10 @@ Observe that our model of evaluation allows for combinations whose operators are
 
 Use this observation to describe the behavior of the following procedure:
 
-<pre>
+```scheme
 (define (a-plus-abs-b a b)
 	((if (> b 0) + -) a b))
-</pre>
+```
 
 Solution
 -------- 
