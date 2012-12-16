@@ -7,7 +7,7 @@ Core code that is used throughout these examples:
 
 **Data Structures**
 
-```emacs
+```lisp
 (defun make-units (C L H)
  (list C L H))
 (defun get-units-C (x) (car x))
