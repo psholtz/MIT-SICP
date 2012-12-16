@@ -7,7 +7,7 @@ Core code that is used throughout these examples:
 
 **Data Structures**
 
-<pre>
+```emacs
 (defun make-units (C L H)
  (list C L H))
 (defun get-units-C (x) (car x))
@@ -28,7 +28,7 @@ Core code that is used throughout these examples:
 
 (defun same-class? (c1 c2)
  (equal (get-class-number c1) (get-class-number c2)))
-</pre>
+```
 
 **HOPs**
 
