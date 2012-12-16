@@ -56,6 +56,25 @@
 (define (make-scheme-number n)
   ((get 'tag 'scheme-number) n))
 
+;;
+;; Unit tests:
+;;
+(define s1 (make-scheme-number 1))
+;; ==> (scheme-number . 1)
+(define s2 (make-scheme-number 2))
+;; ==> (scheme-number . 2)
+
+(add s1 s2)
+;; ==> (scheme-number . 3)
+(sub s1 s2) 
+;; ==> (scheme-number . -1)
+(mul s1 s2)
+;; ==> (scheme-number . 2)
+(div s1 s2)
+;; ==> (scheme-number . 1/2)
+(div s2 s1)
+;; ==> (scheme-number . 2)
+
 ;; ================ 
 ;; Rational Numbers
 ;; ================
@@ -75,7 +94,7 @@
 		 (* (numer y) (denom x)))
 	      (* (denom x) (denom y))))
   (define (mul-rat x y)
-    (make-rat (* (numer x) (number y))
+    (make-rat (* (numer x) (numer y))
 	      (* (denom x) (denom y))))
   (define (div-rat x y)
     (make-rat (* (numer x) (denom y))
@@ -98,6 +117,25 @@
 (define (make-rational n d)
   ((get 'make 'rational) n d))
 
+;;
+;; Unit tests:
+;;
+(define r1 (make-rational 1 2))
+;; ==> (rational 1 . 2)
+(define r2 (make-rational 2 3))
+;; ==> (rational 2 . 3)
+
+(add r1 r2)
+;; ==> (rational 7 . 6)
+(sub r1 r2)
+;; ==> (rational -1 . 6)
+(mul r1 r2)
+;; ==> (rational 1 . 3)
+(div r1 r2)
+;; ==> (rational 3 . 4)
+(div r2 r1)
+;; ==> (rational 4 . 3)
+
 ;; ===============
 ;; Complex Numbers
 ;; ===============
@@ -105,7 +143,7 @@
   ;; internal procedures
   (define (real-part z) (car z))
   (define (imag-part z) (cdr z))
-  (define (make-from-real-iamg x y) (cons x y))
+  (define (make-from-real-imag x y) (cons x y))
   (define (magnitude z)
     (sqrt (+ (square (real-part z))
 	     (square (imag-part z)))))
@@ -121,7 +159,7 @@
   (put 'magnitude '(rectangular) magnitude)
   (put 'angle '(rectangular) angle)
   (put 'make-from-real-imag 'rectangular
-       (lambda (x y) (tag (make-from-real-iamg x y))))
+       (lambda (x y) (tag (make-from-real-imag x y))))
   (put 'make-from-mag-ang 'rectangular 
        (lambda (r a) (tag (make-from-mag-ang r a))))
   'done)
@@ -153,7 +191,7 @@
 
 (define (install-complex-package)
   ;; constructors
-  (define (make-from-rect-imag x y)
+  (define (make-from-real-imag x y)
     ((get 'make-from-real-imag 'rectangular) x y))
   (define (make-from-mag-ang r a)
     ((get 'make-from-mag-ang 'polar) r a))
@@ -187,6 +225,12 @@
        (lambda (x y) (tag (make-from-real-imag x y))))
   (put 'make-from-real-nag 'complex
        (lambda (r a) (tag (make-from-mag-ang r a))))
+
+  (put 'real-part '(complex) real-part)
+  (put 'imag-part '(complex) imag-part)
+  (put 'magnitude '(complex) magnitude)
+  (put 'angle '(complex) angle)
+
   'done)
 
 (define (make-complex-from-real-imag x y)
