@@ -51,13 +51,13 @@ Exercises
 
 ```scheme
 (occurrences 1 (list 1 2 1 1 3)) ==> 3
-</pre>
+```
 
 (2) Define "length" using a higher order list procedure.
 
 (3) Define "ls" to be a list of "procedures":
 
-<pre>
+```scheme
 (define (square x) (* x x))
 (define (double x) (* x 2))
 (define (inc x) (+ x 1))
@@ -68,9 +68,9 @@ Now say we want a function "apply-procs" that behaves as follows:
 
 ```scheme
 (apply-procs ls 4)
-==> ((square 4) (double 4) (inc 4)) ==> (16 8 5)
+;; ==> ((square 4) (double 4) (inc 4)) ==> (16 8 5)
 (apply-procs ls 3)
-==> ((square 3) (double 3) (inc 3)) ==> (9 6 4)
+;; ==> ((square 3) (double 3) (inc 3)) ==> (9 6 4)
 ```
 
 Write a definition for "apply-procs" using "map".
