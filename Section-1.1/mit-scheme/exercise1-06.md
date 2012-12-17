@@ -48,10 +48,10 @@ arguments.
 Evaluation of the `(good-enough? 1.0 2.0)` operand is straightforward enough:
 ```scheme
 (good-enough? 1.0 2.0)
-(&lt; (abs (- (square 1.0) 2.0)) 0.001)
-(&lt; (abs (- 1.0 2.0)) 0.001)
-(&lt; (abs -1.0) 0.001)
-(&lt; 1.0 0.001)
+(< (abs (- (square 1.0) 2.0)) 0.001)
+(< (abs (- 1.0 2.0)) 0.001)
+(< (abs -1.0) 0.001)
+(< 1.0 0.001)
 #f
 ```
 
