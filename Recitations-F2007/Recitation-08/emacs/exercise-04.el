@@ -28,7 +28,7 @@
 (eval-boolean (make-or nil t) env)
 ;; ==> t
 (eval-boolean (make-or nil nil) env)
-;; ==>
+;; ==> nil
 
 (eval-boolean (make-not t) env)
 ;; ==> nil
