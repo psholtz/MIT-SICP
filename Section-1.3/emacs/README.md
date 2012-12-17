@@ -14,7 +14,7 @@ To load the files into a running Emacs interpreter, you may have to update the l
 Lexical Scoping versus Dynamic Scoping
 -------------------------------------- 
 
-Emacs only supports dynamic binding, while the version of Scheme used in these problems, and indeed most Lisp implementations today support both lexical and dynamic binding. Some of the problem sets, beginning in this problem set onwards, require dynamic binding. Accordingly, in the emacs solutions, we "hack" our through these cases uses a combination of the "CL" Emacs Lisp package (i.e,. ```(require 'cl)```) and -- when necessary -- macros.
+Emacs only supports dynamic binding, while the version of Scheme used in SICP, and indeed most Lisp implementations today, support both lexical and dynamic binding. Some of the problem sets, beginning in this problem set onwards, require dynamic binding. Accordingly, in the emacs solutions, we "hack" our through these cases uses a combination of the "CL" Emacs Lisp package (i.e,. ```(require 'cl)```) and -- when necessary -- macros.
 
 **References**
 
