@@ -2,7 +2,11 @@
 ;; Working definitions
 ;;
 (defun variable? (exp)
-  (symbolp exp))
+  (cond ((eq exp t) nil)
+	((eq exp nil) nil)
+	((eq exp '()) nil)
+	(t
+	 (symbolp exp))))
 (defun make-variable (var)
   var)
 (defun variable-name (exp)
@@ -144,7 +148,10 @@ env
 
 ;;
 ;; The best place to respond to this token is in the 
-;; "variable-value" procedure, so we redefine it as follows:
+;; "variable-value" procedure. In addition, we also have 
+;; to check whether the submitted symbol is "t" or "'()", 
+;; since these arguments return "t" when applied to the 
+;; procedure 
 ;;
 (defun variable-value (name environment)
   (defun variable-value-iter (working)
