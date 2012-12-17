@@ -1,6 +1,11 @@
 ;;
 ;; Working definitions
 ;;
+
+;;
+;; We have to check for "true"s and "nils", since
+;; they evaluate to a true "symbolp" in emacs:
+;;
 (defun variable? (exp)
   (cond ((eq exp t) nil)
 	((eq exp nil) nil)
@@ -148,10 +153,7 @@ env
 
 ;;
 ;; The best place to respond to this token is in the 
-;; "variable-value" procedure. In addition, we also have 
-;; to check whether the submitted symbol is "t" or "'()", 
-;; since these arguments return "t" when applied to the 
-;; procedure 
+;; "variable-value" procedure, which we redefine as follows:
 ;;
 (defun variable-value (name environment)
   (defun variable-value-iter (working)
@@ -213,18 +215,17 @@ env
 ;; ==> #[error]
 
 (eval-boolean (make-and 'a t) env)
-;; ==>
+;; ==> t
 (eval-boolean (make-and 'a 1) env)
-;; ==>
+;; ==> t
 (eval-boolean (make-and 'a 0) env)
-;; ==>
+;; ==> t
 ;; Note that "0" is not false in Emacs!"
 (if 0 1 2)
 ;; ==> 1
 ;; i.e., "0" evaluates to "true"
 
 (eval-boolean (make-and 'a '()) env)
-;; ==>
+;; ==> nil
 (eval-boolean (make-and 'a nil) env)
-;; ==>
-
+;; ==> nil
