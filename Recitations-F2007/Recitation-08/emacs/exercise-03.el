@@ -181,8 +181,43 @@ env
 
 	((not? exp)
 	 (let ((first (not-first exp)))
-	   (not (boolean-avlue first))))
+	   (not (boolean-value first))))
 
 	(t
 	 (error "EVAL - expression is not a boolean expression: " exp))))
+
+;;
+;; Let's test it using the boolean expression constructors we have defined:
+;;
+(eval-boolean (make-and 'a 'b) env)
+;; ==> t
+(eval-boolean (make-or 'a 'b) env)
+;; ==> t
+(eval-boolean (make-not 'a) env)
+;; ==> nil
+(eval-boolean (make-not 'b) env)
+;; ==> nil
+
+(eval-boolean (make-and 'a 'c) env)
+;; ==> nil
+(eval-boolean (make-or 'a 'c) env)
+;; ==> t
+(eval-boolean (make-and 'a 'd) env)
+;; ==> #[error]
+
+(eval-boolean (make-and 'a t) env)
+;; ==>
+(eval-boolean (make-and 'a 1) env)
+;; ==>
+(eval-boolean (make-and 'a 0) env)
+;; ==>
+;; Note that "0" is not false in Emacs!"
+(if 0 1 2)
+;; ==> 1
+;; i.e., "0" evaluates to "true"
+
+(eval-boolean (make-and 'a '()) env)
+;; ==>
+(eval-boolean (make-and 'a nil) env)
+;; ==>
 
