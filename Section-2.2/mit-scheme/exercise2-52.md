@@ -16,7 +16,7 @@ Solution
 
 Again, define the supporting procedures:
 
-<pre>
+```scheme
 (define (make-vectors points)
  (map (lambda (p)
        (let ((x (car p))
@@ -32,11 +32,11 @@ Again, define the supporting procedures:
             (two (cadr working)))
         (make-segments-iter (cdr working) (append total (list (make-segment one two)))))))
   (make-segments-iter vectors '()))
-</pre>
+```
 
 (a) We'll add a smile:
 
-<pre>
+```scheme
 ;; define the man
 (define points
   '((0.4 0.0)
@@ -78,7 +78,7 @@ Again, define the supporting procedures:
 
 (define wave (segments->painter segments)
 (paint wave)
-</pre>
+```
 
 ![http://farm9.staticflickr.com/8482/8266809146_5eaa123dac_m.jpg](http://farm9.staticflickr.com/8482/8266809146_5eaa123dac_m.jpg)
 
@@ -88,7 +88,7 @@ Again, define the supporting procedures:
 
 The definitions of "right-split" and "up-split":
 
-<pre>
+```scheme
 (define (right-split painter n)
  (if (= n 0)
      painter
@@ -100,11 +100,11 @@ The definitions of "right-split" and "up-split":
      painter
      (let ((smaller (up-split painter (- n 1))))
       (below painter (beside smaller smaller)))))
-</pre>
+```
 
 The following is our new definition of "corner-split":
 
-<pre>
+```scheme
 (define (corner-split painter n)
  (if (= n 0)
      painter
@@ -115,7 +115,7 @@ The following is our new definition of "corner-split":
             (corner (corner-split painter (- n 1))))
        (beside (below painter top-left)
                (below bottom-right corner))))))
-</pre> 
+```
 
 ![http://farm9.staticflickr.com/8485/8265740211_bbefb512e6_m.jpg](http://farm9.staticflickr.com/8485/8265740211_bbefb512e6_m.jpg) ![http://farm9.staticflickr.com/8487/8265740233_c5b53bf88f_m.jpg](http://farm9.staticflickr.com/8487/8265740233_c5b53bf88f_m.jpg) ![http://farm9.staticflickr.com/8212/8265740243_02e0b9028b_m.jpg](http://farm9.staticflickr.com/8212/8265740243_02e0b9028b_m.jpg)
 
@@ -125,7 +125,7 @@ The following is our new definition of "corner-split":
 
 In the text, the necessary definitions are given as:
 
-<pre>
+```scheme
 (define (identity x) x)
 
 (define (square-of-four tl tr bl br)
@@ -137,15 +137,15 @@ In the text, the necessary definitions are given as:
 (define (square-limit painter n)
  (let ((combine4 (square-of-four flip-horiz identity rotate180 flip-vert)))
   (combine4 (corner-split painter n))))
-</pre>
+```
 
 To reverse the way Einstein looks, we'll reverse the way the four procedures in "combine4" are applied:
 
-<pre>
+```scheme
 (define (square-limit painter n)
  (let ((combine4 (square-of-four flip-vert rotate180 identity flip-horiz)))
   (combine4 (corner-split painter n))))
-</pre>
+```
 
 ![http://farm9.staticflickr.com/8059/8266829550_ccc1811a04_m.jpg](http://farm9.staticflickr.com/8059/8266829550_ccc1811a04_m.jpg)
 
