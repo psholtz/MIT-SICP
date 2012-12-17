@@ -12,7 +12,7 @@ Solution
 
 The first definition of "below" is given as:
 
-<pre>
+```scheme
 (define (below painter1 painter2)
  (let ((split-point (make-vert 0.0 0.5)))
   (let ((paint-bottom
@@ -28,28 +28,28 @@ The first definition of "below" is given as:
     (lambda (frame)
      (paint-bottom frame)
      (paint-top frame)))))
-</pre>
+```
 
 We paint with "wave" and "einstein":
 
-<pre>
+```scheme
 (paint (below einstein wave))
-</pre>
+```
 
 ![http://farm9.staticflickr.com/8482/8266751172_6aff18737f_m.jpg](http://farm9.staticflickr.com/8482/8266751172_6aff18737f_m.jpg)
 
 The second definition of "below" is given as:
 
-<pre>
+```scheme
 (define (below painter1 painter2)
  (rotate270 (beside (rotate90 painter2) (rotate90 painter1))))
-</pre>
+```
 
 Painting again:
 
-<pre>
+```scheme
 (paint (below einstein wave))
-</pre>
+```
 
 ![http://farm9.staticflickr.com/8482/8266751172_6aff18737f_m.jpg](http://farm9.staticflickr.com/8482/8266751172_6aff18737f_m.jpg)
 
