@@ -14,7 +14,7 @@ We will collect statistics for finding primes near a google, and for finding pri
 
 The following statistics were collected for primes near a google:
 
-<pre>
+```scheme
 (define p1 (+ google 267))
 (define p2 (+ google 949))
 (define p3 (+ google 1243))
@@ -33,13 +33,13 @@ The following statistics were collected for primes near a google:
 ;; --> (30 30 31 33 31 31 31 33 30 55)
 ;; --> Mean: 33.5 milliseconds 
 ;; --> Std Dev: 7.64
-</pre>
+```
 
 The average time for primality testing for primes near a google is <strong>33.4 (+- 7.6) milliseconds</strong>
 
 The following statistics were collected for primes near a google-squared:
 
-<pre>
+```scheme
 (define q1 (+ google 357))
 (define q2 (+ google 627))
 (define q3 (+ google 799))
@@ -58,7 +58,7 @@ The following statistics were collected for primes near a google-squared:
 ;; --> (141 141 165 140 140 166 141 141 166 141)
 ;; --> Mean: 148.2 milliseconds
 ;; --> Std Dev: 12.1
-</pre>
+```
 
 The average time for primality testing for primes near a google-squared is <strong>148.0 (+- 11.6) milliseconds</strong>.
 
