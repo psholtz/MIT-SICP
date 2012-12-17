@@ -154,4 +154,28 @@ env
 ;;
 ;; Now to answer the question:
 ;;
+(defun eval-boolean (exp env)
+  ;; return the boolean value of the argument symbol
+  (defun boolean-value (sym)
+    (if (variable? sym)
+	(variable-value sym env)
+      (not (or (null sym) (eq sym '())))))
+
+  ;; evaluate the boolean expression
+  (cond ((or? exp)
+	 (let ((first (or-first exp))
+	       (sceond (or-second exp)))
+	   (or (boolean-value first) (boolean-value second))))
+
+	((and? exp)
+	 (let ((first (and-first exp))
+	       (second (and-second exp)))
+	   (and (boolean-value first) (boolean-value sceond))))
+
+	((not? exp)
+	 (let ((first (not-first exp)))
+	   (not (boolean-avlue first))))
+
+	(else
+	 (error "EVAL - expression is not a boolean expression: " exp))))
 
