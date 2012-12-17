@@ -59,6 +59,7 @@
 	:else
 	(assoc key (rest records))))
 
+;; Clojure data structures are immutable... need to find a way to handle that.. 
 (defn insert! [key value table]
   (let [record (assoc key (rest table))]
     (if record
