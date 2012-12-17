@@ -27,21 +27,21 @@ Applicative-order evaluation is the model used by production Scheme interpreters
 
 The illustrate the difference between the two models, consider the following definitions:
 
-<pre>
+```scheme
 (define (square x) (* x x))
 
 (define (sum-of-squares a b) (+ (square a) (square b)))
 
 (define (f a) (sum-of-squares (+ a 1) (* a 2)))
-</pre>
+```
 
 Evaluation of the procedure `f` is straightforward enough:
 
-<pre>
+```scheme
 (f 5)
 
 ==> 136
-</pre>
+```
 
 But the question we wish to concern ourselves with is: How (exactly) does the interpreter go about arriving at this answer?
 
@@ -53,33 +53,33 @@ The operator `f`, however, can be further reduced to its definition in terms of 
 
 So the first step in our evaluation model yields the following result:
 
-<pre>
+```scheme
 (f 5)
 
 (sum-of-squares (+ 5 1) (* 5 2))
-</pre>
+```
 
 At which point, the **recursive** nature of expression evaluation becomes evident: the problem of evaluating the expression `(f 5)` reduces to the problem of evaluating the expression `(sum-of-squares (+ 5 1) (* 5 10))`; that is to say, we must again evaluate the operands of the expression (in this case, `(+ 5 1)` and `(* 5 10)`), and then we must apply these operands to the operator `sum-of-squares`.
 
 Proceeding with the evaluation, we have:
 
-<pre>
+```scheme
 (f 5)
 
 (sum-of-squares (+ 5 1) (* 5 2))
 
 (+ (square 6) (square 10))
-</pre>
+```
 
 Using the definition of the procedure `square`, we get:
 
-<pre>
+```scheme
 (+ (* 6 6) (* 10 10))
 
 (+ 36 100)
 
 136
-</pre>
+```
 
 Normal-Order Evaluation
 -----------------------
@@ -92,7 +92,7 @@ Such a model of expression evaluation is called normal-order evaluation.
 
 In the normal-order model of expression evaluation, evaluation of `(f 5)` would proceed according to the following sequence of operations:
 
-<pre>
+```scheme
 (f 5)
  
 (sum-of-squares (+ 5 1) (* 5 2))
@@ -100,11 +100,11 @@ In the normal-order model of expression evaluation, evaluation of `(f 5)` would 
 (+ (square (+ 5 1)) (square (* 5 2)))
 
 (+ (* (+ 5 1) (+ 5 1)) (* (* 5 2) (* 5 2)))
-</pre>
+```
 
 Having now arrived at an expression involving only primitive operations, the evaluator would proceed to evaluate the operands:
 
-<pre>
+```scheme
 (+ (* (+ 5 1) (+ 5 1)) (* (* 5 2) (* 5 2)))
 
 (+ (* 6 6) (* 10 10))
@@ -112,7 +112,7 @@ Having now arrived at an expression involving only primitive operations, the eva
 (+ 36 100)
 
 136
-</pre>
+```
 
 It can be shown that for procedures that can be modeled using substitution and that yield legitimate values, normal-order and applicative-order evaluation produce the same value. 
 
