@@ -2,7 +2,11 @@
 ;; Working definitions
 ;;
 (defun variable? (exp)
-  (symbolp exp))
+  (cond ((eq exp t) nil)
+	((eq exp nil) nil)
+	((eq exp '()) nil)
+	(t
+	  (symbolp exp))))
 (defun make-variable (var)
   var)
 (defun variable-name (exp)
