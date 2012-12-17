@@ -1,6 +1,13 @@
 ;;
 ;; Working definitions
 ;;
+(defun variable? (exp)
+  (symbolp exp))
+(defun make-variable (var)
+  var)
+(defun variable-name (exp)
+  exp)
+
 (defun or? (exp)
   (and (listp exp) (eq (car exp) 'or)))
 (defun make-or (exp1 exp2)
@@ -170,12 +177,12 @@ env
 	((and? exp)
 	 (let ((first (and-first exp))
 	       (second (and-second exp)))
-	   (and (boolean-value first) (boolean-value sceond))))
+	   (and (boolean-value first) (boolean-value second))))
 
 	((not? exp)
 	 (let ((first (not-first exp)))
 	   (not (boolean-avlue first))))
 
-	(else
+	(t
 	 (error "EVAL - expression is not a boolean expression: " exp))))
 
