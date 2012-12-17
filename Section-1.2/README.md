@@ -32,16 +32,16 @@ Exponentiation
 
 We can define a **recursive procedure** which generates a **recursive process** to model exponentiation:
 
-<pre>
+```scheme
 (define (expt b n)
  (if (= n 0)
      1
      (* b (expt b (- n 1)))))
-</pre>
+```
 
 The call graph for `(expt 3 5)` will look something like the following:
 
-<pre>
+```scheme
 (expt 3 5)
 (* 3 (expt 3 4))
 (* 3 (* 3 (expt 3 3)))
@@ -54,13 +54,13 @@ The call graph for `(expt 3 5)` will look something like the following:
 (* 3 (* 3 27))
 (* 3 81)
 243
-</pre>
+```
 
 This is a linear recursive process which requires O(n) steps and O(n) space.
 
 We can also model exponentiation by defining a **recursive procedure** which generates an **iterative process**:
 
-<pre>
+```scheme
 (define (expt b n)
  (expt-iter b n 1))
 
@@ -68,11 +68,11 @@ We can also model exponentiation by defining a **recursive procedure** which gen
  (if (= n 0)
      a
      (expt-iter b (- n 1) (* b a))))
-</pre>
+```
 
 The call graph for `(expt 3 5)` will in this case look something like:
 
-<pre>
+```scheme
 (expt 3 5)
 (expt-iter 3 5 1)
 (expt-iter 3 4 3)
@@ -81,7 +81,7 @@ The call graph for `(expt 3 5)` will in this case look something like:
 (expt-iter 3 1 81)
 (expt-iter 3 0 243)
 243
-</pre>
+```
 
 This version requires O(n) steps but only O(1) space.
 
@@ -89,7 +89,7 @@ There are techniques we can use to get higher performance out of our procedures.
 
 One such technique is called "successive squaring". A recursively-defined procedure, which uses successive squaring to generate a **recursive process** for calculating exponentials, is demonstrated below:
 
-<pre>
+```scheme
 (define (fast-expt b n)
  (cond ((= n 0) 1)
        ((even? n) (square (fast-expt b (/ n 2))))
@@ -98,11 +98,11 @@ One such technique is called "successive squaring". A recursively-defined proced
 
 (define (even? n) (= (remainder n 2) 0))
 (define (square n) (* n n))
-</pre>
+```
 
 The call graph for `(fast-expt 3 100)` is:
 
-<pre>
+```scheme
 (fast-expt 3 100)
 (square (fast-expt 3 50))
 (square (square (fast-expt 3 25)))
@@ -123,7 +123,7 @@ The call graph for `(fast-expt 3 100)` is:
 (square (square 847288609443))
 (square 717897987691852588770249)
 515377520732011331036461129765621272702107522001
-</pre>
+```
 
 Evaluation of `(fast-expt 3 100)` only performs 9 multiplications, where `(expt 3 100)` would perform 100. 
 
@@ -131,7 +131,7 @@ The procedure grows as O(log(n)), and for large n is dramatically more efficient
 
 It is also possible to implement `fast-expt` so that it generates an **iterative process**:
 
-<pre>
+```scheme
 (define (fast-expt b n)
  (fast-expt-iter b n 1))
 
@@ -140,11 +140,11 @@ It is also possible to implement `fast-expt` so that it generates an **iterative
        ((even? n) (fast-expt-iter (square b) (/ n 2) a))
        (else
          (fast-expt-iter b (- n 1) (* a b)))))
-</pre>
+```
 
 In this case, the call graph for `(fast-expt 3 100)` looks like:
 
-<pre>
+```scheme
 (fast-expt 3 100)
 (fast-expt-iter 3 100 1)
 (fast-expt-iter 9 50 1)
@@ -157,7 +157,7 @@ In this case, the call graph for `(fast-expt 3 100)` looks like:
 (fast-expt-iter 3433683820292512484657849089281 1 150094635296999121)
 (fast-expt-iter 3433683820292512484657849089281 0 515377520732011331036461129765621272702107522001)
 515377520732011331036461129765621272702107522001
-</pre>
+```
 
 Arithmetical Operations
 ----------------------- 
@@ -166,18 +166,18 @@ One of the more profound aspects of Lisp/Scheme is that arithmetical operators a
 
 For example, one could (rather perversely) redefine '+' to behave like:
 
-<pre>
+```scheme
 (+ 3 5)
 ;; 8
 
 (define (+ a b) (* a (* 2 b)))
 (+ 3 5)
 ;; 30
-</pre>
+```
 
 Or perhaps more conveniently:
 
-<pre>
+```scheme
 (define div /)
 (define (/ a b)
  (if (= b 0)
@@ -186,11 +186,11 @@ Or perhaps more conveniently:
 
 (/ 5 0)
 ;; --> false
-</pre>
+```
 
 Or an even more informative error handling condition:
 
-<pre>
+```scheme
 (define div /)
 (define (/ a b)
  (if (= b 0)
@@ -199,4 +199,4 @@ Or an even more informative error handling condition:
 
 (/ 5 0)
 ;; --> *** cannot divide by zero!
-</pre>
+```
