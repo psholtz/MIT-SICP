@@ -72,59 +72,59 @@ and, for reference, the definition of `first-denomination` is:
 
 We begin by expanding the expression for `N(n,5)`:
 
-<pre>
+```scheme
 N(n,5) = 1 + N(n,4) + N(n-50,5)
-</pre>
+```
 
 Let's "recursively" expand the first subexpression `N(n,4)` as follows:
 
-<pre>
+```scheme
 N(n,4) = 1 + N(n,3) + N(n-25,4)
-</pre>
+```
 
 We continue expanding the first subexpression until the recursion terminates:
 
-<pre>
+```scheme
 N(n,3) = 1 + N(n,2) + N(n-10,3)
 N(n,2) = 1 + N(n,1) + N(n-5,2)
 N(n,1) = 1 + N(n,0) + N(n-1,1)
-</pre>
+```
 
 The recursion stops at `(cc n 0)`, where it returns 0 and performs only 1 operation:
 
-<pre>
+```scheme
 N(n,0) = 1
-</pre>
+```
 
 so that:
 
-<pre>
+```scheme
 N(n,1) = 1 + 1 + N(n-1,1) = 2 + N(n-1,1)
-</pre>
+```
 
 But expanding the first subexpression `N(n-1,1)` again, we obtain:
 
-<pre>
+```scheme
 N(n-1,1) = 2 + N(n-2,1)
-</pre>
+```
 
 so that:
 
-<pre>
+```scheme
 N(n,1) = 4 + N(n-2,1)
-</pre>
+```
 
 Continuing until we reach `N(0,1)`:
 
-<pre>
+```scheme
 N(n,1) = 2n + N(0,1)
-</pre>
+```
 
 and since `N(0,1) = 1`, we have:
 
-<pre>
+```scheme
 N(n,1) = 2n + 1
-</pre>
+```
 
 To verify this, simply refer to the (quantitative) call graph above:
 
@@ -136,55 +136,55 @@ Always the subtree beneath `(cc n 1)` produces `2n+1` nodes.
 
 Now consider our expression for `N(n,2)`:
 
-<pre>
+```scheme
 N(n,2) = 1 + N(n,1) + N(n-5,2) 
 N(n,2) = 1 + 2n + 1 + N(n-5,2) 
 N(n,2) = 2(n+1) + N(n-5,2)
-</pre>
+```
 
 and now expanding the subexpression for `N(n-5,2)`:
 
-<pre>
+```scheme
 N(n-5,2) = 2(n+1) + N(n-10,2)
-</pre>
+```
 
 so that:
 
-<pre>
+```scheme
 N(n,2) = 4(n+1) + N(n-10,2)
-</pre>
+```
 
 In this case, the recursion will bottom out after (roughly) n/5 steps, so that the number of operations required to evaluate N(n,2) is rough (2/5)n(n+1), or in other words, is of order n^2. We can write:
 
-<pre>
+```scheme
 N(n,2) = O(n^2)
-</pre>
+```
 
 Working our way back up the recursion tree, it should be clear now how the process will evolve. For `N(n,3)` we can write:
 
-<pre>
+```scheme
 N(n,3) = 1 + N(n,2) + N(n-10,3)
 N(n,3) = O(n^2) + N(n-10,3)
-</pre>
+```
 
 and since:
 
-<pre>
+```scheme
 N(n-10,3) = O(n^2) + N(n-20,3)
-</pre>
+```
 
 and since this recursion will bottom out after (approximately) n/10 calls, we can write:
 
-<pre>
+```scheme
 N(n,3) = O(n^3)
-</pre>
+```
 
 and similarly:
 
-<pre>
+```scheme
 N(n,4) = O(n^4)
 N(n,5) = O(n^5)
-</pre>
+```
 
 So we expect calls to `(count-change n)` to scale with the fifth power of n, as n increases. That is, we have order of growth O(n^5) in time. The order of growth in terms of space scales at the same rate as does the number of steps required, that is, it too scales at O(n^5). This can be seen again, for example, by looking at the quantitative call graph and seeing how much space is required (i.e., cells) must be allocated to complete the calculation.
 
@@ -193,11 +193,12 @@ So we expect calls to `(count-change n)` to scale with the fifth power of n, as 
 
 Although we are not specifically required to do so, I can scarcely resist an opportunity to indulge vicariously in a little numerical linear algebra to see how well this analysis holds up in practice. The accompanying `exercise1-14-stats.py` file counts the number of invocations of `cc` for `(cc n k)` as k scales from 1 to 5. The collected statistics (expressed as "Lisp-ish-ly" as we can) are as follows:
 
-<pre>(invocation-count (cc n 1) 100) ==> (list 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51 53 55 
+```scheme
+(invocation-count (cc n 1) 100) ==> (list 3 5 7 9 11 13 15 17 19 21 23 25 27 29 31 33 35 37 39 41 43 45 47 49 51 53 55 
 57 59 61 63 65 67 69 71 73 75 77 79 81 83 85 87 89 91 93 95 97 99 101 103 105 107 109 111 113 115 117 119 121 123 125 127 
 129 131 133 135 137 139 141 143 145 147 149 151 153 155 157 159 161 163 165 167 169 171 173 175 177 179 181 183 185 187 
 189 191 193 195 197 199 201)
-</pre>
+```
 
 For k=1, our model predicts that the number of invocations to `cc` will scale linearly as 2n+1, which, indeed, is precisely the behavior we observe. In this case, regression analysis will be of little quantitative value, although we can still carry the calculation out just for the fun of it, if for no other reason. Details on how to carry out the regression analysis are given in the corresponding Wiki entry. In this case, the regression yields values of `x = [1 2]`, that is to say, the best-fit curve looks like `y = 2x + 1`, which is precisely what we anticipated.
 
@@ -210,11 +211,12 @@ The "+" characters indicate the scatterplot of the collected statistics, and the
 ----
 For the remaining values of k, the results are as follows:
 
-<pre>(invocation-count (cc n 2) 100) ==> (list 5 7 9 11 13 19 23 27 31 35 43 49 55 61 67 77 85 93 101 109 121 131 141 151 161 
+```scheme
+(invocation-count (cc n 2) 100) ==> (list 5 7 9 11 13 19 23 27 31 35 43 49 55 61 67 77 85 93 101 109 121 131 141 151 161 
 175 187 199 211 223 239 253 267 281 295 313 329 345 361 377 397 415 433 451 469 491 511 531 551 571 595 617 639 661 683 709 
 733 757 781 805 833 859 885 911 937 967 995 1023 1051 1079 1111 1141 1171 1201 1231 1265 1297 1329 1361 1393 1429 1463 1497 
 1531 1565 1603 1639 1675 1711 1747 1787 1825 1863 1901 1939 1981 2021 2061 2101 2141)
-</pre>
+```
 
 Regression analysis for k=2 yields values of `x = [2.671 1.39866 0.2]`, that is, the best fit curve is `y = 2.671 x^2 + 1.39866 x + 0.2`:
 
@@ -222,11 +224,12 @@ Regression analysis for k=2 yields values of `x = [2.671 1.39866 0.2]`, that is,
 
 ----
 
-<pre>(invocation-count (cc n 3) 100) ==> (list 7 9 11 13 15 21 25 29 33 37 51 59 67 75 83 99 111 123 135 147 173 191 209 227 
+```scheme
+(invocation-count (cc n 3) 100) ==> (list 7 9 11 13 15 21 25 29 33 37 51 59 67 75 83 99 111 123 135 147 173 191 209 227 
 245 275 299 323 347 371 413 445 477 509 541 589 629 669 709 749 811 861 911 961 1011 1081 1141 1201 1261 1321 1407 1479 
 1551 1623 1695 1791 1875 1959 2043 2127 2241 2339 2437 2535 2633 2759 2871 2983 3095 3207 3353 3481 3609 3737 3865 4025 
 4169 4313 4457 4601 4783 4945 5107 5269 5431 5629 5809 5989 6169 6349 6571 6771 6971 7171 7371 7611 7831 8051 8271 8491)
-</pre>
+```
 
 Regression analysis for k=3 yields `x = [5.168 1.1252 0.174 0.0066].
 
