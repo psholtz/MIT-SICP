@@ -91,12 +91,67 @@ env
   (defun variable-value-iter (working)
     (if (null working)
 	(error "VARIABLE-VALUE: no binding for variable: " name)
-      (let ((value (car working)))
-	(if (equal name (car value))
-	    (cdr value)
+      (let ((record (car working)))
+	(if (equal name (car record))
+	    (cdr record)
 	  (variable-value-iter (cdr working))))))
   (variable-value-iter (cdr environment)))
 
 ;;
 ;; Unit tests:
 ;;
+(variable-value 'x env)
+;; ==> 1
+(variable-value 'y env)
+;; ==> 2
+(variable-value 'z env)
+;; ==> 3
+(variable-value 'key env)
+;; ==> value
+(variable-value 'value env)
+;; ==> #[error]
+
+;;
+;; To get the examples of this exercise to work, let's bind three variable symbols 
+;; "a", "b" and "c" to true, true and false:
+;;
+(insert! 'a t env)
+(insert! 'b t env)
+
+;;
+;; The token "t" signals "true" in Emacs, but note that 
+;; the traditional signal for "false" in Emacs, i.e., 
+;; '() or nil, will not work here, since all it will
+;; do is generate an environment table something like 
+;; the following:
+;;
+;;  ((c) (b . t) (a . t))
+;;
+;; In other words, trying to execute (insert! 'c '() env)
+;; or (insert! 'c nil env) will generate a record with just 
+;; one entry instead of two. This will mess up our list 
+;; processing, so we will use the token 'false to signal
+;; "false" in this environment:
+;;
+(insert! 'c 'false env)
+
+;;
+;; The best place to respond to this token is in the 
+;; "variable-value" procedure, so we redefine it as follows:
+;;
+(defun variable-value (name environment)
+  (defun variable-value-iter (working)
+    (if (null working)
+	(error "VARIABLE-VALUE: no binding for variable: " name)
+      (let ((record (car working)))
+	(if (equal name (car record))
+	    (if (eq (cdr record) 'false)
+		'()
+	      (cdr record))
+	  (variable-value-iter (cdr working))))))
+  (variable-value-iter (cdr environment)))
+
+;;
+;; Now to answer the question:
+;;
+
