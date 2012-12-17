@@ -31,7 +31,7 @@ Consider the first procedure:
 
 and consider the evaluation of the expression `(+ 4 5)` by this procedure:
 
-<pre>
+```scheme
 (+ 4 5)
 (inc (+ (dec 4)  5))
 (inc (+ 3 5))
@@ -46,22 +46,22 @@ and consider the evaluation of the expression `(+ 4 5)` by this procedure:
 (inc (inc 7))
 (inc 8)
 9
-</pre>
+```
 
 This process is **recursive**.
 
 Consider next the second procedure:
 
-<pre>
+```scheme
 (define (+ a b)
   (if (= a 0)
       b
       (+ (dec a) (inc b))))
-</pre>
+```
 
 and the evaluation of the expression `(+ 4 5)` by this procedure:
 
-<pre>
+```scheme
 (+ 4 5)
 (+ (dec 4) (inc 5))
 (+ 3 6)
@@ -72,6 +72,6 @@ and the evaluation of the expression `(+ 4 5)` by this procedure:
 (+ (dec 1) (inc 8))
 (+ 0 9)
 9
-</pre>
+```
 
 This procedure is **iterative**.
