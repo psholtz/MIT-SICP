@@ -14,7 +14,7 @@ To load the files into a running Emacs interpreter, you may have to update the l
 Lexical Scoping versus Dynamic Scoping
 -------------------------------------- 
 
-The difference between lexical and dynamic scoping can be stated looosely as:
+The difference between lexical and dynamic scoping can be stated loosely as:
 
 ### Dynamic Binding 
 All variable names and their values live in one global table.
@@ -29,3 +29,5 @@ Emacs only supports dynamic binding, while the version of Scheme used in SICP, a
 [1] [The Art of the Interpreter](http://dspace.mit.edu/bitstream/handle/1721.1/6094/AIM-453.pdf)
 
 [2] [The Original Lambda Papers](http://library.readscheme.org/page1.html)
+
+[3] [Dynamic and Lexical Binding](http://emacswiki.org/emacs/DynamicBindingVsLexicalBinding)
