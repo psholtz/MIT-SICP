@@ -1,17 +1,6 @@
 ;;
 ;; Working definitions
 ;;
-(defun variable? (exp)
-  (cond ((eq exp t) nil)
-	((eq exp nil) nil)
-	((eq exp '()) nil)
-	(t
-	  (symbolp exp))))
-(defun make-variable (var)
-  var)
-(defun variable-name (exp)
-  exp)
-
 (defun or? (exp)
   (and (listp exp) (eq (car exp) 'or)))
 (defun make-or (exp1 exp2)
