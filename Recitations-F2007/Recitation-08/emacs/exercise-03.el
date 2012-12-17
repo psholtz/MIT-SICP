@@ -62,8 +62,41 @@
   (let ((record (assoc key (cdr table))))
     (if record
 	(setcdr record value)
-      (setcdr (cdr table)
+      (setcdr table
 	      (cons (cons key value) (cdr table))))))
 
 (defun make-table ()
   (list '*table*))
+
+;;
+;; Let's define a symbol table to use as our environment:
+;;
+(setq env (make-table))
+
+;;
+;; And let's put some variable bindings in there:
+;;
+(insert! 'x 1 env)
+(insert! 'y 2 env)
+(insert! 'z 3 env)
+(insert! 'key 'value env)
+
+env
+;; ==> ((key . value) (z . 3) (y . 2) (x . 1))
+
+;;
+;; We can now define the "variable-value" procedure:
+;;
+(defun variable-value (name environment)
+  (defun variable-value-iter (working)
+    (if (null working)
+	(error "VARIABLE-VALUE: no binding for variable: " name)
+      (let ((value (car working)))
+	(if (equal name (car value))
+	    (cdr value)
+	  (variable-value-iter (cdr working))))))
+  (variable-value-iter (cdr environment)))
+
+;;
+;; Unit tests:
+;;
