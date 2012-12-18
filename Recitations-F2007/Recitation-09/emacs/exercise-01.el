@@ -36,3 +36,5 @@
 		 ((and (< current-value value) (not (empty-tree? right)))
 		  (tree-lookup value right))
 		 (else '()))))))
+
+;; WORKING --> use cases 
