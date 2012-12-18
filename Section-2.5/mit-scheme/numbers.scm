@@ -233,7 +233,7 @@
   
   (put 'make-from-real-imag 'complex
        (lambda (x y) (tag (make-from-real-imag x y))))
-  (put 'make-from-real-ang 'complex
+  (put 'make-from-mag-ang 'complex
        (lambda (r a) (tag (make-from-mag-ang r a))))
 
   (put 'real-part '(complex) real-part)
