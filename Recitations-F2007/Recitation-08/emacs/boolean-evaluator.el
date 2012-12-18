@@ -83,7 +83,7 @@
   ;; evaluate the boolean expression
   (cond ((or? exp)
 	 (let ((first (or-first exp))
-	       (sceond (or-second exp)))
+	       (second (or-second exp)))
 	   (or (boolean-value first) (boolean-value second))))
 	
 	((and? exp)
