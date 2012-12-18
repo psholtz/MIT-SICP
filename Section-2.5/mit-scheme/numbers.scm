@@ -57,6 +57,11 @@
   ((get 'make 'scheme-number) n))
 
 ;;
+;; Install the number package
+;;
+(install-scheme-number-package)
+
+;;
 ;; Unit tests:
 ;;
 (define s1 (make-scheme-number 1))
@@ -116,6 +121,11 @@
 
 (define (make-rational n d)
   ((get 'make 'rational) n d))
+
+;;
+;; Install the number package
+;;
+(install-rational-package)
 
 ;;
 ;; Unit tests:
@@ -223,7 +233,7 @@
   
   (put 'make-from-real-imag 'complex
        (lambda (x y) (tag (make-from-real-imag x y))))
-  (put 'make-from-real-nag 'complex
+  (put 'make-from-real-ang 'complex
        (lambda (r a) (tag (make-from-mag-ang r a))))
 
   (put 'real-part '(complex) real-part)
@@ -243,3 +253,20 @@
 (define (imag-part z) (apply-generic 'imag-part z))
 (define (magnitude z) (apply-generic 'magnitude z))
 (define (angle z) (apply-generic 'angle z))
+
+;;
+;; Install the number package
+;;
+(install-complex-package)
+
+(define c1 (make-complex-from-real-imag 3 4))
+;; ==> (complex rectangular 3 . 4)
+(real-part c1)
+;; ==> 3
+(imag-part c1)
+;; ==> 4
+(magnitude c1)
+;; ==> 5
+(angle c1)
+;; ==> 0.9272951280016..
+
