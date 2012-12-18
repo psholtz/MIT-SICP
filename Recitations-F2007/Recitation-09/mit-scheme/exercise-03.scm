@@ -113,3 +113,47 @@
 (make-tree-node 4 (make-tree-node 3 '(2 (1 () ()) ()) '()) '())
 (make-tree-node 4 '(3 (2 (1 () ()) ()) ()) '())
 '(4 (3 (2 (1 () ()) ()) ()) ())
+
+;;
+;; If we invoke the procedure on just the first node, we see that the "outermost" make-tree-node
+;; is invoked just once, to wit:
+;;
+(tree-insert 4 the-empty-tree)
+(make-tree-node 4 '() '())
+'(4 () ())
+
+;;
+;; When calculating the additional steps required for the next node, we see that the "outermost"
+;; make-tree-node is invoked three times, to wit:
+;;
+(tree-insert 3 '(4 () ()))
+(make-tree-node 4 (tree-insert 3 '()) '())
+(make-tree-node 4 (make-tree-node 3 '() '()) '())
+(make-tree-node 4 '(3 () ()) '())
+'(4 (3 () ()) ())
+
+;;
+;; In the next node, the "outermost" make-tree-node is invoked five times, then 7 times, and 
+;; so on. We deduce that the total number of steps required for n steps is:
+;;
+;;  n = 1 ==> 1 + 1 + 1 ==> 3
+;;  n = 2 ==>     3 + 1 ==> 3 + 4 ==> 7
+;;  n = 3 ==>     5 + 1 ==> 6 + 7 ==> 13
+;;  n = 4 ==>     7 + 1 ==> 8 + 13 ==> 21
+;;
+;; and so on. 
+;;
+;; Breaking this down, we see that the total number of steps is 1 + n + (Summation of odd numbers).
+;;
+;; The sums of the first n odd numbers are easily calculated:
+;;
+;;  1 ==> 1 = 1^2
+;;  1 + 3 ==> 4 = 2^2
+;;  1 + 3 + 5 ==> 9 = 3^2
+;;
+;; Hence, the sum of the first n odd numbers is n^2. 
+;;
+;; Thus, the total number of steps required here is n^2 + n + 1. 
+;;
+;; We infer that the order of growth here is O(n^2).
+;;
