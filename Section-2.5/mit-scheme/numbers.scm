@@ -287,5 +287,13 @@
 ;; ==> (complex rectangular 2 . 4)
 (mul c1 c2)
 ;; ==> (complex polar 5 . 0.927295128006..)
+(real-part (mul c1 c2))
+;; ==> 3
+(imag-part (mul c1 c2))
+;; ==> 4
 (div c1 c2)
-;; ==>
+;; ==> (complex polar 5 . 0.927295128006..)
+(real-part (div c1 c2))
+;; ==> 3
+(imag-part (div c1 c2))
+;; ==> 4
