@@ -40,12 +40,12 @@
 ;;
 ;; Let's define a sample binary tree:
 ;;
-(define n1 (make-tree-node 1 '() '()))
-(define n2 (make-tree-node 4 '() '()))
-(define n3 (make-tree-node 6 '() '()))
+(define n1 (make-tree-node 1 the-empty-tree the-empty-tree))
+(define n2 (make-tree-node 4 the-empty-tree the-empty-tree))
+(define n3 (make-tree-node 6 the-empty-tree the-empty-tree))
 
 (define n4 (make-tree-node 3 n1 n2))
-(define n5 (make-tree-node 9 n3 '()))
+(define n5 (make-tree-node 9 n3 the-empty-tree))
 
 (define tree (make-tree-node 5 n4 n5))
 

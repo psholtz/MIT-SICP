@@ -39,30 +39,73 @@
 ;; tree with the value added.
 ;;
 (define (tree-insert value tree)
-  ;;
-  ;; Define an iterative algorithm for inserting values
-  ;;
-  (define (tree-insert-iter subtree)
-    (let ((current-value (node-value tree))
-	  (left (node-left tree))
-	  (right (node-right tree)))
-      (if (> current-value value)
-	  (if (empty-tree? left)
-	      (make-tree-node value '() '())
-	      (tree-insert-iter left)))
-      (if (< current-value value)
-	  (if (empty-tree? right)
-	      '()
-	      (tree-insert-iter right)))))
+  (cond ((empty-tree? tree)
+	 (make-tree-node value
+			 the-empty-tree
+			 the-empty-tree))
+	(else
+	 (let ((current (node-value tree)))
 
-  ;; 
-  ;; Invoke the iterative algorithm (if necessary)
-  ;;			       
-  (if (empty-tree? tree)
-      (make-tree-node value '() '())
-      (tree-insert-iter tree)))
-
+	   (cond ((= value current) tree)
+		 ((< value current)
+		  (make-tree-node current
+				  (tree-insert value (node-left tree))
+				  (node-right tree)))
+		 ((> value current)
+		  (make-tree-node current
+				  (node-left tree)
+				  (tree-insert value (node-right tree)))))))))
 
 ;;
-;; WORKING
+;; Let's run some tests:
 ;;
+(define root the-empty-tree)
+(define root (tree-insert 5 root))
+;; ==> (5 () ())
+(define root (tree-insert 5 root))
+;; ==> (5 () ())
+;; ^^ good, it returns just the same tree back again
+
+(define root (tree-insert 3 root))
+;; ==> (5 (3 () ()) ())
+(define root (tree-insert 1 root))
+;; ==> (5 (3 (1 () ()) ()) ())
+(define root (tree-insert 4 root))
+;; ==> (5 (3 (1 () ()) (4 () ())) ())
+(define root (tree-insert 9 root))
+;; ==> (5 (3 (1 () ()) (4 () ())) (9 () ()))
+(define root (tree-insert 6 root))
+;; ==> (5 (3 (1 () ()) (4 () ())) (9 (6 () ()) ()))
+
+;;
+;; Test to see if the values are in there:
+;;
+(tree-lookup 5 root)
+;; ==> #t
+(tree-lookup 3 root)
+;; ==> #t
+(tree-lookup 1 root)
+;; ==> #t
+(tree-lookup 4 root)
+;; ==> #t
+(tree-lookup 9 root)
+;; ==> #t
+(tree-lookup 6 root)
+;; ==> #t
+
+;;
+;; Test for bad values:
+;;
+(tree-lookup 10 root)
+;; ==> #f
+(tree-lookup 33 root)
+;; ==> #f
+
+;;
+;; Further information on binary trees is available here:
+;; 
+;; http://cslibrary.stanford.edu/110/BinaryTrees.html
+;;
+
+
+
