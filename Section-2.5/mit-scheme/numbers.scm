@@ -54,7 +54,7 @@
   'done)
 
 (define (make-scheme-number n)
-  ((get 'tag 'scheme-number) n))
+  ((get 'make 'scheme-number) n))
 
 ;;
 ;; Unit tests:
