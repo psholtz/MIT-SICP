@@ -39,7 +39,7 @@
   (cond ((null? records) false)
 	((equal? key (caar records)) (car records))
 	(else
-	   (assoc key (cdr records)))))
+	 (assoc key (cdr records)))))
 (define (lookup key table)
   (let ((record (assoc key (cdr table))))
     (if record
@@ -50,7 +50,7 @@
     (if record
 	(set-cdr! record value)
 	(set-cdr! table
-		      (cons (cons key value) (cdr table))))))
+		  (cons (cons key value) (cdr table))))))
 (define (make-table)
   (list '*table*))
 (define env (make-table))
@@ -59,9 +59,9 @@
     (if (null? working)
 	(error "VARIABLE-VALUE: no binding for variable: " name)
 	(let ((value (car working)))
-	      (if (equal? name (car value))
-		        (cdr value)
-			            (variable-value-iter (cdr working))))))
+	  (if (equal? name (car value))
+	      (cdr value)
+	      (variable-value-iter (cdr working))))))
   (variable-value-iter (cdr environment)))
 (define (eval-boolean exp env)
   ;; return the boolean value of the argument symbol
@@ -69,21 +69,21 @@
     (if (variable? sym)
 	(variable-value sym env)
 	(not (or (null? sym) (eq? sym #f)))))
-
+  
   ;; evaluate the boolean expression
   (cond ((or? exp)
-	   (let ((first (or-first exp))
-		        (second (or-second exp)))
-	            (or (boolean-value first) (boolean-value second))))
-
+	 (let ((first (or-first exp))
+	       (second (or-second exp)))
+	   (or (boolean-value first) (boolean-value second))))
+	
 	((and? exp)
-	   (let ((first (and-first exp))
-		        (second (and-second exp)))
-	            (and (boolean-value first) (boolean-value second))))
-
+	 (let ((first (and-first exp))
+	       (second (and-second exp)))
+	   (and (boolean-value first) (boolean-value second))))
+	
 	((not? exp)
-	   (let ((first (not-first exp)))
-	            (not (boolean-value first))))
-
+	 (let ((first (not-first exp)))
+	   (not (boolean-value first))))
+	
 	(else
-	   (error "EVAL - expression is not a boolean expression: " exp))))
+	 (error "EVAL - expression is not a boolean expression: " exp))))

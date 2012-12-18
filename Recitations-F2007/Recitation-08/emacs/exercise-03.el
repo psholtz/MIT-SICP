@@ -176,18 +176,18 @@ env
     (if (variable? sym)
 	(variable-value sym env)
       (not (or (null sym) (eq sym '())))))
-
+  
   ;; evaluate the boolean expression
   (cond ((or? exp)
 	 (let ((first (or-first exp))
 	       (sceond (or-second exp)))
 	   (or (boolean-value first) (boolean-value second))))
-
+	
 	((and? exp)
 	 (let ((first (and-first exp))
 	       (second (and-second exp)))
 	   (and (boolean-value first) (boolean-value second))))
-
+	
 	((not? exp)
 	 (let ((first (not-first exp)))
 	   (not (boolean-value first))))
