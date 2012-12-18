@@ -53,7 +53,11 @@
 ;;
 ;; Exercise 3
 ;;
-;; [WORKING]
+;; Consider the three that results from evaluating the following:
+;; 
+;; (tree-insert 1 (tree-insert 2  ... (tree-insert n the-empty-tree)))
+;;
+;; What is the running time of calling "tree-lookup" on such a tree?
 ;;
 
 ;;
