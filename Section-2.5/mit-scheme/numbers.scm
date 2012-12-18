@@ -270,3 +270,22 @@
 (angle c1)
 ;; ==> 0.9272951280016..
 
+(define c2 (make-complex-from-mag-ang 1 0))
+;; ==> (complex polar 1 . 0)
+(real-part c2)
+;; ==> 1
+(imag-part c2)
+;; ==> 0
+(magnitude c2)
+;; ==> 1
+(angle c2)
+;; ==> 0
+
+(add c1 c2)
+;; ==> (complex rectangular 4 . 4)
+(sub c1 c2)
+;; ==> (complex rectangular 2 . 4)
+(mul c1 c2)
+;; ==> (complex polar 5 . 0.927295128006..)
+(div c1 c2)
+;; ==>
