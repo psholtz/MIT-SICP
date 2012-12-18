@@ -54,7 +54,7 @@
   'done)
 
 (define (make-scheme-number n)
-  ((get 'tag 'scheme-number) n))
+  ((get 'make 'scheme-number) n))
 
 ;;
 ;; Unit tests:
@@ -237,9 +237,3 @@
   ((get 'make-from-real-imag 'complex) x y))
 (define (make-complex-from-mag-ang r a)
   ((get 'make-from-mag-ang 'complex) r a))
-
-;; Generic selectors from 2.4 (note that solution to 2.77 will not work without these!)
-(define (real-part z) (apply-generic 'real-part z))
-(define (imag-part z) (apply-generic 'imag-part z))
-(define (magnitude z) (apply-generic 'magnitude z))
-(define (angle z) (apply-generic 'angle z))
