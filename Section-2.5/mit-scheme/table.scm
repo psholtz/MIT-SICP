@@ -37,6 +37,12 @@
             (else (error "Unknown operation -- TABLE" m))))
     dispatch))
 
+;; Operations Table
 (define operation-table (make-table))
 (define get (operation-table 'lookup-proc))
 (define put (operation-table 'insert-proc!))
+
+;; Coercion Table
+(define coercion-table (make-table))
+(define get-coercion (coercion-table 'lookup-proc))
+(define put-coercion (coercion-table 'insert-proc!))
