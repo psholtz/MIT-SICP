@@ -123,9 +123,17 @@
   ;; ============= 
   ;; New Procedure
   ;; =============
+  ;; Rather than strict equality, we test for "exactness" within a 
+  ;; prescribed tolerance, since we want to allow that complex numbers
+  ;; that are congruent up to within a rotation through 2*PI are 
+  ;; equivalent, and without allowing for such a tolerance window, such
+  ;; numbers would otherwise evaluate to "not equ?".
   (put 'equ? '(complex complex)
-       (lambda (x y) (and (= (real-part x) (real-part y))
-			  (= (imag-part x) (imag-part y)))))
+       (lambda (x y)
+	 (define (diff a b) (abs (- a b)))
+	 (let ((tolerance 0.0000001))
+	   (and (< (diff (real-part x) (real-part y)) tolerance)
+		(< (diff (imag-part x) (imag-part y)) tolerance)))))
 
   (put 'make-from-real-imag 'complex
        (lambda (x y) (tag (make-from-real-imag x y))))
@@ -145,3 +153,45 @@
 (install-scheme-number-package)
 (install-rational-package)
 (install-complex-package)
+
+(define PI 3.141592653589793238462643383279)
+
+;;
+;; Test the regular scheme numbers:
+;;
+(equ? (make-scheme-number 1) (make-scheme-number 1))
+;; ==> #t 
+(equ? (make-scheme-number 5) (make-scheme-number 5))
+;; ==> #t
+(equ? (make-scheme-number 0) (make-scheme-number 0))
+;; ==> #t
+(equ? (make-scheme-number -1) (make-scheme-number -1))
+;; ==> #t
+
+(equ? (make-scheme-number 5) (make-scheme-number 10))
+;; ==> #f
+
+;;
+;; Test the rational numbers:
+;;
+(equ? (make-rational 1 2) (make-rational 1 2))
+;; ==> #t
+(equ? (make-rational 1 2) (make-rational 2 4))
+;; ==> #t
+(equ? (make-rational 1 2) (make-rational 3 4))
+;; ==> #f
+
+;;
+;; Test the complex numbers:
+;;
+(equ? (make-complex-from-real-imag 1 2) (make-complex-from-real-imag 1 2))
+;; ==> #t
+(equ? (make-complex-from-real-imag 1 2) (make-complex-from-real-imag 1 3))
+;; ==> #f
+
+(equ? (make-complex-from-mag-ang 1 2) (make-complex-from-mag-ang 1 2))
+;; ==> #t
+(equ? (make-complex-from-mag-ang 1 2) (make-complex-from-mag-ang 1 3))
+;; ==> #f
+(equ? (make-complex-from-mag-ang 1 2) (make-complex-from-mag-ang 1 (+ 2 (* 2 PI))))
+;; ==> #t
