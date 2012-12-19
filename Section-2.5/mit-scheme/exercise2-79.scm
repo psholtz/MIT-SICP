@@ -156,6 +156,9 @@
 (install-rational-package)
 (install-complex-package)
 
+;;
+;; Used to check that rotations through 2*PI are equivalent.
+;;
 (define PI 3.141592653589793238462643383279)
 
 ;;
