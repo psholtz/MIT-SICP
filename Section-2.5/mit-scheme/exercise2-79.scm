@@ -123,7 +123,7 @@
   ;; ============= 
   ;; New Procedure
   ;; =============
-  (put 'equ? '(complex)
+  (put 'equ? '(complex complex)
        (lambda (x y) (and (= (real-part x) (real-part y))
 			  (= (imag-part x) (imag-part y)))))
 
