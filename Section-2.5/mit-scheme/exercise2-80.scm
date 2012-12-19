@@ -1,7 +1,9 @@
 ;;
 ;; Exercise 2.80
 ;;
-;; [WORKING]
+;; Define a generic predicate =zero? that tests if its argument is zero, and install 
+;; it in the generic arithmetic package. This operation should work for ordinary numbers, 
+;; rational numbers, and complex numbers.
 ;;
 
 ;; =================
@@ -225,3 +227,53 @@
 (install-rectangular-package)
 (install-polar-package)
 (install-complex-package)
+
+;;
+;; Run some unit tests:
+;;
+(=zero? (make-scheme-number 1))
+;; ==> #f
+(=zero? (make-scheme-number 0))
+;; ==> #t
+(=zero? (add (make-scheme-number 1) (make-scheme-number -1)))
+;; ==> #t
+(=zero? (sub (make-scheme-number 1) (make-scheme-number 1)))
+;; ==> #t
+
+(=zero? (make-rational 1 2))
+;; ==> #f
+(=zero? (make-rational 0 2))
+;; ==> #t
+(=zero? (add (make-rational 1 2) (make-rational -1 2)))
+;; ==> #t
+(=zero? (sub (make-rational 1 2) (make-rational 1 2)))
+;; ==> #t
+
+(=zero? (make-complex-from-real-imag 1 2))
+;; ==> #f
+(=zero? (make-complex-from-real-imag 0 1))
+;; ==> #f
+(=zero? (make-complex-from-real-imag 1 0))
+;; ==> #f
+(=zero? (make-complex-from-real-imag 0 0))
+;; ==> #t
+
+(=zero? (add (make-complex-from-real-imag 1 2) (make-complex-from-real-imag -1 -2)))
+;; ==> #f
+(=zero? (sub (make-complex-from-real-imag 1 2) (make-complex-from-real-imag 1 2)))
+;; ==> #t
+
+(=zero? (make-complex-from-mag-ang 1 2))
+;; ==> #f
+(=zero? (make-complex-from-mag-ang 1 0))
+;; ==> #f
+(=zero? (make-complex-from-mag-ang 0 1))
+;; ==> #t
+
+(=zero? (add (make-complex-from-mag-ang 1 2) (make-complex-from-mag-ang -1 -2)))
+;; ==> #f
+(=zero? (sub (make-complex-from-mag-ang 1 2) (make-complex-from-mag-ang 1 2)))
+;; ==> #t
+
+(=zero? (mul (make-complex-from-real-imag 1 2) (make-complex-from-mag-ang 0 1)))
+;; ==> #t
