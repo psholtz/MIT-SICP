@@ -1,6 +1,8 @@
 ;;
 ;; Define the procedures used in the "generic" numbers package in the text.
 ;;
+;; This contains the "full" packages as developed in the Exercises in this section.
+;;
 (load "table.scm")
 
 ;; ===============
