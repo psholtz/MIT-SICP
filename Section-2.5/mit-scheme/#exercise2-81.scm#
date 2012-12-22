@@ -85,3 +85,11 @@
 ;; ==> 2
 (imag-part (div arg2 arg1))
 ;; ==> 3
+
+;;
+;; Let's step through a call graph to understand how it works:
+;;
+(add arg1 arg2)
+(apply-generic 'add arg1 arg2)
+;; type-tags <== (map type-tag (list arg1 arg2))
+;; type-tags <== '(scheme-number complex)
