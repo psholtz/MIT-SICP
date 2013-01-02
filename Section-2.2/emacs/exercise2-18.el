@@ -33,3 +33,20 @@
 ;; ==> (2 1)
 (reverse (list 1 2 3))
 ;; ==> (3 2 1)
+
+;;
+;; As an addendum, it's worth pointing out that we can define a "reverse" procedure 
+;; that runs in linear time:
+;;
+(defun reverse (original)
+  (defun reverse-iter (lst1 lst2)
+    (if (null lst1)
+	lst2
+      (reverse-iter (cdr lst1) (cons (car lst1) lst2))))
+  (reverse-iter original '()))
+
+;;
+;; Unit test:
+;;
+(reverse (list 1 2 3))
+;; ==> (3 2 1)
