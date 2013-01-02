@@ -32,6 +32,16 @@
 ;; This implementation is given in the following code:
 ;;
 
+;;
+;; Clojure has a range of "syntactic sugar" facilities which are not
+;; available on more "standard" implementations of Lisp. Let's start by
+;; giving the "standard" Lisp/Scheme implementation, and then give a
+;; more Clojure-esque way of solving this problem.
+;;
+;; We'll demarcate the two solutions using namespaces:
+;;
+(ns sicp.clojure.lisp)
+
 (defn square
   {:doc "Return square of the argument"}
   [n] (* n n))
@@ -67,3 +77,55 @@
   {:doc "Wrapper function to invoke iterative sqrt procedure"}
   [x]
   (sqrt-iter 1.0 x))
+
+;;
+;; Unit tests:
+;;
+(sqrt 2)
+;; ==>
+(sqrt 4)
+;; ==>
+
+;;
+;; Note that (sqrt 4) does not evaluate "exactly" to 2, since we are truncating
+;; the recursion at a specific tolerance level.
+;;
+
+;;
+;; =================================================================================
+;;
+
+;;
+;; Now let's give the most "Clojure-esque" way to approach this exercise:
+;;
+(ns sicp.clojure.joy)
+
+(defn square [n] (* n n))
+(defn average [x y] (/ (+ x y) 2.0))
+(defn improve [guess x] (average guess (/ x guess)))
+(defn good-enough? [guess x]
+  (def tolerance 0.001)
+  (< (Math/abs (- (/ (square guess) x) 1.0)) tolerance))
+
+;;
+;; So far, pretty much the same as before. But with Clojure we can use
+;; loops to accomplish the same this that is done with "recursion" in standard Lisp:
+;;
+(defn sqrt [x]
+  (loop [guess 1.0]
+    (if (good-enough? guess x)
+      guess
+      (recur (improve guess x)))))
+
+;;
+;; Unit tests:
+;;
+(sqrt 2)
+;; ==>
+(sqrt 4)
+;; ==>
+
+;;
+;; Note that (sqrt 4) does not evaluate "exactly" to 2, since we are truncating
+;; the recursion at a specific tolerance level.
+;; 
