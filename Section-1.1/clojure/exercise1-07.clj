@@ -109,7 +109,7 @@
 
 ;;
 ;; So far, pretty much the same as before. But with Clojure we can use
-;; loops to accomplish the same this that is done with "recursion" in standard Lisp:
+;; loops to accomplish the same thing that is done with "recursion" in standard Lisp:
 ;;
 (defn sqrt [x]
   (loop [guess 1.0]
