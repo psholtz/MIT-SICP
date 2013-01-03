@@ -28,8 +28,6 @@
 ;;
 ;; What happens if we call "exp" with two complex numbers as arguments?
 ;;
-;; [WORKING]
-;;
 
 ;;
 ;; First, let's define a "coercion" table:
