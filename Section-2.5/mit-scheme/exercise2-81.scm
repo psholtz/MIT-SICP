@@ -189,6 +189,9 @@
        (lambda (x) (tag x)))
   'done) 
 
+(install-scheme-number-package)
+;; ==> done
+
 ;;
 ;; We test out the new procedure:
 ;;
@@ -222,5 +225,158 @@
 ;;
 ;; If we try to evaluate (exp 2 3) again, it works well enough, and gives us the correct response.
 ;;
-;; 
+;; Again, as before we can trace (loosely) through the call graph to see why it works:
+;;
+;; (exp 2 3)
+;; (apply-generic 'exp 2 3)
+;; (map type-tag '(1 1))
+;; (let type-tags '(scheme-number scheme-number))
+;; (get 'exp '(scheme-number scheme-number))
+;;
+;; In other words, it works for the same reason why the procedures above work: the entry 
+;; for '(exp (scheme-number scheme-number)) is already in the operations table.
+;;
+;; The problems arise, however, when there is no entry in the operations table for this 
+;; particular operation. Before, the "apply-generic" procedure simply threw an exception 
+;; in this case, indicating that it could not find the appropriate handler in the operations
+;; table. Now, consider what happens:
+;;
+;; Because it is unable to find a procedure in the operations table corresponding to the 
+;; '(exp (complex complex)) tag, it falls into the "second half" of the "apply-generic" 
+;; procedure. "type1" and "type2" are both mapped to "complex", and the procedure succeeds
+;; in finding a coercion procedure to apply; that is, both "t1->t2" and "t2->t1" are mapped 
+;; to the "complex->complex" procedure that was inserted into the coercion table earlier. 
+;;
+;; The execution thread falls into the first clause of the conditional branch, and applies
+;; "t1->t2" to the first complex argument, result in that same argument, and then attempts
+;; to recursively (re-)apply the "apply-generic" procedure by invoking "(apply-generic 'exp a1 a2)", 
+;; when in fact this was the identical procedure call that we had just made(!)
+;;
+;; The result is an infinite loop, whereas previously execution had terminated at the "outer" 
+;; exception in "apply-generic", when the procedure had been able to identify either a matching
+;; entry either in the operations table, or in the coercion table.
+;;
+;; The danger is that in coercing one type to the same type, we aren't really "coercing" anything.
+;;
+;; Consequently, the semantics becomes sort of jumbled up, since the recursion in "apply-generic" 
+;; presumes that when the recursion is applied to "apply-generic", that the procedure will be 
+;; operating with a newly-typed argument, and not just with the same old argument type.
+;;
 
+;;
+;; (b) Is Louis correct that something had to be done about coercion with arguments of the same type
+;; or does "apply-generic" work correctly as is?
+;;
+
+;;
+;; Louis is not correct.
+;;
+;; "apply-generic" worked correctly without the modifications he proposed to the coercion table.
+;;
+;; Applying his modifications to the coercion table causes the possibility of infinite recursions
+;; if the operations table is not updated correspondingly, a risk which is not introduced if we 
+;; don't use his modifications to the coercion table. Moreover, by "coercing" arguments into the 
+;; same type as themselves, he is messing up the semantics of what it means to "coerce" an argument
+;; in the first place.
+;;
+
+;;
+;; (c) Modify "apply-generic" so that it doesn't try coercion if the two arguments have the same type.
+;;
+(define (apply-generic op . args)
+  ;; error handler
+  (define (handle-exception type-tags)
+    (error "No method for these types: " (list op type-tags)))
+
+  ;; actual procedure
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+	  (apply proc (map contents args))
+	  (if (= (length args) 2)
+	      (let ((type1 (car type-tags))
+		    (type2 (cadr type-tags))
+		    (a1 (car args))
+		    (a2 (cadr args)))
+		;; handle same types case
+		(if (equal? type1 type2)
+		    (handle-exception type-tags)
+		    (let ((t1->t2 (get-coercion type1 type2))
+			  (t2->t1 (get-coercion type2 type1)))
+		      (cond (t1->t2
+			     (apply-generic op (t1->t2 a1) a2))
+			    (t2->t1
+			     (apply-generic op a1 (t2->t1 a2)))
+			    (else
+			     (handle-exception type-tags))))))
+	      (handle-exception type-tags))))))
+
+;;
+;; Let's clean up the coercion table and try out this new procedure:
+;;
+(define coercion-table (make-table))
+(define get-coercion (coercion-table 'lookup-proc))
+(define put-coercion (coercion-table 'insert-proc!))
+(put-coercion 'scheme-number 'complex scheme-number->complex)
+
+;;
+;; Running through our unit tests:
+;;
+(add arg1 arg2)
+;; ==> (complex rectangular 3 . 3)
+(add arg2 arg1)
+;; ==> (complex rectangular 3 . 3)
+
+(sub arg1 arg2)
+;; ==> (complex rectangular -1 . -3)
+(sub arg2 arg1) 
+;; ==> (complex rectangular 1 . 3)
+
+(real-part (mul arg1 arg2))
+;; ==> 2
+(imag-part (mul arg1 arg2))
+;; ==> 3
+
+(real-part (mul arg2 arg1))
+;; ==> 2
+(imag-part (mul arg2 arg1))
+;; ==> 3
+
+(real-part (div arg2 arg1))
+;; ==> 2
+(imag-part (div arg2 arg1))
+;; ==> 3
+
+(add arg1 arg1)
+;; ==> 1 
+(sub arg1 arg1)
+;; ==> 0 
+(mul arg1 arg1)
+;; ==> 1 
+(div arg1 arg1)
+;; ==> 1
+
+(add arg2 arg2)
+;; ==> (complex rectangular 4 . 6)
+(sub arg2 arg2)
+;; ==> (complex rectangular 0 . 0)
+
+;;
+;; Now let's try the newly added "exp" procedure:
+;;
+(exp 2 3)
+;; ==> 8
+(exp 3 4)
+;; ==> 81
+
+;; 
+;; Again, these work as we anticipate. 
+;;
+;; How about for complex-complex exponentiation? 
+;;
+(exp arg2 arg2)
+;; ==> [No method for these types: (exp (complex complex))
+
+;;
+;; Which is the behavior that we desired.
+;;
