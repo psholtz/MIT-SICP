@@ -44,6 +44,7 @@
 
 ;;
 ;; We can do without inserting this one in the table:
+;; (call this "lower-rational->scheme-number")??
 ;;
 (define (raise-rational->scheme-number r)
   (let ((n (numer r))
