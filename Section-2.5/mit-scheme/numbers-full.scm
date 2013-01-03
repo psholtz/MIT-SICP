@@ -26,12 +26,28 @@
 	  (error "Bad tagged datum -- CONTENTS" datum))))
 
 (define (apply-generic op . args)
+  (define (handle-exception type-tags)
+    (error "No method for these types: " (list op type-tags)))
   (let ((type-tags (map type-tag args)))
     (let ((proc (get op type-tags)))
       (if proc
-	    (apply proc (map contents args))
-	      (error
-	          "No method for these types -- APPLY-GENERIC" (list op type-tags))))))
+	  (apply proc (map contents args))
+	  (if (= (length args) 2)
+	      (let ((type1 (car type-tags))
+		    (type2 (cadr type-tags))
+		    (a1 (car args))
+		    (a2 (cadr args)))
+		(if (equal? type1 type2)
+		    (handle-exception type-tags)
+		    (let ((t1->t2 (get-coercion type1 type2))
+			  (t2->t1 (get-coercion type2 type1)))
+		      (cond (t1->t2
+			     (apply-generic op (t1->t2 a1) a2))
+			    (t2->t1
+			     (apply-generic op a1 (t2->t1 a2)))
+			    (else
+			     (handle-exception type-tags))))))
+	      (handle-exception type-tags))))))
 
 ;; ============
 ;; Generic Math
@@ -40,6 +56,7 @@
 (define (sub x y) (apply-generic 'sub x y))
 (define (mul x y) (apply-generic 'mul x y))
 (define (div x y) (apply-generic 'div x y))
+(define (exp x y) (apply-generic 'exp x y))
 
 (define (equ? x y) (apply-generic 'equ? x y))
 (define (=zero? p) (apply-generic '=zero? p))
@@ -59,6 +76,8 @@
        (lambda (x y) (tag (* x y))))
   (put 'div '(scheme-number scheme-number)
        (lambda (x y) (tag (/ x y))))
+  (put 'exp '(scheme-number scheme-number)
+       (lambda (x y) (tag (expt x y))))
   (put 'equ? '(scheme-number scheme-number)
        (lambda (x y) (= x y)))
   (put '=zero? '(scheme-number)
