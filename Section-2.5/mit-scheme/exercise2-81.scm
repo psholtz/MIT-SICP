@@ -85,3 +85,85 @@
 ;; ==> 2
 (imag-part (div arg2 arg1))
 ;; ==> 3
+
+;;
+;; So thus far, everything appears to work just fine, without making Louis' changes.
+;;
+;; Let's see how these procedures work when combining arguments of the same type:
+;;
+(add arg1 arg1)
+;; ==> 2
+(sub arg1 arg1)
+;; ==> 0
+(mul arg1 arg1)
+;; ==> 1
+(div arg1 arg1)
+;; ==> 1
+
+(add arg2 arg2)
+;; ==> (complex rectangular 4 . 6)
+(sub arg2 arg2)
+;; ==> (complex rectangular 0 . 0)
+
+;;
+;; So here too, everything seems to work just fine as well.
+;;
+;; In that sense, perhaps we can address part (b) first:
+;;
+
+;;
+;; (b) Is Louis correct that something had to be done about coercion with arguments 
+;; of the same type, or does "apply-generic" work correctly as is?
+;;
+
+;;
+;; The answer is no, Louis is not correct. 
+;;
+;; Nothing has to be done with coercion of arguments of the same type, let's see why:
+;;
+;; Consider evaluation of the "(add arg1 arg1)" expression above:
+;;
+(add arg1 arg1)
+(add 1 1)
+(apply-generic 'add 1 1)
+;; type-tags <== (map type-tag '(1 1))
+;; type-tags <== '(scheme-number scheme-number)
+;; proc <== (get 'add type-tags)
+;; proc <== (get 'add '(scheme-number scheme-number))
+;; proc <== (lambda (x y) (tag (+ x y)))
+(apply proc (map contents '(1 1)))
+;; (map contents '(1 1)) <== '(1 1)
+(apply (lambda (x y) (tag (+ x y))) '(1 1))
+(apply (lambda (x y) (attach-tag 'scheme-number (+ x y))) '(1 1))
+(attach-tag 'scheme-number (+ 1 1))
+(attach-tag 'scheme-number 2)
+2
+
+;; 
+;; Similarly, let's consider the evaluation of the "(add arg2 arg2)" expression above:
+;;
+(add arg2 arg2)
+(add '(complex rectangular 2 . 3) '(complex rectangular 2 . 3))
+(apply-generic 'add '(complex rectangular 2 . 3) '(complex rectangular 2 . 3))
+;; type-tags <== (map type-tag '(complex rectangular 2 . 3) '(complex rectangular 2 . 3))
+;; type-tags <== '(complex complex)
+;; proc <== (get 'add '(complex complex))
+;; proc <== (lambda (z1 z2) (tag (add-complex z1 z2)))
+(apply proc (map contents '(complex rectangular 2 . 3) '(complex rectangular 2 . 3)))
+;; (map contents '(complex rectangular 2 . 3) '(complex rectangular 2 . 3)) <== '((rectangular 2 . 3) (rectangular 2 . 3))
+(apply (lambda (z1 z2) (tag (add-complex z1 z2))) '((rectangular 2 . 3) (rectangular 2 . 3)))
+(apply 
+ (lambda (z1 z2)
+   (attach-tag 'complex ((lambda (x y)
+			   (attach-tag 'rectangular (cons (+ (real-part x) (real-part y))
+							  (+ (imag-part x) (imag-part y)))))
+			 z1 z2)))
+ '((rectangular 2 . 3) (rectangular 2 . 3)))
+'(complex rectangular 4 . 6)
+
+;;
+;; So again, the procedure works fine as is.
+;;
+;; The reason is that the procedures for handling two arguments of the same type are already 
+;; added to the operations table.
+;;
