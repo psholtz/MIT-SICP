@@ -1,6 +1,33 @@
 ;;
 ;; Exercise 2.81
 ;;
+;; Louis Reasoner has noticed that "apply-generic" may try to coerce the arguments 
+;; to each other's type even if htey already have the same type. Therefore, he reasons, 
+;; we need to put procedures in the coercion table to "coerce" arguments of each type
+;; to their own type. For example, in addition to the "scheme-number->complex" coercion
+;; shown above, he would do:
+;;
+;; (define (scheme-number->scheme-number n) n)
+;; (define (complex->complex z) z)
+;; (put-coercion 'scheme-number 'scheme-number scheme-number->scheme-number)
+;; (put-coercion 'complex complex complex->complex)
+;;
+;; (a) With Louis' coercion procedures installed, what happens if "apply-generic"
+;; is called with two arguments of type "scheme-number" or two arguments of type
+;; "complex" for an operation that is not found in the table for those types? For example,
+;; assume that we've defined a generic exponentiation operation:
+;;
+;; (define (exp x y) (apply-generic 'exp x y))
+;;
+;; and have put a procedure for exponentiation in the Scheme-number package, but not
+;; in any other package.
+;;
+;; ;; following added to Scheme-number package:
+;; (put 'exp '(scheme-number scheme-number)
+;;  (lambda (x y) (tag (expt x y))))
+;;
+;; What happens if we call "exp" with two complex numbers as arguments?
+;;
 ;; [WORKING]
 ;;
 
@@ -108,62 +135,92 @@
 ;;
 ;; So here too, everything seems to work just fine as well.
 ;;
-;; In that sense, perhaps we can address part (b) first:
+;; The reason why is because the procedures for evaluating expressions where both 
+;; arguments of the same type have already been included in the operations table.
+;; For instance, invoking (add arg1 arg1) causes (in part) the following chain of 
+;; expressions to be evaluated:
+;;
+;; (add arg1 arg1)
+;; (add 1 1)
+;; (map type-tag '(1 1))
+;; (let type-tags '(scheme-number scheme-number)
+;; (get 'add '(scheme-number scheme-number))
+;;
+;; And of course an entry for '(add (scheme-number scheme-number)) was already present
+;; in the operations table.
+;;
+;; The same line of reasoning applies to evaluation of expressions involving two 
+;; rational types, or two complex types.
 ;;
 
 ;;
-;; (b) Is Louis correct that something had to be done about coercion with arguments 
-;; of the same type, or does "apply-generic" work correctly as is?
+;; Of course, this is not (exactly) what the question is asking us.
+;;
+;; Let's update the coercion and operations table according to the specifications 
+;; of the problem statement, and see whether Louis has a point. 
+;;
+;; First let's add an exponentiation procedure into the operations table, without
+;; doing anything else to the coercion table, and see what happens. We define the 
+;; generic math operation:
+;;
+(define (exp x y) (apply-generic 'exp x y))
+
+;;
+;; And modify the operations table for scheme-numbers as follows:
+;;
+(define (install-scheme-number-package)
+  (define (tag x)
+    (attach-tag 'scheme-number x))
+  (put 'add '(scheme-number scheme-number)
+       (lambda (x y) (tag (+ x y))))
+  (put 'sub '(scheme-number scheme-number)
+       (lambda (x y) (tag (- x y))))
+  (put 'mul '(scheme-number scheme-number)
+       (lambda (x y) (tag (* x y))))
+  (put 'div '(scheme-number scheme-number)
+       (lambda (x y) (tag (/ x y))))
+  (put 'equ? '(scheme-number scheme-number)
+       (lambda (x y) (= x y)))
+  (put '=zero? '(scheme-number)
+       (lambda (p) (= p 0)))
+  (put 'exp '(scheme-number scheme-number)
+       (lambda (x y) (tag (expt x y))))
+  (put 'make 'scheme-number
+       (lambda (x) (tag x)))
+  'done) 
+
+;;
+;; We test out the new procedure:
+;;
+(exp 2 3)
+;; ==> 8
+(exp 3 4)
+;; ==> 81 
+
+;;
+;; It works just fine without making modifications to the coercion table, for the same 
+;; reason that the previous examples worked: an entry for '(exp (scheme-number scheme-number))
+;; had already been added to the operations table.
 ;;
 
 ;;
-;; The answer is no, Louis is not correct. 
+;; Conversely, calling (exp arg2 arg2), i.e.., invoking the procedure for two complex 
+;; arguments, fails since there is no corresponding entry for '(exp (complex complex))
+;; in the operations table.
 ;;
-;; Nothing has to be done with coercion of arguments of the same type, let's see why:
-;;
-;; Consider evaluation of the "(add arg1 arg1)" expression above:
-;;
-(add arg1 arg1)
-(add 1 1)
-(apply-generic 'add 1 1)
-;; type-tags <== (map type-tag '(1 1))
-;; type-tags <== '(scheme-number scheme-number)
-;; proc <== (get 'add type-tags)
-;; proc <== (get 'add '(scheme-number scheme-number))
-;; proc <== (lambda (x y) (tag (+ x y)))
-(apply proc (map contents '(1 1)))
-;; (map contents '(1 1)) <== '(1 1)
-(apply (lambda (x y) (tag (+ x y))) '(1 1))
-(apply (lambda (x y) (attach-tag 'scheme-number (+ x y))) '(1 1))
-(attach-tag 'scheme-number (+ 1 1))
-(attach-tag 'scheme-number 2)
-2
 
+;;
+;; It's unclear why we would need to force coercion between two scheme-number types 
+;; in this instance, but let's go ahead and make Louis' modifications and see how 
+;; much havor this plays w/ the system:
+;;
+(define (scheme-number->scheme-number n) n)
+(define (complex->complex z) z)
+(put-coercion 'scheme-number 'scheme-number scheme-number->scheme-number)
+(put-coercion 'complex 'complex complex->complex)
+
+;;
+;; If we try to evaluate (exp 2 3) again, it works well enough, and gives us the correct response.
+;;
 ;; 
-;; Similarly, let's consider the evaluation of the "(add arg2 arg2)" expression above:
-;;
-(add arg2 arg2)
-(add '(complex rectangular 2 . 3) '(complex rectangular 2 . 3))
-(apply-generic 'add '(complex rectangular 2 . 3) '(complex rectangular 2 . 3))
-;; type-tags <== (map type-tag '(complex rectangular 2 . 3) '(complex rectangular 2 . 3))
-;; type-tags <== '(complex complex)
-;; proc <== (get 'add '(complex complex))
-;; proc <== (lambda (z1 z2) (tag (add-complex z1 z2)))
-(apply proc (map contents '(complex rectangular 2 . 3) '(complex rectangular 2 . 3)))
-;; (map contents '(complex rectangular 2 . 3) '(complex rectangular 2 . 3)) <== '((rectangular 2 . 3) (rectangular 2 . 3))
-(apply (lambda (z1 z2) (tag (add-complex z1 z2))) '((rectangular 2 . 3) (rectangular 2 . 3)))
-(apply 
- (lambda (z1 z2)
-   (attach-tag 'complex ((lambda (x y)
-			   (attach-tag 'rectangular (cons (+ (real-part x) (real-part y))
-							  (+ (imag-part x) (imag-part y)))))
-			 z1 z2)))
- '((rectangular 2 . 3) (rectangular 2 . 3)))
-'(complex rectangular 4 . 6)
 
-;;
-;; So again, the procedure works fine as is.
-;;
-;; The reason is that the procedures for handling two arguments of the same type are already 
-;; added to the operations table.
-;;
