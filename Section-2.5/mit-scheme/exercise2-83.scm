@@ -26,6 +26,9 @@
 ;; and avoid any such problems.
 ;;
 
+;;
+;; DO WE WANT TO ALLOW CYCLES in the tower graph?
+;;
 
 ;;
 ;; The tower and the problem statement mention transforming rationals to reals, and 
@@ -46,15 +49,37 @@
 ;; We can do without inserting this one in the table:
 ;; (call this "lower-rational->scheme-number")??
 ;;
-(define (raise-rational->scheme-number r)
+(define (lower-rational->scheme-number r)
   (let ((n (numer r))
 	(d (denom r)))
     (make-scheme-number (/ (* 1.0 n) (* 1.0 d)))))
 
 (define (raise-rational->complex r)
-  (let ((x (raise-rational->scheme-number r)))
+  (let ((x (lower-rational->scheme-number r)))
     (make-complex-from-real-imag x 0.0)))
 
+;;
+;; Run some unit tests:
+;;
+(raise-scheme-number->complex (make-scheme-number 3))
+;; ==> (complex rectangular 3 . 0.)
+(raise-scheme-number->complex (make-scheme-number 3.14))
+;; ==> (complex rectangular 3.14 . 0.)
+
+(raise-scheme-number->rational (make-scheme-number 3))
+;; ==> (rational 3 . 1)
+(raise-scheme-number->rational (make-scheme-number 3.14))
+;; ==> (complex rectangular 3.14 . 0.)
+
+(lower-rational->scheme-number (make-rational 3 1))
+;; ==> 3.
+(lower-rational->scheme-number (make-rational 5 4))
+;; ==> 1.25
+
+(raise-rational->complex (make-rational 3 1))
+;; ==> (complex rectangular 3. . 0.)
+(raise-rational->complex (make-rational 5 4))
+;; ==> (complex rectangular 1.25 . 0.)
 
 
       (make-scheme-number n))) ;; <-- potential source of problems!!!
