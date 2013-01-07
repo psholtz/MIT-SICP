@@ -16,26 +16,20 @@
 ;;
 ;; Accordingly, we will define two hierarchies that looks something more like:
 ;;
-;;       +------------------------------+
-;;       |                              | 
-;;       |                              v
-;;  scheme-number <---> rational ---> complex
+;;  scheme-number ---> rational ---> complex
 ;;
-;; Because of some of the "jumps" and "cycles" involved, this is possibly inviting
-;; trouble, but we will be sure and try to test our use cases thoroughly to try 
-;; and avoid any such problems.
+;; We will moreover define "helper" procedures that raise a scheme-number 
+;; directly to a complex (if the scheme number is not a rational number), and 
+;; which "lower" a rational number to a scheme-number (i.e., convert the 
+;; rational representation to a real-number representation as a scheme-number).
 ;;
 
 ;;
-;; DO WE WANT TO ALLOW CYCLES in the tower graph?
+;; This method uses the "exact-integer?" procedure which is built into MIT Scheme.
 ;;
-
-;;
-;; The tower and the problem statement mention transforming rationals to reals, and 
-;; reals to complex, but since we haven't added a "real" component 
-
-;;
-;; This method uses the "exact-integer?" procedure which is built into MIT Scheme:
+;; If the scheme-number is an "exact-integer", it is raised to a rational number,
+;; otherwise, the real scheme-number is used to construct (i.e., raise) a complex 
+;; number.
 ;;
 (define (raise-scheme-number->rational n)
   (if (exact-integer? n)
@@ -46,14 +40,20 @@
   (make-complex-from-real-imag n 0.0))
 
 ;;
-;; We can do without inserting this one in the table:
-;; (call this "lower-rational->scheme-number")??
+;; This procedure should not be inserted into the operations table 
+;; (at least, not without introducing cycles into the coercion graph, 
+;; which we don't want to contend with right now). It is, however, a 
+;; useful helper method in raising rational numbers to complex.
 ;;
 (define (lower-rational->scheme-number r)
   (let ((n (numer r))
 	(d (denom r)))
     (make-scheme-number (/ (* 1.0 n) (* 1.0 d)))))
 
+;;
+;; Raise a rational to complex by first converting it to a real 
+;; (i.e., scheme-number):
+;;
 (define (raise-rational->complex r)
   (let ((x (lower-rational->scheme-number r)))
     (make-complex-from-real-imag x 0.0)))
@@ -81,23 +81,22 @@
 (raise-rational->complex (make-rational 5 4))
 ;; ==> (complex rectangular 1.25 . 0.)
 
+;;
+;; Of the four methods defined above, although two need to be inserted into 
+;; the operations table: raise-scheme-number->rational and raise-rational->complex.
+;; The other two, raise-scheme-number->complex and lower-rational->scheme-numnber 
+;; are helper methods which can be implemented as inner procedures.
+;;
 
-      (make-scheme-number n))) ;; <-- potential source of problems!!!
-
-
-(define (raise-integer n)
-  (make-rational n 1))
-
-(define (raise-rational r)
-  (let ((n (numer r))
-	(d (denom r)))
-    (/ (* 1.0 n) (* 1.0 d))))
-
-(define (raise-real r)
-  (make-complex-from-real-imag r 0.0))
-
+;;
+;; We define the generic "raise" procedure:
+;;
 (define (raise x) (apply-generic 'raise x))
 
+
+
+(put 'raise '(scheme-number)
+     (lambda (x) (attach-tag 'ration
 
 (put 'raise '(integer)
      (lambda (x) (attach-tag 'rational (raise-integer x))))
