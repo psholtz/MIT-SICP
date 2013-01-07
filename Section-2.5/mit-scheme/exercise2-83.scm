@@ -18,6 +18,9 @@
 ;;
 ;;  scheme-number ---> rational ---> complex
 ;;
+;;
+;; [WORKING --> rewrite this part]
+;;
 ;; We will moreover define "helper" procedures that raise a scheme-number 
 ;; directly to a complex (if the scheme number is not a rational number), and 
 ;; which "lower" a rational number to a scheme-number (i.e., convert the 
@@ -27,36 +30,40 @@
 ;;
 ;; This method uses the "exact-integer?" procedure which is built into MIT Scheme.
 ;;
-;; If the scheme-number is an "exact-integer", it is raised to a rational number,
-;; otherwise, the real scheme-number is used to construct (i.e., raise) a complex 
-;; number.
-;;
 (define (raise-scheme-number->rational n)
+  ;; Helper method
+  (define (raise-scheme-number->complex n)
+    (make-complex-from-real-imag n 0.0))
+
+  ;; Raise depending on the type
   (if (exact-integer? n)
       (make-rational n 1)
       (raise-scheme-number->complex n)))
-
-(define (raise-scheme-number->complex n)
-  (make-complex-from-real-imag n 0.0))
-
-;;
-;; This procedure should not be inserted into the operations table 
-;; (at least, not without introducing cycles into the coercion graph, 
-;; which we don't want to contend with right now). It is, however, a 
-;; useful helper method in raising rational numbers to complex.
-;;
-(define (lower-rational->scheme-number r)
-  (let ((n (numer r))
-	(d (denom r)))
-    (make-scheme-number (/ (* 1.0 n) (* 1.0 d)))))
 
 ;;
 ;; Raise a rational to complex by first converting it to a real 
 ;; (i.e., scheme-number):
 ;;
 (define (raise-rational->complex r)
-  (let ((x (lower-rational->scheme-number r)))
-    (make-complex-from-real-imag x 0.0)))
+  ;; Helper method (determines if the argument is of type rational)
+  (define (is-rational? x)
+    (if (pair? x)
+	(let ((kind (car x)))
+	  (eq? kind 'rational))
+	#f))
+
+  ;; Helper method (lower the rational down to real/scheme-number)
+  (define (lower-rational->scheme-number x)
+    (let ((n (numer x))
+	  (d (denom x)))
+      (make-scheme-number (/ (* 1.0 n) (* 1.0 d)))))
+
+  ;; Raise to complex
+  (if (is-rational? r)
+      (let ((x (lower-rational->scheme-number r)))
+	(make-complex-from-real-imag x 0.0))
+      ;; default, just return the value
+      r))
 
 ;;
 ;; Run some unit tests:
@@ -82,25 +89,13 @@
 ;; ==> (complex rectangular 1.25 . 0.)
 
 ;;
-;; Of the four methods defined above, although two need to be inserted into 
-;; the operations table: raise-scheme-number->rational and raise-rational->complex.
-;; The other two, raise-scheme-number->complex and lower-rational->scheme-numnber 
-;; are helper methods which can be implemented as inner procedures.
-;;
-
-;;
 ;; We define the generic "raise" procedure:
 ;;
 (define (raise x) (apply-generic 'raise x))
 
-
-
-(put 'raise '(scheme-number)
-     (lambda (x) (attach-tag 'ration
-
-(put 'raise '(integer)
-     (lambda (x) (attach-tag 'rational (raise-integer x))))
-(put 'raise '(rational)
-     (lambda (x) (attach-tag 'real (raise-rational x))))
-(put 'raise '(real)
-     (lambda (x) (attach-tag 'complex (raise-real x))))
+;;
+;; Update the operations table:
+;;
+(put 'raise '(scheme-number) raise-scheme-number->rational)
+(put 'raise '(rational) raise-rational->complex)
+    
