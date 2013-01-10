@@ -5,28 +5,46 @@
 ;;
 
 ;;
-;; Both the tower diagram and the problem statement refer to a type hierarchy 
-;; something like the following:
+;; Both the tower diagram and the problem statement refer to a type hierarchy that
+;; looks something like the following:
 ;;
 ;;  integer --> rational --> real --> complex
 ;;
-;; We do not presently have an "integer" or "real" number package. Indeed, the 
-;; "scheme-number" package could be used as either, perhaps more appropriately 
-;; as "real" (since it handles reals), but to simply "substitute" the type 
-;; "scheme-number" in the above tower at two places would introduce ungainly 
-;; complications and cycles in our tower graph.
+;; We do not presently have an "integer" or "real" number package. 
+;; 
+;; Let's agree to use our pre-existing "scheme-number" package as the "real" package.
 ;;
-;; Let's instead simply agree to call the our present scheme-number package 
-;; as our "real" type, and we'll define a new "integer" package which 
-;; supports integer operations. Not that the division operation is not supported, 
-;; since integers in general are not closed under division.
-;;
+;; Let's furthermore design an "integer" package which will be very similar to 
+;; the "scheme-number" package, except that the domain will be restricted to integers.
+;; Notably, we will not support the division operation, since integers are not closed
+;; under the division operation.
+;; 
 (define (install-integer-package)
   (define (tag x)
     (attach-tag 'integer x))
-  
   (put 'add '(integer integer)
        (lambda (x y) (tag (+ x y))))
+  (put 'sub '(integer integer)
+       (lambda (x y) (tag (- x y))))
+  (put 'mul '(integer integer)
+       (lambda (x y) (tag (* x y))))
+  (put 'exp '(integer integer)
+       (lambda (x y) (tag (expt x y))))
+  (put 'equ? '(integer integer)
+       (lambda (x y) (= x y)))
+  (put '=zero? '(integer)
+       (lambda (p) (= p 0)))
+  (put 'make 'integer
+       (lambda (x) (tag x)))
+  'done)
+
+(define (make-integer n)
+  ((get 'make 'integer) n))
+  
+;;
+;; In practice, other than in name, there is little-to-no difference between the 
+;; "scheme-number" package and the "integer" package.
+;;
 
 ;;
 ;; We will also define a coercion procedure, to coerce the integers into 
