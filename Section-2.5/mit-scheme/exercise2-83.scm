@@ -10,7 +10,7 @@
 ;;
 ;;  integer --> rational --> real --> complex
 ;;
-;; We do not presently have an "integer" or "real" number package. 
+;; We do not presently have an "integer" or a "real" number package. 
 ;; 
 ;; Let's agree to use our pre-existing "scheme-number" package as the "real" package.
 ;;
