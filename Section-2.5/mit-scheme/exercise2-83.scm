@@ -47,6 +47,11 @@
 ;;
 
 ;;
+;; Install the integer package:
+;;
+(install-integer-package)
+
+;;
 ;; We will also define a coercion procedure, to coerce the integers into 
 ;; scheme-numbers, should this be required:
 ;;
@@ -54,6 +59,19 @@
   (make-scheme-number n))
 
 (put-coercion 'integer 'scheme-number integer->scheme-number)
+
+;;
+;; Let's run some unit tests:
+;;
+(define i1 (make-integer 2))
+(define i2 (make-integer 3))
+
+(add i1 i2)
+;; ==>
+(sub i1 i2)
+;; ==>
+(mul i1 i2)
+;; ==>
 
 
 ;;
