@@ -51,3 +51,17 @@
   (make-complex-from-real-imag (contents n) 0))
 
 (put-coercion 'scheme-number 'complex scheme-number->complex)
+
+;; Type-Raising/Coercion Table
+(define (raise-integer->rational n)
+  (make-rational n 1))
+(define (raise-rational->scheme-number r)
+  (let ((n (car r))
+	(d (cdr r)))
+    (make-scheme-number (exact->inexact (/ n d)))))
+(define (raise-scheme-number->complex n)
+  (make-complex-from-real-imag n 0))
+
+(put 'raise '(integer) raise-integer->rational)
+(put 'raise '(rational) raise-rational->scheme-number)
+(put 'raise '(scheme-number) raise-scheme-number->complex)

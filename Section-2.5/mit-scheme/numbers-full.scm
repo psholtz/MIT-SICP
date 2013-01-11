@@ -61,6 +61,31 @@
 (define (equ? x y) (apply-generic 'equ? x y))
 (define (=zero? p) (apply-generic '=zero? p))
 
+;; ======== 
+;; Integers
+;; ======== 
+(define (install-integer-package)
+  (define (tag x)
+    (cons 'integer x))
+  (put 'add '(integer integer)
+       (lambda (x y) (tag (+ x y))))
+  (put 'sub '(integer integer)
+       (lambda (x y) (tag (- x y))))
+  (put 'mul '(integer integer)
+       (lambda (x y) (tag (* x y))))
+  (put 'exp '(integer integer)
+       (lambda (x y) (tag (expt x y))))
+  (put 'equ? '(integer integer)
+       (lambda (x y) (= x y)))
+  (put '=zero? '(integer)
+       (lambda (p) (= p 0)))
+  (put 'make 'integer
+       (lambda (x) (tag (if (integer? x) x (truncate x)))))
+  'done)
+
+(define (make-integer n)
+  ((get 'make 'integer) n))
+
 ;; ============== 
 ;; Scheme Numbers
 ;; ============== 
