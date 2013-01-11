@@ -86,9 +86,9 @@
 ;;
 (make-integer 2)
 ;; ==> (integer . 2)
-(make-integer 2.1)
+(make-integer 2.1)     ;; <-- technically misusing the integer API, but handle gracefully
 ;; ==> (integer . 2.)
-(make-integer 2.6)
+(make-integer 2.6)     ;; <-- technically misusing the integer API, but handle gracefully
 ;; ==> (integer . 2.)
 
 ;;
@@ -144,27 +144,59 @@
 	   (error "Argument not scheme-number: " (type-tag n))))))
 
 ;;
-;; [TALK ABOUT HOW YOU HAVE TWO CHECKS ON TYPE IN tHE TWO RAISING PROFCEDURES
+;; There is a "close kinship" between integer types and real (i.e., scheme-number)
+;; types, a kinship which has tempted us into introducing cycles in the coercion
+;; graph earlier in the design process above. So as to simplify things from an end-user
+;; perspective, we've designed the deigned the raising procedures so that even if they 
+;; are "misused" and "misapplied" by the end-user (i.e., the end-user swaps interchanges
+;; between integers and scheme-numbers), the procedures should still work as advertised.
+;;
+;; Accordingly, we check on two types: integer and scheme-number, in the "integer raising"
+;; procedure and the "scheme-number" raising procedure.
 ;;
 
 ;;
-;; Run through some unit tests [WORKING]
+;; Run through some unit tests:
 ;;
 (raise-integer->rational (make-integer 2))
 ;; ==> (rational 2 . 1)
-(raise-integer->rational (make-integer 2.1))
+(raise-integer->rational (make-integer 2.1))  ;; <-- technically misuing the integer API, but handle gracefully
 ;; ==> (rational 2. . 1.)
-(raise-integer->rational (make-integer 2.6))
-;; ==> (rational . . 1.)
+(raise-integer->rational (make-integer 2.6))  ;; <-- technically misuing the integer API, but handle gracefully
+;; ==> (rational 2. . 1.)
 
+;;
+;; The next two examples are technically "misusing" the API,
+;; but so as to guard against "I/O" errors, let's put them here:
+;;
+(raise-integer->rational 3)    ;; <-- API misuse, but handle gracefully
+;; ==> (rational 3 . 1)
+(raise-integer->rational 3.1)  ;; <-- API misuse, but handle gracefully
+;; ==> (rational 3. . 1)
+
+;;
+;; Rational examples:
+;;
 (raise-rational->scheme-number (make-rational 1 2))
 ;; ==> 0.5
 (raise-rational->scheme-number (make-rational 3 1))
 ;; ==> 3.
 
+;;
+;; Scheme number examples:
+;;
 (raise-scheme-number->complex 3)
 ;; ==> (complex rectangular 3 . 0)
 (raise-scheme-number->complex 3.14)
+;; ==> (complex rectangular 3.14 . 0)
+
+;;
+;; Again, the next two examples are technically "misuing" 
+;; the API, but they're nice to have:
+;;
+(raise-scheme-number->complex (make-integer 3))
+;; ==> (complex rectangular 3 . 0)
+(raise-scheme-number->complex (make-integer 3.14))  ;; <-- technically misuing the integer API, but handle gracefully
 ;; ==> (complex rectangular 3.14 . 0)
 
 ;;
@@ -179,4 +211,30 @@
 (put 'raise '(rational) raise-rational->scheme-number)
 (put 'raise '(scheme-number) raise-scheme-number->complex)
 
-    
+;;
+;; Let's unit test the final generic "raise" procedure:
+;;
+(raise (make-integer 2))
+;; ==> (rational 2 . 1)
+(raise (make-integer 3))
+;; ==> (rational 3 . 1)
+(raise (make-integer 3.14)) ;; <-- technically misuing the integer API, but handle gracefully
+;; ==> (rational 3. . 1)
+
+(raise (make-rational 1 2))
+;; ==>
+(raise (make-ratioanl 4 3))
+;; ==>
+(raise (make-rational 5 1))
+;; ==>
+(raise (make-rational 10 2))
+;; ==>
+
+(raise 3)
+;; ==> (complex rectangular 3 . 0)
+(raise 3.14)
+;; ==> (complex rectangular 3.14 . 0)
+(raise (make-scheme-number 3))
+;; ==> (complex rectangular 3 . 0)
+(raise (make-scheme-number 3.14))
+;; ==> (complex rectangular 3.14 . 0)
