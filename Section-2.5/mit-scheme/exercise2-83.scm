@@ -1,6 +1,7 @@
 ;; 
 ;; Exercise 2.83
 ;;
+;; Suppose you are designing a generic arithmetic system for dealing with ...
 ;; [WORKING]
 ;;
 
