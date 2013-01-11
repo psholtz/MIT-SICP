@@ -21,10 +21,8 @@
 ;; 
 (define (install-integer-package)
   ;;
-  ;; We have to attach "real" tags for integer, 
-  ;; otherwise integers are indistinguishable from
-  ;; scheme-numbers (i.e., reals), and we get a 
-  ;; cycle in our conversion graph:
+  ;; We have to attach "real" tags for integer, otherwise integers are indistinguishable 
+  ;; from scheme-numbers (i.e., reals), and we get a cycle in our conversion graph:
   ;;
   (define (tag x)
     (cons 'integer x))
@@ -41,8 +39,7 @@
   (put '=zero? '(integer)
        (lambda (p) (= p 0)))
   ;;
-  ;; Check to make sure its an integer, 
-  ;; otherwise round to nearest integer:
+  ;; Check to make sure its an integer, otherwise round to nearest integer:
   ;;
   (put 'make 'integer
        (lambda (x) (tag (if (integer? x) x (round x)))))
@@ -52,11 +49,6 @@
 (define (make-integer n)
   ((get 'make 'integer) n))
   
-;;
-;; In practice, other than in name, there is little-to-no difference between the 
-;; "scheme-number" package and the "integer" package.
-;;
-
 ;;
 ;; Install the integer package:
 ;;
