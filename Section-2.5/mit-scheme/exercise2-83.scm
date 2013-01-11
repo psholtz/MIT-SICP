@@ -20,8 +20,14 @@
 ;; under the division operation.
 ;; 
 (define (install-integer-package)
+  ;;
+  ;; We have to attach "real" tags for integer, 
+  ;; otherwise integers are indistinguishable from
+  ;; scheme-numbers (i.e., reals), and we get a 
+  ;; cycle in our conversion graph:
+  ;;
   (define (tag x)
-    (attach-tag 'integer x))
+    (cons 'integer x))
   (put 'add '(integer integer)
        (lambda (x y) (tag (+ x y))))
   (put 'sub '(integer integer)
@@ -58,14 +64,10 @@
 
 ;;
 ;; We will also define a coercion procedure, to coerce the integers into 
-;; scheme-numbers, should this be required (strictly speaking, this is 
-;; overkill, since for both "scheme-number" and "integer" the tags are 
-;; removed and the interpreter manipulates these symbols as per the rules
-;; of standard arithmetic .. but for the sake of completeness and consistency,
-;; let's define and install these methods):
+;; scheme-numbers, i.e., reals, should this be required:
 ;;
 (define (integer->scheme-number n)
-  (make-scheme-number n))
+  (make-scheme-number (contents n)))
 
 (put-coercion 'integer 'scheme-number integer->scheme-number)
 
@@ -73,17 +75,20 @@
 ;; Let's run some unit tests:
 ;;
 (define i1 (make-integer 2))
+;; ==> (integer . 2)
 (define i2 (make-integer 3))
+;; ==> (integer . 3)
 (define i3 (make-integer 0))
+;; ==> (integer . 0)
 
 (add i1 i2)
-;; ==> 5
+;; ==> (integer . 5)
 (sub i1 i2)
-;; ==> -1
+;; ==> (integer . -1)
 (mul i1 i2)
-;; ==> 6
+;; ==> (integer . 6)
 (exp i1 i2)
-;; ==> 8
+;; ==> (integer . 8)
 (equ? i1 i2)
 ;; ==> #f
 (equ? i1 i1)
@@ -94,9 +99,31 @@
 ;; ==> #t
 
 ;;
-;; The "coercion" allows us to divide integers anyway (even though we didn't
-;; define the procedure for this type):
+;; Let's see if we only get "integers" when constructing integers:
 ;;
+(make-integer 2)
+;; ==> (integer . 2)
+(make-integer 2.1)
+;; ==> (integer . 2.)
+(make-integer 2.6)
+;; ==> (integer . 3.)
+
+;;
+;; Note that we cannot divide integers (as is appropriate), since integers are 
+;; not closed under division, and we have not defined a "div" procedure for types
+;; '(integer integer):
+;;
+(div i1 i2)
+;; ==> No method for these types: (div (integer integer))
+
+;;
+;; Neither can we combine integers and scheme-numbers (i.e., reals) as you 
+;; might expect, since we haven't defined coercion for these types:
+;;
+(add
+
+
+
 (div i1 i2)
 ;; ==> 2/3
 
@@ -197,7 +224,8 @@
 ;;
 ;; And we update the operations table:
 ;;
-(put 'raise '(scheme-number) raise-scheme-number->rational)
-(put 'raise '(rational)
-     (lambda (z) (attach-tag 'complex (raise-rational->complex z))))
+(put 'raise '(integer) raise-integer->rational)
+(put 'raise '(rational) raise-rational->scheme-number)
+(put 'raise '(scheme-number) raise-scheme-number->complex)
+
     
