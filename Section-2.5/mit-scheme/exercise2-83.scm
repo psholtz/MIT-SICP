@@ -55,15 +55,6 @@
 (install-integer-package)
 
 ;;
-;; We will also define a coercion procedure, to coerce the integers into 
-;; scheme-numbers, i.e., reals, should this be required:
-;;
-(define (integer->scheme-number n)
-  (make-scheme-number (contents n)))
-
-(put-coercion 'integer 'scheme-number integer->scheme-number)
-
-;;
 ;; Let's run some unit tests:
 ;;
 (define i1 (make-integer 2))
@@ -112,81 +103,40 @@
 ;; Neither can we combine integers and scheme-numbers (i.e., reals) as you 
 ;; might expect, since we haven't defined coercion for these types:
 ;;
-(add
-
-
-
-(div i1 i2)
-;; ==> 2/3
-
-;;
-;; Let's see if we only get "integers" when constructing integers:
-;;
-(make-integer 2)
-;; ==> 2
-(make-integer 2.1)
-;; ==> 2.
-(make-integer 2.6)
-;; ==> 3.
-
-;;
-;; Let's see if we can combine integers with scheme-numbers (of course we can, 
-;; for the reasons cited above, but still run the unit tests):
-;;
 (define s1 (make-scheme-number 2))
-(define s2 (make-scheme-number 3))
 
-(add i1 s2)
-;; ==> 5
-(add s2 i1)
-;; ==> 5
-
-(sub i1 s2)
-;; ==> -1
-(sub s2 i1)
-;; ==> 1
-
-(mul i1 s2)
-;; ==> 6
-(mul s2 i1)
-;; ==> 6
-
-(exp i1 s2)
-;; ==> 8
-(exp s2 i1)
-;; ==> 9
-
-(equ? i1 s2)
-;; ==> #f
-(equ? s2 i1)
-;; ==> #f
-
-(equ? i1 s1)
-;; ==> #t
-(equ? s1 i1)
-;; ==> #t
-
-;;
-;; As per "coercion", we can even perform division:
-;;
-(div i1 s2)
-;; ==> 2/3
-(div s2 i1)
-;; ==> 3/2
+(add i1 s1)
+;; ==> No method for these types: (add (integer scheme-number))
+(sub i1 a1)
+;; ==> No method for these types: (sub (integer scheme-number))
+(mul i1 s1)
+;; ==> No method for these types: (mul (integer scheme-number))
+(exp i1 s1)
+;; ==> No method for these types: (exp (integer scheme-number))
 
 ;;
 ;; Now let's define our "raise" procedures:
 ;;
 (define (raise-integer->rational n)
-  (make-rational n 1))
+  (let ((kind (type-tag n)))
+    (cond ((equal? kind 'integer)
+	   (make-rational (contents n) 1))
+	  (else
+	   (error "Argument not an integer: " (type-tag n))))))
 
 (define (raise-rational->scheme-number r)
-  (let ((n (numer r))
-	(d (denom r)))
-    (make-scheme-number (exact->inexact (/ n d)))))
-
+  (let ((kind (type-tag r)))
+    (cond ((equal? kind 'rational)
+	   (let ((n (numer r))
+		 (d (denom r)))
+	     (make-scheme-number (exact->inexact (/ n d)))))
+	  (error "Argument not rational: " (type-tag r)))))
+    
 (define (raise-scheme-number->complex n)
-  (make-complex-from-real-imag n 0))
+  (let ((kind (type-tag n)))
+    (if (equal? kind 'scheme-number)
+	(make-complex-from-real-imag n 0)
+	(error "Argument not scheme-number: " (type-tag n)))))
 
 ;;
 ;; Run through some unit tests:
