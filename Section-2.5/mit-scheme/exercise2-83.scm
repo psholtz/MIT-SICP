@@ -39,10 +39,10 @@
   (put '=zero? '(integer)
        (lambda (p) (= p 0)))
   ;;
-  ;; Check to make sure its an integer, otherwise round to nearest integer:
+  ;; Check to make sure its an integer, otherwise truncate:
   ;;
   (put 'make 'integer
-       (lambda (x) (tag (if (integer? x) x (round x)))))
+       (lambda (x) (tag (if (integer? x) x (truncate x)))))
 
   'done)
 
@@ -89,7 +89,7 @@
 (make-integer 2.1)
 ;; ==> (integer . 2.)
 (make-integer 2.6)
-;; ==> (integer . 3.)
+;; ==> (integer . 2.)
 
 ;;
 ;; Note that we cannot divide integers (as is appropriate), since integers are 
@@ -121,6 +121,8 @@
   (let ((kind (type-tag n)))
     (cond ((equal? kind 'integer)
 	   (make-rational (contents n) 1))
+	  ((equal? kind 'scheme-number)
+	   (make-rational (truncate n) 1))
 	  (else
 	   (error "Argument not an integer: " (type-tag n))))))
 
@@ -134,19 +136,26 @@
     
 (define (raise-scheme-number->complex n)
   (let ((kind (type-tag n)))
-    (if (equal? kind 'scheme-number)
-	(make-complex-from-real-imag n 0)
-	(error "Argument not scheme-number: " (type-tag n)))))
+    (cond ((equal? kind 'scheme-number)
+	   (make-complex-from-real-imag n 0))
+	  ((equal? kind 'integer)
+	   (make-complex-from-real-imag (contents n) 0))
+	  (else
+	   (error "Argument not scheme-number: " (type-tag n))))))
 
 ;;
-;; Run through some unit tests:
+;; [TALK ABOUT HOW YOU HAVE TWO CHECKS ON TYPE IN tHE TWO RAISING PROFCEDURES
+;;
+
+;;
+;; Run through some unit tests [WORKING]
 ;;
 (raise-integer->rational (make-integer 2))
 ;; ==> (rational 2 . 1)
 (raise-integer->rational (make-integer 2.1))
 ;; ==> (rational 2. . 1.)
 (raise-integer->rational (make-integer 2.6))
-;; ==> (rational 3. . 1.)
+;; ==> (rational . . 1.)
 
 (raise-rational->scheme-number (make-rational 1 2))
 ;; ==> 0.5
