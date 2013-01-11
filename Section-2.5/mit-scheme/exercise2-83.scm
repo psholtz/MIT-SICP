@@ -8,7 +8,7 @@
 ;; Both the tower diagram and the problem statement refer to a type hierarchy that
 ;; looks something like the following:
 ;;
-;;  integer --> rational --> real --> complex
+;;  INTEGER --> RATIONAL --> REAL --> COMPLEX
 ;;
 ;; We do not presently have an "integer" or a "real" number package. 
 ;; 
