@@ -42,16 +42,6 @@
 (define get (operation-table 'lookup-proc))
 (define put (operation-table 'insert-proc!))
 
-;; Coercion Table
-(define coercion-table (make-table))
-(define get-coercion (coercion-table 'lookup-proc))
-(define put-coercion (coercion-table 'insert-proc!))
-
-(define (scheme-number->complex n)
-  (make-complex-from-real-imag (contents n) 0))
-
-(put-coercion 'scheme-number 'complex scheme-number->complex)
-
 ;; Type-Raising/Coercion Table
 (define (raise-integer->rational n)
   (make-rational n 1))
@@ -65,3 +55,13 @@
 (put 'raise '(integer) raise-integer->rational)
 (put 'raise '(rational) raise-rational->scheme-number)
 (put 'raise '(scheme-number) raise-scheme-number->complex)
+
+;; Coercion Table
+(define coercion-table (make-table))
+(define get-coercion (coercion-table 'lookup-proc))
+(define put-coercion (coercion-table 'insert-proc!))
+
+(define (scheme-number->complex n)
+  (make-complex-from-real-imag (contents n) 0))
+
+(put-coercion 'scheme-number 'complex scheme-number->complex)
