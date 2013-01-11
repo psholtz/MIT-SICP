@@ -118,68 +118,46 @@
 ;; Now let's define our "raise" procedures:
 ;;
 (define (raise-integer->rational n)
-  (let ((kind (type-tag n)))
-    (cond ((equal? kind 'integer)
-	   (make-rational (contents n) 1))
-	  ((equal? kind 'scheme-number)
-	   (make-rational (truncate n) 1))
-	  (else
-	   (error "Argument not an integer: " (type-tag n))))))
+  (make-rational n 1))
 
 (define (raise-rational->scheme-number r)
-  (let ((kind (type-tag r)))
-    (cond ((equal? kind 'rational)
-	   (let ((n (numer r))
-		 (d (denom r)))
-	     (make-scheme-number (exact->inexact (/ n d)))))
-	  (error "Argument not rational: " (type-tag r)))))
-    
+  (let ((n (car r))
+	(d (cdr r)))
+    (make-scheme-number (exact->inexact (/ n d)))))
+
 (define (raise-scheme-number->complex n)
-  (let ((kind (type-tag n)))
-    (cond ((equal? kind 'scheme-number)
-	   (make-complex-from-real-imag n 0))
-	  ((equal? kind 'integer)
-	   (make-complex-from-real-imag (contents n) 0))
-	  (else
-	   (error "Argument not scheme-number: " (type-tag n))))))
+  (make-complex-from-real-imag n 0))
 
 ;;
-;; There is a "close kinship" between integer types and real (i.e., scheme-number)
-;; types, a kinship which has tempted us into introducing cycles in the coercion
-;; graph earlier in the design process above. So as to simplify things from an end-user
-;; perspective, we've designed the deigned the raising procedures so that even if they 
-;; are "misused" and "misapplied" by the end-user (i.e., the end-user swaps interchanges
-;; between integers and scheme-numbers), the procedures should still work as advertised.
+;; Tracing the call graph through "apply-generic", we see that the 
+;; arguments to each of these procedures is not the tagged type 
+;; per se, but rather the contents of the tagged type. 
 ;;
-;; Accordingly, we check on two types: integer and scheme-number, in the "integer raising"
-;; procedure and the "scheme-number" raising procedure.
+;; So for instance, the argument to "raise-rational->scheme-number" 
+;; is not really, e.g., (rational 1 . 2), but only the "contents"
+;; of this data structure, e.g., (1 . 2).
+;;
+;; This same reasoning applies to all the "raise" procedures.
 ;;
 
 ;;
 ;; Run through some unit tests:
 ;;
-(raise-integer->rational (make-integer 2))
+(raise-integer->rational (contents (make-integer 2)))
 ;; ==> (rational 2 . 1)
-(raise-integer->rational (make-integer 2.1))  ;; <-- technically misuing the integer API, but handle gracefully
+(raise-integer->rational (contents (make-integer 2.1)))  ;; <-- technically misuing integer API, but handle gracefully
 ;; ==> (rational 2. . 1.)
-(raise-integer->rational (make-integer 2.6))  ;; <-- technically misuing the integer API, but handle gracefully
+(raise-integer->rational (contents (make-integer 2.6)))  ;; <-- technically misuing integer API, but handle gracefully
 ;; ==> (rational 2. . 1.)
-
-;;
-;; The next two examples are technically "misusing" the API,
-;; but so as to guard against "I/O" errors, let's put them here:
-;;
-(raise-integer->rational 3)    ;; <-- API misuse, but handle gracefully
-;; ==> (rational 3 . 1)
-(raise-integer->rational 3.1)  ;; <-- API misuse, but handle gracefully
-;; ==> (rational 3. . 1)
 
 ;;
 ;; Rational examples:
 ;;
-(raise-rational->scheme-number (make-rational 1 2))
+(raise-rational->scheme-number (contents (make-rational 1 2)))
 ;; ==> 0.5
-(raise-rational->scheme-number (make-rational 3 1))
+(raise-rational->scheme-number (contents (make-rational 3 1)))
+;; ==> 3.
+(raise-rational->scheme-number (contents (make-rational 6 2)))
 ;; ==> 3.
 
 ;;
@@ -189,14 +167,13 @@
 ;; ==> (complex rectangular 3 . 0)
 (raise-scheme-number->complex 3.14)
 ;; ==> (complex rectangular 3.14 . 0)
-
-;;
-;; Again, the next two examples are technically "misuing" 
-;; the API, but they're nice to have:
-;;
-(raise-scheme-number->complex (make-integer 3))
+(raise-scheme-number->complex (make-scheme-number 3))
 ;; ==> (complex rectangular 3 . 0)
-(raise-scheme-number->complex (make-integer 3.14))  ;; <-- technically misuing the integer API, but handle gracefully
+(raise-scheme-number->complex (make-scheme-number 3.14))
+;; ==> (complex rectangular 3.14 . 0)
+(raise-scheme-number->complex (contents (make-scheme-number 3)))    ;; <-- models how call is really made
+;; ==> (complex rectangular 3 . 0) 
+(raise-scheme-number->complex (contents (make-scheme-number 3.14))) ;; <-- models how call is really made
 ;; ==> (complex rectangular 3.14 . 0)
 
 ;;
@@ -222,14 +199,14 @@
 ;; ==> (rational 3. . 1)
 
 (raise (make-rational 1 2))
-;; ==>
+;; ==> 0.5
 (raise (make-ratioanl 4 3))
-;; ==>
+;; ==> 1.33333333333
 (raise (make-rational 5 1))
-;; ==>
+;; ==> 5.
 (raise (make-rational 10 2))
-;; ==>
-
+;; ==> 5.
+ 
 (raise 3)
 ;; ==> (complex rectangular 3 . 0)
 (raise 3.14)
