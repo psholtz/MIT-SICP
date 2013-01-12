@@ -297,6 +297,7 @@
 (define (angle z) (apply-generic 'angle z))
 
 ;; Install the Number Packages
+(install-integer-package)
 (install-scheme-number-package)
 (install-rational-package)
 (install-rectangular-package)
