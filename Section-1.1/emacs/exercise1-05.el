@@ -41,4 +41,3 @@
 ;; On the other hand, if the interpreter uses normal-order evaluation,
 ;; the procedure will return 0.
 ;;
-
