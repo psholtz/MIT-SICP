@@ -31,7 +31,6 @@
 ;;
 ;; The procedure will then execute correctly:
 ;;
-
 (a-plus-abs-b 1 1)
 ;; returns 2
 
