@@ -32,10 +32,13 @@
 ;; The procedure will then execute correctly:
 ;;
 (a-plus-abs-b 1 1)
-;; returns 2
+;; ==> 2
 
 (a-plus-abs-b 1 -1)
-;; returns 2
+;; ==> 2
+
+(a-plus-abs-b 1 0)
+;; ==> 1
 
 ;;
 ;; Some other forms which, in Common Lisp, should also produce the desired result include:

@@ -17,7 +17,10 @@
 ;;
 
 (a-plus-abs-b 1 1)
-;; returns 2
+;; ==> 2
 
 (a-plus-abs-b 1 -1)
-;; returns 2
+;; ==> 2
+
+(a-plus-abs-b 1 0)
+;; ==> 1
