@@ -24,3 +24,17 @@
 	((eq y smallest) (sum-of-squares x z))
 	((eq z smallest) (sum-of-squares x y))
 	(t -1)))
+
+;;
+;; Run unit tests:
+;;
+(= (f 1 1 1) 2)
+(= (f 1 1 2) 5)
+(= (f 1 2 1) 5)
+(= (f 2 1 1) 5)
+(= (f 1 2 3) 13)
+(= (f 1 3 2) 13)
+(= (f 2 1 3) 13)
+(= (f 2 3 1) 13)
+(= (f 3 1 2) 13)
+(= (f 3 2 1) 13)
