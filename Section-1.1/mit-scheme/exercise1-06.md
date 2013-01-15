@@ -38,7 +38,7 @@ We follow the evaluation of `(sqrt 2.0)` using an applicative-order evaluation m
 ```scheme
 (sqrt 2.0)
 (sqrt-iter 1.0 2.0)
-(new-if (good-enough? 1.0 2.0) 1.0 (sqrt-iter (improve 1.0) 2.0))
+(new-if (good-enough? 1.0 2.0) 1.0 (sqrt-iter (improve 1.0 2.0) 2.0))
 ```
 
 Since `new-if` is not a special form, the interpreter will attempt to evaluate both the `(good-enough? 1.0 2.0)` operand
@@ -58,8 +58,8 @@ Evaluation of the `(good-enough? 1.0 2.0)` operand is straightforward enough:
 Evaluation of `(sqrt-iter (improve 1.0) 2.0)` proves to be more problematic:
 
 ```scheme
-(sqrt-iter (improve 1.0) 2.0)
-(new-if (good-enough? (improve 1.0) 2.0) 1.0 (sqrt-iter (improve (improve 1.0)) 2.0))
+(sqrt-iter (improve 1.0 2.0) 2.0)
+(new-if (good-enough? (improve 1.0 2.0) 2.0) 1.0 (sqrt-iter (improve (improve 1.0 2.0) 2.0) 2.0))
 ```
 
 We are, in a sense, back to where we started from (only with `(improve 1.0)`, rather than `1.0` being the 
