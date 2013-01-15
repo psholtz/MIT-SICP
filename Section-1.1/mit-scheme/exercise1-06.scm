@@ -78,15 +78,15 @@
 ;; Roughly speaking, the evaluation proceeds as follows:
 ;;
 ;; (sqrt-iter 1.0 2.0)
-;; (new-if (good-enough? 1.0 2.0) 1.0 (sqrt-iter (improve 1.0) 2.0))
+;; (new-if (good-enough? 1.0 2.0) 1.0 (sqrt-iter (improve 1.0 2.0) 2.0))
 ;;
 ;; At this point, the interpreter will attempt to evaluate the operands
 ;; to new-if, before applying new-if to the operands. (good-enough? 1.0 2.0)
 ;; evaluates to #f, but sqrt-iter is recursively defined, and includes in 
 ;; its definition another instance of new-if:
 ;;
-;; (sqrt-iter (improve 1.0) 2.0)
-;; (new-if (good-enough? (improve 1.0) 2.0) (improve 1.0) (sqrt-iter (improve (improve 1.0)) 2.0))
+;; (sqrt-iter (improve 1.0 2.0) 2.0)
+;; (new-if (good-enough? (improve 1.0 2.0) 2.0) (improve 1.0 2.0) (sqrt-iter (improve (improve 1.0 2.0) 2.0) 2.0))
 ;;
 ;; It's easy to see that this process results in an infinite recursion, hanging
 ;; the interpreter.
@@ -96,4 +96,3 @@
 ;; This code will hang the interpreter:
 ;;
 (sqrt-iter 1.0 2.0)
-
