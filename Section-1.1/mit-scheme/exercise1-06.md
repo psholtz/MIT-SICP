@@ -55,7 +55,7 @@ Evaluation of the `(good-enough? 1.0 2.0)` operand is straightforward enough:
 #f
 ```
 
-Evaluation of `(sqrt-iter (improve 1.0) 2.0)` proves to be more problematic:
+Evaluation of `(sqrt-iter (improve 1.0 2.0) 2.0)` proves to be more problematic:
 
 ```scheme
 (sqrt-iter (improve 1.0 2.0) 2.0)
