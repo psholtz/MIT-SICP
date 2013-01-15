@@ -66,7 +66,6 @@
 	  guess
 	  (sqrt-iter (improve guess x) x)))
 
-
 ;;
 ;; Attempting to run this code through the emacs lisp interpreter, which 
 ;; uses applicative-order evaluation, will result in an infinite 
