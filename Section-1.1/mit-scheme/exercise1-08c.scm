@@ -23,4 +23,3 @@
 	guess
 	(cube-root-iter (improve guess))))
   (cube-root-iter 1.0))
-
