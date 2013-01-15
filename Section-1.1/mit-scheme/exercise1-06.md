@@ -59,7 +59,7 @@ Evaluation of `(sqrt-iter (improve 1.0 2.0) 2.0)` proves to be more problematic:
 
 ```scheme
 (sqrt-iter (improve 1.0 2.0) 2.0)
-(new-if (good-enough? (improve 1.0 2.0) 2.0) 1.0 (sqrt-iter (improve (improve 1.0 2.0) 2.0) 2.0))
+(new-if (good-enough? (improve 1.0 2.0) 2.0) (improve 1.0 2.0) (sqrt-iter (improve (improve 1.0 2.0) 2.0) 2.0))
 ```
 
 We are, in a sense, back to where we started from (only with `(improve 1.0)`, rather than `1.0` being the 
