@@ -76,4 +76,3 @@
 ;;
 (defun good-enough? (guess x)
   (< (abs (- (/ (square guess) x) 1.0)) 0.001))
-
