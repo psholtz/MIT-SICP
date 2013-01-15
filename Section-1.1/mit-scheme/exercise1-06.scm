@@ -96,4 +96,3 @@
 ;; This code will hang the interpreter:
 ;;
 (sqrt-iter 1.0 2.0)
-
