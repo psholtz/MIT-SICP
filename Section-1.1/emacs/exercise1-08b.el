@@ -25,7 +25,7 @@
 ;; Use the "new" method of approximation, based on fractional changes.
 ;;
 (defun good-enough? (guess x)
-  (setq tolerance 0.001)
+  (defvar tolerance 0.001)
   (< (abs (- (/ (square guess) x) 1.0)) tolerance))
 
 ;;

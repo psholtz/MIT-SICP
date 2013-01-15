@@ -34,7 +34,7 @@
 ;; Use the "new" method of approximation based on fractional differences.
 ;;
 (defun good-enough? (guess x)
-  (setq tolerance 0.001)
+  (defvar tolerance 0.001)
   (< (abs (- (/ (cube guess) x) 1.0)) tolerance))
 
 ;;

@@ -13,7 +13,7 @@
 ;; Block defining the cube root procedure.
 ;;
 (defun cube-root (x)
-  (setq tolerance 0.001)
+  (defvar tolerance 0.001)
   (defun good-enough? (guess)
     (< (abs (- (/ (cube guess) x) 1.0)) tolerance))
   (defun improve (guess)

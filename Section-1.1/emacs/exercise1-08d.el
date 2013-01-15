@@ -13,7 +13,7 @@
 ;; Block defining the square root procedure.
 ;;
 (defun sqrt (x)
-  (setq tolerance 0.001)
+  (defvar tolerance 0.001)
   (defun good-enough? (guess)
     (< (abs (- (/ (square guess) x) 1.0)) tolerance))
   (defun improve (guess)
