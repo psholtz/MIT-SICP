@@ -126,4 +126,3 @@ print "Amount:", c
 print "Count:", change.count_change(c)  
 print "cc invoked:", change.invocation_count
 print
-
