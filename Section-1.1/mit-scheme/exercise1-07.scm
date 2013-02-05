@@ -60,7 +60,7 @@
   (< (abs (- (/ (square guess) x) 1.0)) 0.001))
 
 ;;
-;; Run some tests on large and small numbers:
+;; Run some unit tests on large and small numbers:
 ;;
 (sqrt 1)
 ;; ==> 1.0
