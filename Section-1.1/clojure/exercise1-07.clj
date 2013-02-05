@@ -79,20 +79,25 @@
   (sqrt-iter 1.0 x))
 
 ;;
-;; Unit tests:
+;; Run some unit tests on large and small numbers:
 ;;
+(sqrt 1)
+;; ==> 1.0
 (sqrt 2)
 ;; ==> 1.4142156862745097
+(sqrt 3)
+;; ==> 1.7321428571428572
 (sqrt 4)
 ;; ==> 2.000609756097561
+(sqrt 9)
+;; ==> 3.00009155413138
+(sqrt 0.01)
+;; ==> 0.10000052895642693
+(sqrt 0.0001)
+;; ==> 0.010000714038711746
 
 ;;
-;; Note that (sqrt 4) does not evaluate "exactly" to 2, since we are truncating
-;; the recursion at a specific tolerance level.
-;;
-
-;;
-;; =================================================================================
+;; ====================================================================================
 ;;
 
 ;;
@@ -118,15 +123,25 @@
       (recur (improve guess x)))))
 
 ;;
-;; Unit tests:
+;; Run some unit tests on large and small numbers:
 ;;
+(sqrt 1)
+;; ==> 1.0 
 (sqrt 2)
 ;; ==> 1.4142156862745097
+(sqrt 3)
+;; ==> 1.7321428571428572
 (sqrt 4)
 ;; ==> 2.000609756097561
+(sqrt 9)
+;; ==> 3.00009155413138
+(sqrt 0.01)
+;; ==> 0.10000052895642693
+(sqrt 0.0001)
+;; ==> 0.010000714038711746
 
 ;;
-;; Note that (sqrt 4) does not evaluate "exactly" to 2, since we are truncating
+;; Note that, e.g.,  (sqrt 4) does not evaluate "exactly" to 2, since we are truncating
 ;; the recursion at a specific tolerance level. Note also that we recieve the "same"
 ;; answers, down to the same level of precision, as we did in the previous version.
 ;;
