@@ -25,3 +25,18 @@
 	guess
       (sqrt-iter (improve guess))))
   (sqrt-iter 1.0))
+
+;;
+;; Run some unit tests:
+;;
+(sqrt 1)
+;; ==> 
+
+(sqrt 2)
+;; ==>
+
+(sqrt 3)
+;; ==>
+
+(sqrt 4)
+;; ==>
