@@ -37,3 +37,18 @@
 
 (define (average x y)
   (/ (+ x y) 2))
+
+;;
+;; Run some unit tests:
+;;
+(sqrt 1)
+;; ==>
+
+(sqrt 2)
+;; ==>
+
+(sqrt 3)
+;; ==>
+
+(sqrt 4)
+;; ==>

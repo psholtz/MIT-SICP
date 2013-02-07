@@ -42,3 +42,15 @@
 ;;
 (define (improve guess x)
   (/ (+ (/ x (* guess guess)) (* 2 guess)) 3))
+
+;;
+;; Run some unit tests:
+;;
+(cube-root 2)
+;; ==> 1.2599334393449977
+
+(cube-root 3)
+;; ==> 1.4422497895989996
+
+(cube-root 8)
+;; ==> 2.000004911675504
