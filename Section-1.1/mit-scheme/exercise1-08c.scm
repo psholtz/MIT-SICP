@@ -23,3 +23,15 @@
 	guess
 	(cube-root-iter (improve guess))))
   (cube-root-iter 1.0))
+
+;;
+;; Run some unit tests:
+;;
+(cube-root 2)
+;; ==> 1.2599334393449977
+
+(cube-root 3)
+;; ==> 1.4422497895989996
+
+(cube-root 8)
+;; ==> 2.000004911675504
