@@ -49,7 +49,7 @@
 ;;
 ;; Let's run some unit tests, to make sure it works:
 ;;
-(setq n 100)
+(defvar n 100)
 
 (fast-prime? 3 n)
 ;; ==> t

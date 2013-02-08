@@ -36,13 +36,13 @@
 ;;
 ;; It is also worth noting that many of the steps in the iteration generate prime numbers:
 ;;
-(setq mills-1 (list 0 2 3))
+(defvar mills-1 (list 0 2 3))
 (mills-iter mills-1 0)
 ;; ==> 11 
 (prime? 11)
 ;; ==> t
 
-(setq mills-2 (list 0 2 3 30))
+(defvar mills-2 (list 0 2 3 30))
 (mills-iter mills-2 0)
 ;; ==> 1361
 (prime? 1361)

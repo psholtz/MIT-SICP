@@ -247,9 +247,9 @@
 ;; Now let's test the primes we discovered in Exercise 1.22, as well as numbers in that range that 
 ;; we know to be composite:
 ;;
-(setq point1 1000000000)
-(setq point2 (* 10 point1))
-(setq point3 (* 10 point2))
+(defvar point1 1000000000)
+(defvar point2 (* 10 point1))
+(defvar point3 (* 10 point2))
 
 ;;
 ;; The following three candidates should be prime:

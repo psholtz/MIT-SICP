@@ -55,7 +55,7 @@
 (fermat-test 7)
 ;; ==> t
 
-(setq n 100)  ;; run the test 100 times
+(defvar n 100)  ;; run the test 100 times
 (fast-prime? 3 n)
 ;; ==> t
 (fast-prime? 4 n)

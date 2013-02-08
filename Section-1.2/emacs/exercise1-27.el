@@ -60,7 +60,7 @@
 ;; two procedures return the same result for small primes:
 ;;
 
-(setq n 10)  ;; run the Fermat tests 10 times
+(defvar n 10)  ;; run the Fermat tests 10 times
 
 (eq (prime? 3) (fast-prime? 3 n))  ;; t
 (eq (prime? 5) (fast-prime? 5 n))  ;; t
