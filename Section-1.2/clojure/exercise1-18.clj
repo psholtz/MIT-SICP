@@ -24,4 +24,22 @@
   {:doc "Wrapper procedure for multiplying two numbers in an iterative fashion"}
   [a b]
   (*-iter a b 0))
-  
+
+;;
+;; Unit test:
+;;
+(* 3 5)
+;; ==> 15
+
+;;
+;; Expanding the call graph:
+;;
+(* 3 5)
+(*-iter 3 5 0)
+(*-iter (+ 3 -1) 5 (+ 5 0))
+(*-iter 2 5 5)
+(*-iter (halve 2) (double 5) 5)
+(*-iter 1 10 5)
+(*-iter (+ 1 -1) 10 (+ 10 5))
+(*-iter 0 10 15)
+15

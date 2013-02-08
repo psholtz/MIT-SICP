@@ -26,3 +26,15 @@
   {:doc "Wrapper function for procedure for (fast) calculation of b^n"}
   [b n]
   (fast-expt-iter b n 1))
+
+;;
+;; Run some unit tests:
+;;
+(fast-expt 2 3)
+;; ==> 8
+
+(fast-expt 3 4)
+;; ==> 81
+
+(fast-expt 17 11)
+;; ==> 34271896307633
