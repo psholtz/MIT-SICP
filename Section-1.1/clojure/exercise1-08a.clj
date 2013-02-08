@@ -52,3 +52,15 @@
   {:doc "Wrapper function to calculate (cube-root x)"}
   [x]
   (cube-root-iter 1.0 x))
+
+;;
+;; Run some unit tests:
+;;
+(cube-root 2)
+;; ==> 1.4422497895989996
+
+(cube-root 3)
+;; ==> 1.259933493449977
+
+(cube-root 8)
+;; ==> 2.000004911675504
