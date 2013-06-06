@@ -69,7 +69,6 @@
 	(else
 	  (error "Bad bit -- CHOOSE BRANCH" bit))))
 
-
 ;;
 ;; Now, let's define the symbol tree and the sample message, as specified 
 ;; in the problem statement:
