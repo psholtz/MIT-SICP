@@ -159,17 +159,16 @@
 (encode-symbol 'b tree1)
 ;; ==> (1 0)
 (encode-symbol 'c tree1)
-;; ==> (1 1 0)
-(encode-symbol 'd tree1)
 ;; ==> (1 1 1)
+(encode-symbol 'd tree1)
+;; ==> (1 1 0)
 
 ;;
-;; Not that this encoding is slightly different from that given in the text, 
-;; but that's OK. So long as we use the same tree for encoding/decoding, we'll 
-;; generate consistent results:
+;; Note that the "successive-merge" procedure we've defined here gives the same 
+;; Huffman tree as that defined "by hand" in the text:
 ;;
 (encode '(a d a b b c) tree1)
-;; ==> (0 1 1 10 1 0 1 0 1 1 0)
+;; ==> (0 1 1 0 0 1 0 1 0 1 1 1 0)
 
 (decode (encode '(a d a b b c) tree1) tree1)
 ;; ==> (a d a b b c)
