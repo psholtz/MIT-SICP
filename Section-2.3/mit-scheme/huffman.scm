@@ -6,6 +6,8 @@
 ;; rarely-occurring characters are given long codes. The optimal code for a given file is always represented 
 ;; as a FULL binary tree, where every non-leaf node has two children. 
 ;;
+;; An excellent reference on Huffman codes is given in the CLR text, Chapter 17 on Greedy Algorithms.
+;;
 
 ;;
 ;; Procedures for generating the leaves of a Huffman tree:
