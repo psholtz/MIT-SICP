@@ -25,7 +25,6 @@
 	right
 	(append (symbols left) (symbols right))
 	(+ (weight left) (weight right))))
-
 (define (left-branch tree) (car tree))
 (define (right-branch tree) (cadr tree))
 (define (symbols tree)
@@ -111,19 +110,6 @@
 	(adjoin-set (make-leaf (car pair)    ;; symbol
 			       (cadr pair))  ;; frequency
 		    (make-leaf-set (cdr pairs))))))
-
-;;(define (accumulate op init seq)
-;;  (if (null? seq)
-;;      init
-;;      (op (car seq)
-;;	  (accumulate op init (cdr seq)))))
-
-;;(define (successive-merge pairs)
-;;  (define (successive-merge-lambda a b)
-;;    (if (null? b)
-;;	a
-;;	(make-code-tree a b)))
-;;  (accumulate successive-merge-lambda '() (reverse pairs)))
 
 (define (successive-merge pairs)
   (if (= (length pairs) 1)
