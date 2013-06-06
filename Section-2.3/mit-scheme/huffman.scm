@@ -37,11 +37,6 @@
   (if (leaf? tree)
       (weight-leaf tree)
       (cadddr tree)))
-(define (choose-branch bit branch)
-  (cond ((= bit 0) (left-branch branch))
-	((= bit 1) (right-branch branch))
-	(else
-	 (error "Bad bit -- CHOOSE BRANCH" bit))))
 
 ;;
 ;; Procedures for decoding messages using a Huffman tree:
@@ -57,6 +52,12 @@
 		    (decode-1 (cdr bits) tree))
 	      (decode-1 (cdr bits) next-branch)))))
   (decode-1 bits tree))
+
+(define (choose-branch bit branch)
+  (cond ((= bit 0) (left-branch branch))
+	((= bit 1) (right-branch branch))
+	(else
+	  (error "Bad bit -- CHOOSE BRANCH" bit))))
 
 ;;
 ;; Procedures for encoding messages using a Huffman tree:
