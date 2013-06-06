@@ -167,8 +167,8 @@
 ;; Note that the "successive-merge" procedure we've defined here gives the same 
 ;; Huffman tree encoding as that defined "by hand" in the text:
 ;;
-(encode '(a d a b b c) tree1)
+(encode '(a d a b b c a) tree1)
 ;; ==> (0 1 1 0 0 1 0 1 0 1 1 1 0)
 
-(decode (encode '(a d a b b c) tree1) tree1)
-;; ==> (a d a b b c)
+(decode (encode '(a d a b b c a) tree1) tree1)
+;; ==> (a d a b b c a)
