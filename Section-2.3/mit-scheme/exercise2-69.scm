@@ -132,36 +132,16 @@
 ;;
 
 ;;
-;; To define "generate-huffman-tree", we will go back to our old friend "accumulate":
-;;
-(define (accumulate op init seq)
-  (if (null? seq)
-      init
-      (op (car seq)
-	  (accumulate op init (cdr seq)))))
-
-;; 
-;; Let's make sure we have our "linear time" reverse operation available:
-;;
-(define (reverse items)
-  (define (reverse-iter lst1 lst2)
-    (if (null? lst1)
-	lst2
-	(reverse-iter (cdr lst1) (cons (car lst1) lst2))))
-  (reverse-iter items '()))
-
-;;
-;; With this, we can now define our "successive-merge" procedure:
+;; We define a recursive "successive-merge" procedure which combines the smallest two elements:
 ;;
 (define (successive-merge pairs)
-  ;; Use as the "lambda" procedure in accumulate:
-  (define (successive-merge-lambda a b)
-    (if (null? b)
-	a
-	(make-code-tree a b)))
-
-  ;; Generate an accumulation:
-  (accumulate successive-merge-lambda '() (reverse pairs)))
+  (if (= (length pairs) 1)
+      (car pairs)
+      (let ((first (car pairs))
+	    (second (cadr pairs))
+	    (rest (cddr pairs)))
+	(successive-merge (adjoin-set (make-code-tree first second)
+				      rest)))))
 
 ;;
 ;; And finally generate the Huffman tree:
