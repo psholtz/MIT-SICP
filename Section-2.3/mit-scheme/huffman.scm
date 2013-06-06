@@ -12,9 +12,12 @@
 ;;
 (define (make-leaf symbol weight)
   (list 'leaf symbol weight))
+
 (define (leaf? object)
   (eq? (car object) 'leaf))
+
 (define (symbol-leaf x) (cadr x))
+
 (define (weight-leaf x) (caddr x))
 
 ;;
@@ -25,16 +28,21 @@
 	right
 	(append (symbols left) (symbols right))
 	(+ (weight left) (weight right))))
+
 (define (left-branch tree) (car tree))
+
 (define (right-branch tree) (cadr tree))
+
 (define (symbols tree)
   (if (leaf? tree)
       (list (symbol-leaf tree))
       (caddr tree)))
+
 (define (weight tree)
   (if (leaf? tree)
       (weight-leaf tree)
       (cadddr tree)))
+
 (define (choose-branch bit branch)
   (cond ((= bit 0) (left-branch branch))
 	((= bit 1) (right-branch branch))
@@ -64,6 +72,7 @@
 	((equal? x (car set)) true)
 	(else 
 	 (element-of-set? x (cdr set)))))
+
 ;; (If your Scheme doesn't ship with a "reverse" procedure, this should work:
 (define (reverse items)
   (define (reverse-iter lst1 lst2)
@@ -71,6 +80,7 @@
 	lst2
 	(reverse-iter (cdr lst1) (cons (car lst1) lst2))))
   (reverse-iter items '()))
+
 (define (encode-symbol symbol tree)
   (define (encode-1 symbol-list encoded)
     (if (leaf? symbol-list)
@@ -84,6 +94,7 @@
 		(else
 		 (error "Bad symbol: ENCODE-SYMBOL" symbol))))))
   (encode-1 tree '()))
+
 (define (encode message tree)
   (if (null? message)
       '()
@@ -99,6 +110,7 @@
 	(else
 	 (cons (car set)
 	       (adjoin-set x (cdr set))))))
+
 (define (make-leaf-set pairs)
   (if (null? pairs)
       '()
@@ -106,6 +118,7 @@
 	(adjoin-set (make-leaf (car pair)    ;; symbol
 			       (cadr pair))  ;; frequency
 		    (make-leaf-set (cdr pairs))))))
+
 (define (successive-merge pairs)
   (if (= (length pairs) 1)
       (car pairs)
@@ -114,5 +127,6 @@
 	    (rest (cddr pairs)))
 	(successive-merge (adjoin-set (make-code-tree first second)
 				      rest)))))
+
 (define (generate-huffman-tree pairs)
   (successive-merge (make-leaf-set pairs)))
