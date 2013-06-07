@@ -172,3 +172,33 @@
 
 (decode (encode '(a d a b b c a) tree1) tree1)
 ;; ==> (a d a b b c a)
+
+;;
+;; It's instructive to step through the call graph for a simple example, to 
+;; better visualize how "successive-merge" works. The argument passed into 
+;; successive merge is the result of calling the "make-leaf-set" procedure, 
+;; which sorts the weighted pairs into a kind of makeshift priority queue:
+;;
+(make-leaf-set '((a 4) (b 2) (c 1) (d 1)))
+;; ==> ((leaf d 1) (leaf c 1) (leaf b 2) (leaf a 4))
+
+(successive-merge ((leaf d 1) (leaf c 1) (leaf b 2) (leaf a 4)))
+;; first <- (leaf d 1)
+;; second <- (leaf c 1)
+;; rest <- ((leaf b 2) (leaf a 4))
+(successive-merge (adjoin-set (make-code-tree (leaf d 1) (leaf c 1)) ((leaf b 2) (leaf a 4))))
+(successive-merge (adjoin-set ((leaf d 1) (leaf c 1) (d c) 2) ((leaf b 2) (leaf a 4))))
+(successive-merge ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (leaf a 4)))
+;; first <- (leaf b 2)
+;; second <- ((leaf d 1) (leaf c 1) (d c) 2)
+;; rest <- ((leaf a 4))
+(successive-merge (adjoin-set (make-code-tree (leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2)) ((leaf a 4))))
+(successive-merge (adjoin-set ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4) ((leaf a 4))))
+(successive-merge ((leaf a 4) ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4)))
+;; first <- (leaf a 4)
+;; second <- ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4)
+;; rest <- ()
+(successive-merge (adjoin-set (make-code-tree (leaf a 4) ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4)) ()))
+(successive-merge (adjoin-set ((leaf a 4) ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4) (a b d c) 8) ()))
+(successive-merge (((leaf a 4) ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4) (a b d c) 8)))
+(((leaf a 4) ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4) (a b d c) 8))
