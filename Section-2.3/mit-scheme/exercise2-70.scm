@@ -40,35 +40,70 @@
 		(WAH 1))))
 
 (symbols tree)
-;; ==> (na yip sha a get job boom wah)
+;; ==> (na yip a wah boom sha job get)
 (weight tree)
 ;; ==> 36
 (+ 2 1 2 2 16 3 9 1)
 ;; ==> 36
 
+;;
+;; The Huffman tree looks something like this:
+;;
+;;      (root)
+;;        / \ 
+;;       /   \
+;;      /     \
+;;  (na 16)   ()
+;;           /  \
+;;          /    \
+;;         /      \
+;;     (yip 9)    ()
+;;               /  \
+;;              /    \
+;;             /      \
+;;            /       ()
+;;           /        / \ 
+;;          /        /   \
+;;         /        /     \
+;;        /    (sha 3)   () 
+;;       /                / \
+;;      ()               /   \
+;;     /  \             /     \
+;;    /    \        (job 2) (get 2)
+;;   /      \
+;; (a 2)    ()
+;;         /  \
+;;        /    \
+;;       /      \
+;;    (wah 1)  (boom 1)
+;;
+;; Clearly, the leaves with larger weights are sorted 
+;; closer to the root of the tree.
+;;
+
 (encode '(get a job) tree)
-;; ==> (1 1 1 1 0 1 1 1 0 1 1 1 1 1 0)
+;; ==> (1 1 1 1 1 1 1 0 0 1 1 1 1 0)
 (encode '(sha na na na na na na na na) tree)
-;; ==> (1 1 0 0 0 0 0 0 0 0 0)
+;; ==> (1 1 1 0 0 0 0 0 0 0 0 0)
 (encode '(get a job) tree)
-;; ==> (1 1 1 1 0 1 1 1 0 1 1 1 1 1 0)
-(encode '(sha ha na na na na na na na na) tree)
-;; ==> (1 1 0 0 0 0 0 0 0 0 0)
+;; ==> (1 1 1 1 1 1 1 0 0 1 1 1 1 0)
+(encode '(sha ha na na na na na na na) tree)
+;; ==> (1 1 1 0 0 0 0 0 0 0 0 0)
 (encode '(wah yip yip yip yip yip yip yip yip yip) tree)
-;; ==> (1 1 1 1 1 1 1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0)
+;; ==> (1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0)
 (encode '(sha boom) tree)
-;; ==> (1 1 0 1 1 1 1 1 1 0)
+;; ==> (1 1 1 0 1 1 0 1 1)
 
 ;;
 ;; Let's see if these decode correctly:
 ;;
-(decode '(1 1 1 1 0 1 1 1 0 1 1 1 1 1 0) tree)
+(decode '(1 1 1 1 1 1 1 0 0 1 1 1 1 0) tree)
 ;; ==> (get a job)
-(decode '(1 1 0 0 0 0 0 0 0 0 0) tree)
+(decode '(1 1 1 0 0 0 0 0 0 0 0 0) tree)
 ;; ==> (sha na na na na na na na na)
-(decode '(1 1 1 1 1 1 1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0) tree)
+(decode '(1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0) tree)
 ;; ==> (wah yip yip yip yip yip yip yip yip yip)
-(decode '(1 1 0 1 1 1 1 1 1 0) tree)
+(decode '(1 1 1 0 1 1 0 1 1) tree)
 ;; ==> (sha boom)
 
 ;;
