@@ -110,19 +110,19 @@
 ;; How many bits are required by this encoding?
 ;;
 (* 2 (length (encode '(get a job) tree)))
-;; ==> 30
+;; ==> 28
 (* 2 (length (encode '(sha na na na na na na na na) tree)))
-;; ==> 22
+;; ==> 24
 (length (encode '(wah yip yip yip yip yip yip yip yip yip) tree))
-;; ==> 25
+;; ==> 23
 (length (encode '(sha boom) tree))
-;; ==> 10
+;; ==> 9
 
-(+ 30 22 25 10)
-;; ==> 87
+(+ 28 24 23 9)
+;; ==> 84
 
 ;;
-;; So 87 bits are required using the Huffman encoding.
+;; So 84 bits are required using the Huffman encoding.
 ;;
 
 ;;
@@ -140,6 +140,6 @@
 ;;
 ;; If we used fixed-length encoding, we would require 108 bits.
 ;;
-;; The Huffman encoding saves requires bout 80.6% the amount of space as the 
-;; fixed length encoding does.
+;; The Huffman encoding scheme requires only about 77.8% of the space that is 
+;; required by fixed length encoding.
 ;;
