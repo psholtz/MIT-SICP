@@ -24,20 +24,37 @@
 ;;
 ;; The tree looks like this:
 ;;
-;;     (root) 
-;;      /  \
-;;     /    \
-;;  (e 16)  () 
-;;         /  \
-;;        /    \
-;;     (d 8)   () 
-;;            /  \
-;;           /    \
-;;        (c 4)   ()
-;;               /  \
-;;              /    \
-;;           (b 2)  (a 1)
+;;               ()
+;;              /  \
+;;             /    \    
+;;            ()  (e 16)
+;;           /  \
+;;          /    \
+;;         ()   (d 8) 
+;;        /  \
+;;       /    \
+;;      ()   (c 4) 
+;;     /  \
+;;    /    \ 
+;; (a 1)  (b 2)
 ;; 
+
+;;
+;; It's interesting to trace through the call graph of "generate-huffman-tree" to see how the tree is formed.
+;;
+
+;;
+;; We call "make-leaf-set" on the set of pairs, to generate a makeshift "priority queue" of leaves:
+;;
+(make-leaf-set '((a 1) (b 2) (c 4) (d 8) (e 16)))
+;; ==> ((leaf a 1) (leaf b 2) (leaf c 4) (leaf d 8) (leaf e 16))
+
+;;
+;; This makeshift priority queue is then passed to the "successive-merge" procedure:
+;;
+(successive-merge '((leaf a 1) (leaf b 2) (leaf c 4) (leaf d 8) (leaf e 16)))
+
+
 
 (define tree2 (generate-huffman-tree '((a 1) (b 2) (c 4) (d 8) (e 16) (f 32) (g 64) (h 128) (i 256) (j 512))))
 
