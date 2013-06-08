@@ -49,27 +49,27 @@
 (define tree (generate-huffman-tree '((a 1) (b 2) (c 4) (d 8))))
 
 (encode-symbol 'a tree)
-;; ==> (1 1 1)
+;; ==> (0 0 0)
 (encode-symbol 'b tree)
-;; ==> (1 1 0) 
+;; ==> (0 0 1) 
 (encode-symbol 'c tree)
-;; ==> (1 0)
+;; ==> (0 1)
 (encode-symbol 'd tree)
-;; ==> (0)
+;; ==> (1)
 
 ;;
 ;; The tree will look something like the following:
 ;;
-;;     (root)
-;;      /  \
-;;     /    \ 
-;;  (d 8)   ()
-;;         /  \ 
-;;        /    \
-;;     (c 4)   ()
-;;            /  \
-;;           /    \
-;;        (b 2)  (a 1)
+;;            (root)
+;;             /  \ 
+;;            /    \ 
+;;           ()   (d 8)
+;;          /  \ 
+;;         /    \ 
+;;        ()   (c 4)
+;;       /  \ 
+;;      /    \
+;;   (a 1)   (b 2)
 ;;
 
 ;;
@@ -78,7 +78,7 @@
 ;; Let's step through the call graph:
 ;;
 (encode-symbol 'd tree)
-(encode-symbol-iter '((a 1) (b 2) (c 4) (d 8)) '())
+(encode-1 '((a 1) (b 2) (c 4) (d 8)) '())
 
 ;;
 ;; Calls are now made to:
