@@ -72,14 +72,16 @@
   (define (encode-1 symbol-list encoded)
     (if (leaf? symbol-list)
 	(reverse encoded)
-	(let ((symbols-left (symbols (left-branch symbol-list)))
-	            (symbols-right (symbols (right-branch symbol-list))))
+	(let ((left (left-branch symbol-list))
+	      (right (right-branch symbol-list)))
+	  (let ((symbols-left (symbols left))
+		(symbols-right (symbols right)))
 	    (cond ((element-of-set? symbol symbols-left)
-		    (encode-1 (left-branch symbol-list) (cons 0 encoded)))
+		   (encode-1 left (cons 0 symbol)))
 		  ((element-of-set? symbol symbols-right)
-		    (encode-1 (right-branch symbol-list) (cons 1 encoded)))
+		   (encode-1 right (cons 1 symbol)))
 		  (else
-		    (error "Bad symbol: ENCODE-SYMBOL" symbol))))))
+		   (error "Bad symbol: ENCODE-SYMBOL" symbol)))))))
   (encode-1 tree '()))
 
 ;; (If your Scheme doesn't ship with a "reverse" procedure, this should work:

@@ -15,6 +15,16 @@
 ;; Let's look more closely at the "encode-symbol" procedure:
 ;;
 (define (encode-symbol symbol tree)
+  (define (encode-1 symbol-list encoded)
+    (if (leaf? symbol-list)
+	(reverse encoded)
+	(let ((symbols-left (symbols (left-branch symbol-list)))
+	      (symbols-right (symbols (right-branch symbols-list))))
+	  (cond ((element-of-set? symbol symbols-left)
+		 (encode-1 (left-branch symbol-list)
+
+
+(define (encode-symbol symbol tree)
   (define (encode-symbol-iter working total)
     (if (leaf? working)
 	total
