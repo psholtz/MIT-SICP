@@ -18,25 +18,17 @@
   (define (encode-1 symbol-list encoded)
     (if (leaf? symbol-list)
 	(reverse encoded)
-	(let ((symbols-left (symbols (left-branch symbol-list)))
-	      (symbols-right (symbols (right-branch symbols-list))))
-	  (cond ((element-of-set? symbol symbols-left)
-		 (encode-1 (left-branch symbol-list)
-
-
-(define (encode-symbol symbol tree)
-  (define (encode-symbol-iter working total)
-    (if (leaf? working)
-	total
-	(let ((symbols-left (symbols (left-branch working)))
-	      (symbols-right (symbols (right-branch working))))
-	  (cond ((element-of-set? symbol symbols-left)
-		 (encode-symbol-iter (left-branch working) (cons 0 total)))
-		((element-of-set? symbol symbols-right)
-		 (encode-symbol-iter (right-branch working) (cons 1 total)))
-		(else
-		 (error "Bad symbol: ENCODE-SYMBOL" symbol))))))
-  (encode-symbol-iter tree '()))
+	(let ((left (left-branch symbol-list))
+	      (right (right-branch symbol-list)))
+	  (let ((symbols-left (symbols left))
+		(symbols-right (symbols right)))
+	    (cond ((element-of-set? symbol symbols-left)
+		   (encode-1 left (cons 0 encoded)))
+		  ((element-of-set? symbol symbols-right)
+		   (encode-1 right (cons 1 encoded)))
+		  (else
+		   (error "Bad symbol: ENCODE-SYMBOL" symbol)))))))
+  (encode-1 tree '()))
 
 ;;
 ;; Let's also look at some of the other required procedures:
