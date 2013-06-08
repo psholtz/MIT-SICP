@@ -77,9 +77,9 @@
 	  (let ((symbols-left (symbols left))
 		(symbols-right (symbols right)))
 	    (cond ((element-of-set? symbol symbols-left)
-		   (encode-1 left (cons 0 symbol)))
+		   (encode-1 left (cons 0 encoded)))
 		  ((element-of-set? symbol symbols-right)
-		   (encode-1 right (cons 1 symbol)))
+		   (encode-1 right (cons 1 encoded)))
 		  (else
 		   (error "Bad symbol: ENCODE-SYMBOL" symbol)))))))
   (encode-1 tree '()))
