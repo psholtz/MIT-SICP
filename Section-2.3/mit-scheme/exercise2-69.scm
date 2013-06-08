@@ -196,7 +196,7 @@
 ;; rest <- ((leaf a 4))
 (successive-merge (adjoin-set (make-code-tree '(leaf b 2) '((leaf d 1) (leaf c 1) (d c) 2)) '((leaf a 4))))
 (successive-merge (adjoin-set '((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4) '((leaf a 4))))
-(successive-merge '((leaf a 4) ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4))))
+(successive-merge '((leaf a 4) ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4)))
 ;; first <- (leaf a 4)
 ;; second <- ((leaf b 2) ((leaf d 1) (leaf c 1) (d c) 2) (b d c) 4)
 ;; rest <- ()
