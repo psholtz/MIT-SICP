@@ -84,19 +84,21 @@
 
 (define (encode-symbol symbol tree)
   ;; Build up the encoding using constant time "cons",
-  ;; and then reverse the list once done.. should be 
+  ;; and then reverse the list once done .. should be
   ;; faster than repeatedly invoking "append".
   (define (encode-1 symbol-list encoded)
     (if (leaf? symbol-list)
 	(reverse encoded)
-	(let ((symbols-left (symbols (left-branch symbol-list)))
-	      (symbols-right (symbols (right-branch symbol-list))))
-	  (cond ((element-of-set? symbol symbols-left)
-		 (encode-1 (left-branch symbol-list) (cons 0 encoded)))
-		((element-of-set? symbol symbols-right)
-		 (encode-1 (right-branch symbol-list) (cons 1 encoded)))
-		(else
-		 (error "Bad symbol: ENCODE-SYMBOL" symbol))))))
+	(let ((left (left-branch symbol-list))
+	      (right (right-branch symbol-list)))
+	  (let ((symbols-left (symbols left))
+		(symbols-right (symbols right)))
+	    (cond ((element-of-set? symbol symbols-left)
+		   (encode-1 left (cons 0 encoded)))
+		  ((element-of-set? symbol symbols-right)
+		   (encode-1 right (cons 1 encoded)))
+		  (else
+		   (error "Bad symbol: ENCODE-SYMBOL" symbol)))))))
   (encode-1 tree '()))
 
 (define (encode message tree)
