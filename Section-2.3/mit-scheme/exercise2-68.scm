@@ -83,19 +83,19 @@
 	 (element-of-set? x (cdr set)))))
 
 (define (encode-symbol symbol tree)
-  ;; Build up the encoding using constant time "cons",
-  ;; and then reverse the list once done .. should be
+  ;; Build up the encoding using constant time "cons", 
+  ;; and then reverse the list once done .. should be 
   ;; faster than repeatedly invoking "append".
-  (define (encode-1 symbol-list encoded)
-    (if (leaf? symbol-list)
+  (define (encode-1 tree-list encoded)
+    (if (leaf? tree-list)
 	(reverse encoded)
-	(let ((left (left-branch symbol-list))
-	      (right (right-branch symbol-list)))
-	  (let ((symbols-left (symbols left))
-		(symbols-right (symbols right)))
-	    (cond ((element-of-set? symbol symbols-left)
+	(let ((left (left-branch tree-list))
+	      (right (right-branch tree-list)))
+	  (let ((tree-left (symbols left))
+		(tree-right (symbols right)))
+	    (cond ((element-of-set? symbol tree-left)
 		   (encode-1 left (cons 0 encoded)))
-		  ((element-of-set? symbol symbols-right)
+		  ((element-of-set? symbol tree-right)
 		   (encode-1 right (cons 1 encoded)))
 		  (else
 		   (error "Bad symbol: ENCODE-SYMBOL" symbol)))))))
