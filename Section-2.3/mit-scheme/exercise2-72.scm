@@ -135,81 +135,76 @@
 ;;
 ;; Finally, there is a conditional expression with two branches:
 ;;
-;;   1. (element-of-set? symbo
-;;   2. (element-of-set? symbol tree-right)
+;;   1. (element-of-set? symbol symbols-left)
+;;   2. (element-of-set? symbol symbols-right)
 ;;
 ;; The conditional branches are evaluated in order. 
 ;;
-;; First the left branch is search 
-
-
+;; First the left branch is searched. As we indicated above, this procedure
+;; runs in O(N) time, where N is the length of the "symbols-left" list. In this
+;; case, the "symbols-left" structure is of size N-1, but in terms of order 
+;; of growth, we can classify this as O(N).
 ;;
-;; Calls are now made to:
+;; The first conditional evaluation fails, and so the second expression in the 
+;; conditional expression is evaluated. Again, in general, this procedure will 
+;; run in O(N) time, where N is the size of the "symbols-right" list. However, 
+;; owing to the particular structure of this problem, "symbols-right" will always
+;; have only 1 element in it (given that we are encoding the most frequently 
+;; occurring symbol). Hence, we can surmise that this branch runs in O(1) time.
 ;;
-;;  1. (leaf? tree)
-;;
-;; and then:
-;;
-;;  2. (left-branch '((a 1) (b 2) (c 4) (d 8)))
-;;  3. (right-branch '((a 1) (b 2) (c 4) (d 8)))
-;; 
-;; First the "left-branch" is searched, which really only has one element in it.
-;; 
-;; The target element is identified in this branch. We "cons" 0 onto "total", and 
-;; then make the recursive call:
-;;
-(encode-symbol-iter '(leaf d 8) '(0))
-
-;;
-;; Since this is a leaf, we terminate the recursion here.
-;;
-;; "reverse" is applied to the list '(0), but since it too has only 1 element, 
-;; the procedure runs in constant time.
+;; The total time to encode the most frequent symbol is O(N) + O(1), or O(N) time.
 ;;
 
 ;;
-;; There are several sub-procedures which are invoked, which, in the general 
-;; case would run in O(n) time, but given the nature of the data structures
-;; we're using, there is no invocation here that does not complete in more
-;; than constant time.
+;; To evaluate the running time for the last frequently occurring symbol, 
+;; consider that we arrive at the evaluation of the conditional expression, as above.
+;; The two branches to evaluate, using our example based on N=4, would looks like:
 ;;
-;; Hence, no matter how large n is, the encoding of the most frequent symbol
-;; will always terminate in constant time. 
+;;   1. (element-of-set? 'a '(a b c))
+;;   2. (element-of-set? 'a '(d))
+;;
+;; The first expression evaluates to true, which results in a recursive call
+;; to "encode-1". The next time we hit the evaluation of this same conditional 
+;; expression, the two branches look like:
+;;
+;;   1. (element-of-set? 'a '(a b))
+;;   2. (element-of-set? 'a '(c))
+;;
+;; Again, the first expression evaluates to true, which results in a recursive call
+;; to "encode-1". The next time we hit the evaluation of this same conditional
+;; expression, the two branches look like:
+;;
+;;   1. (element-of-set? 'a '(a))
+;;   2. (element-of-set? 'a '(b))
+;;
+;; Again, the first expression evaluates to true, which results in a recursive call
+;; to "encode-1", at which point the recursion terminates.
 ;;
 
 ;;
-;; For the least frequent symbol, we again enter the call graph, and invoke
-;; the procedures "leaf?", "left-branch", "right-branch", all of which execute
-;; in linear time. We must then search for the target symbol in the list of 
-;; symbols, both in the "left" branch, which always has just 1 element and terminates
-;; in constant time, and the "right" branch, which in the first iteration will have 
-;; (n-1) elements (and so runs in O(n) time).
-;; 
-;; The same sequence repeats itself (mainly constant-time operations), except 
-;; again for searching the symbol list, which now has (n-2) elements in it. 
-;; Note too, that in this implementation, the target symbol we are seeking (i.e., 
-;; the least frequency symbol), appears at the end of the symbol list, so the 
-;; entire list must be searched before the symbol is found:
+;; The "element-of-set?" procedure runs in time proportional to the length of the size 
+;; of the argument set. The procedure is invoked a total of of (N-1) times, but we 
+;; time we invoke the procedure, we are passing in a list that is one element shorter 
+;; than before. Hence, the running time of the recursion looks like:
 ;;
-(symbols (right-branch tree))
-;; ==> (c b a)
+;;   T(N) = (N-1) + (N-2) + .. + 1
+;;
+;;   T(N) = (1/2) * N * (N-1)
+;;
+;;   T(N) = O(N^2)
+;;
+;; The total time to encode the least frequent symbol is O(N^2).
+;;
 
 ;;
-;; In total, the total number of steps that will be performed when searching
-;; the symbol set, via "element-of-set?", will add up to:
-;;
-;;  (n-1) + (n-2) + ... + 1
-;;
-;; This will total (1/2) * (n-1) * (n-2), or, in other words, be O(n^2).
-;;
-;; Note too that once we have generated our symbol list, which has been 
-;; build up using constant-time "cons" operations, we must reverse it, which 
-;; requires one application of a linear-time procedure. Still, the O(n^2)
-;; time of the symbol search predominates this operation.
+;; Note too that once we have generated our symbol list, which has been build up using 
+;; constant-time "cons" operations, we must reverse it, which requires one application 
+;; of a linear-time "reverse" procedure. Still, the O(n^2) time of the symbol search 
+;; predominates this operation.
 ;;
 ;; In summary:
 ;;
-;; (1) To find the most frequent symbol requires constant time.
+;; (1) To encode the most frequent symbol requires O(n) time.
 ;;
-;; (2) To find the least frequent symbol requires O(n^2) time.
+;; (2) To encode the least frequent symbol requires O(n^2) time.
 ;; 
