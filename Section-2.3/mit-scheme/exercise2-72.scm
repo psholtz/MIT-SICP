@@ -42,11 +42,37 @@
 ;;
 
 ;;
+;; Let's also repost the definition of the "symbols" procedure:
+;;
+(define (symbols tree)
+  (if (leaf? tree)
+      (list (symbol-leaf tree))
+      (caddr tree)))
+
+;;
+;; This procedure also runs in constant time.
+;;
+
+;;
+;; Finally let's look at the "element-of-set?" procedure:
+;;
+(define (element-of-set? x set)
+  (cond ((null? set) false)
+	((equal? x (car set)) true)
+	(else
+	 (element-of-set? x (cdr set)))))
+
+;;
+;; This procedure runs in O(N) time, where N is the length of the argument set.
+;;
+
+;;
 ;; We will consider only the special case described above, where n = 2^k.
 ;; 
 ;; For the case k = 4, the tree will look like this:
 ;;
 (define tree (generate-huffman-tree '((a 1) (b 2) (c 4) (d 8))))
+;; ==> ((((leaf a 1) (leaf b 2) (a b) 3) (leaf c 4) (a b c) 7) (leaf d 8) (a b c d) 15)
 
 (encode-symbol 'a tree)
 ;; ==> (0 0 0)
@@ -78,12 +104,49 @@
 ;; Let's step through the call graph:
 ;;
 (encode-symbol 'd tree)
-(encode-1 '((a 1) (b 2) (c 4) (d 8)) '())
+(encode-1 tree '())
+
+;;
+;; The first call is made to:
+;; 
+;;   (leaf? tree-list)
+;;
+;; This procedure executes in constant time.
+;;
+
+;;
+;; The next two calls are made to:
+;;
+;;   1. (left-branch tree-list)
+;;   2. (right-branch tree-list)
+;;
+;; Both of these also execute in constant time.
+;;
+
+;;
+;; The next two calls are made to:
+;;
+;;   1. (symbols left)
+;;   2. (symbols right)
+;;
+;; As indicated above, the "symbols" procedure runs in constant time.
+;;
+
+;;
+;; Finally, there is a conditional expression with two branches:
+;;
+;;   1. (element-of-set? symbol tree-left)
+;;   2. (element-of-set? symbol tree-right)
+;;
+;; The conditional branches are evaluated in order. 
+;;
+;; First the left branch is search 
+
 
 ;;
 ;; Calls are now made to:
 ;;
-;;  1. (leaf? '((a 1) (b 2) (c 4) (d 8)))
+;;  1. (leaf? tree)
 ;;
 ;; and then:
 ;;
