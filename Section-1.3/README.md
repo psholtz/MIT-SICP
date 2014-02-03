@@ -164,10 +164,6 @@ The call graph is not necessarily any simpler, but in terms of expressional simp
 Procedures as Returned Values
 ----------------------------- 
 
-[![](http://farm7.static.flickr.com/6066/6030248343_9455b915bb.jpg)](http://farm7.static.flickr.com/6066/6030248343_9455b915bb.jpg)
-
-**The Y-Combinator Tattoo** - See the attached [wiki article](/psholtz/MIT-SICP/wiki/Y-Combinators-and-the-Lambda-Calculus/) for more information on Y Combinators and the Lambda Calculus.
-
 In addition to passing procedures as arguments to other procedures, we can also return procedures as returned values from function calls.
 
 In order to better understand the power of this idea, let's return briefly to the `sqrt` procedure designed in Section 1.1:
