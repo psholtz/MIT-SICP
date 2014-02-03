@@ -164,7 +164,7 @@ The call graph is not necessarily any simpler, but in terms of expressional simp
 Procedures as Returned Values
 ----------------------------- 
 
-In addition to passing procedures as arguments to other procedures, we can also return procedures as returned values from function calls.
+We can also return procedures as returned values from function calls.
 
 In order to better understand the power of this idea, let's return briefly to the `sqrt` procedure designed in Section 1.1:
 
