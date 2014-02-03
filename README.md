@@ -25,11 +25,7 @@ Some useful links:
 
 * [Hyperpolyglot - Commands for Common Lisp / Scheme / Clojure / Emacs](http://hyperpolyglot.org/lisp)
 
-Don't forget to check out the [wiki](/psholtz/MIT-SICP/wiki) for answers to some of the more mathematically oriented questions.
-
-Finally, A Word From Our Sponsor...
------------------------------------ 
-
+The [wiki](/psholtz/MIT-SICP/wiki) contains answers to some of the more mathematically oriented questions.
 
 [![](http://farm6.static.flickr.com/5239/5890766673_7bf85a61a7.jpg)](http://farm6.static.flickr.com/5239/5890766673_7bf85a61a7.jpg)
 
