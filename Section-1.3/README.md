@@ -171,7 +171,7 @@ In order to better understand the power of this idea, let's return briefly to th
 ```scheme
 (define (sqrt x)
   (define (good-enough? guess)
-    (&lt; (abs (- (square guess) x)) 0.001))
+    (< (abs (- (square guess) x)) 0.001))
   (define (improve guess)
     (average guess (/ x guess)))
   (define (sqrt-iter guess)
@@ -238,7 +238,7 @@ Our `sqrt` procedure now looks like:
 ```scheme
 (define (sqrt x)
   (define (good-enough? guess)
-    (&lt; (abs (- (square guess) x)) 0.001))
+    (< (abs (- (square guess) x)) 0.001))
   (define (improve guess)
     ((average-damp (lambda (y) (/ x y))) guess))
   (define (sqrt-iter guess)
