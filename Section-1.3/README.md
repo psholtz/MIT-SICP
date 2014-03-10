@@ -258,7 +258,7 @@ As it is presently written, the `good-enough?` procedure checks to see whether t
 
 ```scheme
 (define (good-enough? guess)
-  (&lt; (abs (- (square guess) x)) 0.001))
+  (< (abs (- (square guess) x)) 0.001))
 ```
 
 Suppose that `y` is our guess as to the square root of `x`, and that `(improve y)` is the next iterative improvement towards refining that guess. One way to check whether `y` is "good enough" is to calculate `(square y)` and see whether the answer comes within a certain pre-defined tolerance, exactly as is done in the `good-enough?` procedure above.
@@ -269,7 +269,7 @@ We could, then, replace the `good-enough?` procedure with a new procedure in two
 
 ```scheme
 (define (close-enough? v1 v2)
-  (&lt; (abs (- v1 v2)) 0.00001))
+  (< (abs (- v1 v2)) 0.00001))
 ```
 
 Clearly we're going to have to modify our `sqrt-iter` procedure as well. Instead of just passing one arugment into `good-enough?` to check to see if a guess is "good enough", we'll have to pass two arguments in to the `close-enough?` procedure: `guess` and `(improve guess)`, and see whether the two values are close qualify as the square root of the number we are seeking:
@@ -286,7 +286,7 @@ Our complete `sqrt` procedure now looks like:
 ```scheme
 (define (sqrt x)
   (define (close-enough? v1 v2)
-    (&lt; (abs (- v1 v2)) 0.00001))
+    (< (abs (- v1 v2)) 0.00001))
   (define (improve guess)
     ((average-damp (lambda (y) (/ x y))) guess))
   (define (sqrt-iter guess)
@@ -303,7 +303,7 @@ Let's eliminate this inefficiency by using the keyword `let`:
 ```scheme
 (define (sqrt x)
   (define (close-enough? v1 v2)
-    (&lt; (abs (- v1 v2)) 0.00001))
+    (< (abs (- v1 v2)) 0.00001))
   (define (improve guess)
     ((average-damp (lambda (y) (/ x y))) guess))
   (define (sqrt-iter guess)
@@ -348,7 +348,7 @@ Let's start by defining a `fixed-point` procedure, and abstracting our `close-en
 (define (fixed-point f first-guess)
   (define tolerance 0.00001)
   (define (close-enough? v1 v2)
-    (&lt; (abs (- v1 v2)) tolerance))
+    (< (abs (- v1 v2)) tolerance))
   (define (try guess)
     (let ((next-guess (f guess)))
       (if (close-enough? guess next-guess)
