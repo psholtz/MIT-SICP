@@ -18,7 +18,7 @@
   (defun negative? (x)
     (< x 0))
   (let ((g (gcd (abs n) (abs d))))
-    (if (negative? d)
+    (if ( negative? d)
 	(cons (/ (* -1 n) g) (/ (* -1 d) g))
       (cons (/ n g) (/ d g)))))
 
