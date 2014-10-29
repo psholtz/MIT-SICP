@@ -161,7 +161,7 @@
 ;; For any "f", the procedure (zero f) simply returns the identity procedure:
 ;;
 (zero f)
-((lambda (g) (lambda (y) y)) f)
+(lambda (g) (lambda (y) y))
 (lambda (y) y)
 
 ;;
@@ -219,7 +219,7 @@
 2
 
 ;;
-;; From what we have determined, it's quite simple to define "one" and "two" directly.
+;; From what we have determined, it's quite simply to define "one" and "two" directly.
 ;; We simply apply the argument procedure once, or twice:
 ;;
 (define one (lambda (f) (lambda (x) (f x))))
