@@ -221,7 +221,7 @@
 ;; ==> Invalid
 (setq r1 (make-rectangle 0 0 1 0))
 ;; ==> Invalid
-(setq r2 (make-rectangle 0 0 0 1))
+(setq r1 (make-rectangle 0 0 0 1))
 ;; ==> Invalid
 
 ;;
