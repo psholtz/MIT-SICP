@@ -8,8 +8,8 @@ In Chapter 1 we looked at computational processes and the role they play in soft
 
 <ol>
  <li>How to use primitive data (numbers) and primitive operations (arithmetic) to perform computation.</li>
- <li>How to form compound procedures by combining procedures, using conditionals and using function parameters.</li>
- <li>How to abstract procedures using `define`</li>
+ <li>How to form compound procedures by combining procedures, and by using conditionals and function parameters.</li>
+ <li>How to abstract procedures using <code>define</code></li>
 </ol>
 
 Linear combinations (from cover)
