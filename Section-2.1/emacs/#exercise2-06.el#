@@ -27,11 +27,11 @@
 (defun zero (f) (lambda (x) x))
 
 (defun add-1 (n)
-  (lexical-let ((noo n))
-    (lambda (f)
-      (lexical-let ((foo f))
-	(lambda (x)
-	  (funcall foo (funcall (funcall noo foo) x)))))))
+  (lexical-let ((noo n))	      
+	       (lambda (f)
+		 (lexical-let ((foo f))
+			      (lambda (x)
+				(funcall foo (funcall (funcall noo foo) x)))))))
 
 ;;
 ;; To get a sense for what's happening here, let's experiment a bit with these procedures and 
@@ -164,13 +164,13 @@
 ;;
 (defun one (f)
   (lexical-let ((foo f))
-    (lambda (x)
-      (funcall foo x))))
+	       (lambda (x)
+		 (funcall foo x))))
 
 (defun two (f)
   (lexical-let ((foo f))
-    (lambda (x)
-      (funcall foo (funcall foo x)))))
+	       (lambda (x)
+		 (funcall foo (funcall foo x)))))
 
 (funcall (one #'inc) 0)
 ;; ==> 1
