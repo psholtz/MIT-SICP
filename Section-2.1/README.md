@@ -4,7 +4,7 @@ Section 2.1
 Data Abstractions
 ----------------- 
 
-[xx] (linear combinations, from cover)
+Linear combinations (from cover)
 
 Church Numerals
 --------------- 
