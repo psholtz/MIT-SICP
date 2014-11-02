@@ -4,6 +4,12 @@ Section 2.1
 Data Abstractions
 ----------------- 
 
+In Chapter 1 we looked at computational processes and the role they play in software design:
+
+<ol>
+ <li>The use of primitive data (numbers) and primitive operations (arithmetic)</li>
+</ol>
+
 Linear combinations (from cover)
 
 Church Numerals
