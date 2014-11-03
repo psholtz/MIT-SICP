@@ -20,7 +20,7 @@ In this section the focus is on how to build abstractions by combining data to f
  <li>Enhancing the expressive power of our programming language.</li>
 </ol>
 
-# Conceptual Design
+## Conceptual Design
 
 !Conceptual Design
 
