@@ -12,28 +12,19 @@ In Chapter 1 we looked at computational processes and the role they play in soft
  <li>How to abstract procedures using <code>define</code></li>
 </ol>
 
-In this section the focus is on how to build abstractions by combining data to form compound data, thereby accomplishing several things:
-
-<ol>
- <li>Elevating the conceptual level at which we can design programs.</li>
- <li>Increasing the modularity of our program design.</li>
- <li>Enhancing the expressive power of our programming language.</li>
-</ol>
+In this section the focus is on how to build abstractions by combining data to form compound data, thereby accomplishing several things, including (a) elevating the conceptual level at which we can design programs; (b) increasing the modularity of our program design; and (c) enhancing the expressive power of our programming language.
 
 ### Conceptual Design
 
-!Conceptual Design
+xxx
+
+### Program Modularity
 
 xxx
 
-!Program Modularity 
+### Expressive Power
 
 xxx
-
-!Expressive Power
-
-xxx
-
 
 So whereas the focus in Chapter 1 was on how to build abstractions by combining procedures to form **compound procedures**, the focus now will be on how to build abstractions by combining data to form **compound data**.
 
