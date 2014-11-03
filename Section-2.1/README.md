@@ -12,7 +12,7 @@ In Chapter 1 we looked at computational processes and the role they play in soft
  <li>How to abstract procedures using <code>define</code></li>
 </ol>
 
-So whereas the focus in Chapter 1 was on how to build abstractions by combining procedures to form compound procedures, the focus where will be on how to build abstractions by combining data to form **compound data**.
+So whereas the focus in Chapter 1 was on how to build abstractions by combining procedures to form **compound procedures**, the focus now will be on how to build abstractions by combining data to form **compound data**.
 
 Linear combinations (from cover)
 
