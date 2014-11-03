@@ -16,10 +16,9 @@ In this section the focus is on how to build abstractions by combining data to f
 
 <ol>
  <li>Elevating the conceptual level at which we can design programs.</li>
- <li>xx</li>
- <li>xx</li>
+ <li>Increasing the modularity of our program design.</li>
+ <li>Enhancing the expressive power of our programming language.</li>
 </ol>
- (a) elevating the conceptual level at which we can design programs; (b) increasing the modularity of our program design; and (c) enhancing the expressive power of our programming language.
 
 #### Conceptual Design
 
