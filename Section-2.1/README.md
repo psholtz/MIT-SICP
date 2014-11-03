@@ -20,6 +20,19 @@ In this section the focus is on how to build abstractions by combining data to f
  <li>Enhancing the expressive power of our programming language.</li>
 </ol>
 
+!Conceptual Design
+
+xxx
+
+!Program Modularity 
+
+xxx
+
+!Expressive Power
+
+xxx
+
+
 So whereas the focus in Chapter 1 was on how to build abstractions by combining procedures to form **compound procedures**, the focus now will be on how to build abstractions by combining data to form **compound data**.
 
 Linear combinations (from cover)
