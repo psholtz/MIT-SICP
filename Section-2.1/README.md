@@ -12,7 +12,7 @@ In Chapter 1 we looked at computational processes and the role they play in soft
  <li>How to abstract procedures using <code>define</code></li>
 </ol>
 
-In this section the focus is on how to build abstractions by combining data to form compound data, which accomplishes several things:
+In this section the focus is on how to build abstractions by combining data to form compound data, thereby accomplishing several things:
 
 <ol>
  <li>It elevates the conceptual level at which we can design programs.</li>
