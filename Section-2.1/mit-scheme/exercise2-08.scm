@@ -70,3 +70,12 @@
 (define (sub-interval x y)
   (let ((z (neg-interval y)))
     (add-interval x z)))
+
+;;
+;; Run some use cases:
+;;
+(define i1 (make-interval 3 5))
+;; ==> (3 . 5)
+
+(sub-interval i1 i1)
+;; ==> (-2 . 2)
