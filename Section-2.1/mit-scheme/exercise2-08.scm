@@ -40,32 +40,33 @@
 ;;
 ;; Now let us construct the substraction procedure. 
 ;;
-;; First we will define a "negative" procedure, that creates an arithmetical 
+;; First we will define a "neg-interval" procedure, that creates an arithmetical 
 ;; inverse for a given interval. Then we will add this "negative" to the 
-;; first element of the combination, to arrive at the difference between the two elements.
+;; first element of the combination, to arrive at the difference between the 
+;; two elements.
 ;;
-(define (negative interval)
+(define (neg-interval interval)
   (make-interval (* -1 (upper-bound interval))
 		 (* -1 (lower-bound interval))))
 
 ;;
 ;; Do a few use cases, to verify that we are getting the negative:
 ;;
-(negative (make-interval 3 5))
+(neg-interval (make-interval 3 5))
 ;; ==> (-5 . -3)
 
-(negative (make-interval 0 3))
+(neg-interval (make-interval 0 3))
 ;; ==> (-3 . 0)
 
-(negative (make-interval -5 -3))
+(neg-interval (make-interval -5 -3))
 ;; ==> (3 . 5)
 
-(negative (make-interval -3 0))
+(neg-interval (make-interval -3 0))
 ;; ==> (0 . 3)
  
 ;;
 ;; Now define the subtraction procedure:
 ;;
 (define (sub-interval x y)
-  (let ((z (negative y)))
+  (let ((z (neg-interval y)))
     (add-interval x z)))
