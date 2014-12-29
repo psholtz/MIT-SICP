@@ -58,28 +58,31 @@
 ;; ==> (-2 . 0)
 (define i3 (make-interval -2 2))
 ;; ==> (-2 . 2)
-(define i4 (make-interval 1 3))
-;; ==> (1 . 3)
+(define i4 (make-interval 5 7))
+;; ==> (5 . 7)
 
 ;;
 ;; These should result in something approximating zero:
 ;;
 (div-interval i1 i4)
-;; ==> (0 . 2)
+;; ==> (0 . 4)
 (div-interval i2 i4)
-;; ==> (-2 . 0)
+;; ==> (-4 . 0)
 (div-interval i3 i4)
-;; ==> (-2 . 2)
+;; ==> (-4 . 4)
 
 ;;
 ;; These should trigger divide-by-zero errors:
 ;;
 (div-interval i4 i1)
-;; ==>
-(div-interval ii4 i2)
-;; ==>
-(div-interval i4 i3)
-;; ==>
+;; ==> *** Cannot divide by zero!
+(div-interval i4 i2)
+;; ==> *** Cannot divide by zero!
+(div-interval i4 i3) 
+;; ==> *** Cannot divide by zero!
 
+;;
+;; This should result in something approximating one:
+;;
 (div-interval i4 i4)
-;; >
+;; ==> (0.714285... . 1.4)
