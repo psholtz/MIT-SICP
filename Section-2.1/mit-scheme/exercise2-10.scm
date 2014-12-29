@@ -15,6 +15,17 @@
 			       (/ 1.0 (lower-bound y)))))
 
 ;;
+;; "mul-interval" procedure, uesd by "div-interval":
+;;
+(define (mul-interval x y)
+  (let ((p1 (* (lower-bound x) (lower-bound y)))
+	(p2 (* (lower-bound x) (upper-bound y)))
+	(p3 (* (upper-bound x) (lower-bound y)))
+	(p4 (* (upper-bound x) (upper-bound y))))
+    (make-interval (min p1 p2 p3 p4)
+		   (max p1 p2 p3 p4))))
+
+;;
 ;; Modified version that checks for division by zero.
 ;;
 ;; Since we use the forms (/ 1.0 (upper-bound y)) and (/ 1.0 (lower-bound y))
@@ -37,3 +48,38 @@
 	   (mul-interval x
 			 (make-interval (/ 1.0 (upper-bound y))
 					(/ 1.0 (lower-bound y))))))))
+
+;;
+;; Run some unit tests:
+;;
+(define i1 (make-interval 0 2))
+;; ==> (0 . 2) 
+(define i2 (make-interval -2 0))
+;; ==> (-2 . 0)
+(define i3 (make-interval -2 2))
+;; ==> (-2 . 2)
+(define i4 (make-interval 1 3))
+;; ==> (1 . 3)
+
+;;
+;; These should result in something approximating zero:
+;;
+(div-interval i1 i4)
+;; ==> (0 . 2)
+(div-interval i2 i4)
+;; ==> (-2 . 0)
+(div-interval i3 i4)
+;; ==> (-2 . 2)
+
+;;
+;; These should trigger divide-by-zero errors:
+;;
+(div-interval i4 i1)
+;; ==>
+(div-interval ii4 i2)
+;; ==>
+(div-interval i4 i3)
+;; ==>
+
+(div-interval i4 i4)
+;; >
