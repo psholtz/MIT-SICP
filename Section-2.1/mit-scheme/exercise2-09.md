@@ -78,11 +78,11 @@ w(i1 * i2) = bd - ac
 
 which is not a function of either (b-a) or (d-c). 
 
-Consider next division, again with 0 < a < b and 0 < c < d and a < b< c< d. We have:
+Consider next division, again (for the sake of simplicity) with 0 < a < b and 0 < c < d and a < b< c< d. We have:
 
 <pre>
 i1 / i2 = (a/d, b/c)
 w(i1 / i2) = b/c - a/d = (bd - ac)/cd
 </pre>
 
-Again, the factor of bd-ad arises in the expression, which is not a function of either (b-a) or (d-c).
+Again, the factor of bd-ad arises in the expression for the width, but this is not a function of either (b-a) or (d-c).
