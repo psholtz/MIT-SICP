@@ -36,7 +36,7 @@ w(i1+i2) = (d+b)-(a+c) = (d-c) + (b-a) = w(i1) + w(i2)
 
 In other words, the width of the sum is the sum of the widths.
 
-The difference is simply a special for of the sum, namely, adding the negative of one of the arguments, so we would expect the same arguments to carry over identicallly. 
+The difference is simply a special case for of the sum, namely, adding the negative of one of the arguments, so we would expect the same arguments to carry over identicallly. 
 
 If we wish to work out the difference by hand, we would have:
 
@@ -76,4 +76,13 @@ but in this case, we clearly have:
 w(i1 * i2) = bd - ac
 </pre>
 
-which is not a function of either (b-a) or (d-c). QED.
+which is not a function of either (b-a) or (d-c). 
+
+Consider next division, again with 0 < a < b and 0 < c < d and a < b< c< d. We have:
+
+<pre>
+i1 / i2 = (a/d, b/c)
+w(i1 / i2) = b/c - a/d = (bd - ac)/cd
+</pre>
+
+Again, the factor of bd-ad arises in the expression, which is not a function of either (b-a) or (d-c).
