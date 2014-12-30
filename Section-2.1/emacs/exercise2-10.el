@@ -56,3 +56,41 @@
 	   (mul-interval x
 			 (make-interval (/ 1.0 (upper-bound y))
 					(/ 1.0 (lower-bound y))))))))
+
+;;
+;; Run some unit tests:
+;;
+(setq i1 (make-interval 0 2))
+;; ==> (0 . 2)
+(setq i2 (make-interval -2 0))
+;; ==> (-2 . 0)
+(setq i3 (make-interval -2 -2))
+;; ==> (-2 . 2)
+(setq i4 (make-interval 5 7))
+;; ==> (5 . 7)
+
+;;
+;; These should result in something approximating zero:
+;;
+(div-interval i1 i4)
+;; ==> (0 . 4)
+(div-interval i2 i4)
+;; ==> (-4 . 0)
+(div-interval i3 i4)
+;; ==> (-4 . 4)
+
+;;
+;; These should trigger divide-by-zero errors:
+;;
+(div-interval i4 i1)
+;; ==> *** Cannot divide by zero!
+(div-interval i4 i2)
+;; ==> *** Cannot divide by zero!
+(div-interval i4 i3) 
+;; ==> *** Cannot divide by zero!
+
+;;
+;; This should result in something approximating one:
+;;
+(div-interval i4 i4)
+;; ==> (0.714285... . 1.4)
