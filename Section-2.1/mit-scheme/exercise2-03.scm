@@ -49,7 +49,7 @@
 ;;
 (define (distance-points p1 p2)
   (sqrt (+ (square (- (x-point p1) (x-point p2))) 
-	      (square (- (y-point p1) (y-point p2))))))
+	   (square (- (y-point p1) (y-point p2))))))
 (define (length-segment s)
   (distance-points (start-segment s) (end-segment s)))
 
