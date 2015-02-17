@@ -32,13 +32,18 @@
   (predicate-for-circle 0 0 1))
 
 ;;
-;; Import geometry package from Section 2.1:
+;; Import geometry package from Section 2.1.
+;;
+;; Point package:
 ;;
 (define (make-point x y)
   (cons x y))
 (define (x-point p) (car p))
 (define (y-point p) (cdr p))
 
+;;
+;; Segment package:
+;;
 (define (make-segment start-point end-point)
   (cons start-point end-point))
 (define (start-segment s)
@@ -51,6 +56,9 @@
 (define (length-segment s)
   (distance-points (start-segment s) (end-segment s)))
   
+;;
+;; Rectangle package:
+;;
 (define (make-rect upper-left-x upper-left-y lower-right-x lower-right-y)
   (cons (make-point upper-left-x upper-left-y)
 	(make-point lower-right-x lower-right-y)))
@@ -76,6 +84,32 @@
   (+ (* 2 (width-rect rect)) (* 2 (height-rect rect))))
 (define (area-rect rect)
   (* (width-rect rect) (height-rect rect)))
+
+;;
+;; Monte Carlo procedure.
+;;
+(define (monte-carlo trials experiment)
+  (define (iter trials-remaining trials-passed)
+    (cond ((= trials-remaining 0)
+	   (/ trials-passed trials))
+	  ((experiment)
+	   (iter (- trials-remaining 1) (+ trials-passed 1)))
+	  (else
+	   (iter (- trials-remaining 1) trials-passed))))
+  (iter trials 0.0))
+
+;; 
+;; Estimation procedure.
+;;
+;; Invoke procedure where (x1, x2) and (y1, y2) represent bounds for a range, 
+;; as specified in the problem statement, so that x1 < x2 and y1 < y2, and so
+;; (x1, y2) is the upper-left corner of the rectangle, and (x2, y1) is the 
+;; lower-right corner of the rectangle.
+;;
+(define (estimate-integral predicate x1 x2 y1 y2 num-trials)
+  (let ((rect (make-rect x1 y2 x2 y1)))
+    (area-rect rect)))
+
 
 ;;
 ;; Define predicate for a circle (at origin) with a given radius:
