@@ -12,6 +12,8 @@
 ;; Define supporting procedures:
 ;;
 (define (square x) (* x x))
+(define (average x y)
+  (/ (+ x y) 2.0))
 
 ;;
 ;; Define circle predicates. 
@@ -50,6 +52,12 @@
   (car s))
 (define (end-segment s)
   (cdr s))
+(define (midpoint-segment s)
+  (let ((p1 (start-segment s))
+	(p2 (end-segment s)))
+    (make-point
+     (average (x-point p1) (x-point p2))
+     (average (y-point p1) (y-point p2)))))
 (define (distance-points p1 p2)
   (sqrt (+ (square (- (x-point p1) (x-point p2)))
 	   (square (- (y-point p1) (y-point p2))))))
