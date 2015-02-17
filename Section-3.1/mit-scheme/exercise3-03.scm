@@ -22,7 +22,6 @@
 ;;
 (define (make-account pwd balance)
   (let ((password pwd))
-
     ;; "withdraw" procedure
     (define (withdraw amount)
       (if (>= balance amount)
