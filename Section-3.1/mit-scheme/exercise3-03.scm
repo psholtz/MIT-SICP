@@ -22,14 +22,20 @@
 ;;
 (define (make-account pwd balance)
   (let ((password pwd))
+
+    ;; "withdraw" procedure
     (define (withdraw amount)
       (if (>= balance amount)
 	  (begin (set! balance (- balance amount))
 		 balance)
 	  (display "Insufficient funds")))
+
+    ;; "deposit" procedure
     (define (deposit amount)
       (set! balance (+ balance amount))
       balance)
+
+    ;; "dispatch" procedure
     (define (dispatch pwd m)
       (cond ((eq? pwd password)
 	     (cond ((eq? m 'withdraw) withdraw)
