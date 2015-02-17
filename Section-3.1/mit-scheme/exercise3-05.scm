@@ -34,66 +34,6 @@
   (predicate-for-circle 0 0 1))
 
 ;;
-;; Import geometry package from Section 2.1.
-;;
-;; Point package:
-;;
-(define (make-point x y)
-  (cons x y))
-(define (x-point p) (car p))
-(define (y-point p) (cdr p))
-
-;;
-;; Segment package:
-;;
-(define (make-segment start-point end-point)
-  (cons start-point end-point))
-(define (start-segment s)
-  (car s))
-(define (end-segment s)
-  (cdr s))
-(define (midpoint-segment s)
-  (let ((p1 (start-segment s))
-	(p2 (end-segment s)))
-    (make-point
-     (average (x-point p1) (x-point p2))
-     (average (y-point p1) (y-point p2)))))
-(define (distance-points p1 p2)
-  (sqrt (+ (square (- (x-point p1) (x-point p2)))
-	   (square (- (y-point p1) (y-point p2))))))
-(define (length-segment s)
-  (distance-points (start-segment s) (end-segment s)))
-  
-;;
-;; Rectangle package:
-;;
-(define (make-rect upper-left-x upper-left-y lower-right-x lower-right-y)
-  (cons (make-point upper-left-x upper-left-y)
-	(make-point lower-right-x lower-right-y)))
-(define (upper-left-rect rect)
-  (car rect))
-(define (lower-right-rect rect)
-  (cdr rect))
-(define (width-rect rect)
-  (let ((p1 (upper-left-rect rect))
-	(p2 (lower-right-rect rect)))
-    (let ((p3 (make-point
-	       (x-point p2)
-	       (y-point p1))))
-      (length-segment (make-segment p1 p3)))))
-(define (height-rect rect)
-  (let ((p1 (upper-left-rect rect))
-	(p2 (lower-right-rect rect)))
-    (let ((p3 (make-point
-	       (x-point p1)
-	       (y-point p2))))
-      (length-segment (make-segment p1 p3)))))
-(define (perimeter-rect rect)
-  (+ (* 2 (width-rect rect)) (* 2 (height-rect rect))))
-(define (area-rect rect)
-  (* (width-rect rect) (height-rect rect)))
-
-;;
 ;; Monte Carlo procedure as defined in text.
 ;;
 (define (monte-carlo trials experiment)
@@ -130,8 +70,8 @@
 	(predicate x y)))
 
     ;; Integral is given by multiplying area of rectangle by M.C. results
-    (let ((rect (make-rect x1 y2 x2 y1)))
-      (* (area-rect rect) (monte-carlo trials estimate-integral-test)))))
+    (let ((area-rect (* (- x2 x1) (- y2 y1))))
+      (* area-rect (monte-carlo trials estimate-integral-test)))))
 
 ;;
 ;; Run unit tests:
