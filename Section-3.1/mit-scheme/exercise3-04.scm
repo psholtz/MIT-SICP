@@ -10,21 +10,26 @@
 ;; Define the procedure:
 ;;
 (define (make-account pwd balance)
-  (let ((password pwd)
-	(count 0))
+  (let ((password pwd))
+    ;; "withdraw" procedure
     (define (withdraw amount)
       (if (>= balance amount)
-	    (begin (set! balance (- balance amount))
-		    balance)
-	      (display "Insufficient funds")))
+	  (begin (set! balance (- balance amount))
+		 balance)
+	  (display "Insufficient funds")))
+    
+    ;; "deposit" procedure
     (define (deposit amount)
       (set! balance (+ balance amount))
       balance)
-    (define (call-the-cops x)
-      (display "Call the cops!!"))
+
+    ;; "call-the-cops" procedure
+    (define (call-the-cops)
+      (display "Call the cops!"))
+
+    ;; "dispatch" procedure
     (define (dispatch pwd m)
       (cond ((eq? pwd password)
-	     (set! count 0)
 	     (cond ((eq? m 'withdraw) withdraw)
 		   ((eq? m 'deposit) deposit)
 		   (else
@@ -36,4 +41,30 @@
 		 (lambda (x) (display "Incorrect password"))))))
     dispatch))
 
-;; [working]
+;;
+;; Run the unit tests:
+;;
+(define account (make-account 'secret 1000))
+
+((account 'secret 'withdraw) 100)
+;; ==> 900 
+
+((account 'secret 'deposit) 300)
+;; ==> 1200
+
+((account 'wrong 'withdraw) 100)
+;; ==> Incorrect password
+((account 'wrong 'withdraw) 100)
+;; ==> Incorrect password 
+((account 'wrong 'withdraw) 100)
+;; ==> Incorrect password 
+((account 'wrong 'withdraw) 100)
+;; ==> Incorrect password 
+((account 'wrong 'withdraw) 100)
+;; ==> Incorrect password 
+((account 'wrong 'withdraw) 100)
+;; ==> Incorrect password 
+((account 'wrong 'withdraw) 100)
+;; ==> Incorrect password 
+((account 'wrong 'withdraw) 100)
+;; ==> Call the cops!!       
