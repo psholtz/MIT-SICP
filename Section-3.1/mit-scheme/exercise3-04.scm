@@ -7,10 +7,16 @@
 ;;
 
 ;;
-;; Define the procedure:
+;; We make three modifications to the procedure:
+;;
+;;  (1) Add another local state variable to track incorrect password attempts;
+;;  (2) Add the "call-the-cops" procedure;
+;;  (3) Modify the else-branch of password check to count incorrect attempts;
 ;;
 (define (make-account pwd balance)
-  (let ((password pwd))
+  (let ((password pwd)
+	(count 0))
+
     ;; "withdraw" procedure
     (define (withdraw amount)
       (if (>= balance amount)
@@ -24,7 +30,7 @@
       balance)
 
     ;; "call-the-cops" procedure
-    (define (call-the-cops)
+    (define (call-the-cops x)
       (display "Call the cops!"))
 
     ;; "dispatch" procedure
