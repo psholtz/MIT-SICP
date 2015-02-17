@@ -27,7 +27,7 @@
 	  (dy (- b y)))
       (let ((distance-from-center (sqrt (+ (square dx) (square dy)))))
 
-	;; Inside the circle only if distance-to-center is less than radius
+	;; Inside the circle only if distance-from-center is less than radius
 	(<= distance-from-center r)))))
 
 (define predicate-for-unit-circle
