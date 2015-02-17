@@ -123,7 +123,7 @@
 	(y1f (* 1.0 y1))
 	(y2f (* 1.0 y2)))
 
-    ;; Define Monte Carlo test
+    ;; Define M.C. test
     (define (estimate-integral-test)
       (let ((x (random-in-range x1f x2f))
 	    (y (random-in-range y1f y2f)))
