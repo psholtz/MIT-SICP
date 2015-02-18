@@ -31,22 +31,21 @@
 	   start)))
 
 ;;
-;; Let's define another procedure "h", that starts counting (using "g") at 0:
+;; Now define a procedure that returns a function f that meets the requirements
+;; we have outlined above:
 ;;
-(define h (g 0))
-
-;;
-;; Finally, let's define a procedure "f" that returns its argument the first 
-;; time its invoked, and returns 0 for each subsequence invocation:
-;;
-(define (f x)
-  (if (= (h x) 1)
-      x
-      0))
+(define (f-maker)
+  (define h (g 0))
+  (lambda (x)
+    (if (= (h x) 1)
+	x
+	0)))
 
 ;;
 ;; Testing this out:
 ;;
+(define f (f-maker))
+
 (f 100)
 ;; ==> 100
 (f 124)
@@ -60,8 +59,10 @@
 
 ;;
 ;; We can test the order in which the interpreter evaluates arguments by 
-;; evaluating the expression defined in the text:
+;; evaluating the expression defined in the text (remember to reset f):
 ;;
+(define f (f-maker)
+
 (+ (f 0) (f 1))
 ;; ==> 1
 
@@ -73,7 +74,7 @@
 ;; We can model the "reverse" evaluation procedure by switching the order of
 ;; the arguments in the expression:
 ;;
+(define f (f-maker))
+
 (+ (f 1) (f 0))
 ;; ==> 0
-
-;; [working] use a "dispatch" procedure
