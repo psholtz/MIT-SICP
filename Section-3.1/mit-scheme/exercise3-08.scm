@@ -73,3 +73,5 @@
 ;;
 (+ (f 1) (f 0))
 ;; ==> 0
+
+;; [working] use a "dispatch" procedure
