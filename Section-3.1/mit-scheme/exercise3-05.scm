@@ -63,7 +63,7 @@
 	(y1f (* 1.0 y1))
 	(y2f (* 1.0 y2)))
 
-    ;; Define M.C. test
+    ;; Define M.C. test by selecting random point (x,y)
     (define (estimate-integral-test)
       (let ((x (random-in-range x1f x2f))
 	    (y (random-in-range y1f y2f)))
@@ -73,8 +73,35 @@
     (let ((area-rect (* (- x2 x1) (- y2 y1))))
       (* area-rect (monte-carlo trials estimate-integral-test)))))
 
+;; 
+;; The area of the unit circle is A(C) = pi * 1^1 = pi. 
 ;;
-;; Run unit tests:
+;; Hence by invoking the estimate-integral procedure with the predicate
+;; for the unit circle, we should expect to obtain a result that approximates
+;; the value of pi:
 ;;
 
-;; [working]
+(estimate-integral predicate-for-unit-circle -1 1 -1 1 10)
+;; ==> 3.2
+
+;;
+;; The bounding rectangle for the unit circle is given by (-1,1) in the 
+;; x-dimension and (-1,1) in the y-dimension, hence the choices for x1, x2 
+;; and y1, y2 above. We could choose other dimensions for the bounding 
+;; rectangle as well, so long as the unit circle is completely contained 
+;; within the bounding rectangle.
+;;
+
+;;
+;; Monte Carlo is a powerful integration technique when other methods prove
+;; intractable, but convergence can be quite slow. It is frequently necessary 
+;; to simulate a large number of trials before the approximation begins 
+;; converging to the correct answer:
+;;
+
+(estimate-integral predicate-for-unit-circle -1 1 -1 1 100)
+;; ==> 3.12
+(estimate-integral predicate-for-unit-circle -1 1 -1 1 1000)
+;; ==> 3.172
+(estimate-integral predicate-for-unit-circle -1 1 -1 1 10000)
+;; ==> 3.1628
