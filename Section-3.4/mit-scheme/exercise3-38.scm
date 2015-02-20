@@ -9,7 +9,7 @@
 ;;
 ;; 1. Peter, Paul, Mary
 ;;
-(set! balance 100)                       
+(define balance 100)                       
 ;; ==> 100
 (set! balance (+ balance 10)            
 ;; ==> 110
@@ -21,7 +21,7 @@
 ;;
 ;; 2. Peter, Mary, Paul
 ;;
-(set! balance 100)                       
+(define balance 100)                       
 ;; ==> 100
 (set! balance (+ balance 10))
 ;; ==> 110
@@ -33,7 +33,7 @@
 ;;
 ;; 3. Paul, Peter, Mary
 ;;
-(set! balance 100)
+(define balance 100)
 ;; ==> 100
 (set! balance (- balance 20))
 ;; ==> 80
@@ -45,7 +45,7 @@
 ;;
 ;; 4. Paul, Mary, Peter
 ;;
-(set! balance 100)
+(define balance 100)
 ;; ==> 100
 (set! balance (- balance 20))
 ;; ==> 80
@@ -57,7 +57,7 @@
 ;;
 ;; 5. Mary, Peter, Paul
 ;;
-(set! balance 100)
+(define balance 100)
 ;; ==> 100
 (set! balance (- balance (/ balance 2)))
 ;; ==> 50
@@ -69,7 +69,7 @@
 ;;
 ;; 6. Mary, Paul, Peter
 ;;
-(set! balance 100)
+(define balance 100)
 ;; ==> 100
 (set! balance (- balance (/ balance 2)))
 ;; ==> 50
