@@ -39,7 +39,7 @@
     dispatch))
 
 ;;
-;; With these modifications to "make-account", we can define "make-joint":
+;; With these modifications to "make-account", we can define "make-joint" as:
 ;;
 (define (make-joint account account-pwd user-pwd)
   ((account account-pwd 'make-joint) user-pwd))
