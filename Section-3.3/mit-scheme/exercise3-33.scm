@@ -152,6 +152,28 @@
 	   (loop (cdr items)))))
   (loop list))
 
+
+(define (probe name connector)
+  (define (print-probe value)
+    (newline)
+    (display "Probe: ")
+    (display name)
+    (display " = ")
+    (display value))
+  (define (process-new-value)
+    (print-probe (get-value connector)))
+  (define (process-forget-value)
+    (print-probe "?"))
+  (define (me request)
+    (cond ((eq? request 'I-have-a-value)
+	   (process-new-value))
+	  ((eq? request 'I-loast-my-value)
+	   (process-forget-value))
+	  (else
+	   (error "Unknown request -- PROBE" request))))
+  (connect connector me)
+  me)
+
 ;;
 ;; Define the average network:
 ;;
@@ -166,3 +188,16 @@
     (multiplier x y c)
     (constant 0.5 y)
     'ok))
+
+;;
+;; Run the unit tests:
+;;
+(probe "A" a)
+(probe "B" b)
+(probe "C" c)
+
+(set-value! a 4.0 'user)
+;; ==>
+(set-value! b 6.0 'user)
+;; ==>
+;; ==>
