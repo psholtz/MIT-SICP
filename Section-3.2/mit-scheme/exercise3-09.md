@@ -7,4 +7,6 @@ Environment structures created by evaluating ```(factorial 6)``` using the recur
 
 Environment structures created by evaluating ```(factorial 6)``` using the iterative version:
 
+[![](https://farm8.staticflickr.com/7417/16587868475_e013eee969_b.jpg)](https://farm8.staticflickr.com/7417/16587868475_e013eee969_b.jpg)
+
 [working]
