@@ -13,6 +13,12 @@ In the ```make-withdraw``` procedure, the local variable ```balance``` is create
           "Insufficient bunds"))))
 ```
 
+Recall from section 1.3.2 that ```let``` is simply syntactic sugar for a procedure call:
+
+```scheme
+(let ((<var> <exp>)) <body>)
+```
+
 Solution
 -------- 
 
