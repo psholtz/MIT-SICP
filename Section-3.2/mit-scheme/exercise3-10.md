@@ -64,4 +64,6 @@ can be transformed into
            "Insufficient funds"))) initial-amount))
 ```
 
+The environment structure that results upon defining ```make-withdraw``` and evaluating the expression ```(define W1 (make-withdraw 100))``` is as follows:
+
 [working]
