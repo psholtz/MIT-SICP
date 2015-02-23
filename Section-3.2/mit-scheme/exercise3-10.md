@@ -12,7 +12,7 @@ We could also create the local state variable explicitly, using ```let```, as fo
       (if (>= balance amount)
           (begin (set! balance (- balance amount))
                  balance)
-          "Insufficient bunds"))))
+          "Insufficient funds"))))
 ```
 
 Recall from section 1.3.2 that ```let``` is simply syntactic sugar for a procedure call:
@@ -23,5 +23,29 @@ Recall from section 1.3.2 that ```let``` is simply syntactic sugar for a procedu
 
 Solution
 -------- 
+
+The expression 
+
+```scheme
+(define (make-withdraw initial-amount)
+  (let ((balance initial-amount))
+    (lambda (amount)
+      (if (>= balance amount)
+          (begin (set! balance (- balance amount))
+                 balance)
+          "Insufficient funds"))))
+```
+
+can be transformed into
+
+```scheme
+(define (make-withdraw initial-amount)
+  ((lambda (balance)
+     (lambda (amount)
+       (if (>= balance amount)
+           (begin (set! balance (- balance amount))
+                  balance)
+           "Insufficient funds"))) initial-amount))
+```
 
 [working]
