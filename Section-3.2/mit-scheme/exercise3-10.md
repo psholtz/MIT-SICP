@@ -64,8 +64,10 @@ can be transformed into
            "Insufficient funds"))) initial-amount))
 ```
 
-The environment structure that results upon defining ```make-withdraw``` and evaluating the expression ```(define W1 (make-withdraw 100))``` is as follows:
+The environment structure that results upon defining ```make-withdraw``` and evaluating the expression ```(define W1 (make-withdraw 100))``` is as follows (click to enlarge):
 
 [![](https://farm9.staticflickr.com/8596/16626009792_b755c69bf0_b.jpg)](https://farm9.staticflickr.com/8596/16626009792_b755c69bf0_b.jpg)
+
+The ```make-withdraw``` procedure takes a single argument, ```initial-amount```, and applies this argument to an internal lambda procedure that also takes a single argument, ```balance```.
 
 [working]
