@@ -72,7 +72,7 @@ The ```make-withdraw``` procedure takes a single argument, ```initial-amount```.
 
 The environment structure that results upon evaluating ```(W1 50)``` is as follows (click to enlarge):
 
-[![](https://farm9.staticflickr.com/8565/16630778951_d244f2055d_b.jpg)](https://farm9.staticflickr.com/8565/16630778951_d244f2055d_b.jpg)
+[![](https://farm9.staticflickr.com/8588/16631884685_602db4befa_b.jpg)](https://farm9.staticflickr.com/8588/16631884685_602db4befa_b.jpg)
 
 ```W1``` points to a lambda function that takes one argument, ```amount```. Applying the argument 50 to ```W1``` creates a new environment frame where the value 50 is bound to the variable ```amount```. This new frame ponts to the E1 frame where the variable ```initial-amount``` is bound, since E1 is the frame pointed to by the lambda procedure.
 
