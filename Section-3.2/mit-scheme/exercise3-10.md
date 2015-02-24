@@ -82,4 +82,6 @@ When evaluation of the lambda procedure terminates, the resulting environment st
 
 [![](https://farm9.staticflickr.com/8566/16631990315_25ba0701a5_b.jpg)](https://farm9.staticflickr.com/8566/16631990315_25ba0701a5_b.jpg)
 
+The value of ```initial-amount``` in E1 has been updated, and the frame in which ```amount``` was bound and in which the lambda procedure was evaluated has been discarded since the lambda procedure has terminated and there are no other pointers to the frame elsewhere in the environment.
+
 [working]
