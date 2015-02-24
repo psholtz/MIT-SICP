@@ -72,4 +72,6 @@ The ```make-withdraw``` procedure takes a single argument, ```initial-amount```.
 
 The environment structure that results upon evaluating ```(W1 50)``` is as follows:
 
+[![](https://farm9.staticflickr.com/8576/16446016589_02b11fe1ff_b.jpg)](https://farm9.staticflickr.com/8576/16446016589_02b11fe1ff_b.jpg)
+
 [working]
