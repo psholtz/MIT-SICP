@@ -74,6 +74,6 @@ The environment structure that results upon evaluating ```(W1 50)``` is as follo
 
 [![](https://farm9.staticflickr.com/8576/16446016589_02b11fe1ff_b.jpg)](https://farm9.staticflickr.com/8576/16446016589_02b11fe1ff_b.jpg)
 
-```W1``` points to a lambda function that takes one argument, ```amount```. Applying the argument 50 to ```W1``` creates a new environment frame where the value 50 is bound to the variable ```amount```.
+```W1``` points to a lambda function that takes one argument, ```amount```. Applying the argument 50 to ```W1``` creates a new environment frame where the value 50 is bound to the variable ```amount```. This new frame ponts to the E1 frame where the variable ```initial-amount``` is bound, since E1 is the frame pointed to by the lambda procedure.
 
 [working]
