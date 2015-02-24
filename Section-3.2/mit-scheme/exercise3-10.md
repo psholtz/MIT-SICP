@@ -78,4 +78,6 @@ The environment structure that results upon evaluating ```(W1 50)``` is as follo
 
 When evaluation of the lambda procedure terminates, the resulting environment structure looks like:
 
+[![](https://farm9.staticflickr.com/8566/16631990315_25ba0701a5_b.jpg)](https://farm9.staticflickr.com/8566/16631990315_25ba0701a5_b.jpg)
+
 [working]
