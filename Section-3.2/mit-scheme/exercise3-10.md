@@ -78,10 +78,12 @@ The environment structure that results upon evaluating ```(W1 50)``` is as follo
 
 When the lambda procedure is evaluated, the binding for ```amount``` is found in the frame that has just been created, and the binding for ```initial-amount``` is found in the frame E1 that was created when ```make-withdraw``` was defined. The procecdure updates the value of ```initial-amount``` in E1, setting it to ```(- initial-amount amount)``` or 50.
 
-When evaluation of the lambda procedure terminates, the resulting environment structure looks like:
+When evaluation of the lambda procedure terminates, the resulting environment structure looks like (click to eenlarge):
 
 [![](https://farm9.staticflickr.com/8566/16631990315_25ba0701a5_b.jpg)](https://farm9.staticflickr.com/8566/16631990315_25ba0701a5_b.jpg)
 
 The value of ```initial-amount``` in E1 has been updated, and the frame in which ```amount``` was bound and in which the lambda procedure was evaluated has been discarded since the lambda procedure has terminated and there are no other pointers to that frame from elsewhere in the environment.
+
+The environment structure that results upon evaluating ```(define W2 (make-withdraw 100))``` is as follows (cilck to enlarge):
 
 [working]
