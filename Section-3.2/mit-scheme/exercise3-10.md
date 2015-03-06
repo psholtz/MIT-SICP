@@ -74,7 +74,7 @@ The environment structure that results upon evaluating ```(W1 50)``` is as follo
 
 [![](https://farm9.staticflickr.com/8588/16631884685_602db4befa_b.jpg)](https://farm9.staticflickr.com/8588/16631884685_602db4befa_b.jpg)
 
-```W1``` points to a lambda procedure that takes one argument, ```amount```. Applying the argument 50 to ```W1``` creates a new environment frame, ```E2```, where the value 50 is bound to the variable ```amount```. This new frame ```E2``` points to the ```E1``` frame where the variable ```initial-amount``` is bound, since E1 is the frame pointed to by the lambda procedure ```W1```.
+```W1``` points to a lambda procedure that takes one argument, ```amount```. Applying the argument 50 to ```W1``` creates a new environment frame, ```E2```, where the value 50 is bound to the variable ```amount```. This new frame ```E2``` points to the ```E1``` frame in which the variable ```initial-amount``` is bound, since ```E1``` is the frame pointed to by the lambda procedure ```W1```.
 
 When the lambda procedure is evaluated, the binding for ```amount``` is found in the frame that has just been created, and the binding for ```initial-amount``` is found in the frame E1 that was created when ```make-withdraw``` was defined. The procecdure updates the value of ```initial-amount``` in E1, setting it to ```(- initial-amount amount)``` or 50.
 
