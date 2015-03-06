@@ -68,7 +68,9 @@ The environment structure that results upon defining ```make-withdraw``` and eva
 
 [![](https://farm9.staticflickr.com/8596/16626009792_b755c69bf0_b.jpg)](https://farm9.staticflickr.com/8596/16626009792_b755c69bf0_b.jpg)
 
-The ```make-withdraw``` procedure takes a single argument, ```initial-amount```. When ```(make-withdraw 100)``` is evaluated, a new frame ```E1``` is created in which the formal parameter ```inital-amount``` is bound to the value ```100```. 
+The ```make-withdraw``` procedure takes a single argument, ```initial-amount```. 
+
+When ```(make-withdraw 100)``` is evaluated, a new frame ```E1``` is created in which the formal parameter ```inital-amount``` is bound to the value ```100```. 
 
 ```make-withdraw``` defines an internal lambda procedure that also takes a single argument, ```balance```. When ```(make-withdraw initial-amount)``` is evaluated, the value of ```initial-parameter``` is applied to the formal parameter ```balance``` in this internal lambda procedure, which causes a second frame ```E2``` to be created in which formal parameter ```balance``` is bound to the value of ```initial-amount``` (in this case, ```100```).
 
