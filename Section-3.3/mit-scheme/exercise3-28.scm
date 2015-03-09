@@ -40,8 +40,7 @@
 	     (error-handler)))
 
       ;; input signals are wrong
-      (else
-       (error-handler))))
+      (error-handler)))
 
 ;;
 ;; Unit test:
