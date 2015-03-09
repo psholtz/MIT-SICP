@@ -1,6 +1,8 @@
 Exercise 3.10
 =============
 
+[working... answer below is wrong]
+
 In the ```make-withdraw``` procedure, the local variable ```balance``` is created as a parameter of ```make-withdraw```. 
 
 We could also create the local state variable explicitly, using ```let```, as follows:
