@@ -39,6 +39,7 @@
 	    (else
 	     (error-handler)))
 
+      ;; input signals are wrong
       (else
        (error-handler))))
 
