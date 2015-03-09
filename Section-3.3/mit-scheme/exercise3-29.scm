@@ -11,16 +11,16 @@
 ;; We can invert both inputs, attach them to an and-gate, and then invert
 ;; the output of the and-gate:
 ;;
-;;
-;;             |\ 
-;;  INPUT 1 ---| o---+
-;;             |/    |   +-----)
-;;                   +---|      )    |\
-;;                   |           )---| o--- OUTPUT 
-;;                   +---|      )    |/
-;;             |\    |   +-----)
-;;  INPUT 2 ---| o---+
-;;             |/ 
+;;              _
+;;             | \ 
+;;  INPUT 1 ---|  o---+
+;;             |_/    |   +------)      _
+;;                    +---|       )    | \
+;;                        |        )---|  o--- OUTPUT 
+;;              _     +---|       )    |_/
+;;             | \    |   +------)
+;;  INPUT 2 ---|  o---+
+;;             |_/ 
 ;; 
 
 ;;
