@@ -49,7 +49,7 @@
 
 ;;
 ;; The delay time for this or-gate is twice the delay time for the 
-;; inverter to the delay time for the and-gate, or in other words:
+;; inverter plus the delay time for the and-gate, or in other words:
 ;;
 ;;   D(or) = D(and) + 2*D(inv)
 ;;
