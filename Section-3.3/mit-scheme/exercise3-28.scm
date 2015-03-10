@@ -103,7 +103,7 @@
   ((wire 'add-action!) action-procedure))
 
 ;;
-;; Define "after-delay" procedure:
+;; Define "after-delay" procedure (move to below) [working]
 ;;
 (define (after-delay delay action)
   (add-to-agenda! (+ delay (current-time the-agenda))
@@ -111,13 +111,11 @@
 		  the-agenda))
 
 ;;
-;; The supporting "agenda" data structure. 
-;;
 ;; An agenda is made up of time segments. Each time segment is a pair 
 ;; consisting of a number (the time) and a queue that holds the 
 ;; procedures that are scheduled to be run during that time segment.
 ;;
-;; Define constructor and accessors for a time segment:
+;; Define the constructor and accessors for a time segment:
 ;;
 (define (make-time-segment time queue)
   (cons time queue))
