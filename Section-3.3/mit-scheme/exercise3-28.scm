@@ -62,7 +62,7 @@
 ;; ==> Invalid signal 2 2
 
 ;;
-;; To unit test the procedure, we need the "make-wire" procedure defined
+;; To unit test the or-gate, we need the "make-wire" procedure defined
 ;; in the text, along with its corresponding accessors and mutators:
 ;;
 (define (make-wire)
