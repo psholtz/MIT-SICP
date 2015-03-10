@@ -62,19 +62,22 @@
 ;; ==> Invalid signal 2 2
 
 ;;
-;; To unit test the procedure, let's import the "make-wire" procedure from
-;; the text, along with its corresponding accessors and mutators:
+;; To unit test the procedure, we need the "make-wire" procedure defined
+;; in the text, along with its corresponding accessors and mutators:
 ;;
 (define (make-wire)
-  (let ((signal-value 0) (action-procedures '()))
+  (let ((signal-value 0) 
+	(action-procedures '()))
     (define (set-my-signal! new-value)
       (if (not (= signal-value new-value))
 	  (begin (set! signal-value new-value)
 		 (call-each action-procedures))
 	  'done))
+
     (define (accept-action-procedure! proc)
       (set! action-procedures (cons proc action-procedures))
       (proc))
+
     (define (dispatch m)
       (cond ((eq? m 'get-signal) signal-value)
 	    ((eq? m 'set-signal!) set-my-signal!)
