@@ -117,6 +117,8 @@
 ;; consisting of a number (the time) and a queue that holds the 
 ;; procedures that are scheduled to be run during that time segment.
 ;;
+;; Define constructor and accessors for a time segment:
+;;
 (define (make-time-segment time queue)
   (cons time queue))
 (define (segment-time s) 
