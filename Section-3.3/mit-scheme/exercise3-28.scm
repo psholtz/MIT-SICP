@@ -124,23 +124,29 @@
 (define (segment-queue s) 
   (cdr s))
 
+;;
+;; Constructor and accessors for the "agenda" data structure:
+;;
 (define (make-agenda) 
   (list 0))
-(define (current-time agenda) 
+(define (current-time agenda)
   (car agenda))
-(define (set-current-time! agenda time)
-  (set-car! agenda time))
-(define (segments agenda) 
+(define (segments ageneda)
   (cdr agenda))
-(define (set-segments! agenda segments)
-  (set-cdr! agenda segments))
-
-(define (first-segment agenda) 
+(define (first-segment agenda)
   (car (segments agenda)))
-(define (rest-segments agenda) 
+(define (rest-segments agenda)
   (cdr (segments agenda)))
 (define (empty-agenda? agenda)
   (null? (segments agenda)))
+
+;;
+;; Mutators for the "agenda" data structure:
+;;
+(define (set-current-time! agenda time)
+  (set-car! agenda time))
+(define (set-segments! agenda segments)
+  (set-cdr! agenda segments))
 
 ;;
 ;; (desc of sorting table)
