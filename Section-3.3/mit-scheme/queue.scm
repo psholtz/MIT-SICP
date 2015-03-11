@@ -17,6 +17,7 @@
 ;;
 (define (empty-queue? queue)
   (null? (front-ptr queue)))
+
 (define (front-queue queue)
   (if (empty-queue? queue)
       (error "FRONT called with an empty queue" queue)
