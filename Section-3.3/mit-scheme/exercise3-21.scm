@@ -5,7 +5,15 @@
 ;;
 
 ;;
-;; [explanation]
+;; Eva is correct. The data structure we're using to represent "queues" 
+;; is actually a pair. A pointer to the  "queue" itself is stored in the 
+;; first element (or 'car') of the pair, while a pointer to the last 
+;; element of the queue is stored in the second element (or 'cdr') of the 
+;; pair.
+;;
+;; To represent the queue in a manner that Ben expects, we must write a 
+;; procedure that extracts and displays the first element of the pair 
+;; representing the queue.
 ;;
 
 ;;
