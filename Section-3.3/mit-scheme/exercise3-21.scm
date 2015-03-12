@@ -1,40 +1,18 @@
 ;;
 ;; Exercise 3.21
 ;;
-
-;;
-;; Let's define the procedures used by Ben Bitdiddle:
+;; [working]
 ;;
 
-(define (make-queue) (cons '() '()))
+;;
+;; Import the queue module:
+;;
+(load "queue.scm")
 
-(define (empty-queue? queue) (null? (front-ptr queue)))
-
-(define (front-ptr queue) (car queue))
-(define (rear-ptr queue) (cdr queue))
-(define (set-front-ptr! queue item) (set-car! queue item))
-(define (set-rear-ptr! queue item) (set-cdr! queue item))
-
-(define (front-queue queue)
-  (if (empty-queue? queue)
-      (error "FRONT called with an empty queue" queue)
-      (car (front-ptr queue))))
-
-(define (insert-queue! queue item)
-  (let ((new-pair (cons item '())))
-    (cond ((empty-queue? queue)
-	   (set-front-ptr! queue new-pair)
-	   (set-rear-ptr! queue new-pair)
-	   queue)
-	  (else
-	   (set-cdr! (rear-ptr queue) new-pair)
-	   (set-rear-ptr! queue new-pair)
-	   queue))))
-
-(define (delete-queue! queue)
-  (cond ((empty-queue? queue)
-	 (error "DELETE! called with an empty queue" queue))
-	(else
-	 (set-front-ptr! queue (cdr (front-ptr queue)))
-	 queue)))
+;;
+;; The queue itself is pointed to by the "front-ptr" of queue pair:
+;;
+(define (print-queue queue)
+  (newline)
+  (print (front-ptr queue)))
 			 
