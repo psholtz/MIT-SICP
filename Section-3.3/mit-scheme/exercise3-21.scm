@@ -14,5 +14,5 @@
 ;;
 (define (print-queue queue)
   (newline)
-  (print (front-ptr queue)))
+  (display (front-ptr queue)))
 			 
