@@ -19,7 +19,7 @@
   (cons '() '()))
 
 ;; Selectors
-(define (empty-deque deque)
+(define (empty-deque? deque)
   (and (null? (front-ptr deque))
        (null? (rear-ptr deque))))
 (define (front-deque deque)
