@@ -14,11 +14,11 @@
 ;; Deque API
 ;;
 
-;; constructor
+;; Constructor
 (define (make-deque)
   (cons '() '()))
 
-;; selectors
+;; Selectors
 (define (empty-deque? deque)
   (and (null? (front-ptr deque))
        (null? (rear-ptr deque))))
@@ -31,7 +31,7 @@
       (error "REAR-DEQUE called with an empty deque" deque)
       (car (rear-ptr deque))))
 
-;; insert! mutators
+;; Insert Mutators
 (define (insert-front-deque! deque item)
   (let ((new-pair (cons item '())))
     (cond ((empty-deque? deque)
@@ -51,7 +51,7 @@
 	   (set-cdr! (cdr (rear-ptr deque)) new-pair)
 	   (set-rear-ptr! deque new-pair)))))
 
-;; delete! mutators
+;; Delete Mutators
 (define (delete-front-deque! deque)
   (cond ((empty-deque? deque)
 	 (error "DELETE-FRONT-DEQUE! called with an empty queue" queue))
@@ -71,7 +71,7 @@
 	 (set-rear-ptr! deque (cadr (rear-ptr deque)))
 	 (set-cdr! (cdr (rear-ptr deque)) '()))))
 
-;; print procedure
+;; Print Procedure
 (define (print-deque deque)
   (define (printable-deque-iter q)
     (if (null? q)
