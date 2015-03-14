@@ -8,14 +8,17 @@
 (define (make-queue)
   (let ((front-ptr '())
 	(rear-ptr '()))
+
     ;; empty-queue? 
     (define (empty-queue?)
       (null? front-ptr))
+
     ;; front-queue
     (define (front-queue)
       (if (empty-queue?)
 	  (error "FRONT called with an empty queue" queue)
 	  (car (front-ptr))))
+
     ;; insert-queue!
     (define (insert-queue! item)
       (let ((new-pair (cons item '())))
@@ -25,12 +28,14 @@
 	      (else
 	       (set-cdr! rear-ptr new-pair)
 	       (set! rear-ptr new-pair)))))
+
     ;; delete-queue!
     (define (delete-queue!)
       (cond ((empty-queue?) 
 	     (error "DELETE! called with an empty queue" queue))
 	    (else
 	     (set! front-ptr (cdr front-ptr)))))
+
     ;; print-queue
     (define (print-queue)
       (newline)
@@ -38,11 +43,11 @@
 
     ;; dispatch 
     (define (dispatch m)
-      (cond ((eq? 'empty-queue?) '())
-	    ((eq? 'front-queue) '())
-	    ((eq? 'insert-queue!) '())
-	    ((eq? 'delete-queue!) '())
-	    ((eq? 'print-queue) '())
+      (cond ((eq? 'empty-queue?) (empty-queue?))
+	    ((eq? 'front-queue) (front-queue))
+	    ((eq? 'insert-queue!) insert-queue!)
+	    ((eq? 'delete-queue!) (delete-queue!))
+	    ((eq? 'print-queue) (print-queue))
 	    (else
 	     (error "QUEUE - Unknown Message" m))))
     dispatch))
