@@ -38,7 +38,7 @@
 	    ((eq? 'delete-queue!) (delete-queue!))
 	    ((eq? 'print-queue) (print-queue))
 	    (else
-	     (error "QUEUE - Unknown Message" m))))
+	     (error "QUEUE - Unknown message" m))))
     dispatch))
 
 ;;
