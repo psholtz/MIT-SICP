@@ -19,9 +19,6 @@
   (cons '() '()))
 
 ;; Selectors
-(define (empty-deque? deque)
-  (and (null? (front-ptr deque))
-       (null? (rear-ptr deque))))
 (define (front-deque deque)
   (if (empty-deque? deque)
       (error "FRONT-DEQUE called with an empty deque" deque)
@@ -30,6 +27,9 @@
   (if (empty-deque? deque)
       (error "REAR-DEQUE called with an empty deque" deque)
       (car (rear-ptr deque))))
+(define (empty-deque? deque)
+  (and (null? (front-ptr deque))
+       (null? (rear-ptr deque))))
 
 ;; Insert Mutators
 (define (insert-front-deque! deque item)
