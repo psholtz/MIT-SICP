@@ -32,7 +32,7 @@
       (car (rear-ptr deque))))
 
 ;; Insert Mutators
-(define (insert-front-deque! deque item)
+(define (front-insert-deque! deque item)
   (let ((new-pair (cons item '())))
     (cond ((empty-deque? deque)
 	   (set-front-ptr! deque new-pair)
@@ -41,7 +41,7 @@
 	   (set-cdr! (cdr new-pair) (front-ptr deque))
 	   (set-car! (cdr (front-ptr deque)) new-pair)
 	   (set-front-ptr! deque new-pair)))))
-(define (insert-rear-deque! deque item)
+(define (rear-insert-deque! deque item)
   (let ((new-pair (cons item '())))
     (cond ((empty-deque? deque)
 	   (set-front-ptr! deque new-pair)
@@ -52,7 +52,7 @@
 	   (set-rear-ptr! deque new-pair)))))
 
 ;; Delete Mutators
-(define (delete-front-deque! deque)
+(define (front-delete-deque! deque)
   (cond ((empty-deque? deque)
 	 (error "DELETE-FRONT-DEQUE! called with an empty queue" queue))
 	((eq? (front-ptr deque) (rear-ptr deque))
@@ -61,7 +61,7 @@
 	(else
 	 (set-front-ptr! deque (cddr (front-ptr deque)))
 	 (set-car! (cdr (front-ptr deque)) '()))))
-(define (delete-rear-deque! deque)
+(define (rear-delete-deque! deque)
   (cond ((empty-deque? deque)
 	 (error "DELETE-REAR-DEQUE! called with an empty queue" queue))
 	((eq? (front-ptr deque) (rear-ptr deque))
