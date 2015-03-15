@@ -8,6 +8,8 @@
 (define (make-queue)
   (let ((front-ptr '())
 	(rear-ptr '()))
+
+    ;; Internal Procedures
     (define (empty-queue?)
       (null? front-ptr))
     (define (front-queue)
@@ -31,6 +33,7 @@
       (newline)
       (display front-ptr))
 
+    ;; Dispatch Procedure
     (define (dispatch m)
       (cond ((eq? 'empty-queue?) (empty-queue?))
 	    ((eq? 'front-queue) (front-queue))
