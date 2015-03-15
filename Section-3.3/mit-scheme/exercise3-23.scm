@@ -2,23 +2,30 @@
 ;; [working]
 ;;
 
+;; 
+;; We'll stick with the representation of the data structure
+;; as a pair, where the first element in the pair is the 
+;; "front pointer" to the deque, and the second element in the 
+;; pair is the "rear pointer" to the deque.
+;;
+(define (make-deque) 
+  (cons '() '()))
+
 ;;
 ;; Internal procedures:
 ;;
-(define (front-ptr deque) (car deque))
-(define (rear-ptr deque) (cdr deque))
-(define (set-front-ptr! deque item) (set-car! deque item))
-(define (set-rear-ptr! deque item) (set-cdr! deque item))
+(define (front-ptr deque) 
+  (car deque))
+(define (rear-ptr deque) 
+  (cdr deque))
+(define (set-front-ptr! deque item) 
+  (set-car! deque item))
+(define (set-rear-ptr! deque item) 
+  (set-cdr! deque item))
 
 ;;
-;; Deque API
+;; Selectors:
 ;;
-
-;; Constructor
-(define (make-deque)
-  (cons '() '()))
-
-;; Selectors
 (define (empty-deque? deque)
   (and (null? (front-ptr deque))
        (null? (rear-ptr deque))))
