@@ -49,7 +49,7 @@
 	   (set-rear-ptr! deque new-pair)
 	   deque)
 	  (else
-	   (set-cdr! rear-ptr new-pair)
+	   (set-cdr! (rear-ptr deque) new-pair)
 	   (set-rear-ptr! deque new-pair)
 	   deque))))
 
