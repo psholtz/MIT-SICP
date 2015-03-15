@@ -46,11 +46,12 @@
   (let ((new-pair (cons item '())))
     (cond ((empty-deque? deque)
 	   (set-front-ptr! deque new-pair)
-	   (set-rear-ptr! deque new-pair))
+	   (set-rear-ptr! deque new-pair)
+	   deque)
 	  (else
-	   (set-car! (cdr new-pair) (rear-ptr deque))
-	   (set-cdr! (cdr (rear-ptr deque)) new-pair)
-	   (set-rear-ptr! deque new-pair)))))
+	   (set-cdr! rear-ptr new-pair)
+	   (set-rear-ptr! deque new-pair)
+	   deque))))
 
 ;; Delete Mutators
 (define (front-delete-deque! deque)
