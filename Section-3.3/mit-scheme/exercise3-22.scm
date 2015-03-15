@@ -6,6 +6,7 @@
 ;; Define constructor:
 ;;
 (define (make-queue)
+  ;; Front and Rear Pointers
   (let ((front-ptr '())
 	(rear-ptr '()))
 
